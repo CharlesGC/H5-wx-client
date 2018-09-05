@@ -183,25 +183,31 @@ getoutstandingInfo () {
 
     }
   }
-  //行业
-  goToOtherPage (value,index,type) {
-    if(value == '' && index == '') {
-      this.navCtrl.push(IndustrydetialPage)
+   //行业
+   goToOtherPage (value,index,type) {
+    if(value == '' && index == '' && type == 'indeustry') {
+      this.navCtrl.push(IndustrydetialPage,{
+        type:type
+      })
     }else {
       this.navCtrl.push(IndustrydetialPage,{
+        type:type,
         id:this.IndustryArr[index].ilid,
-        name:this.IndustryArr[index].industryName
+        name:this.IndustryArr[index].industryName,
       });
     } 
    
   }
   // 技能
   InfoskillMore (value,index,type) {
-    if(value == '' && index == '') {
-      this.navCtrl.push(IndustrydetialPage)
+    if(value == '' && index == '' && type == 'skill') {
+      this.navCtrl.push(IndustrydetialPage,{
+        type:type
+      });
     }else {
       this.navCtrl.push(IndustrydetialPage,{
         id1:this.skillArr[index].sfid,
+        type:type,
         name1:this.skillArr[index].fName
       });
     } 
