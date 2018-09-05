@@ -4,6 +4,9 @@ page-industrydetial {
         .list-ios > .item-block:first-child {
             border-top:0; 
          }
+         .list-ios .item-block .item-inner {
+            border-bottom: solid 0.7px #f1f1f1;
+        }
         .list-ios > .item-block:last-child {
             border-bottom: 0;
         }
@@ -42,99 +45,109 @@ page-industrydetial {
                 color: #ff6536;
             }
         }
-        .search_content {
-            width: 375px;
-            height: 50px;
-            background-color: #ffffff; 
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            line-height: 50px;
-            .item-input-wrapper {
-                margin-left: 15px;
-                display: flex;
-                input {
-                    width: 141px;
-                    height: 20px;
-                    font-family: PingFangSC;
-                    font-size: 14px;
-                    font-weight: 600;
-                    color: #4a4a4a;
-                    border-width: 0;
-                    caret-color:#ff6536;
-                }
-                // .border {
-                //     width: 3px;
-                //     height: 20px;
-                //     border: solid 1.5px #ff6536;
-                // }
-            }
-            .item-search {
-                margin-right: 15px;
-                .icon {
-                    opacity: 0.4;
-                    color: #4a4a4a;
-                }
-            }
-        }
+       
         // 下拉框
         .item {
             background-color:#fcfcfc;
+            ion-label {
+                white-space: normal;
+             }
           .list-ios {
               margin: 0;
               .item-block:last-child {
-                 border-bottom: 0.55px solid #c8c7cc; 
-                 border-top: 0.55px solid #c8c7cc;
+                 border-bottom:  solid 0.7px #f1f1f1;  
                  .item-inner {
                     height: 50px;
                     border-bottom: 0;
                 }
              }
           } 
-          
-        .item-select {
-            width: 100%;
-            height: 50px;
-            // border: 1px solid #ff6536;
-            background-color:#fff;
-            display: flex;
-            .item-input {
-                width: 50%;
-                height: 100%;
-                // border: 1px solid red;
+          ion-item {
+              padding: 0;
+            .label-ios {
+                margin: 0; 
+                .item-block:fast-child {
+                    border-bottom: 0.55px solid #c8c7cc;
+                    border-top: 0; 
+                }
+                .item-block:last-child {
+                    border-bottom: 0.55px solid #c8c7cc;
+                    border-top: 0; 
+                }
+            }
+            .search_content {
+                width: 375px;
+                height: 50px;
+                background-color: #ffffff; 
                 display: flex;
                 justify-content: space-between;
-                padding: 0 15px;
-                span {
-                    display: block;
-                }
-                span:nth-child(1) {
-                    width: 140px;
-                    height: 35px;
-                    font-family: PingFangSC;
-                    font-size: 14px;
-                    font-weight: 600;
-                    color: #4a4a4a;
-                    line-height: 50px;
-                    overflow: hidden;
-                    text-overflow:ellipsis;
-                    white-space: nowrap;
-                }
-                span:nth-child(2) {
-                    line-height: 50px;
-                    border-radius: 0.5px;
-                    color: #cfcfcf;
-                    ion-icon {
+                align-items: center;
+                line-height: 50px;
+                .item-input-wrapper {
+                    margin-left: 15px;
+                    display: flex;
+                    input {
+                        width: 141px;
+                        height: 20px;
+                        font-family: PingFangSC;
                         font-size: 14px;
+                        font-weight: 600;
+                        color: #4a4a4a;
+                        border-width: 0;
+                        caret-color:#ff6536;
                     }
                 }
-            }
-            .item-input1 {
-                width: 50%;
-                height: 100%;
-                border: 1px solid #4a4a4a;
-            }
+                .item-search {
+                    margin-right: 15px;
+                    .icon {
+                        opacity: 0.4;
+                        color: #4a4a4a;
+                    }
+                }
+            }  
+            .item-select {
+                width: 100%;
+                height: 50px;
+                background-color:#fff;
+                display: flex;
+                .item-input {
+                    width: 50%;
+                    height: 100%; 
+                    display: flex;
+                    justify-content: space-between;
+                    span {
+                        display: block;
+                    }
+                    span:nth-child(1) {
+                        width: 140px;
+                        height: 35px;
+                        font-family: PingFangSC;
+                        font-size: 14px;
+                        font-weight: 600;
+                        color: #4a4a4a;
+                        line-height: 50px;
+                        overflow: hidden;
+                        text-overflow:ellipsis;
+                        white-space: nowrap;
+                        margin-left: 15px;
+                    }
+                    span:nth-child(2) {
+                        line-height: 50px;
+                        border-radius: 0.5px;
+                        color: #cfcfcf;
+                        ion-icon {
+                            font-size: 14px;
+                        }
+                    }
+                }
+                .item-input1 {
+                    width: 50%;
+                    height: 100%;
+                    border: 1px solid #4a4a4a;
+                }
+              }
           }
+         
         .indeuList {
             margin-top: 20px;
             ion-item{
@@ -213,6 +226,7 @@ page-industrydetial {
         }
         .industrySearch {
             background-color: #fff;
+            margin-top: 10px;
             .list-ios {
                 margin:0;
             }
@@ -240,9 +254,10 @@ page-industrydetial {
                     }
                 }
                 .contant-item-right {
+                    margin-left: -15px;
                     p:nth-child(1) {
                         width: 265px;
-                        height: 36px;
+                        // height: 36px;
                         font-family: PingFangSC;
                         font-size: 14px;
                         line-height: 1.29;
@@ -260,13 +275,13 @@ page-industrydetial {
                         .span {
                             display: block;
                             width: auto;
-                            height: 21px;
+                            // height: 21px;
                             border-radius: 3px;
                             margin-left: 14px;
                             font-size: 12px;
                             letter-spacing: 0.2px;
                             color: #4a4a4a;
-                            padding: 0 10px;
+                            padding: 3px 10px;
                             overflow: hidden;
                             text-overflow: ellipsis;
                             white-space: nowrap; 
@@ -316,9 +331,10 @@ page-industrydetial {
                    }
                 }
                 .contant-item-right {
+                    margin-left: -15px;
                     p:nth-child(1) {
                         width: 265px;
-                        height: 36px;
+                        // height: 36px;
                         font-family: PingFangSC;
                         font-size: 14px;
                         line-height: 1.29;
@@ -336,10 +352,10 @@ page-industrydetial {
                         span {
                             display: block;
                             width: auto;
-                            height: 21px;
+                            // height: 21px;
                             border-radius: 3px;
                             margin-left: 14px;
-                            padding: 0 10px;
+                            padding: 3px 10px;
                             background-color: rgba(186, 232, 212, 0.4);
                         }
                     }

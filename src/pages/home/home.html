@@ -23,13 +23,13 @@
         <div (click)="goToOtherPage('','','indeustry')">
           <span>更多</span>
           <span>
-            <ion-icon name="arrow-right"></ion-icon>
+            <ion-icon name="arrow-forward"></ion-icon>
           </span>
         </div>
       </div>
       <div>
         <ul class="industry-content">
-          <li *ngFor="let item_IndustryArr of IndustryArr;let i =index" class="industry_list" (click)="goToOtherPage(item_IndustryArr,i)">
+          <li *ngFor="let item_IndustryArr of IndustryArr;let i =index" class="industry_list" (click)="goToOtherPage(item_IndustryArr,i,'indeustry')">
             <div class="icon_list">
               <img [src]="item_IndustryArr.industryUrl" alt="">
               <p id="industry">{{item_IndustryArr.industryName.slice(0,4)}}</p>
@@ -47,13 +47,13 @@
         <div>
           <span (click)="InfoskillMore('','','skill')">更多</span>
           <span>
-            <ion-icon name="arrow-right"></ion-icon>
+            <ion-icon name="arrow-forward"></ion-icon>
           </span>
         </div>
       </div>
       <div>
         <ul class="industry-content">
-          <li *ngFor="let item_skillArr of skillArr;let i = index" class="industry_list" (click)="InfoskillMore(item_skillArr,i)">
+          <li *ngFor="let item_skillArr of skillArr;let i = index" class="industry_list" (click)="InfoskillMore(item_skillArr,i,'skill')">
             <div class="icon_list">
               <img [src]="item_skillArr.fIcon" alt="">
               <p>{{item_skillArr.fName.slice(0,4)}}</p>
@@ -71,7 +71,7 @@
         <div (click)="goToOtherPage()">
           <span>更多</span>
           <span>
-            <ion-icon name="arrow-right"></ion-icon>
+            <ion-icon name="arrow-forward"></ion-icon>
           </span>
         </div>
       </div>
@@ -106,13 +106,13 @@
   </div>
 
   <!-- 财务审计 -->
-  <div class="contant-cont">
+  <div class="contant-finance">
     <div class="title-cont">
       <h4>财务审计顾问</h4>
       <div (click)="goToOtherPage()">
         <span>更多</span>
         <span>
-          <ion-icon name="arrow-right"></ion-icon>
+          <ion-icon name="arrow-forward"></ion-icon>
         </span>
       </div>
     </div>
@@ -145,7 +145,7 @@
         <div (click)="goToOtherPage()">
           <span>更多</span>
           <span>
-            <ion-icon name="arrow-right"></ion-icon>
+            <ion-icon name="arrow-forward"></ion-icon>
           </span>
         </div>
       </div>
@@ -175,7 +175,7 @@
       <div (click)="goToOtherPage()">
         <span>更多</span>
         <span>
-          <ion-icon name="arrow-right"></ion-icon>
+          <ion-icon name="arrow-forward"></ion-icon>
         </span>
       </div>
     </div>
@@ -200,39 +200,4 @@
       </ion-item>
     </ion-list>
   </div>
-  <!-- <div class="financeAll_container" *ngIf = "financeAllArr">
-    <div class="finance_content">
-        <div class="finance_title">
-          <span class="item_title">{{financeAllArr.title}}</span>
-          <div class="title_right">
-              <span class="hy_more"  class="more">更多</span>
-              <span class="more_icon">
-                  <img src="../../assets/imgs/icon.png" class="icon" alt="">
-              </span>
-          </div>
-        </div>
-        <ul class="ul_finance">
-          <li *ngFor = "let i of financeAllArrlength" class="i_content">
-            <div class="i_box">
-              <div class="img_item">
-                <img [src]="i.avatar" alt="">
-                <p>{{i.adviserName}}</p>
-              </div>
-              <div class="content_item">
-                <p>{{i.introduction}}</p>
-                <div class="leabel_list">
-                  <ul class="text_item">
-                    <li *ngFor = "let item of i.industryList.slice(0,2)" class="text_list">
-                      <span>{{item.alName}}</span>
-                    </li>
-                  </ul>
-                </div>
-                <p class="financeAll-p">工作经验：{{i.workingYears}}</p>
-              </div>
-            </div>
-            <div class="finance-bg"></div>
-          </li>
-        </ul>
-    </div>
-</div> -->
 </ion-content>
