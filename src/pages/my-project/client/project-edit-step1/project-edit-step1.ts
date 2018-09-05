@@ -118,5 +118,10 @@ export class ProjectEditStep1Page {
   goSpeedPage() {
     this.navCtrl.push(SpeedPage);
   }
+  /* 返回到首页 */
+  goback(){
+    // this.navCtrl.goToRoot(HomePage); 
+    this.navCtrl.parent.select(0);
+  }
 
 }
