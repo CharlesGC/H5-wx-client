@@ -41,7 +41,6 @@ export class ClientInfoEditPage {
 
   /*跳转到付款人页面*/
   goPaymentInfo() {
-    console.log(this.companyDetaiData['cid'],'=========')
     this.companyDetaiData['cid'] && this.navCtrl.push(ClientPaymentInfoPage,{companyDetaiData:this.companyDetaiData});
   }
 
