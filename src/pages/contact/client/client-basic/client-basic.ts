@@ -28,7 +28,6 @@ export class ClientBasicPage {
   ionViewDidLoad() {
     this.user = this.navParams.get('user') || {};
     this.getCompanyData();
-    console.log(this.user,'ionViewDidLoad ClientBasicPage==========');
   }
 
   ionViewDidEnter() {
