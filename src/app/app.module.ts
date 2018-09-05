@@ -109,6 +109,7 @@ import { ConsultantDeliveryModelPage } from '../pages/my-project/consultant/cons
 import { ConsultantInteractionSubmitPage } from '../pages/my-project/consultant/consultant-interaction-submit/consultant-interaction-submit';
 import { ConsultantProgramEditPage } from '../pages/my-project/consultant/consultant-program-edit/consultant-program-edit';
 import { PorjectEvalutionPage } from '../pages/my-project/porject-evalution/porject-evalution';
+import { ConsultantInfoAvatarPage } from '../pages/contact/consultant/consultant-info-avatar/consultant-info-avatar'
 
 /*推荐*/
 import { RecommendConsultantListPage } from '../pages/recommend/recommend-consultant-list/recommend-consultant-list';
@@ -218,6 +219,7 @@ import { MamenDataProvider } from '../providers/mamen-data/mamen-data';
     ConsultantInteractionSubmitPage,
     ConsultantProgramEditPage,
     PorjectEvalutionPage,
+    ConsultantInfoAvatarPage,
 
     RecommendConsultantListPage,
     RecommendClientListPage,
@@ -326,6 +328,7 @@ import { MamenDataProvider } from '../providers/mamen-data/mamen-data';
     ConsultantInteractionSubmitPage,
     ConsultantProgramEditPage,
     PorjectEvalutionPage,
+    ConsultantInfoAvatarPage,
 
     RecommendConsultantListPage,
     RecommendClientListPage,

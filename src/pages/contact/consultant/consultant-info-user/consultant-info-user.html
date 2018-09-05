@@ -13,7 +13,7 @@
   </ion-header>
   
   <ion-content style="background-color: #fcfcfc;">
-      <ion-card class="card-avatar" (click)="onSelected(0)" [ngClass]="{'checked':Selected==0}">
+      <ion-card class="card-avatar" (click)="goAvatarEditPage()" [ngClass]="{'checked':Selected==0}">
         <div class="user-avatar">
             <img src="{{userInfoData.avatar}}" style="background:rosybrown"/>
             <div class="avatar-bg"></div>

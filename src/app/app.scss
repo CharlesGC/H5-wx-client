@@ -262,3 +262,24 @@
     }
 }
 
+/* 修改默认表头样式 */
+.toolbar-title-ios,.toolbar-title-md{
+    font-size: 14px;
+    font-family: PingFangSC;
+    font-weight: 600;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #4a4a4a;
+}
+.toolbar-background-ios,.toolbar-background-md{
+    background: #fff;
+}
+.header-ios .toolbar-background-ios, .footer-ios .toolbar-background-ios,.toolbar-background-md{
+    border-color: #ffffff;
+}
+.toolbar-md{
+    min-height: 45px;
+}
+
