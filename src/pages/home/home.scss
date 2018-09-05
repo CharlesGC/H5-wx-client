@@ -7,7 +7,7 @@ page-home {
         padding: 0;
         .swiper_content {
             width: 100%;
-            // height: 190px;
+            height: 190px;
             object-fit: contain;
             opacity: 0.68;
             background-color: #fff;
@@ -547,7 +547,7 @@ page-home {
                         width: 100%;
                         .case_swiper {
                             width: 100%;
-                            height: 15rem;
+                            // height: 15rem;
                             .slide-zoom {
                                 text-align: center;
                                 display: block;
@@ -565,9 +565,8 @@ page-home {
                             }
                            .code_text {
                             width: 80%;
-                            margin-left: 2rem;
-                            margin-top: -13rem;
-                           
+                            margin-left: 3rem;
+                            margin-top: -12rem;
                             display: flex;
                             flex-direction: column;
                             text-align:left;
@@ -619,11 +618,9 @@ page-home {
                             }
                            }
                         }
-                  
                     }
+                }
             }
-       
-        }
     }
     // 全部顾问
     .contant-cont {
