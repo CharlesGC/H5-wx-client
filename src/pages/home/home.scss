@@ -1,0 +1,811 @@
+page-home {
+    #content {
+        width: 100%;
+        height: 100%;
+        background-color: #fcfcfc;
+        margin: 0;
+        padding: 0;
+        .swiper_content {
+            width: 100%;
+            height: 190px;
+            object-fit: contain;
+            opacity: 0.68;
+            background-color: #fff;
+            .swiper-pagination-bullet {
+                border-radius: 1.5px;
+                display: inline-block;
+                width: 13.8px;
+                height: 3px;
+                background: #fff;
+                opacity: .2;
+                pointer-events: auto;
+            }
+            .swiper-pagination-bullet-active {
+                background: #fff;
+                opacity: 1;
+            }
+            .swiper_list {
+                width: 100%;
+                img {
+                    width: 100%;
+                }
+                .img-text {
+                    width: 80%;
+                    margin-left: 2.5rem;
+                    position: absolute;
+                    top: 2rem;
+                    z-index: 999;
+                    display: flex;
+                    flex-direction: column;
+                    text-align:left;
+                    div:nth-child(1) {
+                        width: 100%;
+                        height: 2rem;
+                        font-family: PingFangSC;
+                        font-size: 18px;
+                        font-weight: 600;
+                        font-style: normal;
+                        font-stretch: normal;
+                        line-height: normal;
+                        letter-spacing: normal;
+                        color: #ffffff;
+                        text-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+                    }
+                    div:nth-child(2) {
+                        width: 17rem;
+                        height: 5.7rem;
+                        font-family: PingFangSC;
+                        font-size: 12px;
+                        overflow:hidden; 
+                        text-overflow:ellipsis;
+                        display:-webkit-box; 
+                        -webkit-box-orient:vertical;
+                        -webkit-line-clamp:2;
+                        color: #ffffff;
+                        margin-top: .8rem;
+                    }
+                    div:nth-child(3) {
+                        width: 7.5rem;
+                        height: 1.2rem;
+                        font-family: PingFangSC;
+                        font-size: 10px;
+                        color:#fff;
+                        .icon {
+                            z-index: 999;
+                            width: 0.5rem;
+                            position: absolute;
+                            left: 6.3rem;
+                            top: 8.72rem;
+                            background-color:transparent;
+                        }
+                    }
+                }
+            }
+        }
+        .hy_container {
+            background-color: #fff;
+            .hy_content {
+                margin-top: 2.5rem;
+                width: 100%;
+                list-style: none;
+                height: 12rem;
+                display: flex;
+                flex-direction: column;
+                padding-left: 0;
+                .title-cont {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    margin-left: 15px;
+                    margin-right: 16px;
+                    h4 {
+                        width: 155px;
+                        height: 25px;
+                        font-family: PingFangSC;
+                        font-size: 18px;
+                        font-weight: 600;
+                        letter-spacing: 0.3px;
+                        color: #4a4a4a;
+                    }
+                    div {
+                        display: flex;
+                        span {
+                            display: block;
+                            font-family: PingFangSC;
+                            font-size: 14px;
+                            text-align: right;
+                            color: #c7c7c7;  
+                            ion-icon {
+                                font-size: 24px;
+                            }             
+                        }
+                        span:nth-child(1) {
+                            margin-top: 3px;
+                        }
+                    }
+                    
+                }
+                .industry-content {
+                    width: 100%;
+                    display: flex;
+                    padding-top: 1.5rem;
+                    padding-left: 0;
+                    margin: 0 5px;
+                    .industry_list {
+                        list-style: none;
+                        width: 100%;
+                        height: 6.8rem;
+                        display: flex;
+                        justify-content: space-around;
+                        .icon_list {
+                            img {
+                                width: 45px;
+                                height: 45px;
+                            }
+                            p {
+                            width: 5.5 rem;
+                            height: 1.5rem;
+                            margin-top: 0.3rem;
+                            font-family: PingFangSC;
+                            font-size: 12px;
+                            text-align: center;
+                            color: #0c0033;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        // 技能
+        .jn_container {
+            background-color: #fff;
+            // margin-top: -1.3rem;
+            .jn_content {
+                width: 100%;
+                list-style: none;
+                height: 12rem;
+                display: flex;
+                flex-direction: column;
+                padding-left: 0;
+                .title-cont {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    margin-left: 15px;
+                    margin-right: 16px;
+                    h4 {
+                        width: 155px;
+                        height: 25px;
+                        font-family: PingFangSC;
+                        font-size: 18px;
+                        font-weight: 600;
+                        letter-spacing: 0.3px;
+                        color: #4a4a4a;
+                    }
+                    div {
+                        display: flex;
+                        span {
+                            display: block;
+                            font-family: PingFangSC;
+                            font-size: 14px;
+                            text-align: right;
+                            color: #c7c7c7;  
+                            ion-icon {
+                                font-size: 24px;
+                            }             
+                        }
+                        span:nth-child(1) {
+                            margin-top: 3px;
+                        }
+                    }
+                }
+                    .industry-content {
+                        width: 100%;
+                        display: flex;
+                        padding-top: 1.5rem;
+                        padding-left: 0;
+                        margin: 0 5px;
+                        .industry_list {
+                            list-style: none;
+                            width: 100%;
+                            height: 6.8rem;
+                            display: flex;
+                            justify-content: space-around;
+                           .icon_list {
+                               img {
+                                width: 45px;
+                                height: 45px;
+                               }
+                               p {
+                                width: 5.5 rem;
+                                height: 1.5rem;
+                                margin-top: 0.3rem;
+                                font-family: PingFangSC;
+                                font-size: 12px;
+                                text-align: center;
+                                color: #0c0033;
+                               }
+                           }
+                        }
+                    }
+            }
+        }
+        // 行业翘楚
+        .qc_container {
+            background-color: #fff;
+            //  margin-top: -1.3rem;
+            .qu_content {
+               width: 100%;
+                list-style: none;
+                display: flex;
+                flex-direction: column;
+                padding-left: 0;
+                .title-cont {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    margin-left: 15px;
+                    margin-right: 16px;
+                    h4 {
+                        width: 155px;
+                        height: 25px;
+                        font-family: PingFangSC;
+                        font-size: 18px;
+                        font-weight: 600;
+                        letter-spacing: 0.3px;
+                        color: #4a4a4a;
+                    }
+                    div {
+                        display: flex;
+                        span {
+                            display: block;
+                            font-family: PingFangSC;
+                            font-size: 14px;
+                            text-align: right;
+                            color: #c7c7c7;  
+                            ion-icon {
+                                font-size: 24px;
+                            }             
+                        }
+                        span:nth-child(1) {
+                            margin-top: 3px;
+                        }
+                    }
+                }
+                .qu_u {
+                    list-style:none;
+                    width: 110%;
+                    padding-left:1rem;
+                    display: flex;
+                    overflow: scroll;
+                    overflow-y: hidden;
+                    margin-top: 15px;
+                    .qu_list {
+                        width: 100%;
+                        list-style: none;
+                        margin-right: .9rem;
+                        .text_box {
+                            width: 15.4rem;
+                            height: 23.75rem;
+                            border-radius: 3px;
+                            background-color: #ffffff;
+                            box-shadow: 0 1px 10px 0 rgba(0, 0, 0, 0.05);
+                            display: flex;
+                            flex-direction: column;
+                            align-items: flex-start;
+                            margin-left: 5px;
+                            .celebrity-img {
+                                width: 100%;
+                                height: 145px;
+                                border-radius: 3px;
+                                background-color: #d8d8d8;
+                                .img {
+                                    width: 100%;
+                                    height: 100%;
+                                }
+                            }
+                            .text_labar {
+                                width: 150px;
+                                display: flex;
+                                flex: row;
+                                margin-top: 10px;
+                                margin: 10px 20px 0 20px;
+                                span {
+                                    display: block;
+                                    width: 49px;
+                                    height: 18px;
+                                    font-family: PingFangSC;
+                                    font-size: 16px;
+                                    font-weight: 600;
+                                    line-height: 1.13;
+                                    color: #4a4a4a;
+                                }
+                                .text_content {
+                                    width: 60px;
+                                    height: 17px;
+                                    margin: 0 20px 0 10px;
+                                    padding: 0;
+                                    .text_list {
+                                        width: 100%;
+                                        list-style: none;
+                                        span {                                       
+                                            font-family: PingFangSC;
+                                            font-size: 12px;
+                                            font-weight: 500;
+                                            color: #ff6537;
+                                            margin-top: 3px;
+                                        }
+                                    }
+                                   
+                                }
+                            }
+                            .text_jinyan {
+                                width: 89px;
+                                height: 17px;
+                                opacity: 0.7;
+                                font-family: PingFangSC;
+                                font-size: 12px;
+                                color: #4a4a4a;
+                                margin: 10px 20px 0 20px;
+                                
+                            }
+                            .qiaochu-duc {                               
+                                font-size: 14px;
+                                width:12rem;
+                                height: 5rem;
+                                font-family: PingFangSC;
+                                text-align: justify;
+                                color: #4a4a4a;
+                                margin: 10px 20px 0 20px;
+                                display:-webkit-box;
+                                -webkit-line-clamp:3;
+                                -webkit-box-orient:vertical;
+                                overflow:hidden;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .text-img {
+            width: 100%;
+            height: 10rem;
+            margin-top: 20px;
+            img {
+                width: 100%;
+                padding: 0 15px;
+            }
+            .img_text {
+                width: 171px;
+                height: 46px;
+                font-family: PingFangSC;
+                font-size: 14px;
+                font-weight: 500;
+                line-height: 1.64;
+                letter-spacing: 0.2px;
+                color: #ffffff;
+                text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+                position: relative;
+                bottom: 8rem;
+                // left: 3rem;
+                z-index: 999;
+                margin: 1px 0 23px 45px;
+                p {
+                    margin: 0
+                }
+            } 
+        }
+
+        // // 财务审计
+        // .finance_container {
+        //     background: #fff;
+        //     margin-top: 25px;
+        //     width: 100%;
+        //     height: 37.5rem;
+        //     .finance_content {
+        //         width: 100%;
+        //         list-style: none;
+        //         display: flex;
+        //         flex-direction: column;
+        //         padding-left: 0;
+        //             .finance_title {
+        //                 margin-left: 15px;
+        //                 margin-right: 10px;
+        //                 display: flex;
+        //                 justify-content: space-between;
+        //                 .item_title {
+        //                     width: 13rem;
+        //                     font-family: PingFangSC;
+        //                     font-size: 18px;
+        //                     font-weight: 600;
+        //                     font-style: normal;
+        //                     font-stretch: normal;
+        //                     line-height: normal;
+        //                     letter-spacing: 0.3px;
+        //                     color: #4a4a4a;
+        //                 }
+        //                 .title_right {
+        //                     width: 3rem;
+        //                     height: 1.41rem;
+        //                     display: flex;
+        //                     flex-direction: row;
+        //                     line-height: 1.41rem;
+        //                     color: #c7c7c7;
+        //                     .more {
+        //                         font-family: PingFangSC;
+        //                         font-size: 1rem;
+        //                         color: #c7c7c7;
+        //                         line-height: 2rem;
+        //                         letter-spacing: normal;
+        //                     }
+        //                     .more_icon {
+        //                         padding-left: .2rem;
+        //                         .icon {
+        //                             width: .5rem;
+        //                             color: #c7c7c7;
+        //                             opacity: .5;
+        //                             margin-top: 0.6rem;
+        //                         }
+        //                     } 
+        //                 }
+        //             }
+        //             .ul_finance {
+        //                 width: 100%;
+        //                 height: 11.25rem;
+        //                 padding: 0;
+        //                 list-style: none;
+        //                 .i_content {
+        //                     width: 100%;
+        //                     list-style: none;
+        //                     height: 100%;
+        //                     .i_box {
+        //                         width: 100%;
+        //                         height: 100%;
+        //                         display: flex;
+        //                         .img_item {
+        //                            width: 100%;
+        //                            height: 100%;
+        //                            margin-left: 20px;
+        //                            margin-top: 20px;
+        //                            display: flex;
+        //                            flex-direction: column;
+        //                            align-items: center;
+        //                             img {
+        //                                 width: 55px;
+        //                                 height: 55px;
+        //                                 object-fit: contain;
+        //                                 border-radius: 251.4px;
+        //                                 background-color: #d8d8d8;
+        //                             }
+        //                             p {
+        //                                 width: 55px;
+        //                                 height: 22px;
+        //                                 font-family: PingFangSC;
+        //                                 font-size: 16px;
+        //                                 font-weight: 600;
+        //                                 text-align: center;
+        //                                 color: #4a4a4a;
+        //                                 margin-top: 20px;
+        //                                 overflow: hidden;
+        //                                 text-overflow: ellipsis;
+        //                                 white-space: nowrap; 
+        //                                 text-align: center;
+        //                             }
+        //                         }
+        //                         .content_item {
+        //                             margin-top: 20px;
+        //                             margin-left: 1.5rem;
+        //                             margin-right: 20px;
+        //                             width: 100%;
+        //                             height: 100%;
+        //                             display: flex;
+        //                             flex-direction: column;
+        //                             align-items: flex-start;
+                                    
+        //                             p {
+        //                                 width: 21.3rem;
+        //                                 height: 3rem;
+        //                                 font-family: PingFangSC;
+        //                                 font-size: 14px;
+        //                                 line-height: 1.29;
+        //                                 color: #4a4a4a;
+        //                                 margin: 0;
+        //                                 overflow: hidden;
+        //                                 text-overflow: ellipsis;
+        //                                 display: -webkit-box;
+        //                                 -webkit-line-clamp: 2;
+        //                                 -webkit-box-orient: vertical;
+        //                             }
+        //                             .leabel_list {
+        //                                 display: flex;
+        //                                 display: -webkit-box;
+        //                                 margin-left: -1.3rem;
+        //                                 margin-top: 10px;
+        //                                 .text_item {
+        //                                     list-style: none;
+        //                                     display: flex;
+        //                                     padding: 0;
+        //                                     line-height: 2rem;
+        //                                     .text_list {
+        //                                         display: flex;
+        //                                         width: auto;
+        //                                         height: 21px;
+        //                                         border-radius: 3px;
+        //                                         margin-left: 15px;                                                 
+        //                                         background-color: rgba(186, 232, 212, 0.4);
+        //                                         span {
+        //                                             display: block;  
+        //                                             width: auto;
+        //                                             padding: 0 10px;                                                                 
+        //                                             font-family: PingFangSC;
+        //                                             text-align: center;
+        //                                             font-size: 12px;
+        //                                             letter-spacing: 0.2px;
+        //                                             text-align: center;
+        //                                             color: #4a4a4a;
+        //                                             line-height: 21px;                                                       
+        //                                             overflow: hidden;
+        //                                             text-overflow: ellipsis;
+        //                                             white-space: nowrap; 
+        //                                             text-align: center;
+        //                                         }
+        //                                     }
+        //                                 }
+        //                             }
+        //                             .finance_p {
+        //                                 width: 95.7px;
+        //                                 height: 17px;
+        //                                 opacity: 0.7;
+        //                                 font-family: PingFangSC;
+        //                                 font-size: 12px;
+        //                                 font-weight: 600;
+        //                                 color: #4a4a4a;
+        //                                 margin-top: 12px;
+        //                             }
+        //                         }
+        //                     }
+        //                     .finance-bg {
+        //                         width: 100%;
+        //                         height: 3px;
+        //                         border: solid 0.7px #f1f1f1;
+        //                     }
+        //                 }
+        //             }
+        //     }
+        // }
+        // 案例
+        .case_container {
+            background-color: #fff;
+             margin-top: 3rem;
+            .case_content {
+                width: 100%;
+                list-style: none;
+                display: flex;
+                flex-direction: column;
+                padding-left: 0;
+                    .title-cont {
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        margin-left: 15px;
+                        margin-right: 16px;
+                        h4 {
+                            width: 155px;
+                            height: 25px;
+                            font-family: PingFangSC;
+                            font-size: 18px;
+                            font-weight: 600;
+                            letter-spacing: 0.3px;
+                            color: #4a4a4a;
+                        }
+                        div {
+                            display: flex;
+                            span {
+                                display: block;
+                                font-family: PingFangSC;
+                                font-size: 14px;
+                                text-align: right;
+                                color: #c7c7c7;  
+                                ion-icon {
+                                    font-size: 24px;
+                                }             
+                            }
+                            span:nth-child(1) {
+                                margin-top: 3px;
+                            }
+                        }
+                    }
+                    .case_img {
+                        width: 100%;
+                        .case_swiper {
+                            width: 100%;
+                            height: 15rem;
+                            .slide-zoom {
+                                text-align: center;
+                                display: block;
+                                width: 100%;
+                                height: 100%;
+                            }
+                            .swiper_img {
+                                width: 100%;
+                                height: 14.25rem;
+                            }
+                            img {
+                                width: 100%;
+                                opacity: 0.82;
+                                padding:0 15px;
+                            }
+                           .code_text {
+                            width: 80%;
+                            margin-left: 2rem;
+                            margin-top: -13rem;
+                           
+                            display: flex;
+                            flex-direction: column;
+                            text-align:left;
+                            div:nth-child(1) {
+                                width: 24.91rem;
+                                height: 2rem;
+                                font-family: PingFangSC;
+                                font-size: 1.5rem;
+                                font-weight: 600;
+                                color: #ffffff;
+                                text-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+                                z-index: 999;
+                                text-overflow:ellipsis;
+                                white-space:nowrap;
+                                overflow:hidden; 
+                            }
+                            div:nth-child(2) {
+                                width: 17.25rem;
+                                height: 2.83rem;
+                                font-family: PingFangSC;
+                                font-size: 1rem;
+                                color: #ffffff;
+                                margin-top: .8rem;
+                                z-index: 999;
+                            }
+                            div:nth-child(3) {
+                                width: 7.5rem;
+                                height: 1.2rem;
+                                font-family: PingFangSC;
+                                font-size: 10px;
+                                font-weight: normal;
+                                font-style: normal;
+                                font-stretch: normal;
+                                line-height: normal;
+                                letter-spacing: normal;
+                                color: #ffffff;
+                                margin-top: 2rem;
+                                z-index: 999;
+                                .icon {
+                                    z-index: 999;
+                                    width: 0.4rem;
+                                    height: .9rem;
+                                    background-color: #ffff;
+                                    position: relative;
+                                    top: rem;
+                                    left: 2rem;
+                                    top: .1rem;
+                                }
+                            }
+                           }
+                        }
+                  
+                    }
+            }
+       
+        }
+    }
+    // 全部顾问
+    .contant-cont {
+        background-color: #fff;
+        .title-cont {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-left: 15px;
+            margin-right: 16px;
+            h4 {
+                width: 155px;
+                height: 25px;
+                font-family: PingFangSC;
+                font-size: 18px;
+                font-weight: 600;
+                letter-spacing: 0.3px;
+                color: #4a4a4a;
+            }
+            div {
+                display: flex;
+                span {
+                    display: block;
+                    font-family: PingFangSC;
+                    font-size: 14px;
+                    text-align: right;
+                    color: #c7c7c7;  
+                    ion-icon {
+                        font-size: 24px;
+                    }             
+                }
+                span:nth-child(1) {
+                    margin-top: 3px;
+                }
+            }
+        }
+        .contant-item {
+            display: flex;
+            .contant-item-left{
+               .item-img {
+                width: 55px;
+                height: 55px;
+                border-radius: 50%;
+               } 
+               p {
+                width: 55px;
+                height: 22px;
+                font-family: PingFangSC;
+                font-size: 16px;
+                font-weight: 600;
+                text-align: center;
+                color: #4a4a4a;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap; 
+                text-align: center;
+                margin-top: 15px;
+               }
+            }
+            .contant-item-right {
+                p:nth-child(1) {
+                    width: 265px;
+                    height: 36px;
+                    font-family: PingFangSC;
+                    font-size: 14px;
+                    line-height: 1.29;
+                    color: #4a4a4a;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    display: -webkit-box;
+                    -webkit-line-clamp: 2;
+                    -webkit-box-orient: vertical; 
+                    margin: 10px 20px 0 14px ;
+                }
+                .industryLabel {
+                    display: flex;
+                    margin-top: 5px;
+                    // margin-left: 14px
+                    span {
+                        display: block;
+                        width: auto;
+                        height: 21px;
+                        border-radius: 3px;
+                        margin-left: 14px;
+                        padding: 0 10px;
+                        background-color: rgba(186, 232, 212, 0.4);
+                    }
+                }
+                p:nth-child(3) {
+                    width: 95.7px;
+                    height: 17px;
+                    opacity: 0.7;
+                    font-family: PingFangSC;
+                    font-size: 12px;
+                    font-weight: 600;
+                    color: #4a4a4a;
+                    margin: 13px 20px 0 14px;
+                }
+            }
+        }
+    }
+    
+    ion-label {
+        white-space: normal;
+    }
+    .list-ios > .item-block:first-child {
+        border-top:0; 
+    }
+    .list-ios >.item-block:last-child {
+        border-bottom: 0;
+    }
+    
+}

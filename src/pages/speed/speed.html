@@ -1,0 +1,71 @@
+
+<ion-header>
+  <ion-navbar>
+    <ion-title>speed</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="content">
+    <ion-list  class="company-list" no-lines>
+        <ion-item class="prompt-item" no-lines>
+            <div class="prompt">请填写相关信息</div>
+        </ion-item>
+        <ion-item class="item-tarea" no-lines>
+            <ion-textarea placeholder="请输入详细的项目描述" [(ngModel)]="fieldValue" autofocus="autofocus" class="ion-textarea"></ion-textarea>
+        </ion-item>
+        <div class="speech-prompt">也可通过语音录入，方便快捷记录项目需求</div>
+        <div class="start-box">
+            <ion-item class="item-play" no-lines>
+                <div class="audio-mengu" (click)="autoPlay($event,i)" *ngFor ="let item of audioData;let i=index">
+                    <div class="audio-spinner">
+                        <img src="../../assets/imgs/iconfont-voice@3x.png" alt="">
+                    </div>
+                    <div class="audio-spinner1" style="display: none">
+                        <div class="line1"></div>
+                        <div class="line2"></div>
+                        <div class="line3"></div>
+                        <div class="line4"></div>
+                        <div class="line5"></div>
+                    </div>
+                    <div class="click-play" >
+                        点击播放
+                    </div>
+                    <div class="icon-close" (click)="deletAudio(i)" >
+                        <ion-icon name="close-circle"></ion-icon>
+                    </div>
+                    <audio>
+                        <source [src]="item.url" type="audio/mpeg">
+                        <!-- <source src="http://100.168.1.48:8181/file20180829/cddddd1b79ea40ceb5fb855b142a9244.mp3" type="audio/mpeg"> -->
+                        您的浏览器不支持 audio 元素。
+                    </audio>
+                </div>
+                <div>{{duration}}"</div>
+                <div class="spinner" [hidden]="!isRecord">
+                    <div class="spinner-list" >
+                        <div class="line1"></div>
+                        <div class="line2"></div>
+                        <div class="line3"></div>
+                        <div class="line4"></div>
+                        <div class="line5"></div>
+                    </div>
+                    <div class="luying">录音中</div>
+                </div>
+            </ion-item>
+            <ion-item class="item-import" no-lines (touchstart)="startTouch($event)" (touchend)="endTouch($event)">
+                <div class="icon-shape">
+                    <ion-icon name="shape"></ion-icon>
+                </div>
+                <div class="Lonespeech">长按语音输入</div>
+            </ion-item>
+        </div>
+        <div class="promptbot">请选择发布类型（目前为快速发布模式）</div>
+        <button ion-item (click)="goback()" class="release-btn">
+            <div class="backone" (click)="goback()">
+                <span><ion-icon name="add-circle-outline"></ion-icon></span>
+                <span>前往完整发布</span>
+            </div>
+            <span class="two">提供更详细的项目细节</span>
+        </button>
+    </ion-list>
+  <div class="speed-footer" (click)="Release()">发布</div>
+</ion-content>

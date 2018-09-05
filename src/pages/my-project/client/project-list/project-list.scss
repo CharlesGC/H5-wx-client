@@ -1,0 +1,245 @@
+page-project-list {
+    .list-content {
+        margin: 0 15px !important;
+        width: calc(100% - 30px);
+    }
+    .nav-list-menu{
+        font-family: PingFangSC;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        margin-bottom: 10px;
+        .list-header-left {
+            font-size: 14px;
+            font-weight: 600;
+            color: #f46f46;
+        }
+        .list-header-right {
+            font-size: 10px;
+            letter-spacing: 0.2px;
+            text-align: center;
+            color: #ff6536;
+            span {
+                border-radius: 10px;
+                padding: 2px 12px;
+                border: solid 0.7px #ff6536;
+            }
+        }
+    }
+    
+    .message-item {
+        background-color: #ffffff;
+        box-shadow: 0 1px 10px 0 rgba(0, 0, 0, 0.05);
+        .msg-title {
+            display: flex;
+            span{
+                font-family: PingFangSC;
+                font-size: 1.2rem;
+                font-weight: normal;
+                font-style: normal;
+                font-stretch: normal;
+                line-height: normal;
+                letter-spacing: normal;
+                color: #9b9b9b;
+            }
+            .msg-title-left {
+                flex: 1;
+                font-weight: 600;
+                letter-spacing: 0.2px;
+                color: #f46f46;
+                .project-type {
+                    border-radius: 10px;
+                    color: #fff;
+                    padding: 3px 10px;
+                    &.type-blue {
+                        background-color: #5888fd;
+                    }
+                    &.type-green {
+                        background-color: #19b372;
+                    }
+                    &.type-gray {
+                        background-color: #cdcdcd;
+                    }
+                }
+            }
+        }
+        .msg-cont {
+            font-family: PingFangSC;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: normal;
+            letter-spacing: normal;
+            color: #4a4a4a;
+            h4{
+                font-size: 1.6rem;
+                font-weight: 600;
+                margin-top: 10px;
+            }
+            p{
+                margin-top: 1rem;
+                font-size: 1.2rem;
+                letter-spacing: 0.2px;
+                color: #4a4a4a;
+                .demand-number {
+                    color: #f46f46;
+                }
+            }
+            .city-date-cont{
+                display: flex;
+                span{
+                    flex: 1;
+                }
+                .fontw600 {
+                    font-weight: 600;
+                }
+            }
+            .demand-content-cont {
+                white-space: initial;
+                line-height: 1.6rem;
+                font-family: PingFangSC;
+                font-size: 1.4rem;
+                font-weight: normal;
+                font-style: normal;
+                font-stretch: normal;
+                letter-spacing: 0.2px;
+                text-align: justify;
+                color: #4a4a4a;
+            }
+        }
+        .project-stage-list {
+            padding: 20px;
+            border-radius: 3px;
+            background-color: #fcfcfc;
+            border: solid 1px #ede9e9;
+            display: flex;
+            .stage-list-left {
+                margin-right: 15px;
+                .stage-border {
+                    width: 9px;
+                    height: 9px;
+                    background-color: #ffffff;
+                    border: solid 2.1px #cdcdcd;
+                    border-radius: 50%;
+                    &.checked {
+                        border: solid 2.1px #ff6536;
+                    }
+                }
+                .stage-lines {
+                    height: 60px;
+                    background: #cdcdcd;
+                    width: 3px;
+                    margin-left: 3px;
+                    &.checked {
+                        background: #ff6536;
+                    }
+                }
+                
+            }
+            .stage-list-right {
+                flex: 1;
+                .stage-list-cont {
+                    margin-bottom: 2.2rem;
+                    h4{
+                        font-family: PingFangSC;
+                        font-size: 1.2rem;
+                        font-weight: 600;
+                        font-style: normal;
+                        font-stretch: normal;
+                        line-height: normal;
+                        letter-spacing: 0.2px;
+                        color: #4a4a4a;
+                        .color-f46f46 {
+                            color: #f46f46;
+                        }
+                    }
+                    p {
+                        margin-top: 5px;
+                        font-family: PingFangSC;
+                        font-size: 1.2rem;
+                        font-weight: normal;
+                        font-style: normal;
+                        font-stretch: normal;
+                        line-height: normal;
+                        letter-spacing: normal;
+                        color: #4a4a4a;
+                    }
+                }
+            }
+        }
+        // .project-stage {
+        //     position: relative;
+        //     .project-stage-bg {
+        //         position: absolute;
+        //         border-radius: 3px;
+        //         background-color: #e6e5e5;
+        //         border: solid 1px #979797;
+        //         opacity: 0.2;
+        //     }
+        //     .project-stage-list {
+        //         padding: 20px;
+        //         position: absolute;
+        //         display: flex;
+        //         .stage-list-right {
+        //             flex: 1
+        //         }
+        //     }
+
+        // }
+        
+        .msg-footer {
+            border-top: solid 0.7px #f1f1f1;
+            margin-top: 15px;
+            padding: 10px 0 0;
+            display: flex;
+            .msg-footer-text {
+                flex: 1;
+                font-family: PingFangSC;
+                font-size: 14px;
+                font-weight: normal;
+                font-style: normal;
+                font-stretch: normal;
+                line-height: normal;
+                letter-spacing: normal;
+            }
+            ion-icon {
+                color: #cfcfcf;
+            }
+        }
+    }
+    .nav-menu {
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        z-index: 99;
+        top: 46px;
+        background-color: #fcfcfc;
+        .nav-menu-bg {
+            position: absolute;
+            opacity: 0.2;
+            background-color: #000000;
+            bottom: 0;
+            top: 62px;
+            right: 0;
+            left: 0;
+        }
+        .nav-menu-list {
+            .nav-menu-item {
+                font-family: PingFangSC;
+                font-size: 14px;
+                font-weight: 600;
+                font-style: normal;
+                font-stretch: normal;
+                line-height: normal;
+                letter-spacing: normal;
+                color: #4a4a4a;
+                ion-icon {
+                    font-size: 1.6rem;
+                    color: #cfcfcf;
+                    margin-top: 5px;
+                    line-height: 3rem;
+                }
+            }
+        }
+    }
+}

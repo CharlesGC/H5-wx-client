@@ -1,0 +1,112 @@
+page-consultant-document-browser {
+    ion-list {
+        margin-bottom: 0 !important;
+    }
+    .list-item-flex {
+        ion-item {
+            font-family: PingFangSC;
+            font-size: 14px;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: normal;
+            letter-spacing: normal;
+            color: #4a4a4a;
+            label{
+                font-weight: 600;
+            }
+            .icon {
+                font-size: 1.6rem;
+                vertical-align: middle;
+                color: #cfcfcf;
+            }
+            .item-value {
+                color: #9b9b9b;
+                margin-right: 1rem;
+                &.color-f46f46 {
+                    color: #f46f46;
+                }
+                &.font12 {
+                    font-size: 1.2rem;
+                }
+            }
+            .rigth-message {
+                text-align: right;
+            }
+        }
+    }
+    .user-other-list {
+        width: calc(100% - 30px);
+        margin: 20px 15px 0;
+        .card-item {
+            box-shadow: 0 1px 10px 0 rgba(0, 0, 0, 0.05);
+            .card-item-label {
+                display: flex;
+                font-family: PingFangSC;
+                font-size: 1.4rem;
+                font-weight: normal;
+                font-style: normal;
+                font-stretch: normal;
+                line-height: normal;
+                letter-spacing: normal;
+                label {
+                    min-width: 70px;
+                    color: #9b9b9b;
+                }
+                .card-cont {
+                    flex: 1;
+                    margin: 0;
+                    margin-left: 10px;
+                    line-height: 20px;
+                    color: #4a4a4a;
+                    white-space: normal;
+                    h5{
+                        font-family: PingFangSC;
+                        font-size: 1.6rem;
+                        font-weight: 600;
+                        font-style: normal;
+                        font-stretch: normal;
+                        line-height: 1.13;
+                        letter-spacing: normal;
+                    }
+                    .action-browser-file {
+                        font-family: PingFangSC;
+                        font-size: 1.2rem;
+                        font-weight: normal;
+                        font-style: normal;
+                        font-stretch: normal;
+                        line-height: normal;
+                        letter-spacing: 0.2px;
+                    }
+                    .browser-size {
+                        font-size: 1.2rem;
+                        margin-top: 10px;
+                    }
+                }
+            }
+            .lines-top {
+                border-top: solid 1px #f4f4f4;
+            }
+            .msg-footer {
+                border-top: solid 0.7px #f1f1f1;
+                margin-top: 15px;
+                padding: 10px 0 0;
+                display: flex;
+                .msg-footer-text {
+                    flex: 1;
+                    font-family: PingFangSC;
+                    font-size: 14px;
+                    font-weight: normal;
+                    font-style: normal;
+                    font-stretch: normal;
+                    line-height: normal;
+                    letter-spacing: normal;
+                }
+                ion-icon {
+                    color: #cfcfcf;
+                }
+            }
+
+        }
+    }
+
+}

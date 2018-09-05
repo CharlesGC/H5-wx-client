@@ -1,0 +1,37 @@
+page-project-invoice-browser {
+    ion-list {
+        margin-bottom: 0 !important;
+    }
+    .list-item-flex {
+        ion-item {
+            font-family: PingFangSC;
+            font-size: 14px;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: normal;
+            letter-spacing: normal;
+            color: #4a4a4a;
+            label{
+                font-weight: 600;
+            }
+            .icon {
+                font-size: 1.6rem;
+                vertical-align: middle;
+                color: #cfcfcf;
+            }
+            .item-value {
+                color: #9b9b9b;
+                margin-right: 1rem;
+                &.color-f46f46 {
+                    color: #f46f46;
+                }
+                &.font12 {
+                    font-size: 1.2rem;
+                }
+            }
+            .rigth-message {
+                text-align: right;
+            }
+        }
+    }
+}

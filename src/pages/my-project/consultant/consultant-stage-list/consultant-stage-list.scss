@@ -1,0 +1,222 @@
+page-consultant-stage-list {
+    ion-list {
+        margin: 0 15px !important;
+        width: calc(100% - 30px);
+    }
+    .nav-list-menu, .nav-menu-list, .describe-list {
+        margin: 0 !important;
+        width: 100%;
+    }
+    .message-item {
+        background-color: #ffffff;
+        box-shadow: 0 1px 10px 0 rgba(0, 0, 0, 0.05);
+        .msg-title {
+            display: flex;
+            span{
+                font-family: PingFangSC;
+                font-size: 1.2rem;
+                font-weight: normal;
+                font-style: normal;
+                font-stretch: normal;
+                line-height: normal;
+                letter-spacing: normal;
+                color: #9b9b9b;
+            }
+            .msg-title-left {
+                flex: 1;
+                font-weight: 600;
+                letter-spacing: 0.2px;
+                color: #f46f46;
+                &.color-c7c7c7 {
+                    color: #c7c7c7;
+                }
+            }
+        }
+        .msg-cont {
+            font-family: PingFangSC;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: normal;
+            letter-spacing: normal;
+            color: #4a4a4a;
+            .fweight600 {
+                font-weight: 600;
+            }
+            h4{
+                font-size: 1.6rem;
+                font-weight: 600;
+                margin-top: 10px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+            p{
+                margin-top: 1rem;
+                font-size: 1.2rem;
+                letter-spacing: 0.2px;
+                color: #4a4a4a;
+            }
+        }
+        .msg-cont-line2 {
+            display: flex;
+            .line2-left {
+                flex: 1;
+                font-size: 1.2rem;
+                font-weight: normal;
+                font-style: normal;
+                font-stretch: normal;
+                letter-spacing: 0.2px;
+                color: #4a4a4a;
+                ion-icon {
+                    font-size: 1.6rem;
+                    vertical-align: bottom;
+                }
+            }
+            .line2-right {
+                img {
+                    width: 24px;
+                    height: 24px;
+                    border-radius: 50%;
+                    vertical-align: middle;
+                    margin-right: 8px;
+                }
+                span {
+                    font-family: PingFangSC;
+                    font-size: 1.2rem;
+                    font-weight: 600;
+                    font-style: normal;
+                    font-stretch: normal;
+                    line-height: normal;
+                    letter-spacing: 0.2px;
+                    color: #4a4a4a;
+                }
+            }
+        }
+        .msg-footer {
+            border-top: solid 0.7px #f1f1f1;
+            margin-top: 15px;
+            padding: 10px 0 0;
+            display: flex;
+            .msg-footer-text {
+                flex: 1;
+                font-family: PingFangSC;
+                font-size: 14px;
+                font-weight: normal;
+                font-style: normal;
+                font-stretch: normal;
+                line-height: normal;
+                letter-spacing: normal;
+            }
+            ion-icon {
+                color: #cfcfcf;
+            }
+        }
+    }
+    .no-content{
+        vertical-align: middle;
+        text-align: center;
+        margin-top: 40%;
+        .title {
+            font-family: PingFangSC;
+            font-size: 1.4rem;
+            font-weight: 600;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: normal;
+            letter-spacing: normal;
+            text-align: center;
+            color: #f46f46;
+        }
+        .img {
+            width: 120px;
+            height: 120px;
+            border-radius: 3px;
+            background-color: #f1f1f1;
+            border: dashed 2px #cfcfcf;
+            margin: 20px auto;
+        }
+        .tip {
+            font-family: PingFangSC;
+            font-size: 1.4rem;
+            font-weight: normal;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: 1.29;
+            letter-spacing: normal;
+            text-align: center;
+            color: #4a4a4a;
+            margin-top: 40px;
+        }
+    }
+    .describe-list {
+        ion-item {
+            font-family: PingFangSC;
+            font-size: 1.4rem;
+            font-weight: normal;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: normal;
+            letter-spacing: normal;
+            color: #4a4a4a;
+            h4 {
+                font-weight: 600;
+            }
+            .describe-cont {
+                margin-top: 8px;
+                margin-bottom: 1rem;
+                white-space: normal;
+                color: #4a4a4a;
+            }
+            .tags-cont {
+                white-space: normal;
+                .tag {
+                    display: inline-block;
+                    margin-right: 10px;
+                    margin-bottom: 10px;
+                    font-family: PingFangSC;
+                    font-size: 1.2rem;
+                    font-weight: normal;
+                    font-style: normal;
+                    font-stretch: normal;
+                    line-height: normal;
+                    letter-spacing: 0.2px;
+                    text-align: center;
+                    color: #4a4a4a;
+                    padding: 3px 12px;
+                    border-radius: 3px;
+                }
+                &.skills{
+                    .tag {
+                        background-color: rgba(186, 232, 212, 0.4);
+                    }
+                }
+                &.industry{
+                    .tag {
+                        background-color: rgba(204, 219, 254, 0.5);
+                    }
+                } 
+                
+            } 
+        }
+    }
+    .top-lines {
+        display: flex;
+        .top-lines-right{
+            font-family: PingFangSC;
+            font-size: 1.2rem;
+            font-weight: normal;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: normal;
+            letter-spacing: normal;
+            color: #9b9b9b;
+        }
+        .top-lines-left {
+            flex: 1;
+        }
+    }
+    .mt45 {
+        margin-top: 45px !important;
+    }
+
+}

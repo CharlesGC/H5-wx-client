@@ -1,0 +1,88 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>release-three</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content class="content">
+    <div class="prompt">请填写项目背景与顾问需求信息</div>
+    <div class="jindu">
+      <div class="radius"></div>
+      <div class="solid"></div>
+      <div class="radius"></div>
+      <div class="solid"></div>
+      <div class="radius"></div>
+    </div>
+    <div class="release-list">
+        <ion-list no-lines class="release-iolist">
+            <button ion-item (click)="gosearchIndustry()" class="release-btn">
+              <span class="one">所在行业</span>
+              <div class="industryAll">
+                 <!-- <span>{{industryData.industryName}}</span> -->
+                 <span>金融行业</span>
+              </div>
+            </button> 
+        </ion-list>
+        <ion-list no-lines class="release-iolist">
+            <button ion-item (click)="goback()" class="release-btn">
+              <span class="one">专长领域</span>
+              <div class="industryAll">
+                <span>技术开发与后台维护</span>
+              </div>
+            </button> 
+        </ion-list>
+        <ion-list no-lines class="release-iolist">
+            <button ion-item (click)="goappiontPage()" class="release-btn">
+              <span class="one">项目时间</span>
+              <span class="two">180天</span>
+            </button> 
+        </ion-list>
+        <ion-list no-lines class="release-iolist">
+            <button ion-item (click)="godatestart()" class="release-btn">
+              <span class="one">开始时间</span>
+              <span class="note">尽快开始</span>
+            </button> 
+        </ion-list>
+        <ion-list no-lines class="release-iolist">
+            <button ion-item (click)="goback()" class="release-btn">
+              <span class="one">是否驻场</span>
+              <span class="note">驻场</span>
+            </button> 
+        </ion-list>
+        <ion-list no-lines class="release-iolist">
+            <button ion-item (click)="goBudgetPage()" class="release-btn">
+              <span class="one">项目预算</span>
+              <span class="note">请选择</span>
+            </button> 
+        </ion-list>
+        <ion-list no-lines class="release-iolist">
+            <button ion-item (click)="goback()" class="release-btn">
+              <span class="one">语言要求</span>
+              <span class="note">英语 · 精通 </span>
+            </button> 
+        </ion-list>
+        <ion-list no-lines class="release-iolist">
+            <button ion-item (click)="goaptitude()" class="release-btn">
+              <span class="one">资质要求</span>
+              <span class="note">请选择</span>
+            </button> 
+        </ion-list>
+    </div>
+    <div class="release-prompt">请选择发布类型(目前为完整发布模式)</div>
+    <div class="backrelease">
+        <ion-list no-lines>
+            <button ion-item (click)="gotoSpeedPage()" class="release-btn">
+            <div class="backone" (click)="gotoSpeedPage()">
+              <span ><img src="../../assets/imgs/agile.png" alt=""></span>
+              <span>返回快速发布</span>
+            </div>
+              <span class="two">留下简要的说明书</span>
+            </button> 
+        </ion-list>
+    </div>
+    <div class="release-footer">
+        <div (click)="gotoSpeedPage()">发布</div>
+        <div>存为草稿</div>
+    </div>
+</ion-content>

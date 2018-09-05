@@ -1,0 +1,12 @@
+page-set-account {
+    .bg-black{
+        background-color: #fcfcfc; 
+    }
+    /*更改插件样式*/
+    .list-ios .item-block .item-inner {
+        border-bottom: solid 0.7px #f1f1f1;
+    }
+    .list-ios > .item-block:first-child {
+        border-top: none;
+    }
+}

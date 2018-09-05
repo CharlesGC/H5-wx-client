@@ -1,0 +1,33 @@
+<ion-header>
+    <ion-navbar>
+      <ion-title>个人详情（擅长语言）编辑</ion-title>
+    </ion-navbar>
+  </ion-header>
+  
+  <ion-content style="background-color: #fcfcfc;">
+      <ion-list class="contact-list mt10">
+        <ion-item class="" (click)="goFormEditPage('language',languageListData.language,'text')">
+          <span class="left-title">语言</span>
+          <div item-right class="rigth-message">
+            <span>{{languageListData.language}}</span>
+            <ion-icon name="arrow-forward" color="#cfcfcf" class="ml12"></ion-icon>
+          </div>
+        </ion-item>
+        <ion-item class="" (click)="goFormEditPage('grade',languageListData.grade,'select')" no-lines>
+            <span class="left-title">等级</span>
+            <div item-right class="rigth-message">
+              <span *ngIf="languageListData.grade == 0">较差</span>
+              <span *ngIf="languageListData.grade == 1">一般</span>
+              <span *ngIf="languageListData.grade == 2">熟练</span>
+              <span *ngIf="languageListData.grade == 3">精通</span>
+              <ion-icon name="arrow-forward" class="ml12"></ion-icon>
+            </div>
+        </ion-item>
+      </ion-list>
+      <div class="fixed-bottom">
+          <button ion-button class="btn-submit" (click)="onLanguageExpSubmit()">提交</button>
+          <button ion-button class="btn-delete" (click)="onLanguageExpDel()">删除</button>
+      </div>
+  
+  </ion-content>
+  

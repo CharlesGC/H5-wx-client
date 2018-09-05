@@ -1,0 +1,79 @@
+<!--
+  Generated template for the ProjectConsultantListPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <ion-navbar>
+      <ion-title>我的项目/客户/顾问/列表</ion-title>
+    </ion-navbar>
+  
+  </ion-header>
+  <ion-content style="background-color: #fcfcfc;">
+    <div *ngFor="let projectConsultantListData_item of projectConsultantListData;let i=index"  [ngClass]="{'mt50':i!=0}">
+        <div class="title-cont">
+          <div class="title-cont-left">
+            <p class="line1">{{projectConsultantListData_item.companyName}}</p>
+            <p class="line2">{{projectConsultantListData_item.projectName}}</p>
+          </div>
+          <div class="title-cont-right">
+            <span class="tage">{{projectConsultantListData_item.count}} 位推荐顾问</span>
+          </div>
+        </div>
+        <ion-list class="list-content" *ngIf="projectConsultantListData_item.recommendadviser && projectConsultantListData_item.recommendadviser.length>0">
+          <ion-item class="item-card mt20" *ngFor="let consultantList_item of projectConsultantListData_item.recommendadviser" no-lines>
+            <!-- <p class="consultant-type">
+              <span *ngIf="consultantList_item.ustatus == 0">未审核</span>
+              <span *ngIf="consultantList_item.ustatus == 1">微信新用户</span>
+              <span *ngIf="consultantList_item.ustatus == 2">未选择身份</span>
+              <span *ngIf="consultantList_item.ustatus == 3">未知</span>
+              <span *ngIf="consultantList_item.ustatus == 4">已审核</span>
+              <span *ngIf="consultantList_item.ustatus == 5">面试通过</span>
+              <span *ngIf="consultantList_item.ustatus == 6">项目通过</span>
+            </p> -->
+            <div class="consultant-info">
+              <div class="consultant-info-left">
+                <img src="{{consultantList_item.avatar}}"/>
+              </div>
+              <div class="consultant-info-right">
+                <div>
+                  <h4 class="mr10">{{consultantList_item.nickName}}</h4>
+                  <ion-icon class="transgender mr10 men" name="ios-transgender" *ngIf="consultantList_item.gender == 1"></ion-icon>
+                  <ion-icon class="transgender mr10 women" name="ios-transgender" *ngIf="consultantList_item.gender == 2"></ion-icon>
+                  <span class="info-status" *ngIf="consultantList_item.ustatus == 4">已审核</span>
+                  <span class="info-status" *ngIf="consultantList_item.ustatus == 5">面试通过</span>
+                  <span class="info-status" *ngIf="consultantList_item.ustatus == 6">项目通过</span>
+                </div>
+                <div class="info-other">
+                  <span>{{consultantList_item.years}} </span>
+                  <span>年工作经验，</span>
+                  <span class="color-f46f46">{{consultantList_item.salaryUp}}-{{consultantList_item.salaryDown}} </span>
+                  <span>元/天</span>
+                </div>
+              </div>
+            </div>
+            <div class="consultant-des">{{consultantList_item.introduction}}</div>
+            <div>
+                <p class="tags-cont skills">
+                  <span class="tag" *ngFor="let adviserSkill_tag of consultantList_item.adviserSkill">{{adviserSkill_tag}}</span>
+                  <!-- <span class="tag">水力资源与厂方管理</span>
+                  <span class="tag">人力资源</span> -->
+                </p>
+                <p class="tags-cont industry">
+                  <span class="tag" *ngFor="let adviserIndustry_tag of consultantList_item.adviserIndustry">{{adviserIndustry_tag}}</span>
+                  <!-- <span class="tag">生态互联网</span>
+                  <span class="tag">航空航天</span>
+                  <span class="tag">投资资产法务</span> -->
+                </p>
+            </div>
+            <div class="msg-footer" (click)="goConsultantBrowserClick(consultantList_item.uid)">
+              <span class="msg-footer-text">查看该顾问详情</span>
+              <ion-icon name="arrow-forward" class="ml12"></ion-icon>
+            </div>
+          </ion-item>
+        </ion-list>
+      </div>
+  </ion-content>
+  

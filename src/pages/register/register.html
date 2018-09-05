@@ -1,0 +1,28 @@
+<ion-header>
+    <ion-navbar>
+      <ion-title>注册</ion-title>
+    </ion-navbar>
+  </ion-header>
+
+<ion-content padding class="phonebind-from">
+  <ion-list class="mt10">
+    <ion-item>
+      <ion-input type="text" placeholder="输入手机号" #phone clearInput (ionBlur)="onPhoneBlur(phone,0)"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-input type="text" placeholder="验证码" #smsCode></ion-input>
+        <div item-right ion-button round (click)="getVerificationCode(phone)">获取验证码</div>
+        <!-- <ion-label fixed style="position: fixed;right: 0px;top: 5px;color:#FF6536;z-index:999;" (click)="getVerificationCode()"></ion-label> -->
+    </ion-item>
+    <!-- <div style="position: fixed;right: 18px;top: 157px;color: #FF6536;z-index: 9999;" (click)="getVerificationCode(phone)">{{phoneCodeText}}</div> -->
+    <ion-item>
+        <ion-input type="text" placeholder="用户名" #uCode clearInput (ionBlur)="onPhoneBlur(uCode,1)"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input type="password" placeholder="密码" #pwd clearInput></ion-input>
+    </ion-item>
+    <ion-item class="mt20 item-button" no-lines>
+        <button ion-button block large  (click)="register(phone,smsCode, uCode, pwd)">注册</button>
+    </ion-item>
+  </ion-list>
+</ion-content>

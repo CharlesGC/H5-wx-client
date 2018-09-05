@@ -1,0 +1,87 @@
+page-appoint-date {
+    .appiont-list {
+        width: 100%;
+        .list-ios {
+            margin:0;
+       }
+        .appiont-ion {
+            width: 375px;
+            height: 50px;
+            background-color: #ffffff;
+            .ion-label {
+                width: 141px;
+                height: 20px;
+                font-family: PingFangSC;
+                font-size: 14px;
+                font-weight: 600;
+                color: #4a4a4a;
+            }
+        }
+        .dete-select {
+            .select-border {
+                width: 252px;
+                height: 17px;
+                font-family: PingFangSC;
+                font-size: 12px;
+                color: #4a4a4a;
+                margin-left: 15px;
+            }
+            .date-input1 {
+                width: 100%;
+                height: 50px;
+                background-color: #ffffff;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                input {
+                    width: 60%;
+                    height: 20px;
+                    opacity: 0.5;
+                    font-family: PingFangSC;
+                    font-size: 14px;
+                    font-weight: 600;
+                    color: #9b9b9b;
+                    margin-left: 15px;
+                    margin-top: 10px;
+                    border: 0;
+                }
+                .date-iolist {
+                    margin-top: 15px;
+                    .date-item {
+                        .date-label {
+                            display: flex;
+                            span:nth-child(1) {
+                                display: block;
+                                width: 1px;
+                                height: 28px;
+                                opacity: 0.3;
+                                margin-right: 12px;
+                                border: solid 1px #979797;
+                                margin-top: 5px;
+                            }
+                            span:nth-child(2) {
+                                display: block;
+                                font-family: PingFangSC;
+                                font-size: 12px;
+                                color: #9b9b9b;
+                                margin-right: 10px;
+                                margin-top: 8px;
+                            }
+                        }
+                    }
+                }
+
+            }
+        }
+    }
+    .appiont-footer {
+        width: 100%;
+        height: 49px;
+        background-color: #ff6536;
+        position: fixed;
+        bottom: 0;
+        color: #ffffff;
+        text-align: center;
+        line-height: 49px;
+    }
+}

@@ -1,0 +1,89 @@
+<ion-header>
+
+    <ion-navbar>
+      <ion-title>我的项目/客户/项目详情</ion-title>
+    </ion-navbar>
+  
+  </ion-header>
+  
+  <ion-content style="background-color: #fcfcfc;">
+      <ion-list class="project-browser-top">
+          <p class="address-type">
+            <ion-icon name="navigate"></ion-icon>
+            <span>{{projectData.province}}</span>
+            <span class="mr15"> {{projectData.city}}</span>
+            <ion-icon name="navigate"></ion-icon>
+            <span *ngIf="projectData.status ==0">未发布</span>
+            <span *ngIf="projectData.status != 0">已发布</span>
+          </p>
+          <div class="title-cont">
+              {{projectData.projectName}}
+          </div>
+          <div class="project-type">
+            <!-- <span>未开始</span> -->
+            <span *ngIf="projectData.status ==1||projectData.status ==2||projectData.status ==3||projectData.status ==6">未开始</span>
+            <span *ngIf="projectData.status ==4 || projectData.status ==7">进行中</span>
+            <span *ngIf="projectData.status ==5 || projectData.status ==8||projectData.status ==9 || projectData.status ==10">已完成</span>
+            <span *ngIf="projectData.status ==0">草稿箱</span>
+          </div>
+        </ion-list><ion-list class="list-item-flex mt10">
+            <ion-item (click)="goFormEditPage('introduction',projectData.introduction,'text')">
+              <label>胜任介绍</label>
+              <div item-right class="rigth-message">
+                  <p class="item-value line-overflow">{{projectData.introduction || '请输入'}}</p>
+                  <span class="go-icon"><ion-icon class="icon" name="arrow-forward"></ion-icon></span>
+              </div>
+            </ion-item>
+            <ion-item (click)="goFormEditPage('proposal',projectData.proposal,'text')">
+              <label>项目规划</label>
+              <div item-right class="rigth-message">
+                  <p item-right class="item-value line-overflow">{{projectData.proposal || '请输入'}}</p>
+                  <span class="go-icon"><ion-icon class="icon" name="arrow-forward"></ion-icon></span>
+              </div>
+            </ion-item>
+            <ion-item no-lines (click)="goFormEditPage('pacids',projectData.pacids,'pacids')">
+              <label>案例附件</label>
+              <div item-right class="rigth-message">
+                  <p item-right class="item-value line-overflow">点击预览或上传</p>
+                  <span class="go-icon"><ion-icon class="icon" name="arrow-forward"></ion-icon></span>
+              </div>
+            </ion-item>
+          </ion-list>
+        <div style="height:100px;"></div>
+        <button ion-button expand="full" large class="fixed-bottom" (click)="onApplicationSubmit()">提交申请</button>
+    </ion-content>
+
+  <!--弹出框-->
+<div class="phonebind-modal" [hidden]="!tip_isShow">
+    <div class="modal-bg"></div>
+    <div class="modal-box">
+      <div class="modal-top">
+        <div class="modal-title mt20">平台佣金说明</div>
+        <div class="modal-content">
+            <p>平台将收取 20% 的项目金额作为平台费用，请确认您知晓这一条例。</p>
+        </div>
+        <div class="modal-footer">
+            <button ion-button full large (click)="onDetermine()">同意并完成申请</button>
+            <button ion-button full large (click)="onClose()" class="btn-delete">返回</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--弹出框-->
+<div class="phonebind-modal" [hidden]="!success_isShow">
+    <div class="modal-bg"></div>
+    <div class="modal-box">
+      <div class="modal-top">
+          <div class="modal-title"><img src="../../../../assets/success-icon@3x.png"></div>
+        <div class="modal-title">申请成功</div>
+        <div class="modal-content">
+            <p>您已经成功申请该项目，最新消息将会通过手机短信、邮件及微信的方式对您进行及时告知。</p>
+        </div>
+        <div class="modal-footer">
+            <button ion-button full large (click)="onGoProjectPage()">返回项目列表</button>
+            <button ion-button full large (click)="onGoProjectPage()" class="btn-delete">继续申请项目</button>
+        </div>
+      </div>
+    </div>
+  </div>

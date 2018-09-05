@@ -1,0 +1,139 @@
+<!--
+  Generated template for the ProjectSubmitInvoicePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>我的项目/客户/阶段详情/提交发票</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content style="background-color: #fcfcfc;">
+    <ion-list class="browser-top">
+      <h4>节水系统问题诊断与提升优化</h4>
+      <p class="browser-top-p mt15">
+          <ion-icon name="ios-paper-outline" class="mr3"></ion-icon>
+          <span>阶段周期</span>
+          <span>2018-06-05</span>
+          <span> 至 </span>
+          <span>2018-07-08</span>
+      </p>
+    </ion-list>
+    <p class="browser-file">请选择发票类型</p>
+    <ion-list class="list-item-flex mt10">
+      <ion-item (click)="onSelectInvoice(0)">
+        <label>增值税普通发票</label>
+        <p item-right>
+            <ion-icon class="color-f46f46" name="checkmark-circle" *ngIf="selected == 0"></ion-icon>
+        </p>
+      </ion-item>
+      <ion-item no-lines (click)="onSelectInvoice(1)">
+        <label>增值税专用发票</label>
+        <p item-right>
+            <ion-icon class="color-f46f46" name="checkmark-circle" *ngIf="selected == 1"></ion-icon>
+        </p>
+      </ion-item>
+    </ion-list>
+    <div class="ordinary-invoice" *ngIf="selected == 0">
+        <p class="browser-file">发票信息（请确认纳税号是否正确）</p>
+        <ion-list class="list-item-flex mt10">
+          <ion-item>
+              <label>金额</label>
+              <span item-right class="item-value">{{invoiceData.price}} 元</span>
+          </ion-item>
+          <ion-item>
+            <label>发票抬头</label>
+            <span item-right class="item-value">{{invoiceData.invoiceLetterhead}}</span>
+          </ion-item>
+          <ion-item no-lines (click)="goFormEditPage('taxNumber',invoiceData.taxNumber,'text')">
+            <label>纳税号</label>
+            <p item-right>
+                <span class="item-value">{{invoiceData.taxNumber}}</span>
+                <ion-icon class="icon" name="arrow-forward"></ion-icon>
+            </p>
+          </ion-item>
+        </ion-list>
+        <p class="browser-file">寄送信息</p>
+        <ion-list class="list-item-flex mt10">
+          <ion-item (click)="goFormEditPage('companyAddress',invoiceData.companyAddress,'text')">
+            <label>寄送地址</label>
+            <p item-right>
+                <span class="item-value">{{invoiceData.companyAddress}}</span>
+                <ion-icon class="icon" name="arrow-forward"></ion-icon>
+            </p>
+          </ion-item>
+          <ion-item (click)="goFormEditPage('recipient',invoiceData.recipient,'text')">
+            <label>收件人</label>
+            <p item-right>
+                <span class="item-value">{{invoiceData.recipient}}</span>
+                <ion-icon class="icon" name="arrow-forward"></ion-icon>
+            </p>
+          </ion-item>
+          <ion-item no-lines (click)="goFormEditPage('taxPhone',invoiceData.taxPhone,'text')">
+            <label>联系方式</label>
+            <p item-right>
+                <span class="item-value">{{invoiceData.taxPhone}}</span>
+                <ion-icon class="icon" name="arrow-forward"></ion-icon>
+            </p>
+          </ion-item>
+        </ion-list>
+    </div>
+    <div class="special-invoice" *ngIf="selected == 1">
+      <p class="browser-file">发票信息（请确认纳税号是否正确）</p>
+      <ion-list class="list-item-flex mt10">
+        <ion-item>
+          <label>金额</label>
+          <span item-right class="item-value">{{invoiceData.price}} 元</span>
+        </ion-item>
+        <ion-item>
+          <label>发票抬头</label>
+          <span item-right class="item-value">{{invoiceData.invoiceLetterhead}}</span>
+        </ion-item>
+        <ion-item>
+        <label>公司电话</label>
+          <span item-right class="item-value">{{invoiceData.companyPhone}}</span>
+        </ion-item>
+        <ion-item>
+          <label>中信银行</label>
+          <span item-right class="item-value">{{invoiceData.openBank}}</span>
+        </ion-item>
+        <ion-item no-lines (click)="goFormEditPage('taxNumber',invoiceData.taxNumber,'text')">
+          <label>纳税号</label>
+          <p item-right>
+              <span class="item-value">{{invoiceData.taxNumber}}</span>
+              <ion-icon class="icon" name="arrow-forward"></ion-icon>
+          </p>
+        </ion-item>
+      </ion-list>
+      <p class="browser-file">寄送信息</p>
+      <ion-list class="list-item-flex mt10">
+        <ion-item (click)="goFormEditPage('companyAddress',invoiceData.companyAddress,'text')">
+          <label>寄送地址</label>
+          <p item-right>
+              <span class="item-value">{{invoiceData.companyAddress}}</span>
+              <ion-icon class="icon" name="arrow-forward"></ion-icon>
+          </p>
+        </ion-item>
+        <ion-item (click)="goFormEditPage('recipient',invoiceData.recipient,'text')">
+          <label>收件人</label>
+          <p item-right>
+              <span class="item-value">{{invoiceData.recipient}}</span>
+              <ion-icon class="icon" name="arrow-forward"></ion-icon>
+          </p>
+        </ion-item>
+        <ion-item no-lines (click)="goFormEditPage('taxPhone',invoiceData.taxPhone,'text')">
+          <label>联系方式</label>
+          <p item-right>
+              <span class="item-value">{{invoiceData.taxPhone}}</span>
+              <ion-icon class="icon" name="arrow-forward"></ion-icon>
+          </p>
+        </ion-item>
+      </ion-list>
+    </div>
+    <div style="height:100px;"></div>
+    <button ion-button expand="full" large class="fixed-bottom" (click)="goInvoiceSubmit()">提交</button>
+</ion-content>

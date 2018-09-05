@@ -1,0 +1,320 @@
+page-project-consultant-browser {
+    .select-card {
+        height: 47px;
+        line-height: 47px;
+        background: #fff;
+        text-align: center;
+        padding: 0 40px;
+        font-family: PingFangSC;
+        font-size: 1.4rem;
+        font-weight: 600;
+        font-style: normal;
+        font-stretch: normal;
+        letter-spacing: normal;
+        color: #c7c7c7;
+        display: flex;
+        margin-bottom: 0;
+        .select-card-div{
+            flex: 1;
+            span {
+                display: inline-block;
+                padding: 0 10px;
+            }
+            &.checked {
+                span {
+                    color: #f46f46;
+                    border-bottom: 2px solid #f46f46;
+                }
+            }
+        }
+    }
+    
+    .list-content {
+        margin: 0 15px !important;
+        width: calc(100% - 30px);
+    }
+    .item-card {
+        background-color: #ffffff;
+        box-shadow: 0 1px 10px 0 rgba(0, 0, 0, 0.05);
+        .consultant-type {
+            margin: 5px 0 15px;
+            span {
+                display: inline-block;
+                padding: 3px 12px;
+                border-radius: 10px;
+                background-color: #5888fd;
+                font-family: PingFangSC;
+                font-size: 1rem;
+                font-weight: 600;
+                font-style: normal;
+                font-stretch: normal;
+                line-height: normal;
+                letter-spacing: 0.2px;
+                text-align: center;
+                color: #ffffff;
+            }
+        }
+        .consultant-info {
+            display: flex;
+            .consultant-info-left {
+                // flex: 1;
+                padding-left: 10px;
+                img {
+                    width: 70px;
+                    height: 70px;
+                    border-radius: 50%;
+                }
+            }
+            .consultant-info-right {
+                margin-left: 15px;
+                h4 {
+                    font-family: PingFangSC;
+                    font-size: 16px;    
+                    font-weight: 600;
+                    font-style: normal;
+                    font-stretch: normal;
+                    line-height: normal;
+                    letter-spacing: normal;
+                    color: #4a4a4a;
+                    display: inline-block;
+                    margin-top: 15px;
+                }
+                .transgender {
+                    font-size: 1.2rem;
+                    &.men {
+                        color: #5888fd;
+                    }
+                    &.women {
+                        color: #ff6536;
+                    }
+                }
+                .info-status {
+                    font-family: PingFangSC;
+                    font-size: 12px;
+                    font-weight: normal;
+                    font-style: normal;
+                    font-stretch: normal;
+                    line-height: normal;
+                    letter-spacing: 0.2px;
+                    color: #9b9b9b;
+                }
+                .info-other {
+                    font-family: PingFangSC;
+                    font-size: 1.2rem;
+                    font-weight: normal;
+                    font-style: normal;
+                    font-stretch: normal;
+                    line-height: normal;
+                    letter-spacing: 0.2px;
+                    color: #4a4a4a;
+                    margin-top: 8px;
+                    .color-f46f46 {
+                        color: #f46f46;
+                    }
+                }
+            }
+        }
+        .consultant-des{
+            white-space: normal;
+            font-family: PingFangSC;
+            font-size: 14px;
+            font-weight: normal;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: normal;
+            letter-spacing: 0.2px;
+            text-align: justify;
+            color: #4a4a4a;
+            margin: 15px 0 20px;
+        }
+        .tags-cont {
+            white-space: normal;
+            .tag {
+                display: inline-block;
+                margin-right: 10px;
+                margin-bottom: 10px;
+                font-family: PingFangSC;
+                font-size: 1.2rem;
+                font-weight: normal;
+                font-style: normal;
+                font-stretch: normal;
+                line-height: normal;
+                letter-spacing: 0.2px;
+                text-align: center;
+                color: #4a4a4a;
+                padding: 3px 12px;
+                border-radius: 3px;
+            }
+            &.skills{
+                .tag {
+                    background-color: rgba(186, 232, 212, 0.4);
+                }
+            }
+            &.industry{
+                .tag {
+                    background-color: rgba(204, 219, 254, 0.5);
+                }
+            } 
+                
+        }
+        .msg-footer {
+            border-top: solid 0.7px #f1f1f1;
+            margin-top: 15px;
+            padding: 10px 0 0;
+            display: flex;
+            .msg-footer-text {
+                flex: 1;
+                font-family: PingFangSC;
+                font-size: 14px;
+                font-weight: normal;
+                font-style: normal;
+                font-stretch: normal;
+                line-height: normal;
+                letter-spacing: normal;
+            }
+            ion-icon {
+                color: #cfcfcf;
+            }
+        }
+    }
+    .user-other-list {
+        width: calc(100% - 30px);
+        margin: 30px 15px 0;
+        h4 {
+            font-family: PingFangSC;
+            font-size: 17px;
+            font-weight: 600;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: normal;
+            letter-spacing: 0.2px;
+            color: #4a4a4a;
+            margin-bottom: 20px;
+            &.mt10 {
+                margin-top: 10px;
+            }
+        }
+        ion-card {
+            width: 100%;
+            margin: 0;
+            padding: 15px;
+            box-shadow: 0 1px 10px 0 rgba(0, 0, 0, 0.05);
+            // margin-bottom: 5px;
+            .card-item-label {
+                display: flex;
+                font-family: PingFangSC;
+                font-size: 14px;
+                font-weight: normal;
+                font-style: normal;
+                font-stretch: normal;
+                line-height: normal;
+                letter-spacing: normal;
+                label {
+                    min-width: 70px;
+                    color: #9b9b9b;
+                }
+                .card-cont {
+                    flex: 1;
+                    margin: 0;
+                    margin-left: 10px;
+                    line-height: 20px;
+                    color: #4a4a4a;
+                }
+            }
+            
+        }
+        ion-card:last-child {
+            margin-bottom: 0;
+        }
+        
+        .action-btn {
+            text-align: center;
+            button {
+                width: 110px;
+                height: 35px;
+                border-radius: 20px;
+                background-color: #ff6536;
+                box-shadow: 0 2px 10px 0 rgba(255, 101, 54, 0.3);
+                font-family: PingFangSC;
+                font-size: 12px;
+                font-weight: 600;
+                font-style: normal;
+                font-stretch: normal;
+                line-height: normal;
+                letter-spacing: 0.2px;
+                text-align: center;
+                color: #ffffff;
+                margin: 0;
+            }
+            
+        }
+
+        .border-top {
+            border-top: solid 1px #f4f4f4;
+        }
+    }
+
+    .describe-list {
+        ion-item {
+            font-family: PingFangSC;
+            font-size: 1.4rem;
+            font-weight: normal;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: normal;
+            letter-spacing: normal;
+            color: #4a4a4a;
+            h4 {
+                font-weight: 600;
+            }
+            .describe-cont {
+                margin-top: 8px;
+                white-space: normal;
+                color: #4a4a4a;
+            }
+            .tags-cont {
+                white-space: normal;
+                .tag {
+                    display: inline-block;
+                    margin-right: 10px;
+                    margin-bottom: 10px;
+                    font-family: PingFangSC;
+                    font-size: 1.2rem;
+                    font-weight: normal;
+                    font-style: normal;
+                    font-stretch: normal;
+                    line-height: normal;
+                    letter-spacing: 0.2px;
+                    text-align: center;
+                    color: #4a4a4a;
+                    padding: 3px 12px;
+                    border-radius: 3px;
+                }
+                &.skills{
+                    .tag {
+                        background-color: rgba(186, 232, 212, 0.4);
+                    }
+                }
+                &.industry{
+                    .tag {
+                        background-color: rgba(204, 219, 254, 0.5);
+                    }
+                } 
+                
+            } 
+        }
+    }
+
+    .browser-file {
+        font-family: PingFangSC;
+        font-size: 12px;
+        font-weight: 600;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        color: #c7c7c7;
+        margin-bottom: 0;
+    }
+
+}

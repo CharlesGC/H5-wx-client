@@ -1,0 +1,18 @@
+industry {
+    .hy_content {
+        width: 100%;
+        height: auto;
+        list-style: none;
+        display: flex;
+        justify-content:space-between;
+        align-items: center;
+        img {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+        }
+        .more {
+            margin-right: 40px;
+        }
+    }
+}

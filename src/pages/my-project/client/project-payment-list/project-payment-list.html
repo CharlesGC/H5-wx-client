@@ -1,0 +1,83 @@
+<!--
+  Generated template for the ProjectPaymentListPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>我的项目/客户/支付记录/列表</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content style="background-color: #fcfcfc;">
+    <ion-list>
+      <ion-item class="message-item mt20" no-lines *ngFor="let paymentListData_item of paymentListData">
+        <p class="msg-title">
+          <span class="msg-title-left" *ngIf="paymentListData_item.status == 0">客户付款待确认</span>
+          <span class="msg-title-left" *ngIf="paymentListData_item.status == 1">平台已收款</span>
+          <span class="msg-title-left" *ngIf="paymentListData_item.status == 2">顾问申请收款待收款</span>
+          <span class="msg-title-left" *ngIf="paymentListData_item.status == 3">已向顾问付款</span>
+          <span>{{paymentListData_item.createTime | date: 'yyyy/MM/dd'}} </span>
+        </p>
+        <div class="msg-cont">
+          <h4>应付 {{paymentListData_item.price || 0}} 元 / 实付 {{paymentListData_item.realPrice || 0}} 元</h4>
+          <p>整体进度 <span class="fweight600">第二阶段</span></p>
+          <p class="mt5">流水号 <span class="fweight600">{{paymentListData_item.serialNumber}}</span></p>
+        </div>
+        <div class="msg-footer" (click)="goPaymentBrowser(paymentListData_item)">
+          <span class="msg-footer-text">查看该支付详情</span>
+          <ion-icon name="arrow-forward" class="ml12"></ion-icon>
+        </div>
+      </ion-item>
+      <!-- <ion-item class="message-item mt20" no-lines>
+        <p class="msg-title">
+          <span class="msg-title-left">已核对</span>
+          <span>2018-06-05 23:50 </span>
+        </p>
+        <div class="msg-cont">
+          <h4>应付 23,000 元 / 实付 23,000 元</h4>
+          <p>整体进度 <span class="fweight600">第二阶段</span></p>
+          <p class="mt5">流水号 <span class="fweight600">2018035469820</span></p>
+        </div>
+        <div class="msg-footer" (click)="goPaymentBrowser()">
+          <span class="msg-footer-text">查看该支付详情</span>
+          <ion-icon name="arrow-forward" class="ml12"></ion-icon>
+        </div>
+      </ion-item>
+      <ion-item class="message-item mt20" no-lines>
+          <p class="msg-title">
+            <span class="msg-title-left">已核对</span>
+            <span>2018-06-05 23:50 </span>
+          </p>
+          <div class="msg-cont">
+            <h4>应付 23,000 元 / 实付 23,000 元</h4>
+            <p>整体进度 <span class="fweight600">第二阶段</span></p>
+            <p class="mt5">流水号 <span class="fweight600">2018035469820</span></p>
+          </div>
+          <div class="msg-footer" (click)="goPaymentBrowser()">
+            <span class="msg-footer-text">查看该支付详情</span>
+            <ion-icon name="arrow-forward" class="ml12"></ion-icon>
+          </div>
+        </ion-item>
+        <ion-item class="message-item mt20" no-lines>
+          <p class="msg-title">
+            <span class="msg-title-left">等待核对</span>
+            <span>2018-06-05 23:50 </span>
+          </p>
+          <div class="msg-cont">
+            <h4>应付 23,000 元 / 实付 23,000 元</h4>
+            <p>整体进度 <span class="fweight600">第二阶段</span></p>
+            <p class="mt5">流水号 <span class="fweight600">2018035469820</span></p>
+          </div>
+          <div class="msg-footer" (click)="goPaymentBrowser()">
+            <span class="msg-footer-text">查看该支付详情</span>
+            <ion-icon name="arrow-forward" class="ml12"></ion-icon>
+          </div>
+        </ion-item> -->
+    </ion-list>
+  
+  </ion-content>

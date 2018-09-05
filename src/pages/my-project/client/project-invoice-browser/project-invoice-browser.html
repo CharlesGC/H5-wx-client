@@ -1,0 +1,125 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>我的项目/客户/发票/发票详情</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content style="background-color: #fcfcfc;">
+    <ion-list class="list-item-flex mt10">
+      <ion-item>
+        <label>发票类型</label>
+        <p item-right class="rigth-message">
+            <span class="item-value line-overflow" *ngIf="projectInvoiceDetails.invoiceType == 0">增值税专用发票</span>
+            <span class="item-value line-overflow" *ngIf="projectInvoiceDetails.invoiceType == 1">增值税普通发票</span>
+            <!-- <ion-icon class="icon" name="arrow-forward"></ion-icon> -->
+        </p>
+      </ion-item>
+      <ion-item no-lines>
+        <label>金额</label>
+        <p item-right class="rigth-message">
+            <span item-right class="item-value line-overflow">{{projectInvoiceDetails.price}} 元</span>
+        </p>
+      </ion-item>
+    </ion-list>
+
+    <ion-list class="list-item-flex mt10" *ngIf="projectInvoiceDetails.invoiceType == 1">
+      <ion-item>
+        <label>发票抬头</label>
+        <p item-right class="rigth-message">
+            <span class="item-value line-overflow">{{projectInvoiceDetails.invoiceLetterhead}}</span>
+        </p>
+      </ion-item>
+      <ion-item no-lines>
+        <label>纳税号</label>
+        <p item-right class="rigth-message">
+            <span item-right class="item-value line-overflow">{{projectInvoiceDetails.taxNumber}}</span>
+        </p>
+      </ion-item>
+    </ion-list>
+
+    <ion-list class="list-item-flex mt10" *ngIf="projectInvoiceDetails.invoiceType == 0">
+      <ion-item>
+        <label>发票抬头</label>
+        <p item-right class="rigth-message">
+            <span class="item-value line-overflow">{{projectInvoiceDetails.invoiceLetterhead}}</span>
+        </p>
+      </ion-item>
+      <ion-item>
+        <label>纳税号</label>
+        <p item-right class="rigth-message">
+            <span item-right class="item-value line-overflow">{{projectInvoiceDetails.taxNumber}}</span>
+        </p>
+      </ion-item>
+      <ion-item>
+        <label>对公账户银行</label>
+        <p item-right class="rigth-message">
+            <span item-right class="item-value line-overflow">{{projectInvoiceDetails.bankName}}</span>
+        </p>
+      </ion-item>
+      <ion-item>
+        <label>银行账号</label>
+        <p item-right class="rigth-message">
+            <span item-right class="item-value line-overflow">{{projectInvoiceDetails.bankNumber}}</span>
+        </p>
+      </ion-item>
+      <ion-item>
+        <label>公司地址</label>
+        <p item-right class="rigth-message">
+            <span item-right class="item-value line-overflow">{{projectInvoiceDetails.companyAddress}}</span>
+        </p>
+      </ion-item>
+      <ion-item no-lines>
+        <label>公司电话</label>
+        <p item-right class="rigth-message">
+            <span item-right class="item-value line-overflow">{{projectInvoiceDetails.companyPhone}}</span>
+        </p>
+      </ion-item>
+    </ion-list>
+
+
+    <ion-list class="list-item-flex mt10">
+      <ion-item>
+        <label>寄送地址</label>
+        <p item-right class="rigth-message">
+            <span class="item-value line-overflow">{{projectInvoiceDetails.companyAddress}}</span>
+        </p>
+      </ion-item>
+      <ion-item>
+        <label>收件人</label>
+        <p item-right class="rigth-message">
+            <span item-right class="item-value line-overflow">{{projectInvoiceDetails.recipient}}</span>
+        </p>
+      </ion-item>
+      <ion-item no-lines>
+        <label>联系方式</label>
+        <p item-right class="rigth-message">
+            <span item-right class="item-value line-overflow">{{projectInvoiceDetails.phone}}</span>
+        </p>
+      </ion-item>
+    </ion-list>
+    <ion-list class="list-item-flex mt10">
+      <ion-item>
+        <label>快递</label>
+        <p item-right class="rigth-message">
+            <span class="item-value line-overflow">{{projectInvoiceDetails.logisticsCompany}}</span>
+        </p>
+      </ion-item>
+      <ion-item no-lines>
+        <label>快递单号</label>
+        <p item-right class="rigth-message">
+            <span item-right class="item-value line-overflow">{{projectInvoiceDetails.logisticsNumber}}</span>
+        </p>
+      </ion-item>
+    </ion-list>
+    <ion-list class="list-item-flex mt10">
+      <ion-item no-lines>
+        <label>流水号</label>
+        <p item-right class="rigth-message">
+            <span class="item-value line-overflow">{{projectInvoiceDetails.serialNumber}}</span>
+        </p>
+      </ion-item>
+    </ion-list>
+    <div style="height:50px;"></div>
+</ion-content>

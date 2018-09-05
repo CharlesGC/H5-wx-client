@@ -1,0 +1,153 @@
+<!--
+  Generated template for the ProjectEditStep2Page page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <ion-navbar>
+      <ion-title>我的项目/客户/项目详情编辑3</ion-title>
+    </ion-navbar>
+  
+  </ion-header>
+  
+  <ion-content style="background-color: #fcfcfc;">
+      <p class="browser-file">请填写公司相关信息</p>
+      <div class="steps-list mt10">
+        <span class="steps-round checked"></span>
+        <span class="steps-line checked"></span>
+        <span class="steps-round checked"></span>
+        <span class="steps-line checked"></span>
+        <span class="steps-round checked"></span>
+      </div>
+      <ion-list class="list-item-flex mt20">
+        <ion-item (click)="goFormEditPage('industryList',projectData.industryList,'selectArr')">
+          <label>所在行业</label>
+          <p item-right class="rigth-message">
+              <!-- <span class="item-value line-overflow">阿里拉拉</span> -->
+              <span *ngIf="projectData.industryList && projectData.industryList.length<1"></span>
+              <span *ngIf="projectData.industryList && projectData.industryList.length==1">{{projectData.industryList[0].text}}</span>
+              <span *ngIf="projectData.industryList && projectData.industryList.length>1">{{projectData.industryList[0].text}} 等</span>
+              <ion-icon class="icon" name="arrow-forward"></ion-icon>
+          </p>
+        </ion-item>
+        <ion-item (click)="goFormEditPage('skillList',projectData.skillList,'selectArr')">
+          <label>专长领域</label>
+          <p item-right class="rigth-message">
+              <!-- <span item-right class="item-value line-overflow">请输入对接人姓名</span> -->
+              <span *ngIf="projectData.skillList && projectData.skillList.length<1"></span>
+              <span *ngIf="projectData.skillList && projectData.skillList.length==1">{{projectData.skillList[0].text}}</span>
+              <span *ngIf="projectData.skillList && projectData.skillList.length>1">{{projectData.skillList[0].text}} 等</span>
+              <ion-icon class="icon" name="arrow-forward"></ion-icon>
+          </p>
+        </ion-item>
+        <ion-item (click)="goFormEditPage('projectTime',projectData,'timeSelect')">
+          <label>项目时间</label>
+          <p item-right class="rigth-message">
+              <span item-right class="item-value line-overflow" *ngIf="projectData.projectLengthType == 0">0-3 个月</span>
+              <span item-right class="item-value line-overflow" *ngIf="projectData.projectLengthType == 1">3-6 个月</span>
+              <span item-right class="item-value line-overflow" *ngIf="projectData.projectLengthType == 2">6-12 个月</span>
+              <span item-right class="item-value line-overflow" *ngIf="projectData.projectLengthType == 3">{{projectData.projectLength}}</span>
+              <ion-icon class="icon" name="arrow-forward"></ion-icon>
+          </p>
+        </ion-item>
+        <ion-item (click)="goFormEditPage('startTime',projectData,'timeSelect')">
+          <label>开始时间</label>
+          <p item-right class="rigth-message">
+              <span item-right class="item-value line-overflow" *ngIf="projectData.startTimeType == 0">尽快开始</span>
+              <span item-right class="item-value line-overflow" *ngIf="projectData.startTimeType == 1">待商议</span>
+              <span item-right class="item-value line-overflow" *ngIf="projectData.startTimeType == 2">{{projectData.startTime | date: 'yyyy-MM-dd'}}</span>
+              <ion-icon class="icon" name="arrow-forward"></ion-icon>
+          </p>
+        </ion-item>
+        <ion-item (click)="goFormEditPage('deliverMethod',projectData.deliverMethod,'timeSelect')">
+          <label>是否驻场</label>
+          <p item-right class="rigth-message">
+              <span item-right class="item-value line-overflow" *ngIf="projectData.deliverMethod == 0">驻场</span>
+              <span item-right class="item-value line-overflow" *ngIf="projectData.deliverMethod == 1">半驻场</span>
+              <span item-right class="item-value line-overflow" *ngIf="projectData.deliverMethod == 2">非驻场</span>
+              <span item-right class="item-value line-overflow" *ngIf="projectData.deliverMethod == 3">待商议</span>
+              <ion-icon class="icon" name="arrow-forward"></ion-icon>
+          </p>
+        </ion-item>
+        <ion-item no-lines (click)="goFormEditPage('province-city',[projectData.province,projectData.city],'province-city')">
+          <label>项目地点</label>
+          <p item-right class="rigth-message">
+              <span item-right class="item-value line-overflow">{{projectData.province}} {{projectData.city}}</span>
+              <ion-icon class="icon" name="arrow-forward"></ion-icon>
+          </p>
+        </ion-item>
+      </ion-list>
+      <ion-list class="list-item-flex mt10">
+        <ion-item (click)="goFormEditPage('project_budget',projectData,'timeSelect')">
+          <label>项目预算</label>
+          <p item-right class="rigth-message">
+              <span item-right class="item-value line-overflow" *ngIf="projectData.budgetType == 2">待商议</span>
+              <span item-right class="item-value line-overflow" *ngIf="projectData.budgetType == 0 || projectData.budgetType == 1">{{projectData.budget}} 元</span>
+              <ion-icon class="icon" name="arrow-forward"></ion-icon>
+          </p>
+        </ion-item>
+        <ion-item (click)="goFormEditPage('planguage',projectData.planguage,'timeSelect')">
+          <label>语言要求</label>
+          <p item-right class="rigth-message">
+              <span item-right class="item-value line-overflow" *ngIf="projectData.planguage && projectData.planguage.length>0">
+                <span *ngFor="let languageList_item of projectData.planguage">{{languageList_item.language}} . 
+                  <span *ngIf="languageList_item.grade == 0">较差</span>
+                  <span *ngIf="languageList_item.grade == 1">一般</span>
+                  <span *ngIf="languageList_item.grade == 2">熟练</span>
+                  <span *ngIf="languageList_item.grade == 3">精通</span>
+                </span>
+              </span>
+              <span item-right class="item-value line-overflow" *ngIf="!projectData.planguage || projectData.planguage.length<1">请选择</span>
+              <ion-icon class="icon" name="arrow-forward"></ion-icon>
+          </p>
+        </ion-item>
+        <ion-item no-lines (click)="goFormEditPage('qualification',projectData.qualification,'timeSelect')">
+          <label>资质要求</label>
+          <p item-right class="rigth-message">
+              <span item-right class="item-value line-overflow" *ngIf="projectData.qualification == 0">初级</span>
+              <span item-right class="item-value line-overflow" *ngIf="projectData.qualification == 1">中级</span>
+              <span item-right class="item-value line-overflow" *ngIf="projectData.qualification == 2">高级</span>
+              <span item-right class="item-value line-overflow" *ngIf="projectData.qualification == 3">专家</span>
+              <ion-icon class="icon" name="arrow-forward"></ion-icon>
+          </p>
+        </ion-item>
+      </ion-list>
+      <p class="browser-file">请选择发布类型（目前为完整发布模式）</p>
+      <ion-list class="list-item-flex mt10">
+        <ion-item no-lines>
+          <label>返回快速发布</label>
+          <p item-right class="rigth-message">
+              <span class="item-value line-overflow">留下简要的项目说明</span>
+              <ion-icon class="icon" name="arrow-forward"></ion-icon>
+          </p>
+        </ion-item>
+      </ion-list>
+      <div style="height:100px;"></div>
+      <div class="fixed-bottom" *ngIf="!isEdit">
+          <button ion-button class="btn-submit" (click)="goProjectSubmit()">发布</button>
+          <button ion-button class="btn-delete" (click)="onDraftSubmit()">存为草稿</button>
+      </div>
+      <button ion-button expand="full" large class="fixed-bottom" (click)="onDraftSubmit()" *ngIf="isEdit">保存</button>
+  </ion-content>
+  <!--弹出框--> 
+<div class="phonebind-modal" [hidden]="!isShow">
+    <div class="modal-bg"></div>
+    <div class="modal-box">
+      <div class="modal-top">
+        <div class="modal-top-close">
+          <ion-icon ios="ios-close" md="md-close" item-rigth (click)="onClose()" color=""></ion-icon>
+        </div>
+        <div class="modal-title"><img src="../../../../assets/success-icon@3x.png"></div>
+        <div class="modal-title">发送成功</div>
+        <div class="modal-content">
+            <p>您的项目已经发布成功，我们将在尽快对项目展开审核，结果将会以邮件和短信的形式通知您。</p>
+        </div>
+        <div class="modal-footer">
+            <button ion-button full large (click)="goClientProjectPage()">返回项目列表</button>
+            <!-- <button ion-button full large (click)="onCompanyDel()" class="btn-delete">返回</button> -->
+        </div>
+      </div>
+    </div>
+  </div>

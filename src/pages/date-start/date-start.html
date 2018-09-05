@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>dateStart</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <div class="aptitude-list">
+        <ion-list class="aptitude-ion">
+            <ion-item no-lines>
+              <ion-label class="ion-label">尽快开始</ion-label>
+              <ion-checkbox [(ngModel)]="budgetTrue" item-end></ion-checkbox>
+            </ion-item>
+          </ion-list>
+      </div>
+      <div class="aptitude-list">
+          <ion-list class="aptitude-ion">
+              <ion-item no-lines>
+                <ion-label class="ion-label">待商议</ion-label>
+                <ion-checkbox [(ngModel)]="budgetTrue" item-end></ion-checkbox>
+              </ion-item>
+            </ion-list>
+        </div>
+        <div class="aptitude-list">
+            <ion-list class="aptitude-ion">
+                <ion-item no-lines>
+                  <ion-label class="ion-label">指定日期</ion-label>
+                  <ion-checkbox [(ngModel)]="budgetTrue" item-end></ion-checkbox>
+                </ion-item>
+              </ion-list>
+        </div>
+        <div class="date-list">
+            <ion-list no-lines class="date-iolist">
+                <ion-item class="date-item">
+                    <ion-label class="date-label">
+                      <span>准确开始日期</span>
+                      <span>请选择<ion-icon name="arrow-forward-outline" class="icon"></ion-icon></span>
+                    </ion-label>
+                    <ion-datetime displayFormat="YYYY/MM/DD" [(ngModel)]="myDate">
+                    </ion-datetime>
+                  </ion-item>
+            </ion-list>
+        </div>
+        <div class="date-footer" (click)="gotoreleasePage()">保存</div>
+</ion-content>

@@ -1,0 +1,73 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>budget</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+  <div class="aptitude-list">
+    <ion-list class="aptitude-ion">
+      <ion-item no-lines>
+        <ion-label class="ion-label">预算尚未确定</ion-label>
+        <ion-checkbox [(ngModel)]="isCounsel" (ionChange)="counsel()" item-end></ion-checkbox>
+      </ion-item>
+    </ion-list>
+    <ion-list class="aptitude-ion">
+      <ion-item no-lines>
+        <ion-label class="ion-label">预算已经确定</ion-label>
+        <ion-checkbox [(ngModel)]="isMoney" (ionChange)="money()" item-end></ion-checkbox>
+      </ion-item>
+    </ion-list>
+  </div>
+  <div class="aptitude-list" [hidden]="isMoneydate">
+    <div class="money-budget">
+      <div class="money-btn">
+        <div class="money-date menu-disabled-{{isDisabled}}" (click)="show()" [ngStyle]="">
+          <p>dfd</p>
+          <p>日薪结算</p>
+        </div>
+        <div class="money-fixed menu-bgcolor-{{isBgcolor}}" (click)="togger()">
+          <p>fdf</p>
+          <p>固定单价</p>
+        </div>
+      </div>
+      <div class="date-money" [hidden]="!isShow">
+        <div class="date-input1">
+          <input type="text" value="请输入预算金额">
+          <p>
+            <span>(单日)</span>
+            <span></span>
+            <span>元</span>
+            <span>
+              <ion-icon name="arrow-forward-outline" class="icon" style="font-size: 15px;"></ion-icon>
+            </span>
+          </p>
+        </div>
+        <div class="date-input2">
+          <input type="text" value="请输入预算金额">
+          <span>元</span>
+        </div>
+      </div>
+
+      <div class="fixed-money" [hidden]="ishidden">
+        <div class="money-input">
+          <input type="text" value="请输入预算金额">
+          <span>元</span>
+        </div>
+      </div>
+      <div class="nobudegt">
+        <div class="budgetAll">总预算金额</div>
+        <div class="number">
+          <span>￥</span>
+          <input type="text">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="nobude" [hidden]="isBudegt">
+    <div class="budgetAll">总预算金额</div>
+    <div class="counsel">待商议</div>
+  </div>
+  <div class="add-footer" (click)="gotoreleasePage()">保存</div>
+</ion-content>

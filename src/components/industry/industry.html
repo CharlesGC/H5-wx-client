@@ -1,0 +1,12 @@
+<div>
+  <ul class="hy_content">
+    <li *ngFor = "let item of industryArr" class="hy_list" (click) = "detialchange()">
+      <img [src]="item.icon" alt="">
+      <p>{{item.name}}</p>
+    </li>
+    <span class="more">
+      <img src="../../assets/imgs/logo.png" alt="">
+      <p>更多</p>
+    </span>
+  </ul>
+</div>

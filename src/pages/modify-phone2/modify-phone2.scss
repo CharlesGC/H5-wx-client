@@ -1,0 +1,84 @@
+page-modify-phone2 {
+    ion-item {
+        ion-input {
+            font-family: PingFangSC;
+            font-size: 14px;
+            font-weight: 600;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: normal;
+            letter-spacing: normal;
+            color: #4a4a4a;
+        }
+        & .bg-black {
+            background-color:  #fff;
+        }
+        &.bg-none {
+            background-color: #fcfcfc;
+        }
+    }
+    .phonebind-from {
+        background-color: #fcfcfc;
+        .phonebind-title {
+            h3 {
+                font-size: 2.2rem;
+                font-weight: 600;
+                margin: 0;
+            }
+        }
+        
+    }
+    .mt50 {
+        margin-top: 50px;
+    }
+    .mt20 {
+        margin-top: 20px;
+    }
+    .item-button {
+        
+        button {
+            border-radius: 6px;
+        }
+    }
+    
+}
+fixed-bottom {
+    width: 100%;
+    height: 50px;
+    bottom: 0;
+    position: fixed;
+    margin: 0;
+    border-radius: 0;
+    span {
+        font-family: PingFangSC;
+        font-size: 15px;
+        font-weight: 600;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        text-align: center;
+        color: #ffffff;
+    }
+}
+.none-margin {
+    .item-inner {
+        padding-right: 0 !important;
+    }
+}
+.ion-button-code {
+    width: 115px;
+    // height: 100%;
+    padding: 27px;
+    margin: 0 !important;
+    border-radius: 0;
+    font-family: PingFangSC;
+    font-size: 14px;
+    font-weight: 600;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: center;
+    color: #ffffff;
+}

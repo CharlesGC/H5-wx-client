@@ -1,0 +1,238 @@
+<ion-content id="content">
+  <!-- 轮播图部分 -->
+  <div>
+    <ion-slides pager class="swiper_content" does-continue="true" auto-play="true" loop="true" slide-interval=2000>
+      <ion-slide *ngFor="let item_swiperArr of swiperArr" class="swiper_list">
+        <img [src]="item_swiperArr.bannerUrl" />
+        <div class="img-text">
+          <div>{{item_swiperArr.title}}</div>
+          <div>{{item_swiperArr.note}}</div>
+          <div (click)="clickmore()">
+            <span>点击了解更多</span>
+            <span>></span>
+          </div>
+        </div>
+      </ion-slide>
+    </ion-slides>
+  </div>
+  <!-- 行业部分 -->
+  <div class="hy_container">
+    <div class="hy_content">
+      <div class="title-cont">
+        <h4>麦盟顾问 - 行业</h4>
+        <div (click)="goToOtherPage('','','indeustry')">
+          <span>更多</span>
+          <span>
+            <ion-icon name="arrow-right"></ion-icon>
+          </span>
+        </div>
+      </div>
+      <div>
+        <ul class="industry-content">
+          <li *ngFor="let item_IndustryArr of IndustryArr;let i =index" class="industry_list" (click)="goToOtherPage(item_IndustryArr,i)">
+            <div class="icon_list">
+              <img [src]="item_IndustryArr.industryUrl" alt="">
+              <p id="industry">{{item_IndustryArr.industryName.slice(0,4)}}</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <!-- 技能 -->
+  <div class="jn_container">
+    <div class="jn_content">
+      <div class="title-cont">
+        <h4>麦盟顾问 - 技能</h4>
+        <div>
+          <span (click)="InfoskillMore('','','skill')">更多</span>
+          <span>
+            <ion-icon name="arrow-right"></ion-icon>
+          </span>
+        </div>
+      </div>
+      <div>
+        <ul class="industry-content">
+          <li *ngFor="let item_skillArr of skillArr;let i = index" class="industry_list" (click)="InfoskillMore(item_skillArr,i)">
+            <div class="icon_list">
+              <img [src]="item_skillArr.fIcon" alt="">
+              <p>{{item_skillArr.fName.slice(0,4)}}</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <!-- 翘楚 -->
+  <div class="qc_container" *ngIf="outstandingArr">
+    <div class="qu_content">
+      <div class="title-cont">
+        <h4>行业翘楚</h4>
+        <div (click)="goToOtherPage()">
+          <span>更多</span>
+          <span>
+            <ion-icon name="arrow-right"></ion-icon>
+          </span>
+        </div>
+      </div>
+      <div class="qu_u">
+        <li *ngFor="let item of outstandingArr.data" class="qu_list">
+          <div class="text_box">
+            <div class="celebrity-img">
+              <img [src]="item.avatar" class="img" alt="">
+            </div>
+            <div class="text_labar">
+              <span>{{item.adviserName || '姓名'}}</span>
+              <ul class="text_content">
+                <li *ngFor="let j of item.industryList.slice(0,1)" class="text_list">
+                  <span>{{j.alName || '行业'}}</span>
+                </li>
+              </ul>
+            </div>
+            <div class="text_jinyan">工作经验：{{item.workingYears || '0年'}}</div>
+            <p class="qiaochu-duc">{{item.introduction}}</p>
+          </div>
+        </li>
+      </div>
+    </div>
+  </div>
+
+  <div class="text-img">
+    <img src="../../assets/imgs/rawpixel-558596-unsplash.png" alt="">
+    <div class="img_text">
+      <p>成为麦盟顾问</p>
+      <p>开启职业生涯的另一种可能</p>
+    </div>
+  </div>
+
+  <!-- 财务审计 -->
+  <div class="contant-cont">
+    <div class="title-cont">
+      <h4>财务审计顾问</h4>
+      <div (click)="goToOtherPage()">
+        <span>更多</span>
+        <span>
+          <ion-icon name="arrow-right"></ion-icon>
+        </span>
+      </div>
+    </div>
+    <ion-list>
+      <ion-item *ngFor="let finance_item of financesArrLength" style="white-space:normal;">
+        <div class="contant-item">
+          <div class="contant-item-left" item-start>
+            <img [src]="finance_item.avatar" class="item-img">
+            <p>{{finance_item.adviserName}}</p>
+          </div>
+          <div class="contant-item-right">
+            <p>{{finance_item.introduction}}</p>
+            <p class="industryLabel">
+              <span *ngFor="let item of finance_item.industryList.slice(0,2)">{{item.alName}}</span>
+            </p>
+            <p>
+              <span>工作经验：</span>
+              <span>{{finance_item.workingYears}}</span>
+            </p>
+          </div>
+        </div>
+      </ion-item>
+    </ion-list>
+  </div>
+  <!-- 麦盟案例 -->
+  <div class="case_container">
+    <ul class="case_content">
+      <div class="title-cont">
+        <h4>麦盟案例</h4>
+        <div (click)="goToOtherPage()">
+          <span>更多</span>
+          <span>
+            <ion-icon name="arrow-right"></ion-icon>
+          </span>
+        </div>
+      </div>
+      <div class="case_img">
+        <ion-slides pager class="swiper_content" does-continue="true" auto-play="true" loop="true" slide-interval=2000>
+          <ion-slide *ngFor="let item of caseArr" class="case_swiper">
+            <div class="swiper_img">
+              <img src="{{item.bannerUrl}}" />
+            </div>
+            <div class="code_text">
+              <div>{{item.note}}</div>
+              <div>来自麦盟智库的专家回答</div>
+              <div (click)="goToOtherPage()">
+                <span>点击了解更多</span>
+                <span>></span>
+              </div>
+            </div>
+          </ion-slide>
+        </ion-slides>
+      </div>
+    </ul>
+  </div>
+  <!-- 全部顾问 -->
+  <div class="contant-cont">
+    <div class="title-cont">
+      <h4>全部顾问</h4>
+      <div (click)="goToOtherPage()">
+        <span>更多</span>
+        <span>
+          <ion-icon name="arrow-right"></ion-icon>
+        </span>
+      </div>
+    </div>
+    <ion-list>
+      <ion-item *ngFor="let financeAll_item of financeAllArrlength" style="white-space:normal;">
+        <div class="contant-item">
+          <div class="contant-item-left" item-start>
+            <img [src]="financeAll_item.avatar" class="item-img">
+            <p>{{financeAll_item.adviserName}}</p>
+          </div>
+          <div class="contant-item-right">
+            <p>{{financeAll_item.introduction}}</p>
+            <p class="industryLabel">
+              <span *ngFor="let item of financeAll_item.industryList.slice(0,2)">{{item.alName}}</span>
+            </p>
+            <p>
+              <span>工作经验：</span>
+              <span>{{financeAll_item.workingYears}}</span>
+            </p>
+          </div>
+        </div>
+      </ion-item>
+    </ion-list>
+  </div>
+  <!-- <div class="financeAll_container" *ngIf = "financeAllArr">
+    <div class="finance_content">
+        <div class="finance_title">
+          <span class="item_title">{{financeAllArr.title}}</span>
+          <div class="title_right">
+              <span class="hy_more"  class="more">更多</span>
+              <span class="more_icon">
+                  <img src="../../assets/imgs/icon.png" class="icon" alt="">
+              </span>
+          </div>
+        </div>
+        <ul class="ul_finance">
+          <li *ngFor = "let i of financeAllArrlength" class="i_content">
+            <div class="i_box">
+              <div class="img_item">
+                <img [src]="i.avatar" alt="">
+                <p>{{i.adviserName}}</p>
+              </div>
+              <div class="content_item">
+                <p>{{i.introduction}}</p>
+                <div class="leabel_list">
+                  <ul class="text_item">
+                    <li *ngFor = "let item of i.industryList.slice(0,2)" class="text_list">
+                      <span>{{item.alName}}</span>
+                    </li>
+                  </ul>
+                </div>
+                <p class="financeAll-p">工作经验：{{i.workingYears}}</p>
+              </div>
+            </div>
+            <div class="finance-bg"></div>
+          </li>
+        </ul>
+    </div>
+</div> -->
+</ion-content>

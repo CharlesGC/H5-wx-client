@@ -1,0 +1,27 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>个人中心/顾问/收款账号编辑</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content style="background-color: #fcfcfc;">
+  <ion-list class="account-edit mt10">
+      <ion-item lines="none" class="">
+        <ion-input type="text" placeholder="请输入收款银行" #bankname [(ngModel)]="bankDateil.bankAccount"></ion-input>
+      </ion-item>
+      <ion-item lines="none" class="" no-lines>
+        <ion-input type="text" placeholder="请输入收款账号" #bankaccount [(ngModel)]="bankDateil.account"></ion-input>
+      </ion-item>
+      <ion-item class="mt10" no-lines>
+          <ion-label>设为默认</ion-label>
+          <ion-toggle [(ngModel)]="isdefault"></ion-toggle>
+      </ion-item>
+  </ion-list>
+  <p class="account-ptr mt20">你所提交的银行信息将用于平台向你结算项目款项</p>
+  <div class="fixed-bottom">
+      <button ion-button class="btn-submit" (click)="onBankAccountSubmit(bankDateil.bankAccount,bankDateil.account)">提交</button>
+      <button ion-button class="btn-delete" (click)="onBankAccountDel()">删除</button>
+  </div>
+</ion-content>

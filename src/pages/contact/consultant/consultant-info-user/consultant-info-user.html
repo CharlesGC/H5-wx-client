@@ -1,0 +1,101 @@
+<!--
+  Generated template for the ClientInfoUserPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <ion-navbar>
+      <ion-title>基本信息（顾问）编辑</ion-title>
+    </ion-navbar>
+  
+  </ion-header>
+  
+  <ion-content style="background-color: #fcfcfc;">
+      <ion-card class="card-avatar" (click)="onSelected(0)" [ngClass]="{'checked':Selected==0}">
+        <div class="user-avatar">
+            <img src="{{userInfoData.avatar}}" style="background:rosybrown"/>
+            <div class="avatar-bg"></div>
+            <a class="avatar-active">点击上传</a>
+        </div>
+      </ion-card>
+      <ion-list class="contact-list mt10">
+        <ion-item class="" (click)="goFormEditPage('uname',userInfoData.uname,'text')">
+          <span class="left-title">真实姓名</span>
+          <div item-right class="rigth-message">
+            <span class="line-overflow">{{userInfoData.uname}}</span>
+            <ion-icon name="arrow-forward" color="#cfcfcf" class="ml12"></ion-icon>
+          </div>
+        </ion-item>
+        <ion-item class="" (click)="goFormEditPage('gender',userInfoData.gender,'gender')">
+          <span class="left-title">性别</span>
+          <div item-right class="rigth-message">
+              <span>{{userInfoData.gender == 0?'未知':(userInfoData.gender == 1? '男':'女')}}</span>
+            <ion-icon name="arrow-forward" class="ml12"></ion-icon>
+          </div>
+        </ion-item>
+      <ion-item class="" (click)="goFormEditPage('years',userInfoData.years,'text')">
+          <span class="left-title">工作年限</span>
+        <div item-right class="rigth-message">
+          <span>{{userInfoData.years}} 年</span>
+          <ion-icon name="arrow-forward" class="ml12"></ion-icon>
+        </div>
+      </ion-item>
+      <ion-item class="" (click)="goFormEditPage('industryList',userInfoData.industryList,'selectArr')">
+        <span class="left-title">所在行业</span>
+        <div item-right class="rigth-message">
+          <span *ngIf="userInfoData.industryList && userInfoData.industryList.length<1"></span>
+          <span *ngIf="userInfoData.industryList && userInfoData.industryList.length==1">{{userInfoData.industryList[0].alName}}</span>
+          <span *ngIf="userInfoData.industryList && userInfoData.industryList.length>1">{{userInfoData.industryList[0].alName}} 等</span>
+          <ion-icon name="arrow-forward" class="ml12"></ion-icon>
+        </div>
+      </ion-item>
+      <ion-item class="" (click)="goFormEditPage('skillList',userInfoData.skillList,'selectArr')" >
+          <span class="left-title">擅长领域</span>
+          <div item-right class="rigth-message">
+            <span *ngIf="userInfoData.skillList && userInfoData.skillList.length<1"></span>
+            <span *ngIf="userInfoData.skillList && userInfoData.skillList.length==1">{{userInfoData.skillList[0].asName}}</span>
+            <span *ngIf="userInfoData.skillList && userInfoData.skillList.length>1">{{userInfoData.skillList[0].asName}} 等</span>
+            <ion-icon name="arrow-forward" class="ml12"></ion-icon>
+          </div>
+        </ion-item>
+        <ion-item class="" (click)="goFormEditPage('salaryDown-salaryUp',[userInfoData.salaryDown,userInfoData.salaryUp],'ranger')" >
+            <span class="left-title">日薪范围</span>
+          <div item-right class="rigth-message">
+            <span>{{userInfoData.salaryDown}} 元 - {{userInfoData.salaryUp}} 元</span>
+            <ion-icon name="arrow-forward" class="ml12"></ion-icon>
+          </div>
+        </ion-item>
+        <ion-item class="" (click)="goFormEditPage('address',userInfoData.address,'text')">
+          <span class="left-title">联系地址</span>
+          <div item-right class="rigth-message">
+            <span class="line-overflow">{{userInfoData.address}}</span>
+            <ion-icon name="arrow-forward" class="ml12"></ion-icon>
+          </div>
+        </ion-item>
+        <ion-item class="" (click)="goFormEditPage('introduction',userInfoData.introduction,'textarea')" no-lines>
+          <span class="left-title">个人简介</span>
+          <div item-right class="rigth-message">
+            <span class="line-overflow">{{userInfoData.introduction}}</span>
+            <ion-icon name="arrow-forward" class="ml12"></ion-icon>
+          </div>
+        </ion-item>
+        <ion-item class="mt10" (click)="goBankAccount()" no-lines>
+            <span class="left-title">收款账号</span>
+            <div item-right class="rigth-message">
+              <span>{{userInfoData.bankCount}} 条记录</span>
+              <ion-icon name="arrow-forward" class="ml12"></ion-icon>
+            </div>
+          </ion-item>
+      </ion-list>
+
+      <div style="height:100px;"></div>
+      <button ion-button expand="full" large class="fixed-bottom" (click)="onInfoUserSubmit()">提交</button>
+      
+  </ion-content>
+  <!-- <ion-footer class="footer-btn">
+    <ion-toolbar>
+        <button class="full-btn" ion-button expand="full" large (click)="onInfoUserSubmit()">提交</button>
+    </ion-toolbar>
+  </ion-footer> -->

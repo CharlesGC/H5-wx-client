@@ -1,0 +1,74 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>我的项目/客户/项目详情编辑1</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content style="background-color: #fcfcfc;">
+    <p class="browser-file">请填写公司相关信息</p>
+    <div class="steps-list mt10">
+      <span class="steps-round checked"></span>
+      <span class="steps-line"></span>
+      <span class="steps-round"></span>
+      <span class="steps-line"></span>
+      <span class="steps-round"></span>
+    </div>
+    <ion-list class="list-item-flex mt20">
+      <ion-item (click)="goFormEditPage('companyName',projectData.companyName,'selectList')">
+        <label>公司选择</label>
+        <p item-right class="rigth-message">
+            <span class="item-value line-overflow">{{projectData.companyName || '请选择公司'}}</span>
+            <ion-icon class="icon" name="arrow-forward"></ion-icon>
+        </p>
+      </ion-item>
+      <ion-item (click)="goFormEditPage('principalName',projectData.principalName,'text')">
+        <label>业务负责人</label>
+        <div item-right class="rigth-message">
+            <span item-right class="item-value line-overflow">{{projectData.principalName || '请输入对接人姓名'}}</span>
+            <ion-icon class="icon" name="arrow-forward"></ion-icon>
+        </div>
+      </ion-item>
+      <ion-item (click)="goFormEditPage('principalPosition',projectData.principalPosition,'text')">
+        <label>职务</label>
+        <p item-right class="rigth-message">
+            <span item-right class="item-value line-overflow">{{projectData.principalPosition || '请输入'}}</span>
+            <ion-icon class="icon" name="arrow-forward"></ion-icon>
+        </p>
+      </ion-item>
+      <ion-item (click)="goFormEditPage('principalPhone',projectData.principalPhone,'text')">
+        <label>电话号码</label>
+        <p item-right class="rigth-message">
+            <span item-right class="item-value line-overflow">{{projectData.principalPhone || '请输入'}}</span>
+            <ion-icon class="icon" name="arrow-forward"></ion-icon>
+        </p>
+      </ion-item>
+      <ion-item no-lines (click)="goFormEditPage('principalEmail',projectData.principalEmail,'text')">
+        <label>工作邮箱</label>
+        <p item-right class="rigth-message">
+            <span item-right class="item-value line-overflow">{{projectData.principalEmail || '请输入'}}</span>
+            <ion-icon class="icon" name="arrow-forward"></ion-icon>
+        </p>
+      </ion-item>
+    </ion-list>
+    <p class="browser-file">请选择发布类型（目前为完整发布模式）</p>
+    <ion-list class="list-item-flex mt10">
+      <ion-item no-lines (click)="goSpeedPage()">
+        <label>返回快速发布</label>
+        <p item-right class="rigth-message">
+            <span class="item-value line-overflow">留下简要的项目说明</span>
+            <ion-icon class="icon" name="arrow-forward"></ion-icon>
+        </p>
+      </ion-item>
+    </ion-list>
+    <div style="height:50px;"></div>
+    <div class="fixed-bottom" *ngIf="!isEdit">
+        <button ion-button class="btn-submit" (click)="goStep2Page()">下一步</button>
+        <button ion-button class="btn-delete" (click)="onDraftSubmit()">存为草稿</button>
+    </div>
+    <div class="fixed-bottom" *ngIf="isEdit">
+        <button ion-button class="btn-submit" (click)="goStep2Page()">下一步</button>
+        <button ion-button class="btn-delete" (click)="onDraftSubmit()">保存</button>
+    </div>
+</ion-content>

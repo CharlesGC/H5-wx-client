@@ -1,0 +1,68 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>我的项目/客户/发票/列表</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content style="background-color: #fcfcfc;">
+    <ion-list>
+      <ion-item class="message-item mt20" no-lines *ngFor="let projectInvoiceListData_item of projectInvoiceListData">
+        <p class="msg-title">
+          <span class="msg-title-left" *ngIf="projectInvoiceListData_item.invoiceType == 0">增值税专用发票</span>
+          <span class="msg-title-left" *ngIf="projectInvoiceListData_item.invoiceType == 1">增值税普通发票</span>
+        </p>
+        <div class="msg-cont">
+          <h4>{{projectInvoiceListData_item.invoiceLetterhead}} · {{projectInvoiceListData_item.price || 0}} 元</h4>
+          <p>{{projectInvoiceListData_item.logisticsCompany}} <span class="fweight600">{{projectInvoiceListData_item.logisticsNumber}}</span></p> 
+          <p class="mt5">流水号 <span class="fweight600">{{projectInvoiceListData_item.serialNumber}}</span></p>
+        </div>
+        <div class="msg-footer" (click)="goInvoiceBrowser(projectInvoiceListData_item)">
+          <span class="msg-footer-text">查看该发票详情</span>
+          <ion-icon name="arrow-forward" class="ml12"></ion-icon>
+        </div>
+      </ion-item>
+      <!-- <ion-item class="message-item mt20" no-lines>
+        <p class="msg-title">
+          <span class="msg-title-left">增值税专用发票</span>
+        </p>
+        <div class="msg-cont">
+          <h4>唯莱电子科技有限公司 · 23,000 元</h4>
+          <p>顺丰快递 <span class="fweight600">4328060512984</span></p> 
+          <p class="mt5">流水号 <span class="fweight600">2018035469820</span></p>
+        </div>
+        <div class="msg-footer" (click)="goInvoiceBrowser(2)">
+          <span class="msg-footer-text">查看该发票详情</span>
+          <ion-icon name="arrow-forward" class="ml12"></ion-icon>
+        </div>
+      </ion-item>
+      <ion-item class="message-item mt20" no-lines>
+        <p class="msg-title">
+          <span class="msg-title-left">增值税普通发票</span>
+        </p>
+        <div class="msg-cont">
+          <h4>唯莱电子科技有限公司 · 23,000 元</h4>
+          <p>顺丰快递 <span class="fweight600">4328060512984</span></p> 
+          <p class="mt5">流水号 <span class="fweight600">2018035469820</span></p>
+        </div>
+        <div class="msg-footer" (click)="goInvoiceBrowser(1)">
+          <span class="msg-footer-text">查看该发票详情</span>
+          <ion-icon name="arrow-forward" class="ml12"></ion-icon>
+        </div>
+      </ion-item>
+      <ion-item class="message-item mt20" no-lines>
+        <p class="msg-title">
+          <span class="msg-title-left">增值税专用发票</span>
+        </p>
+        <div class="msg-cont">
+          <h4>唯莱电子科技有限公司 · 23,000 元</h4>
+          <p>顺丰快递 <span class="fweight600">4328060512984</span></p> 
+          <p class="mt5">流水号 <span class="fweight600">2018035469820</span></p>
+        </div>
+        <div class="msg-footer" (click)="goInvoiceBrowser(2)">
+          <span class="msg-footer-text">查看该发票详情</span>
+          <ion-icon name="arrow-forward" class="ml12"></ion-icon>
+        </div>
+      </ion-item> -->
+    </ion-list>
+  
+  </ion-content>

@@ -1,0 +1,407 @@
+page-consultant-project-browser {
+    ion-list {
+        margin-bottom: 0 !important;
+    }
+    .list-content {
+        margin: 0 15px !important;
+        width: calc(100% - 30px);
+    }
+    .nav-list-menu{
+        font-family: PingFangSC;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        margin-bottom: 10px !important;
+        .list-header-left {
+            font-size: 14px;
+            font-weight: 600;
+            color: #f46f46;
+        }
+        .list-header-right {
+            font-size: 10px;
+            letter-spacing: 0.2px;
+            text-align: center;
+            color: #ff6536;
+            span {
+                border-radius: 10px;
+                padding: 2px 12px;
+                border: solid 0.7px #ff6536;
+            }
+        }
+    }
+    
+    .message-item {
+        background-color: #ffffff;
+        box-shadow: 0 1px 10px 0 rgba(0, 0, 0, 0.05);
+        .msg-title {
+            display: flex;
+            span{
+                font-family: PingFangSC;
+                font-size: 1.2rem;
+                font-weight: normal;
+                font-style: normal;
+                font-stretch: normal;
+                line-height: normal;
+                letter-spacing: normal;
+                color: #9b9b9b;
+            }
+            .msg-title-left {
+                flex: 1;
+                font-weight: 600;
+                letter-spacing: 0.2px;
+                color: #f46f46;
+                .project-type {
+                    border-radius: 10px;
+                    color: #fff;
+                    padding: 3px 10px;
+                    &.type-blue {
+                        background-color: #5888fd;
+                    }
+                    &.type-green {
+                        background-color: #19b372;
+                    }
+                    &.type-gray {
+                        background-color: #cdcdcd;
+                    }
+                }
+            }
+        }
+        .msg-cont {
+            font-family: PingFangSC;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: normal;
+            letter-spacing: normal;
+            color: #4a4a4a;
+            h4{
+                font-size: 1.6rem;
+                font-weight: 600;
+                margin-top: 10px;
+            }
+            p{
+                margin-top: 1rem;
+                font-size: 1.2rem;
+                letter-spacing: 0.2px;
+                color: #4a4a4a;
+                .demand-number {
+                    color: #f46f46;
+                }
+            }
+            .city-date-cont{
+                display: flex;
+                span{
+                    flex: 1;
+                }
+            }
+            .demand-content-cont {
+                white-space: initial;
+                line-height: 1.6rem;
+                font-family: PingFangSC;
+                font-size: 1.4rem;
+                font-weight: normal;
+                font-style: normal;
+                font-stretch: normal;
+                letter-spacing: 0.2px;
+                text-align: justify;
+                color: #4a4a4a;
+            }
+        }
+        .msg-footer {
+            border-top: solid 0.7px #f1f1f1;
+            margin-top: 15px;
+            padding: 10px 0 0;
+            display: flex;
+            .msg-footer-text {
+                flex: 1;
+                font-family: PingFangSC;
+                font-size: 14px;
+                font-weight: normal;
+                font-style: normal;
+                font-stretch: normal;
+                line-height: normal;
+                letter-spacing: normal;
+            }
+            ion-icon {
+                color: #cfcfcf;
+            }
+        }
+    }
+    .nav-menu {
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        z-index: 99;
+        top: 46px;
+        background-color: #fcfcfc;
+        .nav-menu-bg {
+            position: absolute;
+            opacity: 0.2;
+            background-color: #000000;
+            bottom: 0;
+            top: 62px;
+            right: 0;
+            left: 0;
+        }
+        .nav-menu-list {
+            overflow: scroll;
+            height: -webkit-fill-available;
+            .nav-menu-item {
+                font-family: PingFangSC;
+                font-size: 14px;
+                font-weight: 600;
+                font-style: normal;
+                font-stretch: normal;
+                line-height: normal;
+                letter-spacing: normal;
+                color: #4a4a4a;
+                ion-icon {
+                    font-size: 1.6rem;
+                    color: #cfcfcf;
+                    margin-top: 5px;
+                    line-height: 3rem;
+                }
+            }
+        }
+    }
+    .project-browser-top {
+        background-image: linear-gradient(to top, #327bd1, #6aafff);
+        text-align: center;
+        color: #fff;
+        padding: 30px;
+        position: relative;
+        z-index: -1;
+        overflow: hidden;
+        .bg-top {
+            width: 100.5px;
+            height: 106px;
+            transform: rotate(50deg);
+            opacity: 0.41;
+            background-image: linear-gradient(to right, #73abec, #4a90e2);
+            position: absolute;
+            z-index: -1;
+            top: -85px;
+            left: 1.4rem;
+        }
+        .bg-bottom {
+            width: 144.5px;
+            height: 130px;
+            transform: rotate(50deg);
+            opacity: 0.41;
+            background-image: linear-gradient(to right, #73abec, #4a90e2);
+            position: absolute;
+            z-index: -1;
+            bottom: -97px;
+            right: 1.6rem;
+        }
+        p {
+            padding: 0;
+            margin: 0;
+        }
+        .address-type {
+            font-family: PingFangSC;
+            font-size: 12px;
+            font-weight: 600;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: normal;
+            letter-spacing: normal;
+            ion-icon {
+                font-size: 1.4rem;
+            }
+        }
+        .title-cont {
+            margin-top: 10px;
+            line-height: 2rem;
+            font-family: PingFangSC;
+            font-size: 16px;
+            font-weight: 600;
+            font-style: normal;
+            font-stretch: normal;
+            letter-spacing: normal;
+            text-align: center;
+        }
+        .project-type {
+            margin-top: 1rem; 
+            span {
+                display: inline-block;
+                font-family: PingFangSC;
+                font-size: 10px;
+                font-weight: 600;
+                font-style: normal;
+                font-stretch: normal;
+                line-height: normal;
+                letter-spacing: 0.2px;
+                text-align: center;
+                padding: 3px 12px;
+                border-radius: 12px;
+                border: solid 1px #fcfcfc;
+            }
+           
+        }
+    }
+    .describe-list {
+        ion-item {
+            font-family: PingFangSC;
+            font-size: 1.4rem;
+            font-weight: normal;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: normal;
+            letter-spacing: normal;
+            color: #4a4a4a;
+            h4 {
+                font-weight: 600;
+            }
+            .describe-cont {
+                margin-top: 8px;
+                white-space: normal;
+                color: #4a4a4a;
+            }
+            .tags-cont {
+                white-space: normal;
+                .tag {
+                    display: inline-block;
+                    margin-right: 10px;
+                    margin-bottom: 10px;
+                    font-family: PingFangSC;
+                    font-size: 1.2rem;
+                    font-weight: normal;
+                    font-style: normal;
+                    font-stretch: normal;
+                    line-height: normal;
+                    letter-spacing: 0.2px;
+                    text-align: center;
+                    color: #4a4a4a;
+                    padding: 3px 12px;
+                    border-radius: 3px;
+                }
+                &.skills{
+                    .tag {
+                        background-color: rgba(186, 232, 212, 0.4);
+                    }
+                }
+                &.industry{
+                    .tag {
+                        background-color: rgba(204, 219, 254, 0.5);
+                    }
+                } 
+                
+            } 
+        }
+    }
+    .list-item-flex {
+        ion-item {
+            font-family: PingFangSC;
+            font-size: 14px;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: normal;
+            letter-spacing: normal;
+            color: #4a4a4a;
+            label{
+                font-weight: 600;
+            }
+            .item-value {
+                color: #cfcfcf;
+                margin-right: 1.5rem;
+            }
+        }
+    }
+    .total-budget {
+        padding-left: 16px;
+        .budget-label {
+            font-family: PingFangSC;
+            font-size: 12px;
+            font-weight: 600;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: normal;
+            letter-spacing: normal;
+            color: #c7c7c7;
+            margin-bottom: 0;
+        }
+        .budget-symbol {
+            font-family: PingFangSC;
+            font-size: 25px;
+            font-weight: 600;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: normal;
+            letter-spacing: normal;
+            color: #505050;
+        }
+        .budget-number {
+            font-family: WeChatNum-150916test;
+            font-size: 30px;
+            font-weight: normal;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: normal;
+            letter-spacing: normal;
+            color: #505050;
+        }
+    }
+
+}
+.nav-list-menu{
+    font-family: PingFangSC;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    margin-bottom: 10px !important;
+    .list-header-left {
+        font-size: 14px;
+        font-weight: 600;
+        color: #f46f46;
+    }
+    .list-header-right {
+        font-size: 10px;
+        letter-spacing: 0.2px;
+        text-align: center;
+        color: #ff6536;
+        span {
+            border-radius: 10px;
+            padding: 2px 12px;
+            border: solid 0.7px #ff6536;
+        }
+    }
+}
+.nav-menu {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    z-index: 99;
+    top: 46px;
+    background-color: #fcfcfc;
+    .nav-menu-bg {
+        position: absolute;
+        opacity: 0.2;
+        background-color: #000000;
+        bottom: 0;
+        top: 62px;
+        right: 0;
+        left: 0;
+    }
+    .nav-menu-list {
+        overflow: scroll;
+        height: -webkit-fill-available;
+        .nav-menu-item {
+            font-family: PingFangSC;
+            font-size: 14px;
+            font-weight: 600;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: normal;
+            letter-spacing: normal;
+            color: #4a4a4a;
+            ion-icon {
+                font-size: 1.6rem;
+                color: #cfcfcf;
+                margin-top: 5px;
+                line-height: 3rem;
+            }
+        }
+    }
+}

@@ -1,0 +1,264 @@
+<!--
+  Generated template for the ProjectConsultantBrowserPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>我的项目/客户/顾问/顾问详情</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content style="background-color: #fcfcfc;">
+  <ion-list class="select-card">
+    <div class="select-card-div" [ngClass]="{'checked':Selected==0}" (click)="onSelectClick(0)"><span>顾问详情</span></div>
+    <div class="select-card-div" [ngClass]="{'checked':Selected==1}" (click)="onSelectClick(1)"><span>项目申请</span></div>
+  </ion-list>
+  <div *ngIf="Selected==0">
+      <ion-list class="list-content">
+          <ion-item class="item-card mt20" no-lines>
+            <p class="consultant-type">
+              <span *ngIf="consultantDetails.astatus == 0">待查看</span>
+              <span *ngIf="consultantDetails.astatus == 1">待面试</span>
+              <span *ngIf="consultantDetails.astatus == 2">已推荐</span>
+              <span *ngIf="consultantDetails.astatus == 3">被拒绝</span>
+              <span *ngIf="consultantDetails.astatus == 4">方案待提交</span>
+              <span *ngIf="consultantDetails.astatus == 5">已聘用</span>
+              <span *ngIf="consultantDetails.astatus == 6">方案待确认</span>
+              <span *ngIf="consultantDetails.astatus == 7">阶段待确认</span>
+              <span *ngIf="consultantDetails.astatus == 8">进行中</span>
+              <span *ngIf="consultantDetails.astatus == 9">已完成</span>
+              <span *ngIf="consultantDetails.astatus == 10">阶段待提交</span>
+            </p>
+            <div class="consultant-info">
+              <div class="consultant-info-left">
+                <img src="{{consultantDetails.avatar}}"/>
+              </div>
+              <div class="consultant-info-right">
+                <div>
+                  <h4 class="mr10">{{consultantDetails.nickName}}</h4>
+                  <ion-icon class="transgender mr10 men" name="ios-transgender" *ngIf="consultantDetails.gender == 1"></ion-icon>
+                  <ion-icon class="transgender mr10 women" name="ios-transgender" *ngIf="consultantDetails.gender == 2"></ion-icon>
+                  <span class="info-status" *ngIf="consultantDetails.ustatus == 4">已审核</span>
+                  <span class="info-status" *ngIf="consultantDetails.ustatus == 5">面试通过</span>
+                  <span class="info-status" *ngIf="consultantDetails.ustatus == 6">项目通过</span>
+                </div>
+                <div class="info-other">
+                  <span>{{consultantDetails.years}} </span>
+                  <span>年工作经验，</span>
+                  <span class="color-f46f46">{{consultantDetails.salaryUp}}-{{consultantDetails.salaryDown}} </span>
+                  <span>元/天</span>
+                </div>
+              </div>
+            </div>
+            <div class="consultant-des">{{consultantDetails.introduction}}</div>
+            <div>
+                <p class="tags-cont skills">
+                  <span class="tag" *ngFor="let adviserSkill_tag of consultantDetails.adviserSkill">{{adviserSkill_tag}}</span>
+                  <!-- <span class="tag">供应链</span>
+                  <span class="tag">水力资源与厂方管理</span>
+                  <span class="tag">人力资源</span> -->
+                </p>
+                <p class="tags-cont industry">
+                    <span class="tag" *ngFor="let adviserIndustry_tag of consultantDetails.adviserIndustry">{{adviserIndustry_tag}}</span>
+                  <!-- <span class="tag">生态互联网</span>
+                  <span class="tag">航空航天</span>
+                  <span class="tag">投资资产法务</span> -->
+                </p>
+            </div>
+            <div class="msg-footer" (click)="goConsultantBrowserClick()">
+              <span class="msg-footer-text">查看该项目详情</span>
+              <ion-icon name="arrow-forward" class="ml12"></ion-icon>
+            </div>
+          </ion-item>
+        </ion-list>
+        <!--工作经历box -->
+      <div class="user-other-list">
+          <h4>工作经历</h4>
+          <ion-card class="card-item" *ngFor="let workList_item of consultantDetails.workList">
+              <div class="card-item-label">
+                <label>公司名称</label>
+                <p class="card-cont">{{workList_item.companyName}}</p>
+              </div>
+              <div class="card-item-label mt10">
+                <label>起止日期</label>
+                <p class="card-cont">
+                  <span>{{workList_item.startTime | date:'yyyy/MM/dd'}} </span>
+                  <span> - </span>
+                  <span>{{workList_item.endTime | date:'yyyy/MM/dd'}}</span>
+                </p>
+              </div>
+              <div class="card-item-label mt10">
+                <label>所在部门</label>
+                <p class="card-cont">{{workList_item.department}}</p>
+              </div>
+              <div class="card-item-label mt10">
+                <label>担任职位</label>
+                <p class="card-cont">{{workList_item.role}}</p>
+              </div>
+              <div class="card-item-label mt10">
+                <label>职责描述</label>
+                <p class="card-cont">{{workList_item.workDescription}}</p>
+              </div>
+          </ion-card>
+        </div>
+        <!--项目经历box -->
+      <div class="user-other-list">
+          <h4>项目经历</h4>
+          <ion-card class="card-item" *ngFor="let projectList_item of consultantDetails.projectList">
+              <div class="card-item-label">
+                <label>项目名称</label>
+                <p class="card-cont">{{projectList_item.projectName}}</p>
+              </div>
+              <div class="card-item-label mt10">
+                <label>公司名称</label>
+                <p class="card-cont">{{projectList_item.companyName}}</p>
+              </div>
+              <div class="card-item-label mt10">
+                <label>起止日期</label>
+                <p class="card-cont">
+                  <span>{{projectList_item.startTime | date:'yyyy/MM/dd'}} </span>
+                  <span> - </span>
+                  <span>{{projectList_item.endTime | date:'yyyy/MM/dd'}}</span>
+                </p>
+              </div>
+              <div class="card-item-label mt10">
+                <label>担任职位</label>
+                <p class="card-cont">{{projectList_item.role}}</p>
+              </div>
+              <div class="card-item-label mt10">
+                <label>项目描述</label>
+                <p class="card-cont">{{projectList_item.projectDetails}}</p>
+              </div>
+              <div class="card-item-label mt10">
+                <label>职责描述</label>
+                <p class="card-cont">{{projectList_item.responsibility}}</p>
+              </div>
+          </ion-card>
+        </div>
+      
+        <!--教育经历box -->
+        <div class="user-other-list">
+          <h4>教育经历</h4>
+          <ion-card class="card-item" *ngFor="let educationalList_item of consultantDetails.educationalList">
+              <div class="card-item-label">
+                <label>学校</label>
+                <p class="card-cont">{{educationalList_item.schoolName}}</p>
+              </div>
+              <div class="card-item-label mt10">
+                <label>起止日期</label>
+                <p class="card-cont">
+                  <span>{{educationalList_item.startTime | date:'yyyy/MM/dd'}}</span>
+                  <span> - </span>
+                  <span>{{educationalList_item.endTime | date:'yyyy/MM/dd'}}</span>
+                </p>
+              </div>
+              <div class="card-item-label mt10">
+                <label>专业名称</label>
+                <p class="card-cont">{{educationalList_item.profession}}</p>
+              </div>
+              <div class="card-item-label mt10">
+                <label>学历</label>
+                <p class="card-cont" *ngIf="educationalList_item.degree == 0">初中及以下</p>
+                <p class="card-cont" *ngIf="educationalList_item.degree == 1">高中</p>
+                <p class="card-cont" *ngIf="educationalList_item.degree == 2">大专</p>
+                <p class="card-cont" *ngIf="educationalList_item.degree == 3">本科</p>
+                <p class="card-cont" *ngIf="educationalList_item.degree == 4">研究生</p>
+                <p class="card-cont" *ngIf="educationalList_item.degree == 5"> 博士</p>
+              </div>
+          </ion-card>
+        </div>
+      
+        <!--擅长语言box -->
+        <div class="user-other-list">
+            <h4>擅长语言</h4>
+            <ion-card class="card-item" *ngFor="let languageList_item of consultantDetails.languageList">
+                <div class="card-item-label">
+                  <label>语言</label>
+                  <p class="card-cont">{{languageList_item.language}}</p>
+                </div>
+                <div class="card-item-label mt10">
+                  <label>等级</label>
+                  <!-- <p class="card-cont">精通</p> -->
+                  <p class="card-cont" *ngIf="languageList_item.grade == 0">较差</p>
+                  <p class="card-cont" *ngIf="languageList_item.grade == 1">一般</p>
+                  <p class="card-cont" *ngIf="languageList_item.grade == 2">熟练</p>
+                  <p class="card-cont" *ngIf="languageList_item.grade == 3">精通</p>
+                </div>
+            </ion-card>
+          </div>
+      
+        <!--专业认证box -->
+        <div class="user-other-list">
+          <h4>专业认证</h4>
+          <ion-card class="card-item" *ngFor="let certificationList_item of consultantDetails.certificationList">
+              <div class="card-item-label">
+                <label>认证机构</label>
+                <p class="card-cont">{{certificationList_item.certifiedTitle}}</p>
+              </div>
+              <div class="card-item-label mt10">
+                <label>颁发机构</label>
+                <p class="card-cont">{{certificationList_item.issuingAgency}}</p>
+              </div>
+              <div class="card-item-label mt10">
+                <label>颁发时间</label>
+                <p class="card-cont">
+                  <span>{{certificationList_item.issuedTime | date:'yyyy/MM/dd'}} </span>
+                </p>
+              </div>
+          </ion-card>
+        </div>
+  </div>
+  <div *ngIf="Selected==1">
+    <ion-list class="describe-list mt20">
+      <ion-item no-lines>
+        <h4>项目描述</h4>
+        <p class="describe-cont">{{applicationDeatil.introduction}}</p>
+      </ion-item>
+      <ion-item no-lines>
+          <h4>交付标的</h4>
+          <p class="describe-cont">{{applicationDeatil.proposal}}</p>
+        </ion-item>
+    </ion-list>
+    <div class="user-other-list">
+        <p class="browser-file">查看规划相关文件</p>
+        <h4 class="mt10">案例附件</h4>
+        <ion-card class="card-item" *ngFor="let successCase_item of applicationDeatil.successCase">
+            <div class="card-item-label">
+              <label>
+                <img style="width:66px;height:66px;" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1534233453&di=bd34b76dca47ce86738ff171e3c50122&imgtype=jpg&er=1&src=http%3A%2F%2Fpic.58pic.com%2F58pic%2F14%2F81%2F70%2F29J58PICf2x_1024.jpg">
+              </label>
+              <div class="card-cont" data-src="resumeList_item.resumeUrl">
+                <h5>项目规划意向书</h5>
+                <p>点击查看文件预览</p>
+                <p>20 KB</p>
+              </div>
+            </div>
+        </ion-card>
+        <!-- <ion-card class="card-item mt20">
+            <div class="card-item-label">
+              <label>
+                <img style="width:66px;height:66px;" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1534233453&di=bd34b76dca47ce86738ff171e3c50122&imgtype=jpg&er=1&src=http%3A%2F%2Fpic.58pic.com%2F58pic%2F14%2F81%2F70%2F29J58PICf2x_1024.jpg">
+              </label>
+              <div class="card-cont" data-src="resumeList_item.resumeUrl">
+                <h5>项目规划意向书</h5>
+                <p>点击查看文件预览</p>
+                <p>20 KB</p>
+              </div>
+            </div>
+        </ion-card> -->
+      </div>
+  </div>
+  <div style="height:100px;"></div>
+  <div class="fixed-bottom" *ngIf="applicationDeatil.status==0 || applicationDeatil.status==2">
+      <button ion-button class="btn-submit" (click)="onInterviewOrGnoreSubmit(1)">面试该顾问</button>
+      <button ion-button class="btn-delete" (click)="onInterviewOrGnoreSubmit(3)">忽略</button>
+  </div>
+  <div class="fixed-bottom" *ngIf="applicationDeatil.status==1">
+      <button ion-button class="btn-submit" (click)="onInterviewOrGnoreSubmit(4)">确认该顾问</button>
+      <button ion-button class="btn-delete" (click)="onInterviewOrGnoreSubmit(3)">拒绝该顾问</button>
+  </div>
+</ion-content>

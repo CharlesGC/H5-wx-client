@@ -1,0 +1,57 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>个人详情（工作经历）编辑</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content style="background-color: #fcfcfc;">
+    <ion-list class="contact-list mt10">
+      <ion-item class="" (click)="goFormEditPage('companyName',workListData.companyName,'text')">
+        <span class="left-title">公司名称</span>
+        <div item-right class="rigth-message">
+          <span class="line-overflow">{{workListData.companyName}}</span>
+          <ion-icon name="arrow-forward" color="#cfcfcf" class="ml12"></ion-icon>
+        </div>
+      </ion-item>
+      <ion-item class="" (click)="goFormEditPage('startTime',workListData.startTime,'date')">
+        <span class="left-title">开始时间</span>
+        <div item-right class="rigth-message">
+          <span>{{workListData.startTime | date:'yyyy/MM/dd'}}</span>
+          <ion-icon name="arrow-forward" class="ml12"></ion-icon>
+        </div>
+      </ion-item>
+      <ion-item class="" (click)="goFormEditPage('endTime',workListData.endTime,'date')">
+        <span class="left-title">结束时间</span>
+        <div item-right class="rigth-message">
+          <span>{{workListData.endTime |  date:'yyyy/MM/dd'}}</span>
+          <ion-icon name="arrow-forward" class="ml12"></ion-icon>
+        </div>
+      </ion-item>
+      <ion-item class="" (click)="goFormEditPage('department',workListData.department,'text')">
+          <span class="left-title">所在部门</span>
+          <div item-right class="rigth-message">
+            <span class="line-overflow">{{workListData.department}}</span>
+            <ion-icon name="arrow-forward" class="ml12"></ion-icon>
+          </div>
+      </ion-item>
+      <ion-item class="" (click)="goFormEditPage('role',workListData.role,'text')">
+          <span class="left-title">担任职位</span>
+          <div item-right class="rigth-message">
+            <span class="line-overflow">{{workListData.role}}</span>
+            <ion-icon name="arrow-forward" class="ml12"></ion-icon>
+          </div>
+      </ion-item>
+      <ion-item class="" (click)="goFormEditPage('workDescription',workListData.workDescription,'textarea')" no-lines>
+          <span class="left-title">职责描述</span>
+          <div item-right class="rigth-message">
+            <span class="line-overflow">{{workListData.workDescription}}</span>
+            <ion-icon name="arrow-forward" class="ml12"></ion-icon>
+          </div>
+      </ion-item>
+    </ion-list>
+    <div class="fixed-bottom">
+        <button ion-button class="btn-submit" (click)="onWorkExpSubmit()">提交</button>
+        <button ion-button class="btn-delete" (click)="onWorkExpDel()">删除</button>
+    </div>
+
+</ion-content>

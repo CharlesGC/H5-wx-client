@@ -1,0 +1,165 @@
+<!--
+  Generated template for the ProjectStageListPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>我的项目/客户/阶段列表</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content style="background-color: #fcfcfc;">
+    <ion-list>
+      <ion-item class="message-item mt20" no-lines *ngFor="let projectStage_item of projectStageListData">
+        <p class="msg-title">
+          <span class="msg-title-left" *ngIf="projectStage_item.customerStatus == 0">未开始</span>
+          <span class="msg-title-left" *ngIf="projectStage_item.customerStatus == 1">有异议</span>
+          <span class="msg-title-left" *ngIf="projectStage_item.customerStatus == 2">待付款</span>
+          <span class="msg-title-left" *ngIf="projectStage_item.customerStatus == 3">待核对付款</span>
+          <span class="msg-title-left" *ngIf="projectStage_item.customerStatus == 4">进行中</span>
+          <span class="msg-title-left" *ngIf="projectStage_item.customerStatus == 5">待审核</span>
+          <span class="msg-title-left" *ngIf="projectStage_item.customerStatus == 6">申请发票</span>
+          <span class="msg-title-left" *ngIf="projectStage_item.customerStatus == 7">已完成</span>
+        </p>
+        <div class="msg-cont">
+          <h4>{{projectStage_item.stageName}}</h4>
+          <p>整体进度 <span class="fweight600">第一阶段</span></p>
+        </div>
+        <div class="msg-cont-line2 mt10">
+          <p class="line2-left">
+            <ion-icon name="ios-paper-outline" class="mr3"></ion-icon>
+            <span>阶段周期</span>
+            <span>{{projectStage_item.startTime | date: 'yyyy-MM-dd'}}</span>
+            <span> 至 </span>
+            <span>{{projectStage_item.endTime | date: 'yyyy-MM-dd'}}</span>
+          </p>
+        </div>
+        <div class="msg-footer" (click)="goStageBrowser(projectStage_item)">
+          <span class="msg-footer-text">查看该阶段详情</span>
+          <ion-icon name="arrow-forward" class="ml12"></ion-icon>
+        </div>
+      </ion-item>
+      <!-- <ion-item class="message-item mt20" no-lines>
+          <p class="msg-title">
+            <span class="msg-title-left">运行中</span>
+          </p>
+          <div class="msg-cont">
+            <h4>旅行保险行业的详细市场概述分析</h4>
+            <p>整体进度 <span class="fweight600">第二阶段</span></p>
+          </div>
+          <div class="msg-cont-line2 mt10">
+            <p class="line2-left">
+              <ion-icon name="ios-paper-outline" class="mr3"></ion-icon>
+              <span>阶段周期</span>
+              <span>2018-06-05</span>
+              <span> 至 </span>
+              <span>2018-07-08</span>
+            </p>
+          </div>
+          <div class="msg-footer" (click)="goStageBrowser()">
+            <span class="msg-footer-text">查看该阶段详情</span>
+            <ion-icon name="arrow-forward" class="ml12"></ion-icon>
+          </div>
+        </ion-item>
+        <ion-item class="message-item mt20" no-lines>
+          <p class="msg-title">
+            <span class="msg-title-left">待确认</span>
+          </p>
+          <div class="msg-cont">
+            <h4>旅行保险行业的详细市场概述分析</h4>
+            <p>整体进度 <span class="fweight600">第二阶段</span></p>
+          </div>
+          <div class="msg-cont-line2 mt10">
+            <p class="line2-left">
+              <ion-icon name="ios-paper-outline" class="mr3"></ion-icon>
+              <span>阶段周期</span>
+              <span>2018-06-05</span>
+              <span> 至 </span>
+              <span>2018-07-08</span>
+            </p>
+          </div>
+          <div class="msg-footer" (click)="goStageBrowser()">
+            <span class="msg-footer-text">查看该阶段详情</span>
+            <ion-icon name="arrow-forward" class="ml12"></ion-icon>
+          </div>
+        </ion-item>
+        <ion-item class="message-item mt20" no-lines>
+          <p class="msg-title">
+            <span class="msg-title-left">待付款</span>
+          </p>
+          <div class="msg-cont">
+            <h4>销售软件系统、物业管理软件系统</h4>
+            <p>整体进度 <span class="fweight600">第二阶段</span></p>
+          </div>
+          <div class="msg-cont-line2 mt10">
+            <p class="line2-left">
+              <ion-icon name="ios-paper-outline" class="mr3"></ion-icon>
+              <span>阶段周期</span>
+              <span>2018-06-05</span>
+              <span> 至 </span>
+              <span>2018-07-08</span>
+            </p>
+          </div>
+          <div class="msg-footer" (click)="goStageBrowser(3)">
+            <span class="msg-footer-text">查看该阶段详情</span>
+            <ion-icon name="arrow-forward" class="ml12"></ion-icon>
+          </div>
+        </ion-item>
+        <ion-item class="message-item mt20" no-lines>
+          <p class="msg-title">
+            <span class="msg-title-left">已完成</span>
+          </p>
+          <div class="msg-cont">
+            <h4>旅行保险行业的详细市场概述分析</h4>
+            <p>整体进度 <span class="fweight600">第二阶段</span></p>
+          </div>
+          <div class="msg-cont-line2 mt10">
+            <p class="line2-left">
+              <ion-icon name="ios-paper-outline" class="mr3"></ion-icon>
+              <span>阶段周期</span>
+              <span>2018-06-05</span>
+              <span> 至 </span>
+              <span>2018-07-08</span>
+            </p>
+          </div>
+          <div class="msg-footer" (click)="goStageBrowser(4)">
+            <span class="msg-footer-text">查看该阶段详情</span>
+            <ion-icon name="arrow-forward" class="ml12"></ion-icon>
+          </div>
+        </ion-item>
+        <ion-item class="message-item mt20" no-lines>
+          <p class="msg-title">
+            <span class="msg-title-left">已完成</span>
+          </p>
+          <div class="msg-cont">
+            <h4>旅行保险行业的详细市场概述分析细市场概述分析细市场概述分析</h4>
+            <p>整体进度 <span class="fweight600">第二阶段</span></p>
+          </div>
+          <div class="msg-cont-line2 mt10">
+            <p class="line2-left">
+              <ion-icon name="ios-paper-outline" class="mr3"></ion-icon>
+              <span>阶段周期</span>
+              <span>2018-06-05</span>
+              <span> 至 </span>
+              <span>2018-07-08</span>
+            </p>
+          </div>
+          <div class="msg-footer" (click)="goStageBrowser()">
+            <span class="msg-footer-text">查看该阶段详情</span>
+            <ion-icon name="arrow-forward" class="ml12"></ion-icon>
+          </div>
+        </ion-item> -->
+    </ion-list>
+    <div style="height:60px;"></div>
+    <button ion-button expand="full" large class="fixed-bottom bg-gry" (click)="goAccountEdit()"  *ngIf="stageType == 7">等待顾问修改中</button>
+    <!-- <button ion-button expand="full" large class="fixed-bottom" (click)="goAccountEdit()">点击查看合同</button> -->
+    <div class="fixed-bottom" *ngIf="stageType == 13">
+        <button ion-button class="btn-submit" (click)="onAllStageSubmit()">确认阶段</button>
+        <button ion-button class="btn-delete" (click)="onCustomerNayStagePlan()">提出异议</button>
+    </div>
+  </ion-content>

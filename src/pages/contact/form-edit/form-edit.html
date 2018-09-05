@@ -1,0 +1,133 @@
+<!--
+  Generated template for the FormEditPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>表单编辑</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content class="phonebind-from" style="background-color: #fcfcfc;">
+    <ion-list class="mt10" *ngIf="selectField == 'skillList'">
+        <ion-item (click)="goSelectTags(skillList_item,i,'skillList')" *ngFor="let skillList_item of inputName; let i = index">
+            <span class="left-title">{{skillList_item.text}}</span>
+            <div item-right class="rigth-message">
+                <ion-icon name="ios-arrow-forward" class="ml12 color-cf"></ion-icon>
+            </div>
+        </ion-item>
+        <div class="action-btn mt20" *ngIf="inputName.length<3">
+            <button ion-button round  (click)="goSelectTags(0,0,'skillList')">添加专业技能</button>
+        </div>
+        <div class="text-des mt20" *ngIf="inputName.length>2">最多只可以添加三个标签哦</div>
+    </ion-list>
+    <ion-list class="mt10" *ngIf="selectField == 'industryList'">
+        <ion-item (click)="goSelectTags(industryList_item,i,'industryList')" *ngFor="let industryList_item of inputName; let i = index">
+            <span class="left-title">{{industryList_item.text}}</span>
+            <div item-right class="rigth-message">
+                <ion-icon name="ios-arrow-forward" class="ml12 color-cf"></ion-icon>
+            </div>
+        </ion-item>
+        <div class="action-btn mt20" *ngIf="inputName.length<3">
+            <button ion-button round  (click)="goSelectTags(0,0,'industryList')">添加行业标签</button>
+        </div>
+        <div class="text-des mt20" *ngIf="inputName.length>2">最多只可以添加三个标签哦</div>
+    </ion-list>
+    <!-- <ion-list class="mt10" *ngIf="selectField == 'industryList'">
+        <ion-item *ngFor="let picker_item of selectList" no-lines>
+            <ion-label>行业一</ion-label>
+            <ion-multi-picker class="ion-picker cities" item-content [multiPickerColumns]="industryListColumns" [(ngModel)]="picker_item.id" [cancelText]="'取消'" [doneText]="'完成'"></ion-multi-picker>
+        </ion-item>
+    </ion-list> -->
+    <ion-list *ngIf="fieldType == 'ranger'">
+        <ion-item class="none-margin bg-black">
+            <ion-input type="text" placeholder="请输入最小值" [(ngModel)]="inputName[0]"></ion-input>
+        </ion-item>
+        <ion-item class="none-margin bg-black" no-lines>
+            <ion-input type="text" placeholder="请输入最大值" [(ngModel)]="inputName[1]"></ion-input>
+        </ion-item>
+    </ion-list>
+    <ion-list class="mt10">
+        <ion-item class="none-margin bg-black" no-lines *ngIf="fieldType == 'text'">
+        <ion-input type="text" placeholder="请输入文本内容" [(ngModel)]="inputName"></ion-input>
+        </ion-item>
+        <ion-item *ngIf="selectField == 'gender'" no-lines>
+            <ion-label>性别</ion-label>
+            <ion-multi-picker class="ion-picker" id="cities" item-content [multiPickerColumns]="genderColumns" [(ngModel)]="inputName" [cancelText]="'取消'" [doneText]="'完成'"></ion-multi-picker>
+        </ion-item>
+        <ion-item *ngIf="fieldType == 'province-city'" no-lines>
+            <ion-label>城市选择</ion-label>
+            <ion-multi-picker class="ion-picker" id="cities" item-content 
+            [multiPickerColumns]="parentColumns" 
+            [(ngModel)]="inputName" 
+            [cancelText]="'取消'" 
+            [placeholder]="userInfo.province == undefined ? '省-市' : (userInfo.province + ' ' + userInfo.city)" 
+            [doneText]="'完成'">
+            </ion-multi-picker>
+        </ion-item>
+        <ion-item *ngIf="fieldType == 'select'" no-lines>
+            <ion-label>选择内容</ion-label>
+            <ion-multi-picker  class="ion-picker" id="cities" item-content [multiPickerColumns]="parentColumns" [(ngModel)]="inputName" [cancelText]="'取消'" [doneText]="'完成'"></ion-multi-picker>
+        </ion-item>
+        <ion-item *ngIf="fieldType == 'textarea'" no-lines>
+            <textarea id="textareaValue" placeholder="请输入文本内容" class="item-textarea" [(ngModel)]="inputName"></textarea>
+        </ion-item>
+        <ion-item class="none-margin bg-black" *ngIf="fieldType == 'date'" no-lines>
+            <ion-label>请选择时间</ion-label>
+            <div item-right class="rigth-message">
+                <ion-datetime displayFormat="YYYY/MM/DD" [(ngModel)]="inputName">
+                    <ion-icon name="arrow-forward" class="ml12"></ion-icon>
+                </ion-datetime>
+            </div>
+        </ion-item>
+    <!-- <ion-item class="" *ngIf="selectField == 'industryList'" no-lines>
+        <ion-input type="text" placeholder="请输入工作年限" #company [(ngModel)]="inputName"></ion-input>
+        <div item-right class="rigth-message">
+          <span>年</span>  
+        </div>
+    </ion-item> -->
+    
+    <!-- <ion-item class="none-margin bg-black">
+      <ion-label>开始时间</ion-label>
+      <div item-right class="rigth-message">
+          <ion-datetime displayFormat="YYYY年MM月" [(ngModel)]="myDate">
+              <ion-icon name="arrow-forward" class="ml12"></ion-icon>
+          </ion-datetime>
+      </div>
+    </ion-item>
+    <ion-item class="none-margin bg-black">
+      <ion-label>开始时间</ion-label>
+      <div item-right class="rigth-message">
+          <ion-datetime displayFormat="YYYY年MM月" [(ngModel)]="myDate">
+              <ion-icon name="arrow-forward" class="ml12"></ion-icon>
+          </ion-datetime>
+      </div>
+    </ion-item>
+    <ion-item>
+        <ion-label>居住地</ion-label>
+        <ion-multi-picker id="cities" item-content [multiPickerColumns]="parentColumns" [(ngModel)]="scale" [cancelText]="'取消'" [doneText]="'完成'"></ion-multi-picker>
+    </ion-item>
+    
+    <ion-item class="" (click)="goFormEdit()">
+        <span class="left-title">行业一</span>
+        <div item-right class="rigth-message">
+          <span>电子商务</span>
+          <ion-icon name="arrow-forward" class="ml12"></ion-icon>
+        </div>
+    </ion-item>
+    <ion-item class="">
+        <ion-input type="text" placeholder="请输入工作年限" #company [(ngModel)]="inputName"></ion-input>
+        <div item-right class="rigth-message">
+          <span>年</span>  
+        </div>
+    </ion-item>
+    <ion-item class="" no-lines>
+        <textarea placeholder="请输入文本内容" class="item-textarea"></textarea>
+    </ion-item> -->
+  </ion-list>
+  <button ion-button expand="full" large class="fixed-bottom" (click)="addEmailSubmit(inputName)">保存</button>
+</ion-content>

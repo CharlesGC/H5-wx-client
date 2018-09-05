@@ -1,0 +1,130 @@
+<ion-content class="user-center">
+  <!-- <ion-list class="user-info user-info-list mt10" no-lines>
+    <ion-item>
+      <div class="title-name" [hidden]="!isLogin">
+        <h2>{{user.nikeName}}</h2>
+        <span class="be-certified">待认证</span>
+      </div>
+      <h3 class="title-experience" [hidden]="!isLogin">
+        <span>{{user.gender == 1?'男':'女'}}</span>
+        <span>15年工作经验</span>
+      </h3>
+      <p class="title-skills-list" [hidden]="!isLogin">
+        <span class="skills-type">全职顾问</span>
+        <span>产品策划</span>
+      </p>
+      <button ion-button full (click)="onLogin()" large style="border-radius:8px;height: 40px;" [hidden]="isLogin">立即登录</button>
+      <ion-thumbnail item-end>
+          <img class="boder-rads" src="{{user.avatar}}" [hidden]="!isLogin">
+          <div class="default-user" [hidden]="isLogin"></div>
+      </ion-thumbnail>
+      <ion-icon name="arrow-forward" item-end></ion-icon>
+    </ion-item>
+  </ion-list> -->
+  <ion-list class="mt10 user-info" no-lines>
+    <ion-item [hidden]="isLogin" (click)="goClientBasic()">
+        <ion-thumbnail item-start>
+            <div class="default-user"></div>
+        </ion-thumbnail>
+        <button class="login-button" ion-button (click)="onLogin()" [hidden]="isLogin">立即登录</button>
+    </ion-item>
+    <ion-item [hidden]="!isLogin" (click)="goClientBasic()">
+        <ion-thumbnail item-start>
+            <img class="boder-rads" src="{{user.avatar}}" [hidden]="!isLogin">
+        </ion-thumbnail>
+        <div class="title-name">
+            <h2>{{user.nickName || '黄先生'}}</h2>
+            <span class="user-type">待认证</span>
+        </div>
+        <p class="title-skills-list mt10">
+          <span>查看并修改个人资料</span>
+          <!-- <span class="skills-type">全职顾问</span>
+          <span>15年</span>
+          <span>产品策划</span> -->
+        </p>
+        <ion-icon name="arrow-forward" item-end color="ion-gray" class="go-brack"></ion-icon>
+    </ion-item>
+  </ion-list>
+  <!-- <ion-grid class="user-list-2 user-info-list mb5">
+    <ion-row>
+      <ion-col col-6>
+          <ion-icon ios="logo-apple" md="logo-android" isActive></ion-icon>
+          <p>我的项目</p>
+      </ion-col>
+      <ion-col col-6>
+          <ion-icon ios="logo-apple" md="logo-android"></ion-icon>
+          <p>消息中心</p>
+      </ion-col>
+    </ion-row>
+  </ion-grid> -->
+  <!-- <ion-list class="user-info-list mb5">
+      <ion-item (click)="goPhonebind()">设置</ion-item>
+  </ion-list>
+  <ion-list>
+      <ion-item class="" (click)="goToOtherPage()">
+        使用帮助
+        <div item-right><ion-icon name="arrow-forward"></ion-icon></div>
+      </ion-item>
+      <ion-item class="" (click)="goRegisterPage()">
+        联系我们
+        <div item-right><ion-icon ios="ios-arrow-forward" md="md-arrow-forward"></ion-icon></div>
+      </ion-item>
+      <ion-item class="" (click)="goChooseIdentityPage()">
+        关于我们
+        <div item-right><ion-icon ios="ios-arrow-forward" md="md-arrow-forward"></ion-icon></div>
+      </ion-item>
+  </ion-list> -->
+  <ion-list class="contact-list mt20">
+      <ion-item class="" (click)="goMyProjectPage()">
+        <ion-icon class="left-icon" name="list-box" start isActive></ion-icon>
+        <span class="left-title">我的项目</span>
+        <div item-right class="rigth-message">
+          <span>{{user.projectCount || 0}} 个的项目</span>
+          <ion-icon name="arrow-forward" class="ml12" color="ion-gray"></ion-icon>
+        </div>
+      </ion-item>
+      <ion-item class="" no-lines (click)="goMessageCenterPage()">
+        <ion-icon class="left-icon" name="mail" start isActive="true"></ion-icon>
+        <span class="left-title">推送通知</span>
+        <div item-right class="rigth-message">
+          <span>{{user.messageCount || 0}} 条新的通知</span>
+          <ion-icon name="arrow-forward" class="ml12" color="ion-gray"></ion-icon>
+        </div>
+      </ion-item>
+      <!-- <ion-item>
+        <ion-range [(ngModel)]="singleValue" color="danger" pin="true" >
+            <ion-icon name="arrow-forward" class="ml12" color="ion-gray"></ion-icon>
+            <p>{{singleValue}}</p>
+        </ion-range>
+      </ion-item>
+      <ion-item>
+        <ion-range [(ngModel)]="singleValue" color="danger" pin="true" >
+            <ion-icon size="small" slot="start" name="sunny"></ion-icon>
+            <ion-icon slot="end" name="sunny"></ion-icon>
+        </ion-range>
+      </ion-item> -->
+  </ion-list>
+
+  <ion-list class="contact-list mt10">
+      <ion-item class="" (click)="goSetAccount()">
+        <ion-icon class="left-icon" name="settings" isActive="true"></ion-icon>
+        <span class="left-title">账号设置</span>
+        <div item-right><ion-icon name="arrow-forward" color="ion-gray"></ion-icon></div>
+      </ion-item>
+      <ion-item class="" >
+        <ion-icon class="left-icon" name="mail" start isActive="true"></ion-icon>
+        <span class="left-title">联系我们</span>
+        <div item-right><ion-icon name="arrow-forward" color="ion-gray"></ion-icon></div>
+      </ion-item>
+      <ion-item class="">
+        <ion-icon class="left-icon" name="mail" start isActive="true"></ion-icon>
+        <span class="left-title">使用帮助</span>
+        <div item-right><ion-icon name="arrow-forward" color="ion-gray"></ion-icon></div>
+      </ion-item>
+      <ion-item class=""no-lines>
+          <ion-icon class="left-icon" name="mail" start isActive="true"></ion-icon>
+          <span class="left-title">关于我们</span>
+          <div item-right><ion-icon ios="ios-arrow-forward" md="md-arrow-forward" color="ion-gray"></ion-icon></div>
+        </ion-item>
+  </ion-list>
+</ion-content>

@@ -1,0 +1,93 @@
+<!--
+  Generated template for the ProjectDecumentBrowserPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <ion-navbar>
+      <ion-title>我的项目/客户/文档详情</ion-title>
+    </ion-navbar>
+  
+  </ion-header>
+  
+  
+  <ion-content style="background-color: #fcfcfc;">
+      <ion-list class="list-item-flex mt10">
+        <ion-item>
+          <label>文档名称</label>
+          <p item-right class="rigth-message">
+              <span class="item-value line-overflow">{{consultantDocumentDetailData.name}}</span>
+              <!-- <ion-icon class="icon" name="arrow-forward"></ion-icon> -->
+          </p>
+        </ion-item>
+        <ion-item no-lines>
+          <label>文档描述</label>
+          <p item-right class="rigth-message">
+              <span item-right class="item-value line-overflow">{{consultantDocumentDetailData.introduction}}</span>
+          </p>
+        </ion-item>
+      </ion-list>
+      <ion-list class="list-item-flex mt10" *ngIf="consultantDocumentDetailData.type == 1">
+        <ion-item>
+          <label>上传时间</label>
+          <p item-right class="rigth-message">
+              <span class="item-value line-overflow">{{consultantDocumentDetailData.createTime | date: 'yyyy-MM-dd'}}</span>
+              <!-- <ion-icon class="icon" name="arrow-forward"></ion-icon> -->
+          </p>
+        </ion-item>
+        <ion-item no-lines>
+          <label>文档类型</label>
+          <p item-right class="rigth-message">
+            <span item-right class="item-value line-overflow" *ngIf="consultantDocumentDetailData.type == 0">交付物</span>
+            <span item-right class="item-value line-overflow" *ngIf="consultantDocumentDetailData.type == 1">其他文档</span>
+          </p>
+        </ion-item>
+      </ion-list>
+      <ion-list class="list-item-flex mt10" *ngIf="consultantDocumentDetailData.type == 0">
+          <ion-item>
+            <label>上传时间</label>
+            <p item-right class="rigth-message">
+                <span class="item-value line-overflow">{{consultantDocumentDetailData.createTime | date: 'yyyy-MM-dd'}}</span>
+                <!-- <ion-icon class="icon" name="arrow-forward"></ion-icon> -->
+            </p>
+          </ion-item>
+          <ion-item>
+            <label>文档类型</label>
+            <p item-right class="rigth-message">
+              <span item-right class="item-value line-overflow" *ngIf="consultantDocumentDetailData.type == 0">交付物</span>
+              <span item-right class="item-value line-overflow" *ngIf="consultantDocumentDetailData.type == 1">其他文档</span>
+            </p>
+          </ion-item>
+          <ion-item no-lines no-lines>
+            <label>对应阶段</label>
+            <p item-right class="rigth-message">
+                <span class="item-value line-overflow">第一阶段</span>
+            </p>
+          </ion-item>
+        </ion-list>
+      <div class="user-other-list">
+        <ion-list class="card-item">
+            <ion-item no-lines>
+                <div class="card-item-label">
+                  <label>
+                    <img style="width:66px;height:66px;" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1534233453&di=bd34b76dca47ce86738ff171e3c50122&imgtype=jpg&er=1&src=http%3A%2F%2Fpic.58pic.com%2F58pic%2F14%2F81%2F70%2F29J58PICf2x_1024.jpg">
+                  </label>
+                  <div class="card-cont" data-src="url">
+                    <h5>{{consultantDocumentDetailData.sourceName}}</h5>
+                    <p class="action-browser-file">点击查看文件预览</p>
+                    <p class="browser-size">{{consultantDocumentDetailData.size}}</p>
+                  </div>
+                </div>
+            </ion-item>
+        </ion-list>
+      </div>
+      <div style="height:100px;"></div>
+      <!-- <div class="fixed-bottom" *ngIf="!isAdd">
+          <button ion-button class="btn-submit" (click)="onDocumentEditClick()">编辑</button>
+          <button ion-button class="btn-delete" (click)="onDocumentDel()">删除</button>
+      </div> -->
+      <!-- <button ion-button expand="full" large class="fixed-bottom" (click)="goPaymentRecord()">提交</button> -->
+  </ion-content>
+  

@@ -1,0 +1,45 @@
+
+<ion-header>
+  <ion-navbar>
+    <ion-title>发布/完整发布/选择公司</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content style="background-color: #fcfcfc;">
+    <ion-list class="company-list" no-lines *ngIf="fieldType=='list'">
+        <ion-item class="border-left" (click)="goProject(companyList)" *ngFor="let companyList of companyArr">
+            <div class="company-item-left" >
+              <div class="company-item-one"> 
+                <p>
+                  <label>公司名称</label>
+                  <span class="label-cont">{{companyList.name}}</span>
+                </p>
+                <span class="item-text">默认</span>
+              </div>
+              <p class="mt10">
+                <label>所在城市</label>
+                <span class="provincer">{{companyList.province}}</span>
+                <span class="label-cont">{{companyList.city}}</span>
+              </p>
+              <div class="company-instury">
+                <label>公司行业</label>
+                <ul>
+                  <li *ngFor = "let companyInstury of companyList.industryList">
+                    <span class="label-cont">{{companyInstury.industryName}}</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </ion-item>
+      </ion-list>
+      <ion-list>
+        <ion-item *ngIf="fieldType == 'text'">
+            <ion-input placeholder="请输入内容" [(ngModel)]="fieldValue"></ion-input>
+        </ion-item>
+      </ion-list>
+      <ion-list *ngIf="fieldType == 'tarea'">
+        <ion-item>
+            <ion-textarea placeholder="请输入" [(ngModel)]="fieldValue"></ion-textarea>
+        </ion-item>
+      </ion-list>
+      <div class="date-footer" (click)="onValueSubmit()">保存</div>
+</ion-content>

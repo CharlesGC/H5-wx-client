@@ -1,0 +1,69 @@
+<!--
+  Generated template for the ProjectPaymentRecordPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+    <ion-navbar>
+      <ion-title>我的项目/客户/添加支付记录</ion-title>
+    </ion-navbar>
+  </ion-header>
+  
+  <ion-content style="background-color: #fcfcfc;">
+      <ion-list class="browser-top">
+        <h4>{{deliveryModelData.projectName}}</h4>
+        <p class="browser-top-p mt15">
+            <ion-icon name="ios-paper-outline" class="mr3"></ion-icon>
+            <span>阶段周期</span>
+            <span>{{deliveryModelData.startTime | date: 'yyyy-MM-dd'}}</span>
+            <span> 至 </span>
+            <span>{{deliveryModelData.endTime | date: 'yyyy-MM-dd'}}</span>
+        </p>
+      </ion-list>
+      <p class="browser-file">收款信息</p>
+      <ion-list class="list-item-flex mt10">
+        <ion-item>
+          <label>收款人</label>
+          <p item-right>
+              <span class="item-value">{{deliveryModelData.accountHolder}}</span>
+          </p>
+        </ion-item>
+        <ion-item no-lines>
+          <label>收款额度</label>
+          <span item-right class="item-value">{{deliveryModelData.price}} 元</span>
+        </ion-item>
+      </ion-list>
+      <div class="registration-matters mt10"><ion-icon class="mr5" name="alert"></ion-icon>平台依据国家相关扣税要求进行费用核实</div>
+      <p class="browser-file">请选择付款信息</p>
+      <ion-list class="list-item-flex mt10">
+        <ion-item (click)="goFormEditPage('taxNumber',deliveryModelData.taxNumber,'selectPaymentBank')" no-lines>
+          <label><ion-icon calss="mr5" name="card"></ion-icon>{{deliveryModelData.bankAccount}}</label>
+          <p item-right>
+              <span class="item-value">{{deliveryModelData.account}}</span>
+              <ion-icon class="icon" name="arrow-forward"></ion-icon>
+          </p>
+        </ion-item>
+      </ion-list>
+      <p class="browser-file">快递信息</p>
+      <ion-list class="list-item-flex mt10">
+        <ion-item (click)="goFormEditPage('logisticsCompany',deliveryModelData.logisticsCompany,'text')">
+          <label>快递公司</label>
+          <p item-right>
+              <span class="item-value">{{deliveryModelData.logisticsCompany || '请输入'}}</span>
+              <ion-icon class="icon" name="arrow-forward"></ion-icon>
+          </p>
+        </ion-item>
+        <ion-item no-lines (click)="goFormEditPage('logisticsNumber',deliveryModelData.logisticsNumber,'text')">
+          <label>快递单号</label>
+          <p item-right>
+              <span class="item-value">{{deliveryModelData.logisticsNumber || '请输入'}}</span>
+              <ion-icon class="icon" name="arrow-forward"></ion-icon>
+          </p>
+        </ion-item>
+      </ion-list>
+      <div style="height:100px;"></div>
+      <button ion-button expand="full" large class="fixed-bottom" (click)="onDeliveryModelClick()">提交</button>
+  </ion-content>
+  
+  

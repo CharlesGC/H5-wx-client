@@ -1,0 +1,53 @@
+
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>项目时间</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+    <div class="appiont-list">
+          <ion-list class="appiont-ion">
+              <ion-item no-lines >
+                <ion-label class="ion-label">0-3个月</ion-label>
+                <ion-checkbox [(ngModel)]="budgetTrue1" item-end (click)="updateCucumber1('budgetTrue1')"></ion-checkbox>
+              </ion-item>
+
+              <ion-item no-lines >
+                <ion-label class="ion-label" >3-6个月</ion-label>
+                <ion-checkbox [(ngModel)]="budgetTrue2" item-end (click)="updateCucumber2('budgetTrue2')"></ion-checkbox>
+              </ion-item>
+
+              <ion-item no-lines >
+                <ion-label class="ion-label">6-12个月</ion-label>
+                <ion-checkbox [(ngModel)]="budgetTrue3" item-end (click)="updateCucumber3('budgetTrue3')"></ion-checkbox>
+              </ion-item>
+
+              <ion-item no-lines >
+                <ion-label class="ion-label">其他时间</ion-label>
+                <ion-checkbox [(ngModel)]="otherDate" item-end (click)="updateCucumber4('otherDate')"></ion-checkbox>
+              </ion-item>
+
+              <div class="dete-select" [hidden]="isShow">
+                <p class="select-border">点击输入框右侧可选择日期单位（日，月，年）</p>
+                <div class="date-input1">
+                    <input type="text" value="请输入项目周期">
+                    <ion-list no-lines class="date-iolist">
+                        <ion-item class="date-item">
+                            <ion-label class="date-label">
+                              <span></span>
+                              <span>日</span>
+                              <span><ion-icon name="arrow-forward-outline" style="font-size: 15px;margin-top: 10px;color: #9b9b9b;"></ion-icon></span>
+                            </ion-label>
+                            <ion-datetime displayFormat="YYYY/MM/DD" [(ngModel)]="myDate" item-start ></ion-datetime>
+                          </ion-item>
+                    </ion-list>
+                </div>
+              </div>
+            </ion-list>
+      </div>
+      <div class="appiont-footer" (click)="onValueSubmit()">保存</div>
+</ion-content>

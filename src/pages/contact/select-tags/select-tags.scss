@@ -1,0 +1,62 @@
+page-select-tags {
+    .tags-tip {
+        font-family: PingFangSC;
+        font-size: 12px;
+        font-weight: 600;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        color: #c7c7c7;
+        margin: 10px 0 10px 15px;
+    }
+    .select-search {
+        font-family: PingFangSC;
+        font-size: 14px;
+        font-weight: 600;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        color: #9b9b9b;
+    }
+    .select-list-item {
+        overflow: scroll;
+        height: -webkit-fill-available;
+        ion-item {
+            font-family: PingFangSC;
+            font-size: 1.4rem;
+            font-weight: 600;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: normal;
+            letter-spacing: normal;
+            color: #4a4a4a;
+        }
+    }
+    .skill-cont {
+        display: flex;
+        .skill-tegs1 {
+            background-color: #cfcfcf;
+            flex: 1;
+            ion-item{
+                background-color: #cfcfcf;
+                &.checked{
+                    border-left: 5px solid #ff6536;
+                    background: #fff;
+                    padding-left: 10px;
+                }
+            }
+            .list-ios {
+                .item-block {
+                    .item-inner {
+                        border-bottom: none;
+                    }
+                }
+            }
+        }
+        .skill-tegs2 {
+            flex: 1;
+        }
+    }
+}

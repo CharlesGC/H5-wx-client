@@ -1,0 +1,31 @@
+<!--
+  Generated template for the ModifyPhonePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <ion-navbar>
+      <ion-title>add-email</ion-title>
+    </ion-navbar>
+  
+  </ion-header>
+  <ion-content class="phonebind-from">
+      <ion-list class="mt10">
+        <!-- <ion-item class="bg-black">
+          <ion-input type="text" placeholder="" #phone disabled value="example@163.com"></ion-input>
+        </ion-item> -->
+        <ion-item lines="none" class="none-margin bg-black" no-lines>
+          <ion-input type="email" placeholder="请输入新邮箱地址" #mail></ion-input>
+        </ion-item>
+      </ion-list>
+      <!-- <ion-list>
+        <ion-item><ion-button expand="full">绑定</ion-button></ion-item>
+      </ion-list> -->
+      <button ion-button expand="full" large class="fixed-bottom" (click)="addEmailSubmit(mail)">绑定</button>
+    </ion-content>
+    
+    
+    
+  

@@ -1,0 +1,79 @@
+<!--
+  Generated template for the ClientBasicPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-title>个人中心-个人详情（客户）</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content class="bg-gray" style="background-color: #fcfcfc;">
+    <!-- <ion-card class="select-card card-item-1" (click)="onSelected(0)" [ngClass]="{'checked':Selected==0}">
+      <ion-item>
+        <img src="http://img5.imgtn.bdimg.com/it/u=448163702,1912868067&fm=27&gp=0.jpg" style="background:rosybrown"/>
+        <h3>黄先生</h3>
+        <ion-icon name="ios-arrow-forward" item-end color="ion-gray"></ion-icon>
+      </ion-item>
+    </ion-card> -->
+    <ion-list class="select-card card-item-1" (click)="onSelected(0)">
+      <ion-item no-lines class="user-avutor">
+          <!-- <img src="http://img5.imgtn.bdimg.com/it/u=448163702,1912868067&fm=27&gp=0.jpg" style="background:rosybrown"/> -->
+          <img src="{{user.avatar || ''}}" style="background:rosybrown"/>
+          <h3 class="mt5">{{user.nickName || ''}}</h3>
+          <ion-icon name="ios-arrow-forward" item-end color="#9b9b9b"></ion-icon>
+        </ion-item>
+    </ion-list>
+    <ion-card class="select-card card-item" (click)="onSelected(1,compony_item.cid)" [ngClass]="{'checked':Selected==1}" *ngFor="let compony_item of companyList">
+        <div class="card-label">
+          <label>公司名称</label>
+          <p class="card-cont">{{compony_item.name}}</p>
+          <!-- <button class="company-type type-first">首要公司</button> -->
+        </div>
+        <div class="card-label mt10">
+          <label>所在城市</label>
+          <p class="card-cont">{{compony_item.province}} {{compony_item.city}}</p>
+          <ion-icon name="arrow-forward" color="#9b9b9b" class="ml12" style="float:right"></ion-icon>
+          <button class="company-type type-first" *ngIf="compony_item.priority == 1">默认</button>
+        </div>
+        <div class="card-label mt10">
+          <label>公司行业</label>
+          <p class="card-cont">{{compony_item.industryList.length > 0 ? compony_item.industryList[0].industryName:''}}</p>
+        </div>
+    </ion-card>
+    <!-- <ion-card class="select-card card-item" (click)="onSelected(1)" [ngClass]="{'checked':Selected==1}">
+        <div class="card-label">
+          <label>公司名称</label>
+          <p class="card-cont">路边摊公司</p>
+        </div>
+        <div class="card-label mt10">
+          <label>所在城市</label>
+          <p class="card-cont">广东省 深圳市</p>
+          <ion-icon name="arrow-forward" color="#9b9b9b" class="ml12" style="float:right"></ion-icon>
+          <button class="company-type type-first">默认</button>
+        </div>
+        <div class="card-label mt10">
+          <label>公司行业</label>
+          <p class="card-cont">电子商务</p>
+        </div>
+    </ion-card>
+    <ion-card class="select-card card-item" (click)="onSelected(2)" [ngClass]="{'checked':Selected==1}">
+        <div class="card-label">
+            <label>公司名称</label>
+            <p class="card-cont">路边摊公司</p>
+        </div>
+        <div class="card-label mt10">
+            <label>所在城市</label>
+            <p class="card-cont">广东省 深圳市</p>
+            <ion-icon name="arrow-forward" color="#9b9b9b" class="ml12" style="float:right"></ion-icon>
+        </div>
+        <div class="card-label mt10">
+            <label>公司行业</label>
+            <p class="card-cont">电子商务</p>
+        </div>
+        
+    </ion-card> -->
+    <div style="height:80px;"></div>
+    <button ion-button expand="full" large class="fixed-bottom" (click)="onSelected(1)">添加公司</button>
+  </ion-content>

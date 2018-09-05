@@ -1,0 +1,14 @@
+ {    
+    "data":[
+        {"id":1,"name":"企业信息化","icon":"http://pic35.photophoto.cn/20150516/0005018639255973_b.jpg","description":"供应链注释"},
+        {"id":2,"name":"战略采购管理","icon":"http://pic28.photophoto.cn/20130902/0005018309100177_b.jpg","description":"采购注释"},
+        {"id":3,"name":"企业估值","icon":"http://pic28.photophoto.cn/20130902/0005018309100177_b.jpg","description":"人力资源注释"},
+        {"id":4,"name":"组织诊断与人才盘点","icon":"http://img17.3lian.com/201612/16/88dc7fcc74be4e24f1e0bacbd8bef48d.jpg","description":"IT管理注释"},
+        {"id":5,"name":"供应链","icon":"http://pic28.photophoto.cn/20130902/0005018309100177_b.jpg","description":"供应链注释"},
+        {"id":6,"name":"供应链","icon":"http://pic35.photophoto.cn/20150516/0005018639255973_b.jpg","description":"供应链注释"},
+        {"id":7,"name":"信息传输","icon":"http://pic28.photophoto.cn/20130902/0005018309100177_b.jpg","description":"信息传输注释"},
+        {"id":8,"name":"供应链","icon":"http://pic35.photophoto.cn/20150516/0005018639255973_b.jpg","description":"供应链注释"},
+        {"id":9,"name":"供应链","icon":"http://img17.3lian.com/201612/16/88dc7fcc74be4e24f1e0bacbd8bef48d.jpg","description":"供应链注释"},
+        {"id":10,"name":"科学研究","icon":"http://img17.3lian.com/201612/16/88dc7fcc74be4e24f1e0bacbd8bef48d.jpg","description":"科学研究注释"}
+    ]
+ }

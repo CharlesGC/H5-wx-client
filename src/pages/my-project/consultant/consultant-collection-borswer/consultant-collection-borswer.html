@@ -1,0 +1,71 @@
+<ion-header>
+
+    <ion-navbar>
+      <ion-title>我的项目/客户/发票/发票详情</ion-title>
+    </ion-navbar>
+  
+  </ion-header>
+  
+  <ion-content style="background-color: #fcfcfc;">
+      <ion-list class="list-item-flex mt10">
+          <ion-item>
+          <label>对应阶段</label>
+          <p item-right class="rigth-message">
+              <span class="item-value line-overflow">第{{projectInvoiceDetails.stageSort}}阶段</span>
+          </p>
+        </ion-item>
+        <ion-item>
+          <label>代扣类型</label>
+          <p item-right class="rigth-message">
+              <span class="item-value line-overflow" *ngIf="projectInvoiceDetails.receiptType == 0">平台代扣</span>
+              <span class="item-value line-overflow" *ngIf="projectInvoiceDetails.receiptType == 1">提供发票</span>
+              <!-- <ion-icon class="icon" name="arrow-forward"></ion-icon> -->
+          </p>
+        </ion-item>
+        <ion-item no-lines>
+          <label>收款额度</label>
+          <p item-right class="rigth-message">
+              <span item-right class="item-value line-overflow">{{projectInvoiceDetails.realPrice}} 元</span>
+          </p>
+        </ion-item>
+      </ion-list>
+  
+      <ion-list class="list-item-flex mt10">
+        <ion-item>
+          <label>收款人</label>
+          <p item-right class="rigth-message">
+              <span class="item-value line-overflow">{{projectInvoiceDetails.payee}}</span>
+          </p>
+        </ion-item>
+        <ion-item>
+          <label>收款银行</label>
+          <p item-right class="rigth-message">
+              <span item-right class="item-value line-overflow">{{projectInvoiceDetails.payeeBank}}</span>
+          </p>
+        </ion-item>
+        <ion-item no-lines>
+            <label>收款账号</label>
+            <p item-right class="rigth-message">
+                <span item-right class="item-value line-overflow">{{projectInvoiceDetails.payeeAccount}}</span>
+            </p>
+          </ion-item>
+      </ion-list>
+  
+      <ion-list class="list-item-flex mt10">
+        <ion-item>
+          <label>平台付款时间</label>
+          <p item-right class="rigth-message">
+              <span class="item-value line-overflow">{{projectInvoiceDetails.updateTime | date: 'yyyy-MM-dd'}}</span>
+          </p>
+        </ion-item>
+        <ion-item no-lines>
+          <label>流水号</label>
+          <p item-right class="rigth-message">
+              <span item-right class="item-value line-overflow">{{projectInvoiceDetails.serialNumber}}</span>
+          </p>
+        </ion-item>
+        
+      </ion-list>
+      <div style="height:50px;"></div>
+  </ion-content>
+  

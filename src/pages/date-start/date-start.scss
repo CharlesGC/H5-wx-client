@@ -1,0 +1,74 @@
+page-date-start {
+    .aptitude-list {
+        width: 100%;
+        .list-ios {
+            margin:0;
+       }
+        .aptitude-ion {
+            width: 375px;
+            height: 50px;
+            background-color: #ffffff;
+            .ion-label {
+                width: 141px;
+                height: 20px;
+                font-family: PingFangSC;
+                font-size: 14px;
+                font-weight: 600;
+                color: #4a4a4a;
+            }
+        }
+    }
+    .date-list {
+        width: 100%;
+        height: 50px;
+        background-color: #ffffff;
+        border: 1px solid #f46f46;
+        .date-iolist {
+            width: 100%;
+            .date-item {
+                width: 100%;
+                .date-label {
+                    width: 100%;
+                    display: flex;
+                    justify-content: space-between;
+                    span:nth-child(1) {
+                        display: block;
+                        width: 141px;
+                        height: 20px;
+                        font-family: PingFangSC;
+                        font-size: 14px;
+                        font-weight: 600;
+                        color: #4a4a4a;
+                        margin-left: 20px;
+                    }
+                    span:nth-child(2) {
+                        display: block;
+                        height: 17px;
+                        font-family: PingFangSC;
+                        font-size: 12px;
+                        text-align: right;
+                        color: #9b9b9b;
+                        margin-left: 15px;
+                        .icon {
+                            color: #cfcfcf;
+                            font-size: 15px;
+                            margin-left: 15px;
+                        }
+                    }
+                }
+            }
+            
+        }
+    }
+    .date-footer {
+        width: 100%;
+        height: 49px;
+        background-color: #ff6536;
+        position: fixed;
+        bottom: 0;
+        color: #ffffff;
+        text-align: center;
+        line-height: 49px;
+    }
+    
+}

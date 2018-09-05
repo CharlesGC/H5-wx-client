@@ -1,0 +1,30 @@
+<ion-content class="phonebind-from">
+  <ion-list radio-group [(ngModel)]="relationship" class="mt20"  (ionChange)="onSelectChange()">
+      <!-- <ion-item>
+        <ion-label>我是企业，寻找顾问的专业建议</ion-label>
+        <ion-radio value="friends" checked></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>我是顾问，寻找为企业提供咨询的机会</ion-label>
+        <ion-radio value="enemies" ></ion-radio>
+      </ion-item> -->
+      <!-- <ion-item class="mt20" no-lines>
+          <button ion-button block large  (click)="onChooseSubmit()" [disabled]="isDisabled">确认身份</button>
+      </ion-item> -->
+    </ion-list>
+    <ion-card class="select-card" (click)="onSelected(0)" [ngClass]="{'checked':Selected==0}">
+        <ion-icon name="desktop"></ion-icon>
+        <div class="card-title">我是企业，寻找顾问的专业建议</div>
+    </ion-card>
+    <ion-card class="select-card mt20" (click)="onSelected(1)" [ngClass]="{'checked':Selected==1}">
+      <ion-icon name="person"></ion-icon>
+      <div class="card-title">我是顾问，寻找为企业提供咨询的机会</div>
+    </ion-card>
+  
+    <button ion-button expand="full" large class="fixed-bottom" (click)="onChooseSubmit()">下一步</button>
+    <!-- <ion-footer>
+        <ion-toolbar>
+          <ion-title>下一步</ion-title>
+        </ion-toolbar>
+      </ion-footer> -->
+</ion-content>

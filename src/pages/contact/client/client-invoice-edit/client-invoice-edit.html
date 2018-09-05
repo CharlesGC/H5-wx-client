@@ -1,0 +1,44 @@
+<ion-header>
+    <ion-navbar>
+      <ion-title>个人中心/客户/查看公司信息/发票信息编辑</ion-title>
+    </ion-navbar>
+  </ion-header>
+  
+  <ion-content style="background-color: #fcfcfc;">
+      <ion-list class="contact-list mt10">
+        <ion-item class="" (click)="goFormEditPage('taxNumber',invoiceData.taxNumber,'text')">
+          <span class="left-title">纳税号</span>
+          <div item-right class="rigth-message">
+            <span>{{invoiceData.taxNumber}}</span>
+            <ion-icon name="arrow-forward" class="ml12"></ion-icon>
+          </div>
+        </ion-item>
+        <ion-item class="" (click)="goFormEditPage('taxPhone',invoiceData.taxPhone,'text')">
+          <span class="left-title">联系电话</span>
+          <div item-right class="rigth-message">
+            <span>{{invoiceData.taxPhone}}</span>
+            <ion-icon name="arrow-forward" class="ml12"></ion-icon>
+          </div>
+        </ion-item>
+        <ion-item class="" (click)="goFormEditPage('taxBank',invoiceData.taxBank,'text')">
+          <span class="left-title">开户银行</span>
+          <div item-right class="rigth-message">
+            <span>{{invoiceData.taxBank}}</span>
+            <ion-icon name="arrow-forward" class="ml12"></ion-icon>
+          </div>
+        </ion-item>
+        <ion-item class="" (click)="goFormEditPage('taxAccount',invoiceData.taxAccount,'text')" no-lines>
+          <span class="left-title">对公账号</span>
+          <div item-right class="rigth-message">
+            <span>{{invoiceData.taxAccount}}</span>
+            <ion-icon name="arrow-forward" class="ml12"></ion-icon>
+          </div>
+        </ion-item>
+      </ion-list>
+      <div class="fixed-bottom">
+          <button ion-button class="btn-submit" (click)="onInvoiceSubmit()">保存</button>
+          <button ion-button class="btn-delete" (click)="onInvoiceDel()">删除</button>
+      </div>
+  
+  </ion-content>
+  

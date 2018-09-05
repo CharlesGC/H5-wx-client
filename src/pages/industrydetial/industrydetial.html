@@ -1,0 +1,170 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>industrydetial</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content class="content">
+  <!-- 下拉列表 -->
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新" refreshingSpinner="circles" refreshingText="刷新中...">
+    </ion-refresher-content>
+  </ion-refresher>
+  <div class="search_content">
+    <span class="item-input-wrapper">
+      <input id="search" type="search" placeholder="请输入" [(ngModel)]="value" autofocus="autofocus">
+      <div class="border"></div>
+    </span>
+    <span class="item-search" (click)="searchLabel(value)">
+      <ion-icon name="search" class="icon"></ion-icon>
+    </span>
+  </div>
+  <div class="item ">
+    <ion-list>
+      <ion-item>
+        <div class="item-select">
+          <div class="item-input">
+            <span *ngIf="IndustryName.industryName == undefined">请选择</span>
+            <span *ngIf="IndustryName.industryName != undefined" style="color: #ff6536">{{IndustryName.industryName}}</span>
+            <span (click)="downindustryShow()">
+              <ion-icon name="arrow-down-outline"></ion-icon>
+            </span>
+          </div>
+          <div class="item-input">
+            <span *ngIf="skilldoubleData.fName == undefined">请选择</span>
+            <span *ngIf="skilldoubleData.fName != undefined" class="SecondarySkill" style="color: #ff6536">{{skilldoubleData.fName}}•{{inputValue.sName}}</span>
+            <!-- <span *ngIf ="skilldoubleData.fName !== '' ">{{skilldoubleData.fName}}</span> -->
+            <!-- <span *ngIf ="skillAll !== '' ">{{skillAll}}</span> -->
+            <span (click)="downSkill()">
+              <ion-icon name="arrow-down-outline"></ion-icon>
+            </span>
+          </div>
+        </div>
+      </ion-item>
+    </ion-list>
+
+    <ion-list *ngIf="isIndustry" class="indeuList">
+      <ion-item (click)="selsectIndustry('')" [ngClass]="{'checked':skillChecked==i}">全部行业</ion-item>
+      <ion-item *ngFor="let industryList of IndustryTotal;let i = index" class="industryList-item" [ngClass]="{'checked':skillChecked==i}"
+        (click)="selsectIndustry(industryList,i)">
+        {{industryList.industryName}}
+      </ion-item>
+    </ion-list>
+
+    <div class="skill-count" *ngIf="isSkill">
+      <div class="skill-list1">
+        <ion-list>
+          <ion-item (click)="infoSecondarySkill('全部领域')" [ngClass]="{'checked':skillChecked==i}">全部领域</ion-item>
+          <ion-item *ngFor="let item_Skill of SkillLabelMoreArr;let i = index" (click)="infoSecondarySkill(item_Skill,i)" [ngClass]="{'checked':skillChecked==i}">
+            {{item_Skill.fName}}
+          </ion-item>
+        </ion-list>
+      </div>
+      <div class="skill-list2">
+        <ion-list>
+          <ion-item (click)="infoSelectClick('')">全部</ion-item>
+          <ion-item *ngFor="let Secondary_item of SkillLabelTwoArr;let i = index" (click)="infoSelectClick(Secondary_item,i)" [ngClass]="{'click':skillBgcolor==i}">
+            {{Secondary_item.sName}}
+          </ion-item>
+        </ion-list>
+      </div>
+    </div>
+  </div>
+  <!-- 输入框搜索 -->
+  <div class="industrySearch" *ngIf="isSearch">
+    <ion-list style="white-space:normal;">
+      <ion-item *ngFor="let deail_label of SearchData">
+        <div class="contant-item">
+          <div class="contant-item-left" item-start>
+            <img [src]="deail_label.avatar" class="item-img">
+            <p>{{deail_label.adviserName}}</p>
+          </div>
+          <div class="contant-item-right">
+            <p>{{deail_label.introduction}}</p>
+            <div class="industryLabel">
+              <span class="span" *ngFor="let skill_right of deail_label.skillList.slice(0,2)">{{skill_right.asName}}</span>
+            </div>
+            <p>
+              <span>工作经验：</span>
+              <span>{{deail_label.workingYears}}</span>
+            </p>
+          </div>
+        </div>
+      </ion-item>
+    </ion-list>
+  </div>
+  <!-- 行业技能标签筛选 -->
+  <div class="industrySearch" *ngIf="isFiltersearch">
+    <ion-list style="white-space:normal;">
+      <ion-item *ngFor="let instry_skill of IndustrySearchData">
+        <div class="contant-item">
+          <div class="contant-item-left" item-start>
+            <img [src]="instry_skill.avatar" class="item-img">
+            <p>{{instry_skill.adviserName}}</p>
+          </div>
+          <div class="contant-item-right">
+            <p>{{instry_skill.introduction}}</p>
+            <div class="industryLabel">
+              <span class="span" *ngFor="let skill_right of instry_skill.skillList.slice(0,2)">{{skill_right.asName}}</span>
+            </div>
+            <p>
+              <span>工作经验：</span>
+              <span>{{instry_skill.workingYears}}</span>
+            </p>
+          </div>
+        </div>
+      </ion-item>
+    </ion-list>
+  </div>
+  <!-- 行业更多 -->
+  <div class="contant-cont" *ngIf="isIndustryMore">
+    <ion-list>
+      <ion-item *ngFor="let industryMore_item of IndustrydetialArr" style="white-space:normal;">
+        <div class="contant-item">
+          <div class="contant-item-left" item-start>
+            <img [src]="industryMore_item.industryUrl" class="item-img">
+            <p>{{industryMore_item.adviserName}}</p>
+          </div>
+          <div class="contant-item-right">
+            <p>{{industryMore_item.introduction}}</p>
+            <p class="industryLabel">
+              <span>{{industryMore_item.industryName}}</span>
+            </p>
+            <p>
+              <span>工作经验：</span>
+              <span>{{industryMore_item.workingYears}}</span>
+            </p>
+          </div>
+        </div>
+      </ion-item>
+    </ion-list>
+    <ion-infinite-scroll (ionInfinite)="loadMore($event)" [enabled]="enabled" threshold="100px" distance="1%" position:button>
+      <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="加载更多"></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </div>
+  <!-- 技能更多 -->
+  <div class="contant-cont" *ngIf="isSkillMore">
+    <ion-list>
+      <ion-item *ngFor="let SkillMore_item of infoSkillMore" style="white-space:normal;">
+        <div class="contant-item">
+          <div class="contant-item-left" item-start>
+            <img [src]="SkillMore_item.fIcon" class="item-img">
+            <p>{{SkillMore_item.adviserName}}</p>
+          </div>
+          <div class="contant-item-right">
+            <p>{{SkillMore_item.introduction}}</p>
+            <p class="industryLabel">
+              <span>{{SkillMore_item.fName}}</span>
+            </p>
+            <p>
+              <span>工作经验：</span>
+              <span>{{SkillMore_item.workingYears}}</span>
+            </p>
+          </div>
+        </div>
+      </ion-item>
+    </ion-list>
+    <ion-infinite-scroll (ionInfinite)="loadMore($event)" [enabled]="enabled" threshold="100px" distance="1%" position:button>
+      <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="加载更多"></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </div>
+</ion-content>

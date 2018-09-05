@@ -1,0 +1,94 @@
+
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>我的项目/客户/方案/列表</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content style="background-color: #fcfcfc;">
+    <ion-list>
+      <ion-item class="message-item mt20" no-lines *ngFor="let program_item of projectProgramListData">
+        <p class="msg-title">
+          <span class="msg-title-left" *ngIf="program_item.status == 0">待查看</span>
+          <span class="msg-title-left" *ngIf="program_item.status == 1">待确认</span>
+          <span class="msg-title-left" *ngIf="program_item.status == 2">已确认</span>
+          <span class="msg-title-left color-c7c7c7" *ngIf="program_item.status == 3">未采用</span>
+          <span class="msg-title-left" *ngIf="program_item.status == 4">有异议</span>
+          <span>18/06/05</span>
+        </p>
+        <div class="msg-cont">
+          <h4>{{program_item.programName}}</h4>
+          <p>报价 <span class="fweight600">{{program_item.price}} 元</span></p>
+        </div>
+        <div class="msg-cont-line2 mt10">
+          <p class="line2-left">
+            <ion-icon name="card" class=""></ion-icon>
+            <span>方案周期 {{program_item.workload}}
+                <span *ngIf="program_item.workloadUnit == 0">天</span>
+                <span *ngIf="program_item.workloadUnit == 1">周</span>
+                <span *ngIf="program_item.workloadUnit == 2">个月</span>
+            </span>
+          </p>
+          <p class="line2-right">
+            <img src="{{program_item.avatar}}">
+            <span>{{program_item.nickName}}</span>
+          </p>
+        </div>
+        <div class="msg-footer" (click)="goProgramBrowser(program_item.ppid)">
+          <span class="msg-footer-text">查看该顾问的方案详情</span>
+          <ion-icon name="arrow-forward" class="ml12"></ion-icon>
+        </div>
+      </ion-item>
+      <!-- <ion-item class="message-item mt20" no-lines>
+          <p class="msg-title">
+            <span class="msg-title-left">已确认</span>
+            <span>18/06/05</span>
+          </p>
+          <div class="msg-cont">
+            <h4>虚拟股权激励实战推广（多语言）</h4>
+            <p>报价 <span class="fweight600">35,000 元</span></p>
+          </div>
+          <div class="msg-cont-line2 mt10">
+            <p class="line2-left">
+              <ion-icon name="card" class=""></ion-icon>
+              <span>方案周期 12 个月</span>
+            </p>
+            <p class="line2-right">
+              <img src="http://img5.imgtn.bdimg.com/it/u=448163702,1912868067&fm=27&gp=0.jpg">
+              <span>大脸猫</span>
+            </p>
+          </div>
+          <div class="msg-footer">
+            <span class="msg-footer-text">查看该顾问的方案详情</span>
+            <ion-icon name="arrow-forward" class="ml12"></ion-icon>
+          </div>
+        </ion-item>
+        <ion-item class="message-item mt20" no-lines>
+            <p class="msg-title">
+              <span class="msg-title-left color-c7c7c7">未采用</span>
+              <span>18/06/05</span>
+            </p>
+            <div class="msg-cont">
+              <h4>虚拟股权激励实战推广（多语言）</h4>
+              <p>报价 <span class="fweight600">35,000 元</span></p>
+            </div>
+            <div class="msg-cont-line2 mt10">
+              <p class="line2-left">
+                <ion-icon name="card" class=""></ion-icon>
+                <span>方案周期 12 个月</span>
+              </p>
+              <p class="line2-right">
+                <img src="http://img5.imgtn.bdimg.com/it/u=448163702,1912868067&fm=27&gp=0.jpg">
+                <span>大脸猫</span>
+              </p>
+            </div>
+            <div class="msg-footer">
+              <span class="msg-footer-text">查看该顾问的方案详情</span>
+              <ion-icon name="arrow-forward" class="ml12"></ion-icon>
+            </div>
+          </ion-item> -->
+    </ion-list>
+  
+  </ion-content>

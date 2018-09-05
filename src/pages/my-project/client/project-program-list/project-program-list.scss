@@ -1,0 +1,112 @@
+page-project-program-list {
+    ion-list {
+        margin: 0 15px !important;
+        width: calc(100% - 30px);
+    }
+    .message-item {
+        background-color: #ffffff;
+        box-shadow: 0 1px 10px 0 rgba(0, 0, 0, 0.05);
+        .msg-title {
+            display: flex;
+            span{
+                font-family: PingFangSC;
+                font-size: 1.2rem;
+                font-weight: normal;
+                font-style: normal;
+                font-stretch: normal;
+                line-height: normal;
+                letter-spacing: normal;
+                color: #9b9b9b;
+            }
+            .msg-title-left {
+                flex: 1;
+                font-weight: 600;
+                letter-spacing: 0.2px;
+                color: #f46f46;
+                &.color-c7c7c7 {
+                    color: #c7c7c7;
+                }
+            }
+        }
+        .msg-cont {
+            font-family: PingFangSC;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: normal;
+            letter-spacing: normal;
+            color: #4a4a4a;
+            .fweight600 {
+                font-weight: 600;
+            }
+            h4{
+                font-size: 1.6rem;
+                font-weight: 600;
+                margin-top: 10px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+            p{
+                margin-top: 1rem;
+                font-size: 1.2rem;
+                letter-spacing: 0.2px;
+                color: #4a4a4a;
+            }
+        }
+        .msg-cont-line2 {
+            display: flex;
+            .line2-left {
+                flex: 1;
+                font-size: 1.2rem;
+                font-weight: normal;
+                font-style: normal;
+                font-stretch: normal;
+                letter-spacing: 0.2px;
+                color: #4a4a4a;
+                ion-icon {
+                    font-size: 1.6rem;
+                    vertical-align: bottom;
+                }
+            }
+            .line2-right {
+                img {
+                    width: 24px;
+                    height: 24px;
+                    border-radius: 50%;
+                    vertical-align: middle;
+                    margin-right: 8px;
+                }
+                span {
+                    font-family: PingFangSC;
+                    font-size: 1.2rem;
+                    font-weight: 600;
+                    font-style: normal;
+                    font-stretch: normal;
+                    line-height: normal;
+                    letter-spacing: 0.2px;
+                    color: #4a4a4a;
+                }
+            }
+        }
+        .msg-footer {
+            border-top: solid 0.7px #f1f1f1;
+            margin-top: 15px;
+            padding: 10px 0 0;
+            display: flex;
+            .msg-footer-text {
+                flex: 1;
+                font-family: PingFangSC;
+                font-size: 14px;
+                font-weight: normal;
+                font-style: normal;
+                font-stretch: normal;
+                line-height: normal;
+                letter-spacing: normal;
+            }
+            ion-icon {
+                color: #cfcfcf;
+            }
+        }
+    }
+
+}

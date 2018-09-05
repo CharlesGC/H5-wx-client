@@ -1,0 +1,47 @@
+
+<ion-header>
+  <ion-navbar>
+    <ion-title>aptitude</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content class="content">
+  
+      <ion-list class="aptitude-ion">
+        <ion-item no-lines>
+          <ion-label class="ion-label">初级</ion-label>
+          <ion-checkbox [(ngModel)]="junior" item-end (click)="Junior(junior,'初级')"></ion-checkbox>
+        </ion-item>
+        <div class="day-money">日薪范围 ￥500 - 2000</div>
+        <div class="decription">具备 0-3 年的业务或咨询行业工作经验，可协助项目负责人完成项目内容交付或独立完成简单项目的交付。</div>
+      </ion-list>
+       
+        <ion-list class="aptitude-ion">
+          <ion-item no-lines>
+            <ion-label class="ion-label">中级</ion-label>
+            <ion-checkbox [(ngModel)]="middle" item-end (click)="Middle(middle,'中级')"></ion-checkbox>
+          </ion-item>
+          <div class="day-money">日薪范围 ￥2000 - 4000</div>
+          <div class="decription">具备 0-3 年的业务或咨询行业工作经验，可协助项目负责人完成项目内容交付或独立完成简单项目的交付。</div>
+        </ion-list>
+             
+        <ion-list class="aptitude-ion">
+          <ion-item no-lines>
+            <ion-label class="ion-label">高级</ion-label>
+            <ion-checkbox [(ngModel)]="senior" item-end (click)="Senior(senior,'高级')"></ion-checkbox>
+          </ion-item>
+          <div class="day-money">日薪范围 ￥4000 - 6000</div>
+          <div class="decription">具备 0-3 年的业务或咨询行业工作经验，可协助项目负责人完成项目内容交付或独立完成简单项目的交付。</div>
+        </ion-list>
+           
+        <ion-list class="aptitude-ion">
+          <ion-item no-lines>
+            <ion-label class="ion-label">专家</ion-label>
+            <ion-checkbox [(ngModel)]="expert" item-end (click)="Expert(expert,'专家')"></ion-checkbox>
+          </ion-item>
+          <div class="day-money">日薪范围 ￥6000 - 10000</div>
+          <div class="decription">具备 0-3 年的业务或咨询行业工作经验，可协助项目负责人完成项目内容交付或独立完成简单项目的交付。</div>
+        </ion-list>
+        <div class="aptitude-footer" (click)="onValueSubmit()">保存</div>
+</ion-content>

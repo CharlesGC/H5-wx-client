@@ -1,0 +1,67 @@
+<!--
+  Generated template for the ConsultantBankAccountPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>个人中心/顾问/收款账号列表</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content style="background-color: #fcfcfc;">
+    <ion-list class="bank-list" no-lines>
+        <ion-item class="border-left" (click)="goAccountEdit(consultantBankList_item)" *ngFor="let consultantBankList_item of consultantBankList">
+            <div class="bank-item-left">
+              <p>
+                <label>收款银行</label>
+                <span class="label-cont">{{consultantBankList_item.bankAccount}}</span>
+              </p>
+              <p class="mt10">
+                <label>收款账号</label>
+                <span class="label-cont">{{consultantBankList_item.account}}</span>
+              </p>
+            </div>
+            <div item-right class="rigth-message">
+              <span *ngIf="consultantBankList_item.type==1">默认</span>
+              <ion-icon name="arrow-forward" color="#cfcfcf" class="ml12"></ion-icon>
+            </div>
+          </ion-item>
+          <!-- <ion-item class="border-left" (click)="goAccountEdit()">
+            <div class="bank-item-left">
+              <p>
+                <label>收款银行</label>
+                <span class="label-cont">工商银行</span>
+              </p>
+              <p class="mt10">
+                <label>收款账号</label>
+                <span class="label-cont">34123535245235</span>
+              </p>
+            </div>
+            <div item-right class="rigth-message">
+              <span>默认</span>
+              <ion-icon name="arrow-forward" color="#cfcfcf" class="ml12"></ion-icon>
+            </div>
+          </ion-item>
+          <ion-item class="border-left" (click)="goAccountEdit()">
+              <div class="bank-item-left">
+                <p>
+                  <label>收款银行</label>
+                  <span class="label-cont">工商银行</span>
+                </p>
+                <p class="mt10">
+                  <label>收款账号</label>
+                  <span class="label-cont">34123535245235</span>
+                </p>
+              </div>
+              <div item-right class="rigth-message">
+                <span>默认</span>
+                <ion-icon name="arrow-forward" color="#cfcfcf" class="ml12"></ion-icon>
+              </div>
+          </ion-item> -->
+      </ion-list>
+      <button ion-button expand="full" large class="fixed-bottom" (click)="goAccountEdit()">添加</button>
+</ion-content>

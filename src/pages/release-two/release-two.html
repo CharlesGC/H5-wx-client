@@ -1,0 +1,60 @@
+
+<ion-header>
+  <ion-navbar>
+    <ion-title>release-two</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content class="content">
+    <div class="prompt">请填写相关信息</div>
+    <div class="jindu">
+      <div class="radiusone"></div>
+      <div class="solid-one"></div>
+      <div class="radius"></div>
+      <div class="solid"></div>
+      <div class="radius"></div>
+    </div>
+    <div class="release-list">
+        <ion-list no-lines class="release-iolist">
+            <button ion-item (click)="gocompany('projectName',releaseData.projectName,'tarea' )" class="release-btn">
+              <span class="one">项目名称</span>
+              <span class="note">(必填)</span>
+              <span class="two">{{releaseData.projectName || '请拟定项目标题'}}</span>
+            </button> 
+        </ion-list>
+        <ion-list no-lines class="release-iolist">
+            <button ion-item (click)="gocompany('description', releaseData.description,'tarea')" class="release-btn">
+              <span class="one">项目描述</span>
+              <span class="two">{{releaseData.description || '对项目需求的详细描述'}}</span>
+            </button> 
+        </ion-list>
+        <ion-list no-lines class="release-iolist">
+            <button ion-item (click)="gocompany('target',releaseData.target,'tarea')" class="release-btn">
+              <span class="one">发布标的</span>
+              <span class="two">{{releaseData.target || '期望的交互无内容及类型'}}</span>
+            </button> 
+        </ion-list>
+        <ion-list no-lines class="release-iolist">
+            <button ion-item (click)="gocompany('note',releaseData.note,'tarea')" class="release-btn">
+              <span class="one">项目备注</span>
+              <span class="note">(非公开)</span>
+              <span class="two">{{releaseData.tarea || '项目或麦盟平台的其他要求'}}</span>
+            </button> 
+        </ion-list>
+    </div>
+    <div class="release-prompt">请选择发布类型(目前为完整发布模式)</div>
+    <div class="backrelease">
+        <ion-list no-lines>
+            <button ion-item (click)="goback()" class="release-btn">
+            <div class="backone" (click)="goback()">
+              <span ><img src="../../assets/imgs/agile.png" alt=""></span>
+              <span>返回快速发布</span>
+            </div>
+              <span class="two">留下简要的说明书</span>
+            </button> 
+        </ion-list>
+    </div>
+    <div class="release-footer">
+        <div (click)="gotoAddindustry()">下一步</div>
+        <div (click)="keepdraft()">存为草稿</div>
+    </div>
+</ion-content>

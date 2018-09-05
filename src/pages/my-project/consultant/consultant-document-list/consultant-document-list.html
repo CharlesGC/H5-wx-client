@@ -1,0 +1,159 @@
+<!--
+  Generated template for the ProjectDecumentListPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>我的项目/顾问/文档列表</ion-title>
+  </ion-navbar>
+</ion-header>
+
+  <div class="nav-menu" *ngIf="isShowNavMenu">
+    <ion-list class="nav-list-menu">
+        <ion-item no-lines (click)="onNavMenuClick(false)">
+          <p class="list-header-left">{{showNavMenuName || '详情'}}</p>
+          <div class="list-header-right" item-end>
+            <span>收起</span>
+          </div>
+        </ion-item>
+      </ion-list>
+    <div class="nav-menu-bg"></div>
+    <ion-list class="nav-menu-list">
+      <ion-item class="nav-menu-item" (click)="onNavMenuItemClick(1,'详情')">
+          <label>详情</label>
+          <ion-icon name="arrow-forward" item-right  (click)="isShow=!isShow"></ion-icon>
+      </ion-item>
+      <ion-item class="nav-menu-item" (click)="onNavMenuItemClick(2,'方案')">
+          <label>方案</label>
+          <ion-icon name="arrow-forward" item-right (click)="isShow=!isShow"></ion-icon>
+      </ion-item>
+      <ion-item class="nav-menu-item" (click)="onNavMenuItemClick(3,'阶段',-1)">
+          <label>阶段</label>
+          <ion-icon name="arrow-forward" item-right (click)="isShow=!isShow"></ion-icon>
+      </ion-item>
+      <ion-item class="nav-menu-item" (click)="onNavMenuItemClick(4,'文档',-1)">
+          <label>文档</label>
+          <ion-icon name="arrow-forward" item-right (click)="isShow=!isShow"></ion-icon>
+      </ion-item>
+      <ion-item class="nav-menu-item" (click)="onNavMenuItemClick(5,'收款记录',-1)" no-lines>
+          <label>收款记录</label>
+          <ion-icon name="arrow-forward" item-right (click)="isShow=!isShow"></ion-icon>
+      </ion-item>
+    </ion-list>
+  </div>
+  
+  <ion-content style="background-color: #fcfcfc;">
+      <ion-list class="nav-list-menu">
+        <ion-item no-lines (click)="onNavMenuClick(true)">
+          <p class="list-header-left">{{showNavMenuName || '文档'}}</p>
+          <div class="list-header-right" item-end>
+            <span>展开</span>
+          </div>
+        </ion-item>
+      </ion-list>
+      <ion-list class="card-item mt20" *ngFor="let documentListData_item of documentListData">
+          <ion-item no-lines>
+              <div class="card-item-top">
+                <!-- <div class="item-top-left">第二阶段 <span class="color-f46f46">交付物</span></div> -->
+                <div class="item-top-left">
+                  <span class="color-f46f46" *ngIf="documentListData_item.type == 0">交付物</span>
+                  <span class="color-f46f46" *ngIf="documentListData_item.type == 1">其他文档</span>
+                </div>
+                <span class="item-top-right">{{documentListData_item.createTime | date: 'yyyy/MM/dd'}}</span>
+              </div>
+              <div class="card-item-label">
+                <label>
+                  <img style="width:66px;height:66px;" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1534233453&di=bd34b76dca47ce86738ff171e3c50122&imgtype=jpg&er=1&src=http%3A%2F%2Fpic.58pic.com%2F58pic%2F14%2F81%2F70%2F29J58PICf2x_1024.jpg">
+                </label>
+                <div class="card-cont" data-src="url">
+                  <h5>{{documentListData_item.sourceName}}</h5>
+                  <p class="browser-file">点击查看文件预览</p>
+                  <p class="browser-size">{{documentListData_item.size}}</p>
+                </div>
+              </div>
+          </ion-item>
+          <ion-item class="lines-top" no-lines>
+            <div class="card-item-label">
+                <label>文档名称</label>
+                <p class="card-cont">{{documentListData_item.name}}</p>
+              </div>
+              <div class="card-item-label mt10">
+                <label>文档描述</label>
+                <p class="card-cont">{{documentListData_item.introduction}}</p>
+              </div>
+              <div class="msg-footer" (click)="goDocumentBrowser(documentListData_item)">
+                <span class="msg-footer-text">查看详情</span>
+                <ion-icon name="arrow-forward" class="ml12"></ion-icon>
+              </div>
+          </ion-item>
+      </ion-list>
+      <!-- <ion-list class="card-item mt20">
+          <ion-item no-lines>
+              <div class="card-item-top">
+                <div class="item-top-left"> <span class="color-f46f46">其他文档</span></div>
+                <span class="item-top-right">18/06/05 10:30</span>
+              </div>
+              <div class="card-item-label">
+                <label>
+                  <img style="width:66px;height:66px;" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1534233453&di=bd34b76dca47ce86738ff171e3c50122&imgtype=jpg&er=1&src=http%3A%2F%2Fpic.58pic.com%2F58pic%2F14%2F81%2F70%2F29J58PICf2x_1024.jpg">
+                </label>
+                <div class="card-cont" data-src="url">
+                  <h5>完整方案计划书</h5>
+                  <p class="browser-file">点击查看文件预览</p>
+                  <p class="browser-size">20 KB</p>
+                </div>
+              </div>
+          </ion-item>
+          <ion-item class="lines-top" no-lines>
+            <div class="card-item-label">
+                <label>文档名称</label>
+                <p class="card-cont">水源创新法则总览</p>
+              </div>
+              <div class="card-item-label mt10">
+                <label>文档描述</label>
+                <p class="card-cont">负责产品项目的规划与策划，监控项目的开发进度，负责解决开发过程中的技术问题。</p>
+              </div>
+              <div class="msg-footer" (click)="goDocumentBrowser(2)">
+                <span class="msg-footer-text">查看详情</span>
+                <ion-icon name="arrow-forward" class="ml12"></ion-icon>
+              </div>
+          </ion-item>
+      </ion-list>
+      <ion-list class="card-item mt20">
+          <ion-item no-lines>
+              <div class="card-item-top">
+                <div class="item-top-left"> <span class="color-f46f46">其他文档</span></div>
+                <span class="item-top-right">18/06/05 10:30</span>
+              </div>
+              <div class="card-item-label">
+                <label>
+                  <img style="width:66px;height:66px;" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1534233453&di=bd34b76dca47ce86738ff171e3c50122&imgtype=jpg&er=1&src=http%3A%2F%2Fpic.58pic.com%2F58pic%2F14%2F81%2F70%2F29J58PICf2x_1024.jpg">
+                </label>
+                <div class="card-cont" data-src="url">
+                  <h5>完整方案计划书</h5>
+                  <p class="browser-file">点击查看文件预览</p>
+                  <p class="browser-size">20 KB</p>
+                </div>
+              </div>
+          </ion-item>
+          <ion-item class="lines-top" no-lines>
+            <div class="card-item-label">
+                <label>文档名称</label>
+                <p class="card-cont">水源创新法则总览</p>
+              </div>
+              <div class="card-item-label mt10">
+                <label>文档描述</label>
+                <p class="card-cont">负责产品项目的规划与策划，监控项目的开发进度，负责解决开发过程中的技术问题。</p>
+              </div>
+              <div class="msg-footer" (click)="goDocumentBrowser(2)">
+                <span class="msg-footer-text">查看详情</span>
+                <ion-icon name="arrow-forward" class="ml12"></ion-icon>
+              </div>
+          </ion-item>
+      </ion-list> -->
+      <button ion-button expand="full" large class="fixed-bottom" (click)="onAddDocumentClick()">上传新附件</button>
+  </ion-content>
+  

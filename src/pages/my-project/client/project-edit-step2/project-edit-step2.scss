@@ -1,0 +1,87 @@
+page-project-edit-step2 {
+    ion-list {
+        margin-bottom: 0 !important;
+    }
+    // .item-inner {
+    //     .rigth-message {
+    //         .line-overflow {
+    //             display: initial;
+    //         }
+    //     }
+    // }
+    .steps-list {
+        display: flex;
+        margin-left: 15px;
+        span {
+            display: inline-block;
+        }
+        .steps-round {
+            width: 1.2rem;
+            height: 1.2rem;
+            background-color: #ffffff;
+            border: solid 3px rgba(155, 155, 155, 0.5);
+            border-radius: 50%;
+            &.checked {
+                border: solid 3px #ff6536;
+            }
+        }
+        .steps-line {
+            width: 25%;
+            height: 3px;
+            background-color: #cdcdcd;
+            margin-top: 6px;
+            &.checked {
+                background-color: #ff6536;
+            }
+        }
+    }
+    .list-item-flex {
+        ion-item {
+            font-family: PingFangSC;
+            font-size: 1.4rem;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: normal;
+            letter-spacing: normal;
+            color: #4a4a4a;
+            label{
+                font-weight: 600;
+                .required-field {
+                    font-size: 1rem;
+                    color: #f46f46;
+                }
+            }
+            .icon {
+                font-size: 1.8rem;
+                // vertical-align: middle;
+                color: #cfcfcf;
+            }
+            .item-value {
+                margin: 0;
+                color: #9b9b9b;
+                margin-right: 1rem;
+                &.color-f46f46 {
+                    color: #f46f46;
+                }
+                &.font12 {
+                    font-size: 1.2rem;
+                }
+            }
+            .rigth-message {
+                text-align: right;
+            }
+        }
+    }
+    .browser-file {
+        font-family: PingFangSC;
+        font-size: 1.2rem;
+        font-weight: 600;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        color: #c7c7c7;
+        margin: 2rem 0 0 1rem;
+    }
+
+}

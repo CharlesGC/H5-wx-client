@@ -1,0 +1,243 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>我的项目/客户/项目详情</ion-title>
+  </ion-navbar>
+</ion-header>
+<!-- <div>
+    <ion-list class="nav-list-menu">
+        <ion-item no-lines (click)="onNavMenuClick(false)">
+          <p class="list-header-left">{{showNavMenuName || '详情'}}</p>
+          <div class="list-header-right" item-end>
+            <span>收起</span>
+          </div>
+        </ion-item>
+      </ion-list>
+</div> -->
+  <!-- <ion-menu [content]="content" type="overlay" side="left">
+      <ion-content> -->
+          
+        
+        <!-- div menuList：是主要的菜单部分，这部分是菜单重点 -->
+        <!-- <div class="menu-list nav-menu"> -->
+          <!-- no-lines：取消list的默认线条 -->
+              <!-- <ion-list class="nav-list-menu">
+                  <ion-item no-lines (click)="onNavMenuClick(false)">
+                    <p class="list-header-left">{{showNavMenuName || '详情'}}</p>
+                    <div class="list-header-right" item-end>
+                      <span>收起</span>
+                    </div>
+                  </ion-item>
+                </ion-list>
+              <div class="nav-menu-bg"></div>
+              <ion-list class="nav-menu-list">
+                <ion-item class="nav-menu-item" (click)="onNavMenuItemClick(1,'详情')">
+                    <label>详情</label>
+                    <ion-icon name="arrow-forward" item-right  (click)="isShow=!isShow"></ion-icon>
+                </ion-item>
+                <ion-item class="nav-menu-item" (click)="onNavMenuItemClick(2,'方案')">
+                    <label>方案</label>
+                    <ion-icon name="arrow-forward" item-right (click)="isShow=!isShow"></ion-icon>
+                </ion-item>
+                <ion-item class="nav-menu-item" (click)="onNavMenuItemClick(3,'阶段',-1)">
+                    <label>阶段</label>
+                    <ion-icon name="arrow-forward" item-right (click)="isShow=!isShow"></ion-icon>
+                </ion-item>
+                <ion-item class="nav-menu-item" (click)="onNavMenuItemClick(4,'文档',-1)">
+                    <label>文档</label>
+                    <ion-icon name="arrow-forward" item-right (click)="isShow=!isShow"></ion-icon>
+                </ion-item>
+                <ion-item class="nav-menu-item" (click)="onNavMenuItemClick(5,'收款记录',-1)" no-lines>
+                    <label>收款记录</label>
+                    <ion-icon name="arrow-forward" item-right (click)="isShow=!isShow"></ion-icon>
+                </ion-item>
+              </ion-list>
+          <ion-list no-lines>
+            <button menuClose="left" ion-item *ngFor="let p of pages;let i=index" (click)="openPage(p)">
+              <ion-icon name="{{p.icon}}" item-left class="iconColor"></ion-icon>
+              {{p.title}}
+            </button>
+          </ion-list>
+        </div>
+      </ion-content>
+    </ion-menu>
+    <ion-menu [content]="content">
+    <ion-content >
+      <ion-list no-lines>
+        <ion-item (click)="openPage(ConsultantProgramListPage)">菜单一</ion-item>
+        <ion-item (click)="openPage(ConsultantStageListPage)">菜单二</ion-item>
+        <ion-item (click)="openPage(ConsultantDocumentListPage)">菜单三</ion-item>
+      </ion-list>
+    </ion-content>
+    </ion-menu>
+    <ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav> -->
+
+  <div class="nav-menu" *ngIf="isShowNavMenu && !isApply">
+      <ion-list class="nav-list-menu">
+          <ion-item no-lines (click)="onNavMenuClick(false)">
+            <p class="list-header-left">{{showNavMenuName || '详情'}}</p>
+            <div class="list-header-right" item-end>
+              <span>收起</span>
+            </div>
+          </ion-item>
+        </ion-list>
+      <div class="nav-menu-bg"></div>
+      <ion-list class="nav-menu-list">
+        <ion-item class="nav-menu-item" (click)="onNavMenuItemClick(1,'详情')">
+            <label>详情</label>
+            <ion-icon name="arrow-forward" item-right  (click)="isShow=!isShow"></ion-icon>
+        </ion-item>
+        <ion-item class="nav-menu-item" (click)="onNavMenuItemClick(2,'方案')">
+            <label>方案</label>
+            <ion-icon name="arrow-forward" item-right (click)="isShow=!isShow"></ion-icon>
+        </ion-item>
+        <ion-item class="nav-menu-item" (click)="onNavMenuItemClick(3,'阶段',-1)">
+            <label>阶段</label>
+            <ion-icon name="arrow-forward" item-right (click)="isShow=!isShow"></ion-icon>
+        </ion-item>
+        <ion-item class="nav-menu-item" (click)="onNavMenuItemClick(4,'文档',-1)">
+            <label>文档</label>
+            <ion-icon name="arrow-forward" item-right (click)="isShow=!isShow"></ion-icon>
+        </ion-item>
+        <ion-item class="nav-menu-item" (click)="onNavMenuItemClick(5,'收款记录',-1)" no-lines>
+            <label>收款记录</label>
+            <ion-icon name="arrow-forward" item-right (click)="isShow=!isShow"></ion-icon>
+        </ion-item>
+      </ion-list>
+    </div>
+  
+  <ion-content style="background-color: #fcfcfc;">
+      <ion-list class="nav-list-menu" *ngIf="!isApply">
+        <ion-item no-lines (click)="onNavMenuClick(true)">
+          <p class="list-header-left">{{showNavMenuName || '详情'}}</p>
+          <div class="list-header-right" item-end>
+            <span>展开</span>
+          </div>
+        </ion-item>
+      </ion-list>
+      <ion-list class="project-browser-top">
+          <div class="bg-top"></div>
+          <div class="bg-bottom"></div>
+          <p class="address-type">
+            <ion-icon name="navigate"></ion-icon>
+            <span>{{projectDetails.province}}</span>
+            <span class="mr15"> {{projectDetails.city}}</span>
+            <ion-icon name="navigate"></ion-icon>
+            <span>{{projectDetails.createTime | date: 'yy/MM/dd'}}</span>
+          </p>
+          <div class="title-cont">
+              {{projectDetails.projectName}}
+          </div>
+          <div class="project-type">
+            <span class="project-type type-blue" *ngIf="projectDetails.status ==0">草稿</span>
+            <span class="project-type type-blue" *ngIf="projectDetails.status ==1">待审核</span>
+            <span class="project-type type-blue" *ngIf="projectDetails.status ==2">匹配顾问中</span>
+            <span class="project-type type-blue" *ngIf="projectDetails.status ==3">方案待确定</span>
+            <span class="project-type type-blue" *ngIf="projectDetails.status ==4">进行中</span>
+            <span class="project-type type-blue" *ngIf="projectDetails.status ==5">已完成</span>
+            <span class="project-type type-blue" *ngIf="projectDetails.status ==6">已取消</span>
+            <span class="project-type type-blue" *ngIf="projectDetails.status ==7">待客户确认</span>
+            <span class="project-type type-green" *ngIf="projectDetails.status ==8">客户未评论</span>
+            <span class="project-type type-gray" *ngIf="projectDetails.status ==9">顾问未评论</span>
+            <span class="project-type type-gray" *ngIf="projectDetails.status ==10">结束</span>
+            <span class="project-type type-gray" *ngIf="projectDetails.status ==11">阶段待提交</span>
+            <span class="project-type type-gray" *ngIf="projectDetails.status ==12">方案待提交</span>
+            <span class="project-type type-gray" *ngIf="projectDetails.status ==13">阶段待确认</span>
+          </div>
+        </ion-list>
+        <ion-list class="describe-list mt10">
+          <ion-item no-lines>
+            <h4>项目描述</h4>
+            <p class="describe-cont">{{projectDetails.description}}</p>
+          </ion-item>
+          <ion-item no-lines>
+              <h4>交付标的</h4>
+              <p class="describe-cont">{{projectDetails.target}}</p>
+            </ion-item>
+        </ion-list>
+        <ion-list class="describe-list mt10">
+          <ion-item no-lines>
+            <h4 class="mb15">专长领域</h4>
+            <p class="tags-cont skills" *ngIf="projectDetails.pSkill && projectDetails.pSkill.length>0">
+              <span *ngFor="let pskill_tag of projectDetails.pSkill" class="tag">{{pskill_tag.skillName}}</span>
+            </p>
+          </ion-item>
+          <ion-item no-lines>
+              <h4 class="mb15">所在行业</h4>
+              <p class="tags-cont industry" *ngIf="projectDetails.pIndustry && projectDetails.pIndustry.length>0">
+                  <span *ngFor="let pIndustry_tag of projectDetails.pIndustry" class="tag">{{pIndustry_tag.industryName}}</span>
+              </p>
+            </ion-item>
+        </ion-list>
+        <ion-list class="list-item-flex mt10">
+          <ion-item>
+            <label>预算方式</label>
+            <span item-right class="item-value" *ngIf="projectDetails.budgetType == 0">每日费用</span>
+            <span item-right class="item-value" *ngIf="projectDetails.budgetType == 1">固定单价</span>
+            <span item-right class="item-value" *ngIf="projectDetails.budgetType == 2">待商议</span>
+          </ion-item>
+          <ion-item>
+            <label>预算金额</label>
+            <span item-right class="item-value">{{projectDetails.budgetDay}}</span>
+          </ion-item>
+          <ion-item no-lines>
+            <label>大致天数</label>
+            <span item-right class="item-value">{{projectDetails.workload}} 天</span>
+          </ion-item>
+        </ion-list>
+        <ion-list class="total-budget">
+          <p class="budget-label mt15">总预算金额</p>
+          <div class="mb15">
+            <span class="budget-symbol">￥</span>
+            <span class="budget-number">{{projectDetails.budget}}</span>
+          </div>
+        </ion-list>
+      <ion-list class="list-item-flex mt10">
+          <ion-item>
+            <label>开始时间</label>
+            <span item-right class="item-value" *ngIf="projectDetails.startTimeType==0">越快越好</span>
+            <span item-right class="item-value" *ngIf="projectDetails.startTimeType==1">{{projectDetails.startTime  | date:'yyyy/MM/dd'}}</span>
+            <span item-right class="item-value" *ngIf="projectDetails.startTimeType==2">待商议</span>
+          </ion-item>
+          <ion-item>
+            <label>项目时长</label>
+            <span item-right class="item-value" *ngIf="projectDetails.projectLengthType == 0">0-3 个月</span>
+            <span item-right class="item-value" *ngIf="projectDetails.projectLengthType == 1">3-6 个月</span>
+            <span item-right class="item-value" *ngIf="projectDetails.projectLengthType == 2">6-12 个月</span>
+            <span item-right class="item-value" *ngIf="projectDetails.projectLengthType == 3">{{projectDetails.projectLength}}</span>
+          </ion-item>
+          <ion-item no-lines>
+            <label>是否驻场</label>
+            <span item-right class="item-value" *ngIf="projectDetails.deliverMethod ==0">驻场</span>
+            <span item-right class="item-value" *ngIf="projectDetails.deliverMethod ==1">半驻场</span>
+            <span item-right class="item-value" *ngIf="projectDetails.deliverMethod ==2">非驻场</span>
+            <span item-right class="item-value" *ngIf="projectDetails.deliverMethod ==3">待商议</span>
+          </ion-item>
+        </ion-list>
+        <ion-list class="list-item-flex mt10">
+            <ion-item>
+              <label>资质要求</label>
+              <span item-right class="item-value" *ngIf="projectDetails.qualification == 0">初级</span>
+              <span item-right class="item-value" *ngIf="projectDetails.qualification == 1">中级</span>
+              <span item-right class="item-value" *ngIf="projectDetails.qualification == 2">高级</span>
+              <span item-right class="item-value" *ngIf="projectDetails.qualification == 3">专家</span>
+            </ion-item>
+            <ion-item no-lines>
+              <label>语言要求</label>
+              <span item-right class="item-value" *ngFor="let planguage_tag of projectDetails.planguage">
+                {{planguage_tag.language}} . 
+                <span *ngIf="planguage_tag.grade == 0">较差</span>
+                <span *ngIf="planguage_tag.grade == 1">一般</span>
+                <span *ngIf="planguage_tag.grade == 2">熟练</span>
+                <span *ngIf="planguage_tag.grade == 3">精通</span>
+              </span>
+            </ion-item>
+          </ion-list>
+          <div style="height:100px;"></div>
+          <button ion-button expand="full" large class="fixed-bottom" (click)="goEvalutionPage()" *ngIf="projectDetails.appStatus ==11">评价</button>
+          <div class="fixed-bottom" *ngIf="!projectDetails.appStatus && projectDetails.appStatus != 0">
+              <button ion-button class="btn-submit" (click)="onApplicationProject()">申请该项目</button>
+              <button ion-button class="btn-delete" (click)="onProjectEditStep1()">忽略</button>
+          </div>
+    </ion-content>
+  

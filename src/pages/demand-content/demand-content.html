@@ -1,0 +1,74 @@
+<!--
+  Generated template for the DemandContentPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<!-- <ion-header>
+
+  <ion-navbar>
+    <ion-title>需求内容</ion-title>
+  </ion-navbar>
+
+</ion-header> -->
+
+<ion-content style="background-color: #fcfcfc;">
+    <ion-list class="select-card">
+      <div class="select-card-div" [ngClass]="{'checked':selected==2}" (click)="onSelectClick(2)"><span>顾问寻找中</span></div>
+      <div class="select-card-div" [ngClass]="{'checked':selected==3}" (click)="onSelectClick(3)"><span>顾问已确认</span></div>
+    </ion-list>
+    <ion-list class="list-content">
+      <ion-item class="message-item mt20" no-lines *ngFor="let projectListData_item of projectListData">
+        <div class="msg-cont">
+          <h4>{{projectListData_item.projectName}}</h4>
+          <p>预算 <span class="demand-number">{{projectListData_item.budget}}</span> 元</p>
+          <p class="city-date-cont">
+            <span *ngIf="projectListData_item.projectLengthType ==0">0-3 个月</span>
+            <span *ngIf="projectListData_item.projectLengthType ==1">3-6 个月</span>
+            <span *ngIf="projectListData_item.projectLengthType ==2">6-12 个月</span>
+            <span *ngIf="projectListData_item.projectLengthType ==3">其他时间</span>
+            <span>{{projectListData_item.city}}</span>
+            <span>发布时间 {{projectListData_item.releaseTime | date:'yy/MM/dd'}}</span>
+          </p>
+          <div class="demand-content-cont mt10">{{projectListData_item.description}}</div>
+        </div>
+        <div class="msg-footer" (click)="onProjectBrowserClick(projectListData_item)">
+          <span class="msg-footer-text">查看该阶段详情</span>
+          <ion-icon name="arrow-forward" class="ml12"></ion-icon>
+        </div>
+      </ion-item>
+      <!-- <ion-item class="message-item mt20" no-lines>
+          <div class="msg-cont">
+            <h4>多语言项目的技术难题（Java 语言）</h4>
+            <p>预算 <span class="demand-number">35,000</span> 元</p>
+            <p class="city-date-cont">
+              <span>06-12 个月</span>
+              <span>深圳市</span>
+              <span>发布时间 18/06/05</span>
+            </p>
+            <div class="demand-content-cont mt10">负责产品项目的规划与策划，监控项目的开发进度，负责解决开发过程中的技术问题。希望专家对于国内外协作机械臂运动控制这块技术发展情况有深入了解，负责解决开发过程中的技术对于这…</div>
+          </div>
+          <div class="msg-footer">
+            <span class="msg-footer-text">查看该阶段详情</span>
+            <ion-icon name="arrow-forward" class="ml12"></ion-icon>
+          </div>
+        </ion-item>
+        <ion-item class="message-item mt20" no-lines>
+            <div class="msg-cont">
+              <h4>多语言项目的技术难题（Java 语言）</h4>
+              <p>预算 <span class="demand-number">35,000</span> 元</p>
+              <p class="city-date-cont">
+                <span>06-12 个月</span>
+                <span>深圳市</span>
+                <span>发布时间 18/06/05</span>
+              </p>
+              <div class="demand-content-cont mt10">负责产品项目的规划与策划，监控项目的开发进度，负责解决开发过程中的技术问题。希望专家对于国内外协作机械臂运动控制这块技术发展情况有深入了解，负责解决开发过程中的技术对于这…</div>
+            </div>
+            <div class="msg-footer">
+              <span class="msg-footer-text">查看该阶段详情</span>
+              <ion-icon name="arrow-forward" class="ml12"></ion-icon>
+            </div>
+          </ion-item> -->
+    </ion-list>
+  
+  </ion-content>

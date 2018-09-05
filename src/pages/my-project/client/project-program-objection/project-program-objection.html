@@ -1,0 +1,26 @@
+<!--
+  Generated template for the ProjectProgramObjectionPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>我的项目/客户/提出异议</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content style="background-color: #fcfcfc;">
+  <p class="objection-tip">{{title}}</p>
+  <ion-list class="mt10">
+      <ion-item no-lines>
+          <textarea id="textareaValue" placeholder="请输入文本内容" class="item-textarea" [(ngModel)]="inputName"></textarea>
+      </ion-item>
+  </ion-list>
+  <div class="fixed-bottom">
+      <button ion-button class="btn-submit" (click)="onProgramObjectionSubmit(inputName)">提交</button>
+      <button ion-button class="btn-delete" (click)="onCancelClick()">取消</button>
+  </div>
+</ion-content>

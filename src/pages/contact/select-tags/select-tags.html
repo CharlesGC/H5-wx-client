@@ -1,0 +1,78 @@
+<!--
+  Generated template for the FormEditPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <ion-navbar>
+      <ion-title>表单编辑</ion-title>
+    </ion-navbar>
+  
+  </ion-header>
+  
+  <ion-content class="phonebind-from" style="background-color: #fcfcfc;" *ngIf="type == 'skillList'">
+      <ion-list class="mt10 mb10">
+          <ion-item no-lines>
+              <ion-input type="text" class="select-search" placeholder="请输入文本内容" [(ngModel)]="inputName" (ionChange)="onInputChange('skillList')"></ion-input>
+          </ion-item>
+      </ion-list> 
+      <div class="tags-tip">请选择行业，可在上方输入关键词快速查询</div>
+      <div class="skill-cont" *ngIf="isSkillSecondary">
+        <div class="skill-tegs1">
+          <ion-list class="select-list-item">
+              <ion-item *ngFor="let skillList_item of skillList; let i = index" (click)="onSkillSecondaryList(skillList_item,i)" [ngClass]="{'checked':skillChecked==i}">
+                {{skillList_item.text}}
+              </ion-item>
+            <ion-item no-lines>
+            </ion-item>
+          </ion-list>
+        </div>
+        <div class="skill-tegs2">
+          <ion-list class="select-list-item">
+            <ion-item *ngFor="let skillSecondaryList_item of skillSecondaryList" (click)="onSelectClick(skillSecondaryList_item)">
+              {{skillSecondaryList_item.text}}
+            </ion-item>
+            <ion-item no-lines>
+            </ion-item>
+          </ion-list>
+        </div>
+      </div>
+      <ion-list>
+        <ion-item *ngIf="inputName && skillSecondaryList.length<1" (click)="onSelectClick({id:-1,text:inputName})" no-lines>
+          <span>{{inputName}}</span>
+          <span item-end>点击添加</span>
+        </ion-item>
+      </ion-list>
+      <div class="tags-tip" *ngIf="inputName && skillSecondaryList.length<1">没有此行业标签，可以点击添加为其他类型</div>
+  </ion-content>
+  <ion-content class="phonebind-from" style="background-color: #fcfcfc;" *ngIf="type == 'industryList'">
+      <ion-list class="mt10 mb10">
+          <ion-item no-lines>
+              <ion-input type="text" class="select-search" placeholder="请输入文本内容" [(ngModel)]="inputName" (ionChange)="onInputChange('industryList')"></ion-input>
+          </ion-item>
+      </ion-list>
+      <div class="tags-tip">请选择行业，可在上方输入关键词快速查询</div>
+      <ion-list class="select-list-item">
+        <ion-item *ngFor="let select_item of selectListData" (click)="onSelectClick(select_item)">
+          {{select_item.text}}
+        </ion-item>
+        <ion-item *ngIf="inputName && selectListData.length<1" (click)="onSelectClick({id:-1,text:inputName})">
+          <span>{{inputName}}</span>
+          <span item-end>点击添加</span>
+        </ion-item>
+        <ion-item no-lines>
+        </ion-item>
+      </ion-list>
+      <div class="tags-tip" *ngIf="inputName && selectListData.length<1">没有此行业标签，可以点击添加为其他类型</div>
+  </ion-content>
+  
+  <ion-footer class="footer-btn">
+    <ion-toolbar>
+        <div class="fixed-bottom">
+            <button ion-button class="btn-submit" (click)="onSelectSubmit()">保存</button>
+            <button ion-button class="btn-delete" (click)="onSelectDel()">删除</button>
+        </div>
+    </ion-toolbar>
+  </ion-footer>

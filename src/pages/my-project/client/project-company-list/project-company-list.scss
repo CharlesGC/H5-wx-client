@@ -1,0 +1,64 @@
+page-project-company-list {
+    .select-card {
+        padding: 15px 0;
+        font-family: PingFangSC;
+        font-size: 14px;
+        font-weight: 600;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: 2rem;
+        letter-spacing: normal;
+        color: #979797;
+        margin: 15px;
+        margin-bottom: 0;
+        margin-top: 20;
+        width: calc(100% - 30px);
+        box-shadow: 0 1px 10px 0 rgba(0, 0, 0, 0.05);
+        ion-icon {
+            color: #9b9b9b;
+        }
+        &.card-item {
+            display: inline-block;
+            padding: 15px;
+            font-family: PingFangSC;
+            font-size: 14px;
+            font-weight: 600;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: normal;
+            letter-spacing: normal;
+            label {
+                width: 70px;
+                color: #4a4a4a;
+            }
+            .card-cont {
+                margin-left: 15px;
+                display: inline-block;
+                font-size: 12px;
+                font-weight: normal;
+                color: #9b9b9b;
+            }
+            .color-f46f46 {
+                color: #f46f46;
+            }
+            .company-type {
+                float: right;
+                height: 18px;
+                border-radius: 8.5px;
+                background: inherit;
+                font-size: 12px;
+                border: solid 0.7px #0c0033;
+                color: #0c0033;
+                padding: 2px 10px;
+                &.type-first {
+                    border: solid 0.7px #ff6536;
+                    color: #ff6536;
+                }
+            }
+        }
+        &.checked {
+            border: solid 0.7px #ff6536;
+        }
+    }
+
+}
