@@ -13,7 +13,7 @@ import { ConsultantWorkExpPage } from '../consultant-work-exp/consultant-work-ex
 import { ConsultantLanguageExpPage } from '../consultant-language-exp/consultant-language-exp';
 import { ConsultantEducationExpPage } from '../consultant-education-exp/consultant-education-exp'
 import { getAdviserDetailUrl } from '../../../../providers/requestUrl';
-
+import { UploadfilePage } from '../../../uploadfile/uploadfile'
 /**
  * Generated class for the ConsultantBasicPage page.
  *
@@ -116,6 +116,11 @@ export class ConsultantBasicPage {
     },error=>{
       console.log('erros===',error);
     })
+  }
+
+  /* 上传页面 */
+  gouploadfile() {
+    this.navCtrl.push(UploadfilePage)
   }
 
 }
