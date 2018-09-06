@@ -131,6 +131,7 @@ import { MamenDataProvider } from '../providers/mamen-data/mamen-data';
 /* 上传和裁剪组件 */
 import { ImageCropperComponent, CropperSettings } from 'ngx-img-cropper';
 import { FileUploadModule } from 'ng2-file-upload';
+import { UploadfilePage } from '../pages/uploadfile/uploadfile'
 
 @NgModule({
   /*申明组件*/
@@ -228,7 +229,8 @@ import { FileUploadModule } from 'ng2-file-upload';
     RecommendConsultantListPage,
     RecommendClientListPage,
 
-    ImageCropperComponent
+    ImageCropperComponent,
+    UploadfilePage
   ],
   /*引入的模块 依赖的模块*/
   imports: [
@@ -340,6 +342,7 @@ import { FileUploadModule } from 'ng2-file-upload';
 
     RecommendConsultantListPage,
     RecommendClientListPage,
+    UploadfilePage
   ],
   providers: [
     StatusBar,
