@@ -14,7 +14,7 @@
 
 
 <ion-content style="background-color: #fcfcfc;">
-    <ion-list class="bank-list" no-lines>
+    <ion-list class="bank-list" no-lines *ngIf="type == 'consultantType'">
         <ion-item class="border-left" (click)="onCollectBankClick(consultantBankList_item)" *ngFor="let consultantBankList_item of consultantBankList">
             <div class="bank-item-left">
               <p>
@@ -31,5 +31,27 @@
             </div>
           </ion-item>
       </ion-list>
-      <button ion-button expand="full" large class="fixed-bottom" (click)="goAccountEdit()">添加</button>
+      <button ion-button expand="full" large class="fixed-bottom" (click)="goAccountEdit()" *ngIf="type == 'consultantType'">添加</button>
+
+      <ion-list class="bank-list" no-lines *ngIf="type == 'clientType'">
+        <ion-item class="border-left" (click)="goPaymentInfoEdit(paymentList_item)" *ngFor="let paymentList_item of paymentListData">
+            <div class="bank-item-left">
+              <p>
+                <label>付款人</label>
+                <span class="label-cont">{{paymentList_item.name}}</span>
+              </p>
+              <p class="mt10">
+                <label>开户银行</label>
+                <span class="label-cont">{{paymentList_item.bankName}}</span>
+              </p>
+            </div>
+            <div item-right class="rigth-message">
+              <span *ngIf="paymentList_item.type==1">默认</span>
+              <ion-icon name="arrow-forward" color="#cfcfcf" class="ml12"></ion-icon>
+            </div>
+          </ion-item>
+      </ion-list>
+      <button ion-button expand="full" large class="fixed-bottom" (click)="goPaymentInfoEdit()" *ngIf="type == 'clientType'">添加</button>
+      
 </ion-content>
+

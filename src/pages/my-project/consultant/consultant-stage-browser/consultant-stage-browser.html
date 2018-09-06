@@ -33,6 +33,7 @@
             <span item-right class="item-value color-f46f46 font12" *ngIf="projectStageDetail.adviserStatus == 4">待审核</span>
             <span item-right class="item-value color-f46f46 font12" *ngIf="projectStageDetail.adviserStatus == 5">申请收款</span>
             <span item-right class="item-value color-f46f46 font12" *ngIf="projectStageDetail.adviserStatus == 6">已完成</span>
+            <span item-right class="item-value color-f46f46 font12" *ngIf="projectStageDetail.adviserStatus == 7">收款中</span>
           </ion-item>
         </ion-list>
       <ion-list class="describe-list mt10">
@@ -116,7 +117,7 @@
       </button>
       <button ion-button expand="full" large class="fixed-bottom" 
         (click)="goPaymentRecord(projectStageDetail.adviserStatus)" 
-        *ngIf="projectStageDetail.adviserStatus==5">
+        >
         提交收款申请
       </button>
       <!-- <button ion-button expand="full" large class="fixed-bottom" 

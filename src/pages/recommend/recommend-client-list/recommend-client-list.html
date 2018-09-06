@@ -5,12 +5,11 @@
   Ionic pages and navigation.
 -->
 <ion-header>
+  <ion-navbar>
+    <ion-title>我的项目/客户/顾问/列表</ion-title>
+  </ion-navbar>
+</ion-header>
 
-    <ion-navbar>
-      <ion-title>我的项目/客户/顾问/列表</ion-title>
-    </ion-navbar>
-  
-  </ion-header>
   <ion-content style="background-color: #fcfcfc;">
     <div *ngFor="let projectConsultantListData_item of projectConsultantListData;let i=index"  [ngClass]="{'mt50':i!=0}">
         <div class="title-cont">

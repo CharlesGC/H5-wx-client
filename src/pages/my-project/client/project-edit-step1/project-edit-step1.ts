@@ -39,6 +39,16 @@ export class ProjectEditStep1Page {
       }  
     this.isEdit = this.navParams.get('isEdit') || false;
   }
+  
+  ionViewDidEnter(){
+    //当页面进入初始化的时候
+    let elements = document.querySelectorAll(".tabbar");
+    if(elements != null) {
+        Object.keys(elements).map((key) => {
+            elements[key].style.display ='none';
+        });
+    }  
+  }
 
   //当退出页面的时候
   // ionViewWillLeave() {

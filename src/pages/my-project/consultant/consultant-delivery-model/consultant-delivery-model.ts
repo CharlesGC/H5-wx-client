@@ -86,7 +86,7 @@ export class ConsultantDeliveryModelPage {
   /*列表编辑*/
   goFormEditPage(field, value, type) {
     if(type == 'selectPaymentBank') {
-      this.navCtrl.push(ProjectCollectBankPage,{callback:this.setValue,field:field,data:this.deliveryModelData});
+      this.navCtrl.push(ProjectCollectBankPage,{callback:this.setValue,field:field,data:this.deliveryModelData,type:'consultantType'});
     }else{
       this.navCtrl.push(FormEditPage,{callback:this.setValue,value:value,field:field,type:type});
     }

@@ -23,7 +23,7 @@ export class TabsPage {
   tab5Root = ContactPage;
   public isshow = false;
   constructor() {
-
+    this.tab4Root = RecommendConsultantListPage
   }
   // ionViewDidLoad() {
   //   console.log('执行！~~');
@@ -45,9 +45,31 @@ export class TabsPage {
       this.tab4Root = RecommendClientListPage;
     }
   }
+  
+  // ngOnchanges(){
+  //   console.log("父组件ngonchanges");
+  // }
+  // ngDoCheck (){
+  //   console.log("父组件ngDocheck")
+  // }
+  // ngAfterContentInit(){
+  //   console.log("父组件ngAfterContentInit")
+  // }
+  // ngAfterContentChecked(){
+  //   console.log("父组件ngAfterContentChecked")
+  // }
+  // ngAfterViewInit(){
+  //   console.log("父组件ngAfterViewInit")
+  // }
+  // ngAfterViewChecked(){
+  //   console.log("父组件ngAfterViewChecked")
+  // }
+  // ngAfterViewInt(){
+  //   console.log('改变时执行~~');
+  // }
 
   ionViewDidEnter(){
-    console.log('进行')
+    console.log('进行~~~~~~~~~~~~')
     const user = window.sessionStorage.getItem('user') ? JSON.parse(window.sessionStorage.getItem('user')) : {};
     // user.type == 0
     if(user.type == 1){

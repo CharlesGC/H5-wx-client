@@ -168,8 +168,17 @@ getoutstandingInfo () {
     
   //进入时执行
   ionViewDidEnter() {
+    let elements = document.querySelectorAll(".tabbar");
+    console.log(elements,'=======')
+    if(elements != null) {
+        Object.keys(elements).map((key) => {
+            elements[key].style.display ='flex';
+        });
+    }
     const token = this.getUrlParam('token');
     const usertype = this.getUrlParam('status');
+    const openId = this.getUrlParam('openId');
+    openId && window.localStorage.setItem('openId',openId);
     console.log(token,usertype,9999999);
     if(token) {
       console.log('获取 ', usertype);

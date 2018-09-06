@@ -69,7 +69,7 @@ export class ProjectPaymentRecordPage {
   /*列表编辑*/
   goFormEditPage(field, value, type) {
     if(type == 'selectPaymentBank') {
-      this.navCtrl.push(ProjectCollectBankPage,{callback:this.setValue,field:field,data:this.paymentRecordData});
+      this.navCtrl.push(ProjectCollectBankPage,{callback:this.setValue,field:field,data:this.paymentRecordData,type:'clientType'});
     }else{
       this.navCtrl.push(FormEditPage,{callback:this.setValue,value:value,field:field,type:type});
     }

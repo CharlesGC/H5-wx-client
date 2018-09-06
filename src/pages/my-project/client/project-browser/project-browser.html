@@ -28,8 +28,8 @@
                 <label class="ml25">所有顾问（{{projectSignCount.allCount}}） </label>
                 <ion-icon name="arrow-forward" item-right (click)="isShow=!isShow"></ion-icon>
             </ion-item>
-            <ion-item class="nav-menu-item" (click)="onNavMenuItemClick(1,'待查看',0)">
-                <label class="ml25">待查看（{{projectSignCount.toBeViewedCount}}） </label>
+            <ion-item class="nav-menu-item" (click)="onNavMenuItemClick(1,'已推荐',0)">
+                <label class="ml25">已推荐（{{projectSignCount.recommendedCount}}） </label>
                 <ion-icon name="arrow-forward" item-right (click)="isShow=!isShow"></ion-icon>
             </ion-item>
             <ion-item class="nav-menu-item" (click)="onNavMenuItemClick(1,'待面试',1)">

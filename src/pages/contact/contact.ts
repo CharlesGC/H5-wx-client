@@ -35,7 +35,7 @@ export class ContactPage {
   }
 
   ionViewDidLoad(){
-    const openId = window.sessionStorage.getItem('openId') || this.getUrlParam('openId');
+    const openId = window.sessionStorage.getItem('openId') || this.getUrlParam('openId') || window.localStorage.getItem('openId');;
     if(!openId) {
       this.onLogin();
     }else{
@@ -101,9 +101,7 @@ export class ContactPage {
   //跳转到个人信息（客户）
   goClientBasic() {
     const user = window.sessionStorage.getItem('user') ? JSON.parse(window.sessionStorage.getItem('user')) : {};
-    console.log(user,123123);
     if(user.type == 1){
-      // this.navCtrl.push(ClientBasicPage,{user:user});
       this.navCtrl.push(ConsultantBasicPage);
     }else if(user.type == 0){
       this.navCtrl.push(ClientBasicPage,{user:user});
@@ -111,22 +109,25 @@ export class ContactPage {
   }
 
   ionViewDidEnter() {
-    const openId = window.sessionStorage.getItem('openId') || this.getUrlParam('openId');
-    const user = window.sessionStorage.getItem('user') ? JSON.parse(window.sessionStorage.getItem('user')) : {};
+    const openId = window.sessionStorage.getItem('openId') || this.getUrlParam('openId') || window.localStorage.getItem('openId');
+    const user = window.sessionStorage.getItem('user') ? JSON.parse(window.sessionStorage.getItem('user')) : {status:1};
     const usertype = window.sessionStorage.getItem('status') ? Number(window.sessionStorage.getItem('status')) : this.getUrlParam('status');
-    const code = this.getUrlParam('code');
-    
+
     if(openId){
+      window.sessionStorage.setItem('openId',openId);
+      window.localStorage.setItem('openId',openId);
       this.getUserInfo(openId);
     }
-    if(openId) {
-      window.sessionStorage.setItem('openId',openId)
-      if(Number(user.status) == 1){
-        this.navCtrl.push(ChooseIdentityPage);
-      }else if(Number(user.status) == 2) {
-        this.navCtrl.push(ChooseIdentityPage);
-      }
-    }
+    // if(openId) {
+    //   window.sessionStorage.setItem('openId',openId);
+    //   if(Number(user.status) == 1){
+    //     this.navCtrl.push(ChooseIdentityPage);
+    //   }else if(Number(user.status) == 2) {
+    //     this.navCtrl.push(ChooseIdentityPage);
+    //   }else{
+    //     this.getUserInfo(openId);
+    //   }
+    // }
     if(openId && user) {
       this.isLogin = true;
       this.user = user
@@ -134,15 +135,18 @@ export class ContactPage {
   }
 
   getUserInfo(openId) {
-    // let token = window.sessionStorage.getItem('token');
     // let chooseIdentyUrl = 'http://mamon.yemindream.com/mamon/wechat/getUserByopenId?';
     // chooseIdentyUrl = chooseIdentyUrl + 'token=' + token + '&type=' + this.userType[this.relationship];
+
     let chooseIdentyUrl = getUserByopenIdUrl + '?openId=' + openId;
     this.Provider.getMamenSwiperData(chooseIdentyUrl).subscribe(res=>{
       if(res.code==200) {
+        this.user = res.data;
+        if(!this.user || this.user['status'] == 1 || this.user['status'] == 2){
+          this.navCtrl.push(ChooseIdentityPage);
+        }
         window.sessionStorage.setItem('user',JSON.stringify(res.data))
         window.localStorage.setItem('user',JSON.stringify(res.data));
-        this.user = res.data;
       }else if(res.code == 207) {
         window.localStorage.removeItem('openId');
       }
