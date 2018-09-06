@@ -33,14 +33,17 @@ export class ContactPage {
   constructor(public navCtrl: NavController,private Provider:MamenDataProvider,public loadingCtrl:LoadingController) {
     
   }
+
   ionViewDidLoad(){
-    console.log(getUserByopenIdUrl,'------======---------');
     const openId = window.sessionStorage.getItem('openId') || this.getUrlParam('openId');
     if(!openId) {
       this.onLogin();
+    }else{
+      this.getUserInfo(openId);
     }
     
   }
+
   itemSelected(item){
 
   }
@@ -117,10 +120,10 @@ export class ContactPage {
       this.getUserInfo(openId);
     }
     if(openId) {
-      if(Number(usertype) == 1){
-        window.sessionStorage.setItem('openId',openId)
+      window.sessionStorage.setItem('openId',openId)
+      if(Number(user.status) == 1){
         this.navCtrl.push(ChooseIdentityPage);
-      }else if(Number(usertype) == 2) {
+      }else if(Number(user.status) == 2) {
         this.navCtrl.push(ChooseIdentityPage);
       }
     }
@@ -138,6 +141,7 @@ export class ContactPage {
     this.Provider.getMamenSwiperData(chooseIdentyUrl).subscribe(res=>{
       if(res.code==200) {
         window.sessionStorage.setItem('user',JSON.stringify(res.data))
+        window.localStorage.setItem('user',JSON.stringify(res.data));
         this.user = res.data;
       }else if(res.code == 207) {
         window.localStorage.removeItem('openId');
@@ -152,11 +156,12 @@ export class ContactPage {
     var isWeixin = ua.indexOf('micromessenger') != -1;
     if (isWeixin) {
       const appid = 'wxc7d4e3e94ad5b330';
-      const code = this.getUrlParam('code');
+      const code = this.getUrlParam('code') || window.localStorage.getItem('code');
       const local = window.location.href;
       if(code == null || code == '') {
         window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid='+appid + '&redirect_uri=http://mamon.yemindream.com/mamon/wechat/getWxOpenid&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect';
       }else{
+        window.localStorage.setItem('code',code);
         let url = 'http://mamon.yemindream.com/mamon/wechat/getWxOpenid?code=' +code;
         this.Provider.getMamenSwiperData(url).subscribe(res=>{
           console.log(res,'-----------');

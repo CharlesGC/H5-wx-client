@@ -36,7 +36,7 @@ export class ClientInfoEditPage {
   }
   ionViewDidEnter() {
     //进行判断（在返回要重新拉取数据时回调）
-    this.getCompanyDetailData();
+    // this.getCompanyDetailData();
   }
 
   /*跳转到付款人页面*/

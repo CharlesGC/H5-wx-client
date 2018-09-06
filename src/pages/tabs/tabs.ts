@@ -45,4 +45,23 @@ export class TabsPage {
       this.tab4Root = RecommendClientListPage;
     }
   }
+
+  ionViewDidEnter(){
+    console.log('进行')
+    const user = window.sessionStorage.getItem('user') ? JSON.parse(window.sessionStorage.getItem('user')) : {};
+    // user.type == 0
+    if(user.type == 1){
+      this.isshow = false;
+    }else if(user.type == 0){
+      this.isshow = true;
+    }
+    // this.tab4Root = RecommendClientListPage;
+    console.log(user.type,'tabs')
+    if(user.type == 1){
+      this.tab4Root = RecommendConsultantListPage
+    }else if(user.type == 0){
+      this.tab4Root = RecommendClientListPage;
+    }
+  }
+
 }

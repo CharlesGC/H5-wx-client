@@ -47,7 +47,7 @@ export class ClientPaymentInfoPage {
   getpaymentListData() {
     let companyDetaiData = this.companyDetaiData;
     // let getpaymentListUrl = 'http://mamon.yemindream.com/mamon/company/getPayerList';
-    const openId = window.sessionStorage.getItem('openId')|| this.getUrlParam('openId') ||'o2GZp1Gsud1OVuaw5AH_e28m3kOw'
+    const openId = window.sessionStorage.getItem('openId')|| this.getUrlParam('openId');
     let getpaymentListUrl = getPayerListUrl + '?openId=' + openId + '&cid=' + (companyDetaiData['cid']||0);
     this.Provider.getMamenSwiperData(getpaymentListUrl).subscribe(res=>{
       if(res.code==200) {
