@@ -128,6 +128,10 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { MamenDataProvider } from '../providers/mamen-data/mamen-data';
 
+/* 上传和裁剪组件 */
+import { ImageCropperComponent, CropperSettings } from 'ngx-img-cropper';
+import { FileUploadModule } from 'ng2-file-upload';
+
 @NgModule({
   /*申明组件*/
   declarations: [   
@@ -223,6 +227,8 @@ import { MamenDataProvider } from '../providers/mamen-data/mamen-data';
 
     RecommendConsultantListPage,
     RecommendClientListPage,
+
+    ImageCropperComponent
   ],
   /*引入的模块 依赖的模块*/
   imports: [
@@ -234,7 +240,9 @@ import { MamenDataProvider } from '../providers/mamen-data/mamen-data';
     IonicModule.forRoot(MyApp,{
       tabsHideOnSubPages: 'true', //隐藏全部子页面
       backButtonText: '返回'  //配置返回按钮
-    })
+    }),
+
+    FileUploadModule
     
   ],
   /*启动的模块*/
