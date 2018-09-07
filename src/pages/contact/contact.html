@@ -76,7 +76,7 @@
   </ion-list> -->
   <ion-list class="contact-list mt20">
       <ion-item class="" (click)="goMyProjectPage()">
-        <ion-icon class="left-icon" name="list-box" start isActive></ion-icon>
+        <ion-icon class="left-icon" name="project" start isActive></ion-icon>
         <span class="left-title">我的项目</span>
         <div item-right class="rigth-message">
           <span>{{user.projectCount || 0}} 个的项目</span>
@@ -84,7 +84,7 @@
         </div>
       </ion-item>
       <ion-item class="" no-lines (click)="goMessageCenterPage()">
-        <ion-icon class="left-icon" name="mail" start isActive="true"></ion-icon>
+        <ion-icon class="left-icon" name="message" start isActive="true"></ion-icon>
         <span class="left-title">推送通知</span>
         <div item-right class="rigth-message">
           <span>{{user.messageCount || 0}} 条新的通知</span>
@@ -107,22 +107,22 @@
 
   <ion-list class="contact-list mt10">
       <ion-item class="" (click)="goSetAccount()">
-        <ion-icon class="left-icon" name="settings" isActive="true"></ion-icon>
+        <ion-icon class="left-icon" name="setting" isActive="true"></ion-icon>
         <span class="left-title">账号设置</span>
         <div item-right><ion-icon name="arrow-forward" color="ion-gray"></ion-icon></div>
       </ion-item>
       <ion-item class="" >
-        <ion-icon class="left-icon" name="mail" start isActive="true"></ion-icon>
+        <ion-icon class="left-icon" name="tele" start isActive="true"></ion-icon>
         <span class="left-title">联系我们</span>
         <div item-right><ion-icon name="arrow-forward" color="ion-gray"></ion-icon></div>
       </ion-item>
       <ion-item class="">
-        <ion-icon class="left-icon" name="mail" start isActive="true"></ion-icon>
+        <ion-icon class="left-icon" name="comm" start isActive="true"></ion-icon>
         <span class="left-title">使用帮助</span>
         <div item-right><ion-icon name="arrow-forward" color="ion-gray"></ion-icon></div>
       </ion-item>
       <ion-item class=""no-lines>
-          <ion-icon class="left-icon" name="mail" start isActive="true"></ion-icon>
+          <ion-icon class="left-icon" name="info" start isActive="true"></ion-icon>
           <span class="left-title">关于我们</span>
           <div item-right><ion-icon ios="ios-arrow-forward" md="md-arrow-forward" color="ion-gray"></ion-icon></div>
         </ion-item>

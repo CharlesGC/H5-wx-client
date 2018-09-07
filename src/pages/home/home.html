@@ -1,4 +1,4 @@
-<ion-content id="content">
+<ion-content class="content">
   <!-- 轮播图部分 -->
   <div>
     <ion-slides pager class="swiper_content" does-continue="true" auto-play="true" loop="true" slide-interval=2000>
@@ -22,9 +22,7 @@
         <h4>麦盟顾问 - 行业</h4>
         <div (click)="goToOtherPage('','','indeustry')">
           <span>更多</span>
-          <span>
-            <ion-icon name="arrow-forward"></ion-icon>
-          </span>
+          <ion-icon name="arrow-forward"></ion-icon>
         </div>
       </div>
       <div>
@@ -46,9 +44,7 @@
         <h4>麦盟顾问 - 技能</h4>
         <div>
           <span (click)="InfoskillMore('','','skill')">更多</span>
-          <span>
-            <ion-icon name="arrow-forward"></ion-icon>
-          </span>
+          <ion-icon name="arrow-forward"></ion-icon>
         </div>
       </div>
       <div>
@@ -70,9 +66,7 @@
         <h4>行业翘楚</h4>
         <div (click)="goToOtherPage()">
           <span>更多</span>
-          <span>
-            <ion-icon name="arrow-forward"></ion-icon>
-          </span>
+          <ion-icon name="arrow-forward"></ion-icon>
         </div>
       </div>
       <div class="qu_u">
@@ -89,7 +83,7 @@
                 </li>
               </ul>
             </div>
-            <div class="text_jinyan">工作经验：{{item.workingYears || '0年'}}</div>
+            <div class="text_jinyan">工作经验：{{item.workingYears || '0年'}}年</div>
             <p class="qiaochu-duc">{{item.introduction}}</p>
           </div>
         </li>
@@ -109,7 +103,7 @@
   <div class="contant-finance">
     <div class="title-cont">
       <h4>财务审计顾问</h4>
-      <div (click)="goToOtherPage()">
+      <div (click)="financemore('','','financemore')">
         <span>更多</span>
         <span>
           <ion-icon name="arrow-forward"></ion-icon>
@@ -117,7 +111,7 @@
       </div>
     </div>
     <ion-list>
-      <ion-item *ngFor="let finance_item of financesArrLength" style="white-space:normal;">
+      <ion-item *ngFor="let finance_item of financesArrLength" style="white-space:normal;" (click)="goProjectBower(finance_item,i)">
         <div class="contant-item">
           <div class="contant-item-left" item-start>
             <img [src]="finance_item.avatar" class="item-img">
@@ -131,6 +125,7 @@
             <p>
               <span>工作经验：</span>
               <span>{{finance_item.workingYears}}</span>
+              <span>年</span>
             </p>
           </div>
         </div>
@@ -144,13 +139,11 @@
         <h4>麦盟案例</h4>
         <div (click)="goToOtherPage()">
           <span>更多</span>
-          <span>
-            <ion-icon name="arrow-forward"></ion-icon>
-          </span>
+          <ion-icon name="arrow-forward"></ion-icon>
         </div>
       </div>
       <div class="case_img">
-        <ion-slides pager class="swiper_content" does-continue="true" auto-play="true" loop="true" slide-interval=2000>
+        <ion-slides pager class="swiper_content1" does-continue="true" auto-play="true" loop="true" slide-interval=2000>
           <ion-slide *ngFor="let item of caseArr" class="case_swiper">
             <div class="swiper_img">
               <img src="{{item.bannerUrl}}" />
@@ -172,15 +165,13 @@
   <div class="contant-cont">
     <div class="title-cont">
       <h4>全部顾问</h4>
-      <div (click)="goToOtherPage()">
+      <div (click)="FinancCount('','','finance-count')">
         <span>更多</span>
-        <span>
-          <ion-icon name="arrow-forward"></ion-icon>
-        </span>
+        <ion-icon name="arrow-forward"></ion-icon>
       </div>
     </div>
     <ion-list>
-      <ion-item *ngFor="let financeAll_item of financeAllArrlength" style="white-space:normal;">
+      <ion-item *ngFor="let financeAll_item of financeAllArrlength" style="white-space:normal;" (click)="financeAllList(financeAll_item,i)">
         <div class="contant-item">
           <div class="contant-item-left" item-start>
             <img [src]="financeAll_item.avatar" class="item-img">
@@ -194,6 +185,7 @@
             <p>
               <span>工作经验：</span>
               <span>{{financeAll_item.workingYears}}</span>
+              <span>年</span>
             </p>
           </div>
         </div>

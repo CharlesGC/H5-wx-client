@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { MamenDataProvider } from '../../../../providers/mamen-data/mamen-data';
 import { getAdviserDetailUrl, getApplicationDeatilUrl, changeApplicationStatusUrl } from '../../../../providers/requestUrl';
-
+import { ProjectEditStep1Page } from '../project-edit-step1/project-edit-step1';
 /**
  * Generated class for the ProjectConsultantBrowserPage page.
  *
@@ -19,6 +19,7 @@ export class ProjectConsultantBrowserPage {
   public Selected:any;
   public consultantDetails={}
   public applicationDeatil={};
+  public ishome='';
   constructor(public navCtrl: NavController, public navParams: NavParams,private Provider:MamenDataProvider) {
     this.Selected =0;
   }
@@ -27,8 +28,14 @@ export class ProjectConsultantBrowserPage {
     console.log('ionViewDidLoad ProjectConsultantBrowserPage');
     let uid = this.navParams.get('uid');
     let pid = this.navParams.get('pid');
-    this.getProjectListData(uid)
-    this.getApplicationDeatil(uid,pid);
+    this.ishome = this.navParams.get('type');
+    if(this.ishome == 'homepage') {
+      this.getProjectListData(uid)
+    }else{
+      this.getProjectListData(uid)
+      this.getApplicationDeatil(uid,pid);
+    }
+    
   }
 
   /*点击选中*/
@@ -101,6 +108,12 @@ export class ProjectConsultantBrowserPage {
     },error=>{
       console.log('erros===',error);
     })
+  }
+
+  /*向顾问发起项目*/
+  goProjectStart(){
+    let uid = this.navParams.get('uid');
+    this.navCtrl.push(ProjectEditStep1Page,{uid:uid,isEdit:true});
   }
 
 }

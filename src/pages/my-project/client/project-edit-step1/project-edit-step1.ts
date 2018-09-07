@@ -31,13 +31,16 @@ export class ProjectEditStep1Page {
     console.log('ionViewDidLoad ProjectEditStep1Page');
     this.projectData = this.navParams.get('projectData') || {};
     //当页面进入初始化的时候
-      let elements = document.querySelectorAll(".tabbar");
-      if(elements != null) {
-          Object.keys(elements).map((key) => {
-              elements[key].style.display ='none';
-          });
-      }  
+    let elements = document.querySelectorAll(".tabbar");
+    if(elements != null) {
+        Object.keys(elements).map((key) => {
+            elements[key].style.display ='none';
+        });
+    }  
     this.isEdit = this.navParams.get('isEdit') || false;
+    if(this.navParams.get('uid')){
+      this.projectData['uid'] = this.navParams.get('uid');
+    }
   }
   
   ionViewDidEnter(){
@@ -109,6 +112,9 @@ export class ProjectEditStep1Page {
                               '&principalEmail='+projectData['principalEmail'];
     if(pid) {
       projectStageDetailUrl = projectStageDetailUrl + '&pid=' + pid;
+    }
+    if(projectData['uid']){
+      //projectStageDetailUrl = projectStageDetailUrl + '&uid=' + projectData['uid'];
     }
     this.Provider.getMamenSwiperData(projectStageDetailUrl).subscribe(res=>{
       if(res.code==200) {

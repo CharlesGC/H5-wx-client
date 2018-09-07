@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {MamenDataProvider} from '../../providers/mamen-data/mamen-data';
-import { getindustryUrl,getskillUrl,getskilltwoUrl,getSearch,getdetialSearch} from '../../providers/dataUrl';
+import { getindustryUrl,getskillUrl,getskilltwoUrl,getSearch,getdetialSearch,getfinanceAllUrl,getfinanceUrl} from '../../providers/dataUrl';
 
 @IonicPage()
 @Component({
@@ -14,11 +14,11 @@ export class IndustrydetialPage {
   public SkillLabelMoreArr:any;
   public SkillLabelTwoArr:any;
   public selectField:any;
-  public pageNum = 0;//页数
-  public pageSize = 6;//每页个数
+  public pageNum:any;//页数
+  public pageSize:any;//每页个数
   public enabled:boolean;//能否上拉加载
-  public isIndustry = false;
-  public isSkill =false;
+  public isIndustry = true;
+  public isSkill =true;
   public IndustrySearchData = [];
   public infoSkillMore = [];
   public SearchData = [];
@@ -37,10 +37,16 @@ export class IndustrydetialPage {
   public secondSkillId:number;
   public industryNameChecked:any;
   public skiiNameChecked:any;
+  public dataType:any;
   public type:any;
+  public type1:any;
+  public searchType:any;
+  public financeAllArr = [];
+  public financesArr = [];
   constructor(public navCtrl: NavController, public navParams: NavParams,public IndustryMoreData:MamenDataProvider,
     public SkillLabelMoreData:MamenDataProvider,
-    public Skilltwolabel:MamenDataProvider,public IndustrySearch:MamenDataProvider,public DetialSearch:MamenDataProvider  ) {
+    public Skilltwolabel:MamenDataProvider,public IndustrySearch:MamenDataProvider,
+    public DetialSearch:MamenDataProvider,public financedata: MamenDataProvider ) {
       let name = navParams.get('name')
       this.industryNameChecked =name;
       this.IndustryName['industryName']= name;
@@ -50,13 +56,13 @@ export class IndustrydetialPage {
       this.skilldoubleData['fName'] = name1;
       console.log(this.skilldoubleData['fName'],'技能1111');
 
-      this.type = this.navParams.get('type');
-      console.log(this.type,'this.type111');
+      // this.type = this.navParams.get('type');
+      // console.log(this.type,'this.type111');
       // this.type=''
   }
   ionViewDidLoad() {
-    this.getinstudryListData();
-    this.getSkillMoreData();
+    // this.getinstudryListData();
+    // this.getSkillMoreData();
     
     // this.getSecondaryData('');
     //this.doRefresh('');
@@ -64,17 +70,24 @@ export class IndustrydetialPage {
     this.type = this.navParams.get('type');
     console.log(this.type,'typetypetypetypetype')
     if(this.type == 'indeustry') {
-      this.getLabelMore();
+      this.getLabelMore(this.dataType = 1,this.pageNum=0,this.pageSize=6);
     }else {
-      this.getSkillCheckd();
+      this.getSkillCheckd(this.dataType = 1,this.pageNum=0,this.pageSize=6);
+    }
+    if (this.type == 'finance-count') {
+      this.getfinanceAllInfo();
+    }
+    if(this.type == 'financemore') {
+      this.getfinanceInfo();
     }
   }
   // 行业更多数据
-  getLabelMore() {
-    this.IndustryMoreData.getIndustryMoreData(getindustryUrl,1,this.pageNum,this.pageSize).subscribe(
+  getLabelMore(industryType,pageNum,pageSize) {
+    this.IndustryMoreData.getIndustryMoreData(getindustryUrl,industryType,pageNum,pageSize).subscribe(
       res=>{
         if(this.industryNameChecked == undefined) {
           this.IndustrydetialArr = res.data.list;
+          console.log(this.IndustrydetialArr,'行业更多数据');
         }else {
           for(var i =0;i < res.data.list.length;i++){
             if(res.data.list[i].industryName == this.industryNameChecked){
@@ -88,19 +101,45 @@ export class IndustrydetialPage {
     )
   }
   // 技能更多
-  getSkillCheckd() {
-    this.SkillLabelMoreData.getSkillLabelMoreData(getskillUrl,1,this.pageNum,this.pageSize).subscribe(
+  getSkillCheckd(Skilltype,pageNum,pageSize) {
+    this.SkillLabelMoreData.getSkillLabelMoreData(getskillUrl,Skilltype,pageNum,pageSize).subscribe(
       res=>{
         if(this.skiiNameChecked == undefined) {
-          this.infoSkillMore = res.data.list;
+          this.IndustrydetialArr = res.data.list;
+          console.log(this.IndustrydetialArr,'技能更多')
         }else {
           for(var i =0;i < res.data.list.length;i++){
             if(res.data.list[i].fName == this.skiiNameChecked){
-              this.infoSkillMore.push(res.data.list[i]);
+              this.IndustrydetialArr.push(res.data.list[i]);
             }
           }
         }
       },error=>{
+        console.log(error);
+      }
+    )
+  }
+  // 财务审计
+  getfinanceInfo() {
+    this.financedata.getfinanceData(getfinanceUrl,1,1,999).subscribe(
+      res => {
+        console.log(res);
+        this.financeAllArr = res.data
+        console.log(this.financeAllArr,'财务审计');
+      }, error => {
+        console.log(error);
+      }
+    )
+  }
+  // 全部顾问更多
+  getfinanceAllInfo() {
+    this.financedata.getindustryAllData(getfinanceAllUrl,1,1,999).subscribe(
+      res => {
+        console.log(1111)
+        console.log(res);
+        this.financeAllArr = res.data
+        console.log(this.financeAllArr,'全部顾问');
+      }, error => {
         console.log(error);
       }
     )
@@ -163,57 +202,55 @@ export class IndustrydetialPage {
     )
   }
   // 点击搜索按钮
-  searchLabel (search) {
+  searchLabel (search,type) {
+    this.searchType = type;
+    console.log(this.searchType,'searchTypesearchTypesearchTypesearchType')
     this.search = search;
-    this.getSearchDetail(this.search);
-    // console.log(search,'搜索字段');
-    this.isFiltersearch = false;
-    this.isSearch = true;
+    if(this.searchType == 'itemsearch') {
+      this.getSearchDetail(this.search);
+    }
   }
   // 行业标签下拉
   downindustryShow() {
     this.isIndustry = !this.isIndustry;
-    this.isSkill = false;
+    this.isSkill = true;
+    // this.getLabelMore(this.dataType =2,this.pageNum = 1,this.pageSize = 999);
+    this.getinstudryListData();
+
+  }
+  // 技能下拉
+  downSkill() {
+    this.isSkill =  !this.isSkill;
+    this.isIndustry = true;
+    // this.getSkillCheckd(this.dataType=2,this.pageNum=1,this.pageSize=999);
+    this.getSkillMoreData();
   }
   // 获取行业筛选数据
   getSearchadviser(industryId,firstSkillId,secondSkillId) {
     this.IndustrySearch.getSearchAdviserList(getSearch,industryId,firstSkillId,secondSkillId).subscribe(
       res=>{
         this.IndustrySearchData = res.data;
-        console.log(this.IndustrySearchData)
+        console.log(this.IndustrySearchData);
       },error=>{
         console.log(error);
       }
     )
   }
-  // 技能下拉
-  downSkill() {
-    this.isSkill =  !this.isSkill;
-    this.isIndustry = false;
-  }
   //获取行业标签
   getinstudryListData() {
     // let getpaymentListUrl = 'http://mamon.yemindream.com/mamon/index/getIndustry';
-    this.IndustryMoreData.getIndustryMoreData(getindustryUrl,2,1,999).subscribe(
+    this.IndustryMoreData.getIndustryMoreData(getindustryUrl,1,1,999).subscribe(
         res=>{
           this.IndustryTotal = res.data.list;
+          console.log( this.IndustryTotal);
         },error=>{
           console.log(error);
         }
       )
   }
-  // 点击选择行业
-  selsectIndustry(value,index) {
-    this.skillChecked = index;
-    this.IndustryName = value;
-    this.isIndustry = false;
-    this.getSearchadviser(this.industryId=1,this.firstSkillId=0,this.secondSkillId=0);
-    this.isSearch = false;
-    this.isFiltersearch = true;
-  }
-   //获取技能标签
-   getSkillMoreData () {
-    this.SkillLabelMoreData.getSkillLabelMoreData(getskillUrl,1,1,999).subscribe(
+  // // 获取技能标签
+  getSkillMoreData () {
+    this.SkillLabelMoreData.getSkillLabelMoreData(getskillUrl,2,1,999).subscribe(
       res=>{
         this.SkillLabelMoreArr = res.data.list;
         console.log(this.SkillLabelMoreArr,'行业技能');
@@ -234,6 +271,16 @@ export class IndustrydetialPage {
       }
     )
   }
+  // 点击选择行业
+  selsectIndustry(value,index) {
+    this.skillChecked = index;
+    this.IndustryName = value;
+    this.isIndustry = true;
+    this.getSearchadviser(this.industryId=1,this.firstSkillId=0,this.secondSkillId=0);
+  }
+   
+   
+  
   // 点击全部领域
   // allSkill(value,index) {
   //   this.skillAll = value;
@@ -263,7 +310,7 @@ export class IndustrydetialPage {
   infoSelectClick (value,index) {
     this.inputValue = value;
     this.skillBgcolor = index;
-    this.isSkill = false;
+    this.isSkill = true;
     this.isSearch = false;
     this.isFiltersearch = true;
     this.getSearchadviser(this.industryId=0,this.firstSkillId=1,this.secondSkillId=3);

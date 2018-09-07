@@ -1,5 +1,5 @@
 import { Http } from '@angular/http';
-import { Injectable } from '@angular/core';
+import { Injectable, AnimationStyles } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 /*
@@ -75,8 +75,8 @@ export class MamenDataProvider {
 		.catch(error=>Observable.throw(error||'Server error'));//抛出异常
   }
   // 财务审计
-  public getfinanceData(dataUrl:string,type:number){
-		return this.http.get(dataUrl + "?type=" +type).map(res=>res.json())
+  public getfinanceData(dataUrl:string,type:any,pageNum:any,pageSize:any){
+		return this.http.get(dataUrl + "?type=" +type+'&pageNum='+pageNum+'&pageSize='+pageSize).map(res=>res.json())
 		.catch(error=>Observable.throw(error||'Server error'));//抛出异常
   }
   /*公司选择*/ 
@@ -129,8 +129,8 @@ export class MamenDataProvider {
   }
 
   // 全部顾问
-  public getindustryAllData(dataUrl,page=0,pageSize=6,type=0){
-		return this.http.get(dataUrl+'&page='+page+'&pageSize='+pageSize,"?type=" +type).map(res=>res.json())
+  public getindustryAllData(dataUrl,type:any,page:any,pageSize:any){
+		return this.http.get(dataUrl+"?type=" +type+'&page='+page+'&pageSize='+pageSize).map(res=>res.json())
 		.catch(error=>Observable.throw(error||'Server error'));//抛出异常
   }
 }

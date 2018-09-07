@@ -13,7 +13,7 @@
 </ion-header>
 
 <ion-content style="background-color: #fcfcfc;">
-  <ion-list class="select-card">
+  <ion-list class="select-card"  *ngIf="!ishome">
     <div class="select-card-div" [ngClass]="{'checked':Selected==0}" (click)="onSelectClick(0)"><span>顾问详情</span></div>
     <div class="select-card-div" [ngClass]="{'checked':Selected==1}" (click)="onSelectClick(1)"><span>项目申请</span></div>
   </ion-list>
@@ -261,4 +261,5 @@
       <button ion-button class="btn-submit" (click)="onInterviewOrGnoreSubmit(4)">确认该顾问</button>
       <button ion-button class="btn-delete" (click)="onInterviewOrGnoreSubmit(3)">拒绝该顾问</button>
   </div>
+  <button ion-button expand="full" large class="fixed-bottom" (click)="goProjectStart()" *ngIf="ishome == 'homepage'">发起项目邀请</button>
 </ion-content>
