@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>主页/筛选顾问/专长领域x所在行业</ion-title>
+    <ion-title>顾问筛选</ion-title>
   </ion-navbar>
 </ion-header>
 <ion-content class="content">
@@ -15,7 +15,7 @@
       <ion-item>
         <div class="search_content">
           <span class="item-input-wrapper">
-            <input id="search" type="search" placeholder="请输入" [(ngModel)]="value" autofocus="autofocus">
+            <input type="search" placeholder="请输入" [(ngModel)]="value" autofocus="autofocus">
             <div class="border"></div>
           </span>
           <span class="item-search" (click)="searchLabel(value,'itemsearch')">
@@ -26,17 +26,17 @@
       <ion-item>
         <!-- 行业下拉 -->
         <div class="item-select">
-          <div class="item-input" (click)="downindustryShow()">
-            <span *ngIf="IndustryName.industryName == undefined">请选择</span>
+          <div class="item-input" (click)="downindustryShow('downindustry')">
+            <span *ngIf="IndustryName.industryName == undefined">请选择行业</span>
             <span *ngIf="IndustryName.industryName != undefined" style="color: #ff6536">{{IndustryName.industryName}}</span>
             <span>
               <ion-icon name="arrow-down-outline"></ion-icon>
             </span>
           </div>
           <!-- 技能下拉 -->
-          <div class="item-input" (click)="downSkill()">
-            <span *ngIf="skilldoubleData.fName == undefined" style="padding-left: 15px;">请选择</span>
-            <span *ngIf="skilldoubleData.fName != undefined" class="SecondarySkill" style="color: #ff6536;padding-left: 15px;">{{skilldoubleData.fName}}•{{inputValue.sName}}</span>
+          <div class="item-input border" (click)="downSkill('downSkill')" >
+            <span *ngIf="skilldoubleData.fName == undefined">请选择领域</span>
+            <span *ngIf="skilldoubleData.fName != undefined" class="SecondarySkill" style="color: #ff6536;">{{skilldoubleData.fName}}•{{inputValue.sName}}</span>
             <!-- <span *ngIf ="skilldoubleData.fName !== '' ">{{skilldoubleData.fName}}</span> -->
             <!-- <span *ngIf ="skillAll !== '' ">{{skillAll}}</span> -->
             <span>
@@ -47,19 +47,19 @@
       </ion-item>
     </ion-list>
     <!-- 行业标签选择 -->
-    <ion-list class="indeuList" [hidden]="isIndustry">
+    <ion-list class="indeuList" [hidden]="isIndustryLabel">
       <ion-item (click)="selsectIndustry('')" [ngClass]="{'checked':skillChecked==i}">全部行业</ion-item>
       <ion-item *ngFor="let industryList of IndustryTotal;let i = index" class="industryList-item" [ngClass]="{'checked':skillChecked==i}"
-        (click)="selsectIndustry(industryList,i)">
+        (click)="selsectIndustry(industryList,i,'isIndustry')">
         {{industryList.industryName}}
       </ion-item>
     </ion-list>
     <!-- 技能标签选择 -->
-    <div class="skill-count" [hidden]="isSkill">
+    <div class="skill-count" [hidden]="skillLabel">
       <div class="skill-list1">
         <ion-list>
           <ion-item (click)="infoSecondarySkill('全部领域')" [ngClass]="{'checked':skillChecked==i}">全部领域</ion-item>
-          <ion-item *ngFor="let item_Skill of SkillLabelMoreArr;let i = index" (click)="infoSecondarySkill(item_Skill,i)" [ngClass]="{'checked':skillChecked==i}">
+          <ion-item *ngFor="let item_Skill of SkillLabelMoreArr;let i = index" (click)="infoSecondarySkill(item_Skill,i,'isSkill')" [ngClass]="{'checked':skillChecked==i}">
             {{item_Skill.fName}}
           </ion-item>
         </ion-list>
@@ -68,38 +68,16 @@
       <div class="skill-list2">
         <ion-list>
           <ion-item (click)="infoSelectClick('')">全部</ion-item>
-          <ion-item *ngFor="let Secondary_item of SkillLabelTwoArr;let i = index" (click)="infoSelectClick(Secondary_item,i)" [ngClass]="{'click':skillBgcolor==i}">
+          <ion-item *ngFor="let Secondary_item of SkillLabelTwoArr;let i = index" (click)="infoSelectClick(Secondary_item,i,'SecondarySkill')" [ngClass]="{'click':skillBgcolor==i}">
             {{Secondary_item.sName}}
           </ion-item>
         </ion-list>
       </div>
     </div>
   </div>
-  <!-- 输入框搜索 -->
-  <div class="industrySearch">
-    <ion-list style="white-space:normal;">
-      <ion-item *ngFor="let deail_label of SearchData">
-        <div class="contant-item">
-          <div class="contant-item-left" item-start>
-            <img [src]="deail_label.avatar" class="item-img">
-            <p>{{deail_label.adviserName}}</p>
-          </div>
-          <div class="contant-item-right">
-            <p>{{deail_label.introduction}}</p>
-            <div class="industryLabel">
-              <span class="span" *ngFor="let skill_right of deail_label.skillList.slice(0,2)">{{skill_right.asName}}</span>
-            </div>
-            <p>
-              <span>工作经验：</span>
-              <span>{{deail_label.workingYears}}</span>
-            </p>
-          </div>
-        </div>
-      </ion-item>
-    </ion-list>
-  </div>
-  <!-- 行业技能标签筛选 -->
-  <div class="industrySearch">
+
+  <!-- 行业技能标签筛选\输入框搜索 -->
+  <!-- <div class="industrySearch" *ngIf ="type =='isIndustry' || type == 'isSkill' || type == 'itemsearch' || type == 'SecondarySkill'">
     <ion-list style="white-space:normal;">
       <ion-item *ngFor="let instry_skill of IndustrySearchData">
         <div class="contant-item">
@@ -121,7 +99,7 @@
         </div>
       </ion-item>
     </ion-list>
-  </div>
+  </div> -->
   <!-- 行业更多/技能 -->
   <div class="contant-cont" *ngIf="type =='indeustry' || type == 'skill'">
     <ion-list>
@@ -143,6 +121,7 @@
             <p>
               <span>工作经验：</span>
               <span>{{industryMore_item.workingYears}}</span>
+              <span>年</span>
             </p>
           </div>
         </div>
@@ -150,8 +129,10 @@
     </ion-list>
   </div>
 
-  <!-- 全部顾问/审计顾问 -->
-  <div class="industrySearch" *ngIf = "type == 'finance-count' || type == 'financemore'">
+  <!-- 全部顾问/审计顾问/行业技能标签筛选\输入框搜索/翘楚 -->
+  <div class="industrySearch" *ngIf = "type == 'finance-count' || 
+  type == 'financemore' ||type =='isIndustry' || type == 'isSkill' 
+  || type == 'itemsearch' || type == 'SecondarySkill'|| type == 'indeustryOutstand'">
     <ion-list style="white-space:normal;">
       <ion-item *ngFor="let instry_skill of financeAllArr">
         <div class="contant-item">

@@ -64,39 +64,39 @@
     <div class="qu_content">
       <div class="title-cont">
         <h4>行业翘楚</h4>
-        <div (click)="goToOtherPage()">
+        <div (click)="outstanding('','','indeustryOutstand')">
           <span>更多</span>
           <ion-icon name="arrow-forward"></ion-icon>
         </div>
       </div>
       <div class="qu_u">
-        <li *ngFor="let item of outstandingArr.data" class="qu_list">
-          <div class="text_box">
-            <div class="celebrity-img">
-              <img [src]="item.avatar" class="img" alt="">
+          <li *ngFor="let item of outstandingArr.data" class="qu_list">
+            <div class="text_box">
+              <div class="celebrity-img">
+                <img [src]="item.avatar" class="img" alt="">
+              </div>
+              <div class="text_labar">
+                <span>{{item.adviserName}}</span>
+                <ul class="text_content">
+                  <li *ngFor="let j of item.industryList.slice(0,1)" class="text_list">
+                    <span>{{j.alName || '行业'}}</span>
+                  </li>
+                </ul>
+              </div>
+              <div class="text_jinyan">工作经验：{{item.workingYears || '0年'}}年</div>
+              <p class="qiaochu-duc">{{item.introduction}}</p>
             </div>
-            <div class="text_labar">
-              <span>{{item.adviserName || '姓名'}}</span>
-              <ul class="text_content">
-                <li *ngFor="let j of item.industryList.slice(0,1)" class="text_list">
-                  <span>{{j.alName || '行业'}}</span>
-                </li>
-              </ul>
-            </div>
-            <div class="text_jinyan">工作经验：{{item.workingYears || '0年'}}年</div>
-            <p class="qiaochu-duc">{{item.introduction}}</p>
-          </div>
-        </li>
+          </li>
       </div>
     </div>
   </div>
 
   <div class="text-img">
-    <img src="../../assets/imgs/rawpixel-558596-unsplash.png" alt="">
-    <div class="img_text">
+    <img src="../../assets/imgs/banner.png" alt="">
+    <!-- <div class="img_text">
       <p>成为麦盟顾问</p>
       <p>开启职业生涯的另一种可能</p>
-    </div>
+    </div> -->
   </div>
 
   <!-- 财务审计 -->
@@ -111,7 +111,7 @@
       </div>
     </div>
     <ion-list>
-      <ion-item *ngFor="let finance_item of financesArrLength" style="white-space:normal;" (click)="goProjectBower(finance_item,i)">
+      <ion-item *ngFor="let finance_item of financesArrLength" style="white-space:normal;" (click)="financeAllList(finance_item,i)">
         <div class="contant-item">
           <div class="contant-item-left" item-start>
             <img [src]="finance_item.avatar" class="item-img">

@@ -48,7 +48,8 @@ export class CompanyPage {
   }
   //调接口 获取数据
   getcompanyData() {
-    this.CompanylistData.getCompanyData(getCompanyList,'o2GZp1Gsud1OVuaw5AH_e28m3kOw').subscribe(
+    let openid = this.getUrlParam('openId');
+    this.CompanylistData.getCompanyData(getCompanyList,openid).subscribe(
       res=>{
         console.log(1111)
       console.log(res);
@@ -80,4 +81,14 @@ export class CompanyPage {
     console.log(data.name);
     this.navCtrl.pop();
   }
+   // 获取openId
+   getUrlParam(name) {  
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象  
+    var r = window.location.search.substr(1).match(reg);  //匹配目标参数  
+    if (r != null) {
+        return encodeURI(r[2]);  //返回参数值 
+    } else {
+        return null; 
+    }
+ }
  }

@@ -1,12 +1,11 @@
-
 <ion-header>
-  <ion-navbar>
-    <ion-title>speed</ion-title>
-  </ion-navbar>
+    <ion-navbar>
+        <ion-title>speed</ion-title>
+    </ion-navbar>
 </ion-header>
 
 <ion-content class="content">
-    <ion-list  class="company-list" no-lines>
+    <ion-list class="company-list" no-lines>
         <ion-item class="prompt-item" no-lines>
             <div class="prompt">请填写相关信息</div>
         </ion-item>
@@ -16,7 +15,7 @@
         <div class="speech-prompt">也可通过语音录入，方便快捷记录项目需求</div>
         <div class="start-box">
             <ion-item class="item-play" no-lines>
-                <div class="audio-mengu" (click)="autoPlay($event,i)" *ngFor ="let item of audioData;let i=index">
+                <div class="audio-mengu" (click)="autoPlay($event,i)" *ngFor="let item of audioData;let i=index">
                     <div class="audio-spinner">
                         <img src="../../assets/imgs/iconfont-voice@3x.png" alt="">
                     </div>
@@ -27,10 +26,10 @@
                         <div class="line4"></div>
                         <div class="line5"></div>
                     </div>
-                    <div class="click-play" >
+                    <div class="click-play">
                         点击播放
                     </div>
-                    <div class="icon-close" (click)="deletAudio(i)" >
+                    <div class="icon-close" (click)="deletAudio(i)">
                         <ion-icon name="close-circle"></ion-icon>
                     </div>
                     <audio>
@@ -39,9 +38,9 @@
                         您的浏览器不支持 audio 元素。
                     </audio>
                 </div>
-                <div>{{duration}}"</div>
+                <!-- <div>{{duration}}"</div> -->
                 <div class="spinner" [hidden]="!isRecord">
-                    <div class="spinner-list" >
+                    <div class="spinner-list">
                         <div class="line1"></div>
                         <div class="line2"></div>
                         <div class="line3"></div>
@@ -61,11 +60,35 @@
         <div class="promptbot">请选择发布类型（目前为快速发布模式）</div>
         <button ion-item (click)="goback()" class="release-btn">
             <div class="backone" (click)="goback()">
-                <span><ion-icon name="add-circle-outline"></ion-icon></span>
+                <span>
+                    <ion-icon name="add-circle-outline"></ion-icon>
+                </span>
                 <span>前往完整发布</span>
             </div>
             <span class="two">提供更详细的项目细节</span>
         </button>
     </ion-list>
-  <div class="speed-footer" (click)="Release()">发布</div>
+    <div class="speed-footer" (click)="onSpeedReleaseSubmit(fieldValue)">发布</div>
+    <!--弹出框-->
+    <div class="phonebind-modal" [hidden]="!isShow">
+        <div class="modal-bg"></div>
+        <div class="modal-box">
+            <div class="modal-top">
+                <div class="modal-top-close">
+                    <!-- <ion-icon ios="ios-close" md="md-close" item-rigth (click)="onClose()" color=""></ion-icon> -->
+                </div>
+                <div class="modal-title">
+                    <img src="../../assets/imgs/success-icon.png" alt="">
+                </div>
+                <div class="modal-title">发送成功</div>
+                <div class="modal-content">
+                    <p>您的项目已经发布成功，我们将在尽快对项目展开审核，结果将会以邮件和短信的形式通知您。</p>
+                </div>
+                <div class="modal-footer">
+                    <button ion-button full large (click)="goClientProjectPage()">返回项目列表</button>
+                    <!-- <button ion-button full large (click)="onCompanyDel()" class="btn-delete">返回</button> -->
+                </div>
+            </div>
+        </div>
+    </div>
 </ion-content>
