@@ -68,8 +68,9 @@ export class ProjectPaymentRecordPage {
 
   /*列表编辑*/
   goFormEditPage(field, value, type) {
+    let cid = this.navParams.get('cid')
     if(type == 'selectPaymentBank') {
-      this.navCtrl.push(ProjectCollectBankPage,{callback:this.setValue,field:field,data:this.paymentRecordData,type:'clientType'});
+      this.navCtrl.push(ProjectCollectBankPage,{callback:this.setValue,field:field,data:this.paymentRecordData,type:'clientType',cid:cid});
     }else{
       this.navCtrl.push(FormEditPage,{callback:this.setValue,value:value,field:field,type:type});
     }
@@ -77,9 +78,19 @@ export class ProjectPaymentRecordPage {
   }
 
   /*设置值（回调函数）*/
-  setValue = (field,value)=> {
+  // setValue = (field,value)=> {
 
-    this.paymentRecordData[field] = value;
+  //   this.paymentRecordData[field] = value;
+  // }
+  /*设置值（回调函数）*/
+  setValue = (field,value)=> {
+    if(field == 'taxNumber' && value){
+      this.paymentRecordData['payer'] =value.name;
+      this.paymentRecordData['payerBank'] =value.bankName;
+      this.paymentRecordData['payerAccount'] =value.account;
+    }else{
+      this.paymentRecordData[field] = value;
+    }
   }
 
   getUrlParam(name) {  

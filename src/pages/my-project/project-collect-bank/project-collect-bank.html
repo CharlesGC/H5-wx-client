@@ -34,7 +34,7 @@
       <button ion-button expand="full" large class="fixed-bottom" (click)="goAccountEdit()" *ngIf="type == 'consultantType'">添加</button>
 
       <ion-list class="bank-list" no-lines *ngIf="type == 'clientType'">
-        <ion-item class="border-left" (click)="goPaymentInfoEdit(paymentList_item)" *ngFor="let paymentList_item of paymentListData">
+        <ion-item class="border-left" (click)="onCollectBankClick(paymentList_item)" *ngFor="let paymentList_item of paymentListData">
             <div class="bank-item-left">
               <p>
                 <label>付款人</label>

@@ -117,7 +117,7 @@
       </button>
       <button ion-button expand="full" large class="fixed-bottom" 
         (click)="goPaymentRecord(projectStageDetail.adviserStatus)" 
-        >
+        *ngIf="projectStageDetail.adviserStatus==5">
         提交收款申请
       </button>
       <!-- <button ion-button expand="full" large class="fixed-bottom" 

@@ -42,7 +42,7 @@ export class ProjectStageBrowserPage {
   goPaymentRecord(stageType){
     let id = this.navParams.get('id')
     if(stageType == 2){
-      this.navCtrl.push(ProjectPaymentRecordPage,{id:id});
+      this.navCtrl.push(ProjectPaymentRecordPage,{id:id,cid:this.projectStageDetail['cid']});
     }else if(stageType == 6){
       this.navCtrl.push(ProjectSubmitInvoicePage,{id:id});
     }

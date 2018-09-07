@@ -54,7 +54,6 @@ export class ConsultantStageBrowserPage {
   /*跳转到添加支付记录页面*/
   goPaymentRecord(stageType){
     let id = this.navParams.get('id')
-    this.navCtrl.push(ConsultantDeliveryModelPage,{pid:this.projectStageDetail['pid'],psid:this.projectStageDetail['psid']});
     if(stageType == 3) {
       this.navCtrl.push(ConsultantInteractionSubmitPage,{isAdd:true,pid:this.projectStageDetail['pid'],psid:this.projectStageDetail['psid']});
     }else if(stageType == 5){

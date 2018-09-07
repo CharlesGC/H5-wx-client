@@ -7,6 +7,7 @@ import { UserlistComponent } from './userlist/userlist';
 import { HomeSwiperComponent } from './home-swiper/home-swiper';
 import { IndustryComponent } from './industry/industry';
 import { IndustrprfileComponent } from './industrprfile/industrprfile';
+import { AttentionTipComponent } from './attention-tip/attention-tip';
 
 
 @NgModule({
@@ -14,13 +15,17 @@ import { IndustrprfileComponent } from './industrprfile/industrprfile';
     UserlistComponent,
     HomeSwiperComponent,
     IndustryComponent,
-    IndustrprfileComponent ],
+    IndustrprfileComponent,
+    AttentionTipComponent,
+    AttentionTipComponent ],
 	imports: [ BrowserModule ],
 	exports: [ ActionsheetComponent,
     UserlistComponent,
     HomeSwiperComponent,
     IndustryComponent,
-    IndustrprfileComponent ]
+    IndustrprfileComponent,
+    AttentionTipComponent,
+    AttentionTipComponent ]
 })
 export class ComponentsModule {
 	constructor(){
