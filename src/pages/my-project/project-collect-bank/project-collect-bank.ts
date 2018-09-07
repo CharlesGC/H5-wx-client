@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { MamenDataProvider } from '../../../providers/mamen-data/mamen-data';
 
 import  { ConsultantBankAccountEditPage } from '../../contact/consultant/consultant-bank-account-edit/consultant-bank-account-edit';
+import { ClientPaymentInfoEditPage} from '../../contact/client/client-payment-info-edit/client-payment-info-edit';
 import { getBankListUrl,getPayerListUrl } from '../../../providers/requestUrl';
 
 /**
@@ -26,22 +27,24 @@ export class ProjectCollectBankPage {
 
   ionViewDidLoad() {
     let type = this.navParams.get('type');
+    let cid = this.navParams.get('cid');
     this.type =  this.navParams.get('type');
     if(type == 'consultantType'){
       this.getbankListData();
     }else{
-      this.getpaymentListData()
+      this.getpaymentListData(cid)
     }
     
   }
 
   ionViewDidEnter() {
     let type = this.navParams.get('type');
+    let cid = this.navParams.get('cid');
     this.type =  this.navParams.get('type');
     if(type == 'consultantType'){
       this.getbankListData();
     }else{
-      this.getpaymentListData()
+      this.getpaymentListData(cid)
     }
   }
 
@@ -81,11 +84,11 @@ export class ProjectCollectBankPage {
   }
 
   /*请求付款人信息*/
-  getpaymentListData() {
+  getpaymentListData(cid) {
     let companyDetaiData = this.navParams.get('data') || {};
     // let getpaymentListUrl = 'http://mamon.yemindream.com/mamon/company/getPayerList';
     const openId = window.sessionStorage.getItem('openId')|| this.getUrlParam('openId');
-    let getpaymentListUrl = getPayerListUrl + '?openId=' + openId + '&cid=' + 9;
+    let getpaymentListUrl = getPayerListUrl + '?openId=' + openId + '&cid=' +cid;
     this.Provider.getMamenSwiperData(getpaymentListUrl).subscribe(res=>{
       if(res.code==200) {
         this.paymentListData = res.data;
@@ -100,6 +103,12 @@ export class ProjectCollectBankPage {
   /*跳转到账号编辑页面*/
   goAccountEdit() {
     this.navCtrl.push(ConsultantBankAccountEditPage);
+  }
+
+  /*付款人编辑页面*/
+  goPaymentInfoEdit() {
+    let cid = this.navParams.get('cid');
+    this.navCtrl.push(ClientPaymentInfoEditPage,{data:{cid:cid}});
   }
 
 }
