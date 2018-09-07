@@ -1,44 +1,52 @@
 <ion-header>
-    <ion-navbar>
-      <ion-title>个人详情（专业认证）编辑</ion-title>
-    </ion-navbar>
-  </ion-header>
-  
-  <ion-content style="background-color: #fcfcfc;">
-      <ion-list class="contact-list mt10">
-        <ion-item class="" (click)="goFormEditPage('certifiedTitle',certificationListData.certifiedTitle,'text')">
-          <span class="left-title">认证机构 </span>
-          <div item-right class="rigth-message">
-            <span>{{certificationListData.certifiedTitle}}</span>
-            <ion-icon name="arrow-forward" class="ml12"></ion-icon>
-          </div>
-        </ion-item>
-        <ion-item class="" (click)="goFormEditPage('issuingAgency',certificationListData.issuingAgency,'text')">
-          <span class="left-title">颁发机构</span>
-          <div item-right class="rigth-message">
-            <span>{{certificationListData.issuingAgency}} </span>
-            <ion-icon name="arrow-forward" class="ml12"></ion-icon>
-          </div>
-        </ion-item>
-        <ion-item class="" (click)="goFormEditPage('issuedTime',certificationListData.issuedTime,'date')">
-          <span class="left-title">颁发时间</span>
-          <div item-right class="rigth-message">
-            <span>{{certificationListData.issuedTime | date:'yyyy/MM/dd'}}</span>
-            <ion-icon name="arrow-forward" class="ml12"></ion-icon>
-          </div>
-        </ion-item>
-        <ion-item class="" (click)="goFormEditPage('certifiedUrl',certificationListData.certifiedUrl,'update')" no-lines>
-          <span class="left-title">证书附件</span>
-          <div item-right class="rigth-message">
-            <span>点击预览或上传</span>
-            <ion-icon name="arrow-forward" class="ml12"></ion-icon>
-          </div>
-        </ion-item>
-      </ion-list>
-      <div class="fixed-bottom">
-          <button ion-button class="btn-submit" (click)="oncertificationExpSubmit()">提交</button>
-          <button ion-button class="btn-delete" (click)="oncertificationExpDel()">删除</button>
+  <ion-navbar>
+    <ion-title>个人详情（专业认证）编辑</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content style="background-color: #fcfcfc;">
+  <ion-list class="contact-list mt10">
+    <ion-item class="" (click)="goFormEditPage('certifiedTitle',certificationListData.certifiedTitle,'text')">
+      <span class="left-title">认证机构 </span>
+      <div item-right class="rigth-message">
+        <span>{{certificationListData.certifiedTitle}}</span>
+        <ion-icon name="arrow-forward" class="ml12"></ion-icon>
       </div>
-  
-  </ion-content>
-  
+    </ion-item>
+    <ion-item class="" (click)="goFormEditPage('issuingAgency',certificationListData.issuingAgency,'text')">
+      <span class="left-title">颁发机构</span>
+      <div item-right class="rigth-message">
+        <span>{{certificationListData.issuingAgency}} </span>
+        <ion-icon name="arrow-forward" class="ml12"></ion-icon>
+      </div>
+    </ion-item>
+    <ion-item class="" (click)="goFormEditPage('issuedTime',certificationListData.issuedTime,'date')">
+      <span class="left-title">颁发时间</span>
+      <div item-right class="rigth-message">
+        <span>{{certificationListData.issuedTime | date:'yyyy/MM/dd'}}</span>
+        <ion-icon name="arrow-forward" class="ml12"></ion-icon>
+      </div>
+    </ion-item>
+    <!-- <ion-item class="" (click)="goFormEditPage('certifiedUrl',certificationListData.certifiedUrl,'update')" no-lines>
+      <span class="left-title">证书附件</span>
+      <div item-right class="rigth-message">
+        <span *ngIf="filestatus == true">重新上传</span>
+        <span *ngIf="filestatus == false">点击预览或上传</span>
+        <ion-icon name="arrow-forward" class="ml12"></ion-icon>
+      </div>
+    </ion-item> -->
+    <ion-item class="" (click)="gouploadfile()" no-lines>
+        <span class="left-title">证书附件</span>
+        <div item-right class="rigth-message">
+          <span *ngIf="filestatus == true">重新上传</span>
+          <span *ngIf="filestatus == false">点击预览或上传</span>
+          <ion-icon name="arrow-forward" class="ml12"></ion-icon>
+        </div>
+      </ion-item>
+  </ion-list>
+  <div class="fixed-bottom">
+    <button ion-button class="btn-submit" (click)="oncertificationExpSubmit()">提交</button>
+    <button ion-button class="btn-delete" (click)="oncertificationExpDel()">删除</button>
+  </div>
+
+</ion-content>

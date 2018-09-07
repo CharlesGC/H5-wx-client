@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ImageCropperComponent, CropperSettings } from 'ngx-img-cropper';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 /**
  * Generated class for the ConsultantInfoAvatarPage page.
@@ -16,7 +16,7 @@ import { HttpClient } from '@angular/common/http';
   templateUrl: 'consultant-info-avatar.html',
 })
 export class ConsultantInfoAvatarPage {
-  public uploadUrl = 'http://localhost:8080/mafile/mamonfile/uploadAvatarPic';
+  public uploadUrl = 'http://100.168.1.48:8181/mafile/mamonfile/uploadAvatarPic';
   public Flagyingyezhizhao = true;
   public avatarUrl: string;
   data: any;
@@ -37,20 +37,23 @@ export class ConsultantInfoAvatarPage {
   }
 
   uploadFile() {
-    var file = this.data.image
+    const file = new HttpParams().set('file',this.data.image);
+    //var file = this.data.image
     //console.log(this.data.image, 'post开始请求');
     this.http.post(this.uploadUrl, file, {
-      headers: {
-        'Content-Disposition': 'form-data; name="file"; filename="chrome.png"',
-        'Content-Type': 'image/png'
-      }
+      // headers: {
+      //   //'Content-Disposition': 'form-data; name="file"; filename="chrome.png"',
+      //   'Content-Type': 'image/png',
+      //   //'Access-Control-Allow-Origin':'*',
+      //   //'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8'
+      // }
     }).subscribe(res => {
-      //console.log('post请求结束', res);
-      this.avatarUrl = res['data'].url;
-      console.log(this.avatarUrl + '1')
-      let callback = this.navParams.get('callback');
-      callback(this.avatarUrl);
-      this.navCtrl.pop();
+      console.log('post请求结束', res);
+      // this.avatarUrl = res['data'].url;
+      // console.log(this.avatarUrl + '1')
+      // let callback = this.navParams.get('callback');
+      // callback(this.avatarUrl);
+      // this.navCtrl.pop();
     });
   }
 

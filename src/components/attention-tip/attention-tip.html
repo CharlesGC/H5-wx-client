@@ -1,0 +1,27 @@
+<!-- Generated template for the AttentionTipComponent component -->
+<div>
+  <div class="attention-bottom-wrap">
+    <span class="icon-wrap">
+      <img src="../../assets/imgs/attention-smalllogo.svg" alt="">
+    </span>
+    <span class="attention-title">
+      麦盟咨询
+    </span>
+    <span class="attention-desc">
+      关注公众号开启新的资讯生活
+    </span>
+    <span class="attention-btn" (click)=isShow()>
+      关注
+    </span>
+  </div>
+
+  <div class="attention-modal" *ngIf='isShowdata'>
+    <div class="qrcode-wrap">
+      <span class="title">长按二维码关注[麦盟咨询]</span>
+      <span class="desc">关注后可继续浏览该页面进行操作</span>
+      <img src="" alt="">
+      <span class="desc-letter">为您带来全新的咨询生活</span>
+      <span class="close-icon" (click)=isShow()></span>
+    </div>
+  </div>
+</div>

@@ -15,7 +15,8 @@ import { ComponentsModule } from '../components/components.module';
 //引入根组件
 import { MyApp } from './app.component';
 //引入http模块
-import {HttpModule,Http} from '@angular/http';
+import { HttpModule,Http } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 
 //页面 自定义的组件
 import { ContactPage } from '../pages/contact/contact';
@@ -237,6 +238,7 @@ import { UploadfilePage } from '../pages/uploadfile/uploadfile'
     BrowserModule,
     ComponentsModule,
     HttpModule,
+    HttpClientModule,
     MultiPickerModule, //选择器
     // IonicModule.forRoot(MyApp)
     IonicModule.forRoot(MyApp,{

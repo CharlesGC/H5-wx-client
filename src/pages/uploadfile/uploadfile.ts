@@ -14,7 +14,7 @@ import { FileUploader } from 'ng2-file-upload';
   templateUrl: 'uploadfile.html',
 })
 export class UploadfilePage {
-  public uploadUrl = 'http://localhost:8080/mafile/mamonfile/uploadFile';
+  public uploadUrl = 'http://100.168.1.48:8181/mafile/mamonfile/uploadFile';
   public Flagyingyezhizhao = true;
   private filestatus = false;
   private fileUrl = '';
