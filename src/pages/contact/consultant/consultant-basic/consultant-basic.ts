@@ -31,6 +31,7 @@ export class ConsultantBasicPage {
   fileTransfer: FileTransferObject = this.transfer.create();
   public consultantBasicData: any;
   public isLoading = true;
+  public format: boolean;
   constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider, public loadingCtrl: LoadingController, private camera: Camera,
     private transfer: FileTransfer, private file: File, ) {
     this.consultantBasicData = {};
@@ -110,13 +111,28 @@ export class ConsultantBasicPage {
         this.consultantBasicData = res.data;
         this.isLoading = false
         this.presentLoading(false);
-        console.log(this.consultantBasicData.certifiedUrl,'获取连接')
+        console.log(this.consultantBasicData)
       } else if (res.code == 207) {
         window.localStorage.removeItem('openId');
       }
     }, error => {
       console.log('erros===', error);
     })
+  }
+
+  /* 根据url来判断文件类型 */
+  formatTypes(value) {
+    if (value.search(/doc/) !== -1 || value.search(/docx/) !== -1) {
+      return 'doc';
+    } else if (value.search(/ppt/) !== -1 || value.search(/pptx/) !== -1) {
+      return 'ppt'
+    } else if (value.search(/xls/) !== -1 || value.search(/xlsx/) !== -1) {
+      return 'xls'
+    } else if (value.search(/jpg/) !== -1 || value.search(/png/) !== -1 || value.search(/jpeg/) !== -1) {
+      return 'jpg'
+    } else if (value.search(/pdf/) !== -1) {
+      return 'pdf'
+    }
   }
 
   /* 上传页面 */

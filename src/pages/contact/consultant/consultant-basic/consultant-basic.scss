@@ -1,5 +1,4 @@
 page-consultant-basic {
-    
     .user-basic {
         width: calc(100% - 30px);
         margin: 20px 15px;
@@ -58,12 +57,11 @@ page-consultant-basic {
                         font-size: 1rem;
                         padding: 2px 5px;
                         border-radius: 8px;
-                        
                         color: #ffffff;
-                        &.type-approved{
+                        &.type-approved {
                             background-color: #19b372;
                         }
-                        &.type-review{
+                        &.type-review {
                             background-color: #5888fd;
                         }
                     }
@@ -82,7 +80,6 @@ page-consultant-basic {
                 }
             }
             .info-rigth {
-                
                 .title-name {
                     padding-left: 0;
                     font-family: PingFangSC;
@@ -106,8 +103,7 @@ page-consultant-basic {
                         letter-spacing: 0.2px;
                         text-align: center;
                         color: #9b9b9b;
-                        border-radius: 6.5px;
-                        // border: solid 0.5px #9b9b9b;
+                        border-radius: 6.5px; // border: solid 0.5px #9b9b9b;
                         // padding: 2px 6px;
                     }
                     .item-inner {
@@ -119,7 +115,6 @@ page-consultant-basic {
                         margin: 0;
                         float: right;
                     }
-                    
                 }
                 .info-other-label {
                     font-family: PingFangSC;
@@ -164,11 +159,10 @@ page-consultant-basic {
                         }
                     }
                 }
-
             }
         }
     }
-    .contact-info{
+    .contact-info {
         width: calc(100% - 30px);
         margin: 0 15px 20px;
         position: relative;
@@ -193,8 +187,7 @@ page-consultant-basic {
                 line-height: normal;
                 letter-spacing: 0.2px;
                 color: #4a4a4a;
-                margin-bottom: 10px; 
-                
+                margin-bottom: 10px;
                 span {
                     margin-left: 6px;
                     opacity: .6;
@@ -207,7 +200,6 @@ page-consultant-basic {
                 margin-bottom: 0;
             }
         }
-
     }
     .contact-item {
         .label-ios {
@@ -239,7 +231,6 @@ page-consultant-basic {
         border-top: solid 1px #f4f4f4;
         border-bottom: solid 1px #f4f4f4;
     }
-
     .user-other-list {
         width: calc(100% - 30px);
         margin: 30px 15px 0;
@@ -260,10 +251,9 @@ page-consultant-basic {
             padding: 15px;
             box-shadow: 0 1px 10px 0 rgba(0, 0, 0, 0.05);
             padding-bottom: 0;
-            &.pm15{
+            &.pm15 {
                 padding-bottom: 15px;
-            }
-            // margin-bottom: 5px;
+            } // margin-bottom: 5px;
             // .card-item-label {
             //     display: flex;
             //     font-family: PingFangSC;
@@ -308,12 +298,10 @@ page-consultant-basic {
                     color: #4a4a4a;
                 }
             }
-            
         }
         ion-card:last-child {
             margin-bottom: 0;
         }
-        
         .action-btn {
             text-align: center;
             button {
@@ -333,16 +321,13 @@ page-consultant-basic {
                 color: #ffffff;
                 margin: 0;
             }
-            
         }
-
         .border-top {
             border-top: solid 1px #f4f4f4;
         }
     }
-
     .user-evaluation-list {
-        ion-card{
+        ion-card {
             .card-item-label {
                 label {
                     font-family: PingFangSC;
@@ -366,7 +351,6 @@ page-consultant-basic {
                     color: #9b9b9b;
                 }
             }
-            
             .evaluation-cont {
                 font-family: PingFangSC;
                 font-size: 12px;
@@ -377,7 +361,6 @@ page-consultant-basic {
                 letter-spacing: 0.2px;
                 color: #4a4a4a;
             }
-
         }
         .evaluation-more {
             font-family: PingFangSC;
@@ -393,7 +376,6 @@ page-consultant-basic {
             background: #fff;
             box-shadow: 0 1px 10px 0 rgba(0, 0, 0, 0.05);
         }
-        
     }
     .msg-footer {
         border-top: solid 0.7px #f1f1f1;
@@ -415,20 +397,20 @@ page-consultant-basic {
             color: #cfcfcf;
         }
     }
-    
-    
-
 }
 
 .mt5 {
     margin-top: 5px !important;
 }
+
 .mt10 {
     margin-top: 10px !important;
 }
+
 .mt20 {
     margin-top: 20px !important;
 }
+
 .mt50 {
     margin-top: 50px !important;
 }

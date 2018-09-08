@@ -41,7 +41,14 @@
                   <span class="go-icon"><ion-icon class="icon" name="arrow-forward"></ion-icon></span>
               </div>
             </ion-item>
-            <ion-item no-lines (click)="goFormEditPage('pacids',projectData.pacids,'pacids')">
+            <!-- <ion-item no-lines (click)="goFormEditPage('pacids',projectData.pacids,'pacids')">
+              <label>案例附件</label>
+              <div item-right class="rigth-message">
+                  <p item-right class="item-value line-overflow">点击预览或上传</p>
+                  <span class="go-icon"><ion-icon class="icon" name="arrow-forward"></ion-icon></span>
+              </div>
+            </ion-item> -->
+            <ion-item no-lines (click)="gouploadfile()">
               <label>案例附件</label>
               <div item-right class="rigth-message">
                   <p item-right class="item-value line-overflow">点击预览或上传</p>
@@ -49,6 +56,12 @@
               </div>
             </ion-item>
           </ion-list>
+          <div class="bg clearfix mt20" *ngIf="certificationListData['certifiedUrl']">
+            <img style="width:66px;height:66px;" src="{{certificationListData.format || filetypeicon}}">
+            <span class="file-title">您的简历</span>
+            <span class="file-desc">点击查看文件预览</span>
+            <span class="file-size">{{certificationListData.size || filesize}}</span>
+          </div>
         <div style="height:100px;"></div>
         <button ion-button expand="full" large class="fixed-bottom" (click)="onApplicationSubmit()">提交申请</button>
     </ion-content>

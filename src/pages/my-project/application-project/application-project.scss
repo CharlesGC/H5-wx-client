@@ -2,7 +2,68 @@ page-application-project {
     ion-list {
         margin-bottom: 0 !important;
     }
-    
+    .clearfix:after {
+        content: "";
+        display: block;
+        clear: both;
+    }
+    .bg {
+        margin: 0 15px;
+        height: auto;
+        padding: 15px;
+        border-radius: 3px;
+        background-color: #ffffff;
+        box-shadow: 0 1px 10px 0 rgba(0, 0, 0, .05);
+        position: relative;
+        img {
+            max-width: 66px;
+            height: auto;
+            float: left;
+        }
+        .file-title {
+            display: block;
+            font-family: PingFangSC;
+            font-size: 16px;
+            font-weight: 600;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: 1.13;
+            letter-spacing: normal;
+            color: #4a4a4a;
+            margin-left: 76px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .file-desc {
+            display: block;
+            opacity: 0.5;
+            font-family: PingFangSC;
+            font-size: 12px;
+            font-weight: normal;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: normal;
+            letter-spacing: 0.2px;
+            color: #4a4a4a;
+            margin-left: 76px;
+            margin-top: 7px;
+        }
+        .file-size {
+            display: block;
+            font-family: PingFangSC;
+            font-size: 10px;
+            font-weight: normal;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: normal;
+            letter-spacing: normal;
+            color: #9b9b9b;
+            position: absolute;
+            bottom: 15px;
+            left: 91px;
+        }
+    }
     .project-browser-top {
         background-image: linear-gradient(to top, #327bd1, #6aafff);
         text-align: center;
@@ -36,7 +97,7 @@ page-application-project {
             text-align: center;
         }
         .project-type {
-            margin-top: 1rem; 
+            margin-top: 1rem;
             span {
                 display: inline-block;
                 font-family: PingFangSC;
@@ -51,7 +112,6 @@ page-application-project {
                 border-radius: 12px;
                 border: solid 1px #fcfcfc;
             }
-           
         }
     }
     .list-item-flex {
@@ -63,7 +123,7 @@ page-application-project {
             line-height: normal;
             letter-spacing: normal;
             color: #4a4a4a;
-            label{
+            label {
                 font-weight: 600;
             }
             .icon {
@@ -85,15 +145,13 @@ page-application-project {
                 text-align: right;
                 display: flex;
                 .go-icon {
-                    flex: 1;
-                    // display: inline-block;
+                    flex: 1; // display: inline-block;
                     // height: 30px;
                     // vertical-align: bottom;
                 }
             }
         }
     }
-
     /*弹出层*/
     .phonebind-modal {
         left: 0;
@@ -144,8 +202,7 @@ page-application-project {
             -ms-flex-direction: column;
             flex-direction: column;
             min-width: 250px;
-            max-height: 90%;
-            // opacity: 0;
+            max-height: 90%; // opacity: 0;
             contain: content;
             font-family: PingFangSC;
             font-weight: 600;
@@ -163,11 +220,11 @@ page-application-project {
                 font-size: 12px;
                 line-height: 1.8;
                 font-weight: 500;
-                p{
+                p {
                     text-indent: 2rem;
                 }
             }
-            .modal-top-close{
+            .modal-top-close {
                 text-align: right;
                 margin-top: 5px;
                 ion-icon {
@@ -194,5 +251,4 @@ page-application-project {
             }
         }
     }
-    
 }

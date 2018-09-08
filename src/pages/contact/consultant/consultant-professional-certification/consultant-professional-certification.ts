@@ -24,13 +24,17 @@ export class ConsultantProfessionalCertificationPage {
   private filestatus = false;
   private fileurl: any;
   public certificationListData: any;
+  public formatvalue:any;
+  public fileUrlvalue:any
   constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider) {
     this.certificationListData = {};
   }
 
   ionViewDidLoad() {
     this.certificationListData = this.navParams.get('data');
-    console.log(this.certificationListData, 'ionViewDidLoad ConsultantProfessionalCertificationPage');
+    console.log(this.certificationListData.certifiedUrl, '赛迪斯--------------------------------------');
+    this.fileUrlvalue = this.certificationListData.certifiedUrl
+    //this.formatTypes(this.fileUrlvalue);
   }
 
   /*跳转到数据处理页面*/
@@ -118,6 +122,7 @@ export class ConsultantProfessionalCertificationPage {
     this.fileurl = obj.url;
     this.certificationListData['certifiedUrl'] = this.fileurl
     this.certificationListData['size'] = this.filesize
+    
     var types = obj.fileType;
     if (this.filesize > 1) {
       this.filesize = this.filesize + ' MB'
@@ -134,6 +139,22 @@ export class ConsultantProfessionalCertificationPage {
       this.filetypeicon = 'assets/imgs/' + 'png.png'
     } else if (types.indexOf('pdf') == 0) {
       this.filetypeicon = 'assets/imgs/' + 'pdf.png'
+    }
+    this.certificationListData['format'] = this.filetypeicon
+  }
+   
+  formatTypes(fileUrlvalue) {
+    //console.log(typeof(fileUrlvalue))
+    if (fileUrlvalue.search(/doc/) !== -1 || fileUrlvalue.search(/docx/) !== -1) {
+      this.formatvalue = 'doc';
+    } else if (fileUrlvalue.search(/ppt/) !== -1 || fileUrlvalue.search(/pptx/) !== -1) {
+      this.formatvalue = 'ppt'
+    } else if (fileUrlvalue.search(/xls/) !== -1 || fileUrlvalue.search(/xlsx/) !== -1) {
+      this.formatvalue = 'xls'
+    } else if (fileUrlvalue.search(/jpg/) !== -1 || fileUrlvalue.search(/png/) !== -1 || fileUrlvalue.search(/jpeg/) !== -1) {
+      this.formatvalue = 'jpg'
+    } else if (fileUrlvalue.search(/pdf/) !== -1) {
+      this.formatvalue = 'pdf'
     }
   }
 }
