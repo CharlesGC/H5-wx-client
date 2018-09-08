@@ -5,14 +5,48 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
   <ion-navbar>
-    <ion-title>project-speed-release</ion-title>
+    <ion-title>我的项目/客户/项目详情/快速发布</ion-title>
   </ion-navbar>
-
 </ion-header>
+<ion-content class="content">
+  <ion-list no-lines class="speed-list">
+    <ion-item>
+      <div class="speed-title">
+        <img src="../../../../assets/imgs/email.png" alt="">
+        <span>快速发布的项目</span>
+      </div>
+    </ion-item>
+    <div class="speed-box" *ngFor= "let speedItem of projectDetails">
+      <div class="speed-decription">
+        <div class="label">方案描述</div>
+        <ion-card>
+          <div>{{speedItem.description}}</div>
+        </ion-card>
+      </div>
+      <div class="speed-voice">收听语音记录</div>
+      <ion-item class="voice-item">
+        <div class="audio-mengu" (click)="autoPlay()" *ngFor="let audioItem of speedItem.voiceList">
+          <div class="audio-spinner">
+            <img src="../../../../assets/imgs/iconfont-voice@3x.png" alt="">
+          </div>
+          <div class="audio-spinner1" style="display: none">
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
+            <div class="line4"></div>
+            <div class="line5"></div>
+          </div>
+          <div class="click-play">
+            点击播放
+          </div>
+          <audio>
+            <source [src]="audioItem.voiceUrl" type="audio/mpeg">
+            <!-- <source src="http://100.168.1.48:8181/file20180829/cddddd1b79ea40ceb5fb855b142a9244.mp3" type="audio/mpeg"> 您的浏览器不支持 audio 元素。 -->
+          </audio>
+        </div>
+      </ion-item>
+    </div>
 
-
-<ion-content padding>
-
+  </ion-list>
 </ion-content>

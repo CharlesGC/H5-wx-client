@@ -4,6 +4,7 @@ import { MamenDataProvider } from '../../../../providers/mamen-data/mamen-data';
 
 import { ProjectBrowserPage } from '../project-browser/project-browser';
 import { getProjectByStatusUrl,myProjectCountUrl } from '../../../../providers/requestUrl';
+import { ProjectSpeedReleasePage } from '../project-speed-release/project-speed-release';
 
 /**
  * Generated class for the ProjectListPage page.
@@ -52,7 +53,12 @@ export class ProjectListPage {
 
   /*跳转到详情页面*/
   onProjectBrowserClick(data) {
-    this.navCtrl.push(ProjectBrowserPage,{data:data});
+    if(data.type == 0){
+      this.navCtrl.push(ProjectBrowserPage,{data:data});
+    }else{
+      this.navCtrl.push(ProjectSpeedReleasePage,{data:data});
+    }
+    
   }
 
   getUrlParam(name) {  

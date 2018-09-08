@@ -92,6 +92,7 @@ import { ProjectCompanyListPage } from '../pages/my-project/client/project-compa
 import { ProjectTimeSelectPage } from '../pages/my-project/project-time-select/project-time-select';
 import { ProjectCollectBankPage } from '../pages/my-project/project-collect-bank/project-collect-bank';
 import { ProjectProgramObjectionPage } from '../pages/my-project/client/project-program-objection/project-program-objection';
+import { ProjectSpeedReleasePage } from '../pages/my-project/client/project-speed-release/project-speed-release'
 
 /*我的项目-顾问*/
 import { ConsultantProjectListPage } from '../pages/my-project/consultant/consultant-project-list/consultant-project-list';
@@ -208,6 +209,7 @@ import { UploadfilePage } from '../pages/uploadfile/uploadfile'
     ProjectTimeSelectPage,
     ProjectCollectBankPage,
     ProjectProgramObjectionPage,
+    ProjectSpeedReleasePage,
 
     ConsultantProjectListPage,
     ConsultantProjectBrowserPage,
@@ -323,6 +325,7 @@ import { UploadfilePage } from '../pages/uploadfile/uploadfile'
     ProjectTimeSelectPage,
     ProjectCollectBankPage,
     ProjectProgramObjectionPage,
+    ProjectSpeedReleasePage,
 
     ConsultantProjectListPage,
     ConsultantProjectBrowserPage,

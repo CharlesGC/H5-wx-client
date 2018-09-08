@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {MamenDataProvider} from '../../providers/mamen-data/mamen-data';
 import { getindustryUrl,getskillUrl,getskilltwoUrl,getSearch,getdetialSearch,getfinanceAllUrl,getfinanceUrl,getoutstandingUrl} from '../../providers/dataUrl';
+import { ProjectConsultantBrowserPage } from '../my-project/client/project-consultant-browser/project-consultant-browser';
 
 @IonicPage()
 @Component({
@@ -316,5 +317,16 @@ export class IndustrydetialPage {
     this.skillBgcolor = index;
     this.skillLabel = true;
     this.getSearchadviser(this.industryId=0,this.firstSkillId=1,this.secondSkillId=3);
+  }
+  /*跳转到顾问详情*/ 
+  goProjectConsultantBrowserPage (value,index) {
+    const user = window.sessionStorage.getItem('user') ? JSON.parse(window.sessionStorage.getItem('user')) : {};
+    if(user.type == 1){
+      this.navCtrl.push(ProjectConsultantBrowserPage, { uid: value.uid })
+    }else if(user.type == 0){
+      this.navCtrl.push(ProjectConsultantBrowserPage, { uid: value.uid, type: 'homepage' })
+    }else {
+      this.navCtrl.push(ProjectConsultantBrowserPage, { uid: value.uid })
+    }
   }
  }

@@ -5,6 +5,7 @@ import { MamenDataProvider } from '../../providers/mamen-data/mamen-data';
 import { PhonebindPage } from '../phonebind/phonebind';
 // import { ChooseIdentityPage } from '../choose-identity/choose-identity';
 import { ProjectConsultantBrowserPage } from '../my-project/client/project-consultant-browser/project-consultant-browser';
+import {ProjectSpeedReleasePage} from '../../pages/my-project/client/project-speed-release/project-speed-release'
 
 import { ViewChild } from '@angular/core';
 
@@ -197,6 +198,7 @@ export class HomePage {
     if (value == '' && index == '' && type == 'indeustry') {
       this.navCtrl.push(IndustrydetialPage, {
         type: type
+        
       })
     } else {
       this.navCtrl.push(IndustrydetialPage, {
@@ -236,12 +238,22 @@ export class HomePage {
   FinancCount(value, index, type) {
     this.navCtrl.push(IndustrydetialPage, {
       type: 'finance-count'
-    });
+    }); 
   }
   // 全部顾问列表
   financeAllList(value, index) {
-    this.navCtrl.push(ProjectConsultantBrowserPage, { uid: value.uid, type: 'homepage' })
+    // type=1代表顾问 0 代表客户
+    const user = window.sessionStorage.getItem('user') ? JSON.parse(window.sessionStorage.getItem('user')) : {};
+    if(user.type == 1){
+      this.navCtrl.push(ProjectConsultantBrowserPage, { uid: value.uid })
+    }else if(user.type == 0){
+      this.navCtrl.push(ProjectConsultantBrowserPage, { uid: value.uid, type: 'homepage' })
+    }else {
+      this.navCtrl.push(ProjectConsultantBrowserPage, { uid: value.uid })
+    }
+    
   }
+  // 获取openId
   getUrlParam(name) {
     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象  
     var r = window.location.search.substr(1).match(reg);  //匹配目标参数  
@@ -250,5 +262,8 @@ export class HomePage {
     } else {
       return null;
     }
+  }
+  goProjectSpeed () {
+    this.navCtrl.push(ProjectSpeedReleasePage)
   }
 }

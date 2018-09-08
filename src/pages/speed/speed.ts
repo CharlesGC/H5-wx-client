@@ -145,7 +145,6 @@ export class SpeedPage {
               return;
             },
             cancel: function () {
-                alert('用户拒绝授权录音');
                 this.isRecord = false;
             }
         })
@@ -180,7 +179,6 @@ export class SpeedPage {
       wx.stopRecord({
         success: function (res) {
           this.localId = res.localId;
-          alert(this.localId);
           // 上传语音
           if(this.localId != '') {
               wx.uploadVoice({
@@ -200,15 +198,10 @@ export class SpeedPage {
                       async:false,
                       success: (data) => {
                         // let audioData = [];
-                        console.log(_this.audioData);
-                        console.log(data , '******');
                         _this.audioData.push(data.data);
-                        
                         _this.changeDetectorRef.markForCheck();
                         _this.changeDetectorRef.detectChanges();
                           alert(_this.audioData);
-                          console.log(_this.audioData,11111111111);
-                          alert('文件已经保存到自己的服务器');
                           _this.localId = '';
                       },
                       error: function (xhr, errorType, error) {

@@ -75,31 +75,6 @@
       </div>
     </div>
   </div>
-
-  <!-- 行业技能标签筛选\输入框搜索 -->
-  <!-- <div class="industrySearch" *ngIf ="type =='isIndustry' || type == 'isSkill' || type == 'itemsearch' || type == 'SecondarySkill'">
-    <ion-list style="white-space:normal;">
-      <ion-item *ngFor="let instry_skill of IndustrySearchData">
-        <div class="contant-item">
-          <div class="contant-item-left" item-start>
-            <img [src]="instry_skill.avatar" class="item-img">
-            <p>{{instry_skill.adviserName}}</p>
-          </div>
-          <div class="contant-item-right">
-            <p>{{instry_skill.introduction}}</p>
-            <div class="industryLabel">
-              <span class="span" *ngFor="let skill_right of instry_skill.skillList.slice(0,2)">{{skill_right.asName}}</span>
-            </div>
-            <p>
-              <span>工作经验：</span>
-              <span>{{instry_skill.workingYears}}</span>
-              <span>年</span>
-            </p>
-          </div>
-        </div>
-      </ion-item>
-    </ion-list>
-  </div> -->
   <!-- 行业更多/技能 -->
   <div class="contant-cont" *ngIf="type =='indeustry' || type == 'skill'">
     <ion-list>
@@ -134,7 +109,7 @@
   type == 'financemore' ||type =='isIndustry' || type == 'isSkill' 
   || type == 'itemsearch' || type == 'SecondarySkill'|| type == 'indeustryOutstand'">
     <ion-list style="white-space:normal;">
-      <ion-item *ngFor="let instry_skill of financeAllArr">
+      <ion-item *ngFor="let instry_skill of financeAllArr;let i =index" (click)="goProjectConsultantBrowserPage(instry_skill,i)">
         <div class="contant-item">
           <div class="contant-item-left" item-start>
             <img [src]="instry_skill.avatar" class="item-img">
