@@ -44,6 +44,12 @@
         </div>
       </ion-item>
   </ion-list>
+  <div class="bg clearfix mt20" *ngIf=filestatus>
+    <img src={{filetypeicon}} alt="">
+    <span class="file-title">{{filetitle}}</span>
+    <span class="file-desc">点击查看文件预览</span>
+    <span class="file-size">{{filesize}}</span>
+  </div>
   <div class="fixed-bottom">
     <button ion-button class="btn-submit" (click)="oncertificationExpSubmit()">提交</button>
     <button ion-button class="btn-delete" (click)="oncertificationExpDel()">删除</button>

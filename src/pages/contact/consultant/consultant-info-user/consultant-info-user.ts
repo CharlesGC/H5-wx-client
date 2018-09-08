@@ -34,6 +34,7 @@ export class ConsultantInfoUserPage {
     this.userAvatarPic = value
     this.userInfoData.avatar = value
   }
+  
   ionViewDidLoad() {
     console.log('ionViewDidLoad ConsultantInfoUserPage');
     this.userInfoData = this.navParams.get('consultantAdviser') || {}

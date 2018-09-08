@@ -322,12 +322,21 @@
       <ion-card class="card-item border-top">
           <div class="card-item-label">
             <label>
-              <img style="width:66px;height:66px;" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1534233453&di=bd34b76dca47ce86738ff171e3c50122&imgtype=jpg&er=1&src=http%3A%2F%2Fpic.58pic.com%2F58pic%2F14%2F81%2F70%2F29J58PICf2x_1024.jpg">
+              <img style="width:66px;height:66px;" src="assets/imgs/doc.png" 
+                *ngIf="certificationList_item.certifiedUrl && certificationList_item.certifiedUrl.search('doc') !== -1 || types.search('docx') !== -1">
+              <img style="width:66px;height:66px;" src="assets/imgs/ppt.png" 
+              *ngIf="certificationList_item.certifiedUrl && certificationList_item.certifiedUrl.search('ppt') !== -1 || types.search('pptx') !== -1">
+              <img style="width:66px;height:66px;" src="assets/imgs/xls.png"
+               *ngIf="certificationList_item.certifiedUrl && certificationList_item.certifiedUrl.search('xls') !== -1 || types.search('xlsx') !== -1">
+              <img style="width:66px;height:66px;" src="assets/imgs/png.png" 
+              *ngIf="certificationList_item.certifiedUrl && certificationList_item.certifiedUrl.search('jpg') !== -1 || types.search('png') !== -1">
+              <img style="width:66px;height:66px;" src="assets/imgs/pdf.png"
+               *ngIf="certificationList_item.certifiedUrl && certificationList_item.certifiedUrl.search('pdf') !== -1">
             </label>
             <div class="card-cont">
-              <h5>黄先生的证书</h5>
+              <h5>{{certificationList_item.certifiedUrl || '黄先生的证书'}}</h5>
               <p>点击查看文件预览</p>
-              <p>20 KB</p>
+              <p>{{certificationList_item.size}}</p>
             </div>
           </div>
           <div class="msg-footer" (click)="onGoPages(5,certificationList_item)">
@@ -358,7 +367,7 @@
         </div>
     </ion-card>
     <div class="action-btn mt20">
-        <button ion-button round (click)="gouploadfile()">上传简历附件</button>
+        <button ion-button round (click)="gouploadfile('resumePage')">上传简历附件</button>
     </div>
   </div>
 

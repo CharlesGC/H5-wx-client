@@ -116,6 +116,8 @@ export class ConsultantProfessionalCertificationPage {
     var a = obj.fileSize / 1048576;
     this.filesize = a.toPrecision(3);
     this.fileurl = obj.url;
+    this.certificationListData['certifiedUrl'] = this.fileurl
+    this.certificationListData['size'] = this.filesize
     var types = obj.fileType;
     if (this.filesize > 1) {
       this.filesize = this.filesize + ' MB'

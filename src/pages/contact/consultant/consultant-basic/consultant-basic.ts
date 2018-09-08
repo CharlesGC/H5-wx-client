@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController  } from 'ionic-angular';
-import {Camera, CameraOptions} from '@ionic-native/camera';
-import {FileTransfer, FileUploadOptions, FileTransferObject} from '@ionic-native/file-transfer';
-import {File} from '@ionic-native/file';
+import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
+import { Camera, CameraOptions } from '@ionic-native/camera';
+import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
+import { File } from '@ionic-native/file';
 
 import { MamenDataProvider } from '../../../../providers/mamen-data/mamen-data';
 
@@ -29,11 +29,11 @@ import { UploadfilePage } from '../../../uploadfile/uploadfile'
 export class ConsultantBasicPage {
   path: string;
   fileTransfer: FileTransferObject = this.transfer.create();
-  public consultantBasicData:any;
-  public isLoading=true;
-  constructor(public navCtrl: NavController, public navParams: NavParams, private Provider:MamenDataProvider,public loadingCtrl: LoadingController,private camera: Camera,
-    private transfer: FileTransfer, private file: File,) {
-    this.consultantBasicData={};
+  public consultantBasicData: any;
+  public isLoading = true;
+  constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider, public loadingCtrl: LoadingController, private camera: Camera,
+    private transfer: FileTransfer, private file: File, ) {
+    this.consultantBasicData = {};
   }
 
   ionViewDidLoad() {
@@ -46,81 +46,88 @@ export class ConsultantBasicPage {
   }
 
   presentLoading(isLoading) {
-    console.log(isLoading,'===');
+    console.log(isLoading, '===');
     let loader = this.loadingCtrl.create({
       content: "加载中",
       duration: 100
     });
-    
-    if(!isLoading){
-      console.log(loader,'loader');
+
+    if (!isLoading) {
+      console.log(loader, 'loader');
       loader && loader.dismiss();
-    }else{
+    } else {
       loader.present();
     }
   }
 
   /*跳转页面*/
-  onGoPages(type,data) {
+  onGoPages(type, data) {
 
-    if(type==0) {
+    if (type == 0) {
       //跳转至编辑用户基本信息
-      this.navCtrl.push(ConsultantInfoUserPage,{consultantAdviser:this.consultantBasicData});
+      this.navCtrl.push(ConsultantInfoUserPage, { consultantAdviser: this.consultantBasicData });
 
-    }else if(type == 1){
+    } else if (type == 1) {
       //跳转至编辑工作经验
-      this.navCtrl.push(ConsultantWorkExpPage,{data:(data?data:{})});
+      this.navCtrl.push(ConsultantWorkExpPage, { data: (data ? data : {}) });
 
-    }else if(type == 2){
+    } else if (type == 2) {
       //跳转至编辑项目经验
-      this.navCtrl.push(ConsultantProjectExpPage,{data:(data?data:{})});
+      this.navCtrl.push(ConsultantProjectExpPage, { data: (data ? data : {}) });
 
-    }else if(type == 3){
+    } else if (type == 3) {
       //跳转至编辑项目经验
-      this.navCtrl.push(ConsultantEducationExpPage,{data:(data?data:{})});
+      this.navCtrl.push(ConsultantEducationExpPage, { data: (data ? data : {}) });
 
-    }else if(type == 4){
+    } else if (type == 4) {
       //跳转至编辑项目经验
-      this.navCtrl.push(ConsultantLanguageExpPage,{data:(data?data:{})});
+      this.navCtrl.push(ConsultantLanguageExpPage, { data: (data ? data : {}) });
 
-    }else if(type == 5){
+    } else if (type == 5) {
       //跳转至编辑专业认证
-      console.log(data,'data~~~~');
-      this.navCtrl.push(ConsultantProfessionalCertificationPage,{data:(data?data:{})});
+      console.log(data, 'data~~~~');
+      this.navCtrl.push(ConsultantProfessionalCertificationPage, { data: (data ? data : {}) });
 
     }
   }
-  getUrlParam(name) {  
+  getUrlParam(name) {
     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象  
     var r = window.location.search.substr(1).match(reg);  //匹配目标参数  
     if (r != null) {
-        return encodeURI(r[2]);  //返回参数值 
+      return encodeURI(r[2]);  //返回参数值 
     } else {
-        return null; 
+      return null;
     }
   }
 
   /*顾问个人信息请求*/
-  getConsultantBasicData(){
+  getConsultantBasicData() {
     // let getCompanyListUrl = 'http://mamon.yemindream.com/mamon/adviser/getAdviserDetail';
-    const openId = window.sessionStorage.getItem('openId')|| this.getUrlParam('openId');
+    const openId = window.sessionStorage.getItem('openId') || this.getUrlParam('openId');
     let getCompanyListUrl = getAdviserDetailUrl + '?openId=' + openId;
-    this.Provider.getMamenSwiperData(getCompanyListUrl).subscribe(res=>{
-      if(res.code==200) {
+    this.Provider.getMamenSwiperData(getCompanyListUrl).subscribe(res => {
+      if (res.code == 200) {
         this.consultantBasicData = res.data;
         this.isLoading = false
         this.presentLoading(false);
-      }else if(res.code == 207) {
+        console.log(this.consultantBasicData.certifiedUrl,'获取连接')
+      } else if (res.code == 207) {
         window.localStorage.removeItem('openId');
       }
-    },error=>{
-      console.log('erros===',error);
+    }, error => {
+      console.log('erros===', error);
     })
   }
 
   /* 上传页面 */
-  gouploadfile() {
-    this.navCtrl.push(UploadfilePage)
+  gouploadfile(value) {
+    if (value == 'resumePage') {
+      this.navCtrl.push(UploadfilePage, { type: value })
+    } else {
+      this.navCtrl.push(UploadfilePage)
+    }
   }
+
+
 
 }
