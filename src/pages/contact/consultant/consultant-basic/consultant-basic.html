@@ -14,43 +14,43 @@
 
 
 <ion-content style="background-color: #fcfcfc;">
-   <!--基础信息box -->
+  <!--基础信息box -->
   <div class="user-basic">
     <ion-card class="card-item card-avatar" [ngClass]="{'checked':Selected==0}">
       <ion-list class="user-info" no-lines>
-          <ion-item class="mt20">
-              <ion-thumbnail item-start>
-                  <!-- <img src="http://img5.imgtn.bdimg.com/it/u=448163702,1912868067&fm=27&gp=0.jpg"> -->
-                  <img src="{{consultantBasicData.avatar}}">
-                  <div class="info-finish">
-                    <!-- <h3 class="mt20">12</h3> -->
-                    <!-- <p>已完成委托</p> -->
-                    <!-- <p class="mt10">
+        <ion-item class="mt20">
+          <ion-thumbnail item-start>
+            <!-- <img src="http://img5.imgtn.bdimg.com/it/u=448163702,1912868067&fm=27&gp=0.jpg"> -->
+            <img src="{{consultantBasicData.avatar}}">
+            <div class="info-finish">
+              <!-- <h3 class="mt20">12</h3> -->
+              <!-- <p>已完成委托</p> -->
+              <!-- <p class="mt10">
                       <span class="user-type type-approved" *ngIf="consultantBasicData.status >= 4">已审核</span>
                       <span class="user-type type-review" *ngIf="consultantBasicData.status == 0">审核中</span>
                     </p> -->
-                  </div>
-              </ion-thumbnail>
-              <div class="info-rigth">
-                  <div class="title-name">
-                      <h3>{{consultantBasicData.nickName || ''}}</h3>
-                      <span class="user-type type-approved" *ngIf="consultantBasicData.status >= 4">已审核</span>
-                      <span class="user-type type-review" *ngIf="consultantBasicData.status == 0">审核中</span>
-                      <!-- <ion-icon name="ios-arrow-forward" item-end color="ion-gray"></ion-icon> -->
-                  </div>
-                  <p class="info-other-label">
-                    <span>{{consultantBasicData.years}}  </span>
-                    <span>年工作经验</span>
-                    <span class="date-number">{{consultantBasicData.salaryDown}} - {{consultantBasicData.salaryUp}}</span>
-                    <span> 元/天</span>
-                  </p>
-                  <!-- <p class="info-other-label item-tags skills mt15">
+            </div>
+          </ion-thumbnail>
+          <div class="info-rigth">
+            <div class="title-name">
+              <h3>{{consultantBasicData.nickName || ''}}</h3>
+              <span class="user-type type-approved" *ngIf="consultantBasicData.status >= 4">已审核</span>
+              <span class="user-type type-review" *ngIf="consultantBasicData.status == 0">审核中</span>
+              <!-- <ion-icon name="ios-arrow-forward" item-end color="ion-gray"></ion-icon> -->
+            </div>
+            <p class="info-other-label">
+              <span>{{consultantBasicData.years}} </span>
+              <span>年工作经验</span>
+              <span class="date-number">{{consultantBasicData.salaryDown}} - {{consultantBasicData.salaryUp}}</span>
+              <span> 元/天</span>
+            </p>
+            <!-- <p class="info-other-label item-tags skills mt15">
                     <span *ngFor="let skillList_item of consultantBasicData.skillList">{{skillList_item.asName}}</span>
                   </p>
                   <p class="info-other-label item-tags industry mt10">
                     <span *ngFor="let industryList_item of consultantBasicData.industryList">{{industryList_item.alName}}</span>
                   </p> -->
-                  <!-- <p class="info-other-label">
+            <!-- <p class="info-other-label">
                     <label class="skills-type">工作年限</label>
                     <span>15年</span>
                   </p>
@@ -69,57 +69,57 @@
                     <label class="skills-type">擅长领域</label>
                     <span>产品开发</span>
                   </p> -->
-              </div>
-          </ion-item>
-          <ion-item no-lines text-wrap class="user-introdection">
-              {{consultantBasicData.introduction}}
-          </ion-item>
-          <ion-item no-lines class="info-rigth" *ngIf="(consultantBasicData.skillList && consultantBasicData.skillList.length > 0) || (consultantBasicData.industryList &&  consultantBasicData.industryList.length>0)">
-              <p class="info-other-label item-tags skills">
-                <span calss="mt5" *ngFor="let skillList_item of consultantBasicData.skillList">{{skillList_item.asName}}</span>
-              </p>
-              <p class="info-other-label item-tags industry mt10">
-                <span *ngFor="let industryList_item of consultantBasicData.industryList">{{industryList_item.alName}}</span>
-              </p>
-          </ion-item>
-          <!-- <div class="user-Introduction">曾经任职于多家互联网公司，工作经验 17 年有丰富的行业经理，完成了多个项目，专业技术强劲。</div> -->
-          <!-- <div class="user-Introduction">{{consultantBasicData.introduction}}</div> -->
-          <!-- <ion-item class="contact-item mt15"> -->
-              <div class="contact-info mt15">
-                  <div class="contact-info-cont">
-                    <p class="contact-info-list" *ngIf="consultantBasicData.country || consultantBasicData.province || consultantBasicData.city || consultantBasicData.address">
-                      <ion-icon ios="ios-navigate" md="md-navigate"></ion-icon>
-                      <span>{{consultantBasicData.country+consultantBasicData.province+consultantBasicData.city+(consultantBasicData.address||'')}}</span>
-                    </p>
-                    <p class="contact-info-list" *ngIf="consultantBasicData.uphone">
-                        <ion-icon ios="ios-call" md="md-call"></ion-icon>
-                      <span>{{consultantBasicData.uphone}}</span>
-                    </p>
-                    <p class="contact-info-list" *ngIf="consultantBasicData.email">
-                      <ion-icon name="ios-mail-outline"></ion-icon>
-                      <span>{{consultantBasicData.email}}</span>
-                    </p>
-                    <p class="contact-info-list" *ngIf="consultantBasicData.bankList && consultantBasicData.bankList.length>0">
-                        <ion-icon name="ios-card-outline"></ion-icon>
-                        <span>{{consultantBasicData.bankList[0].bankAccount}} · {{consultantBasicData.bankList[0].account}}</span>
-                      </p>
-                  </div>  
-                  <div class="contact-info-bg"></div>
-              </div>
-              <!-- <ion-item class="" (click)="goFormEditPage('schoolName',educationListData.schoolName,'text')" no-lines>
+          </div>
+        </ion-item>
+        <ion-item no-lines text-wrap class="user-introdection">
+          {{consultantBasicData.introduction}}
+        </ion-item>
+        <ion-item no-lines class="info-rigth" *ngIf="(consultantBasicData.skillList && consultantBasicData.skillList.length > 0) || (consultantBasicData.industryList &&  consultantBasicData.industryList.length>0)">
+          <p class="info-other-label item-tags skills">
+            <span calss="mt5" *ngFor="let skillList_item of consultantBasicData.skillList">{{skillList_item.asName}}</span>
+          </p>
+          <p class="info-other-label item-tags industry mt10">
+            <span *ngFor="let industryList_item of consultantBasicData.industryList">{{industryList_item.alName}}</span>
+          </p>
+        </ion-item>
+        <!-- <div class="user-Introduction">曾经任职于多家互联网公司，工作经验 17 年有丰富的行业经理，完成了多个项目，专业技术强劲。</div> -->
+        <!-- <div class="user-Introduction">{{consultantBasicData.introduction}}</div> -->
+        <!-- <ion-item class="contact-item mt15"> -->
+        <div class="contact-info mt15">
+          <div class="contact-info-cont">
+            <p class="contact-info-list" *ngIf="consultantBasicData.country || consultantBasicData.province || consultantBasicData.city || consultantBasicData.address">
+              <ion-icon ios="ios-navigate" md="md-navigate"></ion-icon>
+              <span>{{consultantBasicData.country+consultantBasicData.province+consultantBasicData.city+(consultantBasicData.address||'')}}</span>
+            </p>
+            <p class="contact-info-list" *ngIf="consultantBasicData.uphone">
+              <ion-icon ios="ios-call" md="md-call"></ion-icon>
+              <span>{{consultantBasicData.uphone}}</span>
+            </p>
+            <p class="contact-info-list" *ngIf="consultantBasicData.email">
+              <ion-icon name="ios-mail-outline"></ion-icon>
+              <span>{{consultantBasicData.email}}</span>
+            </p>
+            <p class="contact-info-list" *ngIf="consultantBasicData.bankList && consultantBasicData.bankList.length>0">
+              <ion-icon name="ios-card-outline"></ion-icon>
+              <span>{{consultantBasicData.bankList[0].bankAccount}} · {{consultantBasicData.bankList[0].account}}</span>
+            </p>
+          </div>
+          <div class="contact-info-bg"></div>
+        </div>
+        <!-- <ion-item class="" (click)="goFormEditPage('schoolName',educationListData.schoolName,'text')" no-lines>
                 <span class="left-title">编辑个人信息</span>
                 <div item-right class="rigth-message">
                   <ion-icon name="arrow-forward" color="#cfcfcf" class="ml12"></ion-icon>
                 </div>
               </ion-item>  -->
-          <!-- </ion-item> -->
-          <div class="msg-footer" (click)="onGoPages(0)">
-            <span class="msg-footer-text">查看个人信息详情</span>
-            <ion-icon name="arrow-forward" class="ml12"></ion-icon>
-          </div>
-        </ion-list>
-        
-        <!-- <p class="contact-annotation">手机号，邮箱与所在地址仅平台可见</p> -->
+        <!-- </ion-item> -->
+        <div class="msg-footer" (click)="onGoPages(0)">
+          <span class="msg-footer-text">查看个人信息详情</span>
+          <ion-icon name="arrow-forward" class="ml12"></ion-icon>
+        </div>
+      </ion-list>
+
+      <!-- <p class="contact-annotation">手机号，邮箱与所在地址仅平台可见</p> -->
     </ion-card>
   </div>
 
@@ -127,35 +127,35 @@
   <div class="user-other-list">
     <h4>工作经历</h4>
     <ion-card class="card-item" *ngFor="let workList_item of consultantBasicData.workList">
-        <div class="card-item-label">
-          <label>公司名称</label>
-          <p class="card-cont">{{workList_item.companyName}}</p>
-          <!-- <ion-icon name="arrow-forward" item-end color="ion-gray"></ion-icon> -->
-        </div>
-        <div class="card-item-label mt10">
-          <label>起止日期</label>
-          <p class="card-cont">
-            <span>{{workList_item.startTime | date:'yyyy/MM/dd'}} </span>
-            <span> - </span>
-            <span>{{workList_item.endTime | date:'yyyy/MM/dd'}}</span>
-          </p>
-        </div>
-        <div class="card-item-label mt10">
-          <label>所在部门</label>
-          <p class="card-cont">{{workList_item.department}}</p>
-        </div>
-        <div class="card-item-label mt10">
-          <label>担任职位</label>
-          <p class="card-cont">{{workList_item.role}}</p>
-        </div>
-        <div class="card-item-label mt10">
-          <label>职责描述</label>
-          <p class="card-cont">{{workList_item.workDescription}}</p>
-        </div>
-        <div class="msg-footer" (click)="onGoPages(1,workList_item)">
-          <span class="msg-footer-text">编辑详情</span>
-          <ion-icon name="arrow-forward" class="ml12"></ion-icon>
-        </div>
+      <div class="card-item-label">
+        <label>公司名称</label>
+        <p class="card-cont">{{workList_item.companyName}}</p>
+        <!-- <ion-icon name="arrow-forward" item-end color="ion-gray"></ion-icon> -->
+      </div>
+      <div class="card-item-label mt10">
+        <label>起止日期</label>
+        <p class="card-cont">
+          <span>{{workList_item.startTime | date:'yyyy/MM/dd'}} </span>
+          <span> - </span>
+          <span>{{workList_item.endTime | date:'yyyy/MM/dd'}}</span>
+        </p>
+      </div>
+      <div class="card-item-label mt10">
+        <label>所在部门</label>
+        <p class="card-cont">{{workList_item.department}}</p>
+      </div>
+      <div class="card-item-label mt10">
+        <label>担任职位</label>
+        <p class="card-cont">{{workList_item.role}}</p>
+      </div>
+      <div class="card-item-label mt10">
+        <label>职责描述</label>
+        <p class="card-cont">{{workList_item.workDescription}}</p>
+      </div>
+      <div class="msg-footer" (click)="onGoPages(1,workList_item)">
+        <span class="msg-footer-text">编辑详情</span>
+        <ion-icon name="arrow-forward" class="ml12"></ion-icon>
+      </div>
     </ion-card>
     <!-- <ion-card class="card-item mt5" (click)="onGoPages(1)">
         <div class="card-item-label">
@@ -185,7 +185,7 @@
         </div>
     </ion-card> -->
     <div class="action-btn mt20">
-        <button ion-button round  (click)="onGoPages(1)">添加工作经历</button>
+      <button ion-button round (click)="onGoPages(1)">添加工作经历</button>
     </div>
   </div>
 
@@ -193,42 +193,42 @@
   <div class="user-other-list">
     <h4>项目经历</h4>
     <ion-card class="card-item" *ngFor="let projectList_item of consultantBasicData.projectList">
-        <div class="card-item-label">
-          <label>项目名称</label>
-          <p class="card-cont">{{projectList_item.projectName}}</p>
-          <!-- <ion-icon name="arrow-forward" item-end color="ion-gray"></ion-icon> -->
-        </div>
-        <div class="card-item-label mt10">
-          <label>公司名称</label>
-          <p class="card-cont">{{projectList_item.companyName}}</p>
-        </div>
-        <div class="card-item-label mt10">
-          <label>起止日期</label>
-          <p class="card-cont">
-            <span>{{projectList_item.startTime | date:'yyyy/MM/dd'}} </span>
-            <span> - </span>
-            <span>{{projectList_item.endTime | date:'yyyy/MM/dd'}}</span>
-          </p>
-        </div>
-        <div class="card-item-label mt10">
-          <label>担任职位</label>
-          <p class="card-cont">{{projectList_item.role}}</p>
-        </div>
-        <div class="card-item-label mt10">
-          <label>项目描述</label>
-          <p class="card-cont">{{projectList_item.projectDetails}}</p>
-        </div>
-        <div class="card-item-label mt10">
-          <label>职责描述</label>
-          <p class="card-cont">{{projectList_item.responsibility}}</p>
-        </div>
-        <div class="msg-footer" (click)="onGoPages(2,projectList_item)">
-          <span class="msg-footer-text">编辑详情</span>
-          <ion-icon name="arrow-forward" class="ml12"></ion-icon>
-        </div>
+      <div class="card-item-label">
+        <label>项目名称</label>
+        <p class="card-cont">{{projectList_item.projectName}}</p>
+        <!-- <ion-icon name="arrow-forward" item-end color="ion-gray"></ion-icon> -->
+      </div>
+      <div class="card-item-label mt10">
+        <label>公司名称</label>
+        <p class="card-cont">{{projectList_item.companyName}}</p>
+      </div>
+      <div class="card-item-label mt10">
+        <label>起止日期</label>
+        <p class="card-cont">
+          <span>{{projectList_item.startTime | date:'yyyy/MM/dd'}} </span>
+          <span> - </span>
+          <span>{{projectList_item.endTime | date:'yyyy/MM/dd'}}</span>
+        </p>
+      </div>
+      <div class="card-item-label mt10">
+        <label>担任职位</label>
+        <p class="card-cont">{{projectList_item.role}}</p>
+      </div>
+      <div class="card-item-label mt10">
+        <label>项目描述</label>
+        <p class="card-cont">{{projectList_item.projectDetails}}</p>
+      </div>
+      <div class="card-item-label mt10">
+        <label>职责描述</label>
+        <p class="card-cont">{{projectList_item.responsibility}}</p>
+      </div>
+      <div class="msg-footer" (click)="onGoPages(2,projectList_item)">
+        <span class="msg-footer-text">编辑详情</span>
+        <ion-icon name="arrow-forward" class="ml12"></ion-icon>
+      </div>
     </ion-card>
     <div class="action-btn mt20">
-        <button ion-button round (click)="onGoPages(2)">添加项目经历</button>
+      <button ion-button round (click)="onGoPages(2)">添加项目经历</button>
     </div>
   </div>
 
@@ -236,108 +236,114 @@
   <div class="user-other-list">
     <h4>教育经历</h4>
     <ion-card class="card-item" *ngFor="let educationalList_item of consultantBasicData.educationalList">
-        <div class="card-item-label">
-          <label>学校</label>
-          <p class="card-cont">{{educationalList_item.schoolName}}</p>
-          <!-- <ion-icon name="arrow-forward" item-end color="ion-gray"></ion-icon> -->
-        </div>
-        <div class="card-item-label mt10">
-          <label>起止日期</label>
-          <p class="card-cont">
-            <span>{{educationalList_item.startTime | date:'yyyy/MM/dd'}} </span>
-            <span> - </span>
-            <span>{{educationalList_item.endTime | date:'yyyy/MM/dd'}}</span>
-          </p>
-        </div>
-        <div class="card-item-label mt10">
-          <label>专业名称</label>
-          <p class="card-cont">{{educationalList_item.profession}}</p>
-        </div>
-        <div class="card-item-label mt10">
-          <label>学历</label>
-          <p class="card-cont" *ngIf="educationalList_item.degree == 0">初中及以下</p>
-          <p class="card-cont" *ngIf="educationalList_item.degree == 1">高中</p>
-          <p class="card-cont" *ngIf="educationalList_item.degree == 2">大专</p>
-          <p class="card-cont" *ngIf="educationalList_item.degree == 3">本科</p>
-          <p class="card-cont" *ngIf="educationalList_item.degree == 4">研究生</p>
-          <p class="card-cont" *ngIf="educationalList_item.degree == 5"> 博士</p>
-        </div>
-        <div class="msg-footer" (click)="onGoPages(3,educationalList_item)">
-          <span class="msg-footer-text">编辑详情</span>
-          <ion-icon name="arrow-forward" class="ml12"></ion-icon>
-        </div>
+      <div class="card-item-label">
+        <label>学校</label>
+        <p class="card-cont">{{educationalList_item.schoolName}}</p>
+        <!-- <ion-icon name="arrow-forward" item-end color="ion-gray"></ion-icon> -->
+      </div>
+      <div class="card-item-label mt10">
+        <label>起止日期</label>
+        <p class="card-cont">
+          <span>{{educationalList_item.startTime | date:'yyyy/MM/dd'}} </span>
+          <span> - </span>
+          <span>{{educationalList_item.endTime | date:'yyyy/MM/dd'}}</span>
+        </p>
+      </div>
+      <div class="card-item-label mt10">
+        <label>专业名称</label>
+        <p class="card-cont">{{educationalList_item.profession}}</p>
+      </div>
+      <div class="card-item-label mt10">
+        <label>学历</label>
+        <p class="card-cont" *ngIf="educationalList_item.degree == 0">初中及以下</p>
+        <p class="card-cont" *ngIf="educationalList_item.degree == 1">高中</p>
+        <p class="card-cont" *ngIf="educationalList_item.degree == 2">大专</p>
+        <p class="card-cont" *ngIf="educationalList_item.degree == 3">本科</p>
+        <p class="card-cont" *ngIf="educationalList_item.degree == 4">研究生</p>
+        <p class="card-cont" *ngIf="educationalList_item.degree == 5"> 博士</p>
+      </div>
+      <div class="msg-footer" (click)="onGoPages(3,educationalList_item)">
+        <span class="msg-footer-text">编辑详情</span>
+        <ion-icon name="arrow-forward" class="ml12"></ion-icon>
+      </div>
     </ion-card>
     <div class="action-btn mt20">
-        <button ion-button round (click)="onGoPages(3)">添加教育经历</button>
+      <button ion-button round (click)="onGoPages(3)">添加教育经历</button>
     </div>
   </div>
 
   <!--擅长语言box -->
   <div class="user-other-list">
-      <h4>擅长语言</h4>
-      <ion-card class="card-item" *ngFor="let languageList_item of consultantBasicData.languageList">
-          <div class="card-item-label">
-            <label>语言</label>
-            <p class="card-cont">{{languageList_item.language}}</p>
-            <!-- <ion-icon name="arrow-forward" item-end color="ion-gray"></ion-icon> -->
-          </div>
-          <div class="card-item-label mt10">
-            <label>等级</label>
-            <p class="card-cont" *ngIf="languageList_item.grade == 0">较差</p>
-            <p class="card-cont" *ngIf="languageList_item.grade == 1">一般</p>
-            <p class="card-cont" *ngIf="languageList_item.grade == 2">熟练</p>
-            <p class="card-cont" *ngIf="languageList_item.grade == 3">精通</p>
-          </div>
-          <div class="msg-footer" (click)="onGoPages(4,languageList_item)">
-            <span class="msg-footer-text">编辑详情</span>
-            <ion-icon name="arrow-forward" class="ml12"></ion-icon>
-          </div>
-      </ion-card>
-      <div class="action-btn mt20">
-          <button ion-button round (click)="onGoPages(4)">添加擅长语言</button>
+    <h4>擅长语言</h4>
+    <ion-card class="card-item" *ngFor="let languageList_item of consultantBasicData.languageList">
+      <div class="card-item-label">
+        <label>语言</label>
+        <p class="card-cont">{{languageList_item.language}}</p>
+        <!-- <ion-icon name="arrow-forward" item-end color="ion-gray"></ion-icon> -->
       </div>
+      <div class="card-item-label mt10">
+        <label>等级</label>
+        <p class="card-cont" *ngIf="languageList_item.grade == 0">较差</p>
+        <p class="card-cont" *ngIf="languageList_item.grade == 1">一般</p>
+        <p class="card-cont" *ngIf="languageList_item.grade == 2">熟练</p>
+        <p class="card-cont" *ngIf="languageList_item.grade == 3">精通</p>
+      </div>
+      <div class="msg-footer" (click)="onGoPages(4,languageList_item)">
+        <span class="msg-footer-text">编辑详情</span>
+        <ion-icon name="arrow-forward" class="ml12"></ion-icon>
+      </div>
+    </ion-card>
+    <div class="action-btn mt20">
+      <button ion-button round (click)="onGoPages(4)">添加擅长语言</button>
     </div>
+  </div>
 
   <!--专业认证box -->
   <div class="user-other-list">
     <h4>专业认证</h4>
     <div *ngFor="let certificationList_item of consultantBasicData.certificationList">
       <ion-card class="card-item pm15">
-          <div class="card-item-label">
-            <label>认证机构</label>
-            <p class="card-cont">{{certificationList_item.certifiedTitle}}</p>
-            <!-- <ion-icon name="arrow-forward" item-end color="ion-gray"></ion-icon> -->
-          </div>
-          <div class="card-item-label mt10">
-            <label>颁发机构</label>
-            <p class="card-cont">{{certificationList_item.issuingAgency}}</p>
-          </div>
-          <div class="card-item-label mt10">
-            <label>颁发时间</label>
-            <p class="card-cont">
-              <span>{{certificationList_item.issuedTime | date:'yyyy/MM/dd'}} </span>
-            </p>
-          </div>
+        <div class="card-item-label">
+          <label>认证机构</label>
+          <p class="card-cont">{{certificationList_item.certifiedTitle}}</p>
+          <!-- <ion-icon name="arrow-forward" item-end color="ion-gray"></ion-icon> -->
+        </div>
+        <div class="card-item-label mt10">
+          <label>颁发机构</label>
+          <p class="card-cont">{{certificationList_item.issuingAgency}}</p>
+        </div>
+        <div class="card-item-label mt10">
+          <label>颁发时间</label>
+          <p class="card-cont">
+            <span>{{certificationList_item.issuedTime | date:'yyyy/MM/dd'}} </span>
+          </p>
+        </div>
       </ion-card>
       <ion-card class="card-item border-top">
-          <div class="card-item-label">
-            <label>
-              <img style="width:66px;height:66px;" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1534233453&di=bd34b76dca47ce86738ff171e3c50122&imgtype=jpg&er=1&src=http%3A%2F%2Fpic.58pic.com%2F58pic%2F14%2F81%2F70%2F29J58PICf2x_1024.jpg">
-            </label>
+        <div class="card-item-label">
+          <label>
+            <img style="width:66px;height:66px;" src="assets/imgs/doc.png" *ngIf="formatTypes(certificationList_item.certifiedUrl) == 'doc'">
+            <img style="width:66px;height:66px;" src="assets/imgs/ppt.png" *ngIf="formatTypes(certificationList_item.certifiedUrl) == 'ppt'">
+            <img style="width:66px;height:66px;" src="assets/imgs/xls.png" *ngIf="formatTypes(certificationList_item.certifiedUrl) == 'xls'">
+            <img style="width:66px;height:66px;" src="assets/imgs/png.png" *ngIf="formatTypes(certificationList_item.certifiedUrl) == 'jpg'">
+            <img style="width:66px;height:66px;" src="assets/imgs/pdf.png" *ngIf="formatTypes(certificationList_item.certifiedUrl) == 'pdf'">
+          </label>
+          <a href={{certificationList_item.certifiedUrl}} style="text-decoration:none;">
             <div class="card-cont">
               <h5>黄先生的证书</h5>
               <p>点击查看文件预览</p>
-              <p>20 KB</p>
+              <p>{{certificationList_item.size}}</p>
             </div>
-          </div>
-          <div class="msg-footer" (click)="onGoPages(5,certificationList_item)">
-            <span class="msg-footer-text">编辑详情</span>
-            <ion-icon name="arrow-forward" class="ml12"></ion-icon>
-          </div>
+          </a>
+        </div>
+        <div class="msg-footer" (click)="onGoPages(5,certificationList_item)">
+          <span class="msg-footer-text">编辑详情</span>
+          <ion-icon name="arrow-forward" class="ml12"></ion-icon>
+        </div>
       </ion-card>
     </div>
     <div class="action-btn mt20">
-        <button ion-button round (click)="onGoPages(5)">上传专业认证</button>
+      <button ion-button round (click)="onGoPages(5)">上传专业认证</button>
     </div>
   </div>
 
@@ -345,20 +351,20 @@
   <div class="user-other-list">
     <h4>简历附件</h4>
     <ion-card class="card-item" *ngFor="let resumeList_item of consultantBasicData.resumeList">
-        <div class="card-item-label">
-          <label>
-            <img style="width:66px;height:66px;" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1534233453&di=bd34b76dca47ce86738ff171e3c50122&imgtype=jpg&er=1&src=http%3A%2F%2Fpic.58pic.com%2F58pic%2F14%2F81%2F70%2F29J58PICf2x_1024.jpg">
-          </label>
-          <div class="card-cont" data-src="resumeList_item.resumeUrl">
-            <h5>{{resumeList_item.resumeName}}</h5>
-            <p>点击查看文件预览</p>
-            <p>{{resumeList_item.size}}</p>
-          </div>
-          <ion-icon name="md-close" item-end color="ion-gray"></ion-icon>
+      <div class="card-item-label">
+        <label>
+          <img style="width:66px;height:66px;" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1534233453&di=bd34b76dca47ce86738ff171e3c50122&imgtype=jpg&er=1&src=http%3A%2F%2Fpic.58pic.com%2F58pic%2F14%2F81%2F70%2F29J58PICf2x_1024.jpg">
+        </label>
+        <div class="card-cont" data-src="resumeList_item.resumeUrl">
+          <h5>{{resumeList_item.resumeName}}</h5>
+          <p>点击查看文件预览</p>
+          <p>{{resumeList_item.size}}</p>
         </div>
+        <ion-icon name="md-close" item-end color="ion-gray"></ion-icon>
+      </div>
     </ion-card>
     <div class="action-btn mt20">
-        <button ion-button round (click)="gouploadfile()">上传简历附件</button>
+      <button ion-button round (click)="gouploadfile('resumePage')">上传简历附件</button>
     </div>
   </div>
 
@@ -367,46 +373,46 @@
   <div class="user-other-list user-evaluation-list" *ngIf="consultantBasicData.abc">
     <h4>客户评价</h4>
     <ion-card class="card-item">
-        <div class="card-item-label">
-          <label>客户 XXX</label>
-          <span class="card-cont" ></span>
-          <span item-end class="evaluation-time">2018/06/05 23:50</span>
-          <!-- <ion-icon name="md-close" item-end color="ion-gray"></ion-icon> -->
-        </div>
-        <div class="evaluation-cont mt10">
-            黄先生拥有非常雄厚的供应链专业知识，对于项目的整体策划和落地推进起到了非常重要的作用，同时，他还拥有非常优秀的沟通技巧。
-        </div>
+      <div class="card-item-label">
+        <label>客户 XXX</label>
+        <span class="card-cont"></span>
+        <span item-end class="evaluation-time">2018/06/05 23:50</span>
+        <!-- <ion-icon name="md-close" item-end color="ion-gray"></ion-icon> -->
+      </div>
+      <div class="evaluation-cont mt10">
+        黄先生拥有非常雄厚的供应链专业知识，对于项目的整体策划和落地推进起到了非常重要的作用，同时，他还拥有非常优秀的沟通技巧。
+      </div>
     </ion-card>
     <ion-card class="card-item border-top">
-        <div class="card-item-label">
-          <label>客户 XXX</label>
-          <span class="card-cont" ></span>
-          <span item-end class="evaluation-time">2018/06/05 23:50</span>
-          <!-- <ion-icon name="md-close" item-end color="ion-gray"></ion-icon> -->
-        </div>
-        <div class="evaluation-cont mt10">
-            黄先生拥有非常雄厚的供应链专业知识，对于项目的整体策划和落地推进起到了非常重要的作用，同时，他还拥有非常优秀的沟通技巧。
-        </div>
+      <div class="card-item-label">
+        <label>客户 XXX</label>
+        <span class="card-cont"></span>
+        <span item-end class="evaluation-time">2018/06/05 23:50</span>
+        <!-- <ion-icon name="md-close" item-end color="ion-gray"></ion-icon> -->
+      </div>
+      <div class="evaluation-cont mt10">
+        黄先生拥有非常雄厚的供应链专业知识，对于项目的整体策划和落地推进起到了非常重要的作用，同时，他还拥有非常优秀的沟通技巧。
+      </div>
     </ion-card>
     <ion-card class="card-item border-top">
-        <div class="card-item-label">
-          <label>客户 XXX</label>
-          <span class="card-cont" ></span>
-          <span item-end class="evaluation-time">2018/06/05 23:50</span>
-          <!-- <ion-icon name="md-close" item-end color="ion-gray"></ion-icon> -->
-        </div>
-        <div class="evaluation-cont mt10">
-            黄先生拥有非常雄厚的供应链专业知识，对于项目的整体策划和落地推进起到了非常重要的作用，同时，他还拥有非常优秀的沟通技巧。
-        </div>
+      <div class="card-item-label">
+        <label>客户 XXX</label>
+        <span class="card-cont"></span>
+        <span item-end class="evaluation-time">2018/06/05 23:50</span>
+        <!-- <ion-icon name="md-close" item-end color="ion-gray"></ion-icon> -->
+      </div>
+      <div class="evaluation-cont mt10">
+        黄先生拥有非常雄厚的供应链专业知识，对于项目的整体策划和落地推进起到了非常重要的作用，同时，他还拥有非常优秀的沟通技巧。
+      </div>
     </ion-card>
     <div class="evaluation-more">查看更多</div>
   </div>
 
-    <div style="height:100px;"></div>
-    <!--操作提交-->
-    <button ion-button expand="full" large class="fixed-bottom" >申请认证</button>
-    <!-- <button ion-button expand="full" large class="fixed-bottom" >向该顾问发起项目邀请</button> -->
-    
+  <div style="height:100px;"></div>
+  <!--操作提交-->
+  <button ion-button expand="full" large class="fixed-bottom">申请认证</button>
+  <!-- <button ion-button expand="full" large class="fixed-bottom" >向该顾问发起项目邀请</button> -->
+
 </ion-content>
 <!-- <ion-footer class="footer-btn">
   <ion-toolbar>

@@ -131,9 +131,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { MamenDataProvider } from '../providers/mamen-data/mamen-data';
 
 /* 上传和裁剪组件 */
-import { ImageCropperComponent, CropperSettings } from 'ngx-img-cropper';
 import { FileUploadModule } from 'ng2-file-upload';
 import { UploadfilePage } from '../pages/uploadfile/uploadfile'
+import { ImageCropperModule } from 'ngx-image-cropper';
 
 @NgModule({
   /*申明组件*/
@@ -231,8 +231,6 @@ import { UploadfilePage } from '../pages/uploadfile/uploadfile'
 
     RecommendConsultantListPage,
     RecommendClientListPage,
-
-    ImageCropperComponent,
     UploadfilePage
   ],
   /*引入的模块 依赖的模块*/
@@ -248,8 +246,8 @@ import { UploadfilePage } from '../pages/uploadfile/uploadfile'
       backButtonText: '返回'  //配置返回按钮
     }),
 
-    FileUploadModule
-    
+    FileUploadModule,
+    ImageCropperModule
   ],
   /*启动的模块*/
   bootstrap: [IonicApp],

@@ -5,6 +5,7 @@ import { MamenDataProvider } from '../../../providers/mamen-data/mamen-data';
 import { FormEditPage } from '../../contact/form-edit/form-edit';
 import { DemandContentPage } from '../../demand-content/demand-content';
 import { submitApplicationUrl } from '../../../providers/requestUrl';
+import { UploadfilePage } from '../../uploadfile/uploadfile'
 
 /**
  * Generated class for the ApplicationProjectPage page.
@@ -19,6 +20,11 @@ import { submitApplicationUrl } from '../../../providers/requestUrl';
   templateUrl: 'application-project.html',
 })
 export class ApplicationProjectPage {
+  private filetypeicon: any;
+  private filetitle: any;
+  private filesize: any;
+  private filestatus = false;
+  private fileurl: any;
   public projectData = {};
   public tip_isShow = false;
   public success_isShow = false;
@@ -34,7 +40,30 @@ export class ApplicationProjectPage {
   goFormEditPage(field, value, type) {
     this.navCtrl.push(FormEditPage,{callback:this.setValue,value:value,field:field,type:type});
   }
-
+  /* 跳转到上传页面 */
+  gouploadfile() {
+    this.navCtrl.push(UploadfilePage, {
+      callback: this.setuploadfile,
+      title: this.filetitle,
+      typeicon: this.filetypeicon,
+      status: this.filestatus,
+      size: this.filesize
+    })
+  }
+  setuploadfile = (obj, name) =>{
+    this.filestatus = true;
+    this.filetitle = name;
+    console.log(obj)
+    var a = obj.fileSize / 1048576;
+    this.filesize = a.toPrecision(3);
+    this.fileurl = obj.url;
+    var types = obj.fileType;
+    if (this.filesize > 1) {
+      this.filesize = this.filesize + ' MB'
+    } else {
+      this.filesize = this.filesize * 1024 + ' KB'
+    }
+  }
   /*设置值（回调函数）*/
   setValue = (field,value)=> {
     

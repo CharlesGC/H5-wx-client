@@ -23,7 +23,7 @@
 
   <button ion-button round class="btn-upload">
     选择文件
-    <input type="file" ng2FileSelect [uploader]="uploader" (change)="selectedFileOnChanged($event)" id="uploadfile" />
+    <input type="file" (change)="selectedFileOnChanged($event)" id="uploadfile" />
   </button>
 
   <div class="fixed-bottom">

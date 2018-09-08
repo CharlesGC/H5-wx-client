@@ -6,6 +6,67 @@ page-consultant-professional-certification {
                 color: #cfcfcf;
             }
         }
-    
+    }
+    .clearfix:after {
+        content:""; 
+        display: block; 
+        clear:both; 
+     }
+    .bg{
+        margin: 0 15px;
+        height: auto;
+        padding: 15px;
+        border-radius: 3px;
+        background-color: #ffffff;
+        box-shadow: 0 1px 10px 0 rgba(0, 0, 0, .05);
+        position: relative;
+        img{
+            max-width: 66px;
+            height: auto;
+            float: left;
+        }
+        .file-title{
+            display: block;
+            font-family: PingFangSC;
+            font-size: 16px;
+            font-weight: 600;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: 1.13;
+            letter-spacing: normal;
+            color: #4a4a4a;
+            margin-left: 76px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .file-desc{
+            display: block;
+            opacity: 0.5;
+            font-family: PingFangSC;
+            font-size: 12px;
+            font-weight: normal;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: normal;
+            letter-spacing: 0.2px;
+            color: #4a4a4a;
+            margin-left: 76px;
+            margin-top: 7px;
+        }
+        .file-size{
+            display: block;
+            font-family: PingFangSC;
+            font-size: 10px;
+            font-weight: normal;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: normal;
+            letter-spacing: normal;
+            color: #9b9b9b;
+            position: absolute;
+            bottom: 15px;
+            left: 91px;
+        }
     }
 }

@@ -14,14 +14,23 @@
 
 
 <ion-content>
-  <img-cropper #cropper [image]="data" [settings]="cropperSettings" class="imgcropper"></img-cropper>
+  <image-cropper class="imgcropper"
+    [imageChangedEvent]="imageChangedEvent" 
+    [roundCropper]="true"
+    [maintainAspectRatio]="true" 
+    [aspectRatio]="1 / 1"
+    [resizeToWidth]="128" format="png" 
+    (imageCroppedBase64)="imageCropped($event)" 
+    (imageLoaded)="imageLoaded()"
+    (loadImageFailed)="loadImageFailed()">
+  </image-cropper>
   <br>
-  <button ion-button block>
+  <button ion-button round class="btn-upload">
     点击选择文件
-    <input id="custom-input" type="file" (change)="fileChangeListener($event,cropper)">
+    <input type="file" id="custom-input" (change)="fileChangeEvent($event)" />
   </button>
-  <span class="result" *ngIf="data.image">
-    <img [src]="data.image" [width]="cropperSettings.croppedWidth" [height]="cropperSettings.croppedHeight">
-  </span>
+  <!-- <span class="result" *ngIf="data.image">
+    <img [src]="croppedImage">
+  </span> -->
   <button ion-button expand="full" large class="fixed-bottom" (click)="uploadFile()">提交</button>
 </ion-content>
