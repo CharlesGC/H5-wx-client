@@ -3,7 +3,8 @@ import { IonicPage, NavController, NavParams  } from 'ionic-angular';
 import {ReleaseThreePage} from '../release-three/release-three';
 import {ReleaseSuccessPage} from '../release-success/release-success';
 import { MamenDataProvider } from '../../providers/mamen-data/mamen-data';
-import {getWechatJsConfig,getUploadLocal} from '../../providers/dataUrl';
+import {ProjectListPage} from '../../pages/my-project/client/project-list/project-list';
+import {getWechatJsConfig,getUploadLocal,getSpeedrelease} from '../../providers/dataUrl';
 
 declare var wx: any;
 declare var $:any;
@@ -29,7 +30,13 @@ export class SpeedPage {
   public audioUrl= {};
   public animationplay:any;
   public selected = -1;
-  constructor(public navCtrl: NavController, public navParams: NavParams,public WechatData:MamenDataProvider,public UploadData:MamenDataProvider,public changeDetectorRef:ChangeDetectorRef ) {
+  public speedVoiceReleaseArr:any;
+  public description:any;
+  public voice:any;
+  public isShow = false;
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+    public WechatData:MamenDataProvider,public UploadData:MamenDataProvider,
+    public changeDetectorRef:ChangeDetectorRef,public speedVoiceData:MamenDataProvider ) {
   }
   ionViewDidLoad() { 
     console.log('ionViewDidLoad SpeedPage');
@@ -40,6 +47,8 @@ export class SpeedPage {
     // audio.onended = () =>{
     //   alert('执行完成')
     // }
+    // this.fieldValue = this.navParams.get('value');
+    // console.log(this.fieldValue);
   }
   goback() {
     this.navCtrl.push(ReleaseThreePage);
@@ -219,7 +228,39 @@ export class SpeedPage {
       });
     }
   }
-
+  /*动态获取openId*/ 
+  getUrlParam(name) {  
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象  
+    var r = window.location.search.substr(1).match(reg);  //匹配目标参数  
+    if (r != null) {
+        return encodeURI(r[2]);  //返回参数值 
+    } else {
+        return null; 
+    }
+ }
+  /*快速发布*/ 
+  onSpeedReleaseSubmit(value) {
+    console.log(value);
+    // o2GZp1KSbS2Ab6zWjBurLzfcrAKk
+    const openId = window.sessionStorage.getItem('openId') || this.getUrlParam('openId') || window.localStorage.getItem('openId');
+    this.description = value;
+    let Arr = this.audioData || [];
+    this.voice = Arr.length > 0 ?  Arr.map(f=>f.url).join(",") :'';
+    this.speedVoiceData.getSpeedReleaseData(getSpeedrelease,openId,this.description,this.voice).subscribe(
+      res=>{
+        this.speedVoiceReleaseArr = res.data;
+        console.log(this.speedVoiceReleaseArr);
+        this.isShow = true;
+      },error=>{
+        console.log(error);
+      }
+    )
+  }
+  /*功能之后跳转*/
+  goClientProjectPage() {
+    this.navCtrl.push(ProjectListPage);
+    this.isShow = false;
+  }
 }
   
  

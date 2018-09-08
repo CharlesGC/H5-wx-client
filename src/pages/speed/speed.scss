@@ -357,4 +357,106 @@ page-speed {
             line-height: 50px;
         }
     }
+    // 弹出层
+    .phonebind-modal {
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        position: absolute;
+        z-index: 1000;
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+        -webkit-align-items: center;
+        -ms-flex-align: center;
+        align-items: center;
+        -webkit-box-pack: center;
+        -webkit-justify-content: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+        contain: strict;
+        z-index: 99999;
+        .modal-bg {
+            left: 0;
+            top: 0;
+            position: absolute;
+            z-index: 2;
+            display: block;
+            width: 100%;
+            height: 100%;
+            background-color: #000;
+            opacity: .2;
+            -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+        }
+        .modal-box {
+            background-color: #fff;
+            margin: 0 40px;
+            padding: 0 20px 20px;
+            z-index: 10;
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+            -webkit-flex-direction: column;
+            -ms-flex-direction: column;
+            flex-direction: column;
+            min-width: 250px;
+            max-height: 90%;
+            // opacity: 0;
+            contain: content;
+            font-family: PingFangSC;
+            font-weight: 600;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: 1.29;
+            letter-spacing: normal;
+            text-align: center;
+            color: #4a4a4a;
+            border-radius: 3px;
+            box-shadow: 0 1px 10px 0 rgba(0, 0, 0, 0.05);
+            .modal-content {
+                overflow: auto;
+                text-align: left;
+                font-size: 12px;
+                line-height: 1.8;
+                font-weight: 500;
+                p{
+                    text-indent: 2rem;
+                }
+            }
+            .modal-top-close{
+                text-align: right;
+                margin-top: 5px;
+                ion-icon {
+                    font-size: 28px;
+                }
+            }
+            .modal-title {
+                color: #ff6536;
+                margin-bottom: .5rem;
+                padding-right: 5px;
+            }
+            .modal-footer {
+                button {
+                    height: 40px;
+                    margin: 0;
+                    margin-top: .8rem;
+                    border-radius: 3px;
+                    font-size: 1.2rem;
+                    font-weight: 600;
+                    &.btn-delete {
+                        background-color: #e9e9e9;
+                        color: #fc6868;
+                    }
+                }
+            }
+        }
+    }
+
 }

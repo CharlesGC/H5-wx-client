@@ -70,8 +70,8 @@ export class MamenDataProvider {
 		.catch(error=>Observable.throw(error||'Server error'));//抛出异常
   }
   // 翘楚
-  public getoutstandingData(dataUrl:string,type:number){
-		return this.http.get(dataUrl + "?type=" +type).map(res=>res.json())
+  public getoutstandingData(dataUrl:string,type:number,pageNum:any,pageSize:any){
+		return this.http.get(dataUrl + "?type=" +type +'&pageNum='+pageNum+'&pageSize='+pageSize).map(res=>res.json())
 		.catch(error=>Observable.throw(error||'Server error'));//抛出异常
   }
   // 财务审计
@@ -115,6 +115,11 @@ export class MamenDataProvider {
   /*发布*/ 
   public getReleaseData(dataUrl:string,openId:any,pid:any) {
     return this.http.get(dataUrl + "?openId=" +openId+"&pid="+pid).map(res=>res.json())
+		.catch(error=>Observable.throw(error||'Server error'));//抛出异常
+  }
+  /*快速发布*/ 
+  public getSpeedReleaseData(dataUrl:string,openId:any,description:any,voice:any) {
+    return this.http.get(dataUrl + "?openId=" +openId+"&description="+description+"&voice="+voice).map(res=>res.json())
 		.catch(error=>Observable.throw(error||'Server error'));//抛出异常
   }
   /*语音存放微信*/ 

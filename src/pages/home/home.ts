@@ -108,7 +108,7 @@ export class HomePage {
 
   // 翘楚
   getoutstandingInfo() {
-    this.outstanddata.getcaseData(getoutstandingUrl, 1).subscribe(
+    this.outstanddata.getoutstandingData(getoutstandingUrl, 1, '', '').subscribe(
       res => {
         console.log(res);
         this.outstandingArr = {
@@ -125,7 +125,7 @@ export class HomePage {
 
   // 财务审计
   getfinanceInfo() {
-    this.financedata.getfinanceData(getfinanceUrl,2,1,6).subscribe(
+    this.financedata.getfinanceData(getfinanceUrl, 2, 1, 6).subscribe(
       res => {
         console.log(res);
         this.financesArr = {
@@ -141,9 +141,9 @@ export class HomePage {
       }
     )
   }
-   // 全部顾问
-   getfinanceAllInfo() {
-    this.financedata.getindustryAllData(getfinanceAllUrl, 0,1,4).subscribe(
+  // 全部顾问
+  getfinanceAllInfo() {
+    this.financedata.getindustryAllData(getfinanceAllUrl, 0, 1, 4).subscribe(
       res => {
         console.log(1111)
         console.log(res);
@@ -152,9 +152,9 @@ export class HomePage {
           title: '全部顾问',
           data: res.data
         };;
-        this.financesArrLength = this.financeAllArr.data.filter((f, i) => i < 3);
+        // this.financesArrLength = this.financeAllArr.data.filter((f, i) => i < 3);
         this.financeAllArrlength = this.financeAllArr.data.filter((f, i) => i < 4);
-        console.log(this.financeAllArr,'全部顾问');
+        console.log(this.financeAllArr, '全部顾问');
       }, error => {
         console.log(error);
       }
@@ -171,15 +171,15 @@ export class HomePage {
   //进入时执行
   ionViewDidEnter() {
     let elements = document.querySelectorAll(".tabbar");
-    if(elements != null) {
-        Object.keys(elements).map((key) => {
-            elements[key].style.display ='flex';
-        });
+    if (elements != null) {
+      Object.keys(elements).map((key) => {
+        elements[key].style.display = 'flex';
+      });
     }
     const token = this.getUrlParam('token');
     const usertype = this.getUrlParam('status');
     const openId = this.getUrlParam('openId');
-    openId && window.localStorage.setItem('openId',openId);
+    openId && window.localStorage.setItem('openId', openId);
     if (token) {
       console.log('获取 ', usertype);
       if (Number(usertype) == 1) {
@@ -220,26 +220,27 @@ export class HomePage {
       });
     }
   }
+  // 行业翘楚
+  outstanding(value, index, type) {
+    this.navCtrl.push(IndustrydetialPage, {
+      type: 'indeustryOutstand'
+    });
+  }
   // 财务审计
-  financemore(value,index,type) {
-    if(value == '' && index == '' && type == 'financemore') {
-      this.navCtrl.push(IndustrydetialPage, {
-        type: type
-      });
-    }
-    
+  financemore(value, index, type) {
+    this.navCtrl.push(IndustrydetialPage, {
+      type: 'financemore'
+    });
   }
   // 全部顾问更多
-  FinancCount(value,index,type) {
-    if(value == '' && index == '' && type == 'finance-count') {
-      this.navCtrl.push(IndustrydetialPage, {
-        type: type
-      });
-    }
+  FinancCount(value, index, type) {
+    this.navCtrl.push(IndustrydetialPage, {
+      type: 'finance-count'
+    });
   }
   // 全部顾问列表
-  financeAllList (value,index) {
-    this.navCtrl.push(ProjectConsultantBrowserPage,{uid:value.uid,type:'homepage'})
+  financeAllList(value, index) {
+    this.navCtrl.push(ProjectConsultantBrowserPage, { uid: value.uid, type: 'homepage' })
   }
   getUrlParam(name) {
     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象  
