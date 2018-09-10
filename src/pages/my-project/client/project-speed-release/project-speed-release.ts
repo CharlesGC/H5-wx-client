@@ -23,19 +23,18 @@ export class ProjectSpeedReleasePage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProjectSpeedReleasePage');
-    this.getProjectListData('');
+    let data = this.navParams.get('data') || {};
+    this.getProjectListData(data.pid);
   }
 
   /*项目详情数据请求*/
   getProjectListData(pid) {
     // let projectDetailsUrl = 'http://mamon.yemindream.com/mamon/customer/getProjectDetail';
-    const openId = window.sessionStorage.getItem('openId')|| this.getUrlParam('openId')
+    const openId = window.sessionStorage.getItem('openId')|| this.getUrlParam('openId');
     let projectDetailsUrl = getProjectDetailUrl + '?openId=' + openId + '&pid='+pid;
     this.Provider.getMamenSwiperData(projectDetailsUrl).subscribe(res=>{
       if(res.code==200) {
-        console.log(res,'--------');
-        this.projectDetails = res.data;
-        console.log(this.projectDetails,'**************');
+        this.projectDetails.push(res.data);
       }else if(res.code == 207) {
         window.localStorage.removeItem('openId');
       }else{
@@ -48,7 +47,8 @@ export class ProjectSpeedReleasePage {
 // 语音播放
 autoPlay(e,index) {
   console.log(111111111111)
-  this.audio = document.getElementsByTagName('audio')[0];
+  // this.audio = document.getElementsByTagName('audio')[0];
+  this.audio = document.getElementsByTagName('audio');
   console.log(this.audio,'语音')
     //  总时长
     // this.duration = this.audio[index].duration;
@@ -57,47 +57,49 @@ autoPlay(e,index) {
     // // console.log(math);
     // console.log( this.duration,'秒');
     /*播放完成事件*/ 
-  this.audio.onended = () =>{
+  this.audio[index].onended = () =>{
     // alert('执行完成');
-    spinner1['style'].display = 'none';
-    spinner['style'].display = 'block';
+    spinner1[index]['style'].display = 'none';
+    spinner[index]['style'].display = 'block';
   }
   console.log(this.audio)
-  let spinner = document.getElementsByClassName('audio-spinner')[0];
-  let spinner1 = document.getElementsByClassName('audio-spinner1')[0];
+  // let spinner = document.getElementsByClassName('audio-spinner')[0];
+  // let spinner1 = document.getElementsByClassName('audio-spinner1')[0];
+  let spinner = document.getElementsByClassName('audio-spinner');
+  let spinner1 = document.getElementsByClassName('audio-spinner1');
   console.log(spinner,spinner1,2222222222222);
-      if(this.audio.paused) {
-        this.audio.play();
-        spinner1['style'].display = 'block';
-        spinner['style'].display = 'none';
-      }else {
-        // this.audio.pause();
-        spinner1['style'].display = 'none';
-        spinner['style'].display = 'block';
-      }
-  // for(let i=0;i<this.audio.length;i++) {
-  //     if(index === i) {
-  //       // spinner1[i]['style'].display = 'block';
-  //       // spinner[i]['style'].display = 'none';
-  //       if(this.audio[i].paused) {
-  //         this.audio[i].play();
-  //         spinner1[i]['style'].display = 'block';
-  //         spinner[i]['style'].display = 'none';
-  //       }else {
-  //         this.audio[i].pause();
-  //         spinner1[i]['style'].display = 'none';
-  //         spinner[i]['style'].display = 'block';
-  //       }
+      // if(this.audio.paused) {
+      //   this.audio.play();
+      //   spinner1['style'].display = 'block';
+      //   spinner['style'].display = 'none';
+      // }else {
+      //   // this.audio.pause();
+      //   spinner1['style'].display = 'none';
+      //   spinner['style'].display = 'block';
+      // }
+  for(let i=0;i<this.audio.length;i++) {
+      if(index === i) {
+        // spinner1[i]['style'].display = 'block';
+        // spinner[i]['style'].display = 'none';
+        if(this.audio[i].paused) {
+          this.audio[i].play();
+          spinner1[i]['style'].display = 'block';
+          spinner[i]['style'].display = 'none';
+        }else {
+          this.audio[i].pause();
+          spinner1[i]['style'].display = 'none';
+          spinner[i]['style'].display = 'block';
+        }
       
-  //     }else {
-  //       spinner1[i]['style'].display = 'none';
-  //       spinner[i]['style'].display = 'block'; 
-  //       this.audio[i].pause();
-  //       if(this.audio[i].paused) {
-  //         this.audio[i].load();
-  //       }
-  //     }
-  //   } 
+      }else {
+        spinner1[i]['style'].display = 'none';
+        spinner[i]['style'].display = 'block'; 
+        this.audio[i].pause();
+        if(this.audio[i].paused) {
+          this.audio[i].load();
+        }
+      }
+    } 
   }
   // 请求openId
   getUrlParam(name) {  

@@ -5,7 +5,7 @@ import { MamenDataProvider } from '../../providers/mamen-data/mamen-data';
 import { PhonebindPage } from '../phonebind/phonebind';
 // import { ChooseIdentityPage } from '../choose-identity/choose-identity';
 import { ProjectConsultantBrowserPage } from '../my-project/client/project-consultant-browser/project-consultant-browser';
-import {ProjectSpeedReleasePage} from '../../pages/my-project/client/project-speed-release/project-speed-release'
+// import {ProjectSpeedReleasePage} from '../../pages/my-project/client/project-speed-release/project-speed-release'
 
 import { ViewChild } from '@angular/core';
 
@@ -198,7 +198,7 @@ export class HomePage {
     if (value == '' && index == '' && type == 'indeustry') {
       this.navCtrl.push(IndustrydetialPage, {
         type: type
-        
+
       })
     } else {
       this.navCtrl.push(IndustrydetialPage, {
@@ -263,7 +263,7 @@ export class HomePage {
       return null;
     }
   }
-  goProjectSpeed () {
-    this.navCtrl.push(ProjectSpeedReleasePage)
-  }
+  // goProjectSpeed () {
+  //   this.navCtrl.push(ProjectSpeedReleasePage)
+  // }
 }
