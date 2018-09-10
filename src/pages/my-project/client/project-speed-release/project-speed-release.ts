@@ -68,15 +68,6 @@ autoPlay(e,index) {
   let spinner = document.getElementsByClassName('audio-spinner');
   let spinner1 = document.getElementsByClassName('audio-spinner1');
   console.log(spinner,spinner1,2222222222222);
-      // if(this.audio.paused) {
-      //   this.audio.play();
-      //   spinner1['style'].display = 'block';
-      //   spinner['style'].display = 'none';
-      // }else {
-      //   // this.audio.pause();
-      //   spinner1['style'].display = 'none';
-      //   spinner['style'].display = 'block';
-      // }
   for(let i=0;i<this.audio.length;i++) {
       if(index === i) {
         // spinner1[i]['style'].display = 'block';
