@@ -112,7 +112,7 @@
       <div style="height:100px;"></div>
       <button ion-button expand="full" large class="fixed-bottom bg-gry" 
         (click)="goAccountEdit()" 
-        *ngIf="projectStageDetail.adviserStatus==0">
+        *ngIf="projectStageDetail.adviserStatus==0 || projectStageDetail.adviserStatus==4">
         等待客户确认中
       </button>
       <button ion-button expand="full" large class="fixed-bottom" 

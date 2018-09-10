@@ -85,7 +85,7 @@ export class ConsultantProjectBrowserPage {
   ionViewDidEnter() {
     console.log(this.navParams.get('data'),'ionViewDidEnter ProjectBrowserPage');
     let data = this.navParams.get('data')
-    // this.getProjectListData(data.pid);
+    this.getProjectListData(data.pid);
     window.sessionStorage.setItem('pid',data.pid || 0);
     
     

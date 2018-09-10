@@ -26,9 +26,9 @@
       <ion-list class="list-content">
         <ion-item class="item-card mt20" *ngFor="let consultantList_item of projectConsultantListData" no-lines>
           <p class="consultant-type">
-            <span *ngIf="consultantList_item.astatus == 0">待查看</span>
+            <!-- <span *ngIf="consultantList_item.astatus == 0">待查看</span> -->
             <span *ngIf="consultantList_item.astatus == 1">待面试</span>
-            <span *ngIf="consultantList_item.astatus == 2">已推荐</span>
+            <span *ngIf="consultantList_item.astatus == 2">待查看</span>
             <span *ngIf="consultantList_item.astatus == 3">被拒绝</span>
             <span *ngIf="consultantList_item.astatus == 4">方案待提交</span>
             <span *ngIf="consultantList_item.astatus == 5">已聘用</span>

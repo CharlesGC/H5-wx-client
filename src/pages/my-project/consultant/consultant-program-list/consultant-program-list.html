@@ -129,11 +129,11 @@
         </ion-item>
       </ion-list>
       <div style="height:100px;"></div>
-      <!-- <button ion-button expand="full" large class="fixed-bottom bg-gry" (click)="goAccountEdit()">等待客户确认中</button> -->
-      <button ion-button expand="full" large class="fixed-bottom" (click)="onAddProgramClick(projectProgramDetails)" *ngIf="projectProgramDetails.status == -1 ||projectProgramDetails.status == 1||projectProgramDetails.status == 4">编辑</button>
-      <!-- <div class="fixed-bottom">
+      <button ion-button expand="full" large class="fixed-bottom bg-gry" (click)="goAccountEdit()" *ngIf="projectProgramDetails.status == -1 ||projectProgramDetails.status == 1">等待客户确认中</button>
+      <!-- <button ion-button expand="full" large class="fixed-bottom" (click)="onAddProgramClick(projectProgramDetails)" *ngIf="projectProgramDetails.status == -1 ||projectProgramDetails.status == 1||projectProgramDetails.status == 4">编辑</button> -->
+      <div class="fixed-bottom"*ngIf="projectProgramDetails.status == 4">
           <button ion-button class="btn-submit" (click)="onAddProgramClick(projectProgramDetails)">编辑</button>
           <button ion-button class="btn-delete" (click)="on()">提交方案</button>
-      </div> -->
+      </div>
   </ion-content>
   

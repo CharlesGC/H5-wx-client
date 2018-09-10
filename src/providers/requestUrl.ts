@@ -292,6 +292,8 @@ export const projectEvaluateUrl = getAPIPath + '/adviser/projectEvaluate';
 /*我的项目-客户-项目评价*/
 export const clientprojectEvaluateUrl = getAPIPath + '/customer/projectEvaluate';
 
+/*我的项目-消息中心*/
+export const getMessageListUrl = getAPIPath + '/message/getMessageList';
 
 
 

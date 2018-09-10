@@ -1,7 +1,7 @@
 <ion-header>
 
     <ion-navbar>
-      <ion-title>我的项目/客户/项目列表</ion-title>
+      <ion-title>我的项目/顾问/项目列表</ion-title>
     </ion-navbar>
   
   </ion-header>
@@ -81,7 +81,7 @@
           <div *ngIf="projectListData_item.type ==0">
             <div class="msg-title">
                 <div class="msg-title-left">
-                  <span class="project-type type-blue" *ngIf="projectListData_item.status ==0">待查看</span>
+                  <!-- <span class="project-type type-blue" *ngIf="projectListData_item.status ==0">待查看</span> -->
                   <span class="project-type type-blue" *ngIf="projectListData_item.status ==1">待面试</span>
                   <span class="project-type type-blue" *ngIf="projectListData_item.status ==2">已推荐</span>
                   <span class="project-type type-blue" *ngIf="projectListData_item.status ==3">被拒绝</span>
