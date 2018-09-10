@@ -4,6 +4,7 @@ import {ReleaseThreePage} from '../release-three/release-three';
 import {ReleaseSuccessPage} from '../release-success/release-success';
 import { MamenDataProvider } from '../../providers/mamen-data/mamen-data';
 import {ProjectListPage} from '../../pages/my-project/client/project-list/project-list';
+import { ProjectEditStep1Page } from '../my-project/client/project-edit-step1/project-edit-step1';
 import {getWechatJsConfig,getUploadLocal,getSpeedrelease} from '../../providers/dataUrl';
 
 declare var wx: any;
@@ -50,8 +51,9 @@ export class SpeedPage {
     // this.fieldValue = this.navParams.get('value');
     // console.log(this.fieldValue);
   }
+  // 跳转到完整发布
   goback() {
-    this.navCtrl.push(ReleaseThreePage);
+    this.navCtrl.push(ProjectEditStep1Page);
   }
   /*到发布成功页面*/ 
   // gotosuccess () {
