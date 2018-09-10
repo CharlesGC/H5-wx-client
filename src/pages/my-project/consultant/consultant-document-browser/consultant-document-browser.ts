@@ -59,7 +59,7 @@ export class ConsultantDocumentBrowserPage {
 
   /*编辑操作*/
   onDocumentEditClick() {
-    this.navCtrl.push(ConsultantInteractionSubmitPage,{data:this.consultantDocumentDetailData});
+    this.navCtrl.push(ConsultantInteractionSubmitPage,{data:this.consultantDocumentDetailData,pid:this.consultantDocumentDetailData['pid'],psid:this.consultantDocumentDetailData['psid']});
   }
 
   /*删除操作*/

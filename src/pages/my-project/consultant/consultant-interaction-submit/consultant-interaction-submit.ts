@@ -45,15 +45,21 @@ export class ConsultantInteractionSubmitPage {
     let fid = 1; //上传文件返回的id;
     let pid = this.navParams.get('pid') || this.interactionData['pid'];
     let psid = this.navParams.get('psid') || this.interactionData['psid'];
+    let pdid = this.navParams.get('pdid') || this.interactionData['pdid'];
     let interactionData = this.interactionData;
     // let projectStageDetailUrl = 'http://mamon.yemindream.com/mamon/adviser/submitDocument';
     const openId = window.sessionStorage.getItem('openId')|| this.getUrlParam('openId');
-    let projectStageDetailUrl = submitDocumentUrl + '?openId=' + openId + '&pid='+pid + '&psid=' + psid +
+    let projectStageDetailUrl = submitDocumentUrl + '?openId=' + openId + '&pid='+pid +
                               '&name='+interactionData['name']+
                               '&introduction='+interactionData['introduction']+
                               '&type=' +this.type+
                               '&fid='+fid;
-    
+    if(pdid){
+      projectStageDetailUrl = projectStageDetailUrl+ '&pdid='+pdid;
+    }                        
+    if(psid){
+      projectStageDetailUrl = projectStageDetailUrl+ '&psid='+psid;
+    }
     this.Provider.getMamenSwiperData(projectStageDetailUrl).subscribe(res=>{
       if(res.code==200) {
         alert('操作功能！');

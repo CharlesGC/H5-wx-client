@@ -122,7 +122,7 @@ export class ConsultantDocumentListPage {
 
   /*新增附件*/
   onAddDocumentClick() {
-    this.navCtrl.push(ConsultantInteractionSubmitPage,{type:1});
+    this.navCtrl.push(ConsultantInteractionSubmitPage,{type:1,pid:this.projectDetails['pid']});
   }
 
 }

@@ -87,6 +87,7 @@ export class TabsPage {
   }
 
   NgDocheck() {
+    console.log(1111)
     const user = window.sessionStorage.getItem('user') ? JSON.parse(window.sessionStorage.getItem('user')) : {};
     // user.type == 0
     if(user.type == 1){
