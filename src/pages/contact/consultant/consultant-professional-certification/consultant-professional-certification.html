@@ -46,9 +46,9 @@
   </ion-list>
   <div class="bg clearfix mt20" *ngIf="certificationListData['certifiedUrl']">
     <img style="width:66px;height:66px;" src="{{certificationListData.format || filetypeicon}}">
-    <span class="file-title">您的简历</span>
+    <span class="file-title">{{certificationListData.sourceName || filetitle}}</span>
     <span class="file-desc">点击查看文件预览</span>
-    <span class="file-size">{{certificationListData.size || filesize}}</span>
+    <span class="file-size">{{certificationListData.urlSize || filesize}}</span>
   </div>
   <div class="fixed-bottom">
     <button ion-button class="btn-submit" (click)="oncertificationExpSubmit()">提交</button>

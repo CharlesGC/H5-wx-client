@@ -53,9 +53,9 @@
                     <img style="width:66px;height:66px;" src="{{interactionData.format || filetypeicon}}">
                   </label>
                   <div class="card-cont" data-src="url">
-                    <h5>{{interactionData.name || filetitle}}</h5>
+                    <h5>{{interactionData.sourceName || filetitle}}</h5>
                     <p class="action-browser-file">点击查看文件预览</p>
-                    <p class="browser-size">{{interactionData.size || filesize}}</p>
+                    <p class="browser-size">{{interactionData.urlSize || filesize}}</p>
                   </div>
                 </div>
             </ion-item>
