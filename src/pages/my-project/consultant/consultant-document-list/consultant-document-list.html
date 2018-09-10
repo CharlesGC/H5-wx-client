@@ -66,12 +66,12 @@
       </div>
       <div class="card-item-label">
         <label>
-          <img style="width:66px;height:66px;" src="">
+          <img style="width:66px;height:66px;" src="{{interactionData.format || filetypeicon}}">
         </label>
         <div class="card-cont" data-src="url">
-          <h5>{{documentListData_item.sourceName}}</h5>
+          <h5>{{documentListData_item.sourceName || filetitle}}</h5>
           <p class="browser-file">点击查看文件预览</p>
-          <p class="browser-size">{{documentListData_item.size}}</p>
+          <p class="browser-size">{{documentListData_item.size || filesize}}</p>
         </div>
       </div>
     </ion-item>

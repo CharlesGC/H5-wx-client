@@ -69,7 +69,7 @@ export class ConsultantProgramEditPage {
     }
     this.programData['format'] = this.filetypeicon
     this.programData['planName'] = this.filetitle
-    console.log(this.filetypeicon)
+    //console.log(this.filetypeicon)
   }
 
   /*设置值（回调函数）*/

@@ -15,7 +15,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
   templateUrl: 'consultant-info-avatar.html',
 })
 export class ConsultantInfoAvatarPage {
-  public uploadUrl = 'http://100.168.1.48:8181/mafile/mamonfile/uploadAvatarPic';
+  public uploadUrl = 'http://matest.mf-tal.com/mafile/mamonfile/uploadAvatarPic';
   public Flagyingyezhizhao = true;
   public avatarUrl: string;
   imageChangedEvent: any = '';

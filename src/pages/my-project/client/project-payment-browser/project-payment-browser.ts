@@ -46,6 +46,7 @@ export class ProjectPaymentBrowserPage {
       if(res.code==200) {
         console.log(res,'--------');
         this.projectPaymentDetails = res.data;
+        console.log(this.projectPaymentDetails,'这是数据')
       }else if(res.code == 207) {
         window.localStorage.removeItem('openId');
       }else{

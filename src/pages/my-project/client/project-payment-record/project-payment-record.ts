@@ -9,6 +9,8 @@ import { MamenDataProvider } from '../../../../providers/mamen-data/mamen-data';
 import { ProjectCollectBankPage } from '../../project-collect-bank/project-collect-bank';
 import { getPayMentByPsidUrl,addPayMentUrl } from '../../../../providers/requestUrl';
 
+import { UploadfilePage } from '../../../uploadfile/uploadfile'
+
 /**
  * Generated class for the ProjectPaymentRecordPage page.
  *
@@ -22,6 +24,11 @@ import { getPayMentByPsidUrl,addPayMentUrl } from '../../../../providers/request
   templateUrl: 'project-payment-record.html',
 })
 export class ProjectPaymentRecordPage {
+  private filetypeicon: any;
+  private filetitle: any;
+  private filesize: any;
+  private filestatus = false;
+  private fileurl: any;
   public paymentRecordData = {}
   public payerList = {};
   constructor(public navCtrl: NavController, public navParams: NavParams,private transfer: FileTransfer,private file: File,private Provider:MamenDataProvider) {
@@ -64,6 +71,45 @@ export class ProjectPaymentRecordPage {
     }, (error) => {
       // handle error
     });
+  }
+
+  /** 跳转到上传页面 */
+  gouploadfile(){
+    this.navCtrl.push(UploadfilePage,{
+      callback: this.setuploadfile,
+    })
+  }
+
+  setuploadfile = (obj, name) => {
+    this.filestatus = true;
+    this.filetitle = name;
+    console.log(obj)
+    var a = obj.fileSize / 1048576;
+    this.filesize = a.toPrecision(3);
+    this.fileurl = obj.url;
+    this.paymentRecordData['name'] = this.filetitle
+    this.paymentRecordData['size'] = this.filesize
+
+    var types = obj.fileType;
+    if (this.filesize > 1) {
+      this.filesize = this.filesize + ' MB'
+    } else {
+      this.filesize = this.filesize * 1024 + ' KB'
+    }
+    if (types.indexOf('doc') == 0 || types.indexOf('docx') == 0) {
+      this.filetypeicon = 'assets/imgs/' + 'doc.png'
+    } else if (types.indexOf('ppt') == 0 || types.indexOf('pptx') == 0) {
+      this.filetypeicon = 'assets/imgs/' + 'ppt.png'
+    } else if (types.indexOf('xls') == 0 || types.indexOf('xlsx') == 0) {
+      this.filetypeicon = 'assets/imgs/' + 'xls.png'
+    } else if (types.indexOf('jpg') == 0 || types.indexOf('png') == 0) {
+      this.filetypeicon = 'assets/imgs/' + 'png.png'
+    } else if (types.indexOf('pdf') == 0) {
+      this.filetypeicon = 'assets/imgs/' + 'pdf.png'
+    }
+    this.paymentRecordData['format'] = this.filetypeicon
+    this.paymentRecordData['planName'] = this.filetitle
+    //console.log(this.filetypeicon)
   }
 
   /*列表编辑*/

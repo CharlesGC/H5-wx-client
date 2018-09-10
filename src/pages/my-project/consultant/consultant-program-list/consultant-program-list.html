@@ -106,7 +106,7 @@
       <div class="user-other-list">
         <p class="browser-file">查看方案相关文件</p>
         <h4 class="mt10">方案计划书</h4>
-        <ion-card class="card-item">
+        <ion-card class="card-item" *ngIf="projectProgramDetails">
             <div class="card-item-label">
               <label>
                 <img style="width:66px;height:66px;" src="{{projectProgramDetails.format}}">
