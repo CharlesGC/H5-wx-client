@@ -24,8 +24,8 @@ export class ConsultantProfessionalCertificationPage {
   private filestatus = false;
   private fileurl: any;
   public certificationListData: any;
-  public formatvalue:any;
-  public fileUrlvalue:any
+  public formatvalue: any;
+  public fileUrlvalue: any
   constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider) {
     this.certificationListData = {};
   }
@@ -122,7 +122,7 @@ export class ConsultantProfessionalCertificationPage {
     this.fileurl = obj.url;
     this.certificationListData['certifiedUrl'] = this.fileurl
     this.certificationListData['size'] = this.filesize
-    
+
     var types = obj.fileType;
     if (this.filesize > 1) {
       this.filesize = this.filesize + ' MB'
@@ -142,7 +142,7 @@ export class ConsultantProfessionalCertificationPage {
     }
     this.certificationListData['format'] = this.filetypeicon
   }
-   
+
   formatTypes(fileUrlvalue) {
     //console.log(typeof(fileUrlvalue))
     if (fileUrlvalue.search(/doc/) !== -1 || fileUrlvalue.search(/docx/) !== -1) {

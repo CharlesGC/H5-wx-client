@@ -13,7 +13,9 @@
   </ion-header>
   
   <ion-content style="background-color: #fcfcfc;">
-    <p class="objection-tip">请写下你对项目和客户的评价</p>
+    <p class="objection-tip" *ngIf="!evalutionType">请写下你对项目的评价</p>
+    <p class="objection-tip" *ngIf="evalutionType == 'consultantEvalution'">请写下你对项目和客户的评价</p>
+    <p class="objection-tip" *ngIf="evalutionType == 'clientEvalution'">请写下你对项目和顾问的评价</p>
     <ion-list class="mt10">
         <ion-item no-lines>
             <textarea id="textareaValue" placeholder="请输入评价内容" class="item-textarea" [(ngModel)]="inputName"></textarea>

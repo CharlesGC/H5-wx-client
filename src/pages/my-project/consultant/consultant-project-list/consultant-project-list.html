@@ -90,7 +90,7 @@
                   <span class="project-type type-blue" *ngIf="projectListData_item.status ==6">方案待确认</span>
                   <span class="project-type type-blue" *ngIf="projectListData_item.status ==7">阶段待确认</span>
                   <span class="project-type type-green" *ngIf="projectListData_item.status ==8">进行中</span>
-                  <span class="project-type type-gray" *ngIf="projectListData_item.status ==9">已完成</span>
+                  <span class="project-type type-gray" *ngIf="projectListData_item.status ==9 ||projectListData_item.status ==11">已完成</span>
                   <span class="project-type type-gray" *ngIf="projectListData_item.status ==10">阶段待提交</span>
                 </div>
                 <span><ion-icon name="more"></ion-icon></span>

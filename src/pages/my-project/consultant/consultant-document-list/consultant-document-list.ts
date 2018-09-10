@@ -29,20 +29,20 @@ export class ConsultantDocumentListPage {
   public showNavMenuName = '';
   public documentListData = [];
   public projectDetails = {};
-  constructor(public navCtrl: NavController, public navParams: NavParams,private Provider:MamenDataProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider) {
   }
 
   ionViewDidLoad() {
     let pid = this.navParams.get('pid');
     let status = this.navParams.get('status');
-    this.getProjectDocumentListDataData(pid,status);
+    this.getProjectDocumentListDataData(pid, status);
     console.log('ionViewDidLoad ProjectDecumentListPage');
   }
 
   ionViewDidEnter() {
     let pid = this.navParams.get('pid');
     let status = this.navParams.get('status');
-    this.getProjectDocumentListDataData(pid,status);
+    this.getProjectDocumentListDataData(pid, status);
     this.projectDetails = this.navParams.get('data') || {};
   }
 
@@ -52,77 +52,80 @@ export class ConsultantDocumentListPage {
   }
 
   /*点击菜单触发*/
-  onNavMenuItemClick(type,typeName,status) {
+  onNavMenuItemClick(type, typeName, status) {
     this.showNavMenuName = typeName;
     this.isShowNavMenu = false;
     //TODO 提示语
-    if(type == 1){
-      this.navCtrl.push(ConsultantProjectBrowserPage,{data:this.projectDetails,pid:this.projectDetails['pid'],status:status||''});
-    }else if(type == 2){
-      this.projectDetails['appStatus'] !=0 &&this.projectDetails['appStatus'] !=1 &&
-      this.projectDetails['appStatus'] !=2 &&this.projectDetails['appStatus'] !=3 && 
-      this.navCtrl.push(ConsultantProgramListPage,{pid:this.projectDetails['pid'],status:status||'',data:this.projectDetails});
-    }else if(type == 3) {
-      this.projectDetails['appStatus'] !=6&&this.projectDetails['appStatus'] !=4&&
-      this.projectDetails['appStatus'] !=0 &&this.projectDetails['appStatus'] !=1 &&
-      this.projectDetails['appStatus'] !=2 &&this.projectDetails['appStatus'] !=3 && 
-      this.navCtrl.push(ConsultantStageListPage,{pid:this.projectDetails['pid'],status:status,
-      projectType:this.projectDetails['appStatus'],programPrice:this.projectDetails['finalPrice'],data:this.projectDetails});
-    }else if(type == 4) {
+    if (type == 1) {
+      this.navCtrl.push(ConsultantProjectBrowserPage, { data: this.projectDetails, pid: this.projectDetails['pid'], status: status || '' });
+    } else if (type == 2) {
+        this.projectDetails['appStatus'] != 0 && this.projectDetails['appStatus'] != 1 &&
+        this.projectDetails['appStatus'] != 2 && this.projectDetails['appStatus'] != 3 &&
+        this.navCtrl.push(ConsultantProgramListPage, { pid: this.projectDetails['pid'], status: status || '', data: this.projectDetails });
+    } else if (type == 3) {
+        this.projectDetails['appStatus'] != 6 && this.projectDetails['appStatus'] != 4 &&
+        this.projectDetails['appStatus'] != 0 && this.projectDetails['appStatus'] != 1 &&
+        this.projectDetails['appStatus'] != 2 && this.projectDetails['appStatus'] != 3 &&
+        this.navCtrl.push(ConsultantStageListPage, {
+          pid: this.projectDetails['pid'], status: status,
+          projectType: this.projectDetails['appStatus'], programPrice: this.projectDetails['finalPrice'], data: this.projectDetails
+        });
+    } else if (type == 4) {
       // this.projectDetails['appStatus'] !=0 &&this.projectDetails['appStatus'] !=1 &&
       // this.projectDetails['appStatus'] !=2 &&this.projectDetails['appStatus'] !=3 && 
       // this.navCtrl.push(ConsultantDocumentListPage,{pid:this.projectDetails['pid'],status:status,data:this.projectDetails});
       let pid = this.navParams.get('pid');
       let status = this.navParams.get('status');
-      this.getProjectDocumentListDataData(pid,status);
-    }else if(type == 5) {
-      this.projectDetails['appStatus'] !=6&&this.projectDetails['appStatus'] !=4&&
-      this.projectDetails['appStatus'] !=0 &&this.projectDetails['appStatus'] !=1 &&
-      this.projectDetails['appStatus'] !=2 &&this.projectDetails['appStatus'] !=3 && 
-      this.navCtrl.push(ConsultantCollectionListPage,{pid:this.projectDetails['pid'],status:status,data:this.projectDetails});
+      this.getProjectDocumentListDataData(pid, status);
+    } else if (type == 5) {
+        this.projectDetails['appStatus'] != 6 && this.projectDetails['appStatus'] != 4 &&
+        this.projectDetails['appStatus'] != 0 && this.projectDetails['appStatus'] != 1 &&
+        this.projectDetails['appStatus'] != 2 && this.projectDetails['appStatus'] != 3 &&
+        this.navCtrl.push(ConsultantCollectionListPage, { pid: this.projectDetails['pid'], status: status, data: this.projectDetails });
     }
   }
 
   /*跳转到文档详情页面*/
   goDocumentBrowser(data) {
-    this.navCtrl.push(ConsultantDocumentBrowserPage,{id:data.id});
+    this.navCtrl.push(ConsultantDocumentBrowserPage, { id: data.id });
   }
 
-  getUrlParam(name) {  
+  getUrlParam(name) {
     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象  
     var r = window.location.search.substr(1).match(reg);  //匹配目标参数  
     if (r != null) {
-        return encodeURI(r[2]);  //返回参数值 
+      return encodeURI(r[2]);  //返回参数值 
     } else {
-        return null; 
+      return null;
     }
- }
+  }
 
   /*项目文档列表数据请求*/
-  getProjectDocumentListDataData(pid,status) {
+  getProjectDocumentListDataData(pid, status) {
     // let projectStageListUrl = 'http://mamon.yemindream.com/mamon/adviser/getDocumentList';
     const openId = window.sessionStorage.getItem('openId') || this.getUrlParam('openId');
-    let projectStageListUrl = getAdviserDocumentListUrl + '?openId=' + openId + '&pid='+pid;
-    if(status !== ''){
-      projectStageListUrl = projectStageListUrl + '&type='+status;
+    let projectStageListUrl = getAdviserDocumentListUrl + '?openId=' + openId + '&pid=' + pid;
+    if (status !== '') {
+      projectStageListUrl = projectStageListUrl + '&type=' + status;
     }
-    console.log(projectStageListUrl,status != '',status,'有值');
-    this.Provider.getMamenSwiperData(projectStageListUrl).subscribe(res=>{
-      if(res.code==200) {
+    console.log(projectStageListUrl, status != '', status, '有值');
+    this.Provider.getMamenSwiperData(projectStageListUrl).subscribe(res => {
+      if (res.code == 200) {
         this.documentListData = res.data;
-      }else if(res.code == 207) {
+        //console.log(this.documentListData,'这里的值')
+      } else if (res.code == 207) {
         window.localStorage.removeItem('openId');
-      }else{
-        alert('请求出错:'+res.msg);
+      } else {
+        alert('请求出错:' + res.msg);
       }
-    },error=>{
-      console.log('erros===',error);
+    }, error => {
+      console.log('erros===', error);
     })
   }
 
   /*新增附件*/
   onAddDocumentClick() {
-    this.navCtrl.push(ConsultantInteractionSubmitPage,{type:1});
+    this.navCtrl.push(ConsultantInteractionSubmitPage, { type: 1, pid: this.projectDetails['pid'] });
   }
 
 }

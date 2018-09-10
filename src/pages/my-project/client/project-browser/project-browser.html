@@ -24,7 +24,7 @@
             <label>顾问 </label>
             <ion-icon name="arrow-forward" item-right (click)="isShow=!isShow"></ion-icon>
         </ion-item>
-            <ion-item class="nav-menu-item" (click)="onNavMenuItemClick(1,'所有顾问')">
+            <ion-item class="nav-menu-item" (click)="onNavMenuItemClick(1,'所有顾问','')">
                 <label class="ml25">所有顾问（{{projectSignCount.allCount}}） </label>
                 <ion-icon name="arrow-forward" item-right (click)="isShow=!isShow"></ion-icon>
             </ion-item>
@@ -40,11 +40,11 @@
                 <label class="ml25">方案待确认（{{projectSignCount.programConfirmedCount}}） </label>
                 <ion-icon name="arrow-forward" item-right (click)="isShow=!isShow"></ion-icon>
             </ion-item>
-            <ion-item class="nav-menu-item" (click)="onNavMenuItemClick(1,'已聘用（',5)">
+            <ion-item class="nav-menu-item" (click)="onNavMenuItemClick(1,'已聘用',5)">
                 <label class="ml25">已聘用（{{projectSignCount.employCount}}） </label>
                 <ion-icon name="arrow-forward" item-right (click)="isShow=!isShow"></ion-icon>
             </ion-item>
-        <ion-item class="nav-menu-item" (click)="onNavMenuItemClick(2,'方案')">
+        <ion-item class="nav-menu-item" (click)="onNavMenuItemClick(2,'方案','')">
             <label>方案</label>
             <ion-icon name="arrow-forward" item-right (click)="isShow=!isShow"></ion-icon>
         </ion-item>
@@ -182,9 +182,14 @@
           </div>
           <div class="project-type">
             <!-- <span>未开始</span> -->
-            <span *ngIf="projectDetails.status ==1||projectDetails.status ==2||projectDetails.status ==6">未开始</span>
-            <span *ngIf="projectDetails.status ==3||projectDetails.status ==4 || projectDetails.status ==7|| projectDetails.status ==11|| projectDetails.status ==12|| projectDetails.status ==13">进行中</span>
-            <span *ngIf="projectDetails.status ==5 || projectDetails.status ==8||projectDetails.status ==9 || projectDetails.status ==10">已完成</span>
+            <span *ngIf="projectDetails.status ==1||projectDetails.status ==2||
+                        projectDetails.status ==3 || projectDetails.status ==6 ||
+                        projectDetails.status ==7 || projectDetails.status ==11 ||
+                        projectDetails.status ==12 || projectDetails.status ==13 ||
+                        projectDetails.status ==14">未开始</span>
+            <span *ngIf="projectDetails.status ==4">进行中</span>
+            <span *ngIf="projectDetails.status ==5 || projectDetails.status ==8||
+                        projectDetails.status ==9 || projectDetails.status ==10">已完成</span>
             <span *ngIf="projectDetails.status ==0">草稿箱</span>
           </div>
         </ion-list>
@@ -312,7 +317,7 @@
               <button ion-button class="btn-submit" (click)="onProjectReleaseSubmit(projectDetails.pid)">申请发布</button>
               <button ion-button class="btn-delete" (click)="onProjectEditStep1()">编辑</button>
           </div>
-          <button ion-button expand="full" large class="fixed-bottom" (click)="goAccountEdit()" *ngIf="projectDetails.status ==8">评价</button>
+          <button ion-button expand="full" large class="fixed-bottom" (click)="goEvalutionPage()" *ngIf="projectDetails.status ==5">评价</button>
           <!-- <div class="fixed-bottom" *ngIf="isApply">
             <button ion-button class="btn-submit" (click)="onApplicationProject()">申请该项目</button>
             <button ion-button class="btn-delete" (click)="onProjectEditStep1()">忽略</button>

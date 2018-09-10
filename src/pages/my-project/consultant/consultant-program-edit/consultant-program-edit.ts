@@ -4,7 +4,8 @@ import { FormEditPage } from '../../../contact/form-edit/form-edit';
 import { MamenDataProvider } from '../../../../providers/mamen-data/mamen-data';
 import { ProjectTimeSelectPage } from '../../project-time-select/project-time-select';
 import { addOrEditProgramUrl } from '../../../../providers/requestUrl';
-
+import { UploadfilePage } from '../../../uploadfile/uploadfile'
+ 
 /**
  * Generated class for the ConsultantProgramEditPage page.
  *
@@ -18,6 +19,11 @@ import { addOrEditProgramUrl } from '../../../../providers/requestUrl';
   templateUrl: 'consultant-program-edit.html',
 })
 export class ConsultantProgramEditPage {
+  private filetypeicon: any;
+  private filetitle: any;
+  private filesize: any;
+  private filestatus = false;
+  private fileurl: any;
   public programData = {}
   constructor(public navCtrl: NavController, public navParams: NavParams,private Provider:MamenDataProvider) {
   }
@@ -26,6 +32,44 @@ export class ConsultantProgramEditPage {
     this.programData = this.navParams.get('data') || {};
     
     console.log(this.programData,'ionViewDidLoad ConsultantProgramEditPage');
+  }
+  /* 跳转到上传文件页面 */
+  gouploadfile(){
+    this.navCtrl.push(UploadfilePage,{
+      callback: this.setuploadfile,
+    })
+  }
+
+  setuploadfile = (obj, name) => {
+    this.filestatus = true;
+    this.filetitle = name;
+    console.log(obj)
+    var a = obj.fileSize / 1048576;
+    this.filesize = a.toPrecision(3);
+    this.fileurl = obj.url;
+    this.programData['planUrl'] = this.fileurl;
+    this.programData['size'] = this.filesize;
+
+    var types = obj.fileType;
+    if (this.filesize > 1) {
+      this.filesize = this.filesize + ' MB'
+    } else {
+      this.filesize = this.filesize * 1024 + ' KB'
+    }
+    if (types.indexOf('doc') == 0 || types.indexOf('docx') == 0) {
+      this.filetypeicon = 'assets/imgs/' + 'doc.png'
+    } else if (types.indexOf('ppt') == 0 || types.indexOf('pptx') == 0) {
+      this.filetypeicon = 'assets/imgs/' + 'ppt.png'
+    } else if (types.indexOf('xls') == 0 || types.indexOf('xlsx') == 0) {
+      this.filetypeicon = 'assets/imgs/' + 'xls.png'
+    } else if (types.indexOf('jpg') == 0 || types.indexOf('png') == 0) {
+      this.filetypeicon = 'assets/imgs/' + 'png.png'
+    } else if (types.indexOf('pdf') == 0) {
+      this.filetypeicon = 'assets/imgs/' + 'pdf.png'
+    }
+    this.programData['format'] = this.filetypeicon
+    this.programData['planName'] = this.filetitle
+    console.log(this.filetypeicon)
   }
 
   /*设置值（回调函数）*/

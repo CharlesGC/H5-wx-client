@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { MamenDataProvider } from '../../../providers/mamen-data/mamen-data';
-import { projectEvaluateUrl } from '../../../providers/requestUrl';
+import { projectEvaluateUrl,clientprojectEvaluateUrl } from '../../../providers/requestUrl';
 
 /**
  * Generated class for the PorjectEvalutionPage page.
@@ -16,13 +16,14 @@ import { projectEvaluateUrl } from '../../../providers/requestUrl';
   templateUrl: 'porject-evalution.html',
 })
 export class PorjectEvalutionPage {
-
+  public evalutionType='';
   public inputName:any;
   constructor(public navCtrl: NavController, public navParams: NavParams,private Provider:MamenDataProvider) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProjectProgramObjectionPage');
+    this.evalutionType = this.navParams.get('type');
   }
 
   /*取消请求*/
@@ -45,10 +46,12 @@ export class PorjectEvalutionPage {
     let pid = this.navParams.get('pid');
     // let projectDetailsUrl = 'http://mamon.yemindream.com/mamon/customer/getProjectProgramDeatil';
     const openId = window.sessionStorage.getItem('openId')|| this.getUrlParam('openId');
-    let projectDetailsUrl = projectEvaluateUrl + '?openId=' + openId + '&pid='+pid + '&evaluation='+value;
+    let url = this.evalutionType == 'consultantEvalution' ? projectEvaluateUrl : clientprojectEvaluateUrl;
+    let projectDetailsUrl = url + '?openId=' + openId + '&pid='+pid + '&evaluation='+value;
     this.Provider.getMamenSwiperData(projectDetailsUrl).subscribe(res=>{
       if(res.code==200) {
         alert('操作成功！');
+        this.navCtrl.pop();
       }else if(res.code == 207) {
         window.localStorage.removeItem('openId');
       }else{

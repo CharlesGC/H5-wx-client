@@ -71,6 +71,7 @@
                   </p> -->
           </div>
         </ion-item>
+        
         <ion-item no-lines text-wrap class="user-introdection">
           {{consultantBasicData.introduction}}
         </ion-item>
@@ -107,6 +108,42 @@
           <div class="contact-info-bg"></div>
         </div>
         <!-- <ion-item class="" (click)="goFormEditPage('schoolName',educationListData.schoolName,'text')" no-lines>
+              </div>
+          </ion-item>
+          <ion-item no-lines text-wrap class="user-introdection">
+              {{consultantBasicData.introduction}}
+          </ion-item>
+          <ion-item no-lines class="info-rigth" *ngIf="(consultantBasicData.skillList && consultantBasicData.skillList.length > 0) || (consultantBasicData.industryList &&  consultantBasicData.industryList.length>0)">
+              <p class="info-other-label item-tags skills">
+                <span calss="mt5" *ngFor="let skillList_item of consultantBasicData.skillList">{{skillList_item.asName}}</span>
+              </p>
+              <p class="info-other-label item-tags industry mt10">
+                <span *ngFor="let industryList_item of consultantBasicData.industryList">{{industryList_item.alName}}</span>
+              </p>
+          </ion-item>
+           <ion-item class="contact-item mt15"> -->
+              <!-- <div class="contact-info mt15">
+                  <div class="contact-info-cont">
+                    <p class="contact-info-list" *ngIf="consultantBasicData.country || consultantBasicData.province || consultantBasicData.city || consultantBasicData.address">
+                      <ion-icon ios="ios-navigate" md="md-navigate"></ion-icon>
+                      <span>{{(consultantBasicData.country || '')+consultantBasicData.province+consultantBasicData.city+(consultantBasicData.address||'')}}</span>
+                    </p>
+                    <p class="contact-info-list" *ngIf="consultantBasicData.uphone">
+                        <ion-icon ios="ios-call" md="md-call"></ion-icon>
+                      <span>{{consultantBasicData.uphone}}</span>
+                    </p>
+                    <p class="contact-info-list" *ngIf="consultantBasicData.email">
+                      <ion-icon name="ios-mail-outline"></ion-icon>
+                      <span>{{consultantBasicData.email}}</span>
+                    </p>
+                    <p class="contact-info-list" *ngIf="consultantBasicData.bankList && consultantBasicData.bankList.length>0">
+                        <ion-icon name="ios-card-outline"></ion-icon>
+                        <span>{{consultantBasicData.bankList[0].bankAccount}} · {{consultantBasicData.bankList[0].account}}</span>
+                      </p>
+                  </div>  
+                  <div class="contact-info-bg"></div>
+              </div> -->
+              <!-- <ion-item class="" (click)="goFormEditPage('schoolName',educationListData.schoolName,'text')" no-lines>
                 <span class="left-title">编辑个人信息</span>
                 <div item-right class="rigth-message">
                   <ion-icon name="arrow-forward" color="#cfcfcf" class="ml12"></ion-icon>
@@ -410,7 +447,7 @@
 
   <div style="height:100px;"></div>
   <!--操作提交-->
-  <button ion-button expand="full" large class="fixed-bottom">申请认证</button>
+  <!-- <button ion-button expand="full" large class="fixed-bottom">申请认证</button> -->
   <!-- <button ion-button expand="full" large class="fixed-bottom" >向该顾问发起项目邀请</button> -->
 
 </ion-content>
