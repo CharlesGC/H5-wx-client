@@ -8,6 +8,7 @@ import { MessageCenterPage } from '../message-center/message-center';
 import { DemandContentPage } from '../demand-content/demand-content';
 import { RecommendConsultantListPage } from '../recommend/recommend-consultant-list/recommend-consultant-list';
 import { RecommendClientListPage } from '../recommend/recommend-client-list/recommend-client-list';
+import { SpeedPage } from '../speed/speed';
 
 @Component({
   selector: 'page-tabs',
@@ -17,7 +18,7 @@ export class TabsPage {
   tab1Root = HomePage;
   tab2Root = DemandContentPage;
   // tab3Root = ReleasePage;
-  tab3Root = ProjectEditStep1Page;
+  tab3Root = SpeedPage;
   // tab2Root = PhonebindPage;
   public tab4Root:any;
   tab5Root = ContactPage;

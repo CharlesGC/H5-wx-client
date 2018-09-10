@@ -4,7 +4,7 @@
   </ion-navbar>
 </ion-header>
 <ion-content class="content">
-  <!-- 下拉列表 -->
+  <!-- 下拉刷新 -->
   <ion-refresher (ionRefresh)="doRefresh($event)">
     <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新" refreshingSpinner="circles" refreshingText="刷新中...">
     </ion-refresher-content>
@@ -48,7 +48,7 @@
     </ion-list>
     <!-- 行业标签选择 -->
     <ion-list class="indeuList" [hidden]="isIndustryLabel">
-      <ion-item (click)="selsectIndustry('')" [ngClass]="{'checked':skillChecked==i}">全部行业</ion-item>
+      <ion-item (click)="selsectIndustry('全部行业')" [ngClass]="{'checked':skillChecked==i}">全部行业</ion-item>
       <ion-item *ngFor="let industryList of IndustryTotal;let i = index" class="industryList-item" [ngClass]="{'checked':skillChecked==i}"
         (click)="selsectIndustry(industryList,i,'isIndustry')">
         {{industryList.industryName}}
@@ -106,7 +106,7 @@
 
   <!-- 全部顾问/审计顾问/行业技能标签筛选\输入框搜索/翘楚 -->
   <div class="industrySearch" *ngIf = "type == 'finance-count' || 
-  type == 'financemore' ||type =='isIndustry' || type == 'isSkill' 
+  type == 'financemore' ||type =='isIndustry' 
   || type == 'itemsearch' || type == 'SecondarySkill'|| type == 'indeustryOutstand'">
     <ion-list style="white-space:normal;">
       <ion-item *ngFor="let instry_skill of financeAllArr;let i =index" (click)="goProjectConsultantBrowserPage(instry_skill,i)">
