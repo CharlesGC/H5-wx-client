@@ -10,6 +10,7 @@ import { ProjectPaymentListPage } from '../project-payment-list/project-payment-
 import { ProjectInvoiceListPage } from '../project-invoice-list/project-invoice-list';
 import { ProjectEditStep1Page } from '../project-edit-step1/project-edit-step1';
 import { ApplicationProjectPage } from '../../application-project/application-project';
+import { PorjectEvalutionPage } from '../../porject-evalution/porject-evalution';
 import { getProjectDetailUrl, releaseProjectUrl, getProjectSignUpAdviserCountUrl,
   getProjectProgramCountUrl,getProjectStageCountUrl,getProjectDocumentCountUrl } from '../../../../providers/requestUrl';
 
@@ -74,9 +75,9 @@ export class ProjectBrowserPage {
     this.isShowNavMenu = false;
     this.showNavMenuNumber = 2
     if(type == 1){
-      this.navCtrl.push(ProjectConsultantListPage,{pid:this.projectDetails['pid'],status:status||''});
+      this.navCtrl.push(ProjectConsultantListPage,{pid:this.projectDetails['pid'],status:status});
     }else if(type == 2){
-      this.navCtrl.push(ProjectProgramListPage,{pid:this.projectDetails['pid'],status:status||''});
+      this.navCtrl.push(ProjectProgramListPage,{pid:this.projectDetails['pid'],status:status});
     }else if(type == 3) {
       this.navCtrl.push(ProjectStageListPage,{pid:this.projectDetails['pid'],status:status,type:this.projectDetails['status']});
     }else if(type == 4) {
@@ -223,6 +224,11 @@ export class ProjectBrowserPage {
   /*项目编辑跳转*/
   onProjectEditStep1() {
     this.navCtrl.push(ProjectEditStep1Page,{projectData:this.projectDetails,isEdit:true});
+  }
+
+  /*跳转到项目评价*/
+  goEvalutionPage(){
+    this.navCtrl.push(PorjectEvalutionPage,{pid:this.projectDetails['pid'],type:'clientEvalution'});
   }
 
 }

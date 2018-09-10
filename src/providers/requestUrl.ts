@@ -289,6 +289,9 @@ export const projectStageProposalListUrl = getAPIPath + 'adviser/projectStagePro
 /*我的项目-顾问-项目评价*/
 export const projectEvaluateUrl = getAPIPath + '/adviser/projectEvaluate';
 
+/*我的项目-客户-项目评价*/
+export const clientprojectEvaluateUrl = getAPIPath + '/customer/projectEvaluate';
+
 
 
 

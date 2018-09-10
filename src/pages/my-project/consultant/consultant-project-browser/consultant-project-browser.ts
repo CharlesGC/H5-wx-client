@@ -204,7 +204,7 @@ export class ConsultantProjectBrowserPage {
 
   /*跳转到项目评价*/
   goEvalutionPage(){
-    this.navCtrl.push(PorjectEvalutionPage,{pid:this.projectDetails['pid']});
+    this.navCtrl.push(PorjectEvalutionPage,{pid:this.projectDetails['pid'],type:'consultantEvalution'});
   }
   
 }
