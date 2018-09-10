@@ -29,25 +29,33 @@
         </ion-item>
       </ion-list>
       <ion-list class="list-item-flex mt10">
-        <ion-item (click)="goFormEditPage('taxNumber',interactionData.taxNumber,'selectPaymentBank')" no-lines>
+        <!-- <ion-item (click)="goFormEditPage('taxNumber',interactionData.taxNumber,'selectPaymentBank')" no-lines>
           <label>交付物原件</label>
           <p item-right>
               <span class="item-value">点击上传</span>
+              <ion-icon class="icon" name="arrow-forward"></ion-icon>
+          </p>
+        </ion-item> -->
+        <ion-item (click)="gouploadfile()" no-lines>
+          <label>交付物原件</label>
+          <p item-right>
+              <span class="item-value" *ngIf="filestatus == true">重新上传</span>
+              <span class="item-value" *ngIf="filestatus == false">点击预览或上传</span>
               <ion-icon class="icon" name="arrow-forward"></ion-icon>
           </p>
         </ion-item>
       </ion-list>
       <div class="user-other-list">
         <ion-list class="card-item">
-            <ion-item no-lines>
+            <ion-item no-lines *ngIf="fileurl">
                 <div class="card-item-label">
                   <label>
-                    <img style="width:66px;height:66px;" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1534233453&di=bd34b76dca47ce86738ff171e3c50122&imgtype=jpg&er=1&src=http%3A%2F%2Fpic.58pic.com%2F58pic%2F14%2F81%2F70%2F29J58PICf2x_1024.jpg">
+                    <img style="width:66px;height:66px;" src="{{filetypeicon}}">
                   </label>
                   <div class="card-cont" data-src="url">
-                    <h5>第二阶段初步解决方案</h5>
+                    <h5>{{filetitle}}</h5>
                     <p class="action-browser-file">点击查看文件预览</p>
-                    <p class="browser-size">20 KB</p>
+                    <p class="browser-size">{{filesize}}</p>
                   </div>
                 </div>
             </ion-item>

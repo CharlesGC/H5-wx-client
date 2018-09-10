@@ -52,7 +52,7 @@ export class ConsultantDocumentBrowserPage {
     var r = window.location.search.substr(1).match(reg);  //匹配目标参数  
     if (r != null) {
         return encodeURI(r[2]);  //返回参数值 
-    } else {
+    } else {0
         return null; 
     }
  }
