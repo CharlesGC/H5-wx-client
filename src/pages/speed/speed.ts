@@ -42,9 +42,9 @@ export class SpeedPage {
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad SpeedPage');
-    this.audioData = [{ url: '../../assets/js/BmuN5wbnOdzRQpU0yUpKrFPy3CwgRPytCJs2GMc2AqX_m3WdOAEFqUge0muzNqqH.mp3' }, {
-      url: '../../assets/js/fQcm5V91gRC5qhgG2btytH0f66LFP9LFlvm2LS7hHBQRumRJDK0UyJVvPvWbvceM.mp3'
-    }, { url: '../../assets/js/SKG4pSxf2yVhJ0aCBRAm_PVMyJaWG0uB6D700junb2HcQa4oH1EfIhn8ks0RJM0R.mp3' }, { url: '../../assets/js/XCiXTMcrw_PMtE1I0DnMS3TMbOlH0sxN3YrDNRsHkweoUK3ZPiqWPAnQriPMo4Hi.mp3' }];
+    // this.audioData = [{ url: '../../assets/js/BmuN5wbnOdzRQpU0yUpKrFPy3CwgRPytCJs2GMc2AqX_m3WdOAEFqUge0muzNqqH.mp3' }, {
+    //   url: '../../assets/js/fQcm5V91gRC5qhgG2btytH0f66LFP9LFlvm2LS7hHBQRumRJDK0UyJVvPvWbvceM.mp3'
+    // }, { url: '../../assets/js/SKG4pSxf2yVhJ0aCBRAm_PVMyJaWG0uB6D700junb2HcQa4oH1EfIhn8ks0RJM0R.mp3' }, { url: '../../assets/js/XCiXTMcrw_PMtE1I0DnMS3TMbOlH0sxN3YrDNRsHkweoUK3ZPiqWPAnQriPMo4Hi.mp3' }];
 
   }
   ionViewDidEnter() {
@@ -150,17 +150,17 @@ export class SpeedPage {
     this.START = new Date().getTime();
     console.log(this.START, 'getTime');
     this.recordTimer = setTimeout(() => {
-      // wx.startRecord({
-      //   success: function () {
-      //     localStorage.rainAllowRecord = 'true';
-      //     wx.startRecord();
-      //     //  alert('录音开始'); 
-      //     return;
-      //   },
-      //   cancel: function () {
-      //     this.isRecord = false;
-      //   }
-      // })
+      wx.startRecord({
+        success: function () {
+          localStorage.rainAllowRecord = 'true';
+          wx.startRecord();
+          //  alert('录音开始'); 
+          return;
+        },
+        cancel: function () {
+          this.isRecord = false;
+        }
+      })
       localStorage.rainAllowRecord = 'true';
     }, 300);
     event.preventDefault();
@@ -174,34 +174,34 @@ export class SpeedPage {
     if ((new Date().getTime() - this.START) < 300) {
       // this.END = 0;
       this.START = 0;
-      // wx.stopRecord({
-      //   success: function (res) {
-      //     wx.stopRecord({
-      //       success: function (res) {
-      //         console.log(111111111111);
-      //         alert('录音结束');
-      //       }
-      //     })
-      //   }
-      // });
+      wx.stopRecord({
+        success: function (res) {
+          wx.stopRecord({
+            success: function (res) {
+              console.log(111111111111);
+              alert('录音结束');
+            }
+          })
+        }
+      });
       alert('小于300ms，不录音');
       clearTimeout(this.recordTimer);
     } else {
       // var audioData = [];
       var _this = this;
-      // wx.stopRecord({
-      //   success: function (res) {
-      //     this.localId = res.localId;
-      //     // 上传语音
-      //     if (this.localId != '') {
-      //       wx.uploadVoice({
-      //         localId: this.localId, // 需要上传的音频的本地ID，由stopRecord接口获得
-      //         isShowProgressTips: 1, // 默认为1，显示进度提示
-      //         success: function (res) {
-      //           var serverId = res.serverId
-      var serverId = 0;
+      wx.stopRecord({
+        success: function (res) {
+          this.localId = res.localId;
+          // 上传语音
+          if (this.localId != '') {
+            wx.uploadVoice({
+              localId: this.localId, // 需要上传的音频的本地ID，由stopRecord接口获得
+              isShowProgressTips: 1, // 默认为1，显示进度提示
+              success: function (res) {
+                var serverId = res.serverId
+      // var serverId = 0;
       //把录音在微信服务器上的id（res.serverId）发送到自己的服务器供下载。
-      // if (serverId != '') {
+      if (serverId != '') {
       $.ajax({
         url: '/mamon/wechat/uploadLocal',
         type: 'post',
@@ -220,16 +220,16 @@ export class SpeedPage {
           this.isRecord = true;
         }
       })
-      // }
-      //         }
-      //       });
-      //     }
-      //     console.log(res);
-      //   },
-      //   fail: function (res) {
-      //     alert(JSON.stringify(res));
-      //   }
-      // });
+      }
+              }
+            });
+          }
+          console.log(res);
+        },
+        fail: function (res) {
+          alert(JSON.stringify(res));
+        }
+      });
     }
   }
   /*动态获取openId*/
@@ -252,9 +252,13 @@ export class SpeedPage {
     this.voice = Arr.length > 0 ? Arr.map(f => f.url).join(",") : '';
     this.speedVoiceData.getSpeedReleaseData(getSpeedrelease, openId, this.description, this.voice).subscribe(
       res => {
-        this.speedVoiceReleaseArr = res.data;
-        console.log(this.speedVoiceReleaseArr);
-        this.isShow = true;
+        if(res.code == 200){
+          this.speedVoiceReleaseArr = res.data;
+          console.log(this.speedVoiceReleaseArr);
+          this.isShow = true;
+        }else {
+          alert('请求出错：'+res.msg)
+        }
       }, error => {
         console.log(error);
       }
