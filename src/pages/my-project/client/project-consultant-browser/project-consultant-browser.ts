@@ -93,6 +93,10 @@ export class ProjectConsultantBrowserPage {
 
   /*面试、确认、拒绝、忽略*/
   onInterviewOrGnoreSubmit(type){
+    if(type == 3){
+      this.navCtrl.pop();
+      return;
+    }
     // let projectDetailsUrl = 'http://mamon.yemindream.com/mamon/customer/changeApplicationStatus';
     const openId = window.sessionStorage.getItem('openId') ||this.getUrlParam('openId');
     let projectDetailsUrl = changeApplicationStatusUrl + '?openId=' + openId + '&paid='+this.applicationDeatil['paid'] + '&status='+type;

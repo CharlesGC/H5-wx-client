@@ -110,24 +110,24 @@ export class ProjectListPage {
     })
   }
 
-  //下拉刷型界面
-  doRefresh(refresher){
+  // //下拉刷型界面
+  // doRefresh(refresher){
 
-    setTimeout(() => { 
-        console.log('加载完成后，关闭刷新'); 
-        refresher.complete();
+  //   setTimeout(() => { 
+  //       console.log('加载完成后，关闭刷新'); 
+  //       refresher.complete();
 
-        //toast提示
-        alert("加载成功");
-    }, 2000);
-  }
+  //       //toast提示
+  //       alert("加载成功");
+  //   }, 2000);
+  // }
 
-  //下滑动加载数据
-  doInfinite(infiniteScroll){
+  // //下滑动加载数据
+  // doInfinite(infiniteScroll){
 
-    setTimeout(() => { 
-        alert('加载完成后，关闭刷新'); 
-        infiniteScroll.complete();
-    }, 2000);
-  }
+  //   setTimeout(() => { 
+  //       alert('加载完成后，关闭刷新'); 
+  //       infiniteScroll.complete();
+  //   }, 2000);
+  // }
 }
