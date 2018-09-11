@@ -134,7 +134,6 @@ export class ProjectEditStep1Page {
   /*点击返回快速发布*/ 
   goSpeedPage() {
     this.isShow = true;
-  
   }
   /*跳转到快速发布页面*/
   goClientProjectSpeedPage() {

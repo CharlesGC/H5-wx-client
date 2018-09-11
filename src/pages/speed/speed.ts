@@ -199,28 +199,28 @@ export class SpeedPage {
               isShowProgressTips: 1, // 默认为1，显示进度提示
               success: function (res) {
                 var serverId = res.serverId
-      // var serverId = 0;
-      //把录音在微信服务器上的id（res.serverId）发送到自己的服务器供下载。
-      if (serverId != '') {
-      $.ajax({
-        url: '/mamon/wechat/uploadLocal',
-        type: 'post',
-        data: { 'serverId': serverId },
-        dataType: "json",
-        async: false,
-        success: (data) => {
-          // let audioData = [];
-          _this.audioData.push(data.data);
-          _this.changeDetectorRef.markForCheck();
-          _this.changeDetectorRef.detectChanges();
-          alert(_this.audioData);
-          _this.localId = '';
-        },
-        error: function (xhr, errorType, error) {
-          this.isRecord = true;
-        }
-      })
-      }
+                // var serverId = 0;
+                //把录音在微信服务器上的id（res.serverId）发送到自己的服务器供下载。
+                if (serverId != '') {
+                  $.ajax({
+                    url: '/mamon/wechat/uploadLocal',
+                    type: 'post',
+                    data: { 'serverId': serverId },
+                    dataType: "json",
+                    async: false,
+                    success: (data) => {
+                      // let audioData = [];
+                      _this.audioData.push(data.data);
+                      _this.changeDetectorRef.markForCheck();
+                      _this.changeDetectorRef.detectChanges();
+                      alert(_this.audioData);
+                      _this.localId = '';
+                    },
+                    error: function (xhr, errorType, error) {
+                      this.isRecord = true;
+                    }
+                  })
+                }
               }
             });
           }
@@ -252,12 +252,12 @@ export class SpeedPage {
     this.voice = Arr.length > 0 ? Arr.map(f => f.url).join(",") : '';
     this.speedVoiceData.getSpeedReleaseData(getSpeedrelease, openId, this.description, this.voice).subscribe(
       res => {
-        if(res.code == 200){
+        if (res.code == 200) {
           this.speedVoiceReleaseArr = res.data;
           console.log(this.speedVoiceReleaseArr);
           this.isShow = true;
-        }else {
-          alert('请求出错：'+res.msg)
+        } else {
+          alert('请求出错：' + res.msg)
         }
       }, error => {
         console.log(error);
@@ -270,7 +270,7 @@ export class SpeedPage {
     this.isShow = false;
   }
   // 返回首页
-  goback(){
+  goback() {
     // this.navCtrl.goToRoot(HomePage); 
     this.navCtrl.parent.select(0);
   }

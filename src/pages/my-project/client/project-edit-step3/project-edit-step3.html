@@ -28,8 +28,8 @@
         <!-- <span class="item-value line-overflow">阿里拉拉</span> -->
         <span *ngIf="projectData.industryList && projectData.industryList.length<1"></span>
         <span *ngIf="projectData.industryList && projectData.industryList.length==1">{{projectData.industryList[0].text}}</span>
-        <span *ngIf="projectData.industryList && projectData.industryList.length>1">{{projectData.industryList[0].text}}
-          等</span>
+        <span *ngIf="projectData.industryList && projectData.industryList.length>1">{{projectData.industryList[0].text}} 等
+        </span>
         <ion-icon class="icon" name="arrow-forward"></ion-icon>
       </p>
     </ion-item>
@@ -58,8 +58,7 @@
       <p item-right class="rigth-message">
         <span item-right class="item-value line-overflow" *ngIf="projectData.startTimeType == 0">尽快开始</span>
         <span item-right class="item-value line-overflow" *ngIf="projectData.startTimeType == 1">待商议</span>
-        <span item-right class="item-value line-overflow" *ngIf="projectData.startTimeType == 2">{{projectData.startTime
-          | date: 'yyyy-MM-dd'}}</span>
+        <span item-right class="item-value line-overflow" *ngIf="projectData.startTimeType == 2">{{projectData.startTime | date: 'yyyy-MM-dd'}}</span>
         <ion-icon class="icon" name="arrow-forward"></ion-icon>
       </p>
     </ion-item>
@@ -86,8 +85,8 @@
       <label>项目预算</label>
       <p item-right class="rigth-message">
         <span item-right class="item-value line-overflow" *ngIf="projectData.budgetType == 2">待商议</span>
-        <span item-right class="item-value line-overflow" *ngIf="projectData.budgetType == 0 || projectData.budgetType == 1">{{projectData.budget}}
-          元</span>
+        <span item-right class="item-value line-overflow" *ngIf="projectData.budgetType == 0 || projectData.budgetType == 1">{{projectData.budget}} 元
+        </span>
         <ion-icon class="icon" name="arrow-forward"></ion-icon>
       </p>
     </ion-item>
@@ -119,7 +118,7 @@
   </ion-list>
   <p class="browser-file">请选择发布类型（目前为完整发布模式）</p>
   <ion-list class="list-item-flex mt10">
-    <ion-item no-lines>
+    <ion-item no-lines (click)="goSpeedPage()">
       <label>返回快速发布</label>
       <p item-right class="rigth-message">
         <span class="item-value line-overflow">留下简要的项目说明</span>
@@ -134,23 +133,44 @@
   </div>
   <button ion-button expand="full" large class="fixed-bottom" (click)="onDraftSubmit()" *ngIf="isEdit">保存</button>
 </ion-content>
-  <!--弹出框--> 
+<!--弹出框-->
 <div class="phonebind-modal" [hidden]="!isShow">
-    <div class="modal-bg"></div>
-    <div class="modal-box">
-      <div class="modal-top">
-        <div class="modal-top-close">
-          <!-- <ion-icon ios="ios-close" md="md-close" item-rigth (click)="onClose()" color=""></ion-icon> -->
-        </div>
-        <div class="modal-title"> <img src="../../../../assets/imgs/success-icon.png" alt=""></div>
-        <div class="modal-title">发送成功</div>
-        <div class="modal-content">
-            <p>您的项目已经发布成功，我们将在尽快对项目展开审核，结果将会以邮件和短信的形式通知您。</p>
-        </div>
-        <div class="modal-footer">
-            <button ion-button full large (click)="goClientProjectPage()">返回项目列表</button>
-            <!-- <button ion-button full large (click)="onCompanyDel()" class="btn-delete">返回</button> -->
-        </div>
+  <div class="modal-bg"></div>
+  <div class="modal-box">
+    <div class="modal-top">
+      <div class="modal-top-close">
+        <!-- <ion-icon ios="ios-close" md="md-close" item-rigth (click)="onClose()" color=""></ion-icon> -->
+      </div>
+      <div class="modal-title">
+        <img src="../../../../assets/imgs/success-icon.png" alt="">
+      </div>
+      <div class="modal-title">发送成功</div>
+      <div class="modal-content">
+        <p>您的项目已经发布成功，我们将在尽快对项目展开审核，结果将会以邮件和短信的形式通知您。</p>
+      </div>
+      <div class="modal-footer">
+        <button ion-button full large (click)="goClientProjectPage()">返回项目列表</button>
+        <!-- <button ion-button full large (click)="onCompanyDel()" class="btn-delete">返回</button> -->
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 返回快速发布弹框 -->
+<div class="phonebind-modal" [hidden]="!isSpeed">
+  <div class="modal-bg"></div>
+  <div class="modal-box">
+    <div class="modal-top">
+      <div class="modal-top-close">
+        <!-- <ion-icon ios="ios-close" md="md-close" item-rigth (click)="onClose()" color=""></ion-icon> -->
+      </div>
+      <div class="modal-title">切换发布方式</div>
+      <div class="modal-content">
+        <p>切换发布方式之后，部分您已经填写的信息将不会被保存，确定要继续么？</p>
+      </div>
+      <div class="modal-footer">
+        <button ion-button full large (click)="goClientProjectSpeedPage()">继续返回快速发布</button>
+        <button ion-button full large (click)="onCompanyDel()" class="btn-delete">返回</button>
+      </div>
     </div>
   </div>
 </div>

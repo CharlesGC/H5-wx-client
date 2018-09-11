@@ -234,14 +234,7 @@ export class HomePage {
   financeAllList(value, index) {
     // type=1代表顾问 0 代表客户
     const user = window.sessionStorage.getItem('user') ? JSON.parse(window.sessionStorage.getItem('user')) : {};
-    if(user.type == 1){
-      this.navCtrl.push(ProjectConsultantBrowserPage, { uid: value.uid })
-    }else if(user.type == 0){
-      this.navCtrl.push(ProjectConsultantBrowserPage, { uid: value.uid, type: 'homepage' })
-    }else {
-      this.navCtrl.push(ProjectConsultantBrowserPage, { uid: value.uid })
-    }
-    
+    this.navCtrl.push(ProjectConsultantBrowserPage, { uid: value.uid, type: 'homepage' ,userType:user.type });
   }
   // 获取openId
   getUrlParam(name) {

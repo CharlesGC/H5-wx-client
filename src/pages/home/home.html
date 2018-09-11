@@ -145,17 +145,18 @@
       <div class="case_img">
         <ion-slides pager class="swiper_content1" does-continue="true" auto-play="true" loop="true" slide-interval=2000>
           <ion-slide *ngFor="let item of caseArr" class="case_swiper">
+              <div class="code_text">
+                  <div>{{item.note}}</div>
+                  <div>来自麦盟智库的专家回答</div>
+                  <div (click)="goToOtherPage()">
+                    <span>点击了解更多</span>
+                    <span>></span>
+                  </div>
+                </div>
             <div class="swiper_img">
               <img src="{{item.bannerUrl}}" />
             </div>
-            <div class="code_text">
-              <div>{{item.note}}</div>
-              <div>来自麦盟智库的专家回答</div>
-              <div (click)="goToOtherPage()">
-                <span>点击了解更多</span>
-                <span>></span>
-              </div>
-            </div>
+           
           </ion-slide>
         </ion-slides>
       </div>

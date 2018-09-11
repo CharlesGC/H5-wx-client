@@ -6,6 +6,7 @@ import { ProjectEditStep3Page } from '../project-edit-step3/project-edit-step3';
 import { FormEditPage } from '../../../contact/form-edit/form-edit';
 import { ProjectListPage } from '../project-list/project-list';
 import { savaraftUrl } from '../../../../providers/requestUrl';
+import { SpeedPage } from '../../../speed/speed';
 /**
  * Generated class for the ProjectEditStep2Page page.
  *
@@ -21,6 +22,7 @@ import { savaraftUrl } from '../../../../providers/requestUrl';
 export class ProjectEditStep2Page {
   public projectData:any;
   public isEdit = false;
+  public isShow = false;
   constructor(public navCtrl: NavController, public navParams: NavParams,private Provider:MamenDataProvider) {
     this.projectData = {};
   }
@@ -46,7 +48,19 @@ export class ProjectEditStep2Page {
     
     this.projectData[field] = value;
   }
-
+  /*点击返回快速发布*/ 
+  goSpeedPage() {
+    this.isShow = true;
+  }
+  /*跳转到快速发布页面*/
+  goClientProjectSpeedPage() {
+    this.navCtrl.push(SpeedPage);
+    this.isShow = false;
+  }
+  /*点击返回*/ 
+  onCompanyDel() {
+    this.isShow = false;
+  }
   getUrlParam(name) {  
     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象  
     var r = window.location.search.substr(1).match(reg);  //匹配目标参数  
