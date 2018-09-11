@@ -23,6 +23,7 @@ import { SpeedPage } from '../../../speed/speed';
 export class ProjectEditStep1Page {
   public isEdit=false;
   public projectData:any;
+  public isShow = false;
   constructor(public navCtrl: NavController, public navParams: NavParams,private Provider:MamenDataProvider) {
     this.projectData = {}
   }
@@ -130,9 +131,19 @@ export class ProjectEditStep1Page {
     })
   }
 
-  /*跳转到快速发布页面*/
+  /*点击返回快速发布*/ 
   goSpeedPage() {
+    this.isShow = true;
+  
+  }
+  /*跳转到快速发布页面*/
+  goClientProjectSpeedPage() {
     this.navCtrl.push(SpeedPage);
+    this.isShow = false;
+  }
+  /*点击返回*/ 
+  onCompanyDel() {
+    this.isShow = false;
   }
   /* 返回到首页 */
   goback(){

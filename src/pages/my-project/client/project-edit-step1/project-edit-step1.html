@@ -2,9 +2,9 @@
 
   <ion-navbar>
     <ion-buttons start>
-      <button ion-button icon-only color="royal" (click)="goback()">
+      <!-- <button ion-button icon-only color="royal" (click)="goback()">
         <ion-icon name="arrow-back"></ion-icon>
-      </button>
+      </button> -->
     </ion-buttons>
     <ion-title>我的项目/客户/项目详情编辑1</ion-title>
   </ion-navbar>
@@ -75,5 +75,24 @@
   <div class="fixed-bottom" *ngIf="isEdit">
     <button ion-button class="btn-submit" (click)="goStep2Page()">下一步</button>
     <button ion-button class="btn-delete" (click)="onDraftSubmit()">保存</button>
+  </div>
+  <!-- 返回快速发布弹框 -->
+  <div class="phonebind-modal" [hidden]="!isShow">
+      <div class="modal-bg"></div>
+      <div class="modal-box">
+          <div class="modal-top">
+              <div class="modal-top-close">
+                  <!-- <ion-icon ios="ios-close" md="md-close" item-rigth (click)="onClose()" color=""></ion-icon> -->
+              </div>
+              <div class="modal-title">切换发布方式</div>
+              <div class="modal-content">
+                  <p>切换发布方式之后，部分您已经填写的信息将不会被保存，确定要继续么？</p>
+              </div>
+              <div class="modal-footer">
+                  <button ion-button full large (click)="goClientProjectSpeedPage()">继续返回快速发布</button>
+                  <button ion-button full large (click)="onCompanyDel()" class="btn-delete">返回</button>
+              </div>
+          </div>
+      </div>
   </div>
 </ion-content>

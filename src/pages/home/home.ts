@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { Component,ViewChild } from '@angular/core';
+import { NavController,Slides } from 'ionic-angular';
 import { IndustrydetialPage } from '../industrydetial/industrydetial';
 import { MamenDataProvider } from '../../providers/mamen-data/mamen-data';
 import { PhonebindPage } from '../phonebind/phonebind';
@@ -7,29 +7,19 @@ import { PhonebindPage } from '../phonebind/phonebind';
 import { ProjectConsultantBrowserPage } from '../my-project/client/project-consultant-browser/project-consultant-browser';
 // import {ProjectSpeedReleasePage} from '../../pages/my-project/client/project-speed-release/project-speed-release'
 
-import { ViewChild } from '@angular/core';
+// import { ViewChild } from '@angular/core';
 
-import { Slides } from 'ionic-angular';
+// import { Slides } from 'ionic-angular';
 
-// import { data,mamen_hy,mamen_jn,ma_qiaochu,finance,ma_case ,financeAll} from '../../Mock/data.js';
 import { getswipreUrl, getindustryUrl, getskillUrl, getcaseUrl, getoutstandingUrl, getfinanceUrl, getfinanceAllUrl } from '../../providers/dataUrl';
-// const guwenType = [
-//   {
-//     type: 'A',
-//     title: ''
-//   },
-//   {
-//     type:'B',
-//     title:''
-//   }
-// ]
+
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
 
 export class HomePage {
-  @ViewChild(Slides) slides: Slides;
+  @ViewChild('slides ') slides: Slides;
   private swiperArr: Array<any>;
   private IndustryArr = [];
   public skillArr: Array<any>;
@@ -162,12 +152,12 @@ export class HomePage {
     )
   }
   //解决切换其他页面回去轮播图不动问题
-  ionViewWillEnter() {
-    this.slides.startAutoplay();
-  }
-  ionViewWillLeave() {
-    this.slides.stopAutoplay();
-  }
+  // ionViewWillEnter() {
+  //   this.slides.startAutoplay();
+  // }
+  // ionViewWillLeave() {
+  //   this.slides.stopAutoplay();
+  // }
 
   //进入时执行
   ionViewDidEnter() {

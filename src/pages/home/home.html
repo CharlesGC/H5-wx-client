@@ -100,7 +100,7 @@
   </div>
 
   <!-- 财务审计 -->
-  <div class="contant-finance">
+  <div class="contant-finance" *ngIf = "financesArrLength">
     <div class="title-cont">
       <h4>财务审计顾问</h4>
       <div (click)="financemore('','','financemore')">
@@ -133,7 +133,7 @@
     </ion-list>
   </div>
   <!-- 麦盟案例 -->
-  <div class="case_container">
+  <div class="case_container" *ngIf = "caseArr">
     <ul class="case_content">
       <div class="title-cont">
         <h4>麦盟案例</h4>
@@ -162,7 +162,7 @@
     </ul>
   </div>
   <!-- 全部顾问 -->
-  <div class="contant-cont">
+  <div class="contant-cont" *ngIf ="financeAllArrlength">
     <div class="title-cont">
       <h4>全部顾问</h4>
       <div (click)="FinancCount('','','finance-count')">

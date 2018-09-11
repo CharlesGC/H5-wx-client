@@ -92,9 +92,8 @@ page-industrydetial {
                 .item-input-wrapper {
                     // margin-left: 15px;
                     display: flex;
-                    input {
-                        width: 141px;
-                        height: 20px;
+                    .input-search {
+                        width: 100%;
                         font-family: PingFangSC;
                         font-size: 14px;
                         font-weight: 600;
