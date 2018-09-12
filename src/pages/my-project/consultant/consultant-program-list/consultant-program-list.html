@@ -109,13 +109,15 @@
         <ion-card class="card-item" *ngIf="projectProgramDetails">
             <div class="card-item-label">
               <label>
-                <img style="width:66px;height:66px;" src="{{projectProgramDetails.format}}">
+                <img style="width:66px;height:66px;" src="{{projectProgramDetails.typeStr}}">
               </label>
-              <div class="card-cont" data-src="planUrl">
-                <h5>{{projectProgramDetails.sourceName}}</h5>
-                <p class="browser-file">点击查看文件预览</p>
-                <p class="browser-size">{{projectProgramDetails.urlSize}}</p>
-              </div>
+              <a href="{{projectProgramDetails.certifiedUrl}}">
+                <div class="card-cont" data-src="planUrl">
+                  <h5>{{projectProgramDetails.sourceName}}</h5>
+                  <p class="browser-file">点击查看文件预览</p>
+                  <p class="browser-size">{{projectProgramDetails.urlSize}}</p>
+                </div>
+              </a>
             </div>
         </ion-card>
       </div>

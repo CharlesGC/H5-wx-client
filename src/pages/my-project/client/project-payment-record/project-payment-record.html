@@ -87,13 +87,15 @@
           <ion-item no-lines *ngIf="paymentRecordData">
               <div class="card-item-label">
                 <label>
-                  <img style="width:66px;height:66px;" src="{{paymentRecordData.format || filetypeicon}}">
+                  <img style="width:66px;height:66px;" src="{{paymentRecordData.typeStr || filetypeicon}}">
                 </label>
-                <div class="card-cont" data-src="url">
-                  <h5>{{paymentRecordData.name}}</h5>
-                  <p class="action-browser-file">点击查看文件预览</p>
-                  <p class="browser-size">{{paymentRecordData.size || filesize}}</p>
-                </div>
+                <a href="{{paymentRecordData.certifiedUrl}}" style="text-decoration:none;">
+                  <div class="card-cont" data-src="url">
+                    <h5>{{paymentRecordData.sourceName || filetitle}}</h5>
+                    <p class="action-browser-file">点击查看文件预览</p>
+                    <p class="browser-size">{{paymentRecordData.urlSize || filesize}}</p>
+                  </div>
+                </a>
               </div>
           </ion-item>
       </ion-list>

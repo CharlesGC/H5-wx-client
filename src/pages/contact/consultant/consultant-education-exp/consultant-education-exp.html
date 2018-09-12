@@ -1,56 +1,109 @@
 <ion-header>
-    <ion-navbar>
-      <ion-title>个人详情（教育经历）编辑</ion-title>
-    </ion-navbar>
-  </ion-header>
-  
-  <ion-content style="background-color: #fcfcfc;">
-      <ion-list class="contact-list mt10">
-        <ion-item class="" (click)="goFormEditPage('schoolName',educationListData.schoolName,'text')">
-          <span class="left-title">学校</span>
-          <div item-right class="rigth-message">
-            <span class="line-overflow">{{educationListData.schoolName}}</span>
-            <ion-icon name="arrow-forward" color="#cfcfcf" class="ml12"></ion-icon>
-          </div>
-        </ion-item>
-        <ion-item class="" (click)="goFormEditPage('startTime',educationListData.startTime,'date')">
-          <span class="left-title">开始时间</span>
-          <div item-right class="rigth-message">
-            <span class="line-overflow">{{educationListData.startTime | date:'yyyy/MM/dd'}}</span>
-            <ion-icon name="arrow-forward" class="ml12"></ion-icon>
-          </div>
-        </ion-item>
-        <ion-item class="" (click)="goFormEditPage('endTime',educationListData.endTime,'date')">
-          <span class="left-title">结束时间</span>
-          <div item-right class="rigth-message">
-            <span class="line-overflow">{{educationListData.endTime | date:'yyyy/MM/dd'}}</span>
-            <ion-icon name="arrow-forward" class="ml12"></ion-icon>
-          </div>
-        </ion-item>
-        <ion-item class=""  (click)="goFormEditPage('profession',educationListData.profession,'text')">
-            <span class="left-title">专业名称</span>
-            <div item-right class="rigth-message">
-              <span class="line-overflow">{{educationListData.profession}}</span>
-              <ion-icon name="arrow-forward" class="ml12"></ion-icon>
-            </div>
-        </ion-item>
-        <ion-item class="" (click)="goFormEditPage('degree',educationListData.degree,'select')"no-lines>
-            <span class="left-title">学历</span>
-            <div item-right class="rigth-message">
-              <span class="line-overflow" *ngIf="educationListData.degree == 0">初中及以下</span>
-              <span class="line-overflow" *ngIf="educationListData.degree == 1">高中</span>
-              <span class="line-overflow" *ngIf="educationListData.degree == 2">大专</span>
-              <span class="line-overflow" *ngIf="educationListData.degree == 3">本科</span>
-              <span class="line-overflow" *ngIf="educationListData.degree == 4">研究生</span>
-              <span class="line-overflow" *ngIf="educationListData.degree == 5">博士</span>
-              <ion-icon name="arrow-forward" class="ml12"></ion-icon>
-            </div>
-        </ion-item>
-      </ion-list>
-      <div class="fixed-bottom">
-          <button ion-button class="btn-submit" (click)="onEducationExpSubmit()">提交</button>
-          <button ion-button class="btn-delete" (click)="onEducationExpDel()">删除</button>
+  <ion-navbar>
+    <ion-title>个人详情（教育经历）编辑</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content style="background-color: #fcfcfc;">
+  <ion-list class="contact-list mt10">
+    <ion-item class="" (click)="goFormEditPage('schoolName',educationListData.schoolName,'text')">
+      <span class="left-title">学校</span>
+      <div item-right class="rigth-message">
+        <span class="line-overflow">{{educationListData.schoolName}}</span>
+        <ion-icon name="arrow-forward" color="#cfcfcf" class="ml12"></ion-icon>
       </div>
-  
-  </ion-content>
-  
+    </ion-item>
+    <ion-item class="" (click)="goFormEditPage('startTime',educationListData.startTime,'date')">
+      <span class="left-title">开始时间</span>
+      <div item-right class="rigth-message">
+        <span class="line-overflow">{{educationListData.startTime | date:'yyyy/MM/dd'}}</span>
+        <ion-icon name="arrow-forward" class="ml12"></ion-icon>
+      </div>
+    </ion-item>
+    <ion-item class="" (click)="goFormEditPage('endTime',educationListData.endTime,'date')">
+      <span class="left-title">结束时间</span>
+      <div item-right class="rigth-message">
+        <span class="line-overflow">{{educationListData.endTime | date:'yyyy/MM/dd'}}</span>
+        <ion-icon name="arrow-forward" class="ml12"></ion-icon>
+      </div>
+    </ion-item>
+    <ion-item class="" (click)="goFormEditPage('profession',educationListData.profession,'text')">
+      <span class="left-title">专业名称</span>
+      <div item-right class="rigth-message">
+        <span class="line-overflow">{{educationListData.profession}}</span>
+        <ion-icon name="arrow-forward" class="ml12"></ion-icon>
+      </div>
+    </ion-item>
+    <ion-item class="" (click)="goFormEditPage('degree',educationListData.degree,'select')" no-lines>
+      <span class="left-title">学历</span>
+      <div item-right class="rigth-message">
+        <span class="line-overflow" *ngIf="educationListData.degree == 0">初中及以下</span>
+        <span class="line-overflow" *ngIf="educationListData.degree == 1">高中</span>
+        <span class="line-overflow" *ngIf="educationListData.degree == 2">大专</span>
+        <span class="line-overflow" *ngIf="educationListData.degree == 3">本科</span>
+        <span class="line-overflow" *ngIf="educationListData.degree == 4">研究生</span>
+        <span class="line-overflow" *ngIf="educationListData.degree == 5">博士</span>
+        <ion-icon name="arrow-forward" class="ml12"></ion-icon>
+      </div>
+    </ion-item>
+  </ion-list>
+  <div class="phonebind-modal" [hidden]="!isSubmit">
+    <div class="modal-bg"></div>
+    <div class="modal-box">
+      <div class="modal-top">
+        <div class="modal-top-close">
+          <!-- <ion-icon ios="ios-close" md="md-close" item-rigth (click)="onClose()" color=""></ion-icon> -->
+        </div>
+        <div class="modal-title">提示</div>
+        <div class="modal-content">
+          <p>提交成功</p>
+        </div>
+        <div class="modal-footer">
+          <button ion-button full large (click)="sureBack()">确定</button>
+          <!-- <button ion-button full large (click)="onCompanyDel()" class="btn-delete">返回</button> -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="phonebind-modal" [hidden]="!isDelete">
+    <div class="modal-bg"></div>
+    <div class="modal-box">
+      <div class="modal-top">
+        <div class="modal-top-close">
+          <!-- <ion-icon ios="ios-close" md="md-close" item-rigth (click)="onClose()" color=""></ion-icon> -->
+        </div>
+        <div class="modal-title">提示</div>
+        <div class="modal-content">
+          <p>删除成功</p>
+        </div>
+        <div class="modal-footer">
+          <button ion-button full large (click)="sureDelete()">确定</button>
+          <!-- <button ion-button full large (click)="onCompanyDel()" class="btn-delete">返回</button> -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="phonebind-modal" [hidden]="!isComplete">
+    <div class="modal-bg"></div>
+    <div class="modal-box">
+      <div class="modal-top">
+        <div class="modal-top-close">
+          <!-- <ion-icon ios="ios-close" md="md-close" item-rigth (click)="onClose()" color=""></ion-icon> -->
+        </div>
+        <div class="modal-title">提示</div>
+        <div class="modal-content">
+          <p>请填写完整</p>
+        </div>
+        <div class="modal-footer">
+          <button ion-button full large (click)="sureComplete()">确定</button>
+          <!-- <button ion-button full large (click)="onCompanyDel()" class="btn-delete">返回</button> -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="fixed-bottom">
+    <button ion-button class="btn-submit" (click)="onEducationExpSubmit()">提交</button>
+    <button ion-button class="btn-delete" (click)="onEducationExpDel()">删除</button>
+  </div>
+
+</ion-content>

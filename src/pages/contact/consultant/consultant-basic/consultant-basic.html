@@ -395,13 +395,13 @@
         <div class="card-cont" data-src="resumeList_item.resumeUrl">
           <h5>{{resumeList_item.resumeName}}</h5>
           <p>点击查看文件预览</p>
-          <p>{{resumeList_item.size}}</p>
+          <p>{{resumeList_item.urlSize}}</p>
         </div>
         <ion-icon name="md-close" item-end color="ion-gray"></ion-icon>
       </div>
     </ion-card>
     <div class="action-btn mt20">
-      <button ion-button round (click)="gouploadfile('resumePage')">上传简历附件</button>
+      <button ion-button round (click)="gouploadfile(resumePage)">上传简历附件</button>
     </div>
   </div>
 

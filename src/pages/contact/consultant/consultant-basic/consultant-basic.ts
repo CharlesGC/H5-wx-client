@@ -109,9 +109,10 @@ export class ConsultantBasicPage {
     this.Provider.getMamenSwiperData(getCompanyListUrl).subscribe(res => {
       if (res.code == 200) {
         this.consultantBasicData = res.data;
+        console.log(this.consultantBasicData,'这是数据')
         this.isLoading = false
         this.presentLoading(false);
-        console.log(this.consultantBasicData)
+        this.consultantBasicData.urlSize = (this.consultantBasicData.urlSize / 1048576).toPrecision(3)
       } else if (res.code == 207) {
         window.localStorage.removeItem('openId');
       }
@@ -143,7 +144,4 @@ export class ConsultantBasicPage {
       this.navCtrl.push(UploadfilePage)
     }
   }
-
-
-
 }

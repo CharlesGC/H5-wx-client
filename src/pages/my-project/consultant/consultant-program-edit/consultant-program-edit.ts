@@ -24,6 +24,8 @@ export class ConsultantProgramEditPage {
   private filesize: any;
   private filestatus = false;
   private fileurl: any;
+  public fileUrlvalue: any
+
   public programData = {}
   constructor(public navCtrl: NavController, public navParams: NavParams,private Provider:MamenDataProvider) {
   }
@@ -32,6 +34,33 @@ export class ConsultantProgramEditPage {
     this.programData = this.navParams.get('data') || {};
     
     console.log(this.programData,'ionViewDidLoad ConsultantProgramEditPage');
+
+    this.fileUrlvalue = this.programData['certifiedUrl']
+    //console.log(this.interactionData,'这是数据')
+    this.programData['urlSize'] = (this.programData['urlSize'] / 1048576).toPrecision(3)
+
+    if (this.programData['urlSize'] > 1) {
+      this.programData['urlSize'] = this.programData['urlSize'] + ' MB'
+    } else if (this.programData['urlSize'] < 1) {
+      this.programData['urlSize'] = this.programData['urlSize'] * 1024 + ' KB'
+    } else if (this.programData['urlSize'] == 'NaN') {
+      this.programData = {};
+      //console.log(this.programData['typeStr'])
+    }
+
+    if (this.programData['typeStr']) {
+      if (this.programData['typeStr'].search(/doc/) !== -1 || this.programData['typeStr'].search(/docx/) !== -1) {
+        this.programData['typeStr'] = 'assets/imgs/' + 'doc.png'
+      } else if (this.programData['typeStr'].search(/ppt/) !== -1 || this.programData['typeStr'].search(/pptx/) !== -1) {
+        this.programData['typeStr'] = 'assets/imgs/' + 'ppt.png'
+      } else if (this.programData['typeStr'].search(/xls/) !== -1 || this.programData['typeStr'].search(/xlsx/) !== -1) {
+        this.programData['typeStr'] = 'assets/imgs/' + 'xls.png'
+      } else if (this.programData['typeStr'].search(/jpg/) !== -1 || this.programData['typeStr'].search(/png/) !== -1 || this.programData['typeStr'].search(/jpeg/) !== -1) {
+        this.programData['typeStr'] = 'assets/imgs/' + 'png.png'
+      } else if (this.programData['typeStr'].search(/pdf/) !== -1) {
+        this.programData['typeStr'] = 'assets/imgs/' + 'pdf.png'
+      }
+    }
   }
   /* 跳转到上传文件页面 */
   gouploadfile(){
@@ -43,12 +72,9 @@ export class ConsultantProgramEditPage {
   setuploadfile = (obj, name) => {
     this.filestatus = true;
     this.filetitle = name;
-    console.log(obj)
     var a = obj.fileSize / 1048576;
     this.filesize = a.toPrecision(3);
     this.fileurl = obj.url;
-    this.programData['planUrl'] = this.fileurl;
-    this.programData['size'] = this.filesize;
 
     var types = obj.fileType;
     if (this.filesize > 1) {
@@ -56,6 +82,12 @@ export class ConsultantProgramEditPage {
     } else {
       this.filesize = this.filesize * 1024 + ' KB'
     }
+
+    this.programData['sourceName'] = this.filetitle
+    this.programData['certifiedUrl'] = this.fileurl
+    this.programData['urlSize'] = this.filesize
+    this.programData['fid'] = obj.fid
+
     if (types.indexOf('doc') == 0 || types.indexOf('docx') == 0) {
       this.filetypeicon = 'assets/imgs/' + 'doc.png'
     } else if (types.indexOf('ppt') == 0 || types.indexOf('pptx') == 0) {
@@ -67,8 +99,7 @@ export class ConsultantProgramEditPage {
     } else if (types.indexOf('pdf') == 0) {
       this.filetypeicon = 'assets/imgs/' + 'pdf.png'
     }
-    this.programData['format'] = this.filetypeicon
-    this.programData['planName'] = this.filetitle
+    this.programData['typeStr'] = this.filetypeicon
     //console.log(this.filetypeicon)
   }
 
@@ -113,6 +144,7 @@ export class ConsultantProgramEditPage {
                               '&deliverable='+programData['deliverable']+
                               '&price='+programData['price']+
                               '&planName='+(programData['planName'] || '')+
+                              '&fid='+(programData['fid'] || '')+
                               '&planUrl='+(programData['planUrl'] || '');
     if(ppid) {
       projectStageDetailUrl = projectStageDetailUrl + '&ppid=' + ppid;

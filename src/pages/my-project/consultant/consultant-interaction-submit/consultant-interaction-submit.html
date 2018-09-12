@@ -50,13 +50,15 @@
             <ion-item no-lines *ngIf="fileurl">
                 <div class="card-item-label">
                   <label>
-                    <img style="width:66px;height:66px;" src="{{interactionData.format || filetypeicon}}">
+                    <img style="width:66px;height:66px;" src="{{interactionData.typeStr || filetypeicon}}">
                   </label>
-                  <div class="card-cont" data-src="url">
-                    <h5>{{interactionData.sourceName || filetitle}}</h5>
-                    <p class="action-browser-file">点击查看文件预览</p>
-                    <p class="browser-size">{{interactionData.urlSize || filesize}}</p>
-                  </div>
+                  <a href="{{interactionData.certifiedUrl}}">
+                    <div class="card-cont" data-src="url">
+                      <h5>{{interactionData.sourceName || filetitle}}</h5>
+                      <p class="action-browser-file">点击查看文件预览</p>
+                      <p class="browser-size">{{interactionData.urlSize || filesize}}</p>
+                    </div>
+                  </a>
                 </div>
             </ion-item>
         </ion-list>
