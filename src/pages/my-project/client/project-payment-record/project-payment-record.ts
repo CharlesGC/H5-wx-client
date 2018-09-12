@@ -7,7 +7,7 @@ import { FormEditPage } from '../../../contact/form-edit/form-edit';
 import { MamenDataProvider } from '../../../../providers/mamen-data/mamen-data';
 
 import { ProjectCollectBankPage } from '../../project-collect-bank/project-collect-bank';
-import { getPayMentByPsidUrl,addPayMentUrl } from '../../../../providers/requestUrl';
+import { getPayMentByPsidUrl, addPayMentUrl } from '../../../../providers/requestUrl';
 
 import { UploadfilePage } from '../../../uploadfile/uploadfile'
 
@@ -29,9 +29,10 @@ export class ProjectPaymentRecordPage {
   private filesize: any;
   private filestatus = false;
   private fileurl: any;
+  public fileUrlvalue: any
   public paymentRecordData = {}
   public payerList = {};
-  constructor(public navCtrl: NavController, public navParams: NavParams,private transfer: FileTransfer,private file: File,private Provider:MamenDataProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private transfer: FileTransfer, private file: File, private Provider: MamenDataProvider) {
   }
 
   ionViewDidLoad() {
@@ -55,11 +56,11 @@ export class ProjectPaymentRecordPage {
 
     console.log(12312);
     fileTransfer.upload('', 'http://100.168.1.48:8181/mafile/upload.jsp', options)
-    .then((data) => {
-      // success
-    }, (err) => {
-      // error
-    })
+      .then((data) => {
+        // success
+      }, (err) => {
+        // error
+      })
   }
 
   filedownload() {
@@ -74,8 +75,8 @@ export class ProjectPaymentRecordPage {
   }
 
   /** 跳转到上传页面 */
-  gouploadfile(){
-    this.navCtrl.push(UploadfilePage,{
+  gouploadfile() {
+    this.navCtrl.push(UploadfilePage, {
       callback: this.setuploadfile,
     })
   }
@@ -87,8 +88,10 @@ export class ProjectPaymentRecordPage {
     var a = obj.fileSize / 1048576;
     this.filesize = a.toPrecision(3);
     this.fileurl = obj.url;
-    this.paymentRecordData['name'] = this.filetitle
-    this.paymentRecordData['size'] = this.filesize
+    this.paymentRecordData['sourceName'] = this.filetitle
+    this.paymentRecordData['urlSize'] = this.filesize
+    this.paymentRecordData['certifiedUrl'] = this.fileurl
+    this.paymentRecordData['fid'] = obj.fid
 
     var types = obj.fileType;
     if (this.filesize > 1) {
@@ -107,20 +110,19 @@ export class ProjectPaymentRecordPage {
     } else if (types.indexOf('pdf') == 0) {
       this.filetypeicon = 'assets/imgs/' + 'pdf.png'
     }
-    this.paymentRecordData['format'] = this.filetypeicon
-    this.paymentRecordData['planName'] = this.filetitle
+    this.paymentRecordData['typeStr'] = this.filetypeicon
     //console.log(this.filetypeicon)
   }
 
   /*列表编辑*/
   goFormEditPage(field, value, type) {
     let cid = this.navParams.get('cid')
-    if(type == 'selectPaymentBank') {
-      this.navCtrl.push(ProjectCollectBankPage,{callback:this.setValue,field:field,data:this.paymentRecordData,type:'clientType',cid:cid});
-    }else{
-      this.navCtrl.push(FormEditPage,{callback:this.setValue,value:value,field:field,type:type});
+    if (type == 'selectPaymentBank') {
+      this.navCtrl.push(ProjectCollectBankPage, { callback: this.setValue, field: field, data: this.paymentRecordData, type: 'clientType', cid: cid });
+    } else {
+      this.navCtrl.push(FormEditPage, { callback: this.setValue, value: value, field: field, type: type });
     }
-    
+
   }
 
   /*设置值（回调函数）*/
@@ -129,80 +131,105 @@ export class ProjectPaymentRecordPage {
   //   this.paymentRecordData[field] = value;
   // }
   /*设置值（回调函数）*/
-  setValue = (field,value)=> {
-    if(field == 'taxNumber' && value){
-      this.paymentRecordData['payer'] =value.name;
-      this.paymentRecordData['payerBank'] =value.bankName;
-      this.paymentRecordData['payerAccount'] =value.account;
-    }else{
+  setValue = (field, value) => {
+    if (field == 'taxNumber' && value) {
+      this.paymentRecordData['payer'] = value.name;
+      this.paymentRecordData['payerBank'] = value.bankName;
+      this.paymentRecordData['payerAccount'] = value.account;
+    } else {
       this.paymentRecordData[field] = value;
     }
   }
 
-  getUrlParam(name) {  
+  getUrlParam(name) {
     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象  
     var r = window.location.search.substr(1).match(reg);  //匹配目标参数  
     if (r != null) {
-        return encodeURI(r[2]);  //返回参数值 
+      return encodeURI(r[2]);  //返回参数值 
     } else {
-        return null; 
+      return null;
     }
- }
+  }
 
   /*项目申请发票附加信息数据请求*/
   getProjectPaymentRecordDetail(psid) {
     // let projectInvoiceDetailUrl = 'http://mamon.yemindream.com/mamon/customer/getPayMentByPsid';
-    const openId = window.sessionStorage.getItem('openId')|| this.getUrlParam('openId');
-    let projectInvoiceDetailUrl = getPayMentByPsidUrl + '?openId=' + openId + '&psid='+psid;
-    this.Provider.getMamenSwiperData(projectInvoiceDetailUrl).subscribe(res=>{
-      if(res.code==200) {
-        console.log(res,'--------');
+    const openId = window.sessionStorage.getItem('openId') || this.getUrlParam('openId');
+    let projectInvoiceDetailUrl = getPayMentByPsidUrl + '?openId=' + openId + '&psid=' + psid;
+    this.Provider.getMamenSwiperData(projectInvoiceDetailUrl).subscribe(res => {
+      if (res.code == 200) {
+        console.log(res, '--------');
         this.paymentRecordData = res.data;
-        this.paymentRecordData && this.paymentRecordData['payerList'] && this.paymentRecordData['payerList'].length>0 && this.paymentRecordData['payerList'].map(d=>{
-          if(d.type == 1){
+        this.paymentRecordData['urlSize'] = (this.paymentRecordData['urlSize'] / 1048576).toPrecision(3)
+
+        if (this.paymentRecordData['urlSize'] > 1) {
+          this.paymentRecordData['urlSize'] = this.paymentRecordData['urlSize'] + ' MB'
+        } else if (this.paymentRecordData['urlSize'] < 1) {
+          this.paymentRecordData['urlSize'] = this.paymentRecordData['urlSize'] * 1024 + ' KB'
+        } else if (this.paymentRecordData['urlSize'] == 'NaN') {
+          this.paymentRecordData = {};
+          //console.log(this.interactionData['typeStr'])
+        }
+
+        if (this.paymentRecordData['typeStr']) {
+          if (this.paymentRecordData['typeStr'].search(/doc/) !== -1 || this.paymentRecordData['typeStr'].search(/docx/) !== -1) {
+            this.paymentRecordData['typeStr'] = 'assets/imgs/' + 'doc.png'
+          } else if (this.paymentRecordData['typeStr'].search(/ppt/) !== -1 || this.paymentRecordData['typeStr'].search(/pptx/) !== -1) {
+            this.paymentRecordData['typeStr'] = 'assets/imgs/' + 'ppt.png'
+          } else if (this.paymentRecordData['typeStr'].search(/xls/) !== -1 || this.paymentRecordData['typeStr'].search(/xlsx/) !== -1) {
+            this.paymentRecordData['typeStr'] = 'assets/imgs/' + 'xls.png'
+          } else if (this.paymentRecordData['typeStr'].search(/jpg/) !== -1 || this.paymentRecordData['typeStr'].search(/png/) !== -1 || this.paymentRecordData['typeStr'].search(/jpeg/) !== -1) {
+            this.paymentRecordData['typeStr'] = 'assets/imgs/' + 'png.png'
+          } else if (this.paymentRecordData['typeStr'].search(/pdf/) !== -1) {
+            this.paymentRecordData['typeStr'] = 'assets/imgs/' + 'pdf.png'
+          }
+        }
+        this.paymentRecordData && this.paymentRecordData['payerList'] && this.paymentRecordData['payerList'].length > 0 && this.paymentRecordData['payerList'].map(d => {
+          if (d.type == 1) {
             this.paymentRecordData['payer'] = d.name;
             this.paymentRecordData['payerBank'] = d.bankName;
             this.paymentRecordData['payerAccount'] = d.account;
           }
         })
         // this.payerList = this.paymentRecordData && this.paymentRecordData['payerList'] && this.paymentRecordData['payerList'].length>0 ?
-      }else if(res.code == 207) {
+      } else if (res.code == 207) {
         window.localStorage.removeItem('openId');
-      }else{
-        alert('请求出错:'+res.msg);
+      } else {
+        alert('请求出错:' + res.msg);
       }
-    },error=>{
-      console.log('erros===',error);
+    }, error => {
+      console.log('erros===', error);
     })
   }
 
   /*申请发票提交*/
-  goPaymentRecord(){
+  goPaymentRecord() {
     let psid = this.navParams.get('id');
     let invoiceData = this.paymentRecordData;
     // let projectInvoiceDetailUrl = 'http://mamon.yemindream.com/mamon/customer/addPayMent';
-    const openId = window.sessionStorage.getItem('openId')|| this.getUrlParam('openId');
-    let projectInvoiceDetailUrl = addPayMentUrl + '?openId=' + openId + '&psid='+psid +
-                              '&payer='+invoiceData['payer']+
-                              '&payerBank='+invoiceData['payerBank']+
-                              '&payerAccount='+invoiceData['payerAccount']+
-                              '&payee='+invoiceData['payee']+
-                              '&payeeBank='+invoiceData['payeeBank']+
-                              '&payeeAccount='+invoiceData['payeeAccount']+
-                              '&paymentUrl='+(invoiceData['paymentUrl'] || '')+
-                              '&realPrice='+invoiceData['realPrice'];
-    this.Provider.getMamenSwiperData(projectInvoiceDetailUrl).subscribe(res=>{
-      if(res.code==200) {
-        console.log(res,'--------');
+    const openId = window.sessionStorage.getItem('openId') || this.getUrlParam('openId');
+    let projectInvoiceDetailUrl = addPayMentUrl + '?openId=' + openId + '&psid=' + psid +
+      '&payer=' + invoiceData['payer'] +
+      '&payerBank=' + invoiceData['payerBank'] +
+      '&payerAccount=' + invoiceData['payerAccount'] +
+      '&payee=' + invoiceData['payee'] +
+      '&payeeBank=' + invoiceData['payeeBank'] +
+      '&payeeAccount=' + invoiceData['payeeAccount'] +
+      '&paymentUrl=' + (invoiceData['paymentUrl'] || '') +
+      '&fid=' + (invoiceData['fid'] || '') +
+      '&realPrice=' + invoiceData['realPrice'];
+    this.Provider.getMamenSwiperData(projectInvoiceDetailUrl).subscribe(res => {
+      if (res.code == 200) {
+        console.log(res, '--------');
         this.paymentRecordData = res.data;
         this.navCtrl.pop();
-      }else if(res.code == 207) {
+      } else if (res.code == 207) {
         window.localStorage.removeItem('openId');
-      }else{
-        alert('请求出错:'+res.msg);
+      } else {
+        alert('请求出错:' + res.msg);
       }
-    },error=>{
-      console.log('erros===',error);
+    }, error => {
+      console.log('erros===', error);
     })
   }
 }

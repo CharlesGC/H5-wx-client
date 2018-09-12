@@ -24,6 +24,60 @@
             </div>
         </ion-item>
       </ion-list>
+      <div class="phonebind-modal" [hidden]="!isSubmit">
+        <div class="modal-bg"></div>
+        <div class="modal-box">
+          <div class="modal-top">
+            <div class="modal-top-close">
+              <!-- <ion-icon ios="ios-close" md="md-close" item-rigth (click)="onClose()" color=""></ion-icon> -->
+            </div>
+            <div class="modal-title">提示</div>
+            <div class="modal-content">
+              <p>提交成功</p>
+            </div>
+            <div class="modal-footer">
+              <button ion-button full large (click)="sureBack()">确定</button>
+              <!-- <button ion-button full large (click)="onCompanyDel()" class="btn-delete">返回</button> -->
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="phonebind-modal" [hidden]="!isDelete">
+        <div class="modal-bg"></div>
+        <div class="modal-box">
+          <div class="modal-top">
+            <div class="modal-top-close">
+              <!-- <ion-icon ios="ios-close" md="md-close" item-rigth (click)="onClose()" color=""></ion-icon> -->
+            </div>
+            <div class="modal-title">提示</div>
+            <div class="modal-content">
+              <p>删除成功</p>
+            </div>
+            <div class="modal-footer">
+              <button ion-button full large (click)="sureDelete()">确定</button>
+              <!-- <button ion-button full large (click)="onCompanyDel()" class="btn-delete">返回</button> -->
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="phonebind-modal" [hidden]="!isComplete">
+        <div class="modal-bg"></div>
+        <div class="modal-box">
+          <div class="modal-top">
+            <div class="modal-top-close">
+              <!-- <ion-icon ios="ios-close" md="md-close" item-rigth (click)="onClose()" color=""></ion-icon> -->
+            </div>
+            <div class="modal-title">提示</div>
+            <div class="modal-content">
+              <p>请填写完整</p>
+            </div>
+            <div class="modal-footer">
+              <button ion-button full large (click)="sureComplete()">确定</button>
+              <!-- <button ion-button full large (click)="onCompanyDel()" class="btn-delete">返回</button> -->
+            </div>
+          </div>
+        </div>
+      </div>
       <div class="fixed-bottom">
           <button ion-button class="btn-submit" (click)="onLanguageExpSubmit()">提交</button>
           <button ion-button class="btn-delete" (click)="onLanguageExpDel()">删除</button>

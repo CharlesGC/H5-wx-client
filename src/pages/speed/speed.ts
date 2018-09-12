@@ -1,14 +1,14 @@
-import { Component,ChangeDetectorRef  } from '@angular/core';
-import { IonicPage, NavController, NavParams  } from 'ionic-angular'; 
-import {ReleaseThreePage} from '../release-three/release-three';
-import {ReleaseSuccessPage} from '../release-success/release-success';
+import { Component, ChangeDetectorRef } from '@angular/core';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
+// import { ReleaseThreePage } from '../release-three/release-three';
+// import { ReleaseSuccessPage } from '../release-success/release-success';
 import { MamenDataProvider } from '../../providers/mamen-data/mamen-data';
-import {ProjectListPage} from '../../pages/my-project/client/project-list/project-list';
+import { ProjectListPage } from '../../pages/my-project/client/project-list/project-list';
 import { ProjectEditStep1Page } from '../my-project/client/project-edit-step1/project-edit-step1';
-import {getWechatJsConfig,getUploadLocal,getSpeedrelease} from '../../providers/dataUrl';
+import { getWechatJsConfig, getUploadLocal, getSpeedrelease } from '../../providers/dataUrl';
 
 declare var wx: any;
-declare var $:any;
+declare var $: any;
 @IonicPage()
 @Component({
   selector: 'page-speed',
@@ -19,56 +19,67 @@ export class SpeedPage {
   public START = new Date().getTime();
   public END = new Date().getTime();
   // public Record = new Date().getTime();
-  public recordTimer:any;
-  public timer:any;
+  public recordTimer: any;
+  public timer: any;
   public isRecord = false;//是否播放
-  
+
   public isPause = false;
   public isRuning = true;
   public audioData = [];
-  public audio:any;
-  public duration:any;
-  public audioUrl= {};
-  public animationplay:any;
+  public audio: any;
+  public duration: any;
+  public audioUrl = {};
+  public animationplay: any;
   public selected = -1;
-  public speedVoiceReleaseArr:any;
-  public description:any;
-  public voice:any;
+  public speedVoiceReleaseArr: any;
+  public description: any;
+  public voice: any;
   public isShow = false;
+  public isChange = false;
   constructor(public navCtrl: NavController, public navParams: NavParams,
-    public WechatData:MamenDataProvider,public UploadData:MamenDataProvider,
-    public changeDetectorRef:ChangeDetectorRef,public speedVoiceData:MamenDataProvider ) {
+    public WechatData: MamenDataProvider, public UploadData: MamenDataProvider,
+    public changeDetectorRef: ChangeDetectorRef, public speedVoiceData: MamenDataProvider) {
   }
-  ionViewDidLoad() { 
+  ionViewDidLoad() {
     console.log('ionViewDidLoad SpeedPage');
-    // this.audioData = [{url:'../../assets/js/BmuN5wbnOdzRQpU0yUpKrFPy3CwgRPytCJs2GMc2AqX_m3WdOAEFqUge0muzNqqH.mp3'},{
-    //   url:'../../assets/js/fQcm5V91gRC5qhgG2btytH0f66LFP9LFlvm2LS7hHBQRumRJDK0UyJVvPvWbvceM.mp3'},{url:'../../assets/js/SKG4pSxf2yVhJ0aCBRAm_PVMyJaWG0uB6D700junb2HcQa4oH1EfIhn8ks0RJM0R.mp3'},{url:'../../assets/js/XCiXTMcrw_PMtE1I0DnMS3TMbOlH0sxN3YrDNRsHkweoUK3ZPiqWPAnQriPMo4Hi.mp3'}];
-    
-    // console.log(audio,'========')
-    // audio.onended = () =>{
-    //   alert('执行完成')
-    // }
-    // this.fieldValue = this.navParams.get('value');
-    // console.log(this.fieldValue);
+    // this.audioData = [{ url: '../../assets/js/BmuN5wbnOdzRQpU0yUpKrFPy3CwgRPytCJs2GMc2AqX_m3WdOAEFqUge0muzNqqH.mp3' }, {
+    //   url: '../../assets/js/fQcm5V91gRC5qhgG2btytH0f66LFP9LFlvm2LS7hHBQRumRJDK0UyJVvPvWbvceM.mp3'
+    // }, { url: '../../assets/js/SKG4pSxf2yVhJ0aCBRAm_PVMyJaWG0uB6D700junb2HcQa4oH1EfIhn8ks0RJM0R.mp3' }, { url: '../../assets/js/XCiXTMcrw_PMtE1I0DnMS3TMbOlH0sxN3YrDNRsHkweoUK3ZPiqWPAnQriPMo4Hi.mp3' }];
+
+  }
+  ionViewDidEnter() {
+    this.audioData = [];
+    //当页面进入初始化的时候
+    let elements = document.querySelectorAll(".tabbar");
+    if (elements != null) {
+      Object.keys(elements).map((key) => {
+        elements[key].style.display = 'none';
+      });
+    }
+  }
+  //点击完整发布
+  goRelease() {
+    this.isChange = true;
   }
   // 跳转到完整发布
-  goback() {
+  goClientProjectEdit1Page() {
     this.navCtrl.push(ProjectEditStep1Page);
+    this.isChange = false;
   }
-  /*到发布成功页面*/ 
-  // gotosuccess () {
-  //   this.navCtrl.push(ReleaseSuccessPage);  
-  // }
+  // 返回
+  onCompanyDel() {
+    this.isChange = false;
+  }
   // 语音播放
-  autoPlay(e,index) {
+  autoPlay(e, index) {
     this.audio = document.getElementsByTagName('audio');
-      //  总时长
-      this.duration = this.audio[index].duration;
-      var math = Math.round(this.duration); 
-      this.duration = math;
-      // console.log(math);
-      console.log( this.duration,'秒');
-    this.audio[index].onended = () =>{
+    //  总时长
+    this.duration = this.audio[index].duration;
+    var math = Math.round(this.duration);
+    this.duration = math;
+    // console.log(math);
+    console.log(this.duration, '秒');
+    this.audio[index].onended = () => {
       // alert('执行完成');
       spinner1[index]['style'].display = 'none';
       spinner[index]['style'].display = 'block';
@@ -76,177 +87,179 @@ export class SpeedPage {
     // console.log(this.audio)
     let spinner = document.getElementsByClassName('audio-spinner');
     let spinner1 = document.getElementsByClassName('audio-spinner1');
-    for(let i=0;i<this.audio.length;i++) {
-        if(index === i) {
-          // spinner1[i]['style'].display = 'block';
-          // spinner[i]['style'].display = 'none';
-          if(this.audio[i].paused) {
-            this.audio[i].play();
-            spinner1[i]['style'].display = 'block';
-            spinner[i]['style'].display = 'none';
-          }else {
-            this.audio[i].pause();
-            spinner1[i]['style'].display = 'none';
-            spinner[i]['style'].display = 'block';
-          }
-        
-        }else {
-          spinner1[i]['style'].display = 'none';
-          spinner[i]['style'].display = 'block'; 
+    for (let i = 0; i < this.audio.length; i++) {
+      if (index === i) {
+        // spinner1[i]['style'].display = 'block';
+        // spinner[i]['style'].display = 'none';
+        if (this.audio[i].paused) {
+          this.audio[i].play();
+          spinner1[i]['style'].display = 'block';
+          spinner[i]['style'].display = 'none';
+        } else {
           this.audio[i].pause();
-          if(this.audio[i].paused) {
-            this.audio[i].load();
-          }
+          spinner1[i]['style'].display = 'none';
+          spinner[i]['style'].display = 'block';
         }
-      } 
+
+      } else {
+        spinner1[i]['style'].display = 'none';
+        spinner[i]['style'].display = 'block';
+        this.audio[i].pause();
+        if (this.audio[i].paused) {
+          this.audio[i].load();
+        }
+      }
     }
+  }
   // 删除
-  deletAudio (i) {
-    console.log(i);
-    this.audioData && this.audioData.length > 0 && this.audioData.splice(i,1);
+  deletAudio(i) {
+    console.log(i, '*************************8');
+    this.audioData && this.audioData.length > 0 && this.audioData.splice(i, 1);
     this.changeDetectorRef.markForCheck();
     this.changeDetectorRef.detectChanges();
   }
   // 阻止默认事件
-  touchmoveDefault (event) {
+  touchmoveDefault(event) {
     event.preventDefault();
   }
   // 长按语音输入
   startTouch(event) {
     // var _this = this;
-    console.log(event,'=====')
+    console.log(event, '=====')
     let url = location.href.split('#')[0]; // 当前网页的URL，不包含#及其后面部分
     this.localId = '';
     $.ajax({
-        type : "get",
-        url : "/mamon/wechat/wechatJsConfig",
-        dataType : "json",
-        data : {"url" : url},
-        async : false, 
-        success : function(res) {
-          console.log(res);
-          wx.config({
-            debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
-            appId: res.data.appid, // 必填，公众号的唯一标识
-            timestamp: res.data.timestamp, // 必填，生成签名的时间戳
-            nonceStr: res.data.nonceStr, // 必填，生成签名的随机串
-            signature: res.data.signature, // 必填，签名
-            jsApiList: ['startRecord', 'stopRecord', 'uploadVoice'] // 必填，需要使用的JS接口列表
-          });
-        }
+      type: "get",
+      url: "/mamon/wechat/wechatJsConfig",
+      dataType: "json",
+      data: { "url": url },
+      async: false,
+      success: function (res) {
+        console.log(res);
+        wx.config({
+          debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+          appId: res.data.appid, // 必填，公众号的唯一标识
+          timestamp: res.data.timestamp, // 必填，生成签名的时间戳
+          nonceStr: res.data.nonceStr, // 必填，生成签名的随机串
+          signature: res.data.signature, // 必填，签名
+          jsApiList: ['startRecord', 'stopRecord', 'uploadVoice'] // 必填，需要使用的JS接口列表
+        });
+      }
     });
-      this.isRecord = true;//是否显示录音gif
-      this.START = new Date().getTime();
-      console.log(this.START,'getTime');
-      this.recordTimer = setTimeout(()=>{
+    this.isRecord = true;//是否显示录音gif
+    this.START = new Date().getTime();
+    console.log(this.START, 'getTime');
+    this.recordTimer = setTimeout(() => {
       wx.startRecord({
-            success: function(){
-                localStorage.rainAllowRecord = 'true';
-                wx.startRecord();
-              //  alert('录音开始'); 
-              return;
-            },
-            cancel: function () {
-                this.isRecord = false;
-            }
-        })
+        success: function () {
+          localStorage.rainAllowRecord = 'true';
+          wx.startRecord();
+          //  alert('录音开始'); 
+          return;
+        },
+        cancel: function () {
+          this.isRecord = false;
+        }
+      })
       localStorage.rainAllowRecord = 'true';
-      },300);
+    }, 300);
     event.preventDefault();
   }
-  /*结束录音*/ 
-  endTouch (event) {
+  /*结束录音*/
+  endTouch(event) {
     console.log(event + "************")
     // event.preventDefault();
     this.isRecord = false;
-     /*小于300ms，不录音*/
-    if((new Date().getTime() - this.START) < 300){
+    /*小于300ms，不录音*/
+    if ((new Date().getTime() - this.START) < 300) {
       // this.END = 0;
       this.START = 0;
       wx.stopRecord({
-        success:function(res) {
+        success: function (res) {
           wx.stopRecord({
-            success:function(res) {
+            success: function (res) {
               console.log(111111111111);
               alert('录音结束');
             }
           })
         }
-      });  
+      });
       alert('小于300ms，不录音');
-      clearTimeout(this.recordTimer);  
-  }else{
-    // var audioData = [];
-    var _this = this;
+      clearTimeout(this.recordTimer);
+    } else {
+      // var audioData = [];
+      var _this = this;
       wx.stopRecord({
         success: function (res) {
           this.localId = res.localId;
           // 上传语音
-          if(this.localId != '') {
-              wx.uploadVoice({
-                localId: this.localId, // 需要上传的音频的本地ID，由stopRecord接口获得
-                isShowProgressTips: 1, // 默认为1，显示进度提示
-                success: function (res) {
-                    var serverId = res.serverId
-                    // var serverId = 0;
-                    alert(serverId);
-              //把录音在微信服务器上的id（res.serverId）发送到自己的服务器供下载。
-              if(serverId !='') {  
-                    $.ajax({
-                      url: '/mamon/wechat/uploadLocal',
-                      type: 'post',
-                      data: {'serverId':serverId},
-                      dataType: "json", 
-                      async:false,
-                      success: (data) => {
-                        // let audioData = [];
-                        _this.audioData.push(data.data);
-                        _this.changeDetectorRef.markForCheck();
-                        _this.changeDetectorRef.detectChanges();
-                          alert(_this.audioData);
-                          _this.localId = '';
-                      },
-                      error: function (xhr, errorType, error) {
-                          console.log(error);
-                          this.isRecord = true;
-                      }
-                  })  
+          if (this.localId != '') {
+            wx.uploadVoice({
+              localId: this.localId, // 需要上传的音频的本地ID，由stopRecord接口获得
+              isShowProgressTips: 1, // 默认为1，显示进度提示
+              success: function (res) {
+                var serverId = res.serverId
+                // var serverId = 0;
+                //把录音在微信服务器上的id（res.serverId）发送到自己的服务器供下载。
+                if (serverId != '') {
+                  $.ajax({
+                    url: '/mamon/wechat/uploadLocal',
+                    type: 'post',
+                    data: { 'serverId': serverId },
+                    dataType: "json",
+                    async: false,
+                    success: (data) => {
+                      // let audioData = [];
+                      _this.audioData.push(data.data);
+                      _this.changeDetectorRef.markForCheck();
+                      _this.changeDetectorRef.detectChanges();
+                      alert(_this.audioData);
+                      _this.localId = '';
+                    },
+                    error: function (xhr, errorType, error) {
+                      this.isRecord = true;
+                    }
+                  })
+                }
               }
-            }
-          });
-         }
-           console.log(res);
+            });
+          }
+          console.log(res);
         },
         fail: function (res) {
           alert(JSON.stringify(res));
-      } 
+        }
       });
     }
   }
-  /*动态获取openId*/ 
-  getUrlParam(name) {  
+  /*动态获取openId*/
+  getUrlParam(name) {
     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象  
     var r = window.location.search.substr(1).match(reg);  //匹配目标参数  
     if (r != null) {
-        return encodeURI(r[2]);  //返回参数值 
+      return encodeURI(r[2]);  //返回参数值 
     } else {
-        return null; 
+      return null;
     }
- }
-  /*快速发布*/ 
+  }
+  /*快速发布*/
   onSpeedReleaseSubmit(value) {
     console.log(value);
     // o2GZp1KSbS2Ab6zWjBurLzfcrAKk
     const openId = window.sessionStorage.getItem('openId') || this.getUrlParam('openId') || window.localStorage.getItem('openId');
     this.description = value;
     let Arr = this.audioData || [];
-    this.voice = Arr.length > 0 ?  Arr.map(f=>f.url).join(",") :'';
-    this.speedVoiceData.getSpeedReleaseData(getSpeedrelease,openId,this.description,this.voice).subscribe(
-      res=>{
-        this.speedVoiceReleaseArr = res.data;
-        console.log(this.speedVoiceReleaseArr);
-        this.isShow = true;
-      },error=>{
+    this.voice = Arr.length > 0 ? Arr.map(f => f.url).join(",") : '';
+    this.speedVoiceData.getSpeedReleaseData(getSpeedrelease, openId, this.description, this.voice).subscribe(
+      res => {
+        if (res.code == 200) {
+          this.speedVoiceReleaseArr = res.data;
+          console.log(this.speedVoiceReleaseArr);
+          this.isShow = true;
+        } else {
+          alert('请求出错：' + res.msg)
+        }
+      }, error => {
         console.log(error);
       }
     )
@@ -256,6 +269,10 @@ export class SpeedPage {
     this.navCtrl.push(ProjectListPage);
     this.isShow = false;
   }
+  // 返回首页
+  goback() {
+    // this.navCtrl.goToRoot(HomePage); 
+    this.navCtrl.parent.select(0);
+  }
 }
-  
- 
+

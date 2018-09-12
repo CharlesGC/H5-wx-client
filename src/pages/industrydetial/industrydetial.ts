@@ -277,10 +277,10 @@ export class IndustrydetialPage {
   // 点击选择行业
   selsectIndustry(value, index, type) {
     this.type = type;
-    if(index == undefined) {
+    if (index == undefined) {
       this.IndustryName = value;
       this.getSearchadviser(this.industryId = 1, this.firstSkillId = 0, this.secondSkillId = 0);
-    }else {
+    } else {
       this.skillChecked = index;
       this.IndustryName = value;
       this.isIndustryLabel = true;
@@ -301,7 +301,7 @@ export class IndustrydetialPage {
     this.type = type;
     if (value == '全部领域') {
       // this.skilldoubleData = value;
-      this.skilldoubleData['fName'] =value; 
+      this.skilldoubleData['fName'] = value;
       this.getSecondaryData('');
     } else {
       this.skillChecked = index;
@@ -323,12 +323,6 @@ export class IndustrydetialPage {
   /*跳转到顾问详情*/
   goProjectConsultantBrowserPage(value, index) {
     const user = window.sessionStorage.getItem('user') ? JSON.parse(window.sessionStorage.getItem('user')) : {};
-    if (user.type == 1) {
-      this.navCtrl.push(ProjectConsultantBrowserPage, { uid: value.uid })
-    } else if (user.type == 0) {
-      this.navCtrl.push(ProjectConsultantBrowserPage, { uid: value.uid, type: 'homepage' })
-    } else {
-      this.navCtrl.push(ProjectConsultantBrowserPage, { uid: value.uid })
-    }
+    this.navCtrl.push(ProjectConsultantBrowserPage, { uid: value.uid, type: 'homepage', userType: user.type });
   }
 }

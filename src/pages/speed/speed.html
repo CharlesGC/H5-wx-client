@@ -1,5 +1,10 @@
 <ion-header>
     <ion-navbar>
+        <ion-buttons start>
+            <button ion-button icon-only color="royal" (click)="goback()">
+                <ion-icon name="arrow-back"></ion-icon>
+            </button>
+        </ion-buttons>
         <ion-title>快速发布</ion-title>
     </ion-navbar>
 </ion-header>
@@ -15,29 +20,32 @@
         <div class="speech-prompt">也可通过语音录入，方便快捷记录项目需求</div>
         <div class="start-box">
             <ion-item class="item-play" no-lines>
-                <div class="audio-mengu" (click)="autoPlay($event,i)" *ngFor="let item of audioData;let i=index">
-                    <div class="audio-spinner">
-                        <img src="../../assets/imgs/iconfont-voice@3x.png" alt="">
+                <div class="item-audio">
+                    <div class="audio-mengu" (click)="autoPlay($event,i)" *ngFor="let item of audioData;let i=index">
+                        <div class="audio-spinner">
+                            <img src="../../assets/imgs/iconfont-voice@3x.png" alt="">
+                        </div>
+                        <div class="audio-spinner1" style="display: none">
+                            <div class="line1"></div>
+                            <div class="line2"></div>
+                            <div class="line3"></div>
+                            <div class="line4"></div>
+                            <div class="line5"></div>
+                        </div>
+                        <div class="click-play">
+                            点击播放
+                        </div>
+                        <div class="icon-close" (click)="deletAudio(i)">
+                            <ion-icon name="close-circle"></ion-icon>
+                        </div>
+                        <audio>
+                            <source [src]="item.url" type="audio/mpeg">
+                            <!-- <source src="http://100.168.1.48:8181/file20180829/cddddd1b79ea40ceb5fb855b142a9244.mp3" type="audio/mpeg"> -->
+                            您的浏览器不支持 audio 元素。
+                        </audio>
                     </div>
-                    <div class="audio-spinner1" style="display: none">
-                        <div class="line1"></div>
-                        <div class="line2"></div>
-                        <div class="line3"></div>
-                        <div class="line4"></div>
-                        <div class="line5"></div>
-                    </div>
-                    <div class="click-play">
-                        点击播放
-                    </div>
-                    <div class="icon-close" (click)="deletAudio(i)">
-                        <ion-icon name="close-circle"></ion-icon>
-                    </div>
-                    <audio>
-                        <source [src]="item.url" type="audio/mpeg">
-                        <!-- <source src="http://100.168.1.48:8181/file20180829/cddddd1b79ea40ceb5fb855b142a9244.mp3" type="audio/mpeg"> -->
-                        您的浏览器不支持 audio 元素。
-                    </audio>
                 </div>
+
                 <!-- <div>{{duration}}"</div> -->
                 <div class="spinner" [hidden]="!isRecord">
                     <div class="spinner-list">
@@ -58,8 +66,8 @@
             </ion-item>
         </div>
         <div class="promptbot">请选择发布类型（目前为快速发布模式）</div>
-        <button ion-item (click)="goback()" class="release-btn">
-            <div class="backone" (click)="goback()">
+        <button ion-item (click)="goRelease()" class="release-btn">
+            <div class="backone">
                 <span>
                     <ion-icon name="add-circle-outline"></ion-icon>
                 </span>
@@ -87,6 +95,25 @@
                 <div class="modal-footer">
                     <button ion-button full large (click)="goClientProjectPage()">返回项目列表</button>
                     <!-- <button ion-button full large (click)="onCompanyDel()" class="btn-delete">返回</button> -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 切换发布方式弹框 -->
+    <div class="phonebind-modal" [hidden]="!isChange">
+        <div class="modal-bg"></div>
+        <div class="modal-box">
+            <div class="modal-top">
+                <div class="modal-top-close">
+                    <!-- <ion-icon ios="ios-close" md="md-close" item-rigth (click)="onClose()" color=""></ion-icon> -->
+                </div>
+                <div class="modal-title">切换发布方式</div>
+                <div class="modal-content">
+                    <p>切换发布方式之后，部分您已经填写的信息将不会被保存，确定要继续么？</p>
+                </div>
+                <div class="modal-footer">
+                    <button ion-button full large (click)="goClientProjectEdit1Page()">继续前往完整发布</button>
+                    <button ion-button full large (click)="onCompanyDel()" class="btn-delete">返回</button>
                 </div>
             </div>
         </div>

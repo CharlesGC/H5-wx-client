@@ -6,9 +6,8 @@ page-speed {
             margin:0;
         }
         .label-ios {
-           margin: 0;
-           overflow-y: scroll;
-        }
+            margin: 0;
+         }
         ion-label {
             overflow: initial;
             height: 100%;
@@ -35,6 +34,7 @@ page-speed {
                 font-size: 14px;
                 font-weight: 600;
                 color: #c7c7c7;
+                margin-top: 10px;
                 .text-input-ios {
                     margin: 0;
                 }
@@ -46,138 +46,148 @@ page-speed {
                 }
             }
             .speech-prompt {
-                width: 228px;
+                width: 228px;  
                 height: 17px;
                 font-family: PingFangSC;
                 font-size: 12px;
                 font-weight: 600;
                 color: #c7c7c7;
                 margin-left: 15px;
+                margin-top: 15px;
+                background: #fcfcfc;
             }
             .start-box {
                 width: 100%;
                 height: auto;
                 display: flex;
-                margin-top: 10px;
-                
+                margin-top: 15px;
                 .item-play {
                     width: 55%;
                     height: 155px;
                     margin-left: 15px;
-                    overflow-y: scroll;
-                    .audio-mengu {
-                        width: 145px;
-                        height: 32px;
-                        border-radius: 3px;
-                        background-color: #5da2f4;
-                        margin-top: 14px;
-                        display: flex;
-                          .audio-spinner {
-                            width: 14px;
-                            height: 11px;
-                            /* padding-top: 5px; */
-                            /* padding-left: 10px; */
-                            -webkit-box-flex: 1;
-                            -webkit-flex: 1;
-                            -ms-flex: 1;
-                            flex: 1;
-                            margin-top: 6px;
-                            margin-left: 6px;
-                            img {
-                                max-width: 100%;
-                                height: 100%;
-                                border: 0
+                    box-shadow: 0 1px 10px 0 rgba(0, 0, 0, 0.05);
+                    .item-audio {
+                        width: 100%;
+                        height: 100%;
+                        overflow-y: scroll;
+                        .audio-mengu {
+                            width: 145px;
+                            height: 32px;
+                            border-radius: 3px;
+                            background-color: #5da2f4;
+                            margin-top: 14px;
+                            display: flex;
+                            margin: 15px 0;
+                              .audio-spinner {
+                                width: 14px;
+                                height: 11px;
+                                /* padding-top: 5px; */
+                                /* padding-left: 10px; */
+                                -webkit-box-flex: 1;
+                                -webkit-flex: 1;
+                                -ms-flex: 1;
+                                flex: 1;
+                                margin-top: 6px;
+                                margin-left: 6px;
+                                img {
+                                    max-width: 100%;
+                                    height: 100%;
+                                    border: 0
+                                }
+                              }
+                              .audio-spinner1 {
+                                width: 100%;
+                                height: 20px;
+                                margin-left: 6px;
+                                margin-top: 6px;
+                                div{      
+                                  width: 100%;
+                                  height:12px;
+                                  background-color: #fff;
+                                  display:inline-block;
+                                  width: 2px;
+                                  margin-left: -3px;
+                                  animation:strechdelay 1s infinite ease-in-out;
+                                  -webkit-animation:strechdelaytwo 1s infinite ease-in-out;
+                                  position: relative;
+                                  top: 1px;
+                                  opacity: .8;
+                                }
+                                .line2{
+                                    animation-delay:-0.9s;
+                                    -webkit-animation-delay:-0.9s;
+                                  }
+                                   .line3{
+                                    animation-delay:-0.8s;
+                                    -webkit-animation-delay:-0.8s;
+                                  }
+                                  .line4{
+                                    animation-delay:-0.7s;
+                                    -webkit-animation-delay:-0.7s;
+                                  }
+                                   .line5{
+                                    animation-delay:-0.6s;
+                                    -webkit-animation-delay:-0.6s;
+                                  }
+                                @keyframes strechdelaytwo {
+                                  0%,40%,100%{
+                                    transform:scaleY(.4);
+                                    -webkit-transform:scaleY(.4);
+                                  }
+                                  20%{
+                                    transform:scaleY(1);
+                                    -webkit-transform:scaleY(1);
+                                  }
+                                }
+                                @-webkit-keyframes strechdelaytwo {
+                                  0%,40%,100%{
+                                    -webkit-transform:scaleY(.4);
+                                  }
+                                  20%{
+                                    -webkit-transform:scaleY(1);
+                                  }
+                              }
                             }
-                          }
-                          .audio-spinner1 {
-                            width: 100%;
-                            height: 20px;
-                            margin-left: 6px;
-                            margin-top: 6px;
-                            div{      
-                              width: 100%;
-                              height:12px;
-                              background-color: #fff;
-                              display:inline-block;
-                              width: 2px;
-                              margin-left: -3px;
-                              animation:strechdelay 1s infinite ease-in-out;
-                              -webkit-animation:strechdelaytwo 1s infinite ease-in-out;
-                              position: relative;
-                              top: 1px;
-                              opacity: .8;
+                    
+                            .click-play {
+                                width: 57px;
+                                height: 17px;
+                                font-family: PingFangSC;
+                                font-size: 12px;
+                                font-weight: 600;   
+                                color: #ffffff;
+                                margin-right: 47px;
+                                line-height: 32px;
+                                flex:1;
                             }
-                            .line2{
-                                animation-delay:-0.9s;
-                                -webkit-animation-delay:-0.9s;
-                              }
-                               .line3{
-                                animation-delay:-0.8s;
-                                -webkit-animation-delay:-0.8s;
-                              }
-                              .line4{
-                                animation-delay:-0.7s;
-                                -webkit-animation-delay:-0.7s;
-                              }
-                               .line5{
-                                animation-delay:-0.6s;
-                                -webkit-animation-delay:-0.6s;
-                              }
-                            @keyframes strechdelaytwo {
-                              0%,40%,100%{
-                                transform:scaleY(.4);
-                                -webkit-transform:scaleY(.4);
-                              }
-                              20%{
-                                transform:scaleY(1);
-                                -webkit-transform:scaleY(1);
-                              }
+                            .icon-close {
+                                // width: 20px;
+                                // height: 12px;
+                                // border-radius: 50%;
+                                // background-color: #fff;
+                                // position: relative;
+                                // top: 10px;
+                                // right: 10px;  
+                                // color: #5da2f4;
+                                margin-top: 6px;
+                                margin-right: 6px;
+                                color: #fff;
+                                flex: 1;
+                                ion-icon {
+                                    font-size: 14px;
+                                }
+                                // ion-icon {
+                                //     position: relative;
+                                //     left: 5px;
+                                //     bottom: 5px;
+                                //     font-size: 12px;
+                                //     font-weight: 600;
+                                // }
                             }
-                            @-webkit-keyframes strechdelaytwo {
-                              0%,40%,100%{
-                                -webkit-transform:scaleY(.4);
-                              }
-                              20%{
-                                -webkit-transform:scaleY(1);
-                              }
-                          }
                         }
-                
-                        .click-play {
-                            width: 57px;
-                            height: 17px;
-                            font-family: PingFangSC;
-                            font-size: 12px;
-                            font-weight: 600;   
-                            color: #ffffff;
-                            margin-right: 47px;
-                            line-height: 32px;
-                            flex:1;
-                        }
-                        .icon-close {
-                            // width: 20px;
-                            // height: 12px;
-                            // border-radius: 50%;
-                            // background-color: #fff;
-                            // position: relative;
-                            // top: 10px;
-                            // right: 10px;  
-                            // color: #5da2f4;
-                            margin-top: 6px;
-                            margin-right: 6px;
-                            color: #fff;
-                            flex: 1;
-                            ion-icon {
-                                font-size: 14px;
-                            }
-                            // ion-icon {
-                            //     position: relative;
-                            //     left: 5px;
-                            //     bottom: 5px;
-                            //     font-size: 12px;
-                            //     font-weight: 600;
-                            // }
-                        }
+                    }
+                    .item-audio::-webkit-scrollbar {
+                        display: none;
                     }
                     .spinner{
                         width: 100%;
@@ -259,6 +269,7 @@ page-speed {
                     width: 42%;
                     height: 155px;
                     margin-right: 7px;
+                    box-shadow: 0 1px 10px 0 rgba(0, 0, 0, 0.05);
                     .item-ios {
                         padding-left: 10px;
                     }
@@ -297,8 +308,10 @@ page-speed {
                 color: #c7c7c7;
                 margin-left: 15px;
                 margin-top: 20px;
+                background: #fcfcfc;
             }
             .release-btn {
+                margin-bottom: 40px;
                 .label-ios {
                     display: flex;
                     justify-content: space-between;
@@ -422,7 +435,12 @@ page-speed {
                 line-height: 1.8;
                 font-weight: 500;
                 p{
-                    text-indent: 2rem;
+                    font-family: PingFangSC;
+                    font-size: 14px;
+                    line-height: 1.29;
+                    text-align: justify;
+                    color: #4a4a4a;
+                    // text-indent: 2rem;
                 }
             }
             .modal-top-close{

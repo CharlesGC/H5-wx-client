@@ -1,35 +1,24 @@
-import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { NavController, Slides } from 'ionic-angular';
 import { IndustrydetialPage } from '../industrydetial/industrydetial';
 import { MamenDataProvider } from '../../providers/mamen-data/mamen-data';
 import { PhonebindPage } from '../phonebind/phonebind';
-// import { ChooseIdentityPage } from '../choose-identity/choose-identity';
 import { ProjectConsultantBrowserPage } from '../my-project/client/project-consultant-browser/project-consultant-browser';
-// import {ProjectSpeedReleasePage} from '../../pages/my-project/client/project-speed-release/project-speed-release'
+import { ChooseIdentityPage } from '../../pages/choose-identity/choose-identity';
 
-import { ViewChild } from '@angular/core';
+// import { ViewChild } from '@angular/core';
 
-import { Slides } from 'ionic-angular';
+// import { Slides } from 'ionic-angular';
 
-// import { data,mamen_hy,mamen_jn,ma_qiaochu,finance,ma_case ,financeAll} from '../../Mock/data.js';
 import { getswipreUrl, getindustryUrl, getskillUrl, getcaseUrl, getoutstandingUrl, getfinanceUrl, getfinanceAllUrl } from '../../providers/dataUrl';
-// const guwenType = [
-//   {
-//     type: 'A',
-//     title: ''
-//   },
-//   {
-//     type:'B',
-//     title:''
-//   }
-// ]
+
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
 
 export class HomePage {
-  @ViewChild(Slides) slides: Slides;
+  @ViewChild('slides ') slides: Slides;
   private swiperArr: Array<any>;
   private IndustryArr = [];
   public skillArr: Array<any>;
@@ -162,12 +151,12 @@ export class HomePage {
     )
   }
   //解决切换其他页面回去轮播图不动问题
-  ionViewWillEnter() {
-    this.slides.startAutoplay();
-  }
-  ionViewWillLeave() {
-    this.slides.stopAutoplay();
-  }
+  // ionViewWillEnter() {
+  //   this.slides.startAutoplay();
+  // }
+  // ionViewWillLeave() {
+  //   this.slides.stopAutoplay();
+  // }
 
   //进入时执行
   ionViewDidEnter() {
@@ -238,20 +227,13 @@ export class HomePage {
   FinancCount(value, index, type) {
     this.navCtrl.push(IndustrydetialPage, {
       type: 'finance-count'
-    }); 
+    });
   }
   // 全部顾问列表
   financeAllList(value, index) {
     // type=1代表顾问 0 代表客户
     const user = window.sessionStorage.getItem('user') ? JSON.parse(window.sessionStorage.getItem('user')) : {};
-    if(user.type == 1){
-      this.navCtrl.push(ProjectConsultantBrowserPage, { uid: value.uid })
-    }else if(user.type == 0){
-      this.navCtrl.push(ProjectConsultantBrowserPage, { uid: value.uid, type: 'homepage' })
-    }else {
-      this.navCtrl.push(ProjectConsultantBrowserPage, { uid: value.uid })
-    }
-    
+    this.navCtrl.push(ProjectConsultantBrowserPage, { uid: value.uid, type: 'homepage', userType: user.type });
   }
   // 获取openId
   getUrlParam(name) {
@@ -263,7 +245,14 @@ export class HomePage {
       return null;
     }
   }
-  // goProjectSpeed () {
-  //   this.navCtrl.push(ProjectSpeedReleasePage)
-  // }
+  /*点击图片跳转到注册页*/
+  goContactPage(e) {
+    const user = window.sessionStorage.getItem('user') ? JSON.parse(window.sessionStorage.getItem('user')) : {};
+    if (user.type == 0 || user.type == 1) {
+      e.stopPropatation = true || e.cancelBubble;
+
+    } else {
+      this.navCtrl.push(ChooseIdentityPage);
+    }
+  }
 }

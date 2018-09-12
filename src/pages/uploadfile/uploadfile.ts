@@ -25,6 +25,9 @@ export class UploadfilePage {
   private filetypeicon = '';
   private fileData: any;
   private pagetype: any;
+  public isSubmit = false;
+  public isDelete = false;
+  public isComplete = false;
   constructor(public navCtrl: NavController, public navParams: NavParams, private http: HttpClient) {
     this.filetitle = navParams.get('title');
     this.filesize = navParams.get('size');
@@ -66,6 +69,10 @@ export class UploadfilePage {
     //   }
     // }]
   });
+  sureBack() {
+    this.isSubmit = !this.isSubmit;
+    this.navCtrl.pop();
+  }
   selectedFileOnChanged(event: any) {
     // 打印文件选择名称
     if (!event.target.files || event.target.files.length < 1) {
@@ -95,20 +102,21 @@ export class UploadfilePage {
     }
   }
 
-  getUrlParam(name) {  
+  getUrlParam(name) {
     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象  
     var r = window.location.search.substr(1).match(reg);  //匹配目标参数  
     if (r != null) {
-        return encodeURI(r[2]);  //返回参数值 
+      return encodeURI(r[2]);  //返回参数值 
     } else {
-        return null; 
+      return null;
     }
   }
 
-  uploadFile() {
+  uploadFile(value) {
     // 上传
-    if (this.pagetype == 'resumePage') {
+    if (value =='resumePage') {
       let $this = this;
+      console.log(value)
       if (!this.fileData) {
         return;
       }
@@ -119,9 +127,10 @@ export class UploadfilePage {
       this.http.post(this.uploadUrl, formData).subscribe(res => {
         console.log('请求结束', res);
         //let tempRes = JSON.parse(res);
-        const openId = window.sessionStorage.getItem('openId')|| this.getUrlParam('openId');
+        const openId = window.sessionStorage.getItem('openId') || this.getUrlParam('openId');
         this.fileData = res;
-        $this.navCtrl.pop()
+        this.isSubmit =true;
+        //$this.navCtrl.pop()
       });
     } else {
       let $this = this;
@@ -136,10 +145,11 @@ export class UploadfilePage {
         console.log('请求结束', res);
         //let tempRes = JSON.parse(res);
         this.fileData = res['data'];
-        console.log(this.fileData,'+++')
+        console.log(this.fileData, '+++')
         let callback = this.navParams.get('callback');
         callback(this.fileData, $this.filetitle);
-        $this.navCtrl.pop()
+        this.isSubmit = true;
+        //$this.navCtrl.pop()
       });
     }
 

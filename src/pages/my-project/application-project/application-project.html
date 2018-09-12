@@ -56,12 +56,14 @@
               </div>
             </ion-item>
           </ion-list>
-          <div class="bg clearfix mt20">
-            <img style="width:66px;height:66px;" src="{{filetypeicon}}">
-            <span class="file-title">您的简历</span>
-            <span class="file-desc">点击查看文件预览</span>
-            <span class="file-size">{{filesize}}</span>
-          </div>
+          <a href="{{projectData.certifiedUrl}}" style="text-decoration:none;">
+            <div class="bg clearfix mt20">
+              <img style="width:66px;height:66px;" src="{{projectData.typeStr || filetypeicon}}">
+              <span class="file-title">{{projectData.souceName || filetitle}}</span>
+              <span class="file-desc">点击查看文件预览</span>
+              <span class="file-size">{{projectData.urlSize || filesize}}</span>
+            </div>
+          </a>
         <div style="height:100px;"></div>
         <button ion-button expand="full" large class="fixed-bottom" (click)="onApplicationSubmit()">提交申请</button>
     </ion-content>

@@ -89,6 +89,7 @@ page-project-speed-release {
                 margin-top: 10px;
                 padding-right: 16px;
                 overflow-y: scroll;
+                -webkit-overflow-scrolling: touch;
                 .input-wrapper {
                     display: block;
                 }

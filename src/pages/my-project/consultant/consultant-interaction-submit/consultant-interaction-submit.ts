@@ -24,11 +24,47 @@ export class ConsultantInteractionSubmitPage {
   private filesize: any;
   private filestatus = false;
   private fileurl: any;
+  public fileUrlvalue: any
+
   public interactionData = {}
   public isAdd = false;
   public type = 0;
   public fid: any;
   constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider) {
+  }
+
+  ionViewDidLoad() {
+    this.isAdd = this.navParams.get('isAdd');
+    console.log('ionViewDidLoad ConsultantInteractionSubmitPage');
+    this.type = this.navParams.get('type') || 0;
+    this.interactionData = this.navParams.get('data') || {}
+
+    this.fileUrlvalue = this.interactionData['certifiedUrl']
+    //console.log(this.interactionData,'这是数据')
+    this.interactionData['urlSize'] = (this.interactionData['urlSize'] / 1048576).toPrecision(3)
+
+    if (this.interactionData['urlSize'] > 1) {
+      this.interactionData['urlSize'] = this.interactionData['urlSize'] + ' MB'
+    } else if (this.interactionData['urlSize'] < 1) {
+      this.interactionData['urlSize'] = this.interactionData['urlSize'] * 1024 + ' KB'
+    } else if (this.interactionData['urlSize'] == 'NaN') {
+      this.interactionData = {};
+      //console.log(this.interactionData['typeStr'])
+    }
+
+    if (this.interactionData['typeStr']) {
+      if (this.interactionData['typeStr'].search(/doc/) !== -1 || this.interactionData['typeStr'].search(/docx/) !== -1) {
+        this.interactionData['typeStr'] = 'assets/imgs/' + 'doc.png'
+      } else if (this.interactionData['typeStr'].search(/ppt/) !== -1 || this.interactionData['typeStr'].search(/pptx/) !== -1) {
+        this.interactionData['typeStr'] = 'assets/imgs/' + 'ppt.png'
+      } else if (this.interactionData['typeStr'].search(/xls/) !== -1 || this.interactionData['typeStr'].search(/xlsx/) !== -1) {
+        this.interactionData['typeStr'] = 'assets/imgs/' + 'xls.png'
+      } else if (this.interactionData['typeStr'].search(/jpg/) !== -1 || this.interactionData['typeStr'].search(/png/) !== -1 || this.interactionData['typeStr'].search(/jpeg/) !== -1) {
+        this.interactionData['typeStr'] = 'assets/imgs/' + 'png.png'
+      } else if (this.interactionData['typeStr'].search(/pdf/) !== -1) {
+        this.interactionData['typeStr'] = 'assets/imgs/' + 'pdf.png'
+      }
+    }
   }
 
   /** 跳转到上传页面 */
@@ -43,13 +79,18 @@ export class ConsultantInteractionSubmitPage {
     var a = obj.fileSize / 1048576;
     this.filesize = a.toPrecision(3);
     this.fileurl = obj.url;
-    this.fid = obj.fid;
     var types = obj.fileType;
     if (this.filesize > 1) {
       this.filesize = this.filesize + ' MB'
     } else {
       this.filesize = this.filesize * 1024 + ' KB'
     }
+
+    this.interactionData['sourceName'] = this.filetitle
+    this.interactionData['certifiedUrl'] = this.fileurl
+    this.interactionData['urlSize'] = this.filesize
+    this.fid = obj.fid
+
     if (types.indexOf('doc') == 0 || types.indexOf('docx') == 0) {
       this.filetypeicon = 'assets/imgs/' + 'doc.png'
     } else if (types.indexOf('ppt') == 0 || types.indexOf('pptx') == 0) {
@@ -61,14 +102,7 @@ export class ConsultantInteractionSubmitPage {
     } else if (types.indexOf('pdf') == 0) {
       this.filetypeicon = 'assets/imgs/' + 'pdf.png'
     }
-    //this.certificationListData['format'] = this.filetypeicon
-  }
-
-  ionViewDidLoad() {
-    this.isAdd = this.navParams.get('isAdd');
-    console.log('ionViewDidLoad ConsultantInteractionSubmitPage');
-    this.type = this.navParams.get('type') || 0;
-    this.interactionData = this.navParams.get('data') || {}
+    this.interactionData['typeStr'] = this.filetypeicon
   }
 
   getUrlParam(name) {
@@ -90,19 +124,19 @@ export class ConsultantInteractionSubmitPage {
     let interactionData = this.interactionData;
     // let projectStageDetailUrl = 'http://mamon.yemindream.com/mamon/adviser/submitDocument';
     const openId = window.sessionStorage.getItem('openId') || this.getUrlParam('openId');
-    let projectStageDetailUrl = submitDocumentUrl + '?openId=' + openId + '&pid='+pid +
-                              '&name='+interactionData['name']+
-                              '&introduction='+interactionData['introduction']+
-                              '&type=' +this.type+
-                              '&fid='+fid;
-    if(pdid){
-      projectStageDetailUrl = projectStageDetailUrl+ '&pdid='+pdid;
+    let projectStageDetailUrl = submitDocumentUrl + '?openId=' + openId + '&pid=' + pid +
+      '&name=' + interactionData['name'] +
+      '&introduction=' + interactionData['introduction'] +
+      '&type=' + this.type +
+      '&fid=' + fid;
+    if (pdid) {
+      projectStageDetailUrl = projectStageDetailUrl + '&pdid=' + pdid;
     }
-    if(psid){
-      projectStageDetailUrl = projectStageDetailUrl+ '&psid='+psid;
+    if (psid) {
+      projectStageDetailUrl = projectStageDetailUrl + '&psid=' + psid;
     }
-    this.Provider.getMamenSwiperData(projectStageDetailUrl).subscribe(res=>{
-      if(res.code==200) {
+    this.Provider.getMamenSwiperData(projectStageDetailUrl).subscribe(res => {
+      if (res.code == 200) {
         alert('操作功能！');
         this.navCtrl.pop();
       } else if (res.code == 207) {

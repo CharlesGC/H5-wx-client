@@ -18,10 +18,25 @@ import { addOrEditLanguageUrl,delLanguageUrl } from '../../../../providers/reque
 })
 export class ConsultantLanguageExpPage {
   public languageListData:any;
+  public isSubmit = false;
+  public isDelete = false;
+  public isComplete = false;
   constructor(public navCtrl: NavController, public navParams: NavParams, private Provider:MamenDataProvider) {
     this.languageListData = {};
   }
+  sureBack() {
+    this.isSubmit = !this.isSubmit;
+    this.navCtrl.pop();
+  }
 
+  sureDelete() {
+    this.isDelete = !this.isDelete;
+    this.navCtrl.pop();
+  }
+
+  sureComplete() {
+    this.isComplete = !this.isComplete;
+  }
   ionViewDidLoad() {
     this.languageListData = this.navParams.get('data');
     console.log('ionViewDidLoad ConsultantLanguageExpPage');
@@ -43,7 +58,11 @@ export class ConsultantLanguageExpPage {
     let languageListData = this.languageListData;
     let alid = languageListData.alid || 0;
     // let getlanguageExpUrl = 'http://mamon.yemindream.com/mamon/adviser/addOrEditLanguage';
-    
+    var arr = Object.keys(this.languageListData);
+    if (arr.length < 2) {
+      this.isComplete = true;
+      return
+    }
     let getlanguageExpUrl = addOrEditLanguageUrl + '?openId=' + openId + '&language='+languageListData.language+
                           '&grade='+languageListData.grade;
     if(alid){
@@ -52,8 +71,8 @@ export class ConsultantLanguageExpPage {
     
     this.Provider.getMamenSwiperData(getlanguageExpUrl).subscribe(res=>{
       if(res.code==200) {
-        alert((alid?'修改':'新增') + '成功');
-        this.navCtrl.pop();
+        //alert((alid?'修改':'新增') + '成功');
+        this.isSubmit = true;
       }else if(res.code == 207) {
         window.localStorage.removeItem('openId');
       }
@@ -73,8 +92,8 @@ export class ConsultantLanguageExpPage {
     
     this.Provider.getMamenSwiperData(getLanguageExpDellUrl).subscribe(res=>{
       if(res.code==200) {
-        alert('删除成功');
-        this.navCtrl.pop();
+        //alert('删除成功');
+        this.isDelete = true;
       }else if(res.code == 207) {
         window.localStorage.removeItem('openId');
       }
