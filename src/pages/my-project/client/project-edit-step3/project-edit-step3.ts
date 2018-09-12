@@ -78,8 +78,8 @@ export class ProjectEditStep3Page {
                               '&budgetDay='+(projectData['budgetDay'] || 0)+
                               '&workload='+(projectData['workload'] || 0)+
                               '&budget='+projectData['budget']+
-                              '&language='+language+
-                              '&grade='+grade+
+                              '&languages='+language+
+                              '&grades='+grade+
                               '&otherIndustrys='+otherIndustrys+
                               '&otherSkills='+otherSkills+
                               '&province='+projectData['province']+
@@ -114,6 +114,11 @@ export class ProjectEditStep3Page {
 
   /*列表编辑*/
   goFormEditPage(field, value, type) {
+    if(field == 'skillList') {
+      value = value && value.length ? value.map(d=>({id:d.psid,text:d.skillName})) : [];
+    }else if(field == 'industryList') {
+      value = value && value.length ? value.map(d=>({id:d.piid,text:d.industryName})) : [];
+    }
       if(type == 'timeSelect'){
         this.navCtrl.push(ProjectTimeSelectPage,{callback:this.setValue,value:value,field:field,type:type});
       }else{
@@ -124,23 +129,22 @@ export class ProjectEditStep3Page {
 
   /*设置值（回调函数）*/
   setValue = (field,value)=> {
-    console.log(field,value,11112312);
     if(field == 'province-city'){
       this.projectData['province'] = value['province'] || ''
       this.projectData['city'] = value['city'] || ''
       return;
     }else if(field == 'projectTime'){
-      this.projectData['projectLengthType'] = value[0]  || '';
+      this.projectData['projectLengthType'] = value[0] || 0;
       this.projectData['projectLength'] = value[1] || '';
     }else if(field == 'startTime') {
-      this.projectData['startTimeType'] = value[0] || '';
+      this.projectData['startTimeType'] = value[0] || 0;
       this.projectData['startTime'] = value[1] || '';
     }else if(field == 'deliverMethod'){
       this.projectData[field] = value
     }else if(field == 'qualification'){
       this.projectData[field] = value;
     }else if(field == 'project_budget'){
-      this.projectData['budgetType'] = value[0] || '';
+      this.projectData['budgetType'] = value[0] || 0;
       this.projectData['budgetDay'] = value[1] || '';
       this.projectData['workload'] = value[2] || '';
       this.projectData['budget'] = value[3] || '';
@@ -184,8 +188,8 @@ export class ProjectEditStep3Page {
                               '&budgetDay='+(projectData['budgetDay'] || 0)+
                               '&workload='+(projectData['workload'] || 0)+
                               '&budget='+projectData['budget']+
-                              '&language='+language+
-                              '&grade='+grade+
+                              '&languages='+language+
+                              '&grades='+grade+
                               '&otherIndustrys='+otherIndustrys+
                               '&otherSkills='+otherSkills+
                               '&province='+projectData['province']+

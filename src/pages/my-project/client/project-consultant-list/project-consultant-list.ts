@@ -24,6 +24,12 @@ export class ProjectConsultantListPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProjectConsultantListPage');
+    // let pid = this.navParams.get('pid');
+    // let status = this.navParams.get('status');
+    // this.getProjectListData(pid,status);
+  }
+
+  ionViewDidEnter() {
     let pid = this.navParams.get('pid');
     let status = this.navParams.get('status');
     this.getProjectListData(pid,status);

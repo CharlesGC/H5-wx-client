@@ -30,8 +30,8 @@ export class ProjectListPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProjectListPage');
-    this.getMyProjectCount();
-    this.getProjectListData(0);
+    // this.getMyProjectCount();
+    // this.getProjectListData(0);
   }
   ionViewDidEnter() {
     this.getMyProjectCount();

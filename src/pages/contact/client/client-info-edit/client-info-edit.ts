@@ -25,6 +25,7 @@ export class ClientInfoEditPage {
   public companyDetaiData={};
   public user = {};
   public isdefault = true;
+  public cid = '';
   constructor(public navCtrl: NavController, public navParams: NavParams,private Provider:MamenDataProvider) {
     // this.companyDetaiData = {}
   }
@@ -35,6 +36,7 @@ export class ClientInfoEditPage {
     console.log('ionViewDidLoad ClientInfoEditPage');
   }
   ionViewDidEnter() {
+    this.cid = this.navParams.get('cid') || ''
     //进行判断（在返回要重新拉取数据时回调）
     // this.getCompanyDetailData();
   }

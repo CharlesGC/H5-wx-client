@@ -47,12 +47,19 @@ export class TabsPage {
     }
   }
   
-  // ngOnchanges(){
-  //   console.log("父组件ngonchanges");
-  // }
-  // ngDoCheck (){
-  //   console.log("父组件ngDocheck")
-  // }
+  ngDoCheck (){
+    console.log('ngDoCheck','ngDoCheck进行时');
+    const user = window.sessionStorage.getItem('user') ? JSON.parse(window.sessionStorage.getItem('user')) : {type:0};
+    // user.type == 0
+    if(user.type == 1){
+      this.isshow = false;
+      this.tab4Root = RecommendConsultantListPage
+    }else if(user.type == 0){
+      this.isshow = true;
+      this.tab4Root = RecommendClientListPage;
+    }
+   
+  }
   // ngAfterContentInit(){
   //   console.log("父组件ngAfterContentInit")
   // }
@@ -68,34 +75,5 @@ export class TabsPage {
   // ngAfterViewInt(){
   //   console.log('改变时执行~~');
   // }
-
-  ionViewDidEnter(){
-    console.log('进行~~~~~~~~~~~~')
-    const user = window.sessionStorage.getItem('user') ? JSON.parse(window.sessionStorage.getItem('user')) : {};
-    // // user.type == 0
-    // if(user.type == 1){
-    //   this.isshow = false;
-    // }else if(user.type == 0){
-    //   this.isshow = true;
-    // }
-    // this.tab4Root = RecommendClientListPage;
-    console.log(user.type,'tabs')
-    if(user.type == 1){
-      this.tab4Root = RecommendConsultantListPage
-    }else if(user.type == 0){
-      this.tab4Root = RecommendClientListPage;
-    }
-  }
-
-  NgDocheck() {
-    console.log(1111)
-    const user = window.sessionStorage.getItem('user') ? JSON.parse(window.sessionStorage.getItem('user')) : {};
-    // user.type == 0
-    if(user.type == 1){
-      this.isshow = false;
-    }else if(user.type == 0){
-      this.isshow = true;
-    }
-  }
 
 }

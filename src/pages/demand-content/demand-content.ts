@@ -68,7 +68,7 @@ export class DemandContentPage {
   onProjectBrowserClick(data) {
     const user = window.sessionStorage.getItem('user') ? JSON.parse(window.sessionStorage.getItem('user')) : {};
     if(user.type == 0){
-      this.navCtrl.push(ProjectBrowserPage,{data:data});
+      this.navCtrl.push(ProjectBrowserPage,{data:data,isApply:true});
     }else if(user.type == 1){
       this.navCtrl.push(ConsultantProjectBrowserPage,{data:data,isApply:true});
     }

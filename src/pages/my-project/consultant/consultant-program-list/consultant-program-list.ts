@@ -4,7 +4,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { MamenDataProvider } from '../../../../providers/mamen-data/mamen-data';
 
 import { ConsultantProgramEditPage } from '../consultant-program-edit/consultant-program-edit';
-import { getProjectProgramDetailUrl } from '../../../../providers/requestUrl';
+import { getProjectProgramDetailUrl,addOrEditProgramUrl } from '../../../../providers/requestUrl';
 import { ConsultantProjectBrowserPage } from '../consultant-project-browser/consultant-project-browser'
 import { ConsultantStageListPage } from '../consultant-stage-list/consultant-stage-list';
 import { ConsultantDocumentListPage } from '../consultant-document-list/consultant-document-list';
@@ -94,10 +94,7 @@ export class ConsultantProgramListPage {
     let projectDetailsUrl = getProjectProgramDetailUrl + '?openId=' + openId + '&pid='+pid;
     this.Provider.getMamenSwiperData(projectDetailsUrl).subscribe(res=>{
       if(res.code==200) {
-        console.log(res,'--------');
         this.projectProgramDetails = res.data;
-      }else if(res.code == 207) {
-        window.localStorage.removeItem('openId');
       }else{
         alert('请求出错:'+res.msg);
       }
@@ -115,6 +112,26 @@ export class ConsultantProgramListPage {
       this.navCtrl.push(ConsultantProgramEditPage,{isAdd:false,pid:pid});
     }
     
+  }
+
+  /*提交方案*/
+  onProgramSubmitted() {
+    let pid = this.navParams.get('pid');
+    
+    // let projectStageDetailUrl = 'http://mamon.yemindream.com/mamon/adviser/addOrEditProgram';
+    const openId = window.sessionStorage.getItem('openId')|| this.getUrlParam('openId');
+    let projectStageDetailUrl = addOrEditProgramUrl + '?openId=' + openId + '&pid='+pid + '&status=-1&ppid='+ this.projectProgramDetails['ppid'];
+    
+    this.Provider.getMamenSwiperData(projectStageDetailUrl).subscribe(res=>{
+      if(res.code==200) {
+        alert('操作成功！');
+        this.navCtrl.pop();
+      }else{
+        alert('请求出错:'+res.msg);
+      }
+    },error=>{
+      console.log('erros===',error);
+    })
   }
 
 }
