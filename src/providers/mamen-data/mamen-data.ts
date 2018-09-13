@@ -55,8 +55,9 @@ export class MamenDataProvider {
 		.catch(error=>Observable.throw(error||'Server error'));//抛出异常
   }
   // 行业技能筛选
-  public getSearchAdviserList (dataUrl:string,industryId:number,firstSkillId:number,secondSkillId :number){
-		return this.http.get(dataUrl + "?industryId="+industryId+"&firstSkillId="+firstSkillId+"&secondSkillId="+secondSkillId).map(res=>res.json())
+  public getSearchAdviserList (dataUrl:string,industryId:number,firstSkillId:number,secondSkillId :number,search:any,pageNum:number,pageSize:number){
+    return this.http.get(dataUrl + "?industryId="+industryId+
+    "&firstSkillId="+firstSkillId+"&secondSkillId="+secondSkillId+"&search="+search+"&pageNum="+pageNum+"&pageSize="+pageSize).map(res=>res.json())
 		.catch(error=>Observable.throw(error||'Server error'));//抛出异常
   }
   //详情搜索
