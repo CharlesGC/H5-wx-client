@@ -54,7 +54,7 @@ export class ConsultantStageBrowserPage {
   /*跳转到添加支付记录页面*/
   goPaymentRecord(stageType){
     let id = this.navParams.get('id')
-    if(stageType == 3) {
+    if(stageType == 3 || stageType == 8) {
       this.navCtrl.push(ConsultantInteractionSubmitPage,{isAdd:true,pid:this.projectStageDetail['pid'],psid:this.projectStageDetail['psid']});
     }else if(stageType == 5){
       this.navCtrl.push(ConsultantDeliveryModelPage,{pid:this.projectStageDetail['pid'],psid:this.projectStageDetail['psid']});
@@ -106,7 +106,7 @@ export class ConsultantStageBrowserPage {
 
   /*编辑详情*/
   goDocumentBrowser(id){
-    this.navCtrl.push(ConsultantDocumentBrowserPage,{id:id});
+    this.navCtrl.push(ConsultantDocumentBrowserPage,{id:id,adviserStatus:this.projectStageDetail['adviserStatus']});
   }
 
 }

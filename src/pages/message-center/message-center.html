@@ -15,21 +15,26 @@
 
 <ion-content style="background-color: #fcfcfc;">
   <ion-list>
-    <ion-item class="message-item mt20" no-lines>
+    <ion-item class="message-item mt20" no-lines *ngFor="let messageCenterList_item of messageCenterList">
       <p class="msg-title">
-        <span class="msg-title-left">已交付</span>
-        <span>今天 10:30</span>
+        <span class="msg-title-left">{{messageCenterList_item.message}}</span>
+        <span>{{messageCenterList_item.createTime | date: 'yyyy-MM-dd'}}</span>
       </p>
       <div class="msg-cont">
-        <h4>多语言项目的技术难题（Java 语言）</h4>
-        <p>整体进度 第二阶段</p>
+        <h4>{{messageCenterList_item.projectName}}</h4>
+        <p *ngIf="messageCenterList_item.pStatus != 0 || messageCenterList_item.pStatus != 1 || 
+                  messageCenterList_item.pStatus != 2 || messageCenterList_item.pStatus != 3|| 
+                  messageCenterList_item.pStatus != 6">整体进度 第{{messageCenterList_item.stageSort}}阶段</p>
+        <p *ngIf="messageCenterList_item.pStatus == 0 || messageCenterList_item.pStatus == 1 || 
+                  messageCenterList_item.pStatus == 2 || messageCenterList_item.pStatus == 3|| 
+                  messageCenterList_item.pStatus == 6">整体进度 未开始</p>
       </div>
-      <div class="msg-footer">
-        <span class="msg-footer-text">查看该阶段详情</span>
+      <div class="msg-footer" (click)="goProjectBrowserPage(messageCenterList_item)">
+        <span class="msg-footer-text">查看该项目详情</span>
         <ion-icon name="arrow-forward" class="ml12"></ion-icon>
       </div>
     </ion-item>
-    <ion-item class="message-item mt20" no-lines>
+    <!-- <ion-item class="message-item mt20" no-lines>
         <p class="msg-title">
           <span class="msg-title-left">已交付</span>
           <span>今天 10:30</span>
@@ -56,7 +61,7 @@
             <span class="msg-footer-text">查看该阶段详情</span>
             <ion-icon name="arrow-forward" class="ml12"></ion-icon>
           </div>
-        </ion-item>
+        </ion-item> -->
   </ion-list>
 
 </ion-content>

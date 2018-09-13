@@ -80,13 +80,13 @@ export class ProjectEditStep2Page {
     let projectStageDetailUrl = savaraftUrl + '?openId=' + openId +
                               '&cid='+projectData['cid']+
                               '&principalName='+projectData['principalName']+
-                              '&principalPosition='+projectData['principalPosition']+
-                              '&principalPhone='+projectData['principalPhone']+
-                              '&principalEmail='+projectData['principalEmail']+
-                              '&projectName='+projectData['projectName']+
+                              '&principalPosition='+(projectData['principalPosition']||'')+
+                              '&principalPhone='+(projectData['principalPhone']||'')+
+                              '&principalEmail='+(projectData['principalEmail']||'')+
+                              '&projectName='+(projectData['projectName']||'')+
                               '&description='+projectData['description']+
-                              '&target='+projectData['target']+
-                              '&note='+projectData['note'];
+                              '&target='+(projectData['target']||'')+
+                              '&note='+(projectData['note']||'');
     if(pid) {
       projectStageDetailUrl = projectStageDetailUrl + '&pid=' + pid;
     }

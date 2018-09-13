@@ -48,7 +48,7 @@ export class ConsultantInteractionSubmitPage {
     } else if (this.interactionData['urlSize'] < 1) {
       this.interactionData['urlSize'] = this.interactionData['urlSize'] * 1024 + ' KB'
     } else if (this.interactionData['urlSize'] == 'NaN') {
-      this.interactionData = {};
+      // this.interactionData = {};
       //console.log(this.interactionData['typeStr'])
     }
 

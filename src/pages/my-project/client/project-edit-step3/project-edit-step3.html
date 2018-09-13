@@ -54,16 +54,20 @@
       </p>
     </ion-item>
     <ion-item (click)="goFormEditPage('startTime',projectData,'timeSelect')">
-      <label>开始时间</label>
+      <label>开始时间
+          <span class="required-field ml5">(必填)</span>
+      </label>
       <p item-right class="rigth-message">
         <span item-right class="item-value line-overflow" *ngIf="projectData.startTimeType == 0">尽快开始</span>
-        <span item-right class="item-value line-overflow" *ngIf="projectData.startTimeType == 1">待商议</span>
-        <span item-right class="item-value line-overflow" *ngIf="projectData.startTimeType == 2">{{projectData.startTime | date: 'yyyy-MM-dd'}}</span>
+        <span item-right class="item-value line-overflow" *ngIf="projectData.startTimeType == 2">待商议</span>
+        <span item-right class="item-value line-overflow" *ngIf="projectData.startTimeType == 1">{{projectData.startTime | date: 'yyyy-MM-dd'}}</span>
         <ion-icon class="icon" name="arrow-forward"></ion-icon>
       </p>
     </ion-item>
     <ion-item (click)="goFormEditPage('deliverMethod',projectData.deliverMethod,'timeSelect')">
-      <label>是否驻场</label>
+      <label>是否驻场
+          <span class="required-field ml5">(必填)</span>
+      </label>
       <p item-right class="rigth-message">
         <span item-right class="item-value line-overflow" *ngIf="projectData.deliverMethod == 0">驻场</span>
         <span item-right class="item-value line-overflow" *ngIf="projectData.deliverMethod == 1">半驻场</span>
@@ -73,7 +77,9 @@
       </p>
     </ion-item>
     <ion-item no-lines (click)="goFormEditPage('province-city',[projectData.province,projectData.city],'province-city')">
-      <label>项目地点</label>
+      <label>项目地点
+          <span class="required-field ml5">(必填)</span>
+      </label>
       <p item-right class="rigth-message">
         <span item-right class="item-value line-overflow">{{projectData.province}} {{projectData.city}}</span>
         <ion-icon class="icon" name="arrow-forward"></ion-icon>
@@ -82,7 +88,9 @@
   </ion-list>
   <ion-list class="list-item-flex mt10">
     <ion-item (click)="goFormEditPage('project_budget',projectData,'timeSelect')">
-      <label>项目预算</label>
+      <label>项目预算
+          <span class="required-field ml5">(必填)</span>
+      </label>
       <p item-right class="rigth-message">
         <span item-right class="item-value line-overflow" *ngIf="projectData.budgetType == 2">待商议</span>
         <span item-right class="item-value line-overflow" *ngIf="projectData.budgetType == 0 || projectData.budgetType == 1">{{projectData.budget}} 元

@@ -174,8 +174,8 @@
             <span>{{projectDetails.province}}</span>
             <span class="mr15"> {{projectDetails.city}}</span>
             <ion-icon name="post"></ion-icon>
-            <span *ngIf="projectDetails.status ==0">未发布</span>
-            <span *ngIf="projectDetails.status != 0">已发布</span>
+            <span *ngIf="projectDetails.status ==0 || projectDetails.status ==1">未发布</span>
+            <span *ngIf="projectDetails.status != 0 || projectDetails.status != 1"> {{projectDetails.releaseTime | date: 'yy/MM/dd'}}</span>
           </p>
           <div class="title-cont">
               {{projectDetails.projectName}}
@@ -260,7 +260,7 @@
             <span item-right class="item-value" *ngIf="projectDetails.projectLengthType == 0">0-3 个月</span>
             <span item-right class="item-value" *ngIf="projectDetails.projectLengthType == 1">3-6 个月</span>
             <span item-right class="item-value" *ngIf="projectDetails.projectLengthType == 2">6-12 个月</span>
-            <span item-right class="item-value" *ngIf="projectDetails.projectLengthType == 3">{{projectDetails.projectLength}}</span>
+            <span item-right class="item-value" *ngIf="projectDetails.projectLengthType == 3">{{projectDetails.projectLength}} 个月</span>
           </ion-item>
           <ion-item no-lines>
             <label>是否驻场</label>

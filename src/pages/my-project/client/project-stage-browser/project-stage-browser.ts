@@ -6,6 +6,7 @@ import { ProjectPaymentRecordPage } from '../project-payment-record/project-paym
 import { ProjectSubmitInvoicePage } from '../project-submit-invoice/project-submit-invoice';
 import { ProjectProgramObjectionPage } from '../project-program-objection/project-program-objection';
 import { getProjectStageDetailUrl, confirmStageUrl } from '../../../../providers/requestUrl';
+import { ProjectDecumentBrowserPage } from '../project-decument-browser/project-decument-browser';
 
 /**
  * Generated class for the ProjectStageBrowserPage page.
@@ -99,6 +100,11 @@ export class ProjectStageBrowserPage {
   /*提出异议跳转*/
   onCustomerNayDocument(psid) {
     this.navCtrl.push(ProjectProgramObjectionPage,{type:'nayDocument',psid:psid});
+  }
+
+  /*查看交付物*/
+  goDocumentBrowser(id){
+    this.navCtrl.push(ProjectDecumentBrowserPage,{id:id});
   }
 
   

@@ -129,21 +129,17 @@
               {{projectDetails.projectName}}
           </div>
           <div class="project-type">
-            <span class="project-type type-blue" *ngIf="projectDetails.status ==0">草稿</span>
-            <span class="project-type type-blue" *ngIf="projectDetails.status ==1">待审核</span>
-            <span class="project-type type-blue" *ngIf="projectDetails.status ==2">匹配顾问中</span>
-            <span class="project-type type-blue" *ngIf="projectDetails.status ==3">方案待确定</span>
-            <span class="project-type type-blue" *ngIf="projectDetails.status ==4">进行中</span>
-            <span class="project-type type-blue" *ngIf="projectDetails.status ==5">已完成</span>
-            <span class="project-type type-blue" *ngIf="projectDetails.status ==6">已取消</span>
-            <span class="project-type type-blue" *ngIf="projectDetails.status ==7">待客户确认</span>
-            <span class="project-type type-green" *ngIf="projectDetails.status ==8">客户未评论</span>
-            <span class="project-type type-gray" *ngIf="projectDetails.status ==9">顾问未评论</span>
-            <span class="project-type type-gray" *ngIf="projectDetails.status ==10">结束</span>
-            <span class="project-type type-gray" *ngIf="projectDetails.status ==11">阶段待提交</span>
-            <span class="project-type type-gray" *ngIf="projectDetails.status ==12">方案待提交</span>
-            <span class="project-type type-gray" *ngIf="projectDetails.status ==13">阶段待确认</span>
-            <span class="project-type type-gray" *ngIf="projectDetails.status ==14">待开始</span>
+            <span class="project-type type-blue" *ngIf="projectDetails.appStatus ==0">申请中</span>
+            <span class="project-type type-blue" *ngIf="projectDetails.appStatus ==1">待面试</span>
+            <span class="project-type type-blue" *ngIf="projectDetails.appStatus ==2">已推荐</span>
+            <span class="project-type type-gray" *ngIf="projectDetails.appStatus ==3">未采用</span>
+            <span class="project-type type-blue" *ngIf="projectDetails.appStatus ==4">方案待提交</span>
+            <span class="project-type type-blue" *ngIf="projectDetails.appStatus ==5">已聘用</span>
+            <span class="project-type type-blue" *ngIf="projectDetails.appStatus ==6">方案待确认</span>
+            <span class="project-type type-blue" *ngIf="projectDetails.appStatus ==7">阶段待确认</span>
+            <span class="project-type type-green" *ngIf="projectDetails.appStatus ==8">进行中</span>
+            <span class="project-type type-gray" *ngIf="projectDetails.appStatus ==9 ||projectDetails.appStatus ==11">已完成</span>
+            <span class="project-type type-blue" *ngIf="projectDetails.appStatus ==10">阶段待提交</span>
           </div>
         </ion-list>
         <ion-list class="describe-list mt10">
@@ -205,7 +201,7 @@
             <span item-right class="item-value" *ngIf="projectDetails.projectLengthType == 0">0-3 个月</span>
             <span item-right class="item-value" *ngIf="projectDetails.projectLengthType == 1">3-6 个月</span>
             <span item-right class="item-value" *ngIf="projectDetails.projectLengthType == 2">6-12 个月</span>
-            <span item-right class="item-value" *ngIf="projectDetails.projectLengthType == 3">{{projectDetails.projectLength}}</span>
+            <span item-right class="item-value" *ngIf="projectDetails.projectLengthType == 3">{{projectDetails.projectLength}} 个月</span>
           </ion-item>
           <ion-item no-lines>
             <label>是否驻场</label>
@@ -216,29 +212,29 @@
           </ion-item>
         </ion-list>
         <ion-list class="list-item-flex mt10">
-            <ion-item>
-              <label>资质要求</label>
-              <span item-right class="item-value" *ngIf="projectDetails.qualification == 0">初级</span>
-              <span item-right class="item-value" *ngIf="projectDetails.qualification == 1">中级</span>
-              <span item-right class="item-value" *ngIf="projectDetails.qualification == 2">高级</span>
-              <span item-right class="item-value" *ngIf="projectDetails.qualification == 3">专家</span>
-            </ion-item>
-            <ion-item no-lines>
-              <label>语言要求</label>
-              <span item-right class="item-value" *ngFor="let planguage_tag of projectDetails.planguage">
-                {{planguage_tag.language}} . 
-                <span *ngIf="planguage_tag.grade == 0">较差</span>
-                <span *ngIf="planguage_tag.grade == 1">一般</span>
-                <span *ngIf="planguage_tag.grade == 2">熟练</span>
-                <span *ngIf="planguage_tag.grade == 3">精通</span>
-              </span>
-            </ion-item>
-          </ion-list>
-          <div style="height:100px;"></div>
-          <button ion-button expand="full" large class="fixed-bottom" (click)="goEvalutionPage()" *ngIf="projectDetails.appStatus ==9">评价</button>
-          <div class="fixed-bottom" *ngIf="!projectDetails.appStatus && projectDetails.appStatus != 0">
-              <button ion-button class="btn-submit" (click)="onApplicationProject()">申请该项目</button>
-              <button ion-button class="btn-delete" (click)="onProjectEditStep1()">忽略</button>
-          </div>
+          <ion-item>
+            <label>资质要求</label>
+            <span item-right class="item-value" *ngIf="projectDetails.qualification == 0">初级</span>
+            <span item-right class="item-value" *ngIf="projectDetails.qualification == 1">中级</span>
+            <span item-right class="item-value" *ngIf="projectDetails.qualification == 2">高级</span>
+            <span item-right class="item-value" *ngIf="projectDetails.qualification == 3">专家</span>
+          </ion-item>
+          <ion-item no-lines>
+            <label>语言要求</label>
+            <span item-right class="item-value" *ngFor="let planguage_tag of projectDetails.planguage">
+              {{planguage_tag.language}} . 
+              <span *ngIf="planguage_tag.grade == 0">较差</span>
+              <span *ngIf="planguage_tag.grade == 1">一般</span>
+              <span *ngIf="planguage_tag.grade == 2">熟练</span>
+              <span *ngIf="planguage_tag.grade == 3">精通</span>
+            </span>
+          </ion-item>
+        </ion-list>
+        <div style="height:100px;"></div>
+        <button ion-button expand="full" large class="fixed-bottom" (click)="goEvalutionPage()" *ngIf="projectDetails.appStatus ==9">评价</button>
+        <div class="fixed-bottom" *ngIf="!projectDetails.appStatus && projectDetails.appStatus != 0">
+            <button ion-button class="btn-submit" (click)="onApplicationProject()">申请该项目</button>
+            <button ion-button class="btn-delete" (click)="onProjectEditStep1()">忽略</button>
+        </div>
     </ion-content>
   

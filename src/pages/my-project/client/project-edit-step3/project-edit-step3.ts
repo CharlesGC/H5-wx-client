@@ -46,6 +46,7 @@ export class ProjectEditStep3Page {
       return null;
     }
   }
+
   /*保存提交*/
   goProjectSubmit() {
     this.projectData['otherIndustrys'] = this.getOtherIndustrys(this.projectData['industryList']);
@@ -94,8 +95,8 @@ export class ProjectEditStep3Page {
     this.Provider.getMamenSwiperData(projectStageDetailUrl).subscribe(res => {
       if (res.code == 200) {
         this.isShow = true;
-      } else if (res.code == 207) {
-        window.localStorage.removeItem('openId');
+      } else if (res.code == 213) {
+        alert(res.msg);
       } else {
         alert('请求出错:' + res.msg);
       }
@@ -166,8 +167,6 @@ export class ProjectEditStep3Page {
       this.projectData[field] = value
     } else if (field == 'qualification') {
       this.projectData[field] = value;
-    }else if(field == 'project_budget'){
-      this.projectData['budgetType'] = value[0] || 0;
     } else if (field == 'project_budget') {
       this.projectData['budgetType'] = value[0] || 0;
       this.projectData['budgetDay'] = value[1] || '';
@@ -225,7 +224,9 @@ export class ProjectEditStep3Page {
     }
     this.Provider.getMamenSwiperData(projectStageDetailUrl).subscribe(res => {
       if (res.code == 200) {
-        this.isShow = true;
+        // this.isShow = true;
+        alert('保存成功！')
+        this.navCtrl.push(ProjectListPage);
       } else if (res.code == 207) {
         window.localStorage.removeItem('openId');
       } else {

@@ -84,19 +84,19 @@
                   <ion-icon class="color-f46f46" name="checkmark-circle" *ngIf="selected == 0"></ion-icon>
               </p>
             </ion-item>
-            <ion-item (click)="onSelectedClick(1)">
+            <ion-item (click)="onSelectedClick(2)">
               <label>待商议</label>
-              <p item-right class="rigth-message">
-                  <ion-icon class="color-f46f46" name="checkmark-circle" *ngIf="selected == 1"></ion-icon>
-              </p>
-            </ion-item>
-            <ion-item no-lines (click)="onSelectedClick(2)">
-              <label>其他时间</label>
               <p item-right class="rigth-message">
                   <ion-icon class="color-f46f46" name="checkmark-circle" *ngIf="selected == 2"></ion-icon>
               </p>
             </ion-item>
-            <ion-item class="none-margin bg-black" *ngIf="selected == 2" no-lines>
+            <ion-item no-lines (click)="onSelectedClick(1)">
+              <label>其他时间</label>
+              <p item-right class="rigth-message">
+                  <ion-icon class="color-f46f46" name="checkmark-circle" *ngIf="selected == 1"></ion-icon>
+              </p>
+            </ion-item>
+            <ion-item class="none-margin bg-black" *ngIf="selected == 1" no-lines>
                 <ion-label>准确开始日期</ion-label>
                 <div item-right class="rigth-message">
                     <ion-datetime displayFormat="YYYY/MM/DD" [(ngModel)]="inputName" placeholder="请选择">

@@ -32,6 +32,13 @@ export class ProjectStageListPage {
     console.log(status,'status');
     this.getProjectStageListData(pid,status);
   }
+  ionViewDidEnter() {
+    console.log('ionViewDidEnter ProjectStageListPage');
+    let pid = this.navParams.get('pid');
+    let status = this.navParams.get('status');
+    this.stageType = this.navParams.get('type');
+    this.getProjectStageListData(pid,status);
+  }
 
   /*跳转到阶段详情页面*/
   goStageBrowser(data) {

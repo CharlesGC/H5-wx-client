@@ -20,6 +20,7 @@ export class ConsultantDocumentBrowserPage {
 
   public invoiceType: any;
   public consultantDocumentDetailData = {};
+  public adviserStatus='';
   constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider) {
     this.invoiceType = 0;
   }
@@ -27,6 +28,7 @@ export class ConsultantDocumentBrowserPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProjectInvoiceBrowserPage');
     let id = this.navParams.get('id');
+    this.adviserStatus = this.navParams.get('adviserStatus') || ''
     this.getConsultantDocumentDetails(id);
   }
 

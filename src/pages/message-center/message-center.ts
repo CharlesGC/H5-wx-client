@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { getMessageListUrl } from '../../providers/requestUrl';
 import { MamenDataProvider } from '../../providers/mamen-data/mamen-data';
+import { ProjectBrowserPage } from '../my-project/client/project-browser/project-browser';
+import { ConsultantProjectBrowserPage } from '../my-project/consultant/consultant-project-browser/consultant-project-browser';
 
 /**
  * Generated class for the MessageCenterPage page.
@@ -17,6 +19,8 @@ import { MamenDataProvider } from '../../providers/mamen-data/mamen-data';
 })
 export class MessageCenterPage {
   public messageCenterList = []
+  public pageNum = 0;
+  public pageSize = 999;
   constructor(public navCtrl: NavController, public navParams: NavParams,private Provider:MamenDataProvider) {
   }
 
@@ -39,10 +43,10 @@ export class MessageCenterPage {
    getProjectListData() {
     // let projectListsDataUrl = 'http://mamon.yemindream.com/mamon/customer/getProjectSignUpAdviserList';
     const openId = window.sessionStorage.getItem('openId')|| this.getUrlParam('openId');
-    let projectListsDataUrl = getMessageListUrl + '?openId=' + openId;
+    let projectListsDataUrl = getMessageListUrl + '?openId=' + openId + '&pageNum=' + this.pageNum + '&pageSize='+this.pageSize;
     this.Provider.getMamenSwiperData(projectListsDataUrl).subscribe(res=>{
       if(res.code==200) {
-        this.messageCenterList = res.data;
+        this.messageCenterList =  res.data &&res.data.list?res.data.list:[];
       }else if(res.code == 207) {
         window.localStorage.removeItem('openId');
       }else{
@@ -51,6 +55,18 @@ export class MessageCenterPage {
     },error=>{
       console.log('erros===',error);
     })
+  }
+
+
+  /*跳转到详情页面*/
+  goProjectBrowserPage(data) {
+
+    if(data.userType == 0){
+      this.navCtrl.push(ProjectBrowserPage,{data:data});
+    }else{
+      this.navCtrl.push(ConsultantProjectBrowserPage,{data:data});
+    }
+    
   }
 
 }

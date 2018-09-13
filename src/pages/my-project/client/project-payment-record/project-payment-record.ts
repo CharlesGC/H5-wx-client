@@ -158,7 +158,6 @@ export class ProjectPaymentRecordPage {
     let projectInvoiceDetailUrl = getPayMentByPsidUrl + '?openId=' + openId + '&psid=' + psid;
     this.Provider.getMamenSwiperData(projectInvoiceDetailUrl).subscribe(res => {
       if (res.code == 200) {
-        console.log(res, '--------');
         this.paymentRecordData = res.data;
         this.paymentRecordData['urlSize'] = (this.paymentRecordData['urlSize'] / 1048576).toPrecision(3)
 
@@ -167,7 +166,7 @@ export class ProjectPaymentRecordPage {
         } else if (this.paymentRecordData['urlSize'] < 1) {
           this.paymentRecordData['urlSize'] = this.paymentRecordData['urlSize'] * 1024 + ' KB'
         } else if (this.paymentRecordData['urlSize'] == 'NaN') {
-          this.paymentRecordData = {};
+          // this.paymentRecordData = {};
           //console.log(this.interactionData['typeStr'])
         }
 

@@ -84,7 +84,7 @@
                   <span class="project-type type-blue" *ngIf="projectListData_item.status ==0">申请中</span>
                   <span class="project-type type-blue" *ngIf="projectListData_item.status ==1">待面试</span>
                   <span class="project-type type-blue" *ngIf="projectListData_item.status ==2">已推荐</span>
-                  <span class="project-type type-blue" *ngIf="projectListData_item.status ==3">被拒绝</span>
+                  <span class="project-type type-gray" *ngIf="projectListData_item.status ==3">未采用</span>
                   <span class="project-type type-blue" *ngIf="projectListData_item.status ==4">方案待提交</span>
                   <span class="project-type type-blue" *ngIf="projectListData_item.status ==5">已聘用</span>
                   <span class="project-type type-blue" *ngIf="projectListData_item.status ==6">方案待确认</span>
@@ -125,9 +125,16 @@
                     <div class="stage-list-cont" *ngFor="let projectStageList_item of projectListData_item.projectStageList;let i=index">
                       <h4>
                           <span>第 {{i+1}} 阶段</span>
-                          <span class="color-f46f46 ml10" *ngIf="projectStageList_item.adviserStatus == 6 || projectStageList_item.adviserStatus == 7">已完成</span>
-                          <span class="color-f46f46 ml10" *ngIf="projectStageList_item.adviserStatus == 1 || projectStageList_item.adviserStatus == 2 || projectStageList_item.adviserStatus == 3 || projectStageList_item.adviserStatus == 4|| projectStageList_item.adviserStatus == 5">进行中</span>
-                          <span class="color-f46f46 ml10" *ngIf="projectStageList_item.adviserStatus == 0">未开始</span>
+                          <span class="color-f46f46 ml10" *ngIf="projectStageList_item.adviserStatus == -1">草稿</span>
+                          <span class="color-f46f46 ml10" *ngIf="projectStageList_item.adviserStatus == 0">待确认</span>
+                          <span class="color-f46f46 ml10" *ngIf="projectStageList_item.adviserStatus == 1">有异议</span>
+                          <span class="color-f46f46 ml10" *ngIf="projectStageList_item.adviserStatus == 2">未开始</span>
+                          <span class="color-f46f46 ml10" *ngIf="projectStageList_item.adviserStatus == 3">进行中</span>
+                          <span class="color-f46f46 ml10" *ngIf="projectStageList_item.adviserStatus == 4">待审核</span>
+                          <span class="color-f46f46 ml10" *ngIf="projectStageList_item.adviserStatus == 5">待收款</span>
+                          <span class="color-f46f46 ml10" *ngIf="projectStageList_item.adviserStatus == 6">已完成</span>
+                          <span class="color-f46f46 ml10" *ngIf="projectStageList_item.adviserStatus == 7">待平台付款</span>
+                          <span class="color-f46f46 ml10" *ngIf="projectStageList_item.adviserStatus == 8">交付有异议</span>
                       </h4>
                       <p>{{projectStageList_item.stageName}}</p>
                     </div>

@@ -73,6 +73,7 @@
     </ion-list>
     <div style="height:100px;"></div>
     <button ion-button expand="full" large class="fixed-bottom bg-gry" *ngIf="projectProgramDetails.status == 4 || projectProgramDetails.status == 0">等待顾问修改中</button>
+    <button ion-button expand="full" large class="fixed-bottom bg-gry" *ngIf="projectProgramDetails.status == 3">未采用</button>
     <div class="fixed-bottom" *ngIf="projectProgramDetails.status == 1">
         <button ion-button class="btn-submit" (click)="onConfirmProgramSubmit(2)">确认方案</button>
         <button ion-button class="btn-delete" (click)="onObjectionClick(3)">提出异议</button>

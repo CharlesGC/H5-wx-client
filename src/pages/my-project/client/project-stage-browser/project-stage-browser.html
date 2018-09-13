@@ -25,7 +25,7 @@
     </ion-list>
     <ion-list class="list-item-flex mt10">
         <ion-item no-lines>
-          <label>第一阶段</label>
+          <label>第{{projectStageDetail.stageSort}}阶段</label>
           <span item-right class="item-value color-f46f46 font12" *ngIf="projectStageDetail.customerStatus == 0">未开始</span>
           <span item-right class="item-value color-f46f46 font12" *ngIf="projectStageDetail.customerStatus == 1">有异议</span>
           <span item-right class="item-value color-f46f46 font12" *ngIf="projectStageDetail.customerStatus == 2">待付款</span>
@@ -35,6 +35,7 @@
           <span item-right class="item-value color-f46f46 font12" *ngIf="projectStageDetail.customerStatus == 6">申请发票</span>
           <span item-right class="item-value color-f46f46 font12" *ngIf="projectStageDetail.customerStatus == 7">已完成</span>
           <span item-right class="item-value color-f46f46 font12" *ngIf="projectStageDetail.customerStatus == 8">开票中</span>
+          <span item-right class="item-value color-f46f46 font12" *ngIf="projectStageDetail.customerStatus == 9">交付有异议</span>
         </ion-item>
       </ion-list>
     <ion-list class="describe-list mt10">
@@ -59,7 +60,7 @@
         <span item-right class="item-value">{{projectStageDetail.price}}元</span>
       </ion-item>
       <ion-item no-lines>
-        <label>交互方式</label>
+        <label>交付方式</label>
         <span item-right class="item-value" *ngIf="projectStageDetail.payment_method == 0">线上</span>
         <span item-right class="item-value" *ngIf="projectStageDetail.payment_method == 1">线下</span>
       </ion-item>
@@ -70,7 +71,7 @@
       <ion-list class="card-item mb10" *ngFor="let document_item of projectStageDetail.document">
           <ion-item no-lines>
               <div class="card-item-top">
-                <div class="item-top-left">第二阶段 <span class="color-f46f46">交付物</span></div>
+                <div class="item-top-left">第{{projectStageDetail.stageSort}}阶段 <span class="color-f46f46">交付物</span></div>
                 <span class="item-top-right">{{document_item.createTime | date: 'yy/MM/dd'}}</span>
               </div>
               <div class="card-item-label">
@@ -110,7 +111,7 @@
         </ion-item>
     </ion-list>
     <div style="height:100px;"></div>
-    <button ion-button expand="full" large class="fixed-bottom bg-gry" (click)="goAccountEdit()" *ngIf="projectStageDetail.customerStatus==1">等待顾问修改中</button>
+    <button ion-button expand="full" large class="fixed-bottom bg-gry" (click)="goAccountEdit()" *ngIf="projectStageDetail.customerStatus==1 || projectStageDetail.customerStatus==9">等待顾问修改中</button>
     <button ion-button expand="full" large class="fixed-bottom" (click)="goPaymentRecord(projectStageDetail.customerStatus)" *ngIf="projectStageDetail.customerStatus==2">添加支付记录</button>
     <button ion-button expand="full" large class="fixed-bottom" (click)="goPaymentRecord(projectStageDetail.customerStatus)" *ngIf="projectStageDetail.customerStatus==6">提交发票信息</button>
     <div class="fixed-bottom" *ngIf="projectStageDetail.customerStatus==5">

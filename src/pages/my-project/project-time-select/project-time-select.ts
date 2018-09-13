@@ -94,7 +94,7 @@ export class ProjectTimeSelectPage {
   /*额度、天数改变时*/
   onInputChange(type){
     if(type == 0){
-      this.budgetData.budget = (this.budgetData.workload || 1) * (this.budgetData.budgetDay || 1);
+      this.budgetData.budget = (this.budgetData.workload || 0) * (this.budgetData.budgetDay || 0);
     }else {
       this.budgetData.budget = this.budgetData.budget;
     }
@@ -106,7 +106,7 @@ export class ProjectTimeSelectPage {
     this.selected = type;
     //预算方式改变时重置默认值
     if(type == 0){
-      this.budgetData.budget = (this.budgetData.workload || 1) * (this.budgetData.budgetDay || 1);
+      this.budgetData.budget = (this.budgetData.workload || 0) * (this.budgetData.budgetDay || 0);
     }else {
       this.budgetData.budget = this.budgetData.budget;
     }
@@ -133,7 +133,7 @@ export class ProjectTimeSelectPage {
     }else if(this.field == 'qualification'){
       callback(this.field,this.selected);
     }else if(this.field == 'project_budget'){
-      callback(this.field,[this.selected,this.budgetData.budgetDay,this.budgetData.workload,this.budgetData.budget]);
+      callback(this.field,[this.selected,this.budgetData.budgetDay,this.budgetData.workload,this.budgetData.budget || '']);
     }else if(this.field == 'planguage') {
       callback(this.field,this.languageList);
     }
@@ -148,7 +148,6 @@ export class ProjectTimeSelectPage {
 
   /*设置值（回调函数）*/
   setValue = (field,value,index)=> {
-    console.log(field,value,index,'0000000000000');
     this.languageList[index][field] = value;
     // if(field == 'percentage'){
     //   this.stageData['price'] = (value || 0) * this.programPrice;
@@ -158,7 +157,7 @@ export class ProjectTimeSelectPage {
 
   /*亲增一项目*/
   onAddLanguageClick() {
-    this.languageList.push({language:'',grade:''});
+    this.languageList.push({language:'',grade:0});
   }
 
   /*删除上一项*/

@@ -34,7 +34,9 @@
   </ion-list>
   <ion-list class="list-item-flex mt10">
     <ion-item (click)="goFormEditPage('description',projectData.description,'textarea')">
-      <label>项目描述</label>
+      <label>项目描述
+          <span class="required-field ml5">(必填)</span>
+      </label>
       <p item-right class="rigth-message">
         <span item-right class="item-value line-overflow">{{projectData.description || '对项目需求的详细描述'}}</span>
         <ion-icon class="icon" name="arrow-forward"></ion-icon>

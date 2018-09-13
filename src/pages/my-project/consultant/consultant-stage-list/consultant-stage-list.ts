@@ -122,9 +122,10 @@ export class ConsultantStageListPage {
     // let projectStageListUrl = 'http://mamon.yemindream.com/mamon/adviser/getProjectStageList';
     const openId = window.sessionStorage.getItem('openId') || this.getUrlParam('openId');
     let projectStageListUrl = getAdviserProjectStageListUrl + '?openId=' + openId + '&pid='+pid;
-    if(status !== ''){
-      projectStageListUrl = projectStageListUrl + '&status='+status;
-    }
+    // if(status !== ''){
+    //   projectStageListUrl = projectStageListUrl + '&status='+status;
+    // }
+    projectStageListUrl = projectStageListUrl + '&status=1';
     // console.log(projectStageListUrl,status != '',status,'有值');
     this.Provider.getMamenSwiperData(projectStageListUrl).subscribe(res=>{
       if(res.code==200) {

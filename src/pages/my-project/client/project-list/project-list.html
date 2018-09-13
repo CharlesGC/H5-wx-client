@@ -102,19 +102,31 @@
             </div>
             <div class="project-stage-list mt20" *ngIf="projectListData_item.projectStageList &&projectListData_item.projectStageList.length>0">
                 <div class="stage-list-left">
-                  <div class="stage-border checked"></div>
+                  <!-- <div class="stage-border checked"></div>
                   <div class="stage-lines checked"></div>
                   <div class="stage-border"></div>
                   <div class="stage-lines"></div>
-                  <div class="stage-border"></div>
+                  <div class="stage-border"></div> -->
+                  <div *ngFor="let projectStageList_item of projectListData_item.projectStageList;let i=index">
+                      <div class="stage-border" [ngClass]="{'checked':projectStageList_item.customerStatus == 7}" *ngIf="i==0"></div>
+                      <div class="stage-lines" [ngClass]="{'checked':projectStageList_item.customerStatus == 7}" *ngIf="i!=0"></div>
+                      <div class="stage-border" [ngClass]="{'checked':projectStageList_item.customerStatus == 7}" *ngIf="i!=0"></div>
+                  </div>
                 </div>
                 <div class="stage-list-right">
                   <div class="stage-list-cont" *ngFor="let projectStageList_item of projectListData_item.projectStageList;let i=index">
                     <h4>
                         <span>第 {{i+1}} 阶段</span>
-                        <span class="color-f46f46 ml10" *ngIf="projectStageList_item.customerStatus == 6 || projectStageList_item.customerStatus == 7">已完成</span>
-                        <span class="color-f46f46 ml10" *ngIf="projectStageList_item.customerStatus == 1 || projectStageList_item.customerStatus == 2 || projectStageList_item.customerStatus == 3 || projectStageList_item.customerStatus == 4|| projectStageList_item.customerStatus == 5">进行中</span>
-                        <span class="color-f46f46 ml10" *ngIf="projectStageList_item.customerStatus == 0">未开始</span>
+                        <span class="color-f46f46 ml10" *ngIf="projectStageList_item.customerStatus == 0">待确认</span>
+                        <span class="color-f46f46 ml10" *ngIf="projectStageList_item.customerStatus == 1">有异议</span>
+                        <span class="color-f46f46 ml10" *ngIf="projectStageList_item.customerStatus == 2">待付款</span>
+                        <span class="color-f46f46 ml10" *ngIf="projectStageList_item.customerStatus == 3">待核对付款</span>
+                        <span class="color-f46f46 ml10" *ngIf="projectStageList_item.customerStatus == 4">进行中</span>
+                        <span class="color-f46f46 ml10" *ngIf="projectStageList_item.customerStatus == 5">待审核</span>
+                        <span class="color-f46f46 ml10" *ngIf="projectStageList_item.customerStatus == 6">申请发票</span>
+                        <span class="color-f46f46 ml10" *ngIf="projectStageList_item.customerStatus == 7">已完成</span>
+                        <span class="color-f46f46 ml10" *ngIf="projectStageList_item.customerStatus == 8">开票中</span>
+                        <span class="color-f46f46 ml10" *ngIf="projectStageList_item.customerStatus == 9">交付有异议</span>
                     </h4>
                     <p>{{projectStageList_item.stageName}}</p>
                   </div>

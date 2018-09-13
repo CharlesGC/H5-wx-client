@@ -44,7 +44,7 @@ export class ApplicationProjectPage {
     } else if(this.projectData['certifiedUrl'] < 1){
       this.projectData['certifiedUrl'] = this.projectData['certifiedUrl'] * 1024 + ' KB'
     }else if(this.projectData['certifiedUrl'] == 'NaN'){
-      this.projectData = {};
+      // this.projectData = {};
       //console.log(this.certificationListData['typeStr'])
     }
 

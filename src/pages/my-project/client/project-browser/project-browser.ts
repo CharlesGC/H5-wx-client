@@ -122,12 +122,13 @@ export class ProjectBrowserPage {
     // let releaseProjectUrl = 'http://mamon.yemindream.com/mamon/customer/releaseProject';
     const openId = window.sessionStorage.getItem('openId')|| this.getUrlParam('openId');
     let creleaseProjectUrl = releaseProjectUrl + '?openId=' + openId + '&pid='+pid;
+    //TODO  对数据进行校验
     this.Provider.getMamenSwiperData(creleaseProjectUrl).subscribe(res=>{
       if(res.code==200) {
         alert('发布成功！');
         this.navCtrl.pop();
-      }else if(res.code == 207) {
-        window.localStorage.removeItem('openId');
+      }else if (res.code == 213) {
+        alert(res.msg);
       }else{
         alert('请求出错:'+res.msg);
       }

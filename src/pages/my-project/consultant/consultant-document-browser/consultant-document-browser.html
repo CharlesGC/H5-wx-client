@@ -83,7 +83,7 @@
         </ion-list>
       </div>
       <div style="height:100px;"></div>
-      <div class="fixed-bottom" *ngIf="!isAdd">
+      <div class="fixed-bottom" *ngIf="!adviserStatus || adviserStatus ==3 || adviserStatus ==8 || adviserStatus ==-1">
           <button ion-button class="btn-submit" (click)="onDocumentEditClick()">编辑</button>
           <button ion-button class="btn-delete" (click)="onDocumentDel()">删除</button>
       </div>

@@ -34,6 +34,7 @@
             <span item-right class="item-value color-f46f46 font12" *ngIf="projectStageDetail.adviserStatus == 5">申请收款</span>
             <span item-right class="item-value color-f46f46 font12" *ngIf="projectStageDetail.adviserStatus == 6">已完成</span>
             <span item-right class="item-value color-f46f46 font12" *ngIf="projectStageDetail.adviserStatus == 7">收款中</span>
+            <span item-right class="item-value color-f46f46 font12" *ngIf="projectStageDetail.adviserStatus == 8">交付有异议</span>
           </ion-item>
         </ion-list>
       <ion-list class="describe-list mt10">
@@ -134,7 +135,7 @@
           <button ion-button class="btn-submit" (click)="onBankAccountSubmit(bankDateil.bankAccount,bankDateil.account)">确认阶段</button>
           <button ion-button class="btn-delete" (click)="onBankAccountDel()">提出异议</button>
       </div> -->
-      <div class="fixed-bottom" *ngIf="projectStageDetail.adviserStatus==3">
+      <div class="fixed-bottom" *ngIf="projectStageDetail.adviserStatus==3 || projectStageDetail.adviserStatus==8">
           <button ion-button class="btn-submit" (click)="goPaymentRecord(projectStageDetail.adviserStatus)">添加交互物</button>
           <button ion-button class="btn-delete" (click)="onStageSubmit()">阶段交付</button>
       </div>

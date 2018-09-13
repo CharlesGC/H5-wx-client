@@ -46,6 +46,10 @@ page-project-edit-step3 {
             color: #4a4a4a;
             label{
                 font-weight: 600;
+                .required-field {
+                    font-size: 1rem;
+                    color: #f46f46;
+                }
             }
             .icon {
                 font-size: 1.8rem;

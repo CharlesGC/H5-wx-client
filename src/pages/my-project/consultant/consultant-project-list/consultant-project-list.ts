@@ -30,8 +30,8 @@ export class ConsultantProjectListPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProjectListPage');
-    this.getMyProjectCount();
-    this.getProjectListData(-1);
+    // this.getMyProjectCount();
+    // this.getProjectListData(-1);
   }
   ionViewDidEnter() {
     this.getMyProjectCount();

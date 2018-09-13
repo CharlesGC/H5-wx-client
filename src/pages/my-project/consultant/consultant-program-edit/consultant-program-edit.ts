@@ -44,7 +44,7 @@ export class ConsultantProgramEditPage {
     } else if (this.programData['urlSize'] < 1) {
       this.programData['urlSize'] = this.programData['urlSize'] * 1024 + ' KB'
     } else if (this.programData['urlSize'] == 'NaN') {
-      this.programData = {};
+      // this.programData = {};
       //console.log(this.programData['typeStr'])
     }
 
