@@ -104,7 +104,12 @@ export class ProjectTimeSelectPage {
   onSelectedClick(type) {
 
     this.selected = type;
-    console.log(this.selected,'----------------');
+    //预算方式改变时重置默认值
+    if(type == 0){
+      this.budgetData.budget = (this.budgetData.workload || 1) * (this.budgetData.budgetDay || 1);
+    }else {
+      this.budgetData.budget = this.budgetData.budget;
+    }
   }
 
   /*选择select的value*/
@@ -120,7 +125,7 @@ export class ProjectTimeSelectPage {
       callback(this.field,[this.inputName,this.typeTxt]);
     }else if(this.field == 'projectTime'){
       let typeTxt = this.typeTxt==0?'天':(this.typeTxt==1?'月':'年')
-      callback(this.field,[this.selected,(this.inputName ? this.inputName +''+ typeTxt:'')]);
+      callback(this.field,[this.selected,(this.inputName ? this.inputName:0)]);
     }else if(this.field == 'startTime') {
       callback(this.field,[this.selected,this.inputName]);
     }else if(this.field == 'deliverMethod'){

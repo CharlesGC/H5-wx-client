@@ -134,9 +134,10 @@ export class ConsultantProgramEditPage {
   onProgramSubmitClick(ppid) {
     let pid = this.navParams.get('pid');
     let programData = this.programData;
+
     // let projectStageDetailUrl = 'http://mamon.yemindream.com/mamon/adviser/addOrEditProgram';
     const openId = window.sessionStorage.getItem('openId')|| this.getUrlParam('openId');
-    let projectStageDetailUrl = addOrEditProgramUrl + '?openId=' + openId + '&pid='+pid +
+    let projectStageDetailUrl = addOrEditProgramUrl + '?openId=' + openId + '&pid='+pid+'&status=-2' +
                               '&programName='+programData['programName']+
                               '&programDescription='+programData['programDescription']+
                               '&workload='+programData['workload']+

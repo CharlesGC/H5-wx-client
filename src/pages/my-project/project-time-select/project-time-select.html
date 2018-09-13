@@ -62,13 +62,14 @@
         <p class="browser-file" *ngIf="selected == 3">点击输入框右侧可选择日期单位（日，月，年）</p>
         <ion-list class="list-item-flex mt10" *ngIf="selected == 3">
           <ion-item no-lines>
-            <ion-input type="text" placeholder="请输入项目周期" [(ngModel)]="inputName"></ion-input>
+            <ion-input type="number" placeholder="请输入项目周期" [(ngModel)]="inputName"></ion-input>
             <p item-right class="rigth-message">
-                <ion-select interface="action-sheet" placeholder="选择" [(ngModel)]="typeTxt" (ngModelChange)="switchType()"  style="width:100px;max-width:100%;">
+                <span>月</span>
+                <!-- <ion-select interface="action-sheet" placeholder="选择" [(ngModel)]="typeTxt" (ngModelChange)="switchType()"  style="width:100px;max-width:100%;">
                   <ion-option value="0">日</ion-option>
                   <ion-option value="1">月</ion-option>
                   <ion-option value="2">年</ion-option>
-                </ion-select>
+                </ion-select> -->
             </p>
           </ion-item>
         </ion-list>
@@ -210,14 +211,14 @@
             </div>
             <ion-list class="list-item-flex mt10" *ngIf="selected == 0">
                 <ion-item>
-                    <ion-input type="text" placeholder="请输入预算金额" [(ngModel)]="budgetData.budgetDay" (ionChange)="onInputChange(0)"></ion-input>
+                    <ion-input type="number" placeholder="请输入预算金额" [(ngModel)]="budgetData.budgetDay" (ionChange)="onInputChange(0)"></ion-input>
                     <p item-right class="rigth-message">
                         <span>单日   元</span>
                         <ion-icon class="icon" name="arrow-forward"></ion-icon>
                     </p>
                 </ion-item>
                 <ion-item no-lines>
-                    <ion-input type="text" placeholder="请输入预计天数" [(ngModel)]="budgetData.workload" (ionChange)="onInputChange(0)"></ion-input>
+                    <ion-input type="number" placeholder="请输入预计天数" [(ngModel)]="budgetData.workload" (ionChange)="onInputChange(0)"></ion-input>
                     <p item-right class="rigth-message">
                         <span>日</span>
                         <ion-icon class="icon" name="arrow-forward"></ion-icon>
@@ -226,7 +227,7 @@
             </ion-list>
             <ion-list class="list-item-flex mt10" *ngIf="selected == 1">
                 <ion-item no-lines>
-                    <ion-input type="text" placeholder="请输入预算金额" [(ngModel)]="budgetData.budget" (ionChange)="onInputChange(1)"></ion-input>
+                    <ion-input type="number" placeholder="请输入预算金额" [(ngModel)]="budgetData.budget" (ionChange)="onInputChange(1)"></ion-input>
                     <p item-right class="rigth-message">
                         <span>元</span>
                         <ion-icon class="icon" name="arrow-forward"></ion-icon>

@@ -20,6 +20,7 @@ export class ProjectConsultantBrowserPage {
   public consultantDetails={}
   public applicationDeatil={};
   public ishome='';
+  public userType = '';
   constructor(public navCtrl: NavController, public navParams: NavParams,private Provider:MamenDataProvider) {
     this.Selected =0;
   }
@@ -29,6 +30,7 @@ export class ProjectConsultantBrowserPage {
     let uid = this.navParams.get('uid');
     let pid = this.navParams.get('pid');
     this.ishome = this.navParams.get('type');
+    this.userType = this.navParams.get('userType');
     if(this.ishome == 'homepage') {
       this.getProjectListData(uid)
     }else{

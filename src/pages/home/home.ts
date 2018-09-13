@@ -1,11 +1,10 @@
-import { Component,ViewChild } from '@angular/core';
-import { NavController,Slides } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { NavController, Slides } from 'ionic-angular';
 import { IndustrydetialPage } from '../industrydetial/industrydetial';
 import { MamenDataProvider } from '../../providers/mamen-data/mamen-data';
 import { PhonebindPage } from '../phonebind/phonebind';
-// import { ChooseIdentityPage } from '../choose-identity/choose-identity';
 import { ProjectConsultantBrowserPage } from '../my-project/client/project-consultant-browser/project-consultant-browser';
-// import {ProjectSpeedReleasePage} from '../../pages/my-project/client/project-speed-release/project-speed-release'
+import { ChooseIdentityPage } from '../../pages/choose-identity/choose-identity';
 
 // import { ViewChild } from '@angular/core';
 
@@ -228,13 +227,13 @@ export class HomePage {
   FinancCount(value, index, type) {
     this.navCtrl.push(IndustrydetialPage, {
       type: 'finance-count'
-    }); 
+    });
   }
   // 全部顾问列表
   financeAllList(value, index) {
     // type=1代表顾问 0 代表客户
     const user = window.sessionStorage.getItem('user') ? JSON.parse(window.sessionStorage.getItem('user')) : {};
-    this.navCtrl.push(ProjectConsultantBrowserPage, { uid: value.uid, type: 'homepage' ,userType:user.type });
+    this.navCtrl.push(ProjectConsultantBrowserPage, { uid: value.uid, type: 'homepage', userType: user.type });
   }
   // 获取openId
   getUrlParam(name) {
@@ -246,7 +245,14 @@ export class HomePage {
       return null;
     }
   }
-  // goProjectSpeed () {
-  //   this.navCtrl.push(ProjectSpeedReleasePage)
-  // }
+  /*点击图片跳转到注册页*/
+  goContactPage(e) {
+    const user = window.sessionStorage.getItem('user') ? JSON.parse(window.sessionStorage.getItem('user')) : {};
+    if (user.type == 0 || user.type == 1) {
+      e.stopPropatation = true || e.cancelBubble;
+
+    } else {
+      this.navCtrl.push(ChooseIdentityPage);
+    }
+  }
 }

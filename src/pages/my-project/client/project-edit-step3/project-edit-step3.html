@@ -27,9 +27,9 @@
       <p item-right class="rigth-message">
         <!-- <span class="item-value line-overflow">阿里拉拉</span> -->
         <span *ngIf="projectData.industryList && projectData.industryList.length<1"></span>
-        <span *ngIf="projectData.industryList && projectData.industryList.length==1">{{projectData.industryList[0].text}}</span>
-        <span *ngIf="projectData.industryList && projectData.industryList.length>1">{{projectData.industryList[0].text}} 等
-        </span>
+        <span *ngIf="projectData.industryList && projectData.industryList.length==1">{{projectData.industryList[0].text || projectData.industryList[0].industryName}}</span>
+        <span *ngIf="projectData.industryList && projectData.industryList.length>1">{{projectData.industryList[0].text || projectData.industryList[0].industryName}}
+          等</span>
         <ion-icon class="icon" name="arrow-forward"></ion-icon>
       </p>
     </ion-item>
@@ -38,8 +38,8 @@
       <p item-right class="rigth-message">
         <!-- <span item-right class="item-value line-overflow">请输入对接人姓名</span> -->
         <span *ngIf="projectData.skillList && projectData.skillList.length<1"></span>
-        <span *ngIf="projectData.skillList && projectData.skillList.length==1">{{projectData.skillList[0].text}}</span>
-        <span *ngIf="projectData.skillList && projectData.skillList.length>1">{{projectData.skillList[0].text}} 等</span>
+        <span *ngIf="projectData.skillList && projectData.skillList.length==1">{{projectData.skillList[0].text || projectData.skillList[0].skillName}}</span>
+        <span *ngIf="projectData.skillList && projectData.skillList.length>1">{{projectData.skillList[0].text || projectData.skillList[0].skillName}} 等</span>
         <ion-icon class="icon" name="arrow-forward"></ion-icon>
       </p>
     </ion-item>

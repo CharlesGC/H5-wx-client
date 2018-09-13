@@ -73,7 +73,7 @@ export class ProjectBrowserPage {
   onNavMenuItemClick(type,typeName,status) {
     this.showNavMenuName = typeName;
     this.isShowNavMenu = false;
-    this.showNavMenuNumber = 2
+    // this.showNavMenuNumber = 2
     if(type == 1){
       this.navCtrl.push(ProjectConsultantListPage,{pid:this.projectDetails['pid'],status:status});
     }else if(type == 2){

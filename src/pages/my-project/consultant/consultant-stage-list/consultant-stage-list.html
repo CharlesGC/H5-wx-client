@@ -225,8 +225,8 @@
           <button ion-button expand="full" large class="fixed-bottom bg-gry" (click)="goAccountEdit()" *ngIf="projectType == 7">等待客户确认中</button>
           <button ion-button expand="full" large class="fixed-bottom" (click)="onAddStageClick()"  *ngIf="!projectStageListData || projectStageListData.length<1">添加阶段</button>
           <div class="fixed-bottom" *ngIf="projectType == 10">
-              <button ion-button class="btn-submit" (click)="onAddStageClick()">添加阶段</button>
-              <button ion-button class="btn-delete" (click)="onAllStageSubmit()">提交阶段</button>
+              <button ion-button class="btn-submit" (click)="onAllStageSubmit()">提交阶段</button>
+              <button ion-button class="btn-delete" (click)="onAddStageClick()">添加阶段</button>
           </div>
     </div>
     </ion-content>

@@ -81,7 +81,7 @@
           <div *ngIf="projectListData_item.type ==0">
             <div class="msg-title">
                 <div class="msg-title-left">
-                  <!-- <span class="project-type type-blue" *ngIf="projectListData_item.status ==0">待查看</span> -->
+                  <span class="project-type type-blue" *ngIf="projectListData_item.status ==0">申请中</span>
                   <span class="project-type type-blue" *ngIf="projectListData_item.status ==1">待面试</span>
                   <span class="project-type type-blue" *ngIf="projectListData_item.status ==2">已推荐</span>
                   <span class="project-type type-blue" *ngIf="projectListData_item.status ==3">被拒绝</span>
@@ -91,7 +91,7 @@
                   <span class="project-type type-blue" *ngIf="projectListData_item.status ==7">阶段待确认</span>
                   <span class="project-type type-green" *ngIf="projectListData_item.status ==8">进行中</span>
                   <span class="project-type type-gray" *ngIf="projectListData_item.status ==9 ||projectListData_item.status ==11">已完成</span>
-                  <span class="project-type type-gray" *ngIf="projectListData_item.status ==10">阶段待提交</span>
+                  <span class="project-type type-blue" *ngIf="projectListData_item.status ==10">阶段待提交</span>
                 </div>
                 <span><ion-icon name="more"></ion-icon></span>
               </div>
@@ -103,7 +103,7 @@
                   <span *ngIf="projectListData_item.projectLengthType ==1">3-6 个月</span>
                   <span *ngIf="projectListData_item.projectLengthType ==2">6-12 个月</span>
                   <span *ngIf="projectListData_item.projectLengthType ==3">其他时间</span>
-                  <span>{{projectListData_item.city}}</span>
+                  <span>{{projectListData_item.province}} . {{projectListData_item.city}}</span>
                   <span>发布时间 {{projectListData_item.releaseTime | date:'yy/MM/dd'}}</span>
                 </p>
                 <div class="demand-content-cont mt10">{{projectListData_item.description}}</div>

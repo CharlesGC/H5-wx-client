@@ -4,7 +4,7 @@ import { MultiPickerModule } from 'ion-multi-picker';
 import { Http } from '@angular/http';
 
 import { MamenDataProvider } from '../../../providers/mamen-data/mamen-data';
-
+import { getSkillUrl, getSkillSecondaryUrl, getIndustryListUrl } from '../../../providers/requestUrl';
 import { SelectTagsPage } from '../select-tags/select-tags';
 
 /**
@@ -260,8 +260,10 @@ export class FormEditPage {
 
   /*行业请求*/
   getpaymentListData() {
-    let getpaymentListUrl = 'http://mamon.yemindream.com/mamon/company/getIndustryList';
-    const openId = window.sessionStorage.getItem('openId') || this.getUrlParam('openId') || 'o2GZp1Gsud1OVuaw5AH_e28m3kOw'
+    // let getpaymentListUrl = 'http://mamon.yemindream.com/mamon/company/getIndustryList';
+    // const openId = window.sessionStorage.getItem('openId') || this.getUrlParam('openId') || 'o2GZp1Gsud1OVuaw5AH_e28m3kOw'
+    let getpaymentListUrl = getIndustryListUrl; //'http://mamon.yemindream.com/mamon/company/getIndustryList';
+    const openId = window.sessionStorage.getItem('openId')||this.getUrlParam('openId');
     getpaymentListUrl = getpaymentListUrl + '?openId=' + openId;
     this.Provider.getMamenSwiperData(getpaymentListUrl).subscribe(res => {
       if (res.code == 200) {
@@ -276,9 +278,9 @@ export class FormEditPage {
 
   /*技能 请求*/
   getSkillData(sfid) {
-    let getpaymentListUrl = 'http://mamon.yemindream.com/mamon/index/getSkill?type=1';
-    if (sfid) {
-      getpaymentListUrl = 'http://mamon.yemindream.com/mamon/index/getSkillSecondary?sfid=' + sfid;
+    let getpaymentListUrl = `${getSkillUrl}?type=1`; //'http://mamon.yemindream.com/mamon/index/getSkill?type=1';
+    if(sfid) {
+      getpaymentListUrl =  `${getSkillSecondaryUrl}?sfid=${sfid}`; //'http://mamon.yemindream.com/mamon/index/getSkillSecondary?sfid='+sfid;
     }
 
     getpaymentListUrl = getpaymentListUrl;
