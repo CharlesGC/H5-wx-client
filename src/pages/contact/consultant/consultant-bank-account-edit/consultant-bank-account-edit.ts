@@ -22,6 +22,9 @@ export class ConsultantBankAccountEditPage {
   public isdefault:any;
   public bankDateil:any;
   public inputName:any;
+  public isSubmit=false;
+  public isDelete=false
+  public isComplete=false
   constructor(public navCtrl: NavController, public navParams: NavParams, private Provider:MamenDataProvider) {
     this.bankDateil = {}
   }
@@ -32,7 +35,18 @@ export class ConsultantBankAccountEditPage {
     this.isdefault = this.bankDateil.type == 1;
     // this.bankname = this.bankDateil;
   }
-
+  sureSubmitBack(){
+    this.isSubmit = !this.isSubmit
+    this.navCtrl.pop();
+  }
+  sureDeleteBack(){
+    this.isDelete = !this.isDelete
+    this.navCtrl.pop()
+  }
+  sureCompleteBack(){
+    this.isComplete = !this.isComplete
+    return
+  }
   /*提交数据*/
   onBankAccountSubmit(bankname,bankaccount) {
     console.log(bankname,bankaccount,'-----');
@@ -47,11 +61,18 @@ export class ConsultantBankAccountEditPage {
     if(abid){
       getBankAccountlUrl = getBankAccountlUrl + '&abid=' + abid;
     }
-    
+    if(!bankname){
+      this.isComplete = true
+      return
+    }
+    if(!bankaccount){
+      this.isComplete =true
+      return
+    }
     this.Provider.getMamenSwiperData(getBankAccountlUrl).subscribe(res=>{
       if(res.code==200) {
-        alert((abid?'修改':'新增') + '成功');
-        this.navCtrl.pop();
+        //alert((abid?'修改':'新增') + '成功');
+        this.isSubmit = true;
       }else if(res.code == 207) {
         window.localStorage.removeItem('openId');
       }
@@ -80,8 +101,9 @@ export class ConsultantBankAccountEditPage {
     
     this.Provider.getMamenSwiperData(getBankAccountDellUrl).subscribe(res=>{
       if(res.code==200) {
-        alert('删除成功');
-        this.navCtrl.pop();
+        //alert('删除成功');
+        //this.navCtrl.pop();
+        this.isDelete = true
       }else if(res.code == 207) {
         window.localStorage.removeItem('openId');
       }

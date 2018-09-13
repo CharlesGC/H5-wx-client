@@ -179,7 +179,7 @@ page-uploadfile {
             box-shadow: 0 1px 10px 0 rgba(0, 0, 0, 0.05);
             .modal-content {
                 overflow: auto;
-                text-align: left;
+                text-align: center;
                 font-size: 12px;
                 line-height: 1.8;
                 font-weight: 500;
@@ -187,7 +187,7 @@ page-uploadfile {
                     font-family: PingFangSC;
                     font-size: 14px;
                     line-height: 1.29;
-                    text-align: justify;
+                    //text-align: justify;
                     color: #4a4a4a; // text-indent: 2rem;
                 }
             }

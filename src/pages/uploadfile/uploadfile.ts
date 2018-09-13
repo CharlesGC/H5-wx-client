@@ -3,6 +3,8 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { FileUploader } from 'ng2-file-upload';
 import globalConfig from '../../config.js';
 import { HttpClient, HttpParams } from '@angular/common/http';
+import { MamenDataProvider } from '../../providers/mamen-data/mamen-data';
+import { resumeUpLoadUrl } from '../../providers/requestUrl';
 /**
 * Generated class for the UploadfilePage page.
 *
@@ -25,16 +27,17 @@ export class UploadfilePage {
   private filetypeicon = '';
   private fileData: any;
   private pagetype: any;
+  public fid: any;
   public isSubmit = false;
   public isDelete = false;
   public isComplete = false;
-  constructor(public navCtrl: NavController, public navParams: NavParams, private http: HttpClient) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private http: HttpClient, private Provider: MamenDataProvider) {
     this.filetitle = navParams.get('title');
     this.filesize = navParams.get('size');
     this.filestatus = navParams.get('status')
     this.filetypeicon = navParams.get('typeicon')
-
     this.pagetype = navParams.get('type')
+    //console.log(this.pagetype)
   }
 
   ionViewDidLoad() {
@@ -70,8 +73,26 @@ export class UploadfilePage {
     // }]
   });
   sureBack() {
-    this.isSubmit = !this.isSubmit;
-    this.navCtrl.pop();
+    if (this.pagetype == 'resumePage') {
+      const openId = window.sessionStorage.getItem('openId') || this.getUrlParam('openId');
+      let resumeUpLoadFileUrl = resumeUpLoadUrl + '?openId=' + openId + '&fid=' + (this.fid || '')
+      this.Provider.getMamenSwiperData(resumeUpLoadFileUrl).subscribe(res => {
+        if (res.code == 200) {
+          //alert((aweid ? '修改' : '新增') + '成功');
+          //console.log(res, 'cccccc')
+        } else if (res.code == 207) {
+          window.localStorage.removeItem('openId');
+        }
+      }, error => {
+        console.log('erros===', error);
+      })
+      this.navCtrl.pop();
+      this.isSubmit = !this.isSubmit;
+    } else {
+      this.navCtrl.pop();
+      this.isSubmit = !this.isSubmit;
+      this.filestatus = true;
+    }
   }
   selectedFileOnChanged(event: any) {
     // 打印文件选择名称
@@ -112,11 +133,10 @@ export class UploadfilePage {
     }
   }
 
-  uploadFile(value) {
+  uploadFile() {
     // 上传
-    if (value =='resumePage') {
+    if (this.pagetype == 'resumePage') {
       let $this = this;
-      console.log(value)
       if (!this.fileData) {
         return;
       }
@@ -127,10 +147,8 @@ export class UploadfilePage {
       this.http.post(this.uploadUrl, formData).subscribe(res => {
         console.log('请求结束', res);
         //let tempRes = JSON.parse(res);
-        const openId = window.sessionStorage.getItem('openId') || this.getUrlParam('openId');
-        this.fileData = res;
-        this.isSubmit =true;
-        //$this.navCtrl.pop()
+        this.fid = res['data'].fid;
+        this.isSubmit = true;
       });
     } else {
       let $this = this;
@@ -149,6 +167,7 @@ export class UploadfilePage {
         let callback = this.navParams.get('callback');
         callback(this.fileData, $this.filetitle);
         this.isSubmit = true;
+        //alert('其他')
         //$this.navCtrl.pop()
       });
     }
@@ -170,5 +189,4 @@ export class UploadfilePage {
   returnpage() {
     this.navCtrl.pop()
   }
-
 }

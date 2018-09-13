@@ -6,26 +6,58 @@
 -->
 <ion-header>
 
-    <ion-navbar>
-      <ion-title>add-email</ion-title>
-    </ion-navbar>
-  
-  </ion-header>
-  <ion-content class="phonebind-from">
-      <ion-list class="mt10">
-        <!-- <ion-item class="bg-black">
+  <ion-navbar>
+    <ion-title>add-email</ion-title>
+  </ion-navbar>
+
+</ion-header>
+<ion-content class="phonebind-from">
+  <ion-list class="mt10">
+    <!-- <ion-item class="bg-black">
           <ion-input type="text" placeholder="" #phone disabled value="example@163.com"></ion-input>
         </ion-item> -->
-        <ion-item lines="none" class="none-margin bg-black" no-lines>
-          <ion-input type="email" placeholder="请输入新邮箱地址" #mail></ion-input>
-        </ion-item>
-      </ion-list>
-      <!-- <ion-list>
+    <ion-item lines="none" class="none-margin bg-black" no-lines>
+      <ion-input type="email" placeholder="请输入新邮箱地址" #mail></ion-input>
+    </ion-item>
+  </ion-list>
+  <!-- <ion-list>
         <ion-item><ion-button expand="full">绑定</ion-button></ion-item>
       </ion-list> -->
-      <button ion-button expand="full" large class="fixed-bottom" (click)="addEmailSubmit(mail)">绑定</button>
-    </ion-content>
-    
-    
-    
-  
+  <button ion-button expand="full" large class="fixed-bottom" (click)="addEmailSubmit(mail)">绑定</button>
+</ion-content>
+<div class="phonebind-modal" [hidden]="!isEmailType">
+  <div class="modal-bg"></div>
+  <div class="modal-box">
+    <div class="modal-top">
+      <div class="modal-top-close">
+        <!-- <ion-icon ios="ios-close" md="md-close" item-rigth (click)="onClose()" color=""></ion-icon> -->
+      </div>
+      <div class="modal-title">提示</div>
+      <div class="modal-content">
+        <p>请填写正确的邮箱格式</p>
+      </div>
+      <div class="modal-footer">
+        <button ion-button full large (click)="sureEmailType()">确定</button>
+        <!-- <button ion-button full large (click)="onCompanyDel()" class="btn-delete">返回</button> -->
+      </div>
+    </div>
+  </div>
+</div>
+<div class="phonebind-modal" [hidden]="!isEmail">
+  <div class="modal-bg"></div>
+  <div class="modal-box">
+    <div class="modal-top">
+      <div class="modal-top-close">
+        <!-- <ion-icon ios="ios-close" md="md-close" item-rigth (click)="onClose()" color=""></ion-icon> -->
+      </div>
+      <div class="modal-title">提示</div>
+      <div class="modal-content">
+        <p>绑定成功</p>
+      </div>
+      <div class="modal-footer">
+        <button ion-button full large (click)="sureEmailBack()">确定</button>
+        <!-- <button ion-button full large (click)="onCompanyDel()" class="btn-delete">返回</button> -->
+      </div>
+    </div>
+  </div>
+</div>

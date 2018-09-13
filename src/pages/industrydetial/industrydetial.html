@@ -12,7 +12,7 @@
 
   <div class="item ">
     <ion-list>
-      <ion-item>
+      <ion-item class="search_item">
         <div class="search_content">
           <span class="item-input-wrapper">
             <input type="search" placeholder="请输入" [(ngModel)]="value" autofocus="autofocus" class="input-search">
@@ -48,7 +48,7 @@
     </ion-list>
     <!-- 行业标签选择 -->
     <ion-list class="indeuList" [hidden]="isIndustryLabel">
-      <ion-item (click)="selsectIndustry('全部行业')" [ngClass]="{'checked':skillChecked==i}">全部行业</ion-item>
+      <ion-item (click)="selsectIndustry('全部行业','isIndustry')" [ngClass]="{'checked':skillChecked==i}">全部行业</ion-item>
       <ion-item *ngFor="let industryList of IndustryTotal;let i = index" class="industryList-item" [ngClass]="{'checked':skillChecked==i}"
         (click)="selsectIndustry(industryList,i,'isIndustry')">
         {{industryList.industryName}}

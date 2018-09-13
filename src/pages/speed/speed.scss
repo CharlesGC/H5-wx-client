@@ -13,7 +13,7 @@ page-speed {
             height: 100%;
         }
         .company-list {
-            background-color: #fff;
+            background-color: #fcfcfc;
             margin-bottom: 49px;
             .prompt-item {
                 width: 100%;
@@ -35,6 +35,7 @@ page-speed {
                 font-weight: 600;
                 color: #c7c7c7;
                 margin-top: 10px;
+                background: #fff;
                 .text-input-ios {
                     margin: 0;
                 }
@@ -61,10 +62,11 @@ page-speed {
                 height: auto;
                 display: flex;
                 margin-top: 15px;
+                background:#fcfcfc;
                 .item-play {
                     width: 55%;
                     height: 155px;
-                    margin-left: 15px;
+                    margin: 0 15px;
                     box-shadow: 0 1px 10px 0 rgba(0, 0, 0, 0.05);
                     .item-audio {
                         width: 100%;
@@ -312,6 +314,7 @@ page-speed {
             }
             .release-btn {
                 margin-bottom: 40px;
+                background: #fff;
                 .label-ios {
                     display: flex;
                     justify-content: space-between;

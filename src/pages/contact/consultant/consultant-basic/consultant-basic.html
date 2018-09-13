@@ -71,7 +71,7 @@
                   </p> -->
           </div>
         </ion-item>
-        
+
         <ion-item no-lines text-wrap class="user-introdection">
           {{consultantBasicData.introduction}}
         </ion-item>
@@ -122,7 +122,7 @@
               </p>
           </ion-item>
            <ion-item class="contact-item mt15"> -->
-              <!-- <div class="contact-info mt15">
+        <!-- <div class="contact-info mt15">
                   <div class="contact-info-cont">
                     <p class="contact-info-list" *ngIf="consultantBasicData.country || consultantBasicData.province || consultantBasicData.city || consultantBasicData.address">
                       <ion-icon ios="ios-navigate" md="md-navigate"></ion-icon>
@@ -143,7 +143,7 @@
                   </div>  
                   <div class="contact-info-bg"></div>
               </div> -->
-              <!-- <ion-item class="" (click)="goFormEditPage('schoolName',educationListData.schoolName,'text')" no-lines>
+        <!-- <ion-item class="" (click)="goFormEditPage('schoolName',educationListData.schoolName,'text')" no-lines>
                 <span class="left-title">编辑个人信息</span>
                 <div item-right class="rigth-message">
                   <ion-icon name="arrow-forward" color="#cfcfcf" class="ml12"></ion-icon>
@@ -369,7 +369,7 @@
             <div class="card-cont">
               <h5>{{certificationList_item.sourceName}}</h5>
               <p>点击查看文件预览</p>
-              <p>{{certificationList_item.urlSize}}</p>
+              <p>{{(certificationList_item.urlSize /1048576).toPrecision(3)}}</p>
             </div>
           </a>
         </div>
@@ -387,21 +387,27 @@
   <!--简历附件box -->
   <div class="user-other-list">
     <h4>简历附件</h4>
-    <ion-card class="card-item" *ngFor="let resumeList_item of consultantBasicData.resumeList">
+    <ion-card class="card-item" *ngFor="let resumeList_item of consultantBasicData.resumeList" style="padding-bottom:15px;">
       <div class="card-item-label">
         <label>
-          <img style="width:66px;height:66px;" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1534233453&di=bd34b76dca47ce86738ff171e3c50122&imgtype=jpg&er=1&src=http%3A%2F%2Fpic.58pic.com%2F58pic%2F14%2F81%2F70%2F29J58PICf2x_1024.jpg">
+          <img style="width:66px;height:66px;" src="assets/imgs/doc.png" *ngIf="resumeList_item.format == 'docx'">
+          <img style="width:66px;height:66px;" src="assets/imgs/ppt.png" *ngIf="resumeList_item.format == 'ppt'">
+          <img style="width:66px;height:66px;" src="assets/imgs/xls.png" *ngIf="resumeList_item.format == 'xls'">
+          <img style="width:66px;height:66px;" src="assets/imgs/png.png" *ngIf="resumeList_item.format == 'jpg'">
+          <img style="width:66px;height:66px;" src="assets/imgs/pdf.png" *ngIf="resumeList_item.format == 'pdf'">
         </label>
-        <div class="card-cont" data-src="resumeList_item.resumeUrl">
+        <div class="card-cont">
           <h5>{{resumeList_item.resumeName}}</h5>
-          <p>点击查看文件预览</p>
-          <p>{{resumeList_item.urlSize}}</p>
+          <a href="{{resumeList_item.resumeUrl}}" style="text-decoration:none;">
+            <p>点击查看文件预览</p>
+          </a>
+          <p>{{(resumeList_item.size / 1048576).toPrecision(3)}}</p>
         </div>
-        <ion-icon name="md-close" item-end color="ion-gray"></ion-icon>
+        <ion-icon name="md-close" item-end color="ion-gray" (click)="onResumeDel(resumeList_item.arid)"></ion-icon>
       </div>
     </ion-card>
     <div class="action-btn mt20">
-      <button ion-button round (click)="gouploadfile(resumePage)">上传简历附件</button>
+      <button ion-button round (click)="gouploadfile('resumePage')">上传简历附件</button>
     </div>
   </div>
 
@@ -451,6 +457,24 @@
   <!-- <button ion-button expand="full" large class="fixed-bottom" >向该顾问发起项目邀请</button> -->
 
 </ion-content>
+<div class="phonebind-modal" [hidden]="!isDelete">
+  <div class="modal-bg"></div>
+  <div class="modal-box">
+    <div class="modal-top">
+      <div class="modal-top-close">
+        <!-- <ion-icon ios="ios-close" md="md-close" item-rigth (click)="onClose()" color=""></ion-icon> -->
+      </div>
+      <div class="modal-title">提示</div>
+      <div class="modal-content">
+        <p>确认删除吗</p>
+      </div>
+      <div class="modal-footer">
+        <button ion-button full large (click)="sureDeleteBack()">确定</button>
+        <button ion-button full large (click)="cancelDeleteBack()" class="btn-delete">返回</button>
+      </div>
+    </div>
+  </div>
+</div>
 <!-- <ion-footer class="footer-btn">
   <ion-toolbar>
       <button class="full-btn" ion-button expand="full" large (click)="onInfoUserSubmit()">申请认证</button>

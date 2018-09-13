@@ -63,6 +63,45 @@ page-industrydetial {
                 }
              }
           } 
+          .search_item {
+            .label-ios {
+                margin: 0; 
+                display: flex;
+                justify-content: space-around;
+                .search_content {
+                    width: 375px;
+                    height: 50px;
+                    background-color: #ffffff; 
+                    display: flex;
+                    justify-content: space-around;
+                    align-items: center;
+                    line-height: 50px;
+                    .item-input-wrapper {
+                        // margin-left: 15px;
+                        width: 100%;
+                        display: flex;
+                        .input-search {
+                            width: 100%;
+                            font-family: PingFangSC;
+                            font-size: 14px;
+                            font-weight: 600;
+                            color: #4a4a4a;
+                            border-width: 0;
+                            caret-color:#ff6536;
+                        }
+                        // input::-webkit-input-placeholder, textarea::-webkit-input-placeholder { 
+                        //     color: #ff6536!important; 
+                        //     }
+                    }
+                    .item-search {
+                        .icon {
+                            opacity: 0.4;
+                            color: #4a4a4a;
+                        }
+                    }
+                } 
+            }
+          }
           ion-item {
             .search_content .item-search .icon {
                 opacity: 0.4;
@@ -70,9 +109,6 @@ page-industrydetial {
                 padding-right: 15px;
             }
             .label-ios {
-                margin: 0; 
-                display: flex;
-                justify-content: space-around;
                 .item-block:fast-child {
                     border-bottom: 0.55px solid #c8c7cc;
                     border-top: 0; 
@@ -82,43 +118,6 @@ page-industrydetial {
                     border-top: 0; 
                 }
             }
-            .search_content {
-                width: 375px;
-                height: 50px;
-                background-color: #ffffff; 
-                display: flex;
-                justify-content: space-around;
-                align-items: center;
-                line-height: 50px;
-                .item-input-wrapper {
-                    // margin-left: 15px;
-                    width: 100%;
-                    display: flex;
-                    .input-search {
-                        width: 100%;
-                        font-family: PingFangSC;
-                        font-size: 14px;
-                        font-weight: 600;
-                        color: #4a4a4a;
-                        border-width: 0;
-                        caret-color:#ff6536;
-                        // padding-left: 10px;
-                        // color: #ff6536;
-                    }
-                    // input::-webkit-input-placeholder, textarea::-webkit-input-placeholder { 
-                    //     color: #ff6536!important; 
-                    //     }
-                }
-                .item-search {
-                    // margin-right: 15px;
-                    .icon {
-                        opacity: 0.4;
-                        color: #4a4a4a;
-                        // margin-right: -10px;
-                        // padding-right: 30px;
-                    }
-                }
-            }  
             .item-select {
                 width: 100%;
                 height: 50px;

@@ -198,23 +198,12 @@ export class IndustrydetialPage {
       }
     )
   }
-  // 详情页搜索
-  getSearchDetail(search) {
-    this.DetialSearch.getDetialSearch(getdetialSearch, search).subscribe(
-      res => {
-        // this.IndustrySearchData = res.data;
-        this.financeAllArr = res.data;
-      }, error => {
-        console.log(error);
-      }
-    )
-  }
   // 点击搜索按钮
   searchLabel(search, type) {
     this.type = type;
     console.log(this.type, 'searchTypesearchTypesearchTypesearchType')
     this.search = search;
-    this.getSearchDetail(this.search);
+    this.getSearchadviser(this.industryId = 0, this.firstSkillId = 0, this.secondSkillId = 0,this.search,'','');
   }
   // 行业标签下拉
   downindustryShow(type) {
@@ -234,10 +223,11 @@ export class IndustrydetialPage {
     this.getSkillMoreData();
   }
   // 获取筛选数据
-  getSearchadviser(industryId, firstSkillId, secondSkillId) {
-    this.IndustrySearch.getSearchAdviserList(getSearch, industryId, firstSkillId, secondSkillId).subscribe(
+  getSearchadviser(industryId, firstSkillId, secondSkillId,search,pageNum,pageSize) {
+    this.IndustrySearch.getSearchAdviserList(getSearch, industryId, firstSkillId, secondSkillId,search,pageNum,pageSize).subscribe(
       res => {
-        this.financeAllArr = res.data;
+        this.financeAllArr = res.data.list;
+        console.log(this.financeAllArr,"获取筛选数据")
       }, error => {
         console.log(error);
       }
@@ -279,12 +269,13 @@ export class IndustrydetialPage {
     this.type = type;
     if (index == undefined) {
       this.IndustryName = value;
-      this.getSearchadviser(this.industryId = 1, this.firstSkillId = 0, this.secondSkillId = 0);
+      this.isIndustryLabel = true;
+      this.getSearchadviser(this.industryId = 0, this.firstSkillId = 0, this.secondSkillId = 0,'',this.pageNum=0,this.pageSize=15);
     } else {
       this.skillChecked = index;
       this.IndustryName = value;
       this.isIndustryLabel = true;
-      this.getSearchadviser(this.industryId = 1, this.firstSkillId = 0, this.secondSkillId = 0);
+      this.getSearchadviser(this.industryId = 1, this.firstSkillId = 0, this.secondSkillId = 0,'','','');
     }
   }
   // 点击全部领域
@@ -309,7 +300,7 @@ export class IndustrydetialPage {
       this.skillBgcolor = null;
       this.skilldoubleData = value;
       this.getSecondaryData(value.sfid);
-      this.getSearchadviser(this.industryId = 0, this.firstSkillId = 1, this.secondSkillId = 0);
+      this.getSearchadviser(this.industryId = 0, this.firstSkillId = 1, this.secondSkillId = 0, '','','');
     }
   }
   // 点击二级选择技能
@@ -318,7 +309,7 @@ export class IndustrydetialPage {
     this.inputValue = value;
     this.skillBgcolor = index;
     this.skillLabel = true;
-    this.getSearchadviser(this.industryId = 0, this.firstSkillId = 1, this.secondSkillId = 3);
+    this.getSearchadviser(this.industryId = 0, this.firstSkillId = 1, this.secondSkillId = 3,'', '','');
   }
   /*跳转到顾问详情*/
   goProjectConsultantBrowserPage(value, index) {

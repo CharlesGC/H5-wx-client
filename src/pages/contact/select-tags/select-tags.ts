@@ -22,6 +22,7 @@ export class SelectTagsPage {
   public checkedData:any;
   public isAdd:boolean;
   public type:any;
+  public isSave = false;
   public skillList = [];
   public skillSecondaryList = [];
   public skillChecked:any;
@@ -47,7 +48,13 @@ export class SelectTagsPage {
 
     console.log(this.type,this.isAdd,this.inputName,this.checkedData,'ionViewDidLoad SelectTagsPage');
   }
-
+  sureSave(){
+    this.isSave = !this.isSave;
+    this.navCtrl.pop();
+  }
+  onSelectSubmit(){
+    this.isSave = true;
+  }
   getUrlParam(name) {  
     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象  
     var r = window.location.search.substr(1).match(reg);  //匹配目标参数  
@@ -138,7 +145,6 @@ export class SelectTagsPage {
     let callback = this.navParams.get('callback');
     let index = this.navParams.get('index') || 0;
     callback(this.isAdd,valueObj,index);
-    this.navCtrl.pop();
   }
 
   /*删除*/
