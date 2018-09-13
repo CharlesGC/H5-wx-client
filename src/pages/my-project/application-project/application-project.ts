@@ -36,7 +36,7 @@ export class ApplicationProjectPage {
   ionViewDidLoad() {
     this.projectData = this.navParams.get('data');
     this.fileUrlvalue = this.projectData['certifiedUrl']
-    //console.log(this.certificationListData,'这是数据')
+    console.log(this.projectData,'这是数据')
     this.projectData['certifiedUrl'] = (this.projectData['certifiedUrl'] / 1048576).toPrecision(3)
 
     if (this.projectData['certifiedUrl'] > 1) {
@@ -44,7 +44,7 @@ export class ApplicationProjectPage {
     } else if(this.projectData['certifiedUrl'] < 1){
       this.projectData['certifiedUrl'] = this.projectData['certifiedUrl'] * 1024 + ' KB'
     }else if(this.projectData['certifiedUrl'] == 'NaN'){
-      this.projectData = {};
+      // this.projectData = {};
       //console.log(this.certificationListData['typeStr'])
     }
 

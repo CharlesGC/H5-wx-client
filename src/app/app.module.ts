@@ -124,7 +124,6 @@ import { SelectTagsPage } from '../pages/contact/select-tags/select-tags';
 
 // import { ListPage } from '../pages/list/list';
 
-
 //ionic打包成app以后配置启动画面 以及导航条的服务
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -354,7 +353,7 @@ import { ImageCropperModule } from 'ngx-image-cropper';
     MamenDataProvider,
     Camera,
     File,
-    FileTransfer,
+    FileTransfer
   ]
 })
 export class AppModule {}

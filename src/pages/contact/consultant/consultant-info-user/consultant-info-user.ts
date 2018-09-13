@@ -6,7 +6,6 @@ import { ConsultantBankAccountPage } from '../consultant-bank-account/consultant
 import { FormEditPage } from '../../form-edit/form-edit'
 import { editAdviserUrl, getAdviserInfoUrl } from '../../../../providers/requestUrl';
 import { ConsultantInfoAvatarPage } from '../../../../pages/contact/consultant/consultant-info-avatar/consultant-info-avatar'
-
 /**
  * Generated class for the ConsultantInfoUserPage page.
  *
@@ -22,10 +21,25 @@ import { ConsultantInfoAvatarPage } from '../../../../pages/contact/consultant/c
 export class ConsultantInfoUserPage {
   public userInfoData: any;
   public userAvatarPic: string;
+
+  public isuName = false;
+  public isSkill = false;
+  public isComplete = false
   constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider) {
     this.userInfoData = {};
   }
-
+  sureNameBack(){
+    this.isuName = !this.isuName
+    return 
+  }
+  sureSkillBack(){
+    this.isSkill = !this.isSkill
+    return
+  }
+  sureComplete(){
+    this.isComplete = !this.isComplete
+    this.navCtrl.pop()
+  }
   /* 跳转到头像设置页面 */
   goAvatarEditPage() {
     this.navCtrl.push(ConsultantInfoAvatarPage, { callback: this.setuserAvatarPic });
@@ -67,7 +81,6 @@ export class ConsultantInfoUserPage {
     } else {
       this.userInfoData[field] = value;
     }
-
   }
 
   /*获取行业其他值*/
@@ -83,7 +96,6 @@ export class ConsultantInfoUserPage {
 
   /*提交请求*/
   onInfoUserSubmit() {
-
     const openId = window.sessionStorage.getItem('openId') || this.getUrlParam('openId');
     let userInfoData = this.userInfoData;
     let uid = userInfoData.uid || 0;
@@ -94,7 +106,14 @@ export class ConsultantInfoUserPage {
     let skillList = userInfoData.skillList ? userInfoData.skillList.map(f => f.ssid).join(',') : '';
     let otherIndustrys = this.userInfoData['otherIndustrys'] && this.userInfoData['otherIndustrys'].length > 0 ? this.userInfoData['otherIndustrys'].join(',') : '';
     let otherSkills = this.userInfoData['otherSkills'] && this.userInfoData['otherSkills'].length > 0 ? this.userInfoData['otherSkills'].join(',') : '';
-    console.log(industryList, 123);
+    if(this.userInfoData.uname == ''){
+      this.isuName = true;
+      return;
+    }
+    if(this.userInfoData.skillList.length = 0){
+      this.isSkill = true;
+      return;
+    }
     // let getCompanyDetailUrl = 'http://mamon.yemindream.com/mamon/adviser/editAdviser';
 
     let getCompanyDetailUrl = editAdviserUrl + '?openId=' + openId + '&avatar=' + userInfoData.avatar +
@@ -116,8 +135,9 @@ export class ConsultantInfoUserPage {
 
     this.Provider.getMamenSwiperData(getCompanyDetailUrl).subscribe(res => {
       if (res.code == 200) {
-        alert((uid ? '修改' : '新增') + '成功');
-        this.navCtrl.pop();
+        //alert((uid ? '修改' : '新增') + '成功');
+        //this.navCtrl.pop();
+        this.isComplete = true
       } else if (res.code == 207) {
         window.localStorage.removeItem('openId');
       }

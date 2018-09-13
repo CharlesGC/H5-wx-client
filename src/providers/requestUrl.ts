@@ -295,5 +295,11 @@ export const clientprojectEvaluateUrl = getAPIPath + '/customer/projectEvaluate'
 /*我的项目-消息中心*/
 export const getMessageListUrl = getAPIPath + '/message/getMessageList';
 
+/* 简历上传 */
+export const resumeUpLoadUrl = getAPIPath + '/adviser/addOrEditResume';
+
+/* 简历删除 */
+export const resumeDeleteUrl = getAPIPath + 'adviser/delResume';
+
 
 

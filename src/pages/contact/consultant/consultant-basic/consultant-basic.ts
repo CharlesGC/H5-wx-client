@@ -14,6 +14,7 @@ import { ConsultantLanguageExpPage } from '../consultant-language-exp/consultant
 import { ConsultantEducationExpPage } from '../consultant-education-exp/consultant-education-exp'
 import { getAdviserDetailUrl } from '../../../../providers/requestUrl';
 import { UploadfilePage } from '../../../uploadfile/uploadfile'
+import { resumeDeleteUrl } from '../../../../providers/requestUrl';
 /**
  * Generated class for the ConsultantBasicPage page.
  *
@@ -32,6 +33,8 @@ export class ConsultantBasicPage {
   public consultantBasicData: any;
   public isLoading = true;
   public format: boolean;
+  public isDelete = false;
+  public arid:any;
   constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider, public loadingCtrl: LoadingController, private camera: Camera,
     private transfer: FileTransfer, private file: File, ) {
     this.consultantBasicData = {};
@@ -59,6 +62,33 @@ export class ConsultantBasicPage {
     } else {
       loader.present();
     }
+  }
+  sureDeleteBack() {
+    /* 删除简历 */
+    const openId = window.sessionStorage.getItem('openId') || this.getUrlParam('openId');
+    let arid = this.arid || 0;
+    // let getBankAccountDellUrl = 'http://mamon.yemindream.com/mamon/adviser/delBank';
+    let resumeDeletefILEUrl = resumeDeleteUrl + '?openId=' + openId + '&arid=' + arid;
+    this.Provider.getMamenSwiperData(resumeDeletefILEUrl).subscribe(res => {
+      if (res.code == 200) {
+        //alert('删除成功');
+        //this.navCtrl.pop();
+        this.isDelete = true
+        this.getConsultantBasicData();
+        this.isDelete = !this.isDelete
+      } else if (res.code == 207) {
+        window.localStorage.removeItem('openId');
+      }
+    }, error => {
+      console.log('erros===', error);
+    })
+  }
+  onResumeDel(value){
+    this.isDelete = true;
+    this.arid = value;
+  }
+  cancelDeleteBack() {
+    this.isDelete = !this.isDelete;
   }
 
   /*跳转页面*/
@@ -109,10 +139,17 @@ export class ConsultantBasicPage {
     this.Provider.getMamenSwiperData(getCompanyListUrl).subscribe(res => {
       if (res.code == 200) {
         this.consultantBasicData = res.data;
-        console.log(this.consultantBasicData,'这是数据')
+        console.log(this.consultantBasicData, '这是数据')
         this.isLoading = false
         this.presentLoading(false);
-        this.consultantBasicData.urlSize = (this.consultantBasicData.urlSize / 1048576).toPrecision(3)
+        for (var i = 0; i < this.consultantBasicData.length; i++) {
+          this.consultantBasicData[i].urlSize = (this.consultantBasicData[i].urlSize / 1048576).toPrecision(3)
+          if (this.consultantBasicData[i].urlSize > 1) {
+            this.consultantBasicData[i].urlSize = this.consultantBasicData[i].urlSize + 'MB'
+          } else {
+            this.consultantBasicData[i].urlSize = this.consultantBasicData[i].urlSize + 'KB'
+          }
+        }
       } else if (res.code == 207) {
         window.localStorage.removeItem('openId');
       }
@@ -138,10 +175,6 @@ export class ConsultantBasicPage {
 
   /* 上传页面 */
   gouploadfile(value) {
-    if (value == 'resumePage') {
-      this.navCtrl.push(UploadfilePage, { type: value })
-    } else {
-      this.navCtrl.push(UploadfilePage)
-    }
+    this.navCtrl.push(UploadfilePage, { type: value })
   }
 }
