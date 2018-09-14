@@ -24,6 +24,9 @@ export class ProjectEditStep1Page {
   public isEdit=false;
   public projectData:any;
   public isShow = false;
+  public isComplete = false;
+  public isEmailProper = false;
+  public isPhoneProper = false;
   constructor(public navCtrl: NavController, public navParams: NavParams,private Provider:MamenDataProvider) {
     this.projectData = {}
   }
@@ -66,9 +69,33 @@ export class ProjectEditStep1Page {
 
   /*跳转到下一步*/
   goStep2Page() {
-    this.navCtrl.push(ProjectEditStep2Page,{projectData:this.projectData,isEdit:this.isEdit});
+    var pattern = /^([A-Za-z0-9_\-\.\u4e00-\u9fa5])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,8})$/;
+    var regPhone = /^[0-9]{8,11}$/;
+    let projectData = this.projectData;
+    console.log(projectData.principalPhone);
+    if(!projectData.companyName || !projectData.principalName || !projectData.principalPhone || !projectData.principalEmail) {
+        this.isComplete = true;
+        return ;
+    }else if (pattern.test(projectData.principalEmail) == false) {
+      this.isEmailProper = true;
+    }else if(regPhone.test(projectData.principalPhone) == false){
+      this.isPhoneProper = true;
+    }else {
+      this.navCtrl.push(ProjectEditStep2Page,{projectData:this.projectData,isEdit:this.isEdit});
+    }
   }
-
+  // 确定
+  sureComplete() {
+    this.isComplete = !this.isComplete;
+  }
+  // 邮箱确定
+  sureEmail () {
+    this.isEmailProper =!this.isEmailProper;
+  }
+  // 电话确定
+  surePhone() {
+    this.isPhoneProper = !this.isPhoneProper;
+  }
   /*列表编辑*/
   goFormEditPage(field, value, type) {
     if(type == 'selectList') {
@@ -80,13 +107,13 @@ export class ProjectEditStep1Page {
 
   /*设置值（回调函数）*/
   setValue = (field,value)=> {
-    console.log(field,value,'------')
+    // console.log(field,value,'------')
     if(field == 'companyName'){
       this.projectData['cid'] = value[0];
       this.projectData['companyName'] = value[1];
     }else{
       this.projectData[field] = value;
-    }
+    } 
   }
 
   getUrlParam(name) {  

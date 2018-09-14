@@ -37,8 +37,6 @@
           <div class="item-input border" (click)="downSkill('downSkill')" >
             <span *ngIf="skilldoubleData.fName == undefined">请选择领域</span>
             <span *ngIf="skilldoubleData.fName != undefined" class="SecondarySkill" style="color: #ff6536;">{{skilldoubleData.fName}}•{{inputValue.sName}}</span>
-            <!-- <span *ngIf ="skilldoubleData.fName !== '' ">{{skilldoubleData.fName}}</span> -->
-            <!-- <span *ngIf ="skillAll !== '' ">{{skillAll}}</span> -->
             <span>
               <ion-icon name="arrow-down-outline"></ion-icon>
             </span>
@@ -48,8 +46,8 @@
     </ion-list>
     <!-- 行业标签选择 -->
     <ion-list class="indeuList" [hidden]="isIndustryLabel">
-      <ion-item (click)="selsectIndustry('全部行业','isIndustry')" [ngClass]="{'checked':skillChecked==i}">全部行业</ion-item>
-      <ion-item *ngFor="let industryList of IndustryTotal;let i = index" class="industryList-item" [ngClass]="{'checked':skillChecked==i}"
+      <ion-item (click)="selsectIndustry('全部行业',-1,'isIndustry')" [ngClass]="{'checked':skillChecked==0}">全部行业</ion-item>
+      <ion-item *ngFor="let industryList of IndustryTotal;let i = index" class="industryList-item" [ngClass]="{'checked':skillChecked==industryList.ilid}"
         (click)="selsectIndustry(industryList,i,'isIndustry')">
         {{industryList.industryName}}
       </ion-item>
@@ -58,8 +56,8 @@
     <div class="skill-count" [hidden]="skillLabel">
       <div class="skill-list1">
         <ion-list>
-          <ion-item (click)="infoSecondarySkill('全部领域')" [ngClass]="{'checked':skillChecked==i}">全部领域</ion-item>
-          <ion-item *ngFor="let item_Skill of SkillLabelMoreArr;let i = index" (click)="infoSecondarySkill(item_Skill,i,'isSkill')" [ngClass]="{'checked':skillChecked==i}">
+          <ion-item (click)="infoSecondarySkill('全部领域',-1,'isSkill')" [ngClass]="{'checked':skillCheckedSkill==0}">全部领域</ion-item>
+          <ion-item *ngFor="let item_Skill of SkillLabelMoreArr;let i = index" (click)="infoSecondarySkill(item_Skill,i,'isSkill')" [ngClass]="{'checked':skillCheckedSkill==item_Skill.sfid}">
             {{item_Skill.fName}}
           </ion-item>
         </ion-list>
@@ -67,7 +65,7 @@
       <!-- 二级技能标签选择 -->
       <div class="skill-list2">
         <ion-list>
-          <ion-item (click)="infoSelectClick('')">全部</ion-item>
+          <ion-item (click)="infoSelectClick('全部',-1,'SecondarySkill')" [ngClass]="{'click':skillBgcolor==-1}">全部</ion-item>
           <ion-item *ngFor="let Secondary_item of SkillLabelTwoArr;let i = index" (click)="infoSelectClick(Secondary_item,i,'SecondarySkill')" [ngClass]="{'click':skillBgcolor==i}">
             {{Secondary_item.sName}}
           </ion-item>
@@ -75,39 +73,10 @@
       </div>
     </div>
   </div>
-  <!-- 行业更多/技能 -->
-  <div class="contant-cont" *ngIf="type =='indeustry' || type == 'skill'">
-    <ion-list>
-      <ion-item *ngFor="let industryMore_item of IndustrydetialArr" style="white-space:normal;">
-        <div class="contant-item">
-          <div class="contant-item-left" item-start>
-            <img [src]="industryMore_item.industryUrl" class="item-img" *ngIf="type =='indeustry'">
-            <img [src]="industryMore_item.fIcon" class="item-img" *ngIf="type == 'skill'">
-            <p>{{industryMore_item.adviserName}}</p>
-          </div>
-          <div class="contant-item-right">
-            <p>{{industryMore_item.introduction}}</p>
-            <p class="industryLabel" *ngIf="type =='indeustry'">
-              <span>{{industryMore_item.industryName}}</span>
-            </p>
-            <p class="industryLabel" *ngIf= "type == 'skill'">
-              <span>{{industryMore_item.fName}}</span>
-            </p>
-            <p>
-              <span>工作经验：</span>
-              <span>{{industryMore_item.workingYears}}</span>
-              <span>年</span>
-            </p>
-          </div>
-        </div>
-      </ion-item>
-    </ion-list>
-  </div>
-
-  <!-- 全部顾问/审计顾问/行业技能标签筛选\输入框搜索/翘楚 -->
-  <div class="industrySearch" *ngIf = "type == 'finance-count' || 
-  type == 'financemore' ||type =='isIndustry' 
-  || type == 'itemsearch' || type == 'SecondarySkill'|| type == 'indeustryOutstand'">
+  <!-- 全部顾问/审计顾问/行业技能标签筛选\输入框搜索/翘楚/行业技能更多 -->
+  <div class="industrySearch" *ngIf = "type == 'finance-count' || type == 'financemore'
+   ||type =='isIndustry' || type == 'itemsearch' || type == 'SecondarySkill'
+   || type == 'indeustryOutstand' || type == 'indeustry' || type == 'skill'">
     <ion-list style="white-space:normal;">
       <ion-item *ngFor="let instry_skill of financeAllArr;let i =index" (click)="goProjectConsultantBrowserPage(instry_skill,i)">
         <div class="contant-item">

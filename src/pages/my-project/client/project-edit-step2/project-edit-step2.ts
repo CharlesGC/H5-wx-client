@@ -23,6 +23,7 @@ export class ProjectEditStep2Page {
   public projectData:any;
   public isEdit = false;
   public isShow = false;
+  public isComplete = false;
   constructor(public navCtrl: NavController, public navParams: NavParams,private Provider:MamenDataProvider) {
     this.projectData = {};
   }
@@ -35,9 +36,18 @@ export class ProjectEditStep2Page {
 
   /*跳转到下一步页面*/
   goStep3Page() {
-    this.navCtrl.push(ProjectEditStep3Page,{projectData:this.projectData,isEdit:this.isEdit});
+    let projectData = this.projectData;
+    if(!projectData.projectName || !projectData.description) {
+      this.isComplete = true;
+    }else {
+      this.navCtrl.push(ProjectEditStep3Page,{projectData:this.projectData,isEdit:this.isEdit});
+    }
+   
   }
-
+  // 弹框确定
+  sureComplete () {
+    this.isComplete = !this.isComplete;
+  }
   /*列表编辑*/
   goFormEditPage(field, value, type) {
       this.navCtrl.push(FormEditPage,{callback:this.setValue,value:value,field:field,type:type});

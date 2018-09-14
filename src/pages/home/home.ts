@@ -51,9 +51,9 @@ export class HomePage {
   getswiperInfo() {
     this.swiperdata.getBannerSwiperData(getswipreUrl, 1).subscribe(
       res => {
-        console.log(res);
+        // console.log(res);
         this.swiperArr = res.data;
-        console.log(this.swiperArr);
+        // console.log(this.swiperArr);
       }, error => {
         console.log(error);
       }
@@ -63,9 +63,9 @@ export class HomePage {
   getindustryInfo() {
     this.industrydata.getIndustryData(getindustryUrl, 0).subscribe(
       res => {
-        console.log(res);
+        // console.log(res);
         this.IndustryArr = res.data.list;
-        console.log(this.IndustryArr);
+        // console.log(this.IndustryArr);
       }, error => {
         console.log(error);
       }
@@ -75,9 +75,9 @@ export class HomePage {
   getskillInfo() {
     this.skilldata.getSkillLabelData(getskillUrl, 0).subscribe(
       res => {
-        console.log(res);
+        // console.log(res);
         this.skillArr = res.data.list;
-        console.log(this.skillArr);
+        // console.log(this.skillArr);
       }, error => {
         console.log(error);
       }
@@ -87,9 +87,9 @@ export class HomePage {
   getcaseInfo() {
     this.casedata.getcaseData(getcaseUrl, 2).subscribe(
       res => {
-        console.log(res);
+        // console.log(res);
         this.caseArr = res.data;
-        console.log(this.caseArr);
+        // console.log(this.caseArr);
       }, error => {
         console.log(error);
       }
@@ -106,7 +106,7 @@ export class HomePage {
           title: '行业翘楚',
           data: res.data
         };
-        console.log(this.outstandingArr.data)
+        // console.log(this.outstandingArr.data)
       }, error => {
         console.log(error);
       }
@@ -117,7 +117,7 @@ export class HomePage {
   getfinanceInfo() {
     this.financedata.getfinanceData(getfinanceUrl, 2, 1, 6).subscribe(
       res => {
-        console.log(res);
+        // console.log(res);
         this.financesArr = {
           type: 2,
           title: '财务审计顾问',
@@ -125,7 +125,7 @@ export class HomePage {
         };
         // this.financesArr = res.data;
         this.financesArrLength = this.financesArr.data.filter((f, i) => i < 3);
-        console.log(this.financesArrLength);
+        // console.log(this.financesArrLength);
       }, error => {
         console.log(error);
       }
@@ -135,16 +135,12 @@ export class HomePage {
   getfinanceAllInfo() {
     this.financedata.getindustryAllData(getfinanceAllUrl, 0, 1, 4).subscribe(
       res => {
-        console.log(1111)
-        console.log(res);
         this.financeAllArr = {
           type: 0,
           title: '全部顾问',
           data: res.data
-        };;
-        // this.financesArrLength = this.financeAllArr.data.filter((f, i) => i < 3);
+        };
         this.financeAllArrlength = this.financeAllArr.data.filter((f, i) => i < 4);
-        console.log(this.financeAllArr, '全部顾问');
       }, error => {
         console.log(error);
       }
@@ -171,7 +167,6 @@ export class HomePage {
     const openId = this.getUrlParam('openId');
     openId && window.localStorage.setItem('openId', openId);
     if (token) {
-      console.log('获取 ', usertype);
       if (Number(usertype) == 1) {
         window.sessionStorage.setItem('token', token)
         this.navCtrl.push(PhonebindPage);
@@ -184,33 +179,43 @@ export class HomePage {
   }
   //行业
   goToOtherPage(value, index, type) {
-    if (value == '' && index == '' && type == 'indeustry') {
-      this.navCtrl.push(IndustrydetialPage, {
-        type: type
-
-      })
-    } else {
-      this.navCtrl.push(IndustrydetialPage, {
-        type: type,
-        id: this.IndustryArr[index].ilid,
-        name: this.IndustryArr[index].industryName,
-      });
-    }
+    // if (value == '' && index == '') {
+    //   this.navCtrl.push(IndustrydetialPage, {
+    //     type: type
+    //   })
+    // } else {
+    //   this.navCtrl.push(IndustrydetialPage, {
+    //     type: type,
+    //     id: this.IndustryArr[index].ilid,
+    //     name: this.IndustryArr[index].industryName,
+    //   });
+    // }
+    this.navCtrl.push(IndustrydetialPage, {
+      type: type,
+      id: value ? this.IndustryArr[index].ilid : '',
+      name: value ? this.IndustryArr[index].industryName : '',
+    });
   }
   // 技能
   InfoskillMore(value, index, type) {
-    if (value == '' && index == '' && type == 'skill') {
-      this.navCtrl.push(IndustrydetialPage, {
-        type: type
-      });
-    } else {
-      this.navCtrl.push(IndustrydetialPage, {
-        id1: this.skillArr[index].sfid,
-        type: type,
-        name1: this.skillArr[index].fName
-      });
-    }
+    // if (value == '' && index == '' && type == 'skill') {
+    //   this.navCtrl.push(IndustrydetialPage, {
+    //     type: type
+    //   });
+    // } else {
+    //   this.navCtrl.push(IndustrydetialPage, {
+    //     id: this.skillArr[index].sfid,
+    //     type: type,
+    //     name: this.skillArr[index].fName
+    //   });
+    // }
+    this.navCtrl.push(IndustrydetialPage, {
+      type: type,
+      id: value ? this.skillArr[index].sfid : '',
+      name: value ? this.skillArr[index].fName : '',
+    });
   }
+
   // 行业翘楚
   outstanding(value, index, type) {
     this.navCtrl.push(IndustrydetialPage, {

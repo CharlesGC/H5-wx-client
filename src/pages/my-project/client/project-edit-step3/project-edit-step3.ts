@@ -25,6 +25,7 @@ export class ProjectEditStep3Page {
   public isShow = false;
   public isEdit = false;
   public isSpeed = false;
+  public isComplete = false;
   constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider) {
     this.projectData = {};
   }
@@ -49,6 +50,7 @@ export class ProjectEditStep3Page {
 
   /*保存提交*/
   goProjectSubmit() {
+    console.log(11111111111111);
     this.projectData['otherIndustrys'] = this.getOtherIndustrys(this.projectData['industryList']);
     this.projectData['otherSkills'] = this.getOtherIndustrys(this.projectData['skillList']);
     let industrys = this.projectData['industryList'] && this.projectData['industryList'].length > 0 ? this.projectData['industryList'].map(f => f.id).join(',') : '';
@@ -59,39 +61,48 @@ export class ProjectEditStep3Page {
     let language = this.projectData['planguage'] && this.projectData['planguage'].length > 0 ? this.projectData['planguage'].map(f => f.language).join(',') : '';
     let grade = this.projectData['planguage'] && this.projectData['planguage'].length > 0 ? this.projectData['planguage'].map(f => f.grade).join(',') : '';
     let pid = projectData['pid'];
+    // 必填项校验
+    if((!projectData.startTimeType && projectData.startTimeType !=0) || (!projectData.deliverMethod && projectData.deliverMethod !=0) || !projectData.province  || (!projectData.budgetType && projectData.budgetType !=0)) {
+      this.isComplete = true;
+      return;
+    }
+
     // let projectStageDetailUrl = 'http://mamon.yemindream.com/mamon/customer/releaseProject';
     const openId = window.sessionStorage.getItem('openId') || this.getUrlParam('openId');
     let projectStageDetailUrl = releaseProjectUrl + '?openId=' + openId +
-                              '&cid='+projectData['cid']+
-                              '&principalName='+projectData['principalName']+
-                              '&principalPosition='+projectData['principalPosition']+
-                              '&principalPhone='+projectData['principalPhone']+
-                              '&principalEmail='+projectData['principalEmail']+
-                              '&projectName='+projectData['projectName']+
-                              '&description='+projectData['description']+
-                              '&target='+projectData['target']+
-                              '&industrys='+industrys+
-                              '&skills='+skills+
-                              '&projectLengthType='+projectData['projectLengthType']+
-                              '&projectLength='+projectData['projectLength']+
-                              '&startTimeType='+projectData['startTimeType']+
-                              '&startTime='+projectData['startTime']+
-                              '&deliverMethod='+projectData['deliverMethod']+
-                              '&budgetType='+projectData['budgetType']+
-                              '&budgetDay='+(projectData['budgetDay'] || 0)+
-                              '&workload='+(projectData['workload'] || 0)+
-                              '&budget='+projectData['budget']+
-                              '&languages='+language+
-                              '&grades='+grade+
-                              '&otherIndustrys='+otherIndustrys+
-                              '&otherSkills='+otherSkills+
-                              '&province='+projectData['province']+
-                              '&city='+projectData['city']+
-                              '&qualification='+projectData['qualification'];
-      
+      '&cid=' + projectData['cid'] +
+      '&principalName=' + projectData['principalName'] +
+      '&principalPosition=' + projectData['principalPosition'] +
+      '&principalPhone=' + projectData['principalPhone'] +
+      '&principalEmail=' + projectData['principalEmail'] +
+      '&projectName=' + projectData['projectName'] +
+      '&description=' + projectData['description'] +
+      '&target=' + projectData['target'] +
+      '&industrys=' + industrys +
+      '&skills=' + skills +
+      '&projectLengthType=' + projectData['projectLengthType'] +
+      '&projectLength=' + projectData['projectLength'] +
+      '&startTimeType=' + projectData['startTimeType'] +
+      '&startTime=' + projectData['startTime'] +
+      '&deliverMethod=' + projectData['deliverMethod'] +
+      '&budgetType=' + projectData['budgetType'] +
+      '&budgetDay=' + (projectData['budgetDay'] || 0) +
+      '&workload=' + (projectData['workload'] || 0) +
+      '&budget=' + projectData['budget'] +
+      '&languages=' + language +
+      '&grades=' + grade +
+      '&otherIndustrys=' + otherIndustrys +
+      '&otherSkills=' + otherSkills +
+      '&province=' + projectData['province'] +
+      '&city=' + projectData['city'] +
+      '&qualification=' + projectData['qualification'];
+
     if (pid) {
       projectStageDetailUrl = projectStageDetailUrl + '&pid=' + pid;
     }
+
+   
+    
     this.Provider.getMamenSwiperData(projectStageDetailUrl).subscribe(res => {
       if (res.code == 200) {
         this.isShow = true;
@@ -104,7 +115,10 @@ export class ProjectEditStep3Page {
       console.log('erros===', error);
     })
   }
-
+  // 确定填写完整
+  sureComplete() {
+    this.isComplete = !this.isComplete;
+  }
   /*获取行业其他值*/
   getOtherIndustrys(data) {
     return data.map(d => {
@@ -118,17 +132,17 @@ export class ProjectEditStep3Page {
 
   /*列表编辑*/
   goFormEditPage(field, value, type) {
-    if(field == 'skillList') {
-      value = value && value.length ? value.map(d=>({id:d.psid,text:d.skillName})) : [];
-    }else if(field == 'industryList') {
-      value = value && value.length ? value.map(d=>({id:d.piid,text:d.industryName})) : [];
+    if (field == 'skillList') {
+      value = value && value.length ? value.map(d => ({ id: d.psid, text: d.skillName })) : [];
+    } else if (field == 'industryList') {
+      value = value && value.length ? value.map(d => ({ id: d.piid, text: d.industryName })) : [];
     }
-      if(type == 'timeSelect'){
-        this.navCtrl.push(ProjectTimeSelectPage,{callback:this.setValue,value:value,field:field,type:type});
-      }else{
-        this.navCtrl.push(FormEditPage,{callback:this.setValue,value:value,field:field,type:type});
-      }
-      
+    if (type == 'timeSelect') {
+      this.navCtrl.push(ProjectTimeSelectPage, { callback: this.setValue, value: value, field: field, type: type });
+    } else {
+      this.navCtrl.push(FormEditPage, { callback: this.setValue, value: value, field: field, type: type });
+    }
+
   }
 
   // /*设置值（回调函数）*/
@@ -193,32 +207,32 @@ export class ProjectEditStep3Page {
     // let projectStageDetailUrl = 'http://mamon.yemindream.com/mamon/customer/savaraft';
     const openId = window.sessionStorage.getItem('openId') || this.getUrlParam('openId') || 'o2GZp1Gsud1OVuaw5AH_e28m3kOw'
     let projectStageDetailUrl = savaraftUrl + '?openId=' + openId +
-                              '&cid='+projectData['cid']+
-                              '&principalName='+projectData['principalName']+
-                              '&principalPosition='+projectData['principalPosition']+
-                              '&principalPhone='+projectData['principalPhone']+
-                              '&principalEmail='+projectData['principalEmail']+
-                              '&projectName='+projectData['projectName']+
-                              '&description='+projectData['description']+
-                              '&target='+projectData['target']+
-                              '&industrys='+industrys+
-                              '&skills='+skills+
-                              '&projectLengthType='+projectData['projectLengthType']+
-                              '&projectLength='+projectData['projectLength']+
-                              '&startTimeType='+projectData['startTimeType']+
-                              '&startTime='+projectData['startTime']+
-                              '&deliverMethod='+projectData['deliverMethod']+
-                              '&budgetType='+projectData['budgetType']+
-                              '&budgetDay='+(projectData['budgetDay'] || 0)+
-                              '&workload='+(projectData['workload'] || 0)+
-                              '&budget='+projectData['budget']+
-                              '&languages='+language+
-                              '&grades='+grade+
-                              '&otherIndustrys='+otherIndustrys+
-                              '&otherSkills='+otherSkills+
-                              '&province='+projectData['province']+
-                              '&city='+projectData['city']+
-                              '&qualification='+projectData['qualification'];
+      '&cid=' + projectData['cid'] +
+      '&principalName=' + projectData['principalName'] +
+      '&principalPosition=' + projectData['principalPosition'] +
+      '&principalPhone=' + projectData['principalPhone'] +
+      '&principalEmail=' + projectData['principalEmail'] +
+      '&projectName=' + projectData['projectName'] +
+      '&description=' + projectData['description'] +
+      '&target=' + projectData['target'] +
+      '&industrys=' + industrys +
+      '&skills=' + skills +
+      '&projectLengthType=' + projectData['projectLengthType'] +
+      '&projectLength=' + projectData['projectLength'] +
+      '&startTimeType=' + projectData['startTimeType'] +
+      '&startTime=' + projectData['startTime'] +
+      '&deliverMethod=' + projectData['deliverMethod'] +
+      '&budgetType=' + projectData['budgetType'] +
+      '&budgetDay=' + (projectData['budgetDay'] || 0) +
+      '&workload=' + (projectData['workload'] || 0) +
+      '&budget=' + projectData['budget'] +
+      '&languages=' + language +
+      '&grades=' + grade +
+      '&otherIndustrys=' + otherIndustrys +
+      '&otherSkills=' + otherSkills +
+      '&province=' + projectData['province'] +
+      '&city=' + projectData['city'] +
+      '&qualification=' + projectData['qualification'];
     if (pid) {
       projectStageDetailUrl = projectStageDetailUrl + '&pid=' + pid;
     }
