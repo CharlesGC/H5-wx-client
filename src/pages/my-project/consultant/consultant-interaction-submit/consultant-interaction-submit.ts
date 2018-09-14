@@ -137,7 +137,7 @@ export class ConsultantInteractionSubmitPage {
     }
     this.Provider.getMamenSwiperData(projectStageDetailUrl).subscribe(res => {
       if (res.code == 200) {
-        alert('操作功能！');
+        //alert('操作功能！');
         this.navCtrl.pop();
       } else if (res.code == 207) {
         window.localStorage.removeItem('openId');

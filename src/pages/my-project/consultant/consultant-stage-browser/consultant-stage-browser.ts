@@ -74,6 +74,31 @@ export class ConsultantStageBrowserPage {
       if(res.code==200) {
         console.log(res,'--------');
         this.projectStageDetail = res.data || {};
+        var a = this.projectStageDetail['size'] / 1048576;
+        console.log(this.projectStageDetail['size'])
+        // this.filesize = a.toPrecision(3);
+        // if (this.projectStageDetail['size'] > 1) {
+        //   this.projectStageDetail['size'] = this.projectStageDetail['size'] + ' MB'
+        // } else if (this.projectStageDetail['size'] < 1) {
+        //   this.projectStageDetail['size'] = this.projectStageDetail['size'] * 1024 + ' KB'
+        // } else if (this.projectStageDetail['size'] == 'NaN') {
+        //   // this.projectStageDetail = {};
+        //   //console.log(this.projectStageDetail['typeStr'])
+        // }
+    
+        if (this.projectStageDetail['format']) {
+          if (this.projectStageDetail['format'].search(/doc/) !== -1 || this.projectStageDetail['format'].search(/docx/) !== -1) {
+            this.projectStageDetail['format'] = 'assets/imgs/' + 'doc.png'
+          } else if (this.projectStageDetail['format'].search(/ppt/) !== -1 || this.projectStageDetail['format'].search(/pptx/) !== -1) {
+            this.projectStageDetail['format'] = 'assets/imgs/' + 'ppt.png'
+          } else if (this.projectStageDetail['format'].search(/xls/) !== -1 || this.projectStageDetail['format'].search(/xlsx/) !== -1) {
+            this.projectStageDetail['format'] = 'assets/imgs/' + 'xls.png'
+          } else if (this.projectStageDetail['format'].search(/jpg/) !== -1 || this.projectStageDetail['format'].search(/png/) !== -1 || this.projectStageDetail['format'].search(/jpeg/) !== -1) {
+            this.projectStageDetail['format'] = 'assets/imgs/' + 'png.png'
+          } else if (this.projectStageDetail['format'].search(/pdf/) !== -1) {
+            this.projectStageDetail['format'] = 'assets/imgs/' + 'pdf.png'
+          }
+        }
       }else if(res.code == 207) {
         window.localStorage.removeItem('openId');
       }else{
