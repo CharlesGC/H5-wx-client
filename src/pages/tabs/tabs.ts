@@ -30,7 +30,7 @@ export class TabsPage {
   //   console.log('执行！~~');
   // }
   ngOnInit() {
-    console.log('进行')
+    // console.log('进行')
     const user = window.sessionStorage.getItem('user') ? JSON.parse(window.sessionStorage.getItem('user')) : {};
     // user.type == 0
     if(user.type == 1){
@@ -48,7 +48,7 @@ export class TabsPage {
   }
   
   ngDoCheck (){
-    console.log('ngDoCheck','ngDoCheck进行时');
+    // console.log('ngDoCheck','ngDoCheck进行时');
     const user = window.sessionStorage.getItem('user') ? JSON.parse(window.sessionStorage.getItem('user')) : {type:0};
     // user.type == 0
     if(user.type == 1){

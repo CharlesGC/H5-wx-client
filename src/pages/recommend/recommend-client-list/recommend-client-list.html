@@ -6,7 +6,7 @@
 -->
 <ion-header>
   <ion-navbar>
-    <ion-title>我的项目/客户/推荐列表</ion-title>
+    <ion-title></ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -74,16 +74,10 @@
       </ion-item>
     </ion-list>
   </div>
-  <!-- 推荐 顾问 -->
-  <!-- <div class="no-content">
-    <h4 class="title">推荐</h4>
-    <div class="img"></div>
-    <p class="tip">当前没有符合您信息的内容，请前往个人中心信息补充信息。</p>
-  </div> -->
   <!-- 推荐 客户 -->
-  <!-- <div class="no-content">
+  <div class="no-content" *ngIf ="!projectConsultantListData">
       <h4 class="title">推荐</h4>
       <div class="img"></div>
       <p class="tip">当前您还没有发布项目，请前往发布项目。</p>
-    </div> -->
+    </div>
 </ion-content>

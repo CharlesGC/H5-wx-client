@@ -213,7 +213,7 @@ export class SpeedPage {
                       _this.audioData.push(data.data);
                       _this.changeDetectorRef.markForCheck();
                       _this.changeDetectorRef.detectChanges();
-                      alert(_this.audioData);
+                      // alert(_this.audioData);
                       _this.localId = '';
                     },
                     error: function (xhr, errorType, error) {
