@@ -37,6 +37,8 @@ export class HomePage {
   constructor(public navCtrl: NavController, private swiperdata: MamenDataProvider, private industrydata: MamenDataProvider,
     private skilldata: MamenDataProvider, private casedata: MamenDataProvider, private outstanddata: MamenDataProvider, private financedata: MamenDataProvider,private financeAlldata: MamenDataProvider) {
     this.IndustryArr = [];
+    // var qiaochu = document.getElementsByClassName('qiaochu-duc');
+    // console.log(qiaochu,'pppppppppppppppp');
   }
   ionViewDidLoad() {
     // console.log(getswipreUrl);
@@ -47,6 +49,8 @@ export class HomePage {
     this.getoutstandingInfo();
     this.getfinanceInfo();
     this.getfinanceAllInfo();
+
+  
   }
   //  轮播图数据
   getswiperInfo() {
@@ -107,7 +111,7 @@ export class HomePage {
           title: '行业翘楚',
           data: res.data
         };
-        // console.log(this.outstandingArr.data)
+        // console.log(this.outstandingArr.data,'333333333333333333333333')
       }, error => {
         console.log(error);
       }

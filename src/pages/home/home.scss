@@ -12,7 +12,7 @@ page-home {
             width: 100%;
             height: 190px;
             object-fit: contain;
-            opacity: 0.68;
+            // opacity: 0.68;
             background-color: #fff;
             .swiper-pagination-bullet {
                 border-radius: 1.5px;
@@ -20,7 +20,7 @@ page-home {
                 width: 13.8px;
                 height: 3px;
                 background: #fff;
-                opacity: .2;
+                // opacity: .2;
                 pointer-events: auto;
             }
             .swiper-pagination-bullet-active {
@@ -584,7 +584,7 @@ page-home {
                         height: 171px;
                         .swiper_content1 {
                             object-fit: contain;
-                            opacity: 0.68;
+                            // opacity: 0.68;
                             background-color: #fff;
                             .swiper-pagination-bullet {
                                 border-radius: 1.5px;
@@ -592,12 +592,12 @@ page-home {
                                 width: 13.8px;
                                 height: 3px;
                                 background: #fff;
-                                opacity: .2;
+                                // opacity: .2;
                                 pointer-events: auto;
                             }
                             .swiper-pagination-bullet-active {
                                 background: #fff;
-                                opacity: 1;
+                                // opacity: 1;
                             }
                             .case_swiper {
                                 width: 100%;
@@ -614,7 +614,7 @@ page-home {
                                 }
                                 img {
                                     width: 100%;
-                                    opacity: 0.82;
+                                    // opacity: 0.82;
                                     padding:0 15px;
                                 }
                                .code_text {

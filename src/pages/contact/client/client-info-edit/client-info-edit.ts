@@ -165,6 +165,7 @@ export class ClientInfoEditPage {
     var regPhone = /^[0-9]{8,11}$/;
     if(regPhone.test(newCompanyDetaiData['companyPhone']) == false) {
       this.isPhoneProper = true;
+      return;
     }
     let getCompanyDetailUrl = addOrUpdateCompanyUrl + '?openId=' + openId + '&name='+newCompanyDetaiData['companyName']+
                           '&province='+newCompanyDetaiData['province']+
