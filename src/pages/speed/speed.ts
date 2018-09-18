@@ -180,7 +180,7 @@ export class SpeedPage {
           wx.stopRecord({
             success: function (res) {
               console.log(111111111111);
-              alert('录音结束');
+              // alert('录音结束');
             }
           })
         }
@@ -228,7 +228,7 @@ export class SpeedPage {
           console.log(res);
         },
         fail: function (res) {
-          alert(JSON.stringify(res));
+          // alert(JSON.stringify(res));
         }
       });
     }
@@ -251,8 +251,7 @@ export class SpeedPage {
     this.description = value;
     let Arr = this.audioData || [];
     this.voice = Arr.length > 0 ? Arr.map(f => f.url).join(",") : '';
-    if( this.description == '') {
-      console.log(1111111);
+    if(!this.description && this.description!=0) {
       this.isComplete = true;
       return;
     }
@@ -263,7 +262,7 @@ export class SpeedPage {
           console.log(this.speedVoiceReleaseArr);
           this.isShow = true;
         }else {
-          alert('请求出错：' + res.msg)
+          console.log('请求出错：' + res.msg)
         }
       }, error => {
         console.log(error);

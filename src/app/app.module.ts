@@ -34,6 +34,7 @@ import { ModifyPhone2Page } from '../pages/modify-phone2/modify-phone2';
 import { ModifyEmailPage } from '../pages/modify-email/modify-email';
 import { AddEmailPage } from '../pages/add-email/add-email';
 import {AddSkillPage} from '../pages/add-skill/add-skill';
+import { SwiperDetailPage } from '../pages/home/swiper-detail/swiper-detail';
 // import {ReleasePage} from '../pages/release/release';
 import {ReleaseTwoPage} from '../pages/release-two/release-two';
 import {AddIndustryPage} from '../pages/add-industry/add-industry';
@@ -171,6 +172,7 @@ import { ImageCropperModule } from 'ngx-image-cropper';
     SelectTagsPage,
     MessageCenterPage,
     DemandContentPage,
+    SwiperDetailPage,
 
     AddSkillPage,
     // ReleasePage,
@@ -287,6 +289,7 @@ import { ImageCropperModule } from 'ngx-image-cropper';
     SelectTagsPage,
     MessageCenterPage,
     DemandContentPage,
+    SwiperDetailPage,
 
     AddSkillPage,
     // ReleasePage,

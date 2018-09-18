@@ -4,7 +4,7 @@
       <ion-input type="tel" placeholder="请输入手机号" #phone></ion-input>
     </ion-item>
     <ion-item lines="none" class="none-margin bg-black">
-      <ion-input type="text" placeholder="请输入验证码" #code></ion-input>
+      <ion-input type="number" placeholder="请输入验证码" #code></ion-input>
       <button item-right ion-button large class="ion-button-code" (click)="getVerificationCode(phone)">{{phoneCodeText}}</button>
     </ion-item>
     <ion-item no-lines class="mt10 bg-none item-checkbox">
