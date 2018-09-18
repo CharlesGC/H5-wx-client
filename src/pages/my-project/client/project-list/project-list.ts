@@ -5,7 +5,7 @@ import { MamenDataProvider } from '../../../../providers/mamen-data/mamen-data';
 import { ProjectBrowserPage } from '../project-browser/project-browser';
 import { getProjectByStatusUrl,myProjectCountUrl } from '../../../../providers/requestUrl';
 import { ProjectSpeedReleasePage } from '../project-speed-release/project-speed-release';
-
+import { SpeedPage } from '../../../speed/speed';
 /**
  * Generated class for the ProjectListPage page.
  *
@@ -130,4 +130,9 @@ export class ProjectListPage {
   //       infiniteScroll.complete();
   //   }, 2000);
   // }
+  
+  // 添加项目跳转页
+  onSpeedStageClick () {
+    this.navCtrl.push(SpeedPage);
+  }
 }

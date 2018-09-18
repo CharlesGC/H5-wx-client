@@ -55,10 +55,12 @@ export class ContactPage {
     // this.navCtrl.push(ProjectListPage);
     const user = window.sessionStorage.getItem('user') ? JSON.parse(window.sessionStorage.getItem('user')) : {};
     if(user.type == 1){
-      user.projectCount>0 && this.navCtrl.push(ConsultantProjectListPage);
+      this.navCtrl.push(ConsultantProjectListPage);
     }else if(user.type == 0){
-      user.projectCount>0 && this.navCtrl.push(ProjectListPage);
+      // user.projectCount>0 && this.navCtrl.push(ProjectListPage);
+     this.navCtrl.push(ProjectListPage);
     }
+    
   }
 
   //跳转到消息中心
@@ -110,9 +112,8 @@ export class ContactPage {
 
   ionViewDidEnter() {
     const openId = window.sessionStorage.getItem('openId') || this.getUrlParam('openId') || window.localStorage.getItem('openId');
-    const user = window.sessionStorage.getItem('user') ? JSON.parse(window.sessionStorage.getItem('user')) : {status:1};
+    const user = window.sessionStorage.getItem('user') ? JSON.parse(window.sessionStorage.getItem('user')) : {'status':1};
     const usertype = window.sessionStorage.getItem('status') ? Number(window.sessionStorage.getItem('status')) : this.getUrlParam('status');
-
     if(openId){
       window.sessionStorage.setItem('openId',openId);
       window.localStorage.setItem('openId',openId);
@@ -149,6 +150,11 @@ export class ContactPage {
         window.localStorage.setItem('user',JSON.stringify(res.data));
       }else if(res.code == 207) {
         window.localStorage.removeItem('openId');
+        window.sessionStorage.removeItem('openId');
+      }else if(res.code == 203) {
+        window.localStorage.removeItem('openId');
+        window.sessionStorage.removeItem('openId');
+        this.onLogin();
       }
     },error=>{
       console.log('erros===',error);

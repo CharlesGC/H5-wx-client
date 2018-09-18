@@ -35,7 +35,7 @@
             <div class="title-name">
               <h3>{{consultantBasicData.nickName || ''}}</h3>
               <span class="user-type type-approved" *ngIf="consultantBasicData.status >= 4">已审核</span>
-              <span class="user-type type-review" *ngIf="consultantBasicData.status == 0">审核中</span>
+              <span class="user-type type-gray" *ngIf="consultantBasicData.status == 0">未审核</span>
               <!-- <ion-icon name="ios-arrow-forward" item-end color="ion-gray"></ion-icon> -->
             </div>
             <p class="info-other-label">

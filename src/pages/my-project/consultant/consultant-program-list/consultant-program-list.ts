@@ -133,7 +133,7 @@ export class ConsultantProgramListPage {
     }else{
       this.navCtrl.push(ConsultantProgramEditPage,{isAdd:false,pid:pid});
     }
-    
+     
   }
 
   /*提交方案*/

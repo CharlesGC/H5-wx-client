@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>项目时间选择</ion-title>
+    <ion-title>表单编辑</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -59,7 +59,7 @@
             </p>
           </ion-item>
         </ion-list>
-        <p class="browser-file" *ngIf="selected == 3">点击输入框右侧可选择日期单位（日，月，年）</p>
+        <p class="browser-file" *ngIf="selected == 3">点击输入框输入项目的时长（月）</p>
         <ion-list class="list-item-flex mt10" *ngIf="selected == 3">
           <ion-item no-lines>
             <ion-input type="number" placeholder="请输入项目周期" [(ngModel)]="inputName"></ion-input>

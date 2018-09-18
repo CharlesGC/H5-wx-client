@@ -1,11 +1,12 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>我的项目/客户/项目列表</ion-title>
+    <ion-title>项目列表</ion-title>
   </ion-navbar>
 
 </ion-header>
-<div class="nav-menu" *ngIf="isShowNavMenu">
+
+  <div class="nav-menu" *ngIf="isShowNavMenu">
     <ion-list class="nav-list-menu">
         <ion-item no-lines (click)="onNavMenuClick(false)">
           <p class="list-header-left">{{showNavMenuName || '所有项目'}} ({{showNavMenuNumber}})</p>
@@ -38,8 +39,7 @@
       </ion-item>
     </ion-list>
   </div>
-
-<ion-content style="background-color: #fcfcfc;">
+  <ion-content style="background-color: #fcfcfc;">
     <!-- <ion-item>
         用户信息
         <ion-icon name="ios-arrow-down" item-right  *ngIf="isShow"    (click)="isShow=!isShow"></ion-icon>
@@ -140,10 +140,17 @@
         <div *ngIf="projectListData_item.type ==1">
             <div class="msg-title">
                 <div class="msg-title-left">
-                    <span class="project-type type-blue" *ngIf="projectListData_item.status ==1||projectListData_item.status ==2||projectListData_item.status ==3||projectListData_item.status ==6">未开始</span>
-                    <span class="project-type type-green" *ngIf="projectListData_item.status ==4 || projectListData_item.status ==7">进行中</span>
-                    <span class="project-type type-gray" *ngIf="projectListData_item.status ==5 || projectListData_item.status ==8||projectListData_item.status ==9 || projectListData_item.status ==10">已完成</span>
-                    <span class="project-type type-blue" *ngIf="projectListData_item.status ==0">草稿箱</span>
+                    <span class="project-type type-blue" 
+                    *ngIf="projectListData_item.status ==1||projectListData_item.status ==2||
+                           projectListData_item.status ==3||projectListData_item.status ==6 ||
+                           projectListData_item.status ==7||projectListData_item.status ==11|| 
+                           projectListData_item.status ==12|| projectListData_item.status ==13 ||
+                           projectListData_item.status ==14">未开始</span>
+                  <span class="project-type type-green" *ngIf="projectListData_item.status ==4">进行中</span>
+                  <span class="project-type type-gray" 
+                        *ngIf="projectListData_item.status ==5 || projectListData_item.status ==8||
+                        projectListData_item.status ==9 || projectListData_item.status ==10">已完成</span>
+                  <span class="project-type type-blue" *ngIf="projectListData_item.status ==0">草稿箱</span>
                 </div>
                 <span>{{projectListData_item.releaseTime | date:'yy/MM/dd'}}</span>
               </div>
@@ -262,4 +269,13 @@
          </ion-infinite-scroll-content> 
      </ion-infinite-scroll> -->
   
-  </ion-content>
+</ion-content>
+
+<div class="no-box" *ngIf="!projectListData">
+  <div class="no-content">
+    <h4 class="title">我的项目</h4>
+    <div class="img"></div>
+    <p class="tip">当前项目暂时为空，点击下方按钮添加项目。</p>
+  </div>
+  <button ion-button expand="full" large class="fixed-bottom" (click)="onSpeedStageClick()">添加项目</button> 
+</div>

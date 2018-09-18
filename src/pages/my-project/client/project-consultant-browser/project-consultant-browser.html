@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>我的项目/客户/顾问/顾问详情</ion-title>
+    <ion-title>顾问详情</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -57,13 +57,13 @@
             <div class="consultant-des">{{consultantDetails.introduction}}</div>
             <div>
                 <p class="tags-cont skills">
-                  <span class="tag" *ngFor="let adviserSkill_tag of consultantDetails.adviserSkill">{{adviserSkill_tag}}</span>
+                  <span class="tag" *ngFor="let adviserSkill_tag of consultantDetails.skillList">{{adviserSkill_tag.alName || ''}}</span>
                   <!-- <span class="tag">供应链</span>
                   <span class="tag">水力资源与厂方管理</span>
                   <span class="tag">人力资源</span> -->
                 </p>
                 <p class="tags-cont industry">
-                    <span class="tag" *ngFor="let adviserIndustry_tag of consultantDetails.adviserIndustry">{{adviserIndustry_tag}}</span>
+                    <span class="tag" *ngFor="let adviserIndustry_tag of consultantDetails.industryList">{{adviserIndustry_tag.alName || ''}}</span>
                   <!-- <span class="tag">生态互联网</span>
                   <span class="tag">航空航天</span>
                   <span class="tag">投资资产法务</span> -->
