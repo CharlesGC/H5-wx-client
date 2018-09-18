@@ -332,6 +332,12 @@ page-home {
                                 flex: row;
                                 margin-top: 10px;
                                 margin: 10px 20px 0 20px;
+                                .adviserName {
+                                    overflow: hidden;
+                                    text-overflow: ellipsis;
+                                    white-space: nowrap; 
+                                    text-align: center;
+                                }
                                 span {
                                     display: block;
                                     width: 49px;
@@ -358,7 +364,7 @@ page-home {
                                             font-weight: 500;
                                             color: #ff6537;
                                             margin-top: 3px;
-                                            margin-left: -10px;
+                                            // margin-left: -10px;
                                             overflow: hidden;
                                             text-overflow:ellipsis;
                                             white-space: nowrap;
@@ -481,7 +487,6 @@ page-home {
                     overflow: hidden;
                     text-overflow: ellipsis;
                     white-space: nowrap; 
-                    text-align: center;
                     margin-top: 15px;
                    }
                 }
