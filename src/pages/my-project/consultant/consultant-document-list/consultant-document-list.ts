@@ -116,7 +116,7 @@ export class ConsultantDocumentListPage {
       } else if (res.code == 207) {
         window.localStorage.removeItem('openId');
       } else {
-        alert('请求出错:' + res.msg);
+        console.log('请求出错:' + res.msg);
       }
     }, error => {
       console.log('erros===', error);

@@ -31,6 +31,7 @@ export class FormEditPage {
   public selectList: any;
   public skillList: any;
   public skillSecondaryList: any;
+  public isSave = false;
   //定义省市区数据源变量
   public cityList = {
     area: []
@@ -153,7 +154,7 @@ export class FormEditPage {
       this.parentColumns = this.paymentMethod
     }
     else if (this.selectField == 'industryList') {
-      this.getpaymentListData();
+      // this.getpaymentListData();
       this.selectList = (value && value.length) ? value.map(f => ({ ...f, id: (f.ilid || f.alId) })) : [{ id: 0 }];
     } else if (this.fieldType == 'date') {
       this.inputName = new Date(value);
@@ -220,20 +221,34 @@ export class FormEditPage {
           inValue[i].alName = this.strTrim(citystr[i].innerText)
           inValue[i].alId = this.selectList[i].id
         }
-
-
       }
       value = inValue;
-      console.log(inValue, 'citystr');
+      console.log(inValue, this.inputName,'citystr');
+      if(this.inputName.length>0 && this.arrRepeat(this.inputName.map(d=>d.id))) {
+        console.log(111111)
+        this.isSave = true;
+      }
     }
     if (index || index == 0) {
       callback(this.selectField, value, index);
     } else {
       callback(this.selectField, value);
     }
-    console.log(citystr, this.userInfo, inValue, 'value');
-    this.navCtrl.pop();
+    console.log(citystr, this.userInfo,!this.isSave, inValue, 'value');
+    !this.isSave && this.navCtrl.pop();
   }
+
+  /*判断数组是否重复*/
+  arrRepeat(arr){
+    var arrStr = JSON.stringify(arr),str;
+    for (var i = 0; i < arr.length; i++) {
+      if (arrStr.indexOf(arr[i]) != arrStr.lastIndexOf(arr[i])){
+        return true;
+      }
+    };
+    return false;
+  }
+
   /*去空格*/
   strTrim(str) {
     return str.replace(/(^\s*)|(\s*$)/g, "");
@@ -323,4 +338,10 @@ export class FormEditPage {
     }
 
   }
+
+  /*关闭弹出框*/
+  onClose() {
+    this.isSave = false;
+  }
+
 }

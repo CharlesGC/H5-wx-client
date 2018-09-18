@@ -110,7 +110,7 @@ export class ConsultantInfoUserPage {
       this.isuName = true;
       return;
     }
-    if(this.userInfoData.skillList.length = 0){
+    if(this.userInfoData.skillList.length == 0){
       this.isSkill = true;
       return;
     }

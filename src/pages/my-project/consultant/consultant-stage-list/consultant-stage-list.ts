@@ -140,7 +140,7 @@ export class ConsultantStageListPage {
       } else if (res.code == 207) {
         window.localStorage.removeItem('openId');
       } else {
-        alert('请求出错:' + res.msg);
+        //alert('请求出错:' + res.msg);
       }
     }, error => {
       console.log('erros===', error);
@@ -163,7 +163,7 @@ export class ConsultantStageListPage {
       } else if (res.code == 207) {
         window.localStorage.removeItem('openId');
       } else {
-        alert('请求出错:' + res.msg);
+        //alert('请求出错:' + res.msg);
       }
     }, error => {
       console.log('erros===', error);
@@ -187,12 +187,12 @@ export class ConsultantStageListPage {
     let projectStageDetailUrl = changeStageStatusUrl + '?openId=' + openId + '&type=1' + '&pid=' + pid;
     this.Provider.getMamenSwiperData(projectStageDetailUrl).subscribe(res => {
       if (res.code == 200) {
-        alert('提交成功！');
+        //alert('提交成功！');
         this.navCtrl.pop();
       } else if (res.code == 207) {
         window.localStorage.removeItem('openId');
       } else {
-        alert('请求出错:' + res.msg);
+        //alert('请求出错:' + res.msg);
       }
     }, error => {
       console.log('erros===', error);

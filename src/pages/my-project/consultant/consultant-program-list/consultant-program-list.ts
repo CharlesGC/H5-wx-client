@@ -122,7 +122,7 @@ export class ConsultantProgramListPage {
           }
         }
       } else {
-        alert('请求出错:' + res.msg);
+        console.log('请求出错:' + res.msg);
       }
     }, error => {
       console.log('erros===', error);
@@ -150,10 +150,10 @@ export class ConsultantProgramListPage {
 
     this.Provider.getMamenSwiperData(projectStageDetailUrl).subscribe(res => {
       if (res.code == 200) {
-        alert('操作成功！');
+        console.log('操作成功！');
         this.navCtrl.pop();
       } else {
-        alert('请求出错:' + res.msg);
+        console.log('请求出错:' + res.msg);
       }
     }, error => {
       console.log('erros===', error);

@@ -120,7 +120,7 @@ export class ConsultantStageEditPage {
       } else if( res.code == 214){
         this.isDateRepeat = true
       } else {
-        alert('请求出错:' + res.msg);
+        console.log('请求出错:' + res.msg);
       }
     }, error => {
       console.log('erros===', error);
@@ -135,12 +135,12 @@ export class ConsultantStageEditPage {
     let projectStageDellUrl = delStageUrl + '?openId=' + openId + '&psid=' + psid;
     this.Provider.getMamenSwiperData(projectStageDellUrl).subscribe(res => {
       if (res.code == 200) {
-        alert('删除成功！')
+        console.log('删除成功！')
         this.navCtrl.push(ConsultantStageListPage, { pid: this.stageData['pid'], status: -1 });
       } else if (res.code == 207) {
         window.localStorage.removeItem('openId');
       } else {
-        alert('请求出错:' + res.msg);
+        console.log('请求出错:' + res.msg);
       }
     }, error => {
       console.log('erros===', error);
