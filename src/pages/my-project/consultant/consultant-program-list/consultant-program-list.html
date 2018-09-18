@@ -4,10 +4,10 @@
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<ion-header>
+<ion-header class="project-header">
 
   <ion-navbar hideBackButton="true">
-    <ion-buttons side="left">
+    <ion-buttons side="left" style="order: 0">
       <button ion-button icon-only color="royal" (click)="goback()">
         <ion-icon name="arrow-back">&nbsp;&nbsp;返回</ion-icon>
       </button>
@@ -20,7 +20,7 @@
 <div class="nav-menu" *ngIf="isShowNavMenu">
   <ion-list class="nav-list-menu">
     <ion-item no-lines (click)="onNavMenuClick(false)">
-      <p class="list-header-left">{{showNavMenuName || '详情'}}</p>
+      <p class="list-header-left">{{showNavMenuName || '方案'}}</p>
       <div class="list-header-right" item-end>
         <span>收起</span>
       </div>

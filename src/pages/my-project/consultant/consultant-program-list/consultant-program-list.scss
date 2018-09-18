@@ -1,4 +1,9 @@
 page-consultant-program-list {
+    .project-header {
+        .toolbar-content-md {
+            display: flex;
+        }
+    }
     ion-list {
         margin-bottom: 0 !important;
     }

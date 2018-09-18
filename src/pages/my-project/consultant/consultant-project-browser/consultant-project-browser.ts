@@ -210,6 +210,12 @@ export class ConsultantProjectBrowserPage {
   }
   // 返回项目列表页
   goback() {
-    this.navCtrl.popTo(this.navCtrl.getByIndex(1))
+    console.log(1111)
+    let isApply = this.navParams.get('isApply');
+    if(isApply){
+      this.navCtrl.pop();
+    }else{
+      this.navCtrl.popTo(this.navCtrl.getByIndex(1))
+    }
   }
 }
