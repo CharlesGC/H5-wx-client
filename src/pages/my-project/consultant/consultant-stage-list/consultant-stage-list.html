@@ -5,104 +5,109 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-  <ion-navbar>
+  <ion-navbar hideBackButton="true">
+    <ion-buttons start>
+      <button ion-button icon-only color="royal" (click)="goback()">
+        <ion-icon name="arrow-back">&nbsp;&nbsp;返回</ion-icon>
+      </button>
+    </ion-buttons>
     <ion-title>阶段列表</ion-title>
   </ion-navbar>
 </ion-header>
 
-  <div class="nav-menu" *ngIf="isShowNavMenu">
+<div class="nav-menu" *ngIf="isShowNavMenu">
+  <ion-list class="nav-list-menu">
+    <ion-item no-lines (click)="onNavMenuClick(false)">
+      <p class="list-header-left">{{showNavMenuName || '详情'}}</p>
+      <div class="list-header-right" item-end>
+        <span>收起</span>
+      </div>
+    </ion-item>
+  </ion-list>
+  <div class="nav-menu-bg"></div>
+  <ion-list class="nav-menu-list">
+    <ion-item class="nav-menu-item" (click)="onNavMenuItemClick(1,'详情')">
+      <label>详情</label>
+      <ion-icon name="arrow-forward" item-right (click)="isShow=!isShow"></ion-icon>
+    </ion-item>
+    <ion-item class="nav-menu-item" (click)="onNavMenuItemClick(2,'方案')">
+      <label>方案</label>
+      <ion-icon name="arrow-forward" item-right (click)="isShow=!isShow"></ion-icon>
+    </ion-item>
+    <ion-item class="nav-menu-item" (click)="onNavMenuItemClick(3,'阶段',-1)">
+      <label>阶段</label>
+      <ion-icon name="arrow-forward" item-right (click)="isShow=!isShow"></ion-icon>
+    </ion-item>
+    <ion-item class="nav-menu-item" (click)="onNavMenuItemClick(4,'文档',-1)">
+      <label>文档</label>
+      <ion-icon name="arrow-forward" item-right (click)="isShow=!isShow"></ion-icon>
+    </ion-item>
+    <ion-item class="nav-menu-item" (click)="onNavMenuItemClick(5,'收款记录',-1)" no-lines>
+      <label>收款记录</label>
+      <ion-icon name="arrow-forward" item-right (click)="isShow=!isShow"></ion-icon>
+    </ion-item>
+  </ion-list>
+</div>
+
+<ion-content style="background-color: #fcfcfc;">
+
+  <div *ngIf="!!projectStageListData && projectStageListData.length<1">
     <ion-list class="nav-list-menu">
-        <ion-item no-lines (click)="onNavMenuClick(false)">
-          <p class="list-header-left">{{showNavMenuName || '详情'}}</p>
-          <div class="list-header-right" item-end>
-            <span>收起</span>
-          </div>
-        </ion-item>
-      </ion-list>
-    <div class="nav-menu-bg"></div>
-    <ion-list class="nav-menu-list">
-      <ion-item class="nav-menu-item" (click)="onNavMenuItemClick(1,'详情')">
-          <label>详情</label>
-          <ion-icon name="arrow-forward" item-right  (click)="isShow=!isShow"></ion-icon>
-      </ion-item>
-      <ion-item class="nav-menu-item" (click)="onNavMenuItemClick(2,'方案')">
-          <label>方案</label>
-          <ion-icon name="arrow-forward" item-right (click)="isShow=!isShow"></ion-icon>
-      </ion-item>
-      <ion-item class="nav-menu-item" (click)="onNavMenuItemClick(3,'阶段',-1)">
-          <label>阶段</label>
-          <ion-icon name="arrow-forward" item-right (click)="isShow=!isShow"></ion-icon>
-      </ion-item>
-      <ion-item class="nav-menu-item" (click)="onNavMenuItemClick(4,'文档',-1)">
-          <label>文档</label>
-          <ion-icon name="arrow-forward" item-right (click)="isShow=!isShow"></ion-icon>
-      </ion-item>
-      <ion-item class="nav-menu-item" (click)="onNavMenuItemClick(5,'收款记录',-1)" no-lines>
-          <label>收款记录</label>
-          <ion-icon name="arrow-forward" item-right (click)="isShow=!isShow"></ion-icon>
+      <ion-item no-lines (click)="onNavMenuClick(true)">
+        <p class="list-header-left">{{showNavMenuName || '阶段'}}</p>
+        <div class="list-header-right" item-end>
+          <span>展开</span>
+        </div>
       </ion-item>
     </ion-list>
-  </div>
-
-  <ion-content style="background-color: #fcfcfc;">
-    
-    <div *ngIf="!!projectStageListData && projectStageListData.length<1">
-      <ion-list class="nav-list-menu">
-          <ion-item no-lines (click)="onNavMenuClick(true)">
-            <p class="list-header-left">{{showNavMenuName || '阶段'}}</p>
-            <div class="list-header-right" item-end>
-              <span>展开</span>
-            </div>
-          </ion-item>
-        </ion-list>
-      <div class="no-content">
-        <h4 class="title">项目阶段</h4>
-        <div class="img"></div>
-        <p class="tip">当前分类暂时为空，点击下方按钮添加阶段。</p>
-      </div>
-      <button ion-button expand="full" large class="fixed-bottom" (click)="onAddStageClick()" *ngIf="projectStageListData.length<1">添加阶段</button> 
+    <div class="no-content">
+      <h4 class="title">项目阶段</h4>
+      <div class="img"></div>
+      <p class="tip">当前分类暂时为空，点击下方按钮添加阶段。</p>
     </div>
-    <div *ngIf="projectStageListData && projectStageListData.length>0">
-        <ion-list class="nav-list-menu">
-          <ion-item no-lines (click)="onNavMenuClick(true)">
-            <p class="list-header-left">{{showNavMenuName || '阶段'}}</p>
-            <div class="list-header-right" item-end>
-              <span>展开</span>
-            </div>
-          </ion-item>
-        </ion-list>
-        <ion-list class="mt20">
-            <ion-item class="message-item mt20" no-lines *ngFor="let projectStage_item of projectStageListData">
-              <p class="msg-title">
-                <span class="msg-title-left" *ngIf="projectStage_item.adviserStatus == 0">待确认</span>
-                <span class="msg-title-left" *ngIf="projectStage_item.adviserStatus == 1">有异议</span>
-                <span class="msg-title-left" *ngIf="projectStage_item.adviserStatus == 2">未开始</span>
-                <span class="msg-title-left" *ngIf="projectStage_item.adviserStatus == 3">进行中</span>
-                <span class="msg-title-left" *ngIf="projectStage_item.adviserStatus == 4">待审核</span>
-                <span class="msg-title-left" *ngIf="projectStage_item.adviserStatus == 5">申请收款</span>
-                <span class="msg-title-left" *ngIf="projectStage_item.adviserStatus == 6">已完成</span>
-                <span class="msg-title-left" *ngIf="projectStage_item.adviserStatus == 7">收款中</span>
-                <span class="msg-title-left" *ngIf="projectStage_item.adviserStatus == 8">交付有异议</span>
-              </p>
-              <div class="msg-cont">
-                <h4>{{projectStage_item.stageName}}</h4>
-                <p>整体进度 <span class="fweight600">第{{projectStage_item.stageSort}}阶段</span></p>
-              </div>
-              <div class="msg-cont-line2 mt10">
-                <p class="line2-left">
-                  <ion-icon name="ios-paper-outline" class="mr3"></ion-icon>
-                  <span>阶段周期</span>
-                  <span>{{projectStage_item.startTime | date: 'yyyy-MM-dd'}}</span>
-                  <span> 至 </span>
-                  <span>{{projectStage_item.endTime | date: 'yyyy-MM-dd'}}</span>
-                </p>
-              </div>
-              <div class="msg-footer" (click)="goStageBrowser(projectStage_item)">
-                <span class="msg-footer-text">查看该阶段详情</span>
-                <ion-icon name="arrow-forward" class="ml12"></ion-icon>
-              </div>
-            </ion-item>
-            <!-- <ion-item class="message-item mt20" no-lines>
+    <button ion-button expand="full" large class="fixed-bottom" (click)="onAddStageClick()" *ngIf="projectStageListData.length<1">添加阶段</button>
+  </div>
+  <div *ngIf="projectStageListData && projectStageListData.length>0">
+    <ion-list class="nav-list-menu">
+      <ion-item no-lines (click)="onNavMenuClick(true)">
+        <p class="list-header-left">{{showNavMenuName || '阶段'}}</p>
+        <div class="list-header-right" item-end>
+          <span>展开</span>
+        </div>
+      </ion-item>
+    </ion-list>
+    <ion-list class="mt20">
+      <ion-item class="message-item mt20" no-lines *ngFor="let projectStage_item of projectStageListData">
+        <p class="msg-title">
+          <span class="msg-title-left" *ngIf="projectStage_item.adviserStatus == 0">待确认</span>
+          <span class="msg-title-left" *ngIf="projectStage_item.adviserStatus == 1">有异议</span>
+          <span class="msg-title-left" *ngIf="projectStage_item.adviserStatus == 2">未开始</span>
+          <span class="msg-title-left" *ngIf="projectStage_item.adviserStatus == 3">进行中</span>
+          <span class="msg-title-left" *ngIf="projectStage_item.adviserStatus == 4">待审核</span>
+          <span class="msg-title-left" *ngIf="projectStage_item.adviserStatus == 5">申请收款</span>
+          <span class="msg-title-left" *ngIf="projectStage_item.adviserStatus == 6">已完成</span>
+          <span class="msg-title-left" *ngIf="projectStage_item.adviserStatus == 7">收款中</span>
+          <span class="msg-title-left" *ngIf="projectStage_item.adviserStatus == 8">交付有异议</span>
+        </p>
+        <div class="msg-cont">
+          <h4>{{projectStage_item.stageName}}</h4>
+          <p>整体进度 <span class="fweight600">第{{projectStage_item.stageSort}}阶段</span></p>
+        </div>
+        <div class="msg-cont-line2 mt10">
+          <p class="line2-left">
+            <ion-icon name="ios-paper-outline" class="mr3"></ion-icon>
+            <span>阶段周期</span>
+            <span>{{projectStage_item.startTime | date: 'yyyy-MM-dd'}}</span>
+            <span> 至 </span>
+            <span>{{projectStage_item.endTime | date: 'yyyy-MM-dd'}}</span>
+          </p>
+        </div>
+        <div class="msg-footer" (click)="goStageBrowser(projectStage_item)">
+          <span class="msg-footer-text">查看该阶段详情</span>
+          <ion-icon name="arrow-forward" class="ml12"></ion-icon>
+        </div>
+      </ion-item>
+      <!-- <ion-item class="message-item mt20" no-lines>
                 <p class="msg-title">
                   <span class="msg-title-left">运行中</span>
                 </p>
@@ -212,23 +217,22 @@
                   <ion-icon name="arrow-forward" class="ml12"></ion-icon>
                 </div>
               </ion-item> -->
-          </ion-list>
-          <ion-list class="describe-list mt45" *ngIf="projectStageProposalList && projectStageProposalList.length>0">
-            <ion-item no-lines *ngFor="let proposal_item of projectStageProposalList">
-              <div class="top-lines">
-                  <h4 class="top-lines-left">修改意见</h4>
-                  <span class="top-lines-right">{{proposal_item.createTime | date:'yy/MM/dd'}}</span>
-              </div>
-              <p class="describe-cont">{{proposal_item.opinion}}</p>
-            </ion-item>
-          </ion-list>
-          <div style="height:60px;"></div>
-          <button ion-button expand="full" large class="fixed-bottom bg-gry" (click)="goAccountEdit()" *ngIf="projectType == 7">等待客户确认中</button>
-          <button ion-button expand="full" large class="fixed-bottom" (click)="onAddStageClick()"  *ngIf="!projectStageListData || projectStageListData.length<1">添加阶段</button>
-          <div class="fixed-bottom" *ngIf="projectType == 10">
-              <button ion-button class="btn-submit" (click)="onAllStageSubmit()">提交阶段</button>
-              <button ion-button class="btn-delete" (click)="onAddStageClick()">添加阶段</button>
-          </div>
+    </ion-list>
+    <ion-list class="describe-list mt45" *ngIf="projectStageProposalList && projectStageProposalList.length>0">
+      <ion-item no-lines *ngFor="let proposal_item of projectStageProposalList">
+        <div class="top-lines">
+          <h4 class="top-lines-left">修改意见</h4>
+          <span class="top-lines-right">{{proposal_item.createTime | date:'yy/MM/dd'}}</span>
+        </div>
+        <p class="describe-cont">{{proposal_item.opinion}}</p>
+      </ion-item>
+    </ion-list>
+    <div style="height:60px;"></div>
+    <button ion-button expand="full" large class="fixed-bottom bg-gry" (click)="goAccountEdit()" *ngIf="projectType == 7">等待客户确认中</button>
+    <button ion-button expand="full" large class="fixed-bottom" (click)="onAddStageClick()" *ngIf="!projectStageListData || projectStageListData.length<1">添加阶段</button>
+    <div class="fixed-bottom" *ngIf="projectType == 10">
+      <button ion-button class="btn-submit" (click)="onAllStageSubmit()">提交阶段</button>
+      <button ion-button class="btn-delete" (click)="onAddStageClick()">添加阶段</button>
     </div>
-    </ion-content>
-  
+  </div>
+</ion-content>

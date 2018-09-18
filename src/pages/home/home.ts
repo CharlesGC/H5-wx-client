@@ -35,10 +35,8 @@ export class HomePage {
   public mushrooms: boolean;
 
   constructor(public navCtrl: NavController, private swiperdata: MamenDataProvider, private industrydata: MamenDataProvider,
-    private skilldata: MamenDataProvider, private casedata: MamenDataProvider, private outstanddata: MamenDataProvider, private financedata: MamenDataProvider,
-    private financeAlldata: MamenDataProvider) {
+    private skilldata: MamenDataProvider, private casedata: MamenDataProvider, private outstanddata: MamenDataProvider, private financedata: MamenDataProvider,private financeAlldata: MamenDataProvider) {
     this.IndustryArr = [];
-    // onBridgeReady();
   }
   ionViewDidLoad() {
     // console.log(getswipreUrl);

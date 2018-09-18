@@ -77,7 +77,7 @@ export class ConsultantStageBrowserPage {
       }else if(res.code == 207) {
         window.localStorage.removeItem('openId');
       }else{
-        alert('请求出错:'+res.msg);
+        console.log('请求出错:'+res.msg);
       }
     },error=>{
       console.log('erros===',error);
@@ -107,12 +107,12 @@ export class ConsultantStageBrowserPage {
     let projectStageDetailUrl = changeStageStatusUrl + '?openId=' + openId + '&type=0' +'&psid='+psid;
     this.Provider.getMamenSwiperData(projectStageDetailUrl).subscribe(res=>{
       if(res.code==200) {
-        alert('提交成功！');
+        console.log('提交成功！');
         this.navCtrl.pop();
       }else if(res.code == 207) {
         window.localStorage.removeItem('openId');
       }else{
-        alert('请求出错:'+res.msg);
+        console.log('请求出错:'+res.msg);
       }
     },error=>{
       console.log('erros===',error);

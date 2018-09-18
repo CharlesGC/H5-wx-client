@@ -1,6 +1,11 @@
 <ion-header>
 
-  <ion-navbar>
+  <ion-navbar hideBackButton="true">
+    <ion-buttons start>
+      <button ion-button icon-only color="royal" (click)="goback()">
+        <ion-icon name="arrow-back">&nbsp;&nbsp;返回</ion-icon>
+      </button>
+    </ion-buttons>
     <ion-title>项目列表</ion-title>
   </ion-navbar>
 
