@@ -55,9 +55,6 @@ export class ConsultantProfessionalCertificationPage {
       this.certificationListData.urlSize = this.certificationListData.urlSize + ' MB'
     } else if(this.certificationListData.urlSize < 1){
       this.certificationListData.urlSize = this.certificationListData.urlSize * 1024 + ' KB'
-    }else if(this.certificationListData.urlSize == 'NaN'){
-      this.certificationListData = {};
-      //console.log(this.certificationListData['typeStr'])
     }
 
     if(this.certificationListData['typeStr']){

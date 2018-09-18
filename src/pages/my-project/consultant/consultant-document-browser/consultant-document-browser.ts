@@ -41,6 +41,28 @@ export class ConsultantDocumentBrowserPage {
       if (res.code == 200) {
         this.consultantDocumentDetailData = res.data;
         console.log(this.consultantDocumentDetailData,'这是数据')
+        this.consultantDocumentDetailData['size'] = (this.consultantDocumentDetailData['size'] / 1048576).toPrecision(3)
+
+        if (this.consultantDocumentDetailData['size'] > 1) {
+          this.consultantDocumentDetailData['size'] = this.consultantDocumentDetailData['size'] + ' MB'
+        } else if(this.consultantDocumentDetailData['size'] < 1){
+          this.consultantDocumentDetailData['size'] = this.consultantDocumentDetailData['size'] * 1024 + ' KB'
+        }
+    
+        if(this.consultantDocumentDetailData['format']){
+          if (this.consultantDocumentDetailData['format'].search(/doc/) !== -1 || this.consultantDocumentDetailData['format'].search(/docx/) !== -1) {
+            this.consultantDocumentDetailData['format'] = 'assets/imgs/' + 'doc.png'
+          } else if (this.consultantDocumentDetailData['format'].search(/ppt/) !== -1 || this.consultantDocumentDetailData['format'].search(/pptx/) !== -1) {
+            this.consultantDocumentDetailData['format'] = 'assets/imgs/' + 'ppt.png'
+          } else if (this.consultantDocumentDetailData['format'].search(/xls/) !== -1 || this.consultantDocumentDetailData['format'].search(/xlsx/) !== -1) {
+            this.consultantDocumentDetailData['format'] = 'assets/imgs/' + 'xls.png'
+          } else if (this.consultantDocumentDetailData['format'].search(/jpg/) !== -1 || this.consultantDocumentDetailData['format'].search(/png/) !== -1 || this.consultantDocumentDetailData['format'].search(/jpeg/) !== -1) {
+            this.consultantDocumentDetailData['format'] = 'assets/imgs/' + 'png.png'
+          } else if (this.consultantDocumentDetailData['format'].search(/pdf/) !== -1) {
+            this.consultantDocumentDetailData['format'] = 'assets/imgs/' + 'pdf.png'
+          }
+        }
+
       } else if (res.code == 207) {
         window.localStorage.removeItem('openId');
       } else {
@@ -65,12 +87,27 @@ export class ConsultantDocumentBrowserPage {
   onDocumentEditClick() {
     this.navCtrl.push(ConsultantInteractionSubmitPage, { data: this.consultantDocumentDetailData, pid: this.consultantDocumentDetailData['pid'], psid: this.consultantDocumentDetailData['psid'] });
   }
+  
+  /* 根据format来判断文件类型 */
+  // formatTypes(value) {
+  //   if (value.search(/doc/) !== -1 || value.search(/docx/) !== -1) {
+  //     return 'doc';
+  //   } else if (value.search(/ppt/) !== -1 || value.search(/pptx/) !== -1) {
+  //     return 'ppt'
+  //   } else if (value.search(/xls/) !== -1 || value.search(/xlsx/) !== -1) {
+  //     return 'xls'
+  //   } else if (value.search(/jpg/) !== -1 || value.search(/png/) !== -1 || value.search(/jpeg/) !== -1) {
+  //     return 'jpg'
+  //   } else if (value.search(/pdf/) !== -1) {
+  //     return 'pdf'
+  //   }
+  // }
 
   /*删除操作*/
   onDocumentDel() {
     const pdid = this.consultantDocumentDetailData['pdid']
-    const openId = window.sessionStorage.getItem('openId') || this.getUrlParam('openId');;
-    let consultantDocumentDetailsUrl = delDocumentUrl + '?openId=' + openId + '&pdid =' + pdid;
+    const openId = window.sessionStorage.getItem('openId') || this.getUrlParam('openId');
+    let consultantDocumentDetailsUrl = delDocumentUrl + '?openId=' + openId + '&pdid=' + pdid;
     this.Provider.getMamenSwiperData(consultantDocumentDetailsUrl).subscribe(res => {
       if (res.code == 200) {
         alert('操作成功！');
@@ -84,6 +121,4 @@ export class ConsultantDocumentBrowserPage {
       console.log('erros===', error);
     })
   }
-
-
 }

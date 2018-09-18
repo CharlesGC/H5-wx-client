@@ -8,74 +8,74 @@
 
 <ion-content style="background-color: #fcfcfc;">
   <ion-list class="account-edit mt10">
-      <ion-item lines="none" class="">
-        <ion-input type="text" placeholder="请输入收款银行" #bankname [(ngModel)]="bankDateil.bankAccount"></ion-input>
-      </ion-item>
-      <ion-item lines="none" class="" no-lines>
-        <ion-input type="number" placeholder="请输入收款账号" #bankaccount [(ngModel)]="bankDateil.account"></ion-input>
-      </ion-item>
-      <ion-item class="mt10" no-lines>
-          <ion-label>设为默认</ion-label>
-          <ion-toggle [(ngModel)]="isdefault"></ion-toggle>
-      </ion-item>
+    <ion-item lines="none" class="">
+      <ion-input type="text" placeholder="请输入收款银行" #bankname [(ngModel)]="bankDateil.bankAccount"></ion-input>
+    </ion-item>
+    <ion-item lines="none" class="" no-lines>
+      <ion-input type="number" placeholder="请输入收款账号" #bankaccount [(ngModel)]="bankDateil.account"></ion-input>
+    </ion-item>
+    <ion-item class="mt10" no-lines>
+      <ion-label>设为默认</ion-label>
+      <ion-toggle [(ngModel)]="isdefault"></ion-toggle>
+    </ion-item>
   </ion-list>
-  <div class="phonebind-modal" [hidden]="!isSubmit">
-    <div class="modal-bg"></div>
-    <div class="modal-box">
-      <div class="modal-top">
-        <div class="modal-top-close">
-          <!-- <ion-icon ios="ios-close" md="md-close" item-rigth (click)="onClose()" color=""></ion-icon> -->
-        </div>
-        <div class="modal-title">提示</div>
-        <div class="modal-content">
-          <p>提交成功</p>
-        </div>
-        <div class="modal-footer">
-          <button ion-button full large (click)="sureSubmitBack()">确定</button>
-          <!-- <button ion-button full large (click)="onCompanyDel()" class="btn-delete">返回</button> -->
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="phonebind-modal" [hidden]="!isDelete">
-    <div class="modal-bg"></div>
-    <div class="modal-box">
-      <div class="modal-top">
-        <div class="modal-top-close">
-          <!-- <ion-icon ios="ios-close" md="md-close" item-rigth (click)="onClose()" color=""></ion-icon> -->
-        </div>
-        <div class="modal-title">提示</div>
-        <div class="modal-content">
-          <p>删除成功</p>
-        </div>
-        <div class="modal-footer">
-          <button ion-button full large (click)="sureDeleteBack()">确定</button>
-          <!-- <button ion-button full large (click)="onCompanyDel()" class="btn-delete">返回</button> -->
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="phonebind-modal" [hidden]="!isComplete">
-    <div class="modal-bg"></div>
-    <div class="modal-box">
-      <div class="modal-top">
-        <div class="modal-top-close">
-          <!-- <ion-icon ios="ios-close" md="md-close" item-rigth (click)="onClose()" color=""></ion-icon> -->
-        </div>
-        <div class="modal-title">提示</div>
-        <div class="modal-content">
-          <p>请填写完整</p>
-        </div>
-        <div class="modal-footer">
-          <button ion-button full large (click)="sureCompleteBack()">确定</button>
-          <!-- <button ion-button full large (click)="onCompanyDel()" class="btn-delete">返回</button> -->
-        </div>
-      </div>
-    </div>
-  </div>
   <p class="account-ptr mt20">你所提交的银行信息将用于平台向你结算项目款项</p>
   <div class="fixed-bottom">
-      <button ion-button class="btn-submit" (click)="onBankAccountSubmit(bankDateil.bankAccount,bankDateil.account)">提交</button>
-      <button ion-button class="btn-delete" (click)="onBankAccountDel()">删除</button>
+    <button ion-button class="btn-submit" (click)="onBankAccountSubmit(bankDateil.bankAccount,bankDateil.account)">提交</button>
+    <button ion-button class="btn-delete" (click)="onBankAccountDel()">删除</button>
   </div>
 </ion-content>
+<div class="phonebind-modal" [hidden]="!isSubmit">
+  <div class="modal-bg"></div>
+  <div class="modal-box">
+    <div class="modal-top">
+      <div class="modal-top-close">
+        <!-- <ion-icon ios="ios-close" md="md-close" item-rigth (click)="onClose()" color=""></ion-icon> -->
+      </div>
+      <div class="modal-title">提示</div>
+      <div class="modal-content">
+        <p>提交成功</p>
+      </div>
+      <div class="modal-footer">
+        <button ion-button full large (click)="sureSubmitBack()">确定</button>
+        <!-- <button ion-button full large (click)="onCompanyDel()" class="btn-delete">返回</button> -->
+      </div>
+    </div>
+  </div>
+</div>
+<div class="phonebind-modal" [hidden]="!isDelete">
+  <div class="modal-bg"></div>
+  <div class="modal-box">
+    <div class="modal-top">
+      <div class="modal-top-close">
+        <!-- <ion-icon ios="ios-close" md="md-close" item-rigth (click)="onClose()" color=""></ion-icon> -->
+      </div>
+      <div class="modal-title">提示</div>
+      <div class="modal-content">
+        <p>删除成功</p>
+      </div>
+      <div class="modal-footer">
+        <button ion-button full large (click)="sureDeleteBack()">确定</button>
+        <!-- <button ion-button full large (click)="onCompanyDel()" class="btn-delete">返回</button> -->
+      </div>
+    </div>
+  </div>
+</div>
+<div class="phonebind-modal" [hidden]="!isComplete">
+  <div class="modal-bg"></div>
+  <div class="modal-box">
+    <div class="modal-top">
+      <div class="modal-top-close">
+        <!-- <ion-icon ios="ios-close" md="md-close" item-rigth (click)="onClose()" color=""></ion-icon> -->
+      </div>
+      <div class="modal-title">提示</div>
+      <div class="modal-content">
+        <p>请填写完整</p>
+      </div>
+      <div class="modal-footer">
+        <button ion-button full large (click)="sureCompleteBack()">确定</button>
+        <!-- <button ion-button full large (click)="onCompanyDel()" class="btn-delete">返回</button> -->
+      </div>
+    </div>
+  </div>
+</div>
