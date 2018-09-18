@@ -93,13 +93,21 @@
           <label>发票抬头</label>
           <span item-right class="item-value">{{invoiceData.invoiceLetterhead}}</span>
         </ion-item>
-        <ion-item>
-        <label>公司电话</label>
-          <span item-right class="item-value">{{invoiceData.companyPhone}}</span>
+        <ion-item (click)="goFormEditPage('companyPhone',invoiceData.companyPhone,'text')">
+          <label>公司电话</label>
+          <!-- <span item-right class="item-value">{{invoiceData.companyPhone}}</span> -->
+          <p item-right>
+              <span class="item-value">{{invoiceData.companyPhone}}</span>
+              <ion-icon class="icon" name="arrow-forward"></ion-icon>
+          </p>
         </ion-item>
         <ion-item>
-          <label>中信银行</label>
-          <span item-right class="item-value">{{invoiceData.openBank}}</span>
+          <label>{{invoiceData.openBank}}</label>
+          <!-- <span item-right class="item-value">{{invoiceData.openBank}}</span> -->
+          <p item-right>
+              <span class="item-value">{{invoiceData.account}}</span>
+              <!-- <ion-icon class="icon" name="arrow-forward"></ion-icon> -->
+          </p>
         </ion-item>
         <ion-item no-lines (click)="goFormEditPage('taxNumber',invoiceData.taxNumber,'text')">
           <label>纳税号</label>

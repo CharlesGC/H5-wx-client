@@ -21,6 +21,7 @@ export class ProjectSubmitInvoicePage {
   public selected:any;
   public invoiceData = {}
   public isComplete = false;
+  public isSubmit = true;
   constructor(public navCtrl: NavController, public navParams: NavParams,private Provider:MamenDataProvider) {
     this.selected = 0;
   }
@@ -95,6 +96,11 @@ export class ProjectSubmitInvoicePage {
         return
       }
     }
+    if(!this.isSubmit){
+      return;
+    }
+    this.isSubmit = false;
+
     const openId = window.sessionStorage.getItem('openId')|| this.getUrlParam('openId');
     let projectInvoiceDetailUrl = addInvoiceUrl + '?openId=' + openId + '&psid='+psid + '&invoiceType='+this.selected+
                               '&invoiceLetterhead='+invoiceData['invoiceLetterhead']+
@@ -102,13 +108,12 @@ export class ProjectSubmitInvoicePage {
                               '&price='+invoiceData['price']+
                               '&recipient='+invoiceData['recipient']+
                               '&phone='+invoiceData['taxPhone']+
-                              '&bankName='+invoiceData['bankName']+
+                              '&bankName='+invoiceData['openBank']+
                               '&companyPhone='+invoiceData['companyPhone']+
                               '&companyAddress='+invoiceData['companyAddress']+
-                              '&bankNumber='+invoiceData['bankNumber'];
+                              '&bankNumber='+invoiceData['account'];
     this.Provider.getMamenSwiperData(projectInvoiceDetailUrl).subscribe(res=>{
       if(res.code==200) {
-        console.log(res,'--------');
         this.invoiceData = res.data;
         this.navCtrl.pop();
       }else if(res.code == 207) {
@@ -116,9 +121,15 @@ export class ProjectSubmitInvoicePage {
       }else{
         alert('请求出错:'+res.msg);
       }
+      this.isSubmit = true;
     },error=>{
       console.log('erros===',error);
     })
+  }
+
+  sureComplete(){
+    this.isComplete = !this.isComplete
+    return
   }
 
 }

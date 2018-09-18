@@ -4,6 +4,7 @@ module.exports = {
   footer: '',
   api: {
     host: 'http://mamon.yemindream.com',
+    // host: 'http://matest.mf-tal.com',
     // host: 'http://100.168.1.149:8181',
     port: 80,
     // port: 8181,

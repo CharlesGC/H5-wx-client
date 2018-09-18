@@ -14,14 +14,14 @@
 
 
 <ion-content style="background-color: #fcfcfc;">
-    <ion-list class="nav-list-menu">
-        <ion-item no-lines (click)="onNavMenuClick(true)">
-          <p class="list-header-left">{{showNavMenuName || '顾问/全部顾问'}} ({{showNavMenuNumber}})</p>
-          <div class="list-header-right" item-end>
-            <span>展开</span>
-          </div>
-        </ion-item>
-      </ion-list>
+    <!-- <ion-list class="nav-list-menu">
+      <ion-item no-lines (click)="onNavMenuClick(true)">
+        <p class="list-header-left">{{showNavMenuName || '顾问/全部顾问'}} ({{showNavMenuNumber}})</p>
+        <div class="list-header-right" item-end>
+          <span>展开</span>
+        </div>
+      </ion-item>
+    </ion-list> -->
 
       <ion-list class="list-content">
         <ion-item class="item-card mt20" *ngFor="let consultantList_item of projectConsultantListData" no-lines>
