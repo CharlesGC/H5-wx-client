@@ -42,10 +42,12 @@ export class AddEmailPage {
     const openId = window.sessionStorage.getItem('openId') || this.getUrlParam('openId')
     // let getPhoneCodeUrl = 'http://mamon.yemindream.com/mamon/user/sendMail'
     var pattern = /^([A-Za-z0-9_\-\.\u4e00-\u9fa5])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,8})$/;
-    if (pattern.test(mail) == false) {
+    if (pattern.test(mail.value) == false) {
       this.isEmailType = true
-    } else if(pattern.test(mail) == true){
-      let getPhoneCodeUrl = getAddEmailUrl + '?openId=' + openId + '&mail=' + mail.value;
+      return
+    }
+
+    let getPhoneCodeUrl = getAddEmailUrl + '?openId=' + openId + '&mail=' + mail.value;
       this.Provider.getMamenSwiperData(getPhoneCodeUrl).subscribe(res => {
         if (res.code == 200) {
           // this.navCtrl.push(ChooseIdentityPage);
@@ -58,7 +60,6 @@ export class AddEmailPage {
       }, error => {
         console.log('erros===', error);
       })
-    }
 
   }
 

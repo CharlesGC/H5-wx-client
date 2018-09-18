@@ -6,7 +6,12 @@
 -->
 <ion-header>
 
-  <ion-navbar>
+  <ion-navbar hideBackButton="true">
+    <ion-buttons start>
+      <button ion-button icon-only color="royal" (click)="goback()">
+        <ion-icon name="arrow-back">&nbsp;&nbsp;返回</ion-icon>
+      </button>
+    </ion-buttons>
     <ion-title>文档列表</ion-title>
   </ion-navbar>
 </ion-header>
@@ -67,16 +72,18 @@
       <div class="card-item-label">
         <label>
           <img style="width:66px;height:66px;" src="assets/imgs/doc.png" *ngIf="formatTypes(documentListData_item.typeStr) == 'doc'">
-            <img style="width:66px;height:66px;" src="assets/imgs/ppt.png" *ngIf="formatTypes(documentListData_item.typeStr) == 'ppt'">
-            <img style="width:66px;height:66px;" src="assets/imgs/xls.png" *ngIf="formatTypes(documentListData_item.typeStr) == 'xls'">
-            <img style="width:66px;height:66px;" src="assets/imgs/png.png" *ngIf="formatTypes(documentListData_item.typeStr) == 'jpg'">
-            <img style="width:66px;height:66px;" src="assets/imgs/pdf.png" *ngIf="formatTypes(documentListData_item.typeStr) == 'pdf'">
+          <img style="width:66px;height:66px;" src="assets/imgs/ppt.png" *ngIf="formatTypes(documentListData_item.typeStr) == 'ppt'">
+          <img style="width:66px;height:66px;" src="assets/imgs/xls.png" *ngIf="formatTypes(documentListData_item.typeStr) == 'xls'">
+          <img style="width:66px;height:66px;" src="assets/imgs/png.png" *ngIf="formatTypes(documentListData_item.typeStr) == 'jpg'">
+          <img style="width:66px;height:66px;" src="assets/imgs/pdf.png" *ngIf="formatTypes(documentListData_item.typeStr) == 'pdf'">
         </label>
         <div class="card-cont" data-src="url">
           <h5>{{documentListData_item.sourceName || filetitle}}</h5>
           <!-- <p class="browser-file">点击查看文件预览</p> -->
-          <p class="browser-size" *ngIf="(documentListData_item['urlSize'] / 1048576).toPrecision(3) > 1">{{(documentListData_item['urlSize'] / 1048576).toPrecision(3) || filesize}} MB</p>
-          <p class="browser-size" *ngIf="(documentListData_item['urlSize'] / 1048576).toPrecision(3) < 1">{{(documentListData_item['urlSize'] / 1048576).toPrecision(3) || filesize}} KB</p>
+          <p class="browser-size" *ngIf="(documentListData_item['urlSize'] / 1048576).toPrecision(3) > 1">{{(documentListData_item['urlSize']
+            / 1048576).toPrecision(3) || filesize}} MB</p>
+          <p class="browser-size" *ngIf="(documentListData_item['urlSize'] / 1048576).toPrecision(3) < 1">{{(documentListData_item['urlSize']
+            / 1048576).toPrecision(3) || filesize}} KB</p>
         </div>
       </div>
     </ion-item>

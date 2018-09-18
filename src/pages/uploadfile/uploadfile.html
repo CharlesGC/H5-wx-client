@@ -20,12 +20,17 @@
     <span class="file-desc">点击查看文件预览</span>
     <span class="file-size">{{filesize}}</span>
   </div>
-
   <button ion-button round class="btn-upload">
     选择文件
     <input type="file" (change)="selectedFileOnChanged($event)" id="uploadfile" />
   </button>
-  <div class="phonebind-modal" [hidden]="!isSubmit">
+  <div class="fixed-bottom">
+    <button ion-button class="btn-submit" (click)="uploadFile()">上传文件</button>
+    <button ion-button class="btn-delete" (click)="returnpage()">取消</button>
+  </div>
+</ion-content>
+
+<div class="phonebind-modal" [hidden]="!isSubmit">
     <div class="modal-bg"></div>
     <div class="modal-box">
       <div class="modal-top">
@@ -34,7 +39,7 @@
         </div>
         <div class="modal-title">提示</div>
         <div class="modal-content">
-          <p>提交成功</p>
+          <p>上传成功</p>
         </div>
         <div class="modal-footer">
           <button ion-button full large (click)="sureBack()">确定</button>
@@ -43,9 +48,3 @@
       </div>
     </div>
   </div>
-  <div class="fixed-bottom">
-    <button ion-button class="btn-submit" (click)="uploadFile()">上传文件</button>
-    <button ion-button class="btn-delete" (click)="returnpage()">取消</button>
-  </div>
-
-</ion-content>

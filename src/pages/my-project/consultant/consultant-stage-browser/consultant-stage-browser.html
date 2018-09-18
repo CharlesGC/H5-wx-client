@@ -5,11 +5,11 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-    <ion-navbar>
-      <ion-title>阶段详情</ion-title>
-    </ion-navbar>
-  </ion-header>
-  
+  <ion-navbar>
+    <ion-title>阶段详情</ion-title>
+  </ion-navbar>
+</ion-header>
+
 <ion-content style="background-color: #fcfcfc;">
   <ion-list class="browser-top">
     <h4>{{projectStageDetail.stageName}}</h4>
@@ -102,29 +102,30 @@
         <p class="describe-cont">{{proposal_item.opinion}}</p>
       </ion-item>
     </ion-list>
-    <div style="height:100px;"></div>
-    <button ion-button expand="full" large class="fixed-bottom bg-gry" (click)="goAccountEdit()" *ngIf="projectStageDetail.adviserStatus==0 || projectStageDetail.adviserStatus==4">
-      等待客户确认中
-    </button>
-    <button ion-button expand="full" large class="fixed-bottom" (click)="goPaymentRecord(projectStageDetail.adviserStatus)"
-      *ngIf="projectStageDetail.adviserStatus==5">
-      提交收款申请
-    </button>
-    <!-- <button ion-button expand="full" large class="fixed-bottom" 
+  </div>
+  <div style="height:100px;"></div>
+  <button ion-button expand="full" large class="fixed-bottom bg-gry" (click)="goAccountEdit()" *ngIf="projectStageDetail.adviserStatus==0 || projectStageDetail.adviserStatus==4">
+    等待客户确认中
+  </button>
+  <button ion-button expand="full" large class="fixed-bottom" (click)="goPaymentRecord(projectStageDetail.adviserStatus)"
+    *ngIf="projectStageDetail.adviserStatus==5">
+    提交收款申请
+  </button>
+  <!-- <button ion-button expand="full" large class="fixed-bottom" 
         (click)="goPaymentRecord(projectStageDetail.adviserStatus)" 
         *ngIf="projectStageDetail.adviserStatus==6">
         提交发票信息
       </button> -->
-    <button ion-button expand="full" large class="fixed-bottom" (click)="goPaymentRecord(projectStageDetail.adviserStatus)"
-      *ngIf="projectStageDetail.adviserStatus==-1 || projectStageDetail.adviserStatus==1">
-      编辑阶段
-    </button>
-    <!-- <div class="fixed-bottom" *ngIf="projectStageDetail.adviserStatus==1">
+  <button ion-button expand="full" large class="fixed-bottom" (click)="goPaymentRecord(projectStageDetail.adviserStatus)"
+    *ngIf="projectStageDetail.adviserStatus==-1 || projectStageDetail.adviserStatus==1">
+    编辑阶段
+  </button>
+  <!-- <div class="fixed-bottom" *ngIf="projectStageDetail.adviserStatus==1">
           <button ion-button class="btn-submit" (click)="onBankAccountSubmit(bankDateil.bankAccount,bankDateil.account)">确认阶段</button>
           <button ion-button class="btn-delete" (click)="onBankAccountDel()">提出异议</button>
       </div> -->
-    <div class="fixed-bottom" *ngIf="projectStageDetail.adviserStatus==3 || projectStageDetail.adviserStatus==8">
-      <button ion-button class="btn-submit" (click)="goPaymentRecord(projectStageDetail.adviserStatus)">添加交互物</button>
-      <button ion-button class="btn-delete" (click)="onStageSubmit()">阶段交付</button>
-    </div>
-  </ion-content>
+  <div class="fixed-bottom" *ngIf="projectStageDetail.adviserStatus==3 || projectStageDetail.adviserStatus==8">
+    <button ion-button class="btn-submit" (click)="goPaymentRecord(projectStageDetail.adviserStatus)">添加交互物</button>
+    <button ion-button class="btn-delete" (click)="onStageSubmit()">阶段交付</button>
+  </div>
+</ion-content>

@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { FileUploader } from 'ng2-file-upload';
+import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import globalConfig from '../../config.js';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { MamenDataProvider } from '../../providers/mamen-data/mamen-data';
@@ -31,9 +30,10 @@ export class UploadfilePage {
   public isSubmit = false;
   public isDelete = false;
   public isComplete = false;
-  constructor(public navCtrl: NavController, public navParams: NavParams, private http: HttpClient, private Provider: MamenDataProvider) {
-    this.filetitle = navParams.get('title');
-    this.filesize = navParams.get('size');
+  public loading:any;
+  constructor(public navCtrl: NavController, public navParams: NavParams, private http: HttpClient, private Provider: MamenDataProvider, public loadingCtrl: LoadingController) {
+    this.filetitle = navParams.get('title')
+    this.filesize = navParams.get('size')
     this.filestatus = navParams.get('status')
     this.filetypeicon = navParams.get('typeicon')
     this.pagetype = navParams.get('type')
@@ -44,34 +44,15 @@ export class UploadfilePage {
     console.log('ionViewDidLoad UploadfilePage');
   }
 
-  public uploader: FileUploader = new FileUploader({
-    url: this.uploadUrl,
-    method: "POST",
-    itemAlias: "file",
-    //配置选项
-    // filters: [{
-    //   name: "", fn: (item): any => {
-    //     var numer = item.size
-    //     if (numer > 10000000000000000) {
-    //       //文件格式大小限制
-    //       // this.http.showAlert("提示", "请上传小于1M的文件", "确定", "", "", false);
-    //       console.log('请上传小于1M的文件')
-    //       return false
-    //     }
-    //     //文件类型限制
-    //     var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
-    //     let temp = '|jpg|png|jpeg|bmp|gif|docx|doc|pdf'.indexOf(type) !== -1;
-    //     if (!temp) {
-    //       this.Flagyingyezhizhao = false
-    //       //this.http.showAlert("提示", "请上传格式为jpg、png、jpeg、bmp、gif的文件", "确定", "", "", false);
-    //       alert('请上传格式为jpg、png、jpeg、bmp、gif的文件')
-    //     } else {
-    //       this.Flagyingyezhizhao = true;
-    //     }
-    //     return temp;
-    //   }
-    // }]
-  });
+  presentLoadingDefault() {
+    this.loading = this.loadingCtrl.create({
+      content: '上传中.....'
+    });
+
+    this.loading.present();
+
+  }
+
   sureBack() {
     if (this.pagetype == 'resumePage') {
       const openId = window.sessionStorage.getItem('openId') || this.getUrlParam('openId');
@@ -143,12 +124,15 @@ export class UploadfilePage {
       let file = this.fileData;
       let formData = new FormData();
       formData.append('file', file);
-
+      this.presentLoadingDefault()
       this.http.post(this.uploadUrl, formData).subscribe(res => {
         console.log('请求结束', res);
         //let tempRes = JSON.parse(res);
         this.fid = res['data'].fid;
-        this.isSubmit = true;
+        this.loading.dismiss();
+        setTimeout(()=>{
+          this.isSubmit = true;
+        },1000)
       });
     } else {
       let $this = this;
@@ -158,7 +142,7 @@ export class UploadfilePage {
       let file = this.fileData;
       let formData = new FormData();
       formData.append('file', file);
-
+      this.presentLoadingDefault()
       this.http.post(this.uploadUrl, formData).subscribe(res => {
         console.log('请求结束', res);
         //let tempRes = JSON.parse(res);
@@ -166,7 +150,10 @@ export class UploadfilePage {
         console.log(this.fileData, '+++')
         let callback = this.navParams.get('callback');
         callback(this.fileData, $this.filetitle);
-        this.isSubmit = true;
+        this.loading.dismiss();
+        setTimeout(()=>{
+          this.isSubmit = true;
+        },1000)
         //alert('其他')
         //$this.navCtrl.pop()
       });
