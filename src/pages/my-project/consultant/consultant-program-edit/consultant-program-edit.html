@@ -6,7 +6,7 @@
 -->
 <ion-header>
   <ion-navbar>
-    <ion-title>我的项目/顾问/方案编辑</ion-title>
+    <ion-title>方案编辑</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -76,11 +76,11 @@
   </ion-list>
   <div class="user-other-list">
     <ion-list class="card-item">
-      <a href="{{programData['planUrl']}}" style="text-decoration:none">
-        <ion-item no-lines *ngIf="programData['planUrl']">
+      <a href="{{programData['certifiedUrl']}}" style="text-decoration:none">
+        <ion-item no-lines *ngIf="programData['certifiedUrl']">
           <div class="card-item-label">
             <label>
-              <img style="width:66px;height:66px;" src="{{programData['format'] || filetypeicon}}">
+              <img style="width:66px;height:66px;" src="{{programData['typeStr'] || filetypeicon}}">
             </label>
             <div class="card-cont" data-src="url">
               <h5>{{programData.sourceName || filetitle}}</h5>

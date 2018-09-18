@@ -95,6 +95,28 @@ export class ConsultantProgramListPage {
     this.Provider.getMamenSwiperData(projectDetailsUrl).subscribe(res=>{
       if(res.code==200) {
         this.projectProgramDetails = res.data;
+        console.log(this.projectProgramDetails)
+        this.projectProgramDetails['size'] = (this.projectProgramDetails['size'] / 1048576).toPrecision(3)
+
+        if (this.projectProgramDetails['size'] > 1) {
+          this.projectProgramDetails['size'] = this.projectProgramDetails['size'] + ' MB'
+        } else if(this.projectProgramDetails['size'] < 1){
+          this.projectProgramDetails['size'] = this.projectProgramDetails['size'] * 1024 + ' KB'
+        }
+    
+        if(this.projectProgramDetails['format']){
+          if (this.projectProgramDetails['format'].search(/doc/) !== -1 || this.projectProgramDetails['format'].search(/docx/) !== -1) {
+            this.projectProgramDetails['format'] = 'assets/imgs/' + 'doc.png'
+          } else if (this.projectProgramDetails['format'].search(/ppt/) !== -1 || this.projectProgramDetails['format'].search(/pptx/) !== -1) {
+            this.projectProgramDetails['format'] = 'assets/imgs/' + 'ppt.png'
+          } else if (this.projectProgramDetails['format'].search(/xls/) !== -1 || this.projectProgramDetails['format'].search(/xlsx/) !== -1) {
+            this.projectProgramDetails['format'] = 'assets/imgs/' + 'xls.png'
+          } else if (this.projectProgramDetails['format'].search(/jpg/) !== -1 || this.projectProgramDetails['format'].search(/png/) !== -1 || this.projectProgramDetails['format'].search(/jpeg/) !== -1) {
+            this.projectProgramDetails['format'] = 'assets/imgs/' + 'png.png'
+          } else if (this.projectProgramDetails['format'].search(/pdf/) !== -1) {
+            this.projectProgramDetails['format'] = 'assets/imgs/' + 'pdf.png'
+          }
+        }
       }else{
         alert('请求出错:'+res.msg);
       }

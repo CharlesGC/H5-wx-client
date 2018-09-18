@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>我的项目/客户/支付记录/详情</ion-title>
+    <ion-title>支付记录详情</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -81,13 +81,15 @@
           <ion-item no-lines>
               <div class="card-item-label">
                 <label>
-                  <img style="width:66px;height:66px;" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1534233453&di=bd34b76dca47ce86738ff171e3c50122&imgtype=jpg&er=1&src=http%3A%2F%2Fpic.58pic.com%2F58pic%2F14%2F81%2F70%2F29J58PICf2x_1024.jpg">
+                  <img style="width:66px;height:66px;" src="{{projectPaymentDetails.typeStr}}">
                 </label>
-                <div class="card-cont" data-src="url">
-                  <h5>第二阶段付款凭证</h5>
-                  <p class="action-browser-file">点击查看文件预览</p>
-                  <p class="browser-size">20 KB</p>
-                </div>
+                <a href="{{projectPaymentDetails.paymentUrl}}" style="text-decoration: none;">
+                  <div class="card-cont" data-src="url">
+                    <h5>{{projectPaymentDetails.sourceName}}</h5>
+                    <p class="action-browser-file">点击查看文件预览</p>
+                    <p class="browser-size">{{projectPaymentDetails.size}}</p>
+                  </div>
+                </a>
               </div>
           </ion-item>
       </ion-list>

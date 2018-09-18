@@ -55,10 +55,12 @@ export class ContactPage {
     // this.navCtrl.push(ProjectListPage);
     const user = window.sessionStorage.getItem('user') ? JSON.parse(window.sessionStorage.getItem('user')) : {};
     if(user.type == 1){
-      user.projectCount>0 && this.navCtrl.push(ConsultantProjectListPage);
+      this.navCtrl.push(ConsultantProjectListPage);
     }else if(user.type == 0){
-      user.projectCount>0 && this.navCtrl.push(ProjectListPage);
+      // user.projectCount>0 && this.navCtrl.push(ProjectListPage);
+     this.navCtrl.push(ProjectListPage);
     }
+    
   }
 
   //跳转到消息中心

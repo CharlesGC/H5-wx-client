@@ -21,7 +21,7 @@ export class IndustrydetialPage {
   public skillLabel = true;
   public search: any;
   public skillChecked: any;
-  public skillCheckedSkill:any;
+  public skillCheckedSkill: any;
   public skillBgcolor: any;
   public skilldoubleData = {};
   public inputValue = {};
@@ -34,8 +34,8 @@ export class IndustrydetialPage {
   public skiiNameChecked: any;
   // public dataType: any;
   public type: any;
-  public id:any;
-  public name:any;
+  public id: any;
+  public name: any;
   public financeAllArr = [];
   // public financesArr = [];
   constructor(public navCtrl: NavController, public navParams: NavParams, public IndustryMoreData: MamenDataProvider,
@@ -53,18 +53,18 @@ export class IndustrydetialPage {
     this.type = this.navParams.get('type');
     this.id = this.navParams.get('id');
     this.name = this.navParams.get('name');
-    /*行业更多*/ 
+    /*行业更多*/
     if (this.type == 'indeustry') {
       this.skillChecked = this.id ? this.id : 0;
-      console.log(this.id,this.skillChecked,'===')
+      console.log(this.id, this.skillChecked, '===')
       this.IndustryName['industryName'] = this.name || '全部行业';
-      this.getSearchadviser(this.skillChecked, this.firstSkillId = 0, this.secondSkillId = 0,this.search = '',this.pageNum=0,this.pageSize=15);
+      this.getSearchadviser(this.skillChecked, this.firstSkillId = 0, this.secondSkillId = 0, this.search = '', this.pageNum = 0, this.pageSize = 15);
     }
-    /*技能更多*/ 
-    if(this.type == 'skill' ) {
+    /*技能更多*/
+    if (this.type == 'skill') {
       this.skillCheckedSkill = this.id ? this.id : 0;
       this.skilldoubleData['fName'] = this.name || '全部领域';
-      this.getSearchadviser(this.industryId = 0, this.skillCheckedSkill, this.secondSkillId = 0,this.search = '',this.pageNum=0,this.pageSize=15);
+      this.getSearchadviser(this.industryId = 0, this.skillCheckedSkill, this.secondSkillId = 0, this.search = '', this.pageNum = 0, this.pageSize = 15);
     }
     if (this.type == 'finance-count') {
       this.getfinanceAllInfo();
@@ -154,7 +154,7 @@ export class IndustrydetialPage {
     this.type = type;
     // console.log(this.type, 'searchTypesearchTypesearchTypesearchType')
     this.search = search;
-    this.getSearchadviser(this.industryId = 0, this.firstSkillId = 0, this.secondSkillId = 0,this.search,'','');
+    this.getSearchadviser(this.industryId = 0, this.firstSkillId = 0, this.secondSkillId = 0, this.search, '', '');
   }
   // 行业标签下拉
   downindustryShow(type) {
@@ -172,8 +172,8 @@ export class IndustrydetialPage {
     this.getSkillMoreData();
   }
   // 获取筛选数据
-  getSearchadviser(industryId, firstSkillId, secondSkillId,search,pageNum,pageSize) {
-    this.IndustrySearch.getSearchAdviserList(getSearch, industryId, firstSkillId, secondSkillId,search,pageNum,pageSize).subscribe(
+  getSearchadviser(industryId, firstSkillId, secondSkillId, search, pageNum, pageSize) {
+    this.IndustrySearch.getSearchAdviserList(getSearch, industryId, firstSkillId, secondSkillId, search, pageNum, pageSize).subscribe(
       res => {
         this.financeAllArr = res.data && res.data.list ? res.data.list : [];
         // console.log(res.data,res,this.financeAllArr,"123123213123")
@@ -214,18 +214,18 @@ export class IndustrydetialPage {
     )
   }
   // 点击选择行业
-  selsectIndustry(value, index, type) { 
+  selsectIndustry(value, index, type) {
     this.type = type;
     if (index == -1) {
-      this.IndustryName = {'industryName':value};
+      this.IndustryName = { 'industryName': value };
       this.isIndustryLabel = true;
       this.skillChecked = index;
-      this.getSearchadviser(this.industryId = 0, this.firstSkillId = 0, this.secondSkillId = 0,this.search = '',this.pageNum=0,this.pageSize=15);
+      this.getSearchadviser(this.industryId = 0, this.firstSkillId = 0, this.secondSkillId = 0, this.search = '', this.pageNum = 0, this.pageSize = 15);
     } else {
       this.skillChecked = index;
       this.IndustryName = value;
       this.isIndustryLabel = true;
-      this.getSearchadviser(this.industryId = this.IndustryName['ilid'], this.firstSkillId = 0, this.secondSkillId = 0,this.search = '',this.pageNum='',this.pageSize='');
+      this.getSearchadviser(this.industryId = this.IndustryName['ilid'], this.firstSkillId = 0, this.secondSkillId = 0, this.search = '', this.pageNum = '', this.pageSize = '');
     }
   }
   //点击一级获取二级技能
@@ -233,7 +233,7 @@ export class IndustrydetialPage {
     this.type = type;
     if (index == -1) {
       this.skillCheckedSkill = index;
-      this.skilldoubleData = {'fName':value};
+      this.skilldoubleData = { 'fName': value };
       this.getSecondaryData('');
     } else {
       this.skillCheckedSkill = index;
@@ -241,28 +241,45 @@ export class IndustrydetialPage {
       this.skillBgcolor = null;
       this.skilldoubleData = value;
       this.getSecondaryData(value.sfid);
-      this.getSearchadviser(this.industryId = this.skilldoubleData['sfid'], this.firstSkillId = 1, this.secondSkillId = 0, '','','');
+      this.getSearchadviser(this.industryId = this.skilldoubleData['sfid'], this.firstSkillId = 1, this.secondSkillId = 0, '', '', '');
     }
   }
   // 点击二级选择技能
   infoSelectClick(value, index, type) {
     this.type = type;
-    if(index == -1) {
-      this.inputValue = {'sName':value};
+    if (index == -1) {
+      this.inputValue = { 'sName': value };
       this.skillLabel = true;
       this.skillBgcolor = index;
-      this.getSearchadviser(this.industryId = 0, this.firstSkillId = 1, this.secondSkillId = 0,'', '','');
-    }else {
+      this.getSearchadviser(this.industryId = 0, this.firstSkillId = 1, this.secondSkillId = 0, '', '', '');
+    } else {
       this.inputValue = value;
       this.skillBgcolor = index;
       this.skillLabel = true;
-      this.getSearchadviser(this.industryId = this.inputValue['ssid'], this.firstSkillId = 1, this.secondSkillId = 3,'', '','');
+      this.getSearchadviser(this.industryId = this.inputValue['ssid'], this.firstSkillId = 1, this.secondSkillId = 3, '', '', '');
     }
-   
+
   }
   /*跳转到顾问详情*/
   goProjectConsultantBrowserPage(value, index) {
     const user = window.sessionStorage.getItem('user') ? JSON.parse(window.sessionStorage.getItem('user')) : {};
     this.navCtrl.push(ProjectConsultantBrowserPage, { uid: value.uid, type: 'homepage', userType: user.type });
+  }
+  //下拉刷型界面
+  doRefresh(refresher) {
+    setTimeout(() => {
+      console.log('加载完成后，关闭刷新');
+      refresher.complete();
+      //toast提示
+      //alert("加载成功");
+    }, 2000);
+  }
+
+  //下滑动加载数据
+  doInfinite(infiniteScroll) {
+    setTimeout(() => {
+      alert('加载完成后，关闭刷新');
+      infiniteScroll.complete();
+    }, 2000);
   }
 }

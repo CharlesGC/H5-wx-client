@@ -7,92 +7,150 @@
 <ion-header>
 
     <ion-navbar>
-      <ion-title>我的项目/顾问/编辑阶段</ion-title>
+<<<<<<< HEAD
+      <ion-title>编辑阶段</ion-title>
+=======
+        <ion-title>我的项目/顾问/编辑阶段</ion-title>
+>>>>>>> 9c1395784c70c792a0a8151d998b7271d5e463c2
     </ion-navbar>
-  
-  </ion-header>
-  
-  <ion-content style="background-color: #fcfcfc;">
-      <ion-list class="list-item-flex mt10">
+
+</ion-header>
+
+<ion-content style="background-color: #fcfcfc;">
+    <ion-list class="list-item-flex mt10">
         <ion-item no-lines (click)="goFormEditPage('stageName',stageData.stageName,'text')">
-          <label>阶段名称<span class="required-field ml5">(必填)</span></label>
-          <p item-right class="rigth-message">
-              <span class="item-value line-overflow">{{stageData.stageName || '请拟定阶段名称'}}</span>
-              <ion-icon class="icon" name="arrow-forward"></ion-icon>
-          </p>
+            <label>阶段名称<span class="required-field ml5">(必填)</span></label>
+            <p item-right class="rigth-message">
+                <span class="item-value line-overflow">{{stageData.stageName || '请拟定阶段名称'}}</span>
+                <ion-icon class="icon" name="arrow-forward"></ion-icon>
+            </p>
         </ion-item>
-      </ion-list>
-      <ion-list class="list-item-flex mt10">
+    </ion-list>
+    <ion-list class="list-item-flex mt10">
         <ion-item (click)="goFormEditPage('startTime',stageData.startTime,'date')">
-          <label>开始时间</label>
-          <p item-right class="rigth-message">
-              <span item-right class="item-value line-overflow">{{(stageData.startTime | date: 'yyyy-MM-dd') || '请选择'}}</span>
-              <ion-icon class="icon" name="arrow-forward"></ion-icon>
-          </p>
+            <label>开始时间<span class="required-field ml5">(必填)</span></label>
+            <p item-right class="rigth-message">
+                <span item-right class="item-value line-overflow">{{(stageData.startTime | date: 'yyyy-MM-dd') ||
+                    '请选择'}}</span>
+                <ion-icon class="icon" name="arrow-forward"></ion-icon>
+            </p>
         </ion-item>
         <ion-item (click)="goFormEditPage('endTime',stageData.endTime,'date')" no-lines>
-          <label>结束时间</label>
-          <p item-right class="rigth-message">
-              <span item-right class="item-value line-overflow">{{(stageData.endTime | date: 'yyyy-MM-dd') || '请选择'}}</span>
-              <ion-icon class="icon" name="arrow-forward"></ion-icon>
-          </p>
+            <label>结束时间<span class="required-field ml5">(必填)</span></label>
+            <p item-right class="rigth-message">
+                <span item-right class="item-value line-overflow">{{(stageData.endTime | date: 'yyyy-MM-dd') || '请选择'}}</span>
+                <ion-icon class="icon" name="arrow-forward"></ion-icon>
+            </p>
         </ion-item>
-      </ion-list>
-      <ion-list class="list-item-flex mt10">
-          <ion-item (click)="goFormEditPage('stageDescription',stageData.stageDescription,'textarea')">
-            <label>阶段描述</label>
+    </ion-list>
+    <ion-list class="list-item-flex mt10">
+        <ion-item (click)="goFormEditPage('stageDescription',stageData.stageDescription,'textarea')">
+            <label>阶段描述<span class="required-field ml5">(必填)</span></label>
             <p item-right class="rigth-message">
                 <span item-right class="item-value line-overflow">{{stageData.stageDescription || '阶段的详情描述'}}</span>
                 <ion-icon class="icon" name="arrow-forward"></ion-icon>
             </p>
-          </ion-item>
-          <ion-item (click)="goFormEditPage('deliverable',stageData.deliverable,'textarea')">
-            <label>交付标的</label>
+        </ion-item>
+        <ion-item (click)="goFormEditPage('deliverable',stageData.deliverable,'textarea')">
+            <label>交付标的<span class="required-field ml5">(必填)</span></label>
             <p item-right class="rigth-message">
                 <span item-right class="item-value line-overflow">{{stageData.deliverable || '预期交互物内容及类型'}}</span>
                 <ion-icon class="icon" name="arrow-forward"></ion-icon>
             </p>
-          </ion-item>
-          <ion-item (click)="goFormEditPage('note',stageData.note,'textarea')" no-lines>
-              <label>阶段备注</label>
-              <p item-right class="rigth-message">
-                  <span item-right class="item-value line-overflow">{{stageData.note || '请输入'}}</span>
-                  <ion-icon class="icon" name="arrow-forward"></ion-icon>
-              </p>
-            </ion-item>
-        </ion-list>
-        <ion-list class="list-item-flex mt10">
-            <ion-item (click)="goFormEditPage('percentage',stageData.percentage,'text')">
-              <label>付款占比</label>
-              <p item-right class="rigth-message">
-                  <span item-right class="item-value line-overflow">{{stageData.percentage || '请输入'}}</span>
-                  <ion-icon class="icon" name="arrow-forward"></ion-icon>
-              </p>
-            </ion-item>
-            <ion-item no-lines>
-              <label>付款金额</label>
-              <p item-right class="rigth-message">
-                  <span item-right class="item-value line-overflow color-ff6536">{{stageData.price}}</span>
-                  <!-- <ion-icon class="icon" name="arrow-forward"></ion-icon> -->
-              </p>
-            </ion-item>
-        </ion-list>
-        <ion-list class="list-item-flex mt10">
-            <ion-item (click)="goFormEditPage('paymentMethod',stageData.paymentMethod,'select')" no-lines>
-              <label>交付方式</label>
-              <p item-right class="rigth-message">
-                  <span item-right class="item-value line-overflow" *ngIf="!stageData.paymentMethod && stageData.paymentMethod != 0">请选择</span>
-                  <span item-right class="item-value line-overflow" *ngIf="stageData.paymentMethod == 0">线上</span>
-                  <span item-right class="item-value line-overflow" *ngIf="stageData.paymentMethod == 1">线下</span>
-                  <ion-icon class="icon" name="arrow-forward"></ion-icon>
-              </p>
-            </ion-item>
-        </ion-list>
-      <div style="height:50px;"></div>
-      <button ion-button expand="full" large class="fixed-bottom" (click)="onStageSubmitClick(stageData.psid)" *ngIf="isAdd">保存</button>
-      <div class="fixed-bottom" *ngIf="!isAdd">
-          <button ion-button class="btn-submit" (click)="onStageSubmitClick(stageData.psid)">保存修改</button>
-          <button ion-button class="btn-delete" (click)="onStageDelClick(stageData.psid)">删除</button>
-      </div>
-  </ion-content>
-  
+        </ion-item>
+        <ion-item (click)="goFormEditPage('note',stageData.note,'textarea')" no-lines>
+            <label>阶段备注<span class="required-field ml5">(必填)</span></label>
+            <p item-right class="rigth-message">
+                <span item-right class="item-value line-overflow">{{stageData.note || '请输入'}}</span>
+                <ion-icon class="icon" name="arrow-forward"></ion-icon>
+            </p>
+        </ion-item>
+    </ion-list>
+    <ion-list class="list-item-flex mt10">
+        <ion-item (click)="goFormEditPage('percentage',stageData.percentage,'text')">
+            <label>付款占比<span class="required-field ml5">(必填)</span></label>
+            <p item-right class="rigth-message">
+                <span item-right class="item-value line-overflow">{{stageData.percentage || '请输入'}}</span>
+                <ion-icon class="icon" name="arrow-forward"></ion-icon>
+            </p>
+        </ion-item>
+        <ion-item no-lines>
+            <label>付款金额<span class="required-field ml5">(必填)</span></label>
+            <p item-right class="rigth-message">
+                <span item-right class="item-value line-overflow color-ff6536">{{stageData.price}}</span>
+                <!-- <ion-icon class="icon" name="arrow-forward"></ion-icon> -->
+            </p>
+        </ion-item>
+    </ion-list>
+    <ion-list class="list-item-flex mt10">
+        <ion-item (click)="goFormEditPage('paymentMethod',stageData.paymentMethod,'select')" no-lines>
+            <label>交付方式<span class="required-field ml5">(必填)</span></label>
+            <p item-right class="rigth-message">
+                <span item-right class="item-value line-overflow" *ngIf="!stageData.paymentMethod && stageData.paymentMethod != 0">请选择</span>
+                <span item-right class="item-value line-overflow" *ngIf="stageData.paymentMethod == 0">线上</span>
+                <span item-right class="item-value line-overflow" *ngIf="stageData.paymentMethod == 1">线下</span>
+                <ion-icon class="icon" name="arrow-forward"></ion-icon>
+            </p>
+        </ion-item>
+    </ion-list>
+    <div style="height:50px;"></div>
+    <button ion-button expand="full" large class="fixed-bottom" (click)="onStageSubmitClick(stageData.psid)" *ngIf="isAdd">保存</button>
+    <div class="fixed-bottom" *ngIf="!isAdd">
+        <button ion-button class="btn-submit" (click)="onStageSubmitClick(stageData.psid)">保存修改</button>
+        <button ion-button class="btn-delete" (click)="onStageDelClick(stageData.psid)">删除</button>
+    </div>
+</ion-content>
+<div class="phonebind-modal" [hidden]="!isRange">
+    <div class="modal-bg"></div>
+    <div class="modal-box">
+        <div class="modal-top">
+            <div class="modal-top-close">
+                <!-- <ion-icon ios="ios-close" md="md-close" item-rigth (click)="onClose()" color=""></ion-icon> -->
+            </div>
+            <div class="modal-title">提示</div>
+            <div class="modal-content">
+                <p>付款占比只能填写1-100内的整数</p>
+            </div>
+            <div class="modal-footer">
+                <button ion-button full large (click)="sureRange()">确定</button>
+                <!-- <button ion-button full large (click)="onCompanyDel()" class="btn-delete">返回</button> -->
+            </div>
+        </div>
+    </div>
+</div>
+<div class="phonebind-modal" [hidden]="!isInteger">
+    <div class="modal-bg"></div>
+    <div class="modal-box">
+        <div class="modal-top">
+            <div class="modal-top-close">
+                <!-- <ion-icon ios="ios-close" md="md-close" item-rigth (click)="onClose()" color=""></ion-icon> -->
+            </div>
+            <div class="modal-title">提示</div>
+            <div class="modal-content">
+                <p>付款占比只允许输入数字</p>
+            </div>
+            <div class="modal-footer">
+                <button ion-button full large (click)="sureInteger()">确定</button>
+                <!-- <button ion-button full large (click)="onCompanyDel()" class="btn-delete">返回</button> -->
+            </div>
+        </div>
+    </div>
+</div>
+<div class="phonebind-modal" [hidden]="!isComplete">
+    <div class="modal-bg"></div>
+    <div class="modal-box">
+        <div class="modal-top">
+            <div class="modal-top-close">
+                <!-- <ion-icon ios="ios-close" md="md-close" item-rigth (click)="onClose()" color=""></ion-icon> -->
+            </div>
+            <div class="modal-title">提示</div>
+            <div class="modal-content">
+                <p>请将所有必填项填写完整</p>
+            </div>
+            <div class="modal-footer">
+                <button ion-button full large (click)="sureComplete()">确定</button>
+                <!-- <button ion-button full large (click)="onCompanyDel()" class="btn-delete">返回</button> -->
+            </div>
+        </div>
+    </div>
+</div>

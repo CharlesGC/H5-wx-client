@@ -26,6 +26,7 @@ export class ClientInfoEditPage {
   public user = {};
   public isdefault = true;
   public cid = '';
+  public isPhoneProper = false;
   constructor(public navCtrl: NavController, public navParams: NavParams,private Provider:MamenDataProvider) {
     // this.companyDetaiData = {}
   }
@@ -147,7 +148,7 @@ export class ClientInfoEditPage {
         return 1;
       }
     })
-  }
+  } 
 
 
   /*公司的新增、编辑*/
@@ -161,7 +162,10 @@ export class ClientInfoEditPage {
     newCompanyDetaiData['otherIndustrys'] = this.getOtherIndustrys(newCompanyDetaiData['industryList']);
     let otherIndustrys = this.companyDetaiData['otherIndustrys'] && this.companyDetaiData['otherIndustrys'].length>0 ? this.companyDetaiData['otherIndustrys'].join(','): '';
     // let getCompanyDetailUrl = 'http://mamon.yemindream.com/mamon/company/addOrUpdateCompany';
-    
+    var regPhone = /^[0-9]{8,11}$/;
+    if(regPhone.test(newCompanyDetaiData['companyPhone']) == false) {
+      this.isPhoneProper = true;
+    }
     let getCompanyDetailUrl = addOrUpdateCompanyUrl + '?openId=' + openId + '&name='+newCompanyDetaiData['companyName']+
                           '&province='+newCompanyDetaiData['province']+
                           '&city='+newCompanyDetaiData['city']+
@@ -188,8 +192,10 @@ export class ClientInfoEditPage {
     },error=>{
       console.log('erros===',error);
     })
-
   }
-
+// 电话确定
+surePhone() {
+  this.isPhoneProper = !this.isPhoneProper;
+}
 
 }
