@@ -34,7 +34,7 @@
           <div class="info-rigth">
             <div class="title-name">
               <h3>{{consultantBasicData.nickName || ''}}</h3>
-              <ion-icon class="transgender mr10 women" name="ios-male1" ></ion-icon>
+              <ion-icon class="transgender mr10 men" name="ios-male1" ></ion-icon>
               <span class="user-type type-approved" *ngIf="consultantBasicData.status >= 4">已审核</span>
               <span class="user-type type-gray" *ngIf="consultantBasicData.status == 0">未审核</span>
               <!-- <ion-icon name="ios-arrow-forward" item-end color="ion-gray"></ion-icon> -->
@@ -90,13 +90,8 @@
         <div class="contact-info mt15">
           <div class="contact-info-cont">
             <p class="contact-info-list" *ngIf="consultantBasicData.country || consultantBasicData.province || consultantBasicData.city || consultantBasicData.address">
-<<<<<<< HEAD
               <ion-icon name="place"></ion-icon>
-              <span>{{consultantBasicData.country+consultantBasicData.province+consultantBasicData.city+(consultantBasicData.address||'')}}</span>
-=======
-              <ion-icon ios="ios-navigate" md="md-navigate"></ion-icon>
               <span>{{(consultantBasicData.country || '')+(consultantBasicData.province || '')+(consultantBasicData.city || '')+(consultantBasicData.address||'')}}</span>
->>>>>>> 4ccf63adb38b57618c45e79cc6d6466722b7d2e5
             </p>
             <p class="contact-info-list" *ngIf="consultantBasicData.uphone">
               <ion-icon ios="ios-call" md="md-call"></ion-icon>

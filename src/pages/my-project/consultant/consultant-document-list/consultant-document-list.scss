@@ -1,4 +1,9 @@
 page-consultant-document-list {
+    .project-header {
+        .toolbar-content-md {
+            display: flex;
+        }
+    }
     .card-item {
         width: calc(100% - 30px);
         margin: 0 15px;

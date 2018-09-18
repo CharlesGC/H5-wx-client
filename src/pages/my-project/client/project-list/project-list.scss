@@ -1,4 +1,9 @@
 page-project-list {
+    .project-header {
+        .toolbar-content-md {
+            display: flex;
+        }
+    }
     .list-content {
         margin: 0 15px !important;
         width: calc(100% - 30px);

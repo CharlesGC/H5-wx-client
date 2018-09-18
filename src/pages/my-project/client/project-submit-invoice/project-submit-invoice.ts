@@ -124,6 +124,7 @@ export class ProjectSubmitInvoicePage {
       this.isSubmit = true;
     },error=>{
       console.log('erros===',error);
+      this.isSubmit = true;
     })
   }
 

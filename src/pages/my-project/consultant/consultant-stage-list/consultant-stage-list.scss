@@ -1,4 +1,9 @@
 page-consultant-stage-list {
+    .project-header {
+        .toolbar-content-md {
+            display: flex;
+        }
+    }
     ion-list {
         margin: 0 15px !important;
         width: calc(100% - 30px);
