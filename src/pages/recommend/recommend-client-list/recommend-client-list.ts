@@ -32,8 +32,7 @@ export class RecommendClientListPage {
   }
 
   /*跳转到顾问详情页面*/
-  goConsultantBrowserClick(uid) {
-    let pid = this.navParams.get('pid');
+  goConsultantBrowserClick(uid,pid) {
     this.navCtrl.push(ProjectConsultantBrowserPage,{uid:uid,pid:pid});
   }
 
