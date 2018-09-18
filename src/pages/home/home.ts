@@ -5,6 +5,7 @@ import { MamenDataProvider } from '../../providers/mamen-data/mamen-data';
 import { PhonebindPage } from '../phonebind/phonebind';
 import { ProjectConsultantBrowserPage } from '../my-project/client/project-consultant-browser/project-consultant-browser';
 import { ChooseIdentityPage } from '../../pages/choose-identity/choose-identity';
+// declare var onBridgeReady;
 
 // import { ViewChild } from '@angular/core';
 
@@ -36,6 +37,7 @@ export class HomePage {
     private skilldata: MamenDataProvider, private casedata: MamenDataProvider, private outstanddata: MamenDataProvider, private financedata: MamenDataProvider,
     private financeAlldata: MamenDataProvider) {
     this.IndustryArr = [];
+    // onBridgeReady();
   }
   ionViewDidLoad() {
     // console.log(getswipreUrl);

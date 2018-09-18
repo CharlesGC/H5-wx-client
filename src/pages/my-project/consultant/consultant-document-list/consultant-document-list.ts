@@ -59,11 +59,11 @@ export class ConsultantDocumentListPage {
     if (type == 1) {
       this.navCtrl.push(ConsultantProjectBrowserPage, { data: this.projectDetails, pid: this.projectDetails['pid'], status: status || '' });
     } else if (type == 2) {
-        this.projectDetails['appStatus'] != 0 && this.projectDetails['appStatus'] != 1 &&
+      this.projectDetails['appStatus'] != 0 && this.projectDetails['appStatus'] != 1 &&
         this.projectDetails['appStatus'] != 2 && this.projectDetails['appStatus'] != 3 &&
         this.navCtrl.push(ConsultantProgramListPage, { pid: this.projectDetails['pid'], status: status || '', data: this.projectDetails });
     } else if (type == 3) {
-        this.projectDetails['appStatus'] != 6 && this.projectDetails['appStatus'] != 4 &&
+      this.projectDetails['appStatus'] != 6 && this.projectDetails['appStatus'] != 4 &&
         this.projectDetails['appStatus'] != 0 && this.projectDetails['appStatus'] != 1 &&
         this.projectDetails['appStatus'] != 2 && this.projectDetails['appStatus'] != 3 &&
         this.navCtrl.push(ConsultantStageListPage, {
@@ -78,7 +78,7 @@ export class ConsultantDocumentListPage {
       let status = this.navParams.get('status');
       this.getProjectDocumentListDataData(pid, status);
     } else if (type == 5) {
-        this.projectDetails['appStatus'] != 6 && this.projectDetails['appStatus'] != 4 &&
+      this.projectDetails['appStatus'] != 6 && this.projectDetails['appStatus'] != 4 &&
         this.projectDetails['appStatus'] != 0 && this.projectDetails['appStatus'] != 1 &&
         this.projectDetails['appStatus'] != 2 && this.projectDetails['appStatus'] != 3 &&
         this.navCtrl.push(ConsultantCollectionListPage, { pid: this.projectDetails['pid'], status: status, data: this.projectDetails });
@@ -112,7 +112,7 @@ export class ConsultantDocumentListPage {
     this.Provider.getMamenSwiperData(projectStageListUrl).subscribe(res => {
       if (res.code == 200) {
         this.documentListData = res.data;
-        //console.log(this.documentListData,'这里的值')
+        console.log(this.documentListData,'这里的值')
       } else if (res.code == 207) {
         window.localStorage.removeItem('openId');
       } else {
@@ -121,6 +121,21 @@ export class ConsultantDocumentListPage {
     }, error => {
       console.log('erros===', error);
     })
+  }
+
+  /* 根据format来判断文件类型 */
+  formatTypes(value) {
+    if (value.search(/doc/) !== -1 || value.search(/docx/) !== -1) {
+      return 'doc';
+    } else if (value.search(/ppt/) !== -1 || value.search(/pptx/) !== -1) {
+      return 'ppt'
+    } else if (value.search(/xls/) !== -1 || value.search(/xlsx/) !== -1) {
+      return 'xls'
+    } else if (value.search(/jpg/) !== -1 || value.search(/png/) !== -1 || value.search(/jpeg/) !== -1) {
+      return 'jpg'
+    } else if (value.search(/pdf/) !== -1) {
+      return 'pdf'
+    }
   }
 
   /*新增附件*/

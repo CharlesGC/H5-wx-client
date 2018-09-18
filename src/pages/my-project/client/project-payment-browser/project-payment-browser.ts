@@ -18,7 +18,7 @@ import { getPaymentDetailUrl } from '../../../../providers/requestUrl';
 })
 export class ProjectPaymentBrowserPage {
   public projectPaymentDetails = {};
-  constructor(public navCtrl: NavController, public navParams: NavParams,private Provider:MamenDataProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider) {
   }
 
   ionViewDidLoad() {
@@ -27,33 +27,54 @@ export class ProjectPaymentBrowserPage {
     this.getProjectPaymentDetails(id);
   }
 
-  getUrlParam(name) {  
+  getUrlParam(name) {
     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象  
     var r = window.location.search.substr(1).match(reg);  //匹配目标参数  
     if (r != null) {
-        return encodeURI(r[2]);  //返回参数值 
+      return encodeURI(r[2]);  //返回参数值 
     } else {
-        return null; 
+      return null;
     }
- }
+  }
 
   /*项目支付记录详情数据请求*/
   getProjectPaymentDetails(id) {
     // let projectPaymentDetailsUrl = 'http://mamon.yemindream.com/mamon/customer/getPaymentDetail';
-    const openId = window.sessionStorage.getItem('openId')|| this.getUrlParam('getUrlParam');
-    let projectPaymentDetailsUrl = getPaymentDetailUrl + '?openId=' + openId + '&id='+id;
-    this.Provider.getMamenSwiperData(projectPaymentDetailsUrl).subscribe(res=>{
-      if(res.code==200) {
-        console.log(res,'--------');
+    const openId = window.sessionStorage.getItem('openId') || this.getUrlParam('getUrlParam');
+    let projectPaymentDetailsUrl = getPaymentDetailUrl + '?openId=' + openId + '&id=' + id;
+    this.Provider.getMamenSwiperData(projectPaymentDetailsUrl).subscribe(res => {
+      if (res.code == 200) {
+        console.log(res, '--------');
         this.projectPaymentDetails = res.data;
-        console.log(this.projectPaymentDetails,'这是数据')
-      }else if(res.code == 207) {
+        console.log(this.projectPaymentDetails, '这是数据')
+        this.projectPaymentDetails['size'] = (this.projectPaymentDetails['size'] / 1048576).toPrecision(3)
+
+        if (this.projectPaymentDetails['size'] > 1) {
+          this.projectPaymentDetails['size'] = this.projectPaymentDetails['size'] + ' MB'
+        } else if (this.projectPaymentDetails['size'] < 1) {
+          this.projectPaymentDetails['size'] = this.projectPaymentDetails['size'] * 1024 + ' KB'
+        }
+
+        if (this.projectPaymentDetails['typeStr']) {
+          if (this.projectPaymentDetails['typeStr'].search(/doc/) !== -1 || this.projectPaymentDetails['typeStr'].search(/docx/) !== -1) {
+            this.projectPaymentDetails['typeStr'] = 'assets/imgs/' + 'doc.png'
+          } else if (this.projectPaymentDetails['typeStr'].search(/ppt/) !== -1 || this.projectPaymentDetails['typeStr'].search(/pptx/) !== -1) {
+            this.projectPaymentDetails['typeStr'] = 'assets/imgs/' + 'ppt.png'
+          } else if (this.projectPaymentDetails['typeStr'].search(/xls/) !== -1 || this.projectPaymentDetails['typeStr'].search(/xlsx/) !== -1) {
+            this.projectPaymentDetails['typeStr'] = 'assets/imgs/' + 'xls.png'
+          } else if (this.projectPaymentDetails['typeStr'].search(/jpg/) !== -1 || this.projectPaymentDetails['typeStr'].search(/png/) !== -1 || this.projectPaymentDetails['typeStr'].search(/jpeg/) !== -1) {
+            this.projectPaymentDetails['typeStr'] = 'assets/imgs/' + 'png.png'
+          } else if (this.projectPaymentDetails['typeStr'].search(/pdf/) !== -1) {
+            this.projectPaymentDetails['typeStr'] = 'assets/imgs/' + 'pdf.png'
+          }
+        }
+      } else if (res.code == 207) {
         window.localStorage.removeItem('openId');
-      }else{
-        alert('请求出错:'+res.msg);
+      } else {
+        alert('请求出错:' + res.msg);
       }
-    },error=>{
-      console.log('erros===',error);
+    }, error => {
+      console.log('erros===', error);
     })
   }
 
