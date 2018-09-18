@@ -21,6 +21,13 @@
     </div>
   </ion-card>
   <ion-list class="contact-list mt10">
+    <ion-item class="" (click)="goFormEditPage('nickName',userInfoData.nickName,'text')">
+      <span class="left-title">用户名</span>
+      <div item-right class="rigth-message">
+        <span class="line-overflow">{{userInfoData.nickName}}</span>
+        <ion-icon name="arrow-forward" color="#cfcfcf" class="ml12"></ion-icon>
+      </div>
+    </ion-item>
     <ion-item class="" (click)="goFormEditPage('uname',userInfoData.uname,'text')">
       <span class="left-title">真实姓名</span>
       <div item-right class="rigth-message">

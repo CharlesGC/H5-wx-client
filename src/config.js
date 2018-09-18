@@ -3,18 +3,18 @@ module.exports = {
     name: '管理测试',
     footer: '',
     api: {
-        // host: 'http://mamon.yemindream.com',
-        host: 'http://100.168.1.149:8181',
-        // port: 8080,
-        port: 8181,
+        host: 'http://mamon.yemindream.com',
+        // host: 'http://100.168.1.149:8181',
+        port: 8080,
+        // port: 8181,
         // path: '/mamon/',
         path: '/mamon/',
         timeout: 15000
     },
     //文件上传地址
     // filesUpload: 'http://matest.mf-tal.com/mafile/mamonfile/uploadFile',
-    filesUpload: 'http://100.168.1.149:8181/mafile/mamonfile/uploadFile',
-    // filesUpload: 'http://mamon.yemindream.com/mafile/mamonfile/uploadFile',
+    // filesUpload: 'http://100.168.1.149:8181/mafile/mamonfile/uploadFile',
+    filesUpload: 'http://mamon.yemindream.com/mafile/mamonfile/uploadFile',
     // filesUpload: 'http://100.168.1.48:8100/mafile/mamonfile/uploadFile',
     //文件查看地址
     filesUrl: 'http://100.168.1.199:8080/files',

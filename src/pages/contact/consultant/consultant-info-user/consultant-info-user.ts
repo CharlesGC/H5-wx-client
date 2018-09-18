@@ -117,6 +117,7 @@ export class ConsultantInfoUserPage {
     // let getCompanyDetailUrl = 'http://mamon.yemindream.com/mamon/adviser/editAdviser';
 
     let getCompanyDetailUrl = editAdviserUrl + '?openId=' + openId + '&avatar=' + userInfoData.avatar +
+      '&nickName=' + userInfoData.nickName +
       '&uname=' + userInfoData.uname +
       '&gender=' + userInfoData.gender +
       '&years=' + userInfoData.years +

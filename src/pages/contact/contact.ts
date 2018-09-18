@@ -110,9 +110,8 @@ export class ContactPage {
 
   ionViewDidEnter() {
     const openId = window.sessionStorage.getItem('openId') || this.getUrlParam('openId') || window.localStorage.getItem('openId');
-    const user = window.sessionStorage.getItem('user') ? JSON.parse(window.sessionStorage.getItem('user')) : {status:1};
+    const user = window.sessionStorage.getItem('user') ? JSON.parse(window.sessionStorage.getItem('user')) : {'status':1};
     const usertype = window.sessionStorage.getItem('status') ? Number(window.sessionStorage.getItem('status')) : this.getUrlParam('status');
-
     if(openId){
       window.sessionStorage.setItem('openId',openId);
       window.localStorage.setItem('openId',openId);
@@ -149,6 +148,11 @@ export class ContactPage {
         window.localStorage.setItem('user',JSON.stringify(res.data));
       }else if(res.code == 207) {
         window.localStorage.removeItem('openId');
+        window.sessionStorage.removeItem('openId');
+      }else if(res.code == 203) {
+        window.localStorage.removeItem('openId');
+        window.sessionStorage.removeItem('openId');
+        this.onLogin();
       }
     },error=>{
       console.log('erros===',error);

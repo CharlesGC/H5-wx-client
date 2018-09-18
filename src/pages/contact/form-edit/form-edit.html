@@ -79,7 +79,7 @@
         <ion-item class="none-margin bg-black" *ngIf="fieldType == 'date'" no-lines>
             <ion-label>请选择时间</ion-label>
             <div item-right class="rigth-message">
-                <ion-datetime displayFormat="YYYY/MM/DD" [(ngModel)]="inputName">
+                <ion-datetime displayFormat="YYYY/MM/DD" [(ngModel)]="inputName" max="2022-10-31" doneText="确认" cancelText="取消">
                     <ion-icon name="arrow-forward" class="ml12"></ion-icon>
                 </ion-datetime>
             </div>

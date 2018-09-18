@@ -34,7 +34,8 @@
         </ion-thumbnail>
         <div class="title-name">
             <h2>{{user.nickName || '黄先生'}}</h2>
-            <span class="user-type">待认证</span>
+            <span class="user-type" *ngIf="user.status >= 4">已审核</span>
+            <span class="user-type" *ngIf="user.status == 0">未审核</span>
         </div>
         <p class="title-skills-list mt10">
           <span>查看并修改个人资料</span>
