@@ -23,9 +23,9 @@ export class ConsultantStageEditPage {
   public stageData = {};
   public programPrice = 0;
   public dateTime: Date;
-  public isRange = false
   public isInteger = false
   public isComplete = false
+  public isDateRepeat = false
   constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider) {
   }
 
@@ -58,11 +58,6 @@ export class ConsultantStageEditPage {
       return null;
     }
   }
-  sureRange() {
-    this.isRange = !this.isRange
-    return
-  }
-
   sureInteger() {
     this.isInteger = !this.isInteger
     return
@@ -71,13 +66,24 @@ export class ConsultantStageEditPage {
     this.isComplete = !this.isComplete
     return
   }
-
+  sureDateRepeat(){
+    this.isDateRepeat = !this.isDateRepeat
+    return
+  }
   /*新增、编辑请求*/
   onStageSubmitClick(psid) {
     let date = new Date();
     let pid = this.navParams.get('pid');
     let stageData = this.stageData;
-    let startTime = stageData['startTime'] ? (new Date(stageData['startTime']).getFullYear() + '-' + (new Date(stageData['startTime']).getMonth() + 1) + '-' + new Date(stageData['startTime']).getDate()) : '';
+    var monthDate = (new Date(stageData['startTime']).getMonth() + 1).toString()
+    var lessDate = (new Date(stageData['startTime']).getDate()).toString()
+    if(lessDate.length < 2){
+      lessDate = '0' + lessDate
+    }
+    if(monthDate.length < 2){
+      monthDate = '0'+ monthDate
+    }
+    let startTime = stageData['startTime'] ? (new Date(stageData['startTime']).getFullYear() + '-' + monthDate + '-' + lessDate) : '';
     let endTime = stageData['endTime'] ? (new Date(stageData['endTime']).getFullYear() + '-' + (new Date(stageData['endTime']).getMonth() + 1) + '-' + new Date(stageData['endTime']).getDate()) : '';
     // let projectStageDetailUrl = 'http://mamon.yemindream.com/mamon/adviser/addOrEditStage';
     
@@ -89,10 +95,6 @@ export class ConsultantStageEditPage {
     var rule = /^([1-9][0-9]{0,1}|100)$/;
     if (rule.test(stageData['percentage']) == false) {
       this.isInteger = true
-      return
-    }
-    if (stageData['percentage'] > 100 || stageData['percentage'] < 1) {
-      this.isRange = true
       return
     }
     const openId = window.sessionStorage.getItem('openId') || this.getUrlParam('openId');
@@ -115,6 +117,8 @@ export class ConsultantStageEditPage {
         this.navCtrl.pop();
       } else if (res.code == 207) {
         window.localStorage.removeItem('openId');
+      } else if( res.code == 214){
+        this.isDateRepeat = true
       } else {
         alert('请求出错:' + res.msg);
       }
