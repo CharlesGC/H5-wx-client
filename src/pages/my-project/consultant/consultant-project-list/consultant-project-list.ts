@@ -4,6 +4,7 @@ import { MamenDataProvider } from '../../../../providers/mamen-data/mamen-data';
 
 import { ConsultantProjectBrowserPage } from '../consultant-project-browser/consultant-project-browser';
 import { getAdviserProjectByStatusUrl, myAdviserProjectCountUrl } from '../../../../providers/requestUrl';
+import { SpeedPage } from '../../../speed/speed';
 
 /**
  * Generated class for the ConsultantProjectListPage page.
@@ -124,5 +125,8 @@ export class ConsultantProjectListPage {
         infiniteScroll.complete();
     }, 2000);
   }
-
+  // 返回页面
+  onSpeedStageClick() {
+    this.navCtrl.pop();
+  }
 }

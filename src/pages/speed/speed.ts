@@ -36,6 +36,7 @@ export class SpeedPage {
   public voice: any;
   public isShow = false;
   public isChange = false;
+  public isComplete =false;
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public WechatData: MamenDataProvider, public UploadData: MamenDataProvider,
     public changeDetectorRef: ChangeDetectorRef, public speedVoiceData: MamenDataProvider) {
@@ -250,19 +251,28 @@ export class SpeedPage {
     this.description = value;
     let Arr = this.audioData || [];
     this.voice = Arr.length > 0 ? Arr.map(f => f.url).join(",") : '';
+    if( this.description == '') {
+      console.log(1111111);
+      this.isComplete = true;
+      return;
+    }
     this.speedVoiceData.getSpeedReleaseData(getSpeedrelease, openId, this.description, this.voice).subscribe(
-      res => {
+      res => { 
         if (res.code == 200) {
           this.speedVoiceReleaseArr = res.data;
           console.log(this.speedVoiceReleaseArr);
           this.isShow = true;
-        } else {
+        }else {
           alert('请求出错：' + res.msg)
         }
       }, error => {
         console.log(error);
       }
     )
+  }
+   // 确定
+   sureComplete() {
+    this.isComplete = !this.isComplete;
   }
   /*功能之后跳转*/
   goClientProjectPage() {

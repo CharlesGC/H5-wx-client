@@ -3,10 +3,10 @@ module.exports = {
     name: '管理测试',
     footer: '',
     api: {
-        // host: 'http://mamon.yemindream.com',
-        host: 'http://100.168.1.149:8181',
-        // port: 8080,
-        port: 8181,
+        host: 'http://mamon.yemindream.com',
+        // host: 'http://100.168.1.149:8181',
+        port: 8080,
+        // port: 8181,
         // path: '/mamon/',
         path: '/mamon/',
         timeout: 15000

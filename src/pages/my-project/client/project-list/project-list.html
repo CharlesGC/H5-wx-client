@@ -1,11 +1,12 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>我的项目/客户/项目列表</ion-title>
+    <ion-title>项目列表</ion-title>
   </ion-navbar>
 
 </ion-header>
-<div class="nav-menu" *ngIf="isShowNavMenu">
+
+  <div class="nav-menu" *ngIf="isShowNavMenu">
     <ion-list class="nav-list-menu">
         <ion-item no-lines (click)="onNavMenuClick(false)">
           <p class="list-header-left">{{showNavMenuName || '所有项目'}} ({{showNavMenuNumber}})</p>
@@ -38,8 +39,7 @@
       </ion-item>
     </ion-list>
   </div>
-
-<ion-content style="background-color: #fcfcfc;">
+  <ion-content style="background-color: #fcfcfc;">
     <!-- <ion-item>
         用户信息
         <ion-icon name="ios-arrow-down" item-right  *ngIf="isShow"    (click)="isShow=!isShow"></ion-icon>
@@ -262,4 +262,13 @@
          </ion-infinite-scroll-content> 
      </ion-infinite-scroll> -->
   
-  </ion-content>
+</ion-content>
+
+<div class="no-box" *ngIf="!projectListData">
+  <div class="no-content">
+    <h4 class="title">我的项目</h4>
+    <div class="img"></div>
+    <p class="tip">当前项目暂时为空，点击下方按钮添加项目。</p>
+  </div>
+  <button ion-button expand="full" large class="fixed-bottom" (click)="onSpeedStageClick()">添加项目</button> 
+</div>
