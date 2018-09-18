@@ -34,6 +34,7 @@
           <div class="info-rigth">
             <div class="title-name">
               <h3>{{consultantBasicData.nickName || ''}}</h3>
+              <ion-icon class="transgender mr10 women" name="ios-male1" ></ion-icon>
               <span class="user-type type-approved" *ngIf="consultantBasicData.status >= 4">已审核</span>
               <span class="user-type type-gray" *ngIf="consultantBasicData.status == 0">未审核</span>
               <!-- <ion-icon name="ios-arrow-forward" item-end color="ion-gray"></ion-icon> -->
@@ -89,7 +90,7 @@
         <div class="contact-info mt15">
           <div class="contact-info-cont">
             <p class="contact-info-list" *ngIf="consultantBasicData.country || consultantBasicData.province || consultantBasicData.city || consultantBasicData.address">
-              <ion-icon ios="ios-navigate" md="md-navigate"></ion-icon>
+              <ion-icon name="place"></ion-icon>
               <span>{{consultantBasicData.country+consultantBasicData.province+consultantBasicData.city+(consultantBasicData.address||'')}}</span>
             </p>
             <p class="contact-info-list" *ngIf="consultantBasicData.uphone">
@@ -97,11 +98,11 @@
               <span>{{consultantBasicData.uphone}}</span>
             </p>
             <p class="contact-info-list" *ngIf="consultantBasicData.email">
-              <ion-icon name="ios-mail-outline"></ion-icon>
+              <ion-icon name="message"></ion-icon>
               <span>{{consultantBasicData.email}}</span>
             </p>
             <p class="contact-info-list" *ngIf="consultantBasicData.bankList && consultantBasicData.bankList.length>0">
-              <ion-icon name="ios-card-outline"></ion-icon>
+              <ion-icon name="bank-card"></ion-icon>
               <span>{{consultantBasicData.bankList[0].bankAccount}} · {{consultantBasicData.bankList[0].account}}</span>
             </p>
           </div>

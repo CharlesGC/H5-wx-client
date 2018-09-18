@@ -189,7 +189,7 @@ page-industrydetial {
                         overflow: hidden;
                         text-overflow:ellipsis;
                         white-space: nowrap;
-                        margin-left: -5px;
+                        // margin-left: -5px;
                     }
                     span:nth-child(2) {
                         line-height: 50px;
@@ -197,7 +197,8 @@ page-industrydetial {
                         color: #cfcfcf;
                         
                         ion-icon {
-                            font-size: 14px;
+                            transform: scale(0.7);
+                            font-size: 10px !important;
                         }
                     }
                 }
