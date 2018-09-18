@@ -219,7 +219,7 @@ export class IndustrydetialPage {
     if (index == -1) {
       this.IndustryName = { 'industryName': value };
       this.isIndustryLabel = true;
-      this.skillChecked = index;
+      this.skillChecked = 0;
       this.getSearchadviser(this.industryId = 0, this.firstSkillId = 0, this.secondSkillId = 0, this.search = '', this.pageNum = 0, this.pageSize = 15);
     } else {
       this.skillChecked = index;
@@ -232,7 +232,7 @@ export class IndustrydetialPage {
   infoSecondarySkill(value, index, type) {
     this.type = type;
     if (index == -1) {
-      this.skillCheckedSkill = index;
+      this.skillCheckedSkill = 0;
       this.skilldoubleData = { 'fName': value };
       this.getSecondaryData('');
     } else {

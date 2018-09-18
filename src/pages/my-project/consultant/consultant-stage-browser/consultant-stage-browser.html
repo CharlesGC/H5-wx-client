@@ -5,10 +5,11 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-    <ion-navbar>
-      <ion-title>阶段详情</ion-title>
-    </ion-navbar>
+  <ion-navbar>
+    <ion-title>阶段详情</ion-title>
+  </ion-navbar>
 </ion-header>
+
 <ion-content style="background-color: #fcfcfc;">
   <ion-list class="browser-top">
     <h4>{{projectStageDetail.stageName}}</h4>
@@ -62,12 +63,12 @@
     </ion-item>
   </ion-list>
   <div class="user-other-list" *ngIf="projectStageDetail.document && projectStageDetail.document.length>0">
-    <p class="browser-file">查看阶段相关文件</p>
+    <p class="browser-file"> </p>
     <h4 class="mt10">交互物</h4>
     <ion-list class="card-item mb10" *ngFor="let document_item of projectStageDetail.document">
       <ion-item no-lines>
         <div class="card-item-top">
-          <div class="item-top-left">第二阶段 <span class="color-f46f46">交付物</span></div>
+          <div class="item-top-left">第{{projectStageDetail.stageSort}}阶段 <span class="color-f46f46">交付物</span></div>
           <span class="item-top-right">{{document_item.createTime | date: 'yy/MM/dd'}}</span>
         </div>
         <div class="card-item-label">
@@ -78,10 +79,10 @@
             <img style="width:66px;height:66px;" src="assets/imgs/png.png" *ngIf="formatTypes(document_item.format) == 'jpg'">
             <img style="width:66px;height:66px;" src="assets/imgs/pdf.png" *ngIf="formatTypes(document_item.format) == 'pdf'">
           </label>
-          <div class="card-cont" data-src="url">
+          <div class="card-cont">
             <h5>{{document_item.sourceName}}</h5>
             <!-- <p class="browser-file">点击查看文件预览</p> -->
-            <p class="browser-size">{{(document_item.size/1048576).toPrecision(3)}}</p>
+            <p class="browser-size">{{(document_item.size/1048576).toPrecision(3)>1?(document_item.size/1048576).toPrecision(3)+'MB':(document_item.size/1048576).toPrecision(3)+'KB'}}</p>
           </div>
         </div>
       </ion-item>
@@ -98,33 +99,33 @@
           <span class="msg-footer-text">查看详情</span>
           <ion-icon name="arrow-forward" class="ml12"></ion-icon>
         </div>
-        <p class="describe-cont">{{proposal_item.opinion}}</p>
+        <p class="describe-cont">{{document_item.opinion}}</p>
       </ion-item>
     </ion-list>
-    </div>
-    <div style="height:100px;"></div>
-    <button ion-button expand="full" large class="fixed-bottom bg-gry" (click)="goAccountEdit()" *ngIf="projectStageDetail.adviserStatus==0 || projectStageDetail.adviserStatus==4">
-      等待客户确认中
-    </button>
-    <button ion-button expand="full" large class="fixed-bottom" (click)="goPaymentRecord(projectStageDetail.adviserStatus)"
-      *ngIf="projectStageDetail.adviserStatus==5">
-      提交收款申请
-    </button>
-    <!-- <button ion-button expand="full" large class="fixed-bottom" 
+  </div>
+  <div style="height:100px;"></div>
+  <button ion-button expand="full" large class="fixed-bottom bg-gry" (click)="goAccountEdit()" *ngIf="projectStageDetail.adviserStatus==0 || projectStageDetail.adviserStatus==4">
+    等待客户确认中
+  </button>
+  <button ion-button expand="full" large class="fixed-bottom" (click)="goPaymentRecord(projectStageDetail.adviserStatus)"
+    *ngIf="projectStageDetail.adviserStatus==5">
+    提交收款申请
+  </button>
+  <!-- <button ion-button expand="full" large class="fixed-bottom" 
         (click)="goPaymentRecord(projectStageDetail.adviserStatus)" 
         *ngIf="projectStageDetail.adviserStatus==6">
         提交发票信息
       </button> -->
-    <button ion-button expand="full" large class="fixed-bottom" (click)="goPaymentRecord(projectStageDetail.adviserStatus)"
-      *ngIf="projectStageDetail.adviserStatus==-1 || projectStageDetail.adviserStatus==1">
-      编辑阶段
-    </button>
-    <!-- <div class="fixed-bottom" *ngIf="projectStageDetail.adviserStatus==1">
+  <button ion-button expand="full" large class="fixed-bottom" (click)="goPaymentRecord(projectStageDetail.adviserStatus)"
+    *ngIf="projectStageDetail.adviserStatus==-1 || projectStageDetail.adviserStatus==1">
+    编辑阶段
+  </button>
+  <!-- <div class="fixed-bottom" *ngIf="projectStageDetail.adviserStatus==1">
           <button ion-button class="btn-submit" (click)="onBankAccountSubmit(bankDateil.bankAccount,bankDateil.account)">确认阶段</button>
           <button ion-button class="btn-delete" (click)="onBankAccountDel()">提出异议</button>
       </div> -->
-    <div class="fixed-bottom" *ngIf="projectStageDetail.adviserStatus==3 || projectStageDetail.adviserStatus==8">
-      <button ion-button class="btn-submit" (click)="goPaymentRecord(projectStageDetail.adviserStatus)">添加交互物</button>
-      <button ion-button class="btn-delete" (click)="onStageSubmit()">阶段交付</button>
-    </div>
-  </ion-content>
+  <div class="fixed-bottom" *ngIf="projectStageDetail.adviserStatus==3 || projectStageDetail.adviserStatus==8">
+    <button ion-button class="btn-submit" (click)="goPaymentRecord(projectStageDetail.adviserStatus)">添加交互物</button>
+    <button ion-button class="btn-delete" (click)="onStageSubmit()">阶段交付</button>
+  </div>
+</ion-content>

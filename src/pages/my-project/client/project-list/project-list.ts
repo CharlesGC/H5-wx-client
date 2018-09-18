@@ -3,7 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { MamenDataProvider } from '../../../../providers/mamen-data/mamen-data';
 
 import { ProjectBrowserPage } from '../project-browser/project-browser';
-import { getProjectByStatusUrl,myProjectCountUrl } from '../../../../providers/requestUrl';
+import { getProjectByStatusUrl, myProjectCountUrl } from '../../../../providers/requestUrl';
 import { ProjectSpeedReleasePage } from '../project-speed-release/project-speed-release';
 import { SpeedPage } from '../../../speed/speed';
 /**
@@ -25,7 +25,8 @@ export class ProjectListPage {
   public showNavMenuNumber = 0;
   public projectCount = {}
   public projectListData = [];
-  constructor(public navCtrl: NavController, public navParams: NavParams,private Provider:MamenDataProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider) {
+    this.navCtrl = navCtrl
   }
 
   ionViewDidLoad() {
@@ -39,12 +40,12 @@ export class ProjectListPage {
   }
   /*点击展开、收起*/
   onNavMenuClick(value) {
-    console.log(value,'value');
+    console.log(value, 'value');
     this.isShowNavMenu = value;
   }
 
   /*点击菜单触发*/
-  onNavMenuItemClick(type,typeName,number) {
+  onNavMenuItemClick(type, typeName, number) {
     this.showNavMenuName = typeName;
     this.showNavMenuNumber = number
     this.isShowNavMenu = false;
@@ -53,40 +54,40 @@ export class ProjectListPage {
 
   /*跳转到详情页面*/
   onProjectBrowserClick(data) {
-    if(data.type == 0){
-      this.navCtrl.push(ProjectBrowserPage,{data:data});
-    }else{
-      this.navCtrl.push(ProjectSpeedReleasePage,{data:data});
+    if (data.type == 0) {
+      this.navCtrl.push(ProjectBrowserPage, { data: data });
+    } else {
+      this.navCtrl.push(ProjectSpeedReleasePage, { data: data });
     }
-    
+
   }
 
-  getUrlParam(name) {  
+  getUrlParam(name) {
     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象  
     var r = window.location.search.substr(1).match(reg);  //匹配目标参数  
     if (r != null) {
-        return encodeURI(r[2]);  //返回参数值 
+      return encodeURI(r[2]);  //返回参数值 
     } else {
-        return null; 
+      return null;
     }
- }
+  }
 
   /*项目列表数据请求*/
   getProjectListData(type) {
     // let projectListsDataUrl = 'http://mamon.yemindream.com/mamon/customer/getProjectByStatus';
     const openId = window.sessionStorage.getItem('openId') || this.getUrlParam('openId');
-    let projectListsDataUrl = getProjectByStatusUrl + '?openId=' + openId + '&proStatus='+type;
-    this.Provider.getMamenSwiperData(projectListsDataUrl).subscribe(res=>{
-      if(res.code==200) {
-        console.log(res,'--------');
+    let projectListsDataUrl = getProjectByStatusUrl + '?openId=' + openId + '&proStatus=' + type;
+    this.Provider.getMamenSwiperData(projectListsDataUrl).subscribe(res => {
+      if (res.code == 200) {
+        console.log(res, '--------');
         this.projectListData = res.data;
-      }else if(res.code == 207) {
+      } else if (res.code == 207) {
         window.localStorage.removeItem('openId');
-      }else{
-        alert('请求出错:'+res.msg);
+      } else {
+        alert('请求出错:' + res.msg);
       }
-    },error=>{
-      console.log('erros===',error);
+    }, error => {
+      console.log('erros===', error);
     })
   }
 
@@ -95,18 +96,18 @@ export class ProjectListPage {
     // let myProjectCountUrl = 'http://mamon.yemindream.com/mamon/customer/myProjectCount';
     const openId = window.sessionStorage.getItem('openId') || this.getUrlParam('openId');
     let cmyProjectCountUrl = myProjectCountUrl + '?openId=' + openId;
-    this.Provider.getMamenSwiperData(cmyProjectCountUrl).subscribe(res=>{
-      if(res.code==200) {
-       console.log(res,'项目数量');
-       this.projectCount = res.data;
-       this.showNavMenuNumber = res.data ? res.data.allCount : 0;
-      }else if(res.code == 207) {
+    this.Provider.getMamenSwiperData(cmyProjectCountUrl).subscribe(res => {
+      if (res.code == 200) {
+        console.log(res, '项目数量');
+        this.projectCount = res.data;
+        this.showNavMenuNumber = res.data ? res.data.allCount : 0;
+      } else if (res.code == 207) {
         window.localStorage.removeItem('openId');
-      }else{
-        alert('请求出错:'+res.msg);
+      } else {
+        alert('请求出错:' + res.msg);
       }
-    },error=>{
-      console.log('erros===',error);
+    }, error => {
+      console.log('erros===', error);
     })
   }
 
@@ -130,9 +131,14 @@ export class ProjectListPage {
   //       infiniteScroll.complete();
   //   }, 2000);
   // }
-  
+
   // 添加项目跳转页
-  onSpeedStageClick () {
+  onSpeedStageClick() {
     this.navCtrl.push(SpeedPage);
+  }
+
+  goback() {
+    this.isShowNavMenu = false;
+    this.navCtrl.popToRoot();
   }
 }

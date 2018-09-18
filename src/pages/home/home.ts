@@ -5,6 +5,7 @@ import { MamenDataProvider } from '../../providers/mamen-data/mamen-data';
 import { PhonebindPage } from '../phonebind/phonebind';
 import { ProjectConsultantBrowserPage } from '../my-project/client/project-consultant-browser/project-consultant-browser';
 import { ChooseIdentityPage } from '../../pages/choose-identity/choose-identity';
+import { SwiperDetailPage } from './swiper-detail/swiper-detail';
 // declare var onBridgeReady;
 
 // import { ViewChild } from '@angular/core';
@@ -36,7 +37,6 @@ export class HomePage {
   constructor(public navCtrl: NavController, private swiperdata: MamenDataProvider, private industrydata: MamenDataProvider,
     private skilldata: MamenDataProvider, private casedata: MamenDataProvider, private outstanddata: MamenDataProvider, private financedata: MamenDataProvider,private financeAlldata: MamenDataProvider) {
     this.IndustryArr = [];
-    // onBridgeReady();
   }
   ionViewDidLoad() {
     // console.log(getswipreUrl);
@@ -260,5 +260,9 @@ export class HomePage {
     } else {
       this.navCtrl.push(ChooseIdentityPage);
     }
+  }
+  // 点击跳转到轮播图详情
+  goSwiperDetail () {
+    this.navCtrl.push(SwiperDetailPage);
   }
 }

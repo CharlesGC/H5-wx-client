@@ -112,11 +112,11 @@ export class ConsultantDocumentListPage {
     this.Provider.getMamenSwiperData(projectStageListUrl).subscribe(res => {
       if (res.code == 200) {
         this.documentListData = res.data;
-        console.log(this.documentListData,'这里的值')
+        console.log(this.documentListData, '这里的值')
       } else if (res.code == 207) {
         window.localStorage.removeItem('openId');
       } else {
-        alert('请求出错:' + res.msg);
+        console.log('请求出错:' + res.msg);
       }
     }, error => {
       console.log('erros===', error);
@@ -142,5 +142,8 @@ export class ConsultantDocumentListPage {
   onAddDocumentClick() {
     this.navCtrl.push(ConsultantInteractionSubmitPage, { type: 1, pid: this.projectDetails['pid'] });
   }
-
+  // 返回项目列表页
+  goback() {
+    this.navCtrl.popTo(this.navCtrl.getByIndex(1))
+  }
 }

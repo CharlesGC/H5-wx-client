@@ -3,11 +3,11 @@ page-speed {
         width: 100%;
         background: #fcfcfc;
         .list-ios {
-            margin:0;
+            margin: 0;
         }
         .label-ios {
             margin: 0;
-         }
+        }
         ion-label {
             overflow: initial;
             height: 100%;
@@ -47,7 +47,7 @@ page-speed {
                 }
             }
             .speech-prompt {
-                width: 228px;  
+                width: 228px;
                 height: 17px;
                 font-family: PingFangSC;
                 font-size: 12px;
@@ -62,7 +62,7 @@ page-speed {
                 height: auto;
                 display: flex;
                 margin-top: 15px;
-                background:#fcfcfc;
+                background: #fcfcfc;
                 .item-play {
                     width: 55%;
                     height: 155px;
@@ -80,7 +80,7 @@ page-speed {
                             margin-top: 14px;
                             display: flex;
                             margin: 15px 0;
-                              .audio-spinner {
+                            .audio-spinner {
                                 width: 14px;
                                 height: 11px;
                                 /* padding-top: 5px; */
@@ -96,71 +96,74 @@ page-speed {
                                     height: 100%;
                                     border: 0
                                 }
-                              }
-                              .audio-spinner1 {
+                            }
+                            .audio-spinner1 {
                                 width: 100%;
                                 height: 20px;
                                 margin-left: 6px;
                                 margin-top: 6px;
-                                div{      
-                                  width: 100%;
-                                  height:12px;
-                                  background-color: #fff;
-                                  display:inline-block;
-                                  width: 2px;
-                                  margin-left: -3px;
-                                  animation:strechdelay 1s infinite ease-in-out;
-                                  -webkit-animation:strechdelaytwo 1s infinite ease-in-out;
-                                  position: relative;
-                                  top: 1px;
-                                  opacity: .8;
+                                div {
+                                    width: 100%;
+                                    height: 12px;
+                                    background-color: #fff;
+                                    display: inline-block;
+                                    width: 2px;
+                                    margin-left: -3px;
+                                    animation: strechdelay 1s infinite ease-in-out;
+                                    -webkit-animation: strechdelaytwo 1s infinite ease-in-out;
+                                    position: relative;
+                                    top: 1px;
+                                    opacity: .8;
                                 }
-                                .line2{
-                                    animation-delay:-0.9s;
-                                    -webkit-animation-delay:-0.9s;
-                                  }
-                                   .line3{
-                                    animation-delay:-0.8s;
-                                    -webkit-animation-delay:-0.8s;
-                                  }
-                                  .line4{
-                                    animation-delay:-0.7s;
-                                    -webkit-animation-delay:-0.7s;
-                                  }
-                                   .line5{
-                                    animation-delay:-0.6s;
-                                    -webkit-animation-delay:-0.6s;
-                                  }
+                                .line2 {
+                                    animation-delay: -0.9s;
+                                    -webkit-animation-delay: -0.9s;
+                                }
+                                .line3 {
+                                    animation-delay: -0.8s;
+                                    -webkit-animation-delay: -0.8s;
+                                }
+                                .line4 {
+                                    animation-delay: -0.7s;
+                                    -webkit-animation-delay: -0.7s;
+                                }
+                                .line5 {
+                                    animation-delay: -0.6s;
+                                    -webkit-animation-delay: -0.6s;
+                                }
                                 @keyframes strechdelaytwo {
-                                  0%,40%,100%{
-                                    transform:scaleY(.4);
-                                    -webkit-transform:scaleY(.4);
-                                  }
-                                  20%{
-                                    transform:scaleY(1);
-                                    -webkit-transform:scaleY(1);
-                                  }
+                                    0%,
+                                    40%,
+                                    100% {
+                                        transform: scaleY(.4);
+                                        -webkit-transform: scaleY(.4);
+                                    }
+                                    20% {
+                                        transform: scaleY(1);
+                                        -webkit-transform: scaleY(1);
+                                    }
                                 }
                                 @-webkit-keyframes strechdelaytwo {
-                                  0%,40%,100%{
-                                    -webkit-transform:scaleY(.4);
-                                  }
-                                  20%{
-                                    -webkit-transform:scaleY(1);
-                                  }
-                              }
+                                    0%,
+                                    40%,
+                                    100% {
+                                        -webkit-transform: scaleY(.4);
+                                    }
+                                    20% {
+                                        -webkit-transform: scaleY(1);
+                                    }
+                                }
                             }
-                    
                             .click-play {
                                 width: 57px;
                                 height: 17px;
                                 font-family: PingFangSC;
                                 font-size: 12px;
-                                font-weight: 600;   
+                                font-weight: 600;
                                 color: #ffffff;
                                 margin-right: 47px;
                                 line-height: 32px;
-                                flex:1;
+                                flex: 1;
                             }
                             .icon-close {
                                 // width: 20px;
@@ -177,8 +180,7 @@ page-speed {
                                 flex: 1;
                                 ion-icon {
                                     font-size: 14px;
-                                }
-                                // ion-icon {
+                                } // ion-icon {
                                 //     position: relative;
                                 //     left: 5px;
                                 //     bottom: 5px;
@@ -191,7 +193,7 @@ page-speed {
                     .item-audio::-webkit-scrollbar {
                         display: none;
                     }
-                    .spinner{
+                    .spinner {
                         width: 100%;
                         height: 155px;
                         opacity: 0.5;
@@ -202,57 +204,61 @@ page-speed {
                         position: absolute;
                         top: 0;
                     }
-                      .spinner-list {
-                          width: 100%;
-                          height: 50px;
-                          padding-top: 31px;
-                          padding-left: 65px;
-                          padding-right: 65px;
-                      }
-                      .spinner-list div{
-                          width: 100px;
-                          height: 30.2px;
-                          background-color: #ffffff;
-                          display:inline-block;
-                          width:3px;
-                          margin-left:1px;
-                          margin-right:1px;
-                          animation:strechdelay 1s infinite ease-in-out;
-                          -webkit-animation:strechdelay 1s infinite ease-in-out;
-                          animation-direction: reverse;
-                      }
-                      .spinner-list .line2{
-                        animation-delay:-0.9s;
-                        -webkit-animation-delay:-0.9s;
-                      }
-                      .spinner-list .line3{
-                        animation-delay:-0.8s;
-                        -webkit-animation-delay:-0.8s;
-                      }
-                      .spinner-list .line4{
-                        animation-delay:-0.7s;
-                        -webkit-animation-delay:-0.7s;
-                      }
-                      .spinner-list .line5{
-                        animation-delay:-0.6s;
-                        -webkit-animation-delay:-0.6s;
-                      }
-                      @keyframes strechdelay {
-                        0%,40%,100%{
-                          transform:scaleY(.4);
-                          -webkit-transform:scaleY(.4);
+                    .spinner-list {
+                        width: 100%;
+                        height: 50px;
+                        padding-top: 31px;
+                        padding-left: 65px;
+                        padding-right: 65px;
+                    }
+                    .spinner-list div {
+                        width: 100px;
+                        height: 30.2px;
+                        background-color: #ffffff;
+                        display: inline-block;
+                        width: 3px;
+                        margin-left: 1px;
+                        margin-right: 1px;
+                        animation: strechdelay 1s infinite ease-in-out;
+                        -webkit-animation: strechdelay 1s infinite ease-in-out;
+                        animation-direction: reverse;
+                    }
+                    .spinner-list .line2 {
+                        animation-delay: -0.9s;
+                        -webkit-animation-delay: -0.9s;
+                    }
+                    .spinner-list .line3 {
+                        animation-delay: -0.8s;
+                        -webkit-animation-delay: -0.8s;
+                    }
+                    .spinner-list .line4 {
+                        animation-delay: -0.7s;
+                        -webkit-animation-delay: -0.7s;
+                    }
+                    .spinner-list .line5 {
+                        animation-delay: -0.6s;
+                        -webkit-animation-delay: -0.6s;
+                    }
+                    @keyframes strechdelay {
+                        0%,
+                        40%,
+                        100% {
+                            transform: scaleY(.4);
+                            -webkit-transform: scaleY(.4);
                         }
-                        20%{
-                          transform:scaleY(1);
-                          -webkit-transform:scaleY(1);
+                        20% {
+                            transform: scaleY(1);
+                            -webkit-transform: scaleY(1);
                         }
-                      }
-                      @-webkit-keyframes strechdelay {
-                        0%,40%,100%{
-                          -webkit-transform:scaleY(.4);
+                    }
+                    @-webkit-keyframes strechdelay {
+                        0%,
+                        40%,
+                        100% {
+                            -webkit-transform: scaleY(.4);
                         }
-                        20%{
-                          -webkit-transform:scaleY(1);
+                        20% {
+                            -webkit-transform: scaleY(1);
                         }
                     }
                     .luying {
@@ -298,7 +304,7 @@ page-speed {
                         color: #505050;
                         padding: 0 15px 0 30px;
                         margin-top: 15px;
-                    } 
+                    }
                 }
             }
             .promptbot {
@@ -372,8 +378,7 @@ page-speed {
             color: #ffffff;
             line-height: 50px;
         }
-    }
-    // 弹出层
+    } // 弹出层
     .phonebind-modal {
         left: 0;
         right: 0;
@@ -422,8 +427,7 @@ page-speed {
             -ms-flex-direction: column;
             flex-direction: column;
             min-width: 250px;
-            max-height: 90%;
-            // opacity: 0;
+            max-height: 90%; // opacity: 0;
             contain: content;
             font-family: PingFangSC;
             font-weight: 600;
@@ -437,16 +441,15 @@ page-speed {
                 font-size: 12px;
                 line-height: 1.8;
                 font-weight: 500;
-                p{
+                p {
                     font-family: PingFangSC;
                     font-size: 14px;
                     line-height: 1.29;
                     text-align: justify;
-                    color: #4a4a4a;
-                    // text-indent: 2rem;
+                    color: #4a4a4a; // text-indent: 2rem;
                 }
             }
-            .modal-top-close{
+            .modal-top-close {
                 text-align: right;
                 margin-top: 5px;
                 ion-icon {
@@ -474,5 +477,4 @@ page-speed {
             }
         }
     }
-
 }

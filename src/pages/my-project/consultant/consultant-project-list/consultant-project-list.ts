@@ -129,4 +129,8 @@ export class ConsultantProjectListPage {
   onSpeedStageClick() {
     this.navCtrl.pop();
   }
+  goback(){
+    this.isShowNavMenu = false;
+    this.navCtrl.popToRoot();
+  }
 }

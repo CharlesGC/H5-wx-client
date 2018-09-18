@@ -25,22 +25,22 @@ import { ConsultantProgramListPage } from '../consultant-program-list/consultant
 export class ConsultantCollectionListPage {
   public isShowNavMenu = false;
   public showNavMenuName = '';
-  public projectInvoiceListData =[];
+  public projectInvoiceListData = [];
   public projectDetails = {}
-  constructor(public navCtrl: NavController, public navParams: NavParams,private Provider:MamenDataProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider) {
   }
 
   ionViewDidLoad() {
     let pid = this.navParams.get('pid');
     let status = this.navParams.get('status');
-    this.getProjectInvoiceListDataData(pid,status);
+    this.getProjectInvoiceListDataData(pid, status);
     console.log('ionViewDidLoad ProjectInvoiceListPage');
   }
 
   ionViewDidEnter() {
     let pid = this.navParams.get('pid');
     let status = this.navParams.get('status');
-    this.getProjectInvoiceListDataData(pid,status);
+    this.getProjectInvoiceListDataData(pid, status);
     this.projectDetails = this.navParams.get('data') || {};
   }
 
@@ -50,70 +50,76 @@ export class ConsultantCollectionListPage {
   }
 
   /*点击菜单触发*/
-  onNavMenuItemClick(type,typeName,status) {
+  onNavMenuItemClick(type, typeName, status) {
     this.showNavMenuName = typeName;
     this.isShowNavMenu = false;
     //TODO 提示语
-    if(type == 1){
-      this.navCtrl.push(ConsultantProjectBrowserPage,{data:this.projectDetails,pid:this.projectDetails['pid'],status:status||''});
-    }else if(type == 2){
-      this.projectDetails['appStatus'] !=0 &&this.projectDetails['appStatus'] !=1 &&
-      this.projectDetails['appStatus'] !=2 &&this.projectDetails['appStatus'] !=3 && 
-      this.navCtrl.push(ConsultantProgramListPage,{pid:this.projectDetails['pid'],status:status||'',data:this.projectDetails});
-    }else if(type == 3) {
-      this.projectDetails['appStatus'] !=6&&this.projectDetails['appStatus'] !=4&&
-      this.projectDetails['appStatus'] !=0 &&this.projectDetails['appStatus'] !=1 &&
-      this.projectDetails['appStatus'] !=2 &&this.projectDetails['appStatus'] !=3 && 
-      this.navCtrl.push(ConsultantStageListPage,{pid:this.projectDetails['pid'],status:status,
-      projectType:this.projectDetails['appStatus'],programPrice:this.projectDetails['finalPrice'],data:this.projectDetails});
-    }else if(type == 4) {
-      this.projectDetails['appStatus'] !=0 &&this.projectDetails['appStatus'] !=1 &&
-      this.projectDetails['appStatus'] !=2 &&this.projectDetails['appStatus'] !=3 && 
-      this.navCtrl.push(ConsultantDocumentListPage,{pid:this.projectDetails['pid'],status:status,data:this.projectDetails});
-    }else if(type == 5) {
+    if (type == 1) {
+      this.navCtrl.push(ConsultantProjectBrowserPage, { data: this.projectDetails, pid: this.projectDetails['pid'], status: status || '' });
+    } else if (type == 2) {
+      this.projectDetails['appStatus'] != 0 && this.projectDetails['appStatus'] != 1 &&
+        this.projectDetails['appStatus'] != 2 && this.projectDetails['appStatus'] != 3 &&
+        this.navCtrl.push(ConsultantProgramListPage, { pid: this.projectDetails['pid'], status: status || '', data: this.projectDetails });
+    } else if (type == 3) {
+      this.projectDetails['appStatus'] != 6 && this.projectDetails['appStatus'] != 4 &&
+        this.projectDetails['appStatus'] != 0 && this.projectDetails['appStatus'] != 1 &&
+        this.projectDetails['appStatus'] != 2 && this.projectDetails['appStatus'] != 3 &&
+        this.navCtrl.push(ConsultantStageListPage, {
+          pid: this.projectDetails['pid'], status: status,
+          projectType: this.projectDetails['appStatus'], programPrice: this.projectDetails['finalPrice'], data: this.projectDetails
+        });
+    } else if (type == 4) {
+      this.projectDetails['appStatus'] != 0 && this.projectDetails['appStatus'] != 1 &&
+        this.projectDetails['appStatus'] != 2 && this.projectDetails['appStatus'] != 3 &&
+        this.navCtrl.push(ConsultantDocumentListPage, { pid: this.projectDetails['pid'], status: status, data: this.projectDetails });
+    } else if (type == 5) {
       // this.projectDetails['appStatus'] !=6&&this.projectDetails['appStatus'] !=4&&
       // this.projectDetails['appStatus'] !=0 &&this.projectDetails['appStatus'] !=1 &&
       // this.projectDetails['appStatus'] !=2 &&this.projectDetails['appStatus'] !=3 && 
       // this.navCtrl.push(ConsultantCollectionListPage,{pid:this.projectDetails['pid'],status:status,data:this.projectDetails});
       let pid = this.navParams.get('pid');
       let status = this.navParams.get('status');
-      this.getProjectInvoiceListDataData(pid,status);
+      this.getProjectInvoiceListDataData(pid, status);
     }
   }
 
   /*跳转到发票详情页面*/
   goInvoiceBrowser(data) {
-    this.navCtrl.push(ConsultantCollectionBorswerPage,{id:data.mpid})
+    this.navCtrl.push(ConsultantCollectionBorswerPage, { id: data.mpid })
   }
 
-  getUrlParam(name) {  
+  getUrlParam(name) {
     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象  
     var r = window.location.search.substr(1).match(reg);  //匹配目标参数  
     if (r != null) {
-        return encodeURI(r[2]);  //返回参数值 
+      return encodeURI(r[2]);  //返回参数值 
     } else {
-        return null; 
+      return null;
     }
- }
+  }
 
   /*项目发票列表数据请求*/
-  getProjectInvoiceListDataData(pid,status) {
+  getProjectInvoiceListDataData(pid, status) {
     // let projectPaymentUrl = 'http://mamon.yemindream.com/mamon/adviser/applyMoneyList';
-    const openId = window.sessionStorage.getItem('openId')|| this.getUrlParam('openId');
-    let projectPaymentUrl = applyMoneyListUrl + '?openId=' + openId + '&pid='+pid;
+    const openId = window.sessionStorage.getItem('openId') || this.getUrlParam('openId');
+    let projectPaymentUrl = applyMoneyListUrl + '?openId=' + openId + '&pid=' + pid;
     // if(status !== ''){
     //   projectPaymentUrl = projectPaymentUrl + '&type='+status;
     // }
-    this.Provider.getMamenSwiperData(projectPaymentUrl).subscribe(res=>{
-      if(res.code==200) {
+    this.Provider.getMamenSwiperData(projectPaymentUrl).subscribe(res => {
+      if (res.code == 200) {
         this.projectInvoiceListData = res.data;
-      }else if(res.code == 207) {
+      } else if (res.code == 207) {
         window.localStorage.removeItem('openId');
-      }else{
-        alert('请求出错:'+res.msg);
+      } else {
+        alert('请求出错:' + res.msg);
       }
-    },error=>{
-      console.log('erros===',error);
+    }, error => {
+      console.log('erros===', error);
     })
+  }
+  // 返回项目列表页
+  goback() {
+    this.navCtrl.popTo(this.navCtrl.getByIndex(1))
   }
 }

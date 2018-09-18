@@ -1,13 +1,13 @@
 <ion-content class="content">
   <!-- 轮播图部分 -->
-  <div *ngIf="swiperArr">
+  <div *ngIf="swiperArr" (click)="goSwiperDetail()">
     <ion-slides pager class="swiper_content" does-continue="true" auto-play="true" loop="true" slide-interval=2000>
-      <ion-slide *ngFor="let item_swiperArr of swiperArr" class="swiper_list">
+      <ion-slide *ngFor="let item_swiperArr of swiperArr" class="swiper_list" >
         <img [src]="item_swiperArr.bannerUrl" />
         <div class="img-text">
           <div>{{item_swiperArr.title}}</div>
           <div>{{item_swiperArr.note}}</div>
-          <div (click)="clickmore()">
+          <div >
             <span>点击了解更多</span>
             <span>></span>
           </div>

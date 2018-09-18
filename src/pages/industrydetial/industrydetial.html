@@ -30,7 +30,7 @@
             <span *ngIf="IndustryName.industryName == undefined">请选择行业</span>
             <span *ngIf="IndustryName.industryName != undefined" style="color: #ff6536">{{IndustryName.industryName}}</span>
             <span>
-              <ion-icon name="arrow-down-outline"></ion-icon>
+              <ion-icon name="arrow-down"></ion-icon>
             </span>
           </div>
           <!-- 技能下拉 -->
@@ -38,7 +38,7 @@
             <span *ngIf="skilldoubleData.fName == undefined">请选择领域</span>
             <span *ngIf="skilldoubleData.fName != undefined" class="SecondarySkill" style="color: #ff6536;">{{skilldoubleData.fName}}•{{inputValue.sName}}</span>
             <span>
-              <ion-icon name="arrow-down-outline"></ion-icon>
+              <ion-icon name="arrow-down"></ion-icon>
             </span>
           </div>
         </div>
@@ -48,7 +48,7 @@
     <ion-list class="indeuList" [hidden]="isIndustryLabel">
       <ion-item (click)="selsectIndustry('全部行业',-1,'isIndustry')" [ngClass]="{'checked':skillChecked==0}">全部行业</ion-item>
       <ion-item *ngFor="let industryList of IndustryTotal;let i = index" class="industryList-item" [ngClass]="{'checked':skillChecked==industryList.ilid}"
-        (click)="selsectIndustry(industryList,i,'isIndustry')">
+        (click)="selsectIndustry(industryList,industryList.ilid,'isIndustry')">
         {{industryList.industryName}}
       </ion-item>
     </ion-list>
@@ -57,7 +57,7 @@
       <div class="skill-list1">
         <ion-list>
           <ion-item (click)="infoSecondarySkill('全部领域',-1,'isSkill')" [ngClass]="{'checked':skillCheckedSkill==0}">全部领域</ion-item>
-          <ion-item *ngFor="let item_Skill of SkillLabelMoreArr;let i = index" (click)="infoSecondarySkill(item_Skill,i,'isSkill')" [ngClass]="{'checked':skillCheckedSkill==item_Skill.sfid}">
+          <ion-item *ngFor="let item_Skill of SkillLabelMoreArr;let i = index" (click)="infoSecondarySkill(item_Skill,item_Skill.sfid,'isSkill')" [ngClass]="{'checked':skillCheckedSkill==item_Skill.sfid}">
             {{item_Skill.fName}}
           </ion-item>
         </ion-list>
