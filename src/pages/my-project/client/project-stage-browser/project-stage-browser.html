@@ -61,8 +61,8 @@
       </ion-item>
       <ion-item no-lines>
         <label>交付方式</label>
-        <span item-right class="item-value" *ngIf="projectStageDetail.payment_method == 0">线上</span>
-        <span item-right class="item-value" *ngIf="projectStageDetail.payment_method == 1">线下</span>
+        <span item-right class="item-value" *ngIf="projectStageDetail.paymentMethod == 0">线上</span>
+        <span item-right class="item-value" *ngIf="projectStageDetail.paymentMethod == 1">线下</span>
       </ion-item>
     </ion-list>
     <div class="user-other-list" *ngIf="projectStageDetail.document && projectStageDetail.document.length>0">

@@ -4,6 +4,7 @@ import { MamenDataProvider } from '../../providers/mamen-data/mamen-data';
 import { ChooseIdentityPage } from '../choose-identity/choose-identity';
 import { ContactPage } from '../contact/contact';
 import { bindPhoneUrl,sendSmsCodeUrl } from '../../providers/requestUrl';
+// import { Keyboard } from '@ionic-native/keyboard';
 
 /**
  * Generated class for the PhonebindPage page.
@@ -17,6 +18,7 @@ import { bindPhoneUrl,sendSmsCodeUrl } from '../../providers/requestUrl';
   selector: 'page-phonebind',
   templateUrl: 'phonebind.html',
   viewProviders: [MamenDataProvider]
+  
 })
 export class PhonebindPage {
   public title = '手机号绑定'
@@ -24,21 +26,27 @@ export class PhonebindPage {
   public isFlag = true;
   public isAgreed = false;
   public isShow = false;
+  public isSend = true;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,private Provider:MamenDataProvider,public alertCtrl: AlertController) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad PhonebindPage',this.navParams.get('parmens'),'---==---');
-    
+    // this.keyboard.show();
   }
 
   
 
   /*获取验证码*/
   getVerificationCode(phone){
+    
     const openId = window.sessionStorage.getItem('openId') || this.getUrlParam('openId');
-    // let getPhoneCodeUrl = 'http://mamon.yemindream.com/mamon/user/sendSmsCode'
+    // let getPhoneCodeUrl = 'http://mamon.yemindream.com/mamon/user/sendSmsCode';
+    if(!this.isSend || !this.isFlag){
+      return;
+    }
+    this.isSend = false;
     if(phone.value.length < 11) {
       alert('手机号格式错误')
       return;
@@ -53,6 +61,7 @@ export class PhonebindPage {
       }else{
         alert('网络异常！')
       }
+      this.isSend = true;
     },error=>{
       console.log('erros===',error);
     })

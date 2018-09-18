@@ -20,6 +20,7 @@ import { getInvoiceByPsidUrl, addInvoiceUrl } from '../../../../providers/reques
 export class ProjectSubmitInvoicePage {
   public selected:any;
   public invoiceData = {}
+  public isComplete = false;
   constructor(public navCtrl: NavController, public navParams: NavParams,private Provider:MamenDataProvider) {
     this.selected = 0;
   }
@@ -81,6 +82,19 @@ export class ProjectSubmitInvoicePage {
     let psid = this.navParams.get('id');
     let invoiceData = this.invoiceData;
     // let projectInvoiceDetailUrl = 'http://mamon.yemindream.com/mamon/customer/addInvoice';
+    if(this.selected == 1){
+      if((!invoiceData['price'] && invoiceData['price'] !=0) || !invoiceData['invoiceLetterhead'] || 
+      !invoiceData['taxNumber'] || !invoiceData['companyAddress'] || !invoiceData['recipient'] || !invoiceData['taxPhone']){
+        this.isComplete = true;
+        return
+      }
+    }else if(this.selected == 0){
+      if((!invoiceData['price'] && invoiceData['price'] !=0) || !invoiceData['invoiceLetterhead'] || !invoiceData['companyPhone'] ||
+       !invoiceData['openBank'] ||　!invoiceData['taxNumber'] || !invoiceData['companyAddress'] || !invoiceData['recipient'] || !invoiceData['taxPhone']){
+        this.isComplete = true;
+        return
+      }
+    }
     const openId = window.sessionStorage.getItem('openId')|| this.getUrlParam('openId');
     let projectInvoiceDetailUrl = addInvoiceUrl + '?openId=' + openId + '&psid='+psid + '&invoiceType='+this.selected+
                               '&invoiceLetterhead='+invoiceData['invoiceLetterhead']+

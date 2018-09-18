@@ -90,7 +90,7 @@
           <div class="contact-info-cont">
             <p class="contact-info-list" *ngIf="consultantBasicData.country || consultantBasicData.province || consultantBasicData.city || consultantBasicData.address">
               <ion-icon ios="ios-navigate" md="md-navigate"></ion-icon>
-              <span>{{consultantBasicData.country+consultantBasicData.province+consultantBasicData.city+(consultantBasicData.address||'')}}</span>
+              <span>{{(consultantBasicData.country || '')+(consultantBasicData.province || '')+(consultantBasicData.city || '')+(consultantBasicData.address||'')}}</span>
             </p>
             <p class="contact-info-list" *ngIf="consultantBasicData.uphone">
               <ion-icon ios="ios-call" md="md-call"></ion-icon>
