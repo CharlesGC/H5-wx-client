@@ -23,7 +23,6 @@ export class ConsultantStageEditPage {
   public stageData = {};
   public programPrice = 0;
   public dateTime: Date;
-  public isRange = false
   public isInteger = false
   public isComplete = false
   constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider) {
@@ -58,11 +57,6 @@ export class ConsultantStageEditPage {
       return null;
     }
   }
-  sureRange() {
-    this.isRange = !this.isRange
-    return
-  }
-
   sureInteger() {
     this.isInteger = !this.isInteger
     return
@@ -89,10 +83,6 @@ export class ConsultantStageEditPage {
     var rule = /^([1-9][0-9]{0,1}|100)$/;
     if (rule.test(stageData['percentage']) == false) {
       this.isInteger = true
-      return
-    }
-    if (stageData['percentage'] > 100 || stageData['percentage'] < 1) {
-      this.isRange = true
       return
     }
     const openId = window.sessionStorage.getItem('openId') || this.getUrlParam('openId');
