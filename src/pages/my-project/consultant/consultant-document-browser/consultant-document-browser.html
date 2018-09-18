@@ -70,11 +70,13 @@
           <label>
             <img style="width:66px;height:66px;" src="{{this.consultantDocumentDetailData['format']}}">
           </label>
-          <div class="card-cont" data-src="url">
-            <h5>{{consultantDocumentDetailData.sourceName}}</h5>
-            <!-- <p class="action-browser-file">点击查看文件预览</p> -->
-            <p class="browser-size">{{consultantDocumentDetailData.size}}</p>
-          </div>
+          <a href="{{consultantDocumentDetailData.deliverableUrl}}" style="text-decoration:none">
+            <div class="card-cont" data-src="url">
+              <h5>{{consultantDocumentDetailData.sourceName}}</h5>
+              <p class="action-browser-file">点击查看文件预览</p>
+              <p class="browser-size">{{consultantDocumentDetailData.size}}</p>
+            </div>
+          </a>
         </div>
       </ion-item>
     </ion-list>
