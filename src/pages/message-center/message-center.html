@@ -8,7 +8,10 @@
   <ion-list>
     <ion-item class="message-item mt20" no-lines *ngFor="let messageCenterList_item of messageCenterList">
       <p class="msg-title">
-        <span class="msg-title-left">{{messageCenterList_item.message}}</span>
+        <span class="msg-title-left">
+          {{messageCenterList_item.message}}
+          <span *ngIf="messageCenterList_item.mesStatus == 0" style="width:8px;height:8px;background:red;margin-left:10px;border-radius: 50%;display: inline-block;"></span>
+        </span>
         <span>{{messageCenterList_item.createTime | date: 'yyyy-MM-dd'}}</span>
       </p>
       <div class="msg-cont">

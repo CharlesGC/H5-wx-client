@@ -15,7 +15,7 @@
           </ion-item>
         </ion-list>
       <div class="nav-menu-bg"></div>
-      <ion-list class="nav-menu-list" *ngIf="projectDetails.status != 0">
+      <ion-list class="nav-menu-list" [hidden]="projectDetails.status == 0">
         <ion-item class="nav-menu-item" (click)="onNavMenuItemClick(0,'详情')">
             <label>详情</label>
             <ion-icon name="arrow-forward" item-right  (click)="isShow=!isShow"></ion-icon>
@@ -186,7 +186,7 @@
                         projectDetails.status ==3 || projectDetails.status ==6 ||
                         projectDetails.status ==7 || projectDetails.status ==11 ||
                         projectDetails.status ==12 || projectDetails.status ==13 ||
-                        projectDetails.status ==14">未开始</span>
+                        projectDetails.status ==14 || projectDetails.status ==15">未开始</span>
             <span *ngIf="projectDetails.status ==4">进行中</span>
             <span *ngIf="projectDetails.status ==5 || projectDetails.status ==8||
                         projectDetails.status ==9 || projectDetails.status ==10">已完成</span>
