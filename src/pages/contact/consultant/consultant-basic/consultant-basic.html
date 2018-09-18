@@ -90,8 +90,13 @@
         <div class="contact-info mt15">
           <div class="contact-info-cont">
             <p class="contact-info-list" *ngIf="consultantBasicData.country || consultantBasicData.province || consultantBasicData.city || consultantBasicData.address">
+<<<<<<< HEAD
               <ion-icon name="place"></ion-icon>
               <span>{{consultantBasicData.country+consultantBasicData.province+consultantBasicData.city+(consultantBasicData.address||'')}}</span>
+=======
+              <ion-icon ios="ios-navigate" md="md-navigate"></ion-icon>
+              <span>{{(consultantBasicData.country || '')+(consultantBasicData.province || '')+(consultantBasicData.city || '')+(consultantBasicData.address||'')}}</span>
+>>>>>>> 4ccf63adb38b57618c45e79cc6d6466722b7d2e5
             </p>
             <p class="contact-info-list" *ngIf="consultantBasicData.uphone">
               <ion-icon ios="ios-call" md="md-call"></ion-icon>

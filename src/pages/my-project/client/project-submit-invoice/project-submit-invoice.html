@@ -25,20 +25,20 @@
     </ion-list>
     <p class="browser-file">请选择发票类型</p>
     <ion-list class="list-item-flex mt10">
-      <ion-item (click)="onSelectInvoice(0)">
+      <ion-item (click)="onSelectInvoice(1)">
         <label>增值税普通发票</label>
-        <p item-right>
-            <ion-icon class="color-f46f46" name="checkmark-circle" *ngIf="selected == 0"></ion-icon>
-        </p>
-      </ion-item>
-      <ion-item no-lines (click)="onSelectInvoice(1)">
-        <label>增值税专用发票</label>
         <p item-right>
             <ion-icon class="color-f46f46" name="checkmark-circle" *ngIf="selected == 1"></ion-icon>
         </p>
       </ion-item>
+      <ion-item no-lines (click)="onSelectInvoice(0)">
+        <label>增值税专用发票</label>
+        <p item-right>
+            <ion-icon class="color-f46f46" name="checkmark-circle" *ngIf="selected == 0"></ion-icon>
+        </p>
+      </ion-item>
     </ion-list>
-    <div class="ordinary-invoice" *ngIf="selected == 0">
+    <div class="ordinary-invoice" *ngIf="selected == 1">
         <p class="browser-file">发票信息（请确认纳税号是否正确）</p>
         <ion-list class="list-item-flex mt10">
           <ion-item>
@@ -82,7 +82,7 @@
           </ion-item>
         </ion-list>
     </div>
-    <div class="special-invoice" *ngIf="selected == 1">
+    <div class="special-invoice" *ngIf="selected == 0">
       <p class="browser-file">发票信息（请确认纳税号是否正确）</p>
       <ion-list class="list-item-flex mt10">
         <ion-item>
@@ -137,3 +137,22 @@
     <div style="height:100px;"></div>
     <button ion-button expand="full" large class="fixed-bottom" (click)="goInvoiceSubmit()">提交</button>
 </ion-content>
+
+<div class="phonebind-modal" [hidden]="!isComplete">
+    <div class="modal-bg"></div>
+    <div class="modal-box">
+        <div class="modal-top">
+            <div class="modal-top-close">
+                <!-- <ion-icon ios="ios-close" md="md-close" item-rigth (click)="onClose()" color=""></ion-icon> -->
+            </div>
+            <div class="modal-title">提示</div>
+            <div class="modal-content">
+                <p>请将内容填写完整</p>
+            </div>
+            <div class="modal-footer">
+                <button ion-button full large (click)="sureComplete()">确定</button>
+                <!-- <button ion-button full large (click)="onCompanyDel()" class="btn-delete">返回</button> -->
+            </div>
+        </div>
+    </div>
+</div>

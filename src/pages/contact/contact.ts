@@ -30,6 +30,7 @@ export class ContactPage {
   public user ={};
   public singleValue =10
   // public isshow=true;
+  public isGoto = false;
   constructor(public navCtrl: NavController,private Provider:MamenDataProvider,public loadingCtrl:LoadingController) {
     
   }
@@ -144,7 +145,8 @@ export class ContactPage {
       if(res.code==200) {
         this.user = res.data;
         if(!this.user || this.user['status'] == 1 || this.user['status'] == 2){
-          this.navCtrl.push(ChooseIdentityPage);
+          !this.isGoto && this.navCtrl.push(ChooseIdentityPage);
+          this.isGoto = true;
         }
         window.sessionStorage.setItem('user',JSON.stringify(res.data))
         window.localStorage.setItem('user',JSON.stringify(res.data));
@@ -221,6 +223,10 @@ export class ContactPage {
   } finally {
     loading.dismiss();
   }
+}
+
+goPhonebindPage(){
+  this.navCtrl.push(PhonebindPage);
 }
 
 

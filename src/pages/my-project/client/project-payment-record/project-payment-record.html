@@ -84,8 +84,8 @@
     </ion-list> -->
     <div class="user-other-list">
       <ion-list class="card-item">
-          <ion-item no-lines *ngIf="paymentRecordData">
-              <div class="card-item-label">
+          <ion-item no-lines>
+              <div class="card-item-label" *ngIf="paymentRecordData">
                 <label>
                   <img style="width:66px;height:66px;" src="{{paymentRecordData.typeStr || filetypeicon}}">
                 </label>
