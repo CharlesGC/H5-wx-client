@@ -7,11 +7,7 @@
 <ion-header>
 
     <ion-navbar>
-<<<<<<< HEAD
-      <ion-title>编辑阶段</ion-title>
-=======
-        <ion-title>我的项目/顾问/编辑阶段</ion-title>
->>>>>>> 9c1395784c70c792a0a8151d998b7271d5e463c2
+        <ion-title>编辑阶段</ion-title>
     </ion-navbar>
 
 </ion-header>
@@ -70,7 +66,7 @@
         <ion-item (click)="goFormEditPage('percentage',stageData.percentage,'text')">
             <label>付款占比<span class="required-field ml5">(必填)</span></label>
             <p item-right class="rigth-message">
-                <span item-right class="item-value line-overflow">{{stageData.percentage * 100 || '请输入'}}</span>
+                <span item-right class="item-value line-overflow">{{stageData.percentage || '请输入'}}</span>
                 <ion-icon class="icon" name="arrow-forward"></ion-icon>
             </p>
         </ion-item>
@@ -131,6 +127,24 @@
             </div>
             <div class="modal-footer">
                 <button ion-button full large (click)="sureComplete()">确定</button>
+                <!-- <button ion-button full large (click)="onCompanyDel()" class="btn-delete">返回</button> -->
+            </div>
+        </div>
+    </div>
+</div>
+<div class="phonebind-modal" [hidden]="!isDateRepeat">
+    <div class="modal-bg"></div>
+    <div class="modal-box">
+        <div class="modal-top">
+            <div class="modal-top-close">
+                <!-- <ion-icon ios="ios-close" md="md-close" item-rigth (click)="onClose()" color=""></ion-icon> -->
+            </div>
+            <div class="modal-title">提示</div>
+            <div class="modal-content">
+                <p>阶段开始时间重复</p>
+            </div>
+            <div class="modal-footer">
+                <button ion-button full large (click)="sureDateRepeat()">确定</button>
                 <!-- <button ion-button full large (click)="onCompanyDel()" class="btn-delete">返回</button> -->
             </div>
         </div>
