@@ -299,6 +299,7 @@ page-home {
                         list-style: none;
                         margin-right: .9rem;
                         .text_box {
+                            position: relative;
                             width: 15.4rem;
                             height: 23.75rem;
                             border-radius: 3px;
@@ -321,9 +322,9 @@ page-home {
                                     display: block;
                                     width: 75px;
                                     height: 20px;
-                                    position: relative;
-                                    bottom: 135px;
-                                    left: 100px;
+                                    position: absolute;
+                                    top: 15px;
+                                    right: 10px;
                                 }
                             }
                             .text_labar {
@@ -332,11 +333,12 @@ page-home {
                                 flex: row;
                                 margin-top: 10px;
                                 margin: 10px 20px 0 20px;
+                                
                                 .adviserName {
                                     overflow: hidden;
                                     text-overflow: ellipsis;
                                     white-space: nowrap; 
-                                    text-align: center;
+                                    text-align: left;
                                 }
                                 span {
                                     display: block;
@@ -351,14 +353,14 @@ page-home {
                                 .text_content {
                                     width: 60px;
                                     height: 17px;
-                                    margin: 0 20px 0 10px;
+                                    margin: 0px 20px 0 10px;
                                     padding: 0;
                                     .text_list {
                                         width: 100%;
                                         list-style: none;
                                         span {  
                                             display: block;  
-                                            width: 95px;                                  
+                                            width: 90px;                                  
                                             font-family: PingFangSC;
                                             font-size: 12px;
                                             font-weight: 500;
@@ -380,7 +382,7 @@ page-home {
                                 font-family: PingFangSC;
                                 font-size: 12px;
                                 color: #4a4a4a;
-                                margin: 10px 20px 0 20px;
+                                margin: 10px 20px 10px 20px;
                                 
                             }
                             .qiaochu-duc {                               
@@ -390,7 +392,7 @@ page-home {
                                 font-family: PingFangSC;
                                 text-align: justify;
                                 color: #4a4a4a;
-                                margin: 10px 20px 0 20px;
+                                margin: 0 20px 0 20px;
                                 display:-webkit-box;
                                 -webkit-line-clamp:3;
                                 -webkit-box-orient:vertical;
