@@ -78,14 +78,14 @@
           <img style="width:66px;height:66px;" src="assets/imgs/pdf.png" *ngIf="formatTypes(documentListData_item.typeStr) == 'pdf'">
         </label>
         <a href="{{documentListData_item.deliverableUrl}}" style="text-decoration:none">
-            <div class="card-cont" data-src="url">
-                <h5>{{documentListData_item.sourceName || filetitle}}</h5>
-                <p class="browser-file">点击查看文件预览</p>
-                <p class="browser-size" *ngIf="(documentListData_item['urlSize'] / 1048576).toPrecision(3) > 1">{{(documentListData_item['urlSize']
-                  / 1048576).toPrecision(3) || filesize}} MB</p>
-                <p class="browser-size" *ngIf="(documentListData_item['urlSize'] / 1048576).toPrecision(3) < 1">{{(documentListData_item['urlSize']
-                  / 1048576).toPrecision(3) || filesize}} KB</p>
-              </div>
+          <div class="card-cont" data-src="url">
+            <h5>{{documentListData_item.sourceName || filetitle}}</h5>
+            <p class="browser-file">点击查看文件预览</p>
+            <p class="browser-size" *ngIf="(documentListData_item['urlSize'] / 1048576).toPrecision(3) > 1">{{(documentListData_item['urlSize']
+              / 1048576).toPrecision(3) || filesize}} MB</p>
+            <p class="browser-size" *ngIf="(documentListData_item['urlSize'] / 1048576).toPrecision(3) < 1">{{(documentListData_item['urlSize']
+              / 1048576).toPrecision(3) || filesize}} KB</p>
+          </div>
         </a>
       </div>
     </ion-item>
