@@ -239,9 +239,9 @@
     </ion-item>
   </ion-list>
   <div style="height:100px;"></div>
-  <button ion-button expand="full" large class="fixed-bottom" (click)="goEvalutionPage()" *ngIf="projectDetails.appStatus ==9">评价</button>
+  <button ion-button expand="full" large class="fixed-bottom" (click)="goEvalutionPage()" *ngIf="projectDetails.appStatus ==9 && !isApply">评价</button>
   <div class="fixed-bottom" *ngIf="!projectDetails.appStatus && projectDetails.appStatus != 0">
     <button ion-button class="btn-submit" (click)="onApplicationProject()">申请该项目</button>
-    <button ion-button class="btn-delete" (click)="onProjectEditStep1()">忽略</button>
+    <button ion-button class="btn-delete" (click)="onIgnoreProject(projectDetails.pid)">忽略</button>
   </div>
 </ion-content>

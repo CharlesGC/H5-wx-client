@@ -49,7 +49,7 @@ export class DemandContentPage {
   /*项目列表数据请求*/
   getProjectListData(type) {
     // let projectListsDataUrl = 'http://mamon.yemindream.com/mamon/adviser/demandList';
-    const openId = window.sessionStorage.getItem('openId')|| this.getUrlParam('openId');
+    const openId = window.sessionStorage.getItem('openId')|| this.getUrlParam('openId') || '';
     let projectListsDataUrl = demandListUrl + '?openId=' + openId + '&type='+type + '&pageNum=' + this.pageNum + '&pageSize='+this.pageSize;
     this.Provider.getMamenSwiperData(projectListsDataUrl).subscribe(res=>{
       if(res.code==200) {

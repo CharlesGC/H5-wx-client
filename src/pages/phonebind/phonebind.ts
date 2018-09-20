@@ -101,7 +101,8 @@ export class PhonebindPage {
     let getPhoneCodeUrl = bindPhoneUrl+'?openId='+openId + '&phone=' + phone.value + '&code=' + code.value + '&userType='+userType;
     this.Provider.getMamenSwiperData(getPhoneCodeUrl).subscribe(res=>{
       if(res.code==200) {
-        this.navCtrl.push(ContactPage);
+        // this.navCtrl.push(ContactPage);
+        this.navCtrl.popToRoot();
         alert('绑定成功！')
       }
     },error=>{

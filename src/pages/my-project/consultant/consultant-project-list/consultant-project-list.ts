@@ -73,8 +73,15 @@ export class ConsultantProjectListPage {
     let projectListsDataUrl = getAdviserProjectByStatusUrl + '?openId=' + openId + '&proStatus='+type;
     this.Provider.getMamenSwiperData(projectListsDataUrl).subscribe(res=>{
       if(res.code==200) {
-        console.log(res,'--------');
         this.projectListData = res.data;
+        //TODO 格式化用服务
+        // this.projectListData && this.projectListData.length>0 && this.projectListData.map(f=>{
+        //   if(f.releaseTime){
+        //     let date = new Date(f.releaseTime);
+        //     f.releaseTime = date.getFullYear() + '/' + (date.getMonth()<10?'0'+date.getMonth():date.getMonth())+'/'+(date.getDate()<10?'0'+date.getDate():date.getDate());
+        //     console.log(f.releaseTime,'----');
+        //   }
+        // })
       }else if(res.code == 207) {
         window.localStorage.removeItem('openId');
       }else{
@@ -92,8 +99,7 @@ export class ConsultantProjectListPage {
     let myProjectCountUrl = myAdviserProjectCountUrl + '?openId=' + openId;
     this.Provider.getMamenSwiperData(myProjectCountUrl).subscribe(res=>{
       if(res.code==200) {
-       console.log(res,'项目数量');
-       this.projectCount = res.data;
+       this.projectCount = res.data || {};
        this.showNavMenuNumber = res.data ? res.data.allCount : 0;
       }else if(res.code == 207) {
         window.localStorage.removeItem('openId');
