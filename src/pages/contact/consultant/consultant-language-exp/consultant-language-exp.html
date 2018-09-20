@@ -16,10 +16,10 @@
         <ion-item class="" (click)="goFormEditPage('grade',languageListData.grade,'select')" no-lines>
             <span class="left-title">等级</span>
             <div item-right class="rigth-message">
-              <span *ngIf="languageListData.grade == 0">较差</span>
-              <span *ngIf="languageListData.grade == 1">一般</span>
+              <span *ngIf="languageListData.grade == 0">母语</span>
+              <span *ngIf="languageListData.grade == 1">精通</span>
               <span *ngIf="languageListData.grade == 2">熟练</span>
-              <span *ngIf="languageListData.grade == 3">精通</span>
+              <span *ngIf="languageListData.grade == 3">一般</span>
               <ion-icon name="arrow-forward" class="ml12"></ion-icon>
             </div>
         </ion-item>

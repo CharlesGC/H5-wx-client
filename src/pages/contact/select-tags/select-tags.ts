@@ -53,7 +53,8 @@ export class SelectTagsPage {
     this.navCtrl.pop();
   }
   onSelectSubmit(){
-    this.isSave = true;
+    // this.isSave = true;
+    // this.navCtrl.pop();
   }
   getUrlParam(name) {  
     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象  
@@ -105,7 +106,7 @@ export class SelectTagsPage {
           this.skillList = res.data && res.data.list.length>0 ? res.data.list.map(f=>({text:f.fName,id:f.sfid})):[];
           console.log(this.skillList,'this.skillList')
         }else{
-          this.skillSecondaryList = res.data && res.data.list.length>0 ? res.data.list.map(f=>({text:f.sName,id:f.sfid})):[];
+          this.skillSecondaryList = res.data && res.data.list.length>0 ? res.data.list.map(f=>({text:f.sName,id:f.ssid})):[];
           if(this.skillSecondaryList.length<1){
             this.isSkillSecondary=false;
           }else{
@@ -144,7 +145,9 @@ export class SelectTagsPage {
     this.inputName = valueObj.text || '';
     let callback = this.navParams.get('callback');
     let index = this.navParams.get('index') || 0;
+    console.log(valueObj,'valueObjvalueObj----');
     callback(this.isAdd,valueObj,index);
+    this.navCtrl.pop();
   }
 
   /*删除*/

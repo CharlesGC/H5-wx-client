@@ -30,7 +30,7 @@
           <li *ngFor="let item_IndustryArr of IndustryArr;let i =index" class="industry_list" (click)="goToOtherPage(item_IndustryArr,i,'indeustry')">
             <div class="icon_list">
               <img [src]="item_IndustryArr.industryUrl" alt="">
-              <p id="industry">{{item_IndustryArr.industryName.slice(0,4)}}</p>
+              <p id="industry">{{item_IndustryArr.industryName.slice(0,4) || ''}}</p>
             </div>
           </li>
         </ul>
@@ -74,9 +74,9 @@
             <div class="text_box">
               <div class="celebrity-img">
                 <img [src]="item.avatar" class="img" alt="">
-                <span class="img-span">
+                <!-- <span class="img-span">
                   <img src="../../assets/imgs/mingxin.png" alt="">
-                </span>
+                </span> -->
               </div>
               <div class="text_labar">
                 <span class="adviserName">{{item.adviserName}}</span>

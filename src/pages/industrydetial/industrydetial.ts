@@ -26,28 +26,21 @@ export class IndustrydetialPage {
   public skilldoubleData = {};
   public inputValue = {};
   public IndustryName = {};
-  // public skillAll: any;
   public industryId: number;
   public firstSkillId: number;
   public secondSkillId: number;
   public industryNameChecked: any;
   public skiiNameChecked: any;
-  // public dataType: any;
   public type: any;
   public id: any;
   public name: any;
   public financeAllArr = [];
-  // public financesArr = [];
   constructor(public navCtrl: NavController, public navParams: NavParams, public IndustryMoreData: MamenDataProvider,
     public SkillLabelMoreData: MamenDataProvider,
     public Skilltwolabel: MamenDataProvider, public IndustrySearch: MamenDataProvider,
     public DetialSearch: MamenDataProvider, public financedata: MamenDataProvider) {
   }
   ionViewDidLoad() {
-    // this.getinstudryListData();
-    // this.getSkillMoreData();
-
-    // this.getSecondaryData('');
     //this.doRefresh('');
     this.search = '';
     this.type = this.navParams.get('type');
@@ -267,14 +260,6 @@ export class IndustrydetialPage {
       refresher.complete();
       //toast提示
       //alert("加载成功");
-    }, 2000);
-  }
-
-  //下滑动加载数据
-  doInfinite(infiniteScroll) {
-    setTimeout(() => {
-      alert('加载完成后，关闭刷新');
-      infiniteScroll.complete();
     }, 2000);
   }
 }

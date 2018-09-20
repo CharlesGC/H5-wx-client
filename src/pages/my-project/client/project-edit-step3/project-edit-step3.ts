@@ -127,14 +127,18 @@ export class ProjectEditStep3Page {
         return 1;
       }
     })
-  }
+  } 
 
   /*列表编辑*/
   goFormEditPage(field, value, type) {
+    
     if (field == 'skillList') {
-      value = value && value.length ? value.map(d => ({ id: d.psid, text: d.skillName })) : [];
+      
+      value = value && value.length ? value.map(d => ({ id: d.psid || d.id, text: d.skillName||d.text })) : [];
+      console.log(value,'============');
     } else if (field == 'industryList') {
-      value = value && value.length ? value.map(d => ({ id: d.piid, text: d.industryName })) : [];
+      console.log(value,'industryListindustryListindustryListindustryList');
+      value = value && value.length ? value.map(d => ({ id: d.piid || d.id, text: d.industryName||d.text })) : [];
     }
     if (type == 'timeSelect') {
       this.navCtrl.push(ProjectTimeSelectPage, { callback: this.setValue, value: value, field: field, type: type });

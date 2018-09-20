@@ -22,9 +22,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
 import {IndustrydetialPage} from '../pages/industrydetial/industrydetial';
-import {IndustrymorePage} from '../pages/industrymore/industrymore';
 import { TabsPage } from '../pages/tabs/tabs';
-// import { HomeSwiperComponent } from '../components/home-swiper/home-swiper';
+// import { HomeSwiperComponent } from '../components/home-swiper/home-swiper';   
 import { PhonebindPage } from '../pages/phonebind/phonebind';
 import { RegisterPage } from '../pages/register/register';
 import { ChooseIdentityPage } from '../pages/choose-identity/choose-identity';
@@ -143,7 +142,6 @@ import { ImageCropperModule } from 'ngx-image-cropper';
     ContactPage,
     HomePage,
     IndustrydetialPage,
-    IndustrymorePage,
     TabsPage,
     PhonebindPage,
     RegisterPage,
