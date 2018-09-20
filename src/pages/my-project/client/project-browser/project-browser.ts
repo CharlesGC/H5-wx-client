@@ -145,7 +145,7 @@ export class ProjectBrowserPage {
     this.Provider.getMamenSwiperData(projectSignCountUrl).subscribe(res=>{
       if(res.code==200) {
        console.log(res,'项目数量');
-       this.projectSignCount = res.data;
+       this.projectSignCount = res.data || {};
       //  this.showNavMenuNumber = res.data ? res.data.allCount : 0;
       }else if(res.code == 207) {
         window.localStorage.removeItem('openId');

@@ -50,7 +50,6 @@ export class ProjectEditStep3Page {
 
   /*保存提交*/
   goProjectSubmit() {
-    console.log(11111111111111);
     this.projectData['otherIndustrys'] = this.getOtherIndustrys(this.projectData['industryList']);
     this.projectData['otherSkills'] = this.getOtherIndustrys(this.projectData['skillList']);
     let industrys = this.projectData['industryList'] && this.projectData['industryList'].length > 0 ? this.projectData['industryList'].map(f => f.id).join(',') : '';

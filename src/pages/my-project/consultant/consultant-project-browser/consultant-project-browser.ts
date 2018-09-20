@@ -10,7 +10,7 @@ import { ConsultantStageListPage } from '../consultant-stage-list/consultant-sta
 import { ConsultantDocumentListPage } from '../consultant-document-list/consultant-document-list';
 import { ConsultantCollectionListPage } from '../consultant-collection-list/consultant-collection-list';
 import { PorjectEvalutionPage } from '../../porject-evalution/porject-evalution';
-import { demandDeatilUrl } from '../../../../providers/requestUrl';
+import { demandDeatilUrl,ignoreProjectUrl } from '../../../../providers/requestUrl';
 import { ConsultantProjectListPage } from '../consultant-project-list/consultant-project-list';
 
 /**
@@ -218,4 +218,23 @@ export class ConsultantProjectBrowserPage {
       this.navCtrl.popTo(this.navCtrl.getByIndex(1))
     }
   }
+
+  /*忽略该项目*/
+  onIgnoreProject(pid) {
+    const openId = window.sessionStorage.getItem('openId') || this.getUrlParam('openId');
+    let projectDetailsUrl = ignoreProjectUrl + '?openId=' + openId + '&pid=' + pid;
+    this.Provider.getMamenSwiperData(projectDetailsUrl).subscribe(res => {
+      if (res.code == 200) {
+        alert('忽略成功!')
+        this.navCtrl.pop();
+      } else if (res.code == 207) {
+        window.localStorage.removeItem('openId');
+      } else {
+        alert('请求出错:' + res.msg);
+      }
+    }, error => {
+      console.log('erros===', error);
+    })
+  }
+  
 }

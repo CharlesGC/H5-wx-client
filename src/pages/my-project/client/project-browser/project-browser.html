@@ -312,12 +312,12 @@
               </ion-item>
           </ion-list>
           <div style="height:100px;"></div>
-          <button ion-button expand="full" large class="fixed-bottom bg-gry" *ngIf="projectDetails.status == 1">项目审核中</button>
-          <div class="fixed-bottom" *ngIf="projectDetails.status == 0 || projectDetails.status ==7">
+          <button ion-button expand="full" large class="fixed-bottom bg-gry" *ngIf="projectDetails.status == 1 && !isApply">项目审核中</button>
+          <div class="fixed-bottom" *ngIf="(projectDetails.status == 0 || projectDetails.status ==7) && !isApply">
               <button ion-button class="btn-submit" (click)="onProjectReleaseSubmit(projectDetails.pid)">申请发布</button>
               <button ion-button class="btn-delete" (click)="onProjectEditStep1()">编辑</button>
           </div>
-          <button ion-button expand="full" large class="fixed-bottom" (click)="goEvalutionPage()" *ngIf="projectDetails.status ==5">评价</button>
+          <button ion-button expand="full" large class="fixed-bottom" (click)="goEvalutionPage()" *ngIf="projectDetails.status ==5 && !isApply">评价</button>
           <!-- <div class="fixed-bottom" *ngIf="isApply">
             <button ion-button class="btn-submit" (click)="onApplicationProject()">申请该项目</button>
             <button ion-button class="btn-delete" (click)="onProjectEditStep1()">忽略</button>

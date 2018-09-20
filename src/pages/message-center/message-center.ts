@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { getMessageListUrl } from '../../providers/requestUrl';
+import { getMessageListUrl,readMessageUrl } from '../../providers/requestUrl';
 import { MamenDataProvider } from '../../providers/mamen-data/mamen-data';
 import { ProjectBrowserPage } from '../my-project/client/project-browser/project-browser';
 import { ConsultantProjectBrowserPage } from '../my-project/consultant/consultant-project-browser/consultant-project-browser';
@@ -27,6 +27,10 @@ export class MessageCenterPage {
   ionViewDidLoad() {
     this.getProjectListData();
     console.log('ionViewDidLoad MessageCenterPage');
+  }
+
+  ionViewDidEnter(){
+    this.getProjectListData();
   }
 
   getUrlParam(name) {  
@@ -57,16 +61,25 @@ export class MessageCenterPage {
     })
   }
 
-
   /*跳转到详情页面*/
   goProjectBrowserPage(data) {
-
-    if(data.userType == 0){
-      this.navCtrl.push(ProjectBrowserPage,{data:data});
-    }else{
-      this.navCtrl.push(ConsultantProjectBrowserPage,{data:data});
-    }
-    
+    const openId = window.sessionStorage.getItem('openId')|| this.getUrlParam('openId');
+    let readMessageChangeUrl = readMessageUrl + '?openId=' + openId + '&mid='+data.mid;
+    this.Provider.getMamenSwiperData(readMessageChangeUrl).subscribe(res=>{
+      if(res.code==200) {
+        if(data.userType == 0){
+          this.navCtrl.push(ProjectBrowserPage,{data:data});
+        }else{
+          this.navCtrl.push(ConsultantProjectBrowserPage,{data:data});
+        }
+      }else if(res.code == 207) {
+        window.localStorage.removeItem('openId');
+      }else{
+        alert('请求出错:'+res.msg);
+      }
+    },error=>{
+      console.log('erros===',error);
+    })
   }
 
 }

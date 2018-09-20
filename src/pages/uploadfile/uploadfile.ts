@@ -127,7 +127,6 @@ export class UploadfilePage {
       this.presentLoadingDefault()
       this.http.post(this.uploadUrl, formData).subscribe(res => {
         console.log('请求结束', res);
-        //let tempRes = JSON.parse(res);
         this.fid = res['data'].fid;
         this.loading.dismiss();
         setTimeout(()=>{

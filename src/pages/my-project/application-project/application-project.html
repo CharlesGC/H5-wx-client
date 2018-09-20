@@ -9,12 +9,11 @@
 <ion-content style="background-color: #fcfcfc;">
   <ion-list class="project-browser-top">
     <p class="address-type">
-      <ion-icon name="navigate"></ion-icon>
+      <ion-icon name="place"></ion-icon>
       <span>{{projectData.province}}</span>
       <span class="mr15"> {{projectData.city}}</span>
-      <ion-icon name="navigate"></ion-icon>
-      <span *ngIf="projectData.status ==0">未发布</span>
-      <span *ngIf="projectData.status != 0">已发布</span>
+      <ion-icon name="post"></ion-icon>
+      <span>{{projectData.createTime | date: 'yy/MM/dd'}}</span>
     </p>
     <div class="title-cont">
       {{projectData.projectName}}

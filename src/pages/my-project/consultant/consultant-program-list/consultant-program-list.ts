@@ -100,6 +100,7 @@ export class ConsultantProgramListPage {
       if (res.code == 200) {
         this.projectProgramDetails = res.data;
         console.log(this.projectProgramDetails)
+        if(!this.projectProgramDetails) return;
         this.projectProgramDetails['size'] = (this.projectProgramDetails['size'] / 1048576).toPrecision(3)
 
         if (this.projectProgramDetails['size'] > 1) {

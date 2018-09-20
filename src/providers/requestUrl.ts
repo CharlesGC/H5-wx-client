@@ -301,5 +301,12 @@ export const resumeUpLoadUrl = getAPIPath + '/adviser/addOrEditResume';
 /* 简历删除 */
 export const resumeDeleteUrl = getAPIPath + 'adviser/delResume';
 
+/*消息中心状态更改*/
+export const readMessageUrl = getAPIPath + 'message/readMessage';
+
+/*项目忽略请求*/
+export const  ignoreProjectUrl = getAPIPath + '/adviser/ignoreProject';
+
+
 
 

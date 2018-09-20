@@ -75,6 +75,10 @@ export class ConsultantDeliveryModelPage {
     this.isSubmit = !this.isSubmit
     this.navCtrl.pop();
   }
+  onCancel(){
+    this.isContent = !this.isContent
+    return
+  }
   /*付款申请信息提交*/
   onDeliveryModelClick() {
     let pid = this.navParams.get('pid');
@@ -95,7 +99,11 @@ export class ConsultantDeliveryModelPage {
       '&payerBank=' + deliveryModelData['bankAccount'] +
       '&payerAccount=' + deliveryModelData['account'] +
       '&logisticsCompany=' + deliveryModelData['logisticsCompany'] +
-      '&logisticsNumber=' + deliveryModelData['logisticsNumber'];
+      '&logisticsNumber=' + deliveryModelData['logisticsNumber']+
+      '&payee=' + deliveryModelData['accountHolder']+
+      '&payeeBank=' + deliveryModelData['bankAccount']+
+      '&payeeAccount=' + deliveryModelData['account']+
+      '&realPrice=' + deliveryModelData['price'];
 
     this.Provider.getMamenSwiperData(projectStageDetailUrl).subscribe(res => {
       if (res.code == 200) {

@@ -201,7 +201,7 @@ export class ProjectPaymentRecordPage {
     })
   }
 
-  /*申请发票提交*/
+  /*添加支付记录提交*/
   goPaymentRecord() {
     let psid = this.navParams.get('id');
     let invoiceData = this.paymentRecordData;
@@ -216,6 +216,7 @@ export class ProjectPaymentRecordPage {
       '&payeeAccount=' + invoiceData['payeeAccount'] +
       '&paymentUrl=' + (invoiceData['paymentUrl'] || '') +
       '&fid=' + (invoiceData['fid'] || '') +
+      '&price=' + (invoiceData['price'] || '') +
       '&realPrice=' + invoiceData['realPrice'];
     this.Provider.getMamenSwiperData(projectInvoiceDetailUrl).subscribe(res => {
       if (res.code == 200) {
