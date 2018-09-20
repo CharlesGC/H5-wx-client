@@ -21,6 +21,8 @@ export class ClientInfoUserPage {
   public user: any;
   public fromData: any;
   public isSubmit= false
+  public isfailed= false
+  public isDisabled:any
   constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider) {
     this.user = {};
     this.fromData = {}
@@ -40,6 +42,10 @@ export class ClientInfoUserPage {
   }
   sureSubmit(){
     this.isSubmit = !this.isSubmit
+    this.navCtrl.pop();
+  }
+  sureFailed(){
+    this.isfailed = !this.isfailed
     return
   }
   /*基本信息提交*/
@@ -48,13 +54,14 @@ export class ClientInfoUserPage {
     let user = this.user;
     const openId = window.sessionStorage.getItem('openId') || this.getUrlParam('openId');
     let customerUrl = editUserUrl + '?openId=' + openId + '&avatar=' + user.avatar + '&name=' + user.nickName + '&gender=' + user.gender;
+    this.isDisabled = 'disabled'
     this.Provider.getMamenSwiperData(customerUrl).subscribe(res => {
       if (res.code == 200) {
         //alert('编辑成功');
         this.isSubmit = true
-        this.navCtrl.pop();
-      } else if (res.code == 207) {
-        window.localStorage.removeItem('openId');
+      } else {
+        this.isfailed = true
+        this.isDisabled = ''
       }
     }, error => {
       console.log('erros===', error);

@@ -68,10 +68,10 @@
         <ion-icon name="arrow-forward" class="ml12"></ion-icon>
       </div>
     </ion-item>
-    <ion-item class="" (click)="goFormEditPage('salaryDown-salaryUp',[userInfoData.salaryDown,userInfoData.salaryUp],'ranger')">
+    <ion-item class="" (click)="goFormEditPage('salaryUp-salaryDown',[userInfoData.salaryUp,userInfoData.salaryDown],'ranger')">
       <span class="left-title">日薪范围</span>
       <div item-right class="rigth-message">
-        <span>{{userInfoData.salaryDown}} 元 - {{userInfoData.salaryUp}} 元</span>
+        <span>{{userInfoData.salaryUp}} 元 - {{userInfoData.salaryDown}} 元</span>
         <ion-icon name="arrow-forward" class="ml12"></ion-icon>
       </div>
     </ion-item>
@@ -159,3 +159,21 @@
         <button class="full-btn" ion-button expand="full" large (click)="onInfoUserSubmit()">提交</button>
     </ion-toolbar>
   </ion-footer> -->
+  <div class="phonebind-modal" [hidden]="!salaryDown">
+    <div class="modal-bg"></div>
+    <div class="modal-box">
+      <div class="modal-top">
+        <div class="modal-top-close">
+          <!-- <ion-icon ios="ios-close" md="md-close" item-rigth (click)="onClose()" color=""></ion-icon> -->
+        </div>
+        <div class="modal-title">提示</div>
+        <div class="modal-content">
+          <p>日薪范围不能大于99万</p>
+        </div>
+        <div class="modal-footer">
+          <button ion-button full large (click)="sureSalaryUp()">确定</button>
+          <!-- <button ion-button full large (click)="onCompanyDel()" class="btn-delete">返回</button> -->
+        </div>
+      </div>
+    </div>
+  </div>

@@ -30,25 +30,26 @@ export class ApplicationProjectPage {
   public projectData = {};
   public tip_isShow = false;
   public success_isShow = false;
-  constructor(public navCtrl: NavController, public navParams: NavParams,private Provider:MamenDataProvider) {
+  public isComplete = false
+  constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider) {
   }
 
   ionViewDidLoad() {
     this.projectData = this.navParams.get('data');
     this.fileUrlvalue = this.projectData['certifiedUrl']
-    console.log(this.projectData,'这是数据')
+    console.log(this.projectData, '这是数据')
     this.projectData['certifiedUrl'] = (this.projectData['certifiedUrl'] / 1048576).toPrecision(3)
 
     if (this.projectData['certifiedUrl'] > 1) {
       this.projectData['certifiedUrl'] = this.projectData['certifiedUrl'] + ' MB'
-    } else if(this.projectData['certifiedUrl'] < 1){
+    } else if (this.projectData['certifiedUrl'] < 1) {
       this.projectData['certifiedUrl'] = this.projectData['certifiedUrl'] * 1024 + ' KB'
-    }else if(this.projectData['certifiedUrl'] == 'NaN'){
+    } else if (this.projectData['certifiedUrl'] == 'NaN') {
       // this.projectData = {};
       //console.log(this.certificationListData['typeStr'])
     }
 
-    if(this.projectData['typeStr']){
+    if (this.projectData['typeStr']) {
       if (this.projectData['typeStr'].search(/doc/) !== -1 || this.projectData['typeStr'].search(/docx/) !== -1) {
         this.projectData['typeStr'] = 'assets/imgs/' + 'doc.png'
       } else if (this.projectData['typeStr'].search(/ppt/) !== -1 || this.projectData['typeStr'].search(/pptx/) !== -1) {
@@ -66,7 +67,7 @@ export class ApplicationProjectPage {
 
   /*列表编辑*/
   goFormEditPage(field, value, type) {
-    this.navCtrl.push(FormEditPage,{callback:this.setValue,value:value,field:field,type:type});
+    this.navCtrl.push(FormEditPage, { callback: this.setValue, value: value, field: field, type: type });
   }
   /* 跳转到上传页面 */
   gouploadfile() {
@@ -78,7 +79,7 @@ export class ApplicationProjectPage {
       size: this.filesize
     })
   }
-  setuploadfile = (obj, name) =>{
+  setuploadfile = (obj, name) => {
     this.filestatus = true;
     this.filetitle = name;
     console.log(obj)
@@ -111,52 +112,62 @@ export class ApplicationProjectPage {
     this.projectData['typeStr'] = this.filetypeicon
   }
   /*设置值（回调函数）*/
-  setValue = (field,value)=> {
-    
+  setValue = (field, value) => {
+
     this.projectData[field] = value;
   }
 
-  getUrlParam(name) {  
+  getUrlParam(name) {
     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象  
     var r = window.location.search.substr(1).match(reg);  //匹配目标参数  
     if (r != null) {
-        return encodeURI(r[2]);  //返回参数值 
+      return encodeURI(r[2]);  //返回参数值 
     } else {
-        return null; 
+      return null;
     }
- }
+  }
 
   /*提交申请*/
   onApplicationSubmit() {
+    console.log(this.projectData['introduction']);
+    if (!this.projectData['introduction'] || !this.projectData['proposal'] || !this.projectData['fid']) {
+      this.isComplete = true
+      return
+    }
     this.tip_isShow = true;
   }
-
+  sureComplete() {
+    this.isComplete = !this.isComplete
+    return
+  }
   /*确定提交*/
   onDetermine() {
     let projectData = this.projectData;
     // let projectDetailsUrl = 'http://mamon.yemindream.com/mamon/adviser/submitApplication';
-    const openId = window.sessionStorage.getItem('openId')|| this.getUrlParam('openId')
-    let projectDetailsUrl = submitApplicationUrl + '?openId=' + openId + '&pid='+projectData['pid']+
-                        '&introduction='+projectData['introduction']+
-                        '&proposal='+projectData['proposal']+
-                        '&fid='+projectData['fid']+
-                        '&pacids='+(projectData['pacids'] || '');
-    this.Provider.getMamenSwiperData(projectDetailsUrl).subscribe(res=>{
-      if(res.code==200) {
+    const openId = window.sessionStorage.getItem('openId') || this.getUrlParam('openId')
+    let projectDetailsUrl = submitApplicationUrl + '?openId=' + openId + '&pid=' + projectData['pid'] +
+      '&introduction=' + projectData['introduction'] +
+      '&proposal=' + projectData['proposal'] +
+      '&fid=' + projectData['fid'] +
+      '&pacids=' + (projectData['pacids'] || '');
+
+    this.Provider.getMamenSwiperData(projectDetailsUrl).subscribe(res => {
+      if (res.code == 200) {
         this.success_isShow = true;
         // this.projectDetails = res.data;
-      }else if(res.code == 207) {
+        return
+      } else if (res.code == 207) {
         window.localStorage.removeItem('openId');
-      }else{
-        alert('请求出错:'+res.msg);
+      } else {
+        alert('请求出错:' + res.msg);
       }
-    },error=>{
-      console.log('erros===',error);
+    }, error => {
+      console.log('erros===', error);
     })
   }
 
   /*关闭弹出窗*/
-  onClose(){
+  onClose() {
     this.tip_isShow = false;
   }
 

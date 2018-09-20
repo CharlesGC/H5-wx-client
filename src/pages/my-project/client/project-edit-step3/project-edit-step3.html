@@ -27,8 +27,10 @@
       <p item-right class="rigth-message">
         <!-- <span class="item-value line-overflow">阿里拉拉</span> -->
         <span *ngIf="projectData.industryList && projectData.industryList.length<1"></span>
-        <span *ngIf="projectData.industryList && projectData.industryList.length==1">{{projectData.industryList[0].text || projectData.industryList[0].industryName}}</span>
-        <span *ngIf="projectData.industryList && projectData.industryList.length>1">{{projectData.industryList[0].text || projectData.industryList[0].industryName}}
+        <span *ngIf="projectData.industryList && projectData.industryList.length==1">{{projectData.industryList[0].text
+          || projectData.industryList[0].industryName}}</span>
+        <span *ngIf="projectData.industryList && projectData.industryList.length>1">{{projectData.industryList[0].text
+          || projectData.industryList[0].industryName}}
           等</span>
         <ion-icon class="icon" name="arrow-forward"></ion-icon>
       </p>
@@ -38,8 +40,10 @@
       <p item-right class="rigth-message">
         <!-- <span item-right class="item-value line-overflow">请输入对接人姓名</span> -->
         <span *ngIf="projectData.skillList && projectData.skillList.length<1"></span>
-        <span *ngIf="projectData.skillList && projectData.skillList.length==1">{{projectData.skillList[0].text || projectData.skillList[0].skillName}}</span>
-        <span *ngIf="projectData.skillList && projectData.skillList.length>1">{{projectData.skillList[0].text || projectData.skillList[0].skillName}} 等</span>
+        <span *ngIf="projectData.skillList && projectData.skillList.length==1">{{projectData.skillList[0].text ||
+          projectData.skillList[0].skillName}}</span>
+        <span *ngIf="projectData.skillList && projectData.skillList.length>1">{{projectData.skillList[0].text ||
+          projectData.skillList[0].skillName}} 等</span>
         <ion-icon class="icon" name="arrow-forward"></ion-icon>
       </p>
     </ion-item>
@@ -55,18 +59,19 @@
     </ion-item>
     <ion-item (click)="goFormEditPage('startTime',projectData,'timeSelect')">
       <label>开始时间
-          <span class="required-field ml5">(必填)</span>
+        <span class="required-field ml5">(必填)</span>
       </label>
       <p item-right class="rigth-message">
         <span item-right class="item-value line-overflow" *ngIf="projectData.startTimeType == 0">尽快开始</span>
         <span item-right class="item-value line-overflow" *ngIf="projectData.startTimeType == 2">待商议</span>
-        <span item-right class="item-value line-overflow" *ngIf="projectData.startTimeType == 1">{{projectData.startTime | date: 'yyyy-MM-dd'}}</span>
+        <span item-right class="item-value line-overflow" *ngIf="projectData.startTimeType == 1">{{projectData.startTime
+          | date: 'yyyy-MM-dd'}}</span>
         <ion-icon class="icon" name="arrow-forward"></ion-icon>
       </p>
     </ion-item>
     <ion-item (click)="goFormEditPage('deliverMethod',projectData.deliverMethod,'timeSelect')">
       <label>是否驻场
-          <span class="required-field ml5">(必填)</span>
+        <span class="required-field ml5">(必填)</span>
       </label>
       <p item-right class="rigth-message">
         <span item-right class="item-value line-overflow" *ngIf="projectData.deliverMethod == 0">驻场</span>
@@ -78,7 +83,7 @@
     </ion-item>
     <ion-item no-lines (click)="goFormEditPage('province-city',[projectData.province,projectData.city],'province-city')">
       <label>项目地点
-          <span class="required-field ml5">(必填)</span>
+        <span class="required-field ml5">(必填)</span>
       </label>
       <p item-right class="rigth-message">
         <span item-right class="item-value line-overflow">{{projectData.province}} {{projectData.city}}</span>
@@ -89,11 +94,12 @@
   <ion-list class="list-item-flex mt10">
     <ion-item (click)="goFormEditPage('project_budget',projectData,'timeSelect')">
       <label>项目预算
-          <span class="required-field ml5">(必填)</span>
+        <span class="required-field ml5">(必填)</span>
       </label>
       <p item-right class="rigth-message">
         <span item-right class="item-value line-overflow" *ngIf="projectData.budgetType == 2">待商议</span>
-        <span item-right class="item-value line-overflow" *ngIf="projectData.budgetType == 0 || projectData.budgetType == 1">{{projectData.budget}} 元
+        <span item-right class="item-value line-overflow" *ngIf="projectData.budgetType == 0 || projectData.budgetType == 1">{{projectData.budget | currency : '￥'}}
+          元
         </span>
         <ion-icon class="icon" name="arrow-forward"></ion-icon>
       </p>
@@ -139,7 +145,7 @@
     <button ion-button class="btn-submit" (click)="goProjectSubmit()">发布</button>
     <button ion-button class="btn-delete" (click)="onDraftSubmit()">存为草稿</button>
   </div>
-  <button ion-button expand="full" large class="fixed-bottom" (click)="onDraftSubmit()" *ngIf="isEdit">保存</button>
+  <button ion-button expand="full" large class="fixed-bottom" (click)="onDraftSubmit(1)" *ngIf="isEdit">保存</button>
 </ion-content>
 <!--弹出框-->
 <div class="phonebind-modal" [hidden]="!isShow">
@@ -182,22 +188,58 @@
     </div>
   </div>
 </div>
- <!-- 填写完整弹框 -->
- <div class="phonebind-modal" [hidden]="!isComplete">
-    <div class="modal-bg"></div>
-    <div class="modal-box">
-      <div class="modal-top">
-        <div class="modal-top-close">
-          <!-- <ion-icon ios="ios-close" md="md-close" item-rigth (click)="onClose()" color=""></ion-icon> -->
-        </div>
-        <div class="modal-title">提示</div>
-        <div class="modal-content">
-          <p class="modal-center">请填写完整</p>
-        </div>
-        <div class="modal-footer">
-          <button ion-button full large (click)="sureComplete()">确定</button>
-          <!-- <button ion-button full large (click)="onCompanyDel()" class="btn-delete">返回</button> -->
-        </div>
+<!-- 填写完整弹框 -->
+<div class="phonebind-modal" [hidden]="!isComplete">
+  <div class="modal-bg"></div>
+  <div class="modal-box">
+    <div class="modal-top">
+      <div class="modal-top-close">
+        <!-- <ion-icon ios="ios-close" md="md-close" item-rigth (click)="onClose()" color=""></ion-icon> -->
+      </div>
+      <div class="modal-title">提示</div>
+      <div class="modal-content">
+        <p class="modal-center">请填写完整</p>
+      </div>
+      <div class="modal-footer">
+        <button ion-button full large (click)="sureComplete()">确定</button>
+        <!-- <button ion-button full large (click)="onCompanyDel()" class="btn-delete">返回</button> -->
       </div>
     </div>
   </div>
+</div>
+<div class="phonebind-modal" [hidden]="!isSubmit">
+  <div class="modal-bg"></div>
+  <div class="modal-box">
+    <div class="modal-top">
+      <div class="modal-top-close">
+        <!-- <ion-icon ios="ios-close" md="md-close" item-rigth (click)="onClose()" color=""></ion-icon> -->
+      </div>
+      <div class="modal-title">提示</div>
+      <div class="modal-content">
+        <p>保存成功</p>
+      </div>
+      <div class="modal-footer">
+        <button ion-button full large (click)="sureSubmit()">确定</button>
+        <!-- <button ion-button full large (click)="onCompanyDel()" class="btn-delete">返回</button> -->
+      </div>
+    </div>
+  </div>
+</div>
+<div class="phonebind-modal" [hidden]="!isfailed">
+  <div class="modal-bg"></div>
+  <div class="modal-box">
+    <div class="modal-top">
+      <div class="modal-top-close">
+        <!-- <ion-icon ios="ios-close" md="md-close" item-rigth (click)="onClose()" color=""></ion-icon> -->
+      </div>
+      <div class="modal-title">提示</div>
+      <div class="modal-content">
+        <p>保存失败，请重新保存</p>
+      </div>
+      <div class="modal-footer">
+        <button ion-button full large (click)="sureFailed()">确定</button>
+        <!-- <button ion-button full large (click)="onCompanyDel()" class="btn-delete">返回</button> -->
+      </div>
+    </div>
+  </div>
+</div>

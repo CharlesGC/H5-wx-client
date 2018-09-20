@@ -35,7 +35,7 @@
   <ion-list class="list-item-flex mt10">
     <ion-item (click)="goFormEditPage('description',projectData.description,'textarea')">
       <label>项目描述
-          <span class="required-field ml5">(必填)</span>
+        <span class="required-field ml5">(必填)</span>
       </label>
       <p item-right class="rigth-message">
         <span item-right class="item-value line-overflow">{{projectData.description || '对项目需求的详细描述'}}</span>
@@ -74,44 +74,80 @@
   </div>
   <div class="fixed-bottom" *ngIf="isEdit">
     <button ion-button class="btn-submit" (click)="goStep3Page()">下一步</button>
-    <button ion-button class="btn-delete" (click)="onDraftSubmit()">保存</button>
+    <button ion-button class="btn-delete" (click)="onDraftSubmit(1)">保存</button>
   </div>
-  <!-- 返回快速发布弹框 -->
-  <div class="phonebind-modal" [hidden]="!isShow">
-    <div class="modal-bg"></div>
-    <div class="modal-box">
-      <div class="modal-top">
-        <div class="modal-top-close">
-          <!-- <ion-icon ios="ios-close" md="md-close" item-rigth (click)="onClose()" color=""></ion-icon> -->
-        </div>
-        <div class="modal-title">切换发布方式</div>
-        <div class="modal-content">
-          <p>切换发布方式之后，部分您已经填写的信息将不会被保存，确定要继续么？</p>
-        </div>
-        <div class="modal-footer">
-          <button ion-button full large (click)="goClientProjectSpeedPage()">继续返回快速发布</button>
-          <button ion-button full large (click)="onCompanyDel()" class="btn-delete">返回</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- 填写完整弹框 -->
-  <div class="phonebind-modal" [hidden]="!isComplete">
-      <div class="modal-bg"></div>
-      <div class="modal-box">
-        <div class="modal-top">
-          <div class="modal-top-close">
-            <!-- <ion-icon ios="ios-close" md="md-close" item-rigth (click)="onClose()" color=""></ion-icon> -->
-          </div>
-          <div class="modal-title">提示</div>
-          <div class="modal-content">
-            <p class="modal-center">请填写完整</p>
-          </div>
-          <div class="modal-footer">
-            <button ion-button full large (click)="sureComplete()">确定</button>
-            <!-- <button ion-button full large (click)="onCompanyDel()" class="btn-delete">返回</button> -->
-          </div>
-        </div>
-      </div>
-    </div>
 </ion-content>
+<!-- 返回快速发布弹框 -->
+<div class="phonebind-modal" [hidden]="!isShow">
+  <div class="modal-bg"></div>
+  <div class="modal-box">
+    <div class="modal-top">
+      <div class="modal-top-close">
+        <!-- <ion-icon ios="ios-close" md="md-close" item-rigth (click)="onClose()" color=""></ion-icon> -->
+      </div>
+      <div class="modal-title">切换发布方式</div>
+      <div class="modal-content">
+        <p>切换发布方式之后，部分您已经填写的信息将不会被保存，确定要继续么？</p>
+      </div>
+      <div class="modal-footer">
+        <button ion-button full large (click)="goClientProjectSpeedPage()">继续返回快速发布</button>
+        <button ion-button full large (click)="onCompanyDel()" class="btn-delete">返回</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 填写完整弹框 -->
+<div class="phonebind-modal" [hidden]="!isComplete">
+  <div class="modal-bg"></div>
+  <div class="modal-box">
+    <div class="modal-top">
+      <div class="modal-top-close">
+        <!-- <ion-icon ios="ios-close" md="md-close" item-rigth (click)="onClose()" color=""></ion-icon> -->
+      </div>
+      <div class="modal-title">提示</div>
+      <div class="modal-content">
+        <p class="modal-center">请填写完整</p>
+      </div>
+      <div class="modal-footer">
+        <button ion-button full large (click)="sureComplete()">确定</button>
+        <!-- <button ion-button full large (click)="onCompanyDel()" class="btn-delete">返回</button> -->
+      </div>
+    </div>
+  </div>
+</div>
+<div class="phonebind-modal" [hidden]="!isSubmit">
+  <div class="modal-bg"></div>
+  <div class="modal-box">
+    <div class="modal-top">
+      <div class="modal-top-close">
+        <!-- <ion-icon ios="ios-close" md="md-close" item-rigth (click)="onClose()" color=""></ion-icon> -->
+      </div>
+      <div class="modal-title">提示</div>
+      <div class="modal-content">
+        <p>保存成功</p>
+      </div>
+      <div class="modal-footer">
+        <button ion-button full large (click)="sureSubmit()">确定</button>
+        <!-- <button ion-button full large (click)="onCompanyDel()" class="btn-delete">返回</button> -->
+      </div>
+    </div>
+  </div>
+</div>
+<div class="phonebind-modal" [hidden]="!isfailed">
+  <div class="modal-bg"></div>
+  <div class="modal-box">
+    <div class="modal-top">
+      <div class="modal-top-close">
+        <!-- <ion-icon ios="ios-close" md="md-close" item-rigth (click)="onClose()" color=""></ion-icon> -->
+      </div>
+      <div class="modal-title">提示</div>
+      <div class="modal-content">
+        <p>保存失败，请重新保存</p>
+      </div>
+      <div class="modal-footer">
+        <button ion-button full large (click)="sureFailed()">确定</button>
+        <!-- <button ion-button full large (click)="onCompanyDel()" class="btn-delete">返回</button> -->
+      </div>
+    </div>
+  </div>
+</div>

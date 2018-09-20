@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { HttpClient, HttpParams } from '@angular/common/http';
+import globalConfig from '../../../../config.js';
 
 /**
  * Generated class for the ConsultantInfoAvatarPage page.
@@ -15,9 +16,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
   templateUrl: 'consultant-info-avatar.html',
 })
 export class ConsultantInfoAvatarPage {
-  // public uploadUrl = 'http://matest.mf-tal.com/mafile/mamonfile/uploadAvatarPic';
-  public uploadUrl = 'http://100.168.1.149:8181/mafile/mamonfile/uploadAvatarPic';
-  public Flagyingyezhizhao = true;
+  public uploadUrl = globalConfig.avatarUpload
   public avatarUrl: string;
   imageChangedEvent: any = '';
   croppedImage: any = '';
@@ -50,10 +49,7 @@ export class ConsultantInfoAvatarPage {
     console.log(file)
     this.http.post(this.uploadUrl, file, {
       headers: {
-        //'Content-Disposition': 'form-data; name="file"; filename="chrome.png"',
         'Content-Type': 'image/png',
-        //'Access-Control-Allow-Origin':'*',
-        //'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8'
       }
     }).subscribe(res => {
       console.log('post请求结束', res);

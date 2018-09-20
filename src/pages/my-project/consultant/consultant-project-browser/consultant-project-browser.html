@@ -181,7 +181,7 @@
     </ion-item>
     <ion-item>
       <label>预算金额</label>
-      <span item-right class="item-value">{{projectDetails.budgetDay}}</span>
+      <span item-right class="item-value">{{projectDetails.budgetDay | currency :'￥'}}</span>
     </ion-item>
     <ion-item no-lines>
       <label>大致天数</label>
@@ -191,8 +191,8 @@
   <ion-list class="total-budget">
     <p class="budget-label mt15">总预算金额</p>
     <div class="mb15">
-      <span class="budget-symbol">￥</span>
-      <span class="budget-number">{{projectDetails.budget}}</span>
+      <!-- <span class="budget-symbol">￥</span> -->
+      <span class="budget-number">{{projectDetails.budget |currency: '￥'}}</span>
     </div>
   </ion-list>
   <ion-list class="list-item-flex mt10">

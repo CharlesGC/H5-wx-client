@@ -1,44 +1,115 @@
 <ion-header>
-    <ion-navbar>
-      <ion-title>发票信息编辑</ion-title>
-    </ion-navbar>
-  </ion-header>
-  
-  <ion-content style="background-color: #fcfcfc;">
-      <ion-list class="contact-list mt10">
-        <ion-item class="" (click)="goFormEditPage('taxNumber',invoiceData.taxNumber,'text')">
-          <span class="left-title">纳税号</span>
-          <div item-right class="rigth-message">
-            <span>{{invoiceData.taxNumber}}</span>
-            <ion-icon name="arrow-forward" class="ml12"></ion-icon>
-          </div>
-        </ion-item>
-        <ion-item class="" (click)="goFormEditPage('taxPhone',invoiceData.taxPhone,'text')">
-          <span class="left-title">联系电话</span>
-          <div item-right class="rigth-message">
-            <span>{{invoiceData.taxPhone}}</span>
-            <ion-icon name="arrow-forward" class="ml12"></ion-icon>
-          </div>
-        </ion-item>
-        <ion-item class="" (click)="goFormEditPage('taxBank',invoiceData.taxBank,'text')">
-          <span class="left-title">开户银行</span>
-          <div item-right class="rigth-message">
-            <span>{{invoiceData.taxBank}}</span>
-            <ion-icon name="arrow-forward" class="ml12"></ion-icon>
-          </div>
-        </ion-item>
-        <ion-item class="" (click)="goFormEditPage('taxAccount',invoiceData.taxAccount,'text')" no-lines>
-          <span class="left-title">对公账号</span>
-          <div item-right class="rigth-message">
-            <span>{{invoiceData.taxAccount}}</span>
-            <ion-icon name="arrow-forward" class="ml12"></ion-icon>
-          </div>
-        </ion-item>
-      </ion-list>
-      <div class="fixed-bottom">
-          <button ion-button class="btn-submit" (click)="onInvoiceSubmit()">保存</button>
-          <button ion-button class="btn-delete" (click)="onInvoiceDel()">删除</button>
+  <ion-navbar>
+    <ion-title>发票信息编辑</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content style="background-color: #fcfcfc;">
+  <ion-list class="contact-list mt10">
+    <ion-item class="" (click)="goFormEditPage('taxNumber',invoiceData.taxNumber,'text')">
+      <span class="left-title">纳税号</span>
+      <div item-right class="rigth-message">
+        <span>{{invoiceData.taxNumber}}</span>
+        <ion-icon name="arrow-forward" class="ml12"></ion-icon>
       </div>
-  
-  </ion-content>
-  
+    </ion-item>
+    <ion-item class="" (click)="goFormEditPage('taxPhone',invoiceData.taxPhone,'text')">
+      <span class="left-title">联系电话</span>
+      <div item-right class="rigth-message">
+        <span>{{invoiceData.taxPhone}}</span>
+        <ion-icon name="arrow-forward" class="ml12"></ion-icon>
+      </div>
+    </ion-item>
+    <ion-item class="" (click)="goFormEditPage('taxBank',invoiceData.taxBank,'text')">
+      <span class="left-title">开户银行</span>
+      <div item-right class="rigth-message">
+        <span>{{invoiceData.taxBank}}</span>
+        <ion-icon name="arrow-forward" class="ml12"></ion-icon>
+      </div>
+    </ion-item>
+    <ion-item class="" (click)="goFormEditPage('taxAccount',invoiceData.taxAccount,'text')" no-lines>
+      <span class="left-title">对公账号</span>
+      <div item-right class="rigth-message">
+        <span>{{invoiceData.taxAccount}}</span>
+        <ion-icon name="arrow-forward" class="ml12"></ion-icon>
+      </div>
+    </ion-item>
+  </ion-list>
+  <div class="fixed-bottom">
+    <button ion-button class="btn-submit" (click)="onInvoiceSubmit()" [disabled]='isDisabled'>保存</button>
+    <button ion-button class="btn-delete" (click)="sureDelInvoice()">删除</button>
+  </div>
+
+</ion-content>
+<div class="phonebind-modal" [hidden]="!isDelInvoice">
+  <div class="modal-bg"></div>
+  <div class="modal-box">
+    <div class="modal-top">
+      <div class="modal-top-close">
+        <ion-icon ios="ios-close" md="md-close" item-rigth (click)="onClose()" color=""></ion-icon>
+      </div>
+      <div class="modal-title">删除发票信息</div>
+      <div class="modal-content">
+          <p>您将要删除当前发票信息，是否删除</p>
+      </div>
+      <div class="modal-footer">
+          <button ion-button full large (click)="onClose()">返回</button>
+          <button ion-button full large (click)="onInvoiceDel()" class="btn-delete">删除</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="phonebind-modal" [hidden]="!isComplete">
+  <div class="modal-bg"></div>
+  <div class="modal-box">
+    <div class="modal-top">
+      <div class="modal-top-close">
+        <!-- <ion-icon ios="ios-close" md="md-close" item-rigth (click)="onClose()" color=""></ion-icon> -->
+      </div>
+      <div class="modal-title">提示</div>
+      <div class="modal-content">
+        <p>请仔细核对您所填写的信息，需填写完整</p>
+      </div>
+      <div class="modal-footer">
+        <button ion-button full large (click)="sureComplete()">确定</button>
+        <!-- <button ion-button full large (click)="onCompanyDel()" class="btn-delete">返回</button> -->
+      </div>
+    </div>
+  </div>
+</div>
+<div class="phonebind-modal" [hidden]="!isSuccess">
+  <div class="modal-bg"></div>
+  <div class="modal-box">
+    <div class="modal-top">
+      <div class="modal-top-close">
+        <!-- <ion-icon ios="ios-close" md="md-close" item-rigth (click)="onClose()" color=""></ion-icon> -->
+      </div>
+      <div class="modal-title">提示</div>
+      <div class="modal-content">
+        <p>保存成功</p>
+      </div>
+      <div class="modal-footer">
+        <button ion-button full large (click)="sureSuccess()">确定</button>
+        <!-- <button ion-button full large (click)="onCompanyDel()" class="btn-delete">返回</button> -->
+      </div>
+    </div>
+  </div>
+</div>
+<div class="phonebind-modal" [hidden]="!isfailed">
+  <div class="modal-bg"></div>
+  <div class="modal-box">
+    <div class="modal-top">
+      <div class="modal-top-close">
+        <!-- <ion-icon ios="ios-close" md="md-close" item-rigth (click)="onClose()" color=""></ion-icon> -->
+      </div>
+      <div class="modal-title">提示</div>
+      <div class="modal-content">
+        <p>提交失败，请重新提交</p>
+      </div>
+      <div class="modal-footer">
+        <button ion-button full large (click)="sureFailed()">确定</button>
+        <!-- <button ion-button full large (click)="onCompanyDel()" class="btn-delete">返回</button> -->
+      </div>
+    </div>
+  </div>
+</div>
