@@ -20,6 +20,7 @@ import { ConsultantInfoAvatarPage } from '../../consultant/consultant-info-avata
 export class ClientInfoUserPage {
   public user: any;
   public fromData: any;
+  public isSubmit= false
   constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider) {
     this.user = {};
     this.fromData = {}
@@ -37,7 +38,10 @@ export class ClientInfoUserPage {
   setuserAvatarPic = (value) => {
     this.user.avatar = value
   }
-
+  sureSubmit(){
+    this.isSubmit = !this.isSubmit
+    return
+  }
   /*基本信息提交*/
   onCustomerSubmit() {
     // let customerUrl = 'http://mamon.yemindream.com/mamon/user/editUser';
@@ -46,7 +50,8 @@ export class ClientInfoUserPage {
     let customerUrl = editUserUrl + '?openId=' + openId + '&avatar=' + user.avatar + '&name=' + user.nickName + '&gender=' + user.gender;
     this.Provider.getMamenSwiperData(customerUrl).subscribe(res => {
       if (res.code == 200) {
-        alert('编辑成功');
+        //alert('编辑成功');
+        this.isSubmit = true
         this.navCtrl.pop();
       } else if (res.code == 207) {
         window.localStorage.removeItem('openId');
@@ -85,5 +90,4 @@ export class ClientInfoUserPage {
   setValue = (field, value) => {
     this.user[field] = value;
   }
-
 }

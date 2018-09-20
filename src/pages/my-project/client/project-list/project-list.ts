@@ -99,7 +99,7 @@ export class ProjectListPage {
     this.Provider.getMamenSwiperData(cmyProjectCountUrl).subscribe(res => {
       if (res.code == 200) {
         console.log(res, '项目数量');
-        this.projectCount = res.data;
+        this.projectCount = res.data || {};
         this.showNavMenuNumber = res.data ? res.data.allCount : 0;
       } else if (res.code == 207) {
         window.localStorage.removeItem('openId');
