@@ -101,7 +101,7 @@
             <span *ngIf="projectListData_item.projectLengthType ==2">6-12 个月</span>
             <span *ngIf="projectListData_item.projectLengthType ==3">其他时间</span>
             <span>{{projectListData_item.province}} . {{projectListData_item.city}}</span>
-            <span>发布时间 {{projectListData_item.releaseTime | date:'yy/MM/dd'}}</span>
+            <span>发布时间 {{projectListData_item.releaseTime}}</span>
           </p>
           <div class="demand-content-cont mt10">{{projectListData_item.description}}</div>
         </div>
