@@ -8,7 +8,7 @@ import { ProjectEditStep1Page } from '../my-project/client/project-edit-step1/pr
 import { getWechatJsConfig, getUploadLocal, getSpeedrelease } from '../../providers/dataUrl';
 
 declare var wx: any;
-declare var $: any;
+// declare var $: any;
 @IonicPage()
 @Component({
   selector: 'page-speed',
@@ -37,6 +37,8 @@ export class SpeedPage {
   public isShow = false;
   public isChange = false;
   public isComplete =false;
+  public isTime = false;
+  // public Url:any;
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public WechatData: MamenDataProvider, public UploadData: MamenDataProvider,
     public changeDetectorRef: ChangeDetectorRef, public speedVoiceData: MamenDataProvider) {
@@ -70,6 +72,10 @@ export class SpeedPage {
   // 返回
   onCompanyDel() {
     this.isChange = false;
+  }
+  // 录音时间小于3ms返回
+  surehidden() {
+    this.isTime = !this.isTime;
   }
   // 语音播放
   autoPlay(e, index) {
@@ -129,13 +135,26 @@ export class SpeedPage {
     console.log(event, '=====')
     let url = location.href.split('#')[0]; // 当前网页的URL，不包含#及其后面部分
     this.localId = '';
-    $.ajax({
-      type: "get",
-      url: "/mamon/wechat/wechatJsConfig",
-      dataType: "json",
-      data: { "url": url },
-      async: false,
-      success: function (res) {
+    // $.ajax({
+    //   type: "get",
+    //   url: "/mamon/wechat/wechatJsConfig",
+    //   dataType: "json",
+    //   data: { "url": url },
+    //   async: false,
+    //   success: function (res) {
+    //     console.log(res);
+    //     wx.config({
+    //       debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+    //       appId: res.data.appid, // 必填，公众号的唯一标识
+    //       timestamp: res.data.timestamp, // 必填，生成签名的时间戳
+    //       nonceStr: res.data.nonceStr, // 必填，生成签名的随机串
+    //       signature: res.data.signature, // 必填，签名
+    //       jsApiList: ['startRecord', 'stopRecord', 'uploadVoice'] // 必填，需要使用的JS接口列表
+    //     });
+    //   }
+    // });
+    this.WechatData.getWechatJs(getWechatJsConfig,url).subscribe(
+      res => {
         console.log(res);
         wx.config({
           debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
@@ -145,8 +164,10 @@ export class SpeedPage {
           signature: res.data.signature, // 必填，签名
           jsApiList: ['startRecord', 'stopRecord', 'uploadVoice'] // 必填，需要使用的JS接口列表
         });
+      }, error => {
+        console.log(error);
       }
-    });
+    )
     this.isRecord = true;//是否显示录音gif
     this.START = new Date().getTime();
     console.log(this.START, 'getTime');
@@ -185,42 +206,56 @@ export class SpeedPage {
           })
         }
       });
-      alert('小于300ms，不录音');
+      // alert('小于300ms，不录音');
+      this.isTime = true;
       clearTimeout(this.recordTimer);
     } else {
       // var audioData = [];
-      var _this = this;
+      // var _this = this;
       wx.stopRecord({
-        success: function (res) {
+        success: (res) => {
           this.localId = res.localId;
           // 上传语音
           if (this.localId != '') {
             wx.uploadVoice({
               localId: this.localId, // 需要上传的音频的本地ID，由stopRecord接口获得
               isShowProgressTips: 1, // 默认为1，显示进度提示
-              success: function (res) {
+              success: (res) => {
                 var serverId = res.serverId
-                // var serverId = 0;
+                // var serverId = '549549549595';
                 //把录音在微信服务器上的id（res.serverId）发送到自己的服务器供下载。
                 if (serverId != '') {
-                  $.ajax({
-                    url: '/mamon/wechat/uploadLocal',
-                    type: 'post',
-                    data: { 'serverId': serverId },
-                    dataType: "json",
-                    async: false,
-                    success: (data) => {
-                      // let audioData = [];
-                      _this.audioData.push(data.data);
-                      _this.changeDetectorRef.markForCheck();
-                      _this.changeDetectorRef.detectChanges();
-                      // alert(_this.audioData);
-                      _this.localId = '';
-                    },
-                    error: function (xhr, errorType, error) {
-                      this.isRecord = true;
-                    }
-                  })
+                  // $.ajax({
+                  //   url: '/mamon/wechat/uploadLocal',
+                  //   type: 'post',
+                  //   data: { 'serverId': serverId },
+                  //   dataType: "json",
+                  //   async: false,
+                  //   success: (data) => {
+                  //     // let audioData = [];
+                  //     _this.audioData.push(data.data);
+                  //     _this.changeDetectorRef.markForCheck();
+                  //     _this.changeDetectorRef.detectChanges();
+                  //     // alert(_this.audioData);
+                  //     _this.localId = '';
+                  //   },
+                  //   error: function (xhr, errorType, error) {
+                  //     this.isRecord = true;
+                  //   }
+                  // })
+                
+                  this.UploadData.getUpload(getUploadLocal,serverId).subscribe(
+                        res => {
+                          this.audioData.push(res.data);
+                          this.changeDetectorRef.markForCheck();
+                          this.changeDetectorRef.detectChanges();
+                            console.log(this.audioData,11111111111);
+                            this.localId = '';
+                        }, error => {
+                          console.log(error);
+                          this.isRecord = true;
+                        }
+                    )
                 }
               }
             });

@@ -35,7 +35,7 @@
           </div>
           <!-- 技能下拉 -->
           <div class="item-input border" (click)="downSkill('downSkill')" >
-            <span *ngIf="skilldoubleData.fName == undefined">请选择领域</span>
+            <span *ngIf="skilldoubleData.fName == undefined">请选择技能</span>
             <span *ngIf="skilldoubleData.fName != undefined" class="SecondarySkill" style="color: #ff6536;">{{skilldoubleData.fName}}•{{inputValue.sName}}</span>
             <span>
               <ion-icon name="arrow-down"></ion-icon>

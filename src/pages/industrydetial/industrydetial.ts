@@ -26,7 +26,7 @@ export class IndustrydetialPage {
   public skilldoubleData = {};
   public inputValue = {};
   public IndustryName = {};
-  public skillAll: any;
+  // public skillAll: any;
   public industryId: number;
   public firstSkillId: number;
   public secondSkillId: number;
@@ -59,20 +59,15 @@ export class IndustrydetialPage {
       console.log(this.id, this.skillChecked, '===')
       this.IndustryName['industryName'] = this.name || '全部行业';
       this.getSearchadviser(this.skillChecked, this.firstSkillId = 0, this.secondSkillId = 0, this.search = '', this.pageNum = 0, this.pageSize = 15);
-    }
-    /*技能更多*/
-    if (this.type == 'skill') {
+    }else if (this.type == 'skill') {
       this.skillCheckedSkill = this.id ? this.id : 0;
       this.skilldoubleData['fName'] = this.name || '全部领域';
       this.getSearchadviser(this.industryId = 0, this.skillCheckedSkill, this.secondSkillId = 0, this.search = '', this.pageNum = 0, this.pageSize = 15);
-    }
-    if (this.type == 'finance-count') {
+    }else if (this.type == 'finance-count') {
       this.getfinanceAllInfo();
-    }
-    if (this.type == 'financemore') {
+    }else if (this.type == 'financemore') {
       this.getfinanceInfo();
-    }
-    if (this.type == 'indeustryOutstand') {
+    }else if (this.type == 'indeustryOutstand') {  
       this.getoutstandingInfo();
     }
   }

@@ -52,7 +52,7 @@
           <li *ngFor="let item_skillArr of skillArr;let i = index" class="industry_list" (click)="InfoskillMore(item_skillArr,i,'skill')">
             <div class="icon_list">
               <img [src]="item_skillArr.fIcon" alt="">
-              <p>{{item_skillArr.fName.slice(0,4)}}</p>
+              <p>{{item_skillArr.fName.slice(0,6) || ''}}</p>
             </div>
           </li>
         </ul>

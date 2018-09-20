@@ -11,36 +11,39 @@
 </ion-header>
 
 <ion-content style="background-color: #fcfcfc;">
-    <ion-list class="list-content">
-      <ion-item class="message-item mt20" no-lines *ngFor="let projectListData_item of projectListData">
-        <div class="msg-title">
-          <div class="msg-title-left">
-            <span class="project-type type-blue" *ngIf="projectListData_item.status ==1||projectListData_item.status ==2||projectListData_item.status ==3||projectListData_item.status ==6">未开始</span>
-            <span class="project-type type-green" *ngIf="projectListData_item.status ==4 || projectListData_item.status ==7">进行中</span>
-            <span class="project-type type-gray" *ngIf="projectListData_item.status ==5 || projectListData_item.status ==8||projectListData_item.status ==9 || projectListData_item.status ==10">已完成</span>
-            <span class="project-type type-blue" *ngIf="projectListData_item.status ==0">草稿箱</span>
-          </div>
-          <span><ion-icon name="more"></ion-icon></span>
+  <ion-list class="list-content">
+    <ion-item class="message-item mt20" no-lines *ngFor="let projectListData_item of projectListData">
+      <div class="msg-title">
+        <div class="msg-title-left">
+          <span class="project-type type-blue" *ngIf="projectListData_item.status ==1||projectListData_item.status ==2||projectListData_item.status ==3||projectListData_item.status ==6">未开始</span>
+          <span class="project-type type-green" *ngIf="projectListData_item.status ==4 || projectListData_item.status ==7">进行中</span>
+          <span class="project-type type-gray" *ngIf="projectListData_item.status ==5 || projectListData_item.status ==8||projectListData_item.status ==9 || projectListData_item.status ==10">已完成</span>
+          <span class="project-type type-blue" *ngIf="projectListData_item.status ==0">草稿箱</span>
         </div>
-        <div class="msg-cont">
-          <h4>{{projectListData_item.projectName}}</h4>
-          <p>预算 <span class="demand-number">{{projectListData_item.budget}}</span> 元</p>
-          <p class="city-date-cont">
-            <span *ngIf="projectListData_item.projectLengthType ==0">0-3 个月</span>
-            <span *ngIf="projectListData_item.projectLengthType ==1">3-6 个月</span>
-            <span *ngIf="projectListData_item.projectLengthType ==2">6-12 个月</span>
-            <span *ngIf="projectListData_item.projectLengthType ==3">其他时间</span>
-            <span>{{projectListData_item.city}}</span>
-            <span>发布时间 {{projectListData_item.releaseTime | date:'yy/MM/dd'}}</span>
-          </p>
-          <div class="demand-content-cont mt10">{{projectListData_item.description}}</div>
-        </div>
-        <div class="msg-footer" (click)="onProjectBrowserClick(projectListData_item)">
-          <span class="msg-footer-text">查看该阶段详情</span>
-          <ion-icon name="arrow-forward" class="ml12"></ion-icon>
-        </div>
-      </ion-item>
-      <!-- <ion-item class="message-item mt20" no-lines>
+        <span>
+          <ion-icon name="more"></ion-icon>
+        </span>
+      </div>
+      <div class="msg-cont">
+        <h4>{{projectListData_item.projectName}}</h4>
+        <p>预算
+          <span class="demand-number">{{projectListData_item.budget}}</span> 元</p>
+        <p class="city-date-cont">
+          <span *ngIf="projectListData_item.projectLengthType ==0">0-3 个月</span>
+          <span *ngIf="projectListData_item.projectLengthType ==1">3-6 个月</span>
+          <span *ngIf="projectListData_item.projectLengthType ==2">6-12 个月</span>
+          <span *ngIf="projectListData_item.projectLengthType ==3">其他时间</span>
+          <span>{{projectListData_item.city}}</span>
+          <span>发布时间 {{projectListData_item.releaseTime | date:'yy/MM/dd'}}</span>
+        </p>
+        <div class="demand-content-cont mt10">{{projectListData_item.description}}</div>
+      </div>
+      <div class="msg-footer" (click)="onProjectBrowserClick(projectListData_item)">
+        <span class="msg-footer-text">查看该阶段详情</span>
+        <ion-icon name="arrow-forward" class="ml12"></ion-icon>
+      </div>
+    </ion-item>
+    <!-- <ion-item class="message-item mt20" no-lines>
           <div class="msg-title">
               <div class="msg-title-left">
                 <span class="project-type type-blue">顾问已匹配</span>
@@ -84,6 +87,11 @@
               <ion-icon name="arrow-forward" class="ml12"></ion-icon>
             </div>
           </ion-item> -->
-    </ion-list>
-  
-  </ion-content>
+  </ion-list>
+  <!-- 推荐 顾问 -->
+  <div class="no-content" *ngIf="!projectListData">
+    <h4 class="title">推荐</h4>
+    <div class="img"></div>
+    <p class="tip">您还没有推荐项目!</p>
+  </div>
+</ion-content>

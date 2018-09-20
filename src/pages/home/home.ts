@@ -37,11 +37,8 @@ export class HomePage {
   constructor(public navCtrl: NavController, private swiperdata: MamenDataProvider, private industrydata: MamenDataProvider,
     private skilldata: MamenDataProvider, private casedata: MamenDataProvider, private outstanddata: MamenDataProvider, private financedata: MamenDataProvider,private financeAlldata: MamenDataProvider) {
     this.IndustryArr = [];
-    // var qiaochu = document.getElementsByClassName('qiaochu-duc');
-    // console.log(qiaochu,'pppppppppppppppp');
   }
   ionViewDidLoad() {
-    // console.log(getswipreUrl);
     this.getswiperInfo();
     this.getindustryInfo();
     this.getskillInfo();
@@ -49,8 +46,6 @@ export class HomePage {
     this.getoutstandingInfo();
     this.getfinanceInfo();
     this.getfinanceAllInfo();
-
-  
   }
   //  轮播图数据
   getswiperInfo() {
@@ -100,7 +95,6 @@ export class HomePage {
       }
     )
   }
-
   // 翘楚
   getoutstandingInfo() {
     this.outstanddata.getoutstandingData(getoutstandingUrl, 1, '', '').subscribe(
@@ -111,18 +105,15 @@ export class HomePage {
           title: '行业翘楚',
           data: res.data
         };
-        // console.log(this.outstandingArr.data,'333333333333333333333333')
       }, error => {
         console.log(error);
       }
     )
   }
-
   // 财务审计
   getfinanceInfo() {
     this.financedata.getfinanceData(getfinanceUrl, 2, 1, 6).subscribe(
       res => {
-        // console.log(res);
         this.financesArr = {
           type: 2,
           title: '财务审计顾问',
@@ -184,17 +175,6 @@ export class HomePage {
   }
   //行业
   goToOtherPage(value, index, type) {
-    // if (value == '' && index == '') {
-    //   this.navCtrl.push(IndustrydetialPage, {
-    //     type: type
-    //   })
-    // } else {
-    //   this.navCtrl.push(IndustrydetialPage, {
-    //     type: type,
-    //     id: this.IndustryArr[index].ilid,
-    //     name: this.IndustryArr[index].industryName,
-    //   });
-    // }
     this.navCtrl.push(IndustrydetialPage, {
       type: type,
       id: value ? this.IndustryArr[index].ilid : '',
@@ -203,40 +183,31 @@ export class HomePage {
   }
   // 技能
   InfoskillMore(value, index, type) {
-    // if (value == '' && index == '' && type == 'skill') {
-    //   this.navCtrl.push(IndustrydetialPage, {
-    //     type: type
-    //   });
-    // } else {
-    //   this.navCtrl.push(IndustrydetialPage, {
-    //     id: this.skillArr[index].sfid,
-    //     type: type,
-    //     name: this.skillArr[index].fName
-    //   });
-    // }
     this.navCtrl.push(IndustrydetialPage, {
       type: type,
       id: value ? this.skillArr[index].sfid : '',
       name: value ? this.skillArr[index].fName : '',
     });
   }
-
   // 行业翘楚
   outstanding(value, index, type) {
     this.navCtrl.push(IndustrydetialPage, {
-      type: 'indeustryOutstand'
+      // type: 'indeustryOutstand'
+      type:type
     });
   }
   // 财务审计
   financemore(value, index, type) {
     this.navCtrl.push(IndustrydetialPage, {
-      type: 'financemore'
+      // type: 'financemore'
+      type:type
     });
   }
   // 全部顾问更多
   FinancCount(value, index, type) {
     this.navCtrl.push(IndustrydetialPage, {
-      type: 'finance-count'
+      // type: 'finance-count'
+      type:type
     });
   }
   // 全部顾问列表

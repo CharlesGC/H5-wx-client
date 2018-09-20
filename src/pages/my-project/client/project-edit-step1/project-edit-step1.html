@@ -23,7 +23,7 @@
   <ion-list class="list-item-flex mt20">
     <ion-item (click)="goFormEditPage('companyName',projectData.companyName,'selectList')">
       <label>公司选择
-          <span class="required-field ml5">(必填)</span>
+        <span class="required-field ml5">(必填)</span>
       </label>
       <p item-right class="rigth-message">
         <span class="item-value line-overflow">{{projectData.companyName || '请选择公司'}}</span>
@@ -32,7 +32,7 @@
     </ion-item>
     <ion-item (click)="goFormEditPage('principalName',projectData.principalName,'text')">
       <label>业务负责人
-          <span class="required-field ml5">(必填)</span>
+        <span class="required-field ml5">(必填)</span>
       </label>
       <div item-right class="rigth-message">
         <span item-right class="item-value line-overflow">{{projectData.principalName || '请输入对接人姓名'}}</span>
@@ -48,7 +48,7 @@
     </ion-item>
     <ion-item (click)="goFormEditPage('principalPhone',projectData.principalPhone,'text')">
       <label>电话号码
-          <span class="required-field ml5">(必填)</span>
+        <span class="required-field ml5">(必填)</span>
       </label>
       <p item-right class="rigth-message">
         <span item-right class="item-value line-overflow">{{projectData.principalPhone || '请输入'}}</span>
@@ -57,7 +57,7 @@
     </ion-item>
     <ion-item no-lines (click)="goFormEditPage('principalEmail',projectData.principalEmail,'text')">
       <label>工作邮箱
-          <span class="required-field ml5">(必填)</span>
+        <span class="required-field ml5">(必填)</span>
       </label>
       <p item-right class="rigth-message">
         <span item-right class="item-value line-overflow">{{projectData.principalEmail || '请输入'}}</span>
@@ -86,78 +86,78 @@
   </div>
   <!-- 返回快速发布弹框 -->
   <div class="phonebind-modal" [hidden]="!isShow">
-      <div class="modal-bg"></div>
-      <div class="modal-box">
-          <div class="modal-top">
-              <div class="modal-top-close">
-                  <!-- <ion-icon ios="ios-close" md="md-close" item-rigth (click)="onClose()" color=""></ion-icon> -->
-              </div>
-              <div class="modal-title">切换发布方式</div>
-              <div class="modal-content">
-                  <p>切换发布方式之后，部分您已经填写的信息将不会被保存，确定要继续么？</p>
-              </div>
-              <div class="modal-footer">
-                  <button ion-button full large (click)="goClientProjectSpeedPage()">继续返回快速发布</button>
-                  <button ion-button full large (click)="onCompanyDel()" class="btn-delete">返回</button>
-              </div>
-          </div>
+    <div class="modal-bg"></div>
+    <div class="modal-box">
+      <div class="modal-top">
+        <div class="modal-top-close">
+          <!-- <ion-icon ios="ios-close" md="md-close" item-rigth (click)="onClose()" color=""></ion-icon> -->
+        </div>
+        <div class="modal-title">切换发布方式</div>
+        <div class="modal-content">
+          <p>切换发布方式之后，部分您已经填写的信息将不会被保存，确定要继续么？</p>
+        </div>
+        <div class="modal-footer">
+          <button ion-button full large (click)="goClientProjectSpeedPage()">继续返回快速发布</button>
+          <button ion-button full large (click)="onCompanyDel()" class="btn-delete">返回</button>
+        </div>
       </div>
+    </div>
   </div>
   <!-- 填写完整弹框 -->
   <div class="phonebind-modal " [hidden]="!isComplete">
-      <div class="modal-bg"></div>
-      <div class="modal-box">
-        <div class="modal-top">
-          <div class="modal-top-close">
-            <!-- <ion-icon ios="ios-close" md="md-close" item-rigth (click)="onClose()" color=""></ion-icon> -->
-          </div>
-          <div class="modal-title">提示</div>
-          <div class="modal-content">
-            <p class="modal-center">请填写完整</p>
-          </div>
-          <div class="modal-footer">
-            <button ion-button full large (click)="sureComplete()">确定</button>
-            <!-- <button ion-button full large (click)="onCompanyDel()" class="btn-delete">返回</button> -->
-          </div>
+    <div class="modal-bg"></div>
+    <div class="modal-box">
+      <div class="modal-top">
+        <div class="modal-top-close">
+          <!-- <ion-icon ios="ios-close" md="md-close" item-rigth (click)="onClose()" color=""></ion-icon> -->
+        </div>
+        <div class="modal-title">提示</div>
+        <div class="modal-content">
+          <p class="modal-center">请填写完整</p>
+        </div>
+        <div class="modal-footer">
+          <button ion-button full large (click)="sureComplete()">确定</button>
+          <!-- <button ion-button full large (click)="onCompanyDel()" class="btn-delete">返回</button> -->
         </div>
       </div>
     </div>
-    <!-- 邮箱错误弹框 -->
+  </div>
+  <!-- 邮箱错误弹框 -->
   <div class="phonebind-modal" [hidden]="!isEmailProper">
-      <div class="modal-bg"></div>
-      <div class="modal-box">
-        <div class="modal-top">
-          <div class="modal-top-close">
-            <!-- <ion-icon ios="ios-close" md="md-close" item-rigth (click)="onClose()" color=""></ion-icon> -->
-          </div>
-          <div class="modal-title">提示</div>
-          <div class="modal-content">
-            <p class="modal-center">请输入正确邮箱</p>
-          </div>
-          <div class="modal-footer">
-            <button ion-button full large (click)="sureEmail()">确定</button>
-            <!-- <button ion-button full large (click)="onCompanyDel()" class="btn-delete">返回</button> -->
-          </div>
+    <div class="modal-bg"></div>
+    <div class="modal-box">
+      <div class="modal-top">
+        <div class="modal-top-close">
+          <!-- <ion-icon ios="ios-close" md="md-close" item-rigth (click)="onClose()" color=""></ion-icon> -->
+        </div>
+        <div class="modal-title">提示</div>
+        <div class="modal-content">
+          <p class="modal-center">请输入正确邮箱</p>
+        </div>
+        <div class="modal-footer">
+          <button ion-button full large (click)="sureEmail()">确定</button>
+          <!-- <button ion-button full large (click)="onCompanyDel()" class="btn-delete">返回</button> -->
         </div>
       </div>
     </div>
-     <!-- 电话号码错误弹框 -->
+  </div>
+  <!-- 电话号码错误弹框 -->
   <div class="phonebind-modal" [hidden]="!isPhoneProper">
-      <div class="modal-bg"></div>
-      <div class="modal-box">
-        <div class="modal-top">
-          <div class="modal-top-close">
-            <!-- <ion-icon ios="ios-close" md="md-close" item-rigth (click)="onClose()" color=""></ion-icon> -->
-          </div>
-          <div class="modal-title">提示</div>
-          <div class="modal-content">
-            <p class="modal-center">请输入正确电话号码</p>
-          </div>
-          <div class="modal-footer">
-            <button ion-button full large (click)="surePhone()">确定</button>
-            <!-- <button ion-button full large (click)="onCompanyDel()" class="btn-delete">返回</button> -->
-          </div>
+    <div class="modal-bg"></div>
+    <div class="modal-box">
+      <div class="modal-top">
+        <div class="modal-top-close">
+          <!-- <ion-icon ios="ios-close" md="md-close" item-rigth (click)="onClose()" color=""></ion-icon> -->
+        </div>
+        <div class="modal-title">提示</div>
+        <div class="modal-content">
+          <p class="modal-center">请输入正确电话号码</p>
+        </div>
+        <div class="modal-footer">
+          <button ion-button full large (click)="surePhone()">确定</button>
+          <!-- <button ion-button full large (click)="onCompanyDel()" class="btn-delete">返回</button> -->
         </div>
       </div>
     </div>
+  </div>
 </ion-content>
