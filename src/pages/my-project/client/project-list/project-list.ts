@@ -6,6 +6,7 @@ import { ProjectBrowserPage } from '../project-browser/project-browser';
 import { getProjectByStatusUrl, myProjectCountUrl } from '../../../../providers/requestUrl';
 import { ProjectSpeedReleasePage } from '../project-speed-release/project-speed-release';
 import { SpeedPage } from '../../../speed/speed';
+import { ContactPage } from '../../../contact/contact';
 /**
  * Generated class for the ProjectListPage page.
  *
@@ -144,7 +145,10 @@ export class ProjectListPage {
   }
 
   goback() {
-    this.isShowNavMenu = false;
-    this.navCtrl.popToRoot();
+    // this.isShowNavMenu = false;
+    // this.navCtrl.goToRoot(this.navCtrl.getByIndex(4))
+    this.navCtrl.setRoot(ContactPage);
+    // this.navCtrl.popToRoot().then(()=>this.navCtrl.parent.select(4));
+    // this.navCtrl.parent.select(4);
   }
 }

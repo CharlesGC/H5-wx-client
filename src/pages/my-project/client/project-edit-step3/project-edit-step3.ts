@@ -7,6 +7,7 @@ import { ProjectTimeSelectPage } from '../../project-time-select/project-time-se
 import { ProjectListPage } from '../project-list/project-list';
 import { savaraftUrl, releaseProjectUrl } from '../../../../providers/requestUrl';
 import { SpeedPage } from '../../../speed/speed';
+import { ProjectBrowserPage } from '../project-browser/project-browser'
 
 /**
  * Generated class for the ProjectEditStep3Page page.
@@ -26,6 +27,9 @@ export class ProjectEditStep3Page {
   public isEdit = false;
   public isSpeed = false;
   public isComplete = false;
+  public isSubmit = false
+  public isfailed = false
+  public gotype = 0
   constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider) {
     this.projectData = {};
   }
@@ -47,7 +51,18 @@ export class ProjectEditStep3Page {
       return null;
     }
   }
-
+  sureSubmit() {
+    this.isSubmit = !this.isSubmit
+    if(this.gotype == 1){
+      this.navCtrl.push(ProjectBrowserPage);
+    }else{
+      this.navCtrl.push(ProjectListPage);
+    }
+    
+  }
+  sureFailed() {
+    this.isfailed = !this.isfailed
+  }
   /*保存提交*/
   goProjectSubmit() {
     this.projectData['otherIndustrys'] = this.getOtherIndustrys(this.projectData['industryList']);
@@ -106,9 +121,9 @@ export class ProjectEditStep3Page {
       if (res.code == 200) {
         this.isShow = true;
       } else if (res.code == 213) {
-        alert(res.msg);
+        //alert(res.msg);
       } else {
-        alert('请求出错:' + res.msg);
+        //alert('请求出错:' + res.msg);
       }
     }, error => {
       console.log('erros===', error);
@@ -127,14 +142,18 @@ export class ProjectEditStep3Page {
         return 1;
       }
     })
-  }
+  } 
 
   /*列表编辑*/
   goFormEditPage(field, value, type) {
+    
     if (field == 'skillList') {
-      value = value && value.length ? value.map(d => ({ id: d.psid, text: d.skillName })) : [];
+      
+      value = value && value.length ? value.map(d => ({ id: d.psid || d.id, text: d.skillName||d.text })) : [];
+      console.log(value,'============');
     } else if (field == 'industryList') {
-      value = value && value.length ? value.map(d => ({ id: d.piid, text: d.industryName })) : [];
+      console.log(value,'industryListindustryListindustryListindustryList');
+      value = value && value.length ? value.map(d => ({ id: d.piid || d.id, text: d.industryName||d.text })) : [];
     }
     if (type == 'timeSelect') {
       this.navCtrl.push(ProjectTimeSelectPage, { callback: this.setValue, value: value, field: field, type: type });
@@ -192,7 +211,7 @@ export class ProjectEditStep3Page {
   }
 
   /*存为草稿*/
-  onDraftSubmit() {
+  onDraftSubmit(type) {
     this.projectData['otherIndustrys'] = this.getOtherIndustrys(this.projectData['industryList']);
     this.projectData['otherSkills'] = this.getOtherIndustrys(this.projectData['skillList']);
     let industrys = this.projectData['industryList'] && this.projectData['industryList'].length > 0 ? this.projectData['industryList'].map(f => f.id).join(',') : '';
@@ -207,43 +226,42 @@ export class ProjectEditStep3Page {
     const openId = window.sessionStorage.getItem('openId') || this.getUrlParam('openId') || 'o2GZp1Gsud1OVuaw5AH_e28m3kOw'
     let projectStageDetailUrl = savaraftUrl + '?openId=' + openId +
       '&cid=' + projectData['cid'] +
-      '&principalName=' + projectData['principalName'] +
-      '&principalPosition=' + projectData['principalPosition'] +
-      '&principalPhone=' + projectData['principalPhone'] +
-      '&principalEmail=' + projectData['principalEmail'] +
-      '&projectName=' + projectData['projectName'] +
-      '&description=' + projectData['description'] +
-      '&target=' + projectData['target'] +
-      '&industrys=' + industrys +
-      '&skills=' + skills +
-      '&projectLengthType=' + projectData['projectLengthType'] +
-      '&projectLength=' + projectData['projectLength'] +
-      '&startTimeType=' + projectData['startTimeType'] +
-      '&startTime=' + projectData['startTime'] +
-      '&deliverMethod=' + projectData['deliverMethod'] +
-      '&budgetType=' + projectData['budgetType'] +
+      '&principalName=' + (projectData['principalName'] || '') +
+      '&principalPosition=' + (projectData['principalPosition'] || '') +
+      '&principalPhone=' + (projectData['principalPhone'] || '')+
+      '&principalEmail=' +( projectData['principalEmail'] || '') +
+      '&projectName=' + (projectData['projectName'] || '') +
+      '&description=' + (projectData['description'] || '') +
+      '&target=' + (projectData['target'] || '')+
+      '&industrys=' + (industrys || '') +
+      '&skills=' + (skills || '')+
+      '&projectLengthType=' + (projectData['projectLengthType'] || '')+
+      '&projectLength=' + (projectData['projectLength'] || '')+
+      '&startTimeType=' + (projectData['startTimeType'] || '')+
+      '&startTime=' + (projectData['startTime'] || '')+
+      '&deliverMethod=' + (projectData['deliverMethod'] || '') +
+      '&budgetType=' + (projectData['budgetType'] || '')+
       '&budgetDay=' + (projectData['budgetDay'] || 0) +
       '&workload=' + (projectData['workload'] || 0) +
-      '&budget=' + projectData['budget'] +
-      '&languages=' + language +
-      '&grades=' + grade +
-      '&otherIndustrys=' + otherIndustrys +
-      '&otherSkills=' + otherSkills +
-      '&province=' + projectData['province'] +
-      '&city=' + projectData['city'] +
-      '&qualification=' + projectData['qualification'];
+      '&budget=' + (projectData['budget'] || '') +
+      '&languages=' + (language || '') +
+      '&grades=' + (grade || '')+
+      '&otherIndustrys=' + (otherIndustrys || '')+
+      '&otherSkills=' + (otherSkills || '')+
+      '&province=' + (projectData['province'] || '')+
+      '&city=' + (projectData['city'] || '')+
+      '&qualification=' + (projectData['qualification'] || '');
     if (pid) {
       projectStageDetailUrl = projectStageDetailUrl + '&pid=' + pid;
     }
     this.Provider.getMamenSwiperData(projectStageDetailUrl).subscribe(res => {
       if (res.code == 200) {
         // this.isShow = true;
-        alert('保存成功！')
-        this.navCtrl.push(ProjectListPage);
-      } else if (res.code == 207) {
-        window.localStorage.removeItem('openId');
-      } else {
-        alert('请求出错:' + res.msg);
+        //alert('保存成功！')
+        this.gotype = type;
+        this.isSubmit = true
+      }else {
+        this.isfailed = true
       }
     }, error => {
       console.log('erros===', error);

@@ -40,6 +40,8 @@ export class ProjectBrowserPage {
     {name:'navMenu1',isShow:true}
   ];
   public isApply = false;
+  public isSuccess = false
+  public isFailed = false
   constructor(public navCtrl: NavController, public navParams: NavParams,private Provider:MamenDataProvider) {
   }
 
@@ -68,7 +70,14 @@ export class ProjectBrowserPage {
     console.log(value,'value');
     this.isShowNavMenu = value;
   }
-
+  sureSuccess(){
+    this.isSuccess =!this.isSuccess
+    this.navCtrl.pop()
+  }
+  sureFailed(){
+    this.isFailed = !this.isFailed
+    return
+  }
   /*点击菜单触发*/
   onNavMenuItemClick(type,typeName,status) {
     this.showNavMenuName = typeName;
@@ -110,7 +119,7 @@ export class ProjectBrowserPage {
       }else if(res.code == 207) {
         window.localStorage.removeItem('openId');
       }else{
-        alert('请求出错:'+res.msg);
+        //alert('请求出错:'+res.msg);
       }
     },error=>{
       console.log('erros===',error);
@@ -125,12 +134,12 @@ export class ProjectBrowserPage {
     //TODO  对数据进行校验
     this.Provider.getMamenSwiperData(creleaseProjectUrl).subscribe(res=>{
       if(res.code==200) {
-        alert('发布成功！');
-        this.navCtrl.pop();
-      }else if (res.code == 213) {
-        alert(res.msg);
+        //alert('发布成功！');
+        //this.navCtrl.pop();
+        this.isSuccess = true
       }else{
-        alert('请求出错:'+res.msg);
+        //alert('请求出错:'+res.msg);
+        this.isFailed =true
       }
     },error=>{
       console.log('erros===',error);
@@ -150,7 +159,7 @@ export class ProjectBrowserPage {
       }else if(res.code == 207) {
         window.localStorage.removeItem('openId');
       }else{
-        alert('请求出错:'+res.msg);
+        //alert('请求出错:'+res.msg);
       }
     },error=>{
       console.log('erros===',error);
@@ -170,7 +179,7 @@ export class ProjectBrowserPage {
       }else if(res.code == 207) {
         window.localStorage.removeItem('openId');
       }else{
-        alert('请求出错:'+res.msg);
+       // alert('请求出错:'+res.msg);
       }
     },error=>{
       console.log('erros===',error);
@@ -190,7 +199,7 @@ export class ProjectBrowserPage {
       }else if(res.code == 207) {
         window.localStorage.removeItem('openId');
       }else{
-        alert('请求出错:'+res.msg);
+        //alert('请求出错:'+res.msg);
       }
     },error=>{
       console.log('erros===',error);
@@ -210,7 +219,7 @@ export class ProjectBrowserPage {
       }else if(res.code == 207) {
         window.localStorage.removeItem('openId');
       }else{
-        alert('请求出错:'+res.msg);
+        //alert('请求出错:'+res.msg);
       }
     },error=>{
       console.log('erros===',error);

@@ -6,6 +6,7 @@ import { PhonebindPage } from '../phonebind/phonebind';
 import { ProjectConsultantBrowserPage } from '../my-project/client/project-consultant-browser/project-consultant-browser';
 import { ChooseIdentityPage } from '../../pages/choose-identity/choose-identity';
 import { SwiperDetailPage } from './swiper-detail/swiper-detail';
+import { IndustrymorePage } from '../industrymore/industrymore';
 // declare var onBridgeReady;
 
 // import { ViewChild } from '@angular/core';
@@ -233,7 +234,7 @@ export class HomePage {
       e.stopPropatation = true || e.cancelBubble;
 
     } else {
-      this.navCtrl.push(ChooseIdentityPage);
+      this.navCtrl.push(PhonebindPage);
     }
   }
   // 点击跳转到轮播图详情

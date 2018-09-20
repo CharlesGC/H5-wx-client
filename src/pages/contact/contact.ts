@@ -112,6 +112,14 @@ export class ContactPage {
   }
 
   ionViewDidEnter() {
+    let elements = document.querySelectorAll(".tabbar");
+    if (elements != null) {
+      Object.keys(elements).map((key) => {
+        if(elements[key].style.display == 'none'){
+          elements[key].style.display = 'flex'
+        }
+      });
+    }
     const openId = window.sessionStorage.getItem('openId') || this.getUrlParam('openId') || window.localStorage.getItem('openId');
     const user = window.sessionStorage.getItem('user') ? JSON.parse(window.sessionStorage.getItem('user')) : {'status':1};
     const usertype = window.sessionStorage.getItem('status') ? Number(window.sessionStorage.getItem('status')) : this.getUrlParam('status');

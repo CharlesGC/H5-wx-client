@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams,AlertController  } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { MamenDataProvider } from '../../providers/mamen-data/mamen-data';
 import { ChooseIdentityPage } from '../choose-identity/choose-identity';
 import { ContactPage } from '../contact/contact';
-import { bindPhoneUrl,sendSmsCodeUrl } from '../../providers/requestUrl';
+import { bindPhoneUrl, sendSmsCodeUrl } from '../../providers/requestUrl';
 // import { Keyboard } from '@ionic-native/keyboard';
 
 /**
@@ -18,7 +18,7 @@ import { bindPhoneUrl,sendSmsCodeUrl } from '../../providers/requestUrl';
   selector: 'page-phonebind',
   templateUrl: 'phonebind.html',
   viewProviders: [MamenDataProvider]
-  
+
 })
 export class PhonebindPage {
   public title = '手机号绑定'
@@ -28,68 +28,96 @@ export class PhonebindPage {
   public isShow = false;
   public isSend = true;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,private Provider:MamenDataProvider,public alertCtrl: AlertController) {
+  public isPhoneFormat = false
+  public isHavePhone = false
+  public isIntFailed = false
+  public isSuccess = false
+  public isFailed = false
+  public isDisabled:any
+  constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider, public alertCtrl: AlertController) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad PhonebindPage',this.navParams.get('parmens'),'---==---');
+    console.log('ionViewDidLoad PhonebindPage', this.navParams.get('parmens'), '---==---');
     // this.keyboard.show();
   }
-
-  
-
+  surePhoneFormat() {
+    this.isPhoneFormat = !this.isPhoneFormat
+    return
+  }
+  sureHavePhone() {
+    this.isHavePhone = !this.isHavePhone
+    return
+  }
+  sureIntFailed() {
+    this.isIntFailed = !this.isIntFailed
+    return
+  }
+  sureSuccess() {
+    this.isSuccess = !this.isSuccess
+    this.navCtrl.popToRoot();
+  }
+  sureFailed() {
+    this.isFailed = !this.isFailed
+    return
+  }
   /*获取验证码*/
-  getVerificationCode(phone){
-    
+  getVerificationCode(phone) {
+
     const openId = window.sessionStorage.getItem('openId') || this.getUrlParam('openId');
     // let getPhoneCodeUrl = 'http://mamon.yemindream.com/mamon/user/sendSmsCode';
-    if(!this.isSend || !this.isFlag){
+    if (!this.isSend || !this.isFlag) {
       return;
     }
     this.isSend = false;
-    if(phone.value.length < 11) {
-      alert('手机号格式错误')
+    if (phone.value.length < 11) {
+      //alert('手机号格式错误')
+      this.isPhoneFormat = true
       return;
     }
-    
-    let getPhoneCodeUrl = sendSmsCodeUrl+'?openId='+openId + '&phone=' + phone.value
-    this.Provider.getMamenSwiperData(getPhoneCodeUrl).subscribe(res=>{
-      if(res.code==200) {
+    this.isDisabled = 'disabled'
+    let getPhoneCodeUrl = sendSmsCodeUrl + '?openId=' + openId + '&phone=' + phone.value
+    this.Provider.getMamenSwiperData(getPhoneCodeUrl).subscribe(res => {
+      if (res.code == 200) {
         this.isFlag && this.countdown();
-      }else if(res.code == 204){
-        alert('手机号已存在！');
-      }else{
-        alert('网络异常！')
+      } else if (res.code == 204) {
+        //alert('手机号已存在！');
+        this.isHavePhone = true
+      } else {
+        //alert('网络异常！')
+        this.isIntFailed = true
       }
       this.isSend = true;
-    },error=>{
-      console.log('erros===',error);
+    }, error => {
+      console.log('erros===', error);
     })
   }
 
-  getUrlParam(name) {  
+  getUrlParam(name) {
     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象  
     var r = window.location.search.substr(1).match(reg);  //匹配目标参数  
     if (r != null) {
-        return encodeURI(r[2]);  //返回参数值 
+      return encodeURI(r[2]);  //返回参数值 
     } else {
-        return null; 
+      return null;
     }
- }
+  }
 
   /*倒计时*/
-  countdown(){
+  countdown() {
     this.isFlag = false;
     let count = 60;
-    let setTimeInter = setInterval(()=>{
-      this.phoneCodeText = '重新获取：'+ count--;
-      if(count<1){
+    let setTimeInter = setInterval(() => {
+      this.phoneCodeText = '重新获取：' + count--;
+      if (count < 1) {
         clearInterval(setTimeInter);
         this.isFlag = true;
         this.phoneCodeText = '获取验证码';
+        this.isDisabled = ''
       }
-    },1000);
+    }, 1000);
     this.phoneCodeText = '获取验证码';
+    this.isDisabled =''
   }
 
   //绑定手机号
@@ -97,21 +125,23 @@ export class PhonebindPage {
     const openId = window.sessionStorage.getItem('openId') || this.getUrlParam('openId');
     // let getPhoneCodeUrl = 'http://mamon.yemindream.com/mamon/user/bindPhone';
     let userType = this.navParams.get('parmens');
-   
-    let getPhoneCodeUrl = bindPhoneUrl+'?openId='+openId + '&phone=' + phone.value + '&code=' + code.value + '&userType='+userType;
-    this.Provider.getMamenSwiperData(getPhoneCodeUrl).subscribe(res=>{
-      if(res.code==200) {
+
+    let getPhoneCodeUrl = bindPhoneUrl + '?openId=' + openId + '&phone=' + phone.value + '&code=' + code.value + '&userType=' + userType;
+    this.Provider.getMamenSwiperData(getPhoneCodeUrl).subscribe(res => {
+      if (res.code == 200) {
         // this.navCtrl.push(ContactPage);
-        this.navCtrl.popToRoot();
-        alert('绑定成功！')
+        this.isSuccess = true
+        //alert('绑定成功！')
+      } else {
+        this.isFailed = true
       }
-    },error=>{
-      console.log('erros===',error);
+    }, error => {
+      console.log('erros===', error);
     })
   }
 
   showAlert() {
-    if(!this.isShow) {
+    if (!this.isShow) {
       this.isShow = true;
     }
   }
@@ -126,7 +156,7 @@ export class PhonebindPage {
   }
 
   onSelectChange() {
-    
+
   }
 
 

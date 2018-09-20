@@ -27,11 +27,14 @@ export class ProjectTimeSelectPage {
     workload: 0,
     budget:0,
   }
+  public isBudgetDay = false
+  public isBudget= false
   customPopoverOptions: any = {
     header: 'Hair Color',
     subHeader: 'Select your hair color',
     message: 'Only select your dominant hair color'
   };
+  public headerTitle='信息编辑'
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
@@ -43,6 +46,7 @@ export class ProjectTimeSelectPage {
     if(this.field == 'workload_workloadUnit') {
       this.inputName = value[0];
       this.typeTxt = value[1];
+      this.headerTitle = '项目周期信息'
     }else if(this.field == 'projectTime'){
       this.selected = value['projectLengthType'];
       this.inputName = value['projectLength'];
@@ -70,6 +74,7 @@ export class ProjectTimeSelectPage {
     if(this.field == 'workload_workloadUnit') {
       this.inputName = value[0];
       this.typeTxt = value[1];
+      this.headerTitle = '项目周期信息'
     }else if(this.field == 'projectTime'){
       this.selected = value['projectLengthType'];
       this.inputName = value['projectLength'];
@@ -118,8 +123,14 @@ export class ProjectTimeSelectPage {
   switchType() {
     console.log(this.typeTxt);
   }
-
-
+  sureBudgetDay(){
+    this.isBudgetDay=!this.isBudgetDay
+    return
+  }
+  sureBudget(){
+    this.isBudget = !this.isBudget
+    return
+  }
   /*保存数据并返回页面*/
   onSelectSubmit() {
     let callback = this.navParams.get('callback');
@@ -135,6 +146,17 @@ export class ProjectTimeSelectPage {
     }else if(this.field == 'qualification'){
       callback(this.field,this.selected);
     }else if(this.field == 'project_budget'){
+      if(this.selected == 0){
+        if(!this.budgetData.budgetDay || !this.budgetData.workload){
+          this.isBudgetDay = true
+          return
+        }
+      }else if(this.selected == 1){
+        if(!this.budgetData.budget){
+          this.isBudget =true
+          return
+        }
+      }
       callback(this.field,[this.selected,this.budgetData.budgetDay,this.budgetData.workload,this.budgetData.budget || '']);
     }else if(this.field == 'planguage') {
       callback(this.field,this.languageList);

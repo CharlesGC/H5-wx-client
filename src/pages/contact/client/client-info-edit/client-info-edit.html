@@ -123,7 +123,7 @@
         <button ion-button class="btn-delete" (click)="onChooseSubmit()">删除</button>
     </div> -->
 
-    <button ion-button expand="full" large class="fixed-bottom" (click)="onCompanySubmit()">保存</button>
+    <button ion-button expand="full" large class="fixed-bottom" (click)="onCompanySubmit()" [disabled]='isDisabled'>保存</button>
     
 </ion-content>
 
@@ -157,10 +157,66 @@
       </div>
       <div class="modal-title">提示</div>
       <div class="modal-content">
-        <p class="modal-center">请输入正确电话号码</p>
+        <p class="modal-center">请输入正确的公司座机</p>
       </div>
       <div class="modal-footer">
         <button ion-button full large (click)="surePhone()">确定</button>
+        <!-- <button ion-button full large (click)="onCompanyDel()" class="btn-delete">返回</button> -->
+      </div>
+    </div>
+  </div>
+</div>
+ <!-- 公司信息不完整弹出-->
+ <div class="phonebind-modal" [hidden]="!isComplete">
+  <div class="modal-bg"></div>
+  <div class="modal-box">
+    <div class="modal-top">
+      <div class="modal-top-close">
+        <!-- <ion-icon ios="ios-close" md="md-close" item-rigth (click)="onClose()" color=""></ion-icon> -->
+      </div>
+      <div class="modal-title">提示</div>
+      <div class="modal-content">
+        <p class="modal-center">公司信息需填写完整</p>
+      </div>
+      <div class="modal-footer">
+        <button ion-button full large (click)="sureComplete()">确定</button>
+        <!-- <button ion-button full large (click)="onCompanyDel()" class="btn-delete">返回</button> -->
+      </div>
+    </div>
+  </div>
+</div>
+ <!-- 公司信息不完整弹出-->
+ <div class="phonebind-modal" [hidden]="!isSuccess">
+  <div class="modal-bg"></div>
+  <div class="modal-box">
+    <div class="modal-top">
+      <div class="modal-top-close">
+        <!-- <ion-icon ios="ios-close" md="md-close" item-rigth (click)="onClose()" color=""></ion-icon> -->
+      </div>
+      <div class="modal-title">提示</div>
+      <div class="modal-content">
+        <p class="modal-center">保存成功</p>
+      </div>
+      <div class="modal-footer">
+        <button ion-button full large (click)="sureSuccess()">确定</button>
+        <!-- <button ion-button full large (click)="onCompanyDel()" class="btn-delete">返回</button> -->
+      </div>
+    </div>
+  </div>
+</div>
+<div class="phonebind-modal" [hidden]="!isfailed">
+  <div class="modal-bg"></div>
+  <div class="modal-box">
+    <div class="modal-top">
+      <div class="modal-top-close">
+        <!-- <ion-icon ios="ios-close" md="md-close" item-rigth (click)="onClose()" color=""></ion-icon> -->
+      </div>
+      <div class="modal-title">提示</div>
+      <div class="modal-content">
+        <p>提交失败，请重新提交</p>
+      </div>
+      <div class="modal-footer">
+        <button ion-button full large (click)="sureFailed()">确定</button>
         <!-- <button ion-button full large (click)="onCompanyDel()" class="btn-delete">返回</button> -->
       </div>
     </div>

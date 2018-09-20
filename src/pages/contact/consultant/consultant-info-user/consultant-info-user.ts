@@ -25,6 +25,7 @@ export class ConsultantInfoUserPage {
   public isuName = false;
   public isSkill = false;
   public isComplete = false
+  public salaryDown = false
   constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider) {
     this.userInfoData = {};
   }
@@ -71,9 +72,9 @@ export class ConsultantInfoUserPage {
 
   /*设置值（回调函数）*/
   setValue = (field, value) => {
-    if (field == 'salaryDown-salaryUp') {
-      this.userInfoData['salaryDown'] = value[0];
-      this.userInfoData['salaryUp'] = value[1];
+    if (field == 'salaryUp-salaryDown') {
+      this.userInfoData['salaryUp'] = value[0];
+      this.userInfoData['salaryDown'] = value[1];
     } else if (field == 'skillList') {
       this.userInfoData[field] = value && value.length > 0 ? value.map(f => ({ ...f, ssid: f.id, asName: f.text })) : [];
     } else if (field == 'industryList') {
@@ -93,19 +94,26 @@ export class ConsultantInfoUserPage {
       }
     })
   }
-
+  sureSalaryUp(){
+    this.salaryDown = !this.salaryDown
+    return
+  }
   /*提交请求*/
   onInfoUserSubmit() {
     const openId = window.sessionStorage.getItem('openId') || this.getUrlParam('openId');
     let userInfoData = this.userInfoData;
     let uid = userInfoData.uid || 0;
-    console.log(userInfoData, 'userInfoData');
+    //console.log(userInfoData, 'userInfoData');
     userInfoData['otherIndustrys'] = this.getOtherIndustrys(userInfoData['industryList']);
     userInfoData['otherSkills'] = this.getOtherIndustrys(userInfoData['skillList']);
     let industryList = userInfoData.industryList ? userInfoData.industryList.map(f => f.ilid).join(',') : '';
     let skillList = userInfoData.skillList ? userInfoData.skillList.map(f => f.ssid).join(',') : '';
     let otherIndustrys = this.userInfoData['otherIndustrys'] && this.userInfoData['otherIndustrys'].length > 0 ? this.userInfoData['otherIndustrys'].join(',') : '';
     let otherSkills = this.userInfoData['otherSkills'] && this.userInfoData['otherSkills'].length > 0 ? this.userInfoData['otherSkills'].join(',') : '';
+    if(this.userInfoData.salaryDown > 999999){
+      this.salaryDown = true
+      return
+    }
     if(this.userInfoData.uname == ''){
       this.isuName = true;
       return;

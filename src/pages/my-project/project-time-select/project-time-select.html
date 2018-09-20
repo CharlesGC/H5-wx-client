@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>项目时间选择</ion-title>
+    <ion-title>{{headerTitle}}</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -237,8 +237,8 @@
             <div>
                 <p class="browser-file">总预算金额</p>
                 <div class="money">
-                    <span class="m-format">￥</span>
-                    <span class="m-cont">{{budgetData.budget}}</span>
+                    <!-- <span class="m-format">￥</span> -->
+                    <span class="m-cont">{{budgetData.budget | currency: '￥'}}</span>
                 </div>
                 <p class="browser-file">这并不是一个您承诺的数字，它仅仅帮助我们为您的项目找到合适的顾问</p>
             </div>
@@ -278,3 +278,39 @@
     <div style="height:50px;"></div>
     <button ion-button expand="full" large class="fixed-bottom" (click)="onSelectSubmit()">保存</button>
 </ion-content>
+<div class="phonebind-modal" [hidden]="!isBudgetDay">
+    <div class="modal-bg"></div>
+    <div class="modal-box">
+      <div class="modal-top">
+        <div class="modal-top-close">
+          <!-- <ion-icon ios="ios-close" md="md-close" item-rigth (click)="onClose()" color=""></ion-icon> -->
+        </div>
+        <div class="modal-title">提示</div>
+        <div class="modal-content">
+          <p>预算金额和预算天数不能为空</p>
+        </div>
+        <div class="modal-footer">
+          <button ion-button full large (click)="sureBudgetDay()">确定</button>
+          <!-- <button ion-button full large (click)="onCompanyDel()" class="btn-delete">返回</button> -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="phonebind-modal" [hidden]="!isBudget">
+    <div class="modal-bg"></div>
+    <div class="modal-box">
+      <div class="modal-top">
+        <div class="modal-top-close">
+          <!-- <ion-icon ios="ios-close" md="md-close" item-rigth (click)="onClose()" color=""></ion-icon> -->
+        </div>
+        <div class="modal-title">提示</div>
+        <div class="modal-content">
+          <p>预算金额不能为空</p>
+        </div>
+        <div class="modal-footer">
+          <button ion-button full large (click)="sureBudget()">确定</button>
+          <!-- <button ion-button full large (click)="onCompanyDel()" class="btn-delete">返回</button> -->
+        </div>
+      </div>
+    </div>
+  </div>
