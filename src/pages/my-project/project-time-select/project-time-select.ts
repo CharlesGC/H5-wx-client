@@ -34,6 +34,7 @@ export class ProjectTimeSelectPage {
     subHeader: 'Select your hair color',
     message: 'Only select your dominant hair color'
   };
+  public headerTitle='信息编辑'
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
@@ -45,6 +46,7 @@ export class ProjectTimeSelectPage {
     if(this.field == 'workload_workloadUnit') {
       this.inputName = value[0];
       this.typeTxt = value[1];
+      this.headerTitle = '项目周期信息'
     }else if(this.field == 'projectTime'){
       this.selected = value['projectLengthType'];
       this.inputName = value['projectLength'];
@@ -72,6 +74,7 @@ export class ProjectTimeSelectPage {
     if(this.field == 'workload_workloadUnit') {
       this.inputName = value[0];
       this.typeTxt = value[1];
+      this.headerTitle = '项目周期信息'
     }else if(this.field == 'projectTime'){
       this.selected = value['projectLengthType'];
       this.inputName = value['projectLength'];
