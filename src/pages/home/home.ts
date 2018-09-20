@@ -165,7 +165,7 @@ export class HomePage {
     if (token) {
       if (Number(usertype) == 1) {
         window.sessionStorage.setItem('token', token)
-        this.navCtrl.push(PhonebindPage);
+        this.navCtrl.push(ChooseIdentityPage);
       } else if (Number(usertype) == 1) {
         // this.navCtrl.push(ChooseIdentityPage);
       }

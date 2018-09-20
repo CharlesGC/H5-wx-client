@@ -31,7 +31,7 @@ export class AddEmailPage {
   sureEmailBack() {
     this.isEmail = !this.isEmail
     //this.navCtrl.push(ContactPage);
-    this.navCtrl.pop()
+    this.navCtrl.popToRoot();
   }
   sureEmailType() {
     this.isEmailType = !this.isEmailType
