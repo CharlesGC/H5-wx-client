@@ -25,23 +25,23 @@
             <ion-icon name="arrow-forward" item-right (click)="isShow=!isShow"></ion-icon>
         </ion-item>
         <ion-item class="nav-menu-item" (click)="onNavMenuItemClick(1,'所有顾问','')">
-            <label class="ml25">所有顾问（{{projectSignCount.allCount}}） </label>
+            <label class="ml25">所有顾问（{{projectSignCount.allCount || 0}}） </label>
             <ion-icon name="arrow-forward" item-right (click)="isShow=!isShow"></ion-icon>
         </ion-item>
         <ion-item class="nav-menu-item" (click)="onNavMenuItemClick(1,'已推荐',0)">
-            <label class="ml25">已推荐（{{projectSignCount.recommendedCount}}） </label>
+            <label class="ml25">已推荐（{{projectSignCount.recommendedCount || 0}}） </label>
             <ion-icon name="arrow-forward" item-right (click)="isShow=!isShow"></ion-icon>
         </ion-item>
         <ion-item class="nav-menu-item" (click)="onNavMenuItemClick(1,'待面试',1)">
-            <label class="ml25">待面试（{{projectSignCount.interviewCount}}） </label>
+            <label class="ml25">待面试（{{projectSignCount.interviewCount || 0}}） </label>
             <ion-icon name="arrow-forward" item-right (click)="isShow=!isShow"></ion-icon>
         </ion-item>
         <ion-item class="nav-menu-item" (click)="onNavMenuItemClick(1,'方案待确认',6)">
-            <label class="ml25">方案待确认（{{projectSignCount.programConfirmedCount}}） </label>
+            <label class="ml25">方案待确认（{{projectSignCount.programConfirmedCount || 0}}） </label>
             <ion-icon name="arrow-forward" item-right (click)="isShow=!isShow"></ion-icon>
         </ion-item>
         <ion-item class="nav-menu-item" (click)="onNavMenuItemClick(1,'已聘用',5)">
-            <label class="ml25">已聘用（{{projectSignCount.employCount}}） </label>
+            <label class="ml25">已聘用（{{projectSignCount.employCount || 0}}） </label>
             <ion-icon name="arrow-forward" item-right (click)="isShow=!isShow"></ion-icon>
         </ion-item>
         <ion-item class="nav-menu-item" (click)="onNavMenuItemClick(2,'方案','')">

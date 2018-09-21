@@ -252,7 +252,7 @@ export class ContactPage {
 }
 
 goPhonebindPage(){
-  this.navCtrl.push(PhonebindPage);
+  // this.navCtrl.push(PhonebindPage);
 }
 
 
