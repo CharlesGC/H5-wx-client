@@ -155,7 +155,7 @@
                         projectListData_item.status ==9 || projectListData_item.status ==10">已完成</span>
             <span class="project-type type-blue" *ngIf="projectListData_item.status ==0">草稿箱</span>
           </div>
-          <span>{{projectListData_item.releaseTime | date:'yy/MM/dd'}}</span>
+          <span>{{projectListData_item.releaseTime}}</span>
         </div>
         <div class="msg-cont">
           <h4>快速发布的项目</h4>
