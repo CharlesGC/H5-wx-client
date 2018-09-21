@@ -29,15 +29,15 @@ export class ConsultantInfoUserPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider) {
     this.userInfoData = {};
   }
-  sureNameBack(){
+  sureNameBack() {
     this.isuName = !this.isuName
-    return 
+    return
   }
-  sureSkillBack(){
+  sureSkillBack() {
     this.isSkill = !this.isSkill
     return
   }
-  sureComplete(){
+  sureComplete() {
     this.isComplete = !this.isComplete
     this.navCtrl.pop()
   }
@@ -49,7 +49,7 @@ export class ConsultantInfoUserPage {
     this.userAvatarPic = value
     this.userInfoData.avatar = value
   }
-  
+
   ionViewDidLoad() {
     console.log('ionViewDidLoad ConsultantInfoUserPage');
     this.userInfoData = this.navParams.get('consultantAdviser') || {}
@@ -57,7 +57,10 @@ export class ConsultantInfoUserPage {
 
   //跳转到银行账号页面
   goBankAccount() {
-    this.navCtrl.push(ConsultantBankAccountPage);
+    this.navCtrl.push(ConsultantBankAccountPage, { callback: this.getReceiptNum });
+  }
+  getReceiptNum = (value) => {
+    this.userInfoData.bankCount = value
   }
 
   /*跳转到数据处理页面*/
@@ -94,7 +97,7 @@ export class ConsultantInfoUserPage {
       }
     })
   }
-  sureSalaryUp(){
+  sureSalaryUp() {
     this.salaryDown = !this.salaryDown
     return
   }
@@ -110,15 +113,15 @@ export class ConsultantInfoUserPage {
     let skillList = userInfoData.skillList ? userInfoData.skillList.map(f => f.ssid).join(',') : '';
     let otherIndustrys = this.userInfoData['otherIndustrys'] && this.userInfoData['otherIndustrys'].length > 0 ? this.userInfoData['otherIndustrys'].join(',') : '';
     let otherSkills = this.userInfoData['otherSkills'] && this.userInfoData['otherSkills'].length > 0 ? this.userInfoData['otherSkills'].join(',') : '';
-    if(this.userInfoData.salaryDown > 999999){
+    if (this.userInfoData.salaryDown > 999999) {
       this.salaryDown = true
       return
     }
-    if(this.userInfoData.uname == ''){
+    if (this.userInfoData.uname == '') {
       this.isuName = true;
       return;
     }
-    if(this.userInfoData.skillList.length == 0){
+    if (this.userInfoData.skillList.length == 0) {
       this.isSkill = true;
       return;
     }
@@ -131,8 +134,8 @@ export class ConsultantInfoUserPage {
       '&years=' + userInfoData.years +
       '&industrys=' + industryList +
       '&skills=' + skillList +
-      '&salaryDown=' + userInfoData.salaryUp +
-      '&salaryUp=' + userInfoData.salaryDown +
+      '&salaryUp=' + userInfoData.salaryUp +
+      '&salaryDown=' + userInfoData.salaryDown +
       '&address=' + userInfoData.address +
       '&otherIndustrys=' + otherIndustrys +
       '&otherSkills=' + otherSkills +

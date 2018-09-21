@@ -71,7 +71,7 @@
     <ion-item class="" (click)="goFormEditPage('salaryUp-salaryDown',[userInfoData.salaryUp,userInfoData.salaryDown],'ranger')">
       <span class="left-title">日薪范围</span>
       <div item-right class="rigth-message">
-        <span>{{userInfoData.salaryUp}} 元 - {{userInfoData.salaryDown}} 元</span>
+        <span>{{userInfoData.salaryUp | currency :'￥'}} 元 - {{userInfoData.salaryDown | currency :'￥'}} 元</span>
         <ion-icon name="arrow-forward" class="ml12"></ion-icon>
       </div>
     </ion-item>
