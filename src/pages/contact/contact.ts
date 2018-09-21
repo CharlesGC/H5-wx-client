@@ -12,7 +12,7 @@ import { ProjectListPage } from '../my-project/client/project-list/project-list'
 import { ConsultantProjectListPage } from '../my-project/consultant/consultant-project-list/consultant-project-list';
 import { ProjectProgramObjectionPage } from '../my-project/client/project-program-objection/project-program-objection';
 import { MessageCenterPage } from '../message-center/message-center';
-import { getUserByopenIdUrl } from '../../providers/requestUrl';
+import { getUserByopenIdUrl,getWxOpenidUrl } from '../../providers/requestUrl';
 
 
 // 引入微信服务
@@ -172,23 +172,41 @@ export class ContactPage {
   }
   
   onLogin() {
-    var ua = navigator.userAgent.toLowerCase();
-    var isWeixin = ua.indexOf('micromessenger') != -1;
-    if (isWeixin) {
-      const appid = 'wxc7d4e3e94ad5b330';
-      const code = this.getUrlParam('code') || window.localStorage.getItem('code');
-      const local = window.location.href;
-      if(code == null || code == '') {
-        window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid='+appid + '&redirect_uri=http://mamon.yemindream.com/mamon/wechat/getWxOpenid&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect';
-      }else{
-        window.localStorage.setItem('code',code);
-        let url = 'http://mamon.yemindream.com/mamon/wechat/getWxOpenid?code=' +code;
-        this.Provider.getMamenSwiperData(url).subscribe(res=>{
-          console.log(res,'-----------');
-        },error=>{
-          console.log('erros===',error);
-        })
-      }
+    // var ua = navigator.userAgent.toLowerCase();
+    // var isWeixin = ua.indexOf('micromessenger') != -1;
+    // if (isWeixin) {
+    //   const appid = 'wxc7d4e3e94ad5b330';
+    //   const code = this.getUrlParam('code') || window.localStorage.getItem('code');
+    //   const local = window.location.href;
+    //   if(code == null || code == '') {
+    //     window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid='+appid + '&redirect_uri=http://mamon.yemindream.com/mamon/wechat/getWxOpenid&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect';
+    //   }else{
+    //     window.localStorage.setItem('code',code);
+    //     let url = 'http://mamon.yemindream.com/mamon/wechat/getWxOpenid?code=' +code;
+    //     this.Provider.getMamenSwiperData(url).subscribe(res=>{
+    //       console.log(res,'-----------');
+    //     },error=>{
+    //       console.log('erros===',error);
+    //     })
+    //   }
+      var ua = navigator.userAgent.toLowerCase();
+      var isWeixin = ua.indexOf('micromessenger') != -1;
+      if (isWeixin) {
+        const appid = 'wxc7d4e3e94ad5b330';
+        const code = this.getUrlParam('code') || window.localStorage.getItem('code');
+        const local = window.location.href;
+        const openidUrl = getWxOpenidUrl;
+        if(code == null || code == '') {
+          window.location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${appid}&redirect_uri=${openidUrl}&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect`;
+        }else{
+          window.localStorage.setItem('code',code);
+          let url = `${openidUrl}?code=${code}`;
+          this.Provider.getMamenSwiperData(url).subscribe(res=>{
+            console.log(res,'-----------');
+          },error=>{
+            console.log('erros===',error);
+          })
+        }
     }else{
       alert('请用微信登录')
     }
@@ -234,7 +252,7 @@ export class ContactPage {
 }
 
 goPhonebindPage(){
-  this.navCtrl.push(PhonebindPage);
+  // this.navCtrl.push(PhonebindPage);
 }
 
 

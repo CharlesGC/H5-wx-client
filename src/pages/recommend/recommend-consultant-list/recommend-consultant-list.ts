@@ -23,6 +23,7 @@ export class RecommendConsultantListPage {
   public projectListData = [];
   public pageNum = 0;
   public pageSize = 999;
+  public isCont = false;
   constructor(public navCtrl: NavController, public navParams: NavParams,private Provider:MamenDataProvider) {
     this.selected = 2;
   }
@@ -61,6 +62,8 @@ export class RecommendConsultantListPage {
     this.Provider.getMamenSwiperData(projectListsDataUrl).subscribe(res=>{
       if(res.code==200) {
         this.projectListData = res.data || [];
+        this.isCont = this.projectListData.length<1 ? true : false;
+        console.log(this.isCont,'*****')
       }else if(res.code == 207) {
         window.localStorage.removeItem('openId');
       }else{

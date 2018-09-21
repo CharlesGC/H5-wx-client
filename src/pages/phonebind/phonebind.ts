@@ -69,15 +69,17 @@ export class PhonebindPage {
     if (!this.isSend || !this.isFlag) {
       return;
     }
-    this.isSend = false;
     if (phone.value.length < 11) {
       //alert('手机号格式错误')
       this.isPhoneFormat = true
       return;
     }
+    this.isSend = false;
     this.isDisabled = 'disabled'
     let getPhoneCodeUrl = sendSmsCodeUrl + '?openId=' + openId + '&phone=' + phone.value
     this.Provider.getMamenSwiperData(getPhoneCodeUrl).subscribe(res => {
+      this.isSend = true;
+      this.isDisabled = ''
       if (res.code == 200) {
         this.isFlag && this.countdown();
       } else if (res.code == 204) {
@@ -87,7 +89,7 @@ export class PhonebindPage {
         //alert('网络异常！')
         this.isIntFailed = true
       }
-      this.isSend = true;
+      
     }, error => {
       console.log('erros===', error);
     })
@@ -125,7 +127,9 @@ export class PhonebindPage {
     const openId = window.sessionStorage.getItem('openId') || this.getUrlParam('openId');
     // let getPhoneCodeUrl = 'http://mamon.yemindream.com/mamon/user/bindPhone';
     let userType = this.navParams.get('parmens');
-
+    if(!userType && userType != 0){
+      userType = 1;
+    }
     let getPhoneCodeUrl = bindPhoneUrl + '?openId=' + openId + '&phone=' + phone.value + '&code=' + code.value + '&userType=' + userType;
     this.Provider.getMamenSwiperData(getPhoneCodeUrl).subscribe(res => {
       if (res.code == 200) {
@@ -156,7 +160,6 @@ export class PhonebindPage {
   }
 
   onSelectChange() {
-
   }
 
 

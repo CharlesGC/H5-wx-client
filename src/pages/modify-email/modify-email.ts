@@ -44,7 +44,8 @@ export class ModifyEmailPage {
       if(res.code==200) {
         // this.navCtrl.push(ChooseIdentityPage);
         alert('发送成功！');
-        this.navCtrl.push(ContactPage);
+        // this.navCtrl.push(ContactPage);
+        this.navCtrl.popToRoot();
       }else if(res.code==209){
         alert('邮箱已存在');
       }else{

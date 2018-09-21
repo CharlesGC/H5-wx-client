@@ -287,16 +287,16 @@ export const evalutionSubmitUrl = getAPIPath + 'customer/getProjectProgramDeatil
 export const projectStageProposalListUrl = getAPIPath + 'adviser/projectStageProposalList';
 
 /*我的项目-顾问-项目评价*/
-export const projectEvaluateUrl = getAPIPath + '/adviser/projectEvaluate';
+export const projectEvaluateUrl = getAPIPath + 'adviser/projectEvaluate';
 
 /*我的项目-客户-项目评价*/
-export const clientprojectEvaluateUrl = getAPIPath + '/customer/projectEvaluate';
+export const clientprojectEvaluateUrl = getAPIPath + 'customer/projectEvaluate';
 
 /*我的项目-消息中心*/
-export const getMessageListUrl = getAPIPath + '/message/getMessageList';
+export const getMessageListUrl = getAPIPath + 'message/getMessageList';
 
 /* 简历上传 */
-export const resumeUpLoadUrl = getAPIPath + '/adviser/addOrEditResume';
+export const resumeUpLoadUrl = getAPIPath + 'adviser/addOrEditResume';
 
 /* 简历删除 */
 export const resumeDeleteUrl = getAPIPath + 'adviser/delResume';
@@ -305,7 +305,10 @@ export const resumeDeleteUrl = getAPIPath + 'adviser/delResume';
 export const readMessageUrl = getAPIPath + 'message/readMessage';
 
 /*项目忽略请求*/
-export const  ignoreProjectUrl = getAPIPath + '/adviser/ignoreProject';
+export const ignoreProjectUrl = getAPIPath + 'adviser/ignoreProject';
+
+/*获取openid请求*/
+export const getWxOpenidUrl = getAPIPath + 'wechat/getWxOpenid';
 
 
 

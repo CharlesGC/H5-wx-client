@@ -140,6 +140,7 @@ page-phonebind {
             color: #4a4a4a;
             border-radius: 3px;
             box-shadow: 0 1px 10px 0 rgba(0, 0, 0, 0.05);
+            
             .modal-content {
                 height: 260px;
                 overflow: auto;
@@ -147,6 +148,9 @@ page-phonebind {
                 font-size: 12px;
                 line-height: 1.8;
                 font-weight: 500;
+                &.height-auto {
+                    height: initial;
+                }
                 p {
                     text-indent: 2rem;
                 }
