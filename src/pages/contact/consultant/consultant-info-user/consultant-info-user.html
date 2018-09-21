@@ -60,7 +60,7 @@
       </div>
     </ion-item>
     <ion-item class="" (click)="goFormEditPage('skillList',userInfoData.skillList,'selectArr')">
-      <span class="left-title">擅长领域</span>
+      <span class="left-title">擅长领域<span class="required-field ml5">(必填)</span></span>
       <div item-right class="rigth-message">
         <span *ngIf="userInfoData.skillList && userInfoData.skillList.length<1"></span>
         <span *ngIf="userInfoData.skillList && userInfoData.skillList.length==1">{{userInfoData.skillList[0].asName}}</span>
@@ -71,12 +71,12 @@
     <ion-item class="" (click)="goFormEditPage('salaryUp-salaryDown',[userInfoData.salaryUp,userInfoData.salaryDown],'ranger')">
       <span class="left-title">日薪范围</span>
       <div item-right class="rigth-message">
-        <span>{{userInfoData.salaryUp}} 元 - {{userInfoData.salaryDown}} 元</span>
+        <span>{{userInfoData.salaryUp | currency : '￥'}} 元 - {{userInfoData.salaryDown | currency : '￥'}} 元</span>
         <ion-icon name="arrow-forward" class="ml12"></ion-icon>
       </div>
     </ion-item>
     <ion-item class="" (click)="goFormEditPage('address',userInfoData.address,'text')">
-      <span class="left-title">联系地址</span>
+      <span class="left-title">联系地址<span class="required-field ml5">(必填)</span></span>
       <div item-right class="rigth-message">
         <span class="line-overflow">{{userInfoData.address}}</span>
         <ion-icon name="arrow-forward" class="ml12"></ion-icon>
@@ -109,7 +109,7 @@
       </div>
       <div class="modal-title">提示</div>
       <div class="modal-content">
-        <p>请填写姓名</p>
+        <p>姓名为必填项，请填写</p>
       </div>
       <div class="modal-footer">
         <button ion-button full large (click)="sureNameBack()">确定</button>
@@ -127,7 +127,7 @@
       </div>
       <div class="modal-title">提示</div>
       <div class="modal-content">
-        <p>请填写专业领域</p>
+        <p>专业领域为必填项，请填写</p>
       </div>
       <div class="modal-footer">
         <button ion-button full large (click)="sureSkillBack()">确定</button>
@@ -159,21 +159,21 @@
         <button class="full-btn" ion-button expand="full" large (click)="onInfoUserSubmit()">提交</button>
     </ion-toolbar>
   </ion-footer> -->
-  <div class="phonebind-modal" [hidden]="!salaryDown">
-    <div class="modal-bg"></div>
-    <div class="modal-box">
-      <div class="modal-top">
-        <div class="modal-top-close">
-          <!-- <ion-icon ios="ios-close" md="md-close" item-rigth (click)="onClose()" color=""></ion-icon> -->
-        </div>
-        <div class="modal-title">提示</div>
-        <div class="modal-content">
-          <p>日薪范围不能大于99万</p>
-        </div>
-        <div class="modal-footer">
-          <button ion-button full large (click)="sureSalaryUp()">确定</button>
-          <!-- <button ion-button full large (click)="onCompanyDel()" class="btn-delete">返回</button> -->
-        </div>
+<div class="phonebind-modal" [hidden]="!salaryDown">
+  <div class="modal-bg"></div>
+  <div class="modal-box">
+    <div class="modal-top">
+      <div class="modal-top-close">
+        <!-- <ion-icon ios="ios-close" md="md-close" item-rigth (click)="onClose()" color=""></ion-icon> -->
+      </div>
+      <div class="modal-title">提示</div>
+      <div class="modal-content">
+        <p>日薪范围不能大于99万</p>
+      </div>
+      <div class="modal-footer">
+        <button ion-button full large (click)="sureSalaryUp()">确定</button>
+        <!-- <button ion-button full large (click)="onCompanyDel()" class="btn-delete">返回</button> -->
       </div>
     </div>
   </div>
+</div>
