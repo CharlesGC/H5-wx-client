@@ -2,7 +2,7 @@ page-home {
     .content {
         width: 100%;
         height: 100%;
-        background-color: #fcfcfc;
+        background-color: #fff;
         margin: 0;
         padding: 0;
         .list-ios {
@@ -301,13 +301,16 @@ page-home {
                     margin-top: 15px;
                     // padding-bottom: 25px;
                     .qu_list {
-                        width: 100%;
+                        width: 15.5rem;
                         list-style: none;
                         margin-right: .9rem;
+                        height: 25rem;
+                        border-radius: 3px;
+                        box-shadow: 0 1px 10px 0 rgba(0, 0, 0, 0.05);
                         .text_box {
-                            position: relative;
-                            width: 15.4rem;
-                            height: 23.75rem;
+                            // position: relative;  
+                            width: 100%;
+                            height: 100%;
                             border-radius: 3px;
                             background-color: #ffffff;
                             box-shadow: 0 1px 10px 0 rgba(0, 0, 0, 0.05);

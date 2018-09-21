@@ -13,7 +13,7 @@ import { getUserByopenIdUrl,getWxOpenidUrl } from '../../providers/requestUrl';
 import { MamenDataProvider } from '../../providers/mamen-data/mamen-data';
 
 @Component({
-  selector: 'page-tabs',
+  selector: 'page-tabs',  
   templateUrl: 'tabs.html'
 })
 export class TabsPage {
@@ -31,7 +31,7 @@ export class TabsPage {
   }
  
   ngOnInit() {
-    console.log('我最先执行~~')
+    // console.log('我最先执行~~')
     const openId = window.sessionStorage.getItem('openId') || this.getUrlParam('openId') || window.localStorage.getItem('openId');
     if(openId){
       this.getUserInfo(openId)
@@ -114,7 +114,7 @@ export class TabsPage {
   }
 
   ngDoCheck (){
-    console.log('我最先执行~~改变时')
+    // console.log('我最先执行~~改变时')
     // console.log('ngDoCheck','ngDoCheck进行时');
     const user = window.sessionStorage.getItem('user') ? JSON.parse(window.sessionStorage.getItem('user')) : {type:-1};
     // user.type == 0

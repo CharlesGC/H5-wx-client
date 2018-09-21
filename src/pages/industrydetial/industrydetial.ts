@@ -142,6 +142,8 @@ export class IndustrydetialPage {
     this.type = type;
     // console.log(this.type, 'searchTypesearchTypesearchTypesearchType')
     this.search = search;
+    this.isIndustryLabel = true;
+    this.skillLabel = true;
     this.getSearchadviser(this.industryId = 0, this.firstSkillId = 0, this.secondSkillId = 0, this.search, '', '');
   }
   // 行业标签下拉
