@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
-import {IndustrydetialPage} from '../../pages/industrydetial/industrydetial';
+import {IndustrydetialPage} from '../../pages/home/industrydetial/industrydetial';
 /**
  * Generated class for the IndustrprfileComponent component.
  *

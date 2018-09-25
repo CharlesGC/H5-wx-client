@@ -162,12 +162,12 @@
               </div>
               <div class="card-item-label mt10">
                 <label>学历</label>
-                <p class="card-cont" *ngIf="educationalList_item.degree == 0">初中及以下</p>
-                <p class="card-cont" *ngIf="educationalList_item.degree == 1">高中</p>
-                <p class="card-cont" *ngIf="educationalList_item.degree == 2">大专</p>
-                <p class="card-cont" *ngIf="educationalList_item.degree == 3">本科</p>
+                <p class="card-cont" *ngIf="educationalList_item.degree == 0">博士</p>
+                <p class="card-cont" *ngIf="educationalList_item.degree == 1">硕士</p>
+                <p class="card-cont" *ngIf="educationalList_item.degree == 2">本科</p>
+                <!-- <p class="card-cont" *ngIf="educationalList_item.degree == 3">本科</p>
                 <p class="card-cont" *ngIf="educationalList_item.degree == 4">研究生</p>
-                <p class="card-cont" *ngIf="educationalList_item.degree == 5"> 博士</p>
+                <p class="card-cont" *ngIf="educationalList_item.degree == 5"> 博士</p> -->
               </div>
           </ion-card>
         </div>
@@ -183,10 +183,10 @@
                 <div class="card-item-label mt10">
                   <label>等级</label>
                   <!-- <p class="card-cont">精通</p> -->
-                  <p class="card-cont" *ngIf="languageList_item.grade == 0">较差</p>
-                  <p class="card-cont" *ngIf="languageList_item.grade == 1">一般</p>
+                  <p class="card-cont" *ngIf="languageList_item.grade == 0">母语</p>
+                  <p class="card-cont" *ngIf="languageList_item.grade == 1">精通</p>
                   <p class="card-cont" *ngIf="languageList_item.grade == 2">熟练</p>
-                  <p class="card-cont" *ngIf="languageList_item.grade == 3">精通</p>
+                  <p class="card-cont" *ngIf="languageList_item.grade == 3">一般</p>
                 </div>
             </ion-card>
           </div>

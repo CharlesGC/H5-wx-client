@@ -109,10 +109,10 @@
       <p item-right class="rigth-message">
         <span item-right class="item-value line-overflow" *ngIf="projectData.planguage && projectData.planguage.length>0">
           <span *ngFor="let languageList_item of projectData.planguage">{{languageList_item.language}} .
-            <span *ngIf="languageList_item.grade == 0">较差</span>
-            <span *ngIf="languageList_item.grade == 1">一般</span>
+            <span *ngIf="languageList_item.grade == 0">母语</span>
+            <span *ngIf="languageList_item.grade == 1">精通</span>
             <span *ngIf="languageList_item.grade == 2">熟练</span>
-            <span *ngIf="languageList_item.grade == 3">精通</span>
+            <span *ngIf="languageList_item.grade == 3">一般</span>
           </span>
         </span>
         <span item-right class="item-value line-overflow" *ngIf="!projectData.planguage || projectData.planguage.length<1">请选择</span>

@@ -261,10 +261,10 @@
                 <label>擅长程度</label>
                 <p item-right class="rigth-message">
                     <span *ngIf="!languageList_item.grade && languageList_item.grade != 0">请选择</span>
-                    <span *ngIf="languageList_item.grade == 0">较差</span>
-                    <span *ngIf="languageList_item.grade == 1">一般</span>
+                    <span *ngIf="languageList_item.grade == 0">母语</span>
+                    <span *ngIf="languageList_item.grade == 1">精通</span>
                     <span *ngIf="languageList_item.grade == 2">熟练</span>
-                    <span *ngIf="languageList_item.grade == 3">精通</span>
+                    <span *ngIf="languageList_item.grade == 3">一般</span>
                     <ion-icon class="icon" name="arrow-forward"></ion-icon>
                 </p>
             </ion-item>

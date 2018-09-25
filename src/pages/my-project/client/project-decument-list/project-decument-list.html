@@ -50,6 +50,13 @@
             </div>
         </ion-item>
     </ion-list>
+    <div class="no-content" *ngIf="isModal">
+      <h4 class="title">提示</h4>
+      <div class="img">
+        <img src="../../../assets/imgs/tuijain.png" alt="">
+      </div>
+      <p class="tip">您还没文档信息</p>
+    </div>
     <!-- <ion-list class="card-item mt20">
         <ion-item no-lines>
             <div class="card-item-top">

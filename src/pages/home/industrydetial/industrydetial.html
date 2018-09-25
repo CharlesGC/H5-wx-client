@@ -15,7 +15,7 @@
       <ion-item class="search_item">
         <div class="search_content">
           <span class="item-input-wrapper">
-            <input type="search" placeholder="请输入行业和技能" [(ngModel)]="value" autofocus="autofocus" class="input-search">
+            <input type="search" placeholder="请输入行业或技能" [(ngModel)]="value" autofocus="autofocus" class="input-search">
             <!-- <div class="border"></div> -->
           </span>
           <span class="item-search" (click)="searchLabel(value,'itemsearch')">
@@ -25,7 +25,7 @@
       </ion-item>
       <ion-item>
         <!-- 行业下拉 -->
-        <div class="item-select" [hidden]="isDownindustry">
+        <div class="item-select">
           <div class="item-input" (click)="downindustryShow('downindustry')">
             <span *ngIf="IndustryName.industryName == undefined">请选择行业</span>
             <span *ngIf="IndustryName.industryName != undefined" style="color: #ff6536">{{IndustryName.industryName}}</span>
@@ -34,7 +34,7 @@
             </span>
           </div>
           <!-- 技能下拉 -->
-          <div class="item-input border" (click)="downSkill('downSkill')" [hidden]="isDownSkill">
+          <div class="item-input border" (click)="downSkill('downSkill')">
             <span *ngIf="skilldoubleData.fName == undefined">请选择技能</span>
             <span *ngIf="skilldoubleData.fName != undefined" class="SecondarySkill" style="color: #ff6536;">
               {{skilldoubleData.fName}}<i *ngIf= "inputValue.sName" style="padding: 0 5px">•</i>{{inputValue.sName}}
