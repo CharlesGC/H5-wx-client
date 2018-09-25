@@ -21,6 +21,7 @@ import { getProjectStageListUrl, customerConfirmStagePlanUrl } from '../../../..
 export class ProjectStageListPage {
   public projectStageListData =[];
   public stageType = -1;
+  public isModel = false;
   constructor(public navCtrl: NavController, public navParams: NavParams,private Provider:MamenDataProvider) {
   }
 
@@ -75,6 +76,9 @@ export class ProjectStageListPage {
     this.Provider.getMamenSwiperData(projectStageListUrl).subscribe(res=>{
       if(res.code==200) {
         this.projectStageListData = res.data;
+        if(!this.projectStageListData || this.projectStageListData.length  <1) {
+          this.isModel = true;
+        }
       }else if(res.code == 207) {
         window.localStorage.removeItem('openId');
       }else{

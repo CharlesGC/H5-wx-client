@@ -19,6 +19,7 @@ import { getProjectSignUpAdviserListUrl } from '../../../../providers/requestUrl
 })
 export class ProjectConsultantListPage {
   public projectConsultantListData = [];
+  public typeName = '';
   constructor(public navCtrl: NavController, public navParams: NavParams,private Provider:MamenDataProvider) {
   }
 
@@ -33,6 +34,17 @@ export class ProjectConsultantListPage {
     let pid = this.navParams.get('pid');
     let status = this.navParams.get('status');
     this.getProjectListData(pid,status);
+    if(status == '') {
+      this.typeName = '您还没有顾问列表';
+    }else if (status == 0) {
+      this.typeName = "您还没有推荐顾问!";
+    }else if (status == 1) {
+      this.typeName = "您还没有待面试顾问!";
+    }else if (status == 6) {
+      this.typeName = "您还没有待确认方案!";
+    }else if (status == 5) {
+      this.typeName = "您还没有已聘用顾问!";
+    }
   }
 
   /*跳转到顾问详情页面*/

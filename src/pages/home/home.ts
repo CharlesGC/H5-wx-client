@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { NavController, Slides } from 'ionic-angular';
-import { IndustrydetialPage } from '../industrydetial/industrydetial';
+import { IndustrydetialPage } from './industrydetial/industrydetial';
 import { MamenDataProvider } from '../../providers/mamen-data/mamen-data';
 import { PhonebindPage } from '../phonebind/phonebind';
 import { ProjectConsultantBrowserPage } from '../my-project/client/project-consultant-browser/project-consultant-browser';
@@ -36,7 +36,7 @@ export class HomePage {
   public mushrooms: boolean;
 
   constructor(public navCtrl: NavController, private swiperdata: MamenDataProvider, private industrydata: MamenDataProvider,
-    private skilldata: MamenDataProvider, private casedata: MamenDataProvider, private outstanddata: MamenDataProvider, private financedata: MamenDataProvider,private financeAlldata: MamenDataProvider) {
+    private skilldata: MamenDataProvider, private casedata: MamenDataProvider, private outstanddata: MamenDataProvider, private financedata: MamenDataProvider, private financeAlldata: MamenDataProvider) {
     this.IndustryArr = [];
   }
   ionViewDidLoad() {
@@ -174,7 +174,7 @@ export class HomePage {
 
     }
   }
-  //行业
+  //行业详情
   goToOtherPage(value, index, type) {
     this.navCtrl.push(IndustrydetialPage, {
       type: type,
@@ -182,7 +182,7 @@ export class HomePage {
       name: value ? this.IndustryArr[index].industryName : '',
     });
   }
-  // 技能
+  // 技能详情
   InfoskillMore(value, index, type) {
     this.navCtrl.push(IndustrydetialPage, {
       type: type,
@@ -194,21 +194,21 @@ export class HomePage {
   outstanding(value, index, type) {
     this.navCtrl.push(IndustrydetialPage, {
       // type: 'indeustryOutstand'
-      type:type
+      type: type
     });
   }
   // 财务审计
   financemore(value, index, type) {
     this.navCtrl.push(IndustrydetialPage, {
       // type: 'financemore'
-      type:type
+      type: type
     });
   }
   // 全部顾问更多
   FinancCount(value, index, type) {
     this.navCtrl.push(IndustrydetialPage, {
       // type: 'finance-count'
-      type:type
+      type: type
     });
   }
   // 全部顾问列表
@@ -238,7 +238,7 @@ export class HomePage {
     }
   }
   // 点击跳转到轮播图详情
-  goSwiperDetail () {
+  goSwiperDetail() {
     this.navCtrl.push(SwiperDetailPage);
   }
 }

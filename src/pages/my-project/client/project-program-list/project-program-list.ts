@@ -19,11 +19,17 @@ import { getProjectProgramListUrl } from '../../../../providers/requestUrl';
 })
 export class ProjectProgramListPage {
   public projectProgramListData = [];
+  public isModel = false;
   constructor(public navCtrl: NavController, public navParams: NavParams,private Provider:MamenDataProvider) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProjectProgramListPage');
+    let pid = this.navParams.get('pid');
+    let status = this.navParams.get('status');
+    this.getProjectProgramListData(pid,status);
+  }
+  ionViewDidEnter(){
     let pid = this.navParams.get('pid');
     let status = this.navParams.get('status');
     this.getProjectProgramListData(pid,status);
@@ -55,6 +61,9 @@ export class ProjectProgramListPage {
     this.Provider.getMamenSwiperData(projectListsDataUrl).subscribe(res=>{
       if(res.code==200) {
         this.projectProgramListData = res.data;
+        if(!this.projectProgramListData || this.projectProgramListData.length<1) {
+          this.isModel = true;
+        }
       }else if(res.code == 207) {
         window.localStorage.removeItem('openId');
       }else{

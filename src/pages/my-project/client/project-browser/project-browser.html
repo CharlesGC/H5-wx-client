@@ -286,10 +286,10 @@
             <label>语言要求</label>
             <span item-right class="item-value" *ngFor="let planguage_tag of projectDetails.planguage">
                 {{planguage_tag.language}} .
-                <span *ngIf="planguage_tag.grade == 0">较差</span>
-                <span *ngIf="planguage_tag.grade == 1">一般</span>
+                <span *ngIf="planguage_tag.grade == 0">母语</span>
+                <span *ngIf="planguage_tag.grade == 1">精通</span>
                 <span *ngIf="planguage_tag.grade == 2">熟练</span>
-                <span *ngIf="planguage_tag.grade == 3">精通</span>
+                <span *ngIf="planguage_tag.grade == 3">一般</span>
             </span>
         </ion-item>
     </ion-list>

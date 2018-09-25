@@ -70,10 +70,10 @@ export class FormEditPage {
       name: 'grade',
       parentCol: 'parent',
       options: [
-        { text: '较差', value: '0' },
-        { text: '一般', value: '1' },
+        { text: '母语', value: '0' },
+        { text: '精通', value: '1' },
         { text: '熟练', value: '2' },
-        { text: '精通', value: '3' },
+        { text: '一般', value: '3' },
       ]
     }
   ]
@@ -82,12 +82,12 @@ export class FormEditPage {
       name: 'degree',
       parentCol: 'parent',
       options: [
-        { text: '初中及以下', value: '0' },
-        { text: '高中', value: '1' },
-        { text: '大专', value: '2' },
-        { text: '本科', value: '3' },
-        { text: '研究生', value: '4' },
-        { text: '博士', value: '5' },
+        { text: '博士', value: '0' },
+        { text: '硕士', value: '1' },
+        { text: '本科', value: '2' },
+        // { text: '本科', value: '3' },
+        // { text: '研究生', value: '4' },
+        // { text: '博士', value: '5' },
       ]
     }
   ]

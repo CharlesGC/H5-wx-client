@@ -19,6 +19,7 @@ import { getPaymentListUrl } from '../../../../providers/requestUrl';
 })
 export class ProjectPaymentListPage {
   public paymentListData = [];
+  public isModel = false;
   constructor(public navCtrl: NavController, public navParams: NavParams,private Provider:MamenDataProvider) {
   }
 
@@ -55,6 +56,9 @@ export class ProjectPaymentListPage {
     this.Provider.getMamenSwiperData(projectPaymentUrl).subscribe(res=>{
       if(res.code==200) {
         this.paymentListData = res.data;
+        if(!this.paymentListData || this.paymentListData.length<1) {
+          this.isModel = true;
+        }
       }else if(res.code == 207) {
         window.localStorage.removeItem('openId');
       }else{
