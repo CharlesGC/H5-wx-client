@@ -70,7 +70,7 @@ export class DemandContentPage {
     if(user.type == 0){
       this.navCtrl.push(ProjectBrowserPage,{data:data,isApply:true});
     }else if(user.type == 1){
-      this.navCtrl.push(ConsultantProjectBrowserPage,{data:data,isApply:true});
+      this.navCtrl.push(ConsultantProjectBrowserPage,{data:data,isApply:true,selectType:this.selected});
     }
     
   }
