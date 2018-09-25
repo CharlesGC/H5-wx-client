@@ -23,6 +23,7 @@ export class ConsultantWorkExpPage {
   public isSubmit = false;
   public isDelete = false;
   public isComplete = false;
+  public isBigTime  = false
   constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider) {
     this.workListData = {}
   }
@@ -64,17 +65,24 @@ export class ConsultantWorkExpPage {
   sureComplete() {
     this.isComplete = !this.isComplete
   }
-
+  sureBigTime(){
+    this.isBigTime = !this.isBigTime
+    return
+  }
   /*数据新增、编辑请求*/
   onWorkExpSubmit() {
     const openId = window.sessionStorage.getItem('openId') || this.getUrlParam('openId');
-    let workListData = this.workListData;
+    let workListData = this.workListData;0
     let aweid = workListData.aweid || 0;
     //console.log(workListData.startTime, workListData.endTime, workListData.department)
     // let getWorkExpUrl = 'http://mamon.yemindream.com/mamon/adviser/addOrEditWorkExp';
     var arr = Object.keys(this.workListData);
     if (arr.length < 6) {
       this.isComplete = true;
+      return
+    }
+    if(new Date(workListData.endTime)< new Date(workListData.startTime)){
+      this.isBigTime = true
       return
     }
     let getWorkExpUrl = addOrEditWorkExpUrl + '?openId=' + openId + '&companyName=' + workListData.companyName +

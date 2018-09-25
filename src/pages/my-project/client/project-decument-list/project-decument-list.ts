@@ -19,6 +19,7 @@ import { getDocumentListUrl } from '../../../../providers/requestUrl';
 })
 export class ProjectDecumentListPage {
   public documentListData = [];
+  public isModal = false;
   constructor(public navCtrl: NavController, public navParams: NavParams,private Provider:MamenDataProvider) {
   }
 
@@ -56,6 +57,9 @@ export class ProjectDecumentListPage {
     this.Provider.getMamenSwiperData(projectStageListUrl).subscribe(res=>{
       if(res.code==200) {
         this.documentListData = res.data;
+        if(!this.documentListData || this.documentListData.length < 1){
+          this.isModal = true;
+        }
       }else if(res.code == 207) {
         window.localStorage.removeItem('openId');
       }else{

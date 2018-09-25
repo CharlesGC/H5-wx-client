@@ -6,7 +6,7 @@
 -->
 <ion-header>
     <ion-navbar>
-      <ion-title>编辑阶段</ion-title>
+        <ion-title>编辑阶段</ion-title>
     </ion-navbar>
 </ion-header>
 
@@ -143,6 +143,24 @@
             </div>
             <div class="modal-footer">
                 <button ion-button full large (click)="sureDateRepeat()">确定</button>
+                <!-- <button ion-button full large (click)="onCompanyDel()" class="btn-delete">返回</button> -->
+            </div>
+        </div>
+    </div>
+</div>
+<div class="phonebind-modal" [hidden]="!isBigTime">
+    <div class="modal-bg"></div>
+    <div class="modal-box">
+        <div class="modal-top">
+            <div class="modal-top-close">
+                <!-- <ion-icon ios="ios-close" md="md-close" item-rigth (click)="onClose()" color=""></ion-icon> -->
+            </div>
+            <div class="modal-title">提示</div>
+            <div class="modal-content">
+                <p>结束时间不能小于开始时间</p>
+            </div>
+            <div class="modal-footer">
+                <button ion-button full large (click)="sureBigTime()">确定</button>
                 <!-- <button ion-button full large (click)="onCompanyDel()" class="btn-delete">返回</button> -->
             </div>
         </div>

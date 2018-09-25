@@ -1,8 +1,8 @@
-<ion-header>
-    <ion-navbar>
-        <ion-buttons start>
-            <button ion-button icon-only color="royal" (click)="goback()">
-                <ion-icon name="arrow-back"></ion-icon>
+<ion-header class="project-header">
+    <ion-navbar hideBackButton="true">
+        <ion-buttons side="left" style="order: 0">
+            <button ion-button icon-only color="royal" (click)="goback()" class="returnBtn">
+                <ion-icon name="arrow-back">&nbsp;返回</ion-icon>
             </button>
         </ion-buttons>
         <ion-title>快速发布</ion-title>
@@ -119,41 +119,41 @@
         </div>
     </div>
     <!-- 填写完整弹框 -->
-  <div class="phonebind-modal " [hidden]="!isComplete">
-    <div class="modal-bg"></div>
-    <div class="modal-box">
-      <div class="modal-top">
-        <div class="modal-top-close">
-          <!-- <ion-icon ios="ios-close" md="md-close" item-rigth (click)="onClose()" color=""></ion-icon> -->
+    <div class="phonebind-modal " [hidden]="!isComplete">
+        <div class="modal-bg"></div>
+        <div class="modal-box">
+            <div class="modal-top">
+                <div class="modal-top-close">
+                    <!-- <ion-icon ios="ios-close" md="md-close" item-rigth (click)="onClose()" color=""></ion-icon> -->
+                </div>
+                <div class="modal-title">提示</div>
+                <div class="modal-content">
+                    <p class="modal-center">请填写完整</p>
+                </div>
+                <div class="modal-footer">
+                    <button ion-button full large (click)="sureComplete()">确定</button>
+                    <!-- <button ion-button full large (click)="onCompanyDel()" class="btn-delete">返回</button> -->
+                </div>
+            </div>
         </div>
-        <div class="modal-title">提示</div>
-        <div class="modal-content">
-          <p class="modal-center">请填写完整</p>
-        </div>
-        <div class="modal-footer">
-          <button ion-button full large (click)="sureComplete()">确定</button>
-          <!-- <button ion-button full large (click)="onCompanyDel()" class="btn-delete">返回</button> -->
-        </div>
-      </div>
     </div>
-  </div>
-  <!-- 录音小于300弹框 -->
-  <div class="phonebind-modal" [hidden]="!isTime">
-    <div class="modal-bg"></div>
-    <div class="modal-box">
-      <div class="modal-top">
-        <div class="modal-top-close">
-          <!-- <ion-icon ios="ios-close" md="md-close" item-rigth (click)="onClose()" color=""></ion-icon> -->
+    <!-- 录音小于300弹框 -->
+    <div class="phonebind-modal" [hidden]="!isTime">
+        <div class="modal-bg"></div>
+        <div class="modal-box">
+            <div class="modal-top">
+                <div class="modal-top-close">
+                    <!-- <ion-icon ios="ios-close" md="md-close" item-rigth (click)="onClose()" color=""></ion-icon> -->
+                </div>
+                <div class="modal-title">提示</div>
+                <div class="modal-content">
+                    <p class="modal-center">小于300ms，不录音</p>
+                </div>
+                <div class="modal-footer">
+                    <button ion-button full large (click)="surehidden()">确定</button>
+                    <!-- <button ion-button full large (click)="onCompanyDel()" class="btn-delete">返回</button> -->
+                </div>
+            </div>
         </div>
-        <div class="modal-title">提示</div>
-        <div class="modal-content">
-          <p class="modal-center">小于300ms，不录音</p>
-        </div>
-        <div class="modal-footer">
-          <button ion-button full large (click)="surehidden()">确定</button>
-          <!-- <button ion-button full large (click)="onCompanyDel()" class="btn-delete">返回</button> -->
-        </div>
-      </div>
     </div>
-  </div>
 </ion-content>

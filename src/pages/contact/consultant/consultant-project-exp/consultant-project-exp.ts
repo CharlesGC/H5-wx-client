@@ -21,6 +21,7 @@ export class ConsultantProjectExpPage {
   public isSubmit = false;
   public isDelete = false;
   public isComplete = false;
+  public isBigTime =false
   constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider) {
     this.projecListData = {};
   }
@@ -69,6 +70,10 @@ export class ConsultantProjectExpPage {
     var arr = Object.keys(this.projecListData);
     if (arr.length < 7) {
       this.isComplete = true;
+      return
+    }
+    if(new Date(projecListData.endTime)< new Date(projecListData.startTime)){
+      this.isBigTime = true
       return
     }
     let getProjectExpUrl = addOrEditProjectExpUrl + '?openId=' + openId + '&projectName=' + projecListData.projectName +

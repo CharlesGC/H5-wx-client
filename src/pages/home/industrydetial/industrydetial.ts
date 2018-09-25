@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { MamenDataProvider } from '../../providers/mamen-data/mamen-data';
-import { getindustryUrl, getskillUrl, getskilltwoUrl, getSearch, getdetialSearch, getfinanceAllUrl, getfinanceUrl, getoutstandingUrl } from '../../providers/dataUrl';
-import { ProjectConsultantBrowserPage } from '../my-project/client/project-consultant-browser/project-consultant-browser';
+import { MamenDataProvider } from '../../../providers/mamen-data/mamen-data';
+import { getindustryUrl, getskillUrl, getskilltwoUrl, getSearch, getfinanceAllUrl, getfinanceUrl, getoutstandingUrl } from '../../../providers/dataUrl';
+import { ProjectConsultantBrowserPage } from '../../my-project/client/project-consultant-browser/project-consultant-browser';
 
 @IonicPage()
 @Component({
@@ -38,7 +38,7 @@ export class IndustrydetialPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, public IndustryMoreData: MamenDataProvider,
     public SkillLabelMoreData: MamenDataProvider,
     public Skilltwolabel: MamenDataProvider, public IndustrySearch: MamenDataProvider,
-    public DetialSearch: MamenDataProvider, public financedata: MamenDataProvider) {
+    public financedata: MamenDataProvider) {
   }
   ionViewDidLoad() {
     //this.doRefresh('');
@@ -46,69 +46,67 @@ export class IndustrydetialPage {
     this.type = this.navParams.get('type');
     this.id = this.navParams.get('id');
     this.name = this.navParams.get('name');
-    /*行业更多*/
+    /*首页更多详情*/
     if (this.type == 'indeustry') {
       this.skillChecked = this.id ? this.id : 0;
       console.log(this.id, this.skillChecked, '===')
       this.IndustryName['industryName'] = this.name || '全部行业';
       this.getSearchadviser(this.skillChecked, this.firstSkillId = 0, this.secondSkillId = 0, this.search = '', this.pageNum = 0, this.pageSize = 15);
-    }else if (this.type == 'skill') {
+    } else if (this.type == 'skill') {
       this.skillCheckedSkill = this.id ? this.id : 0;
       this.skilldoubleData['fName'] = this.name || '全部领域';
       this.getSearchadviser(this.industryId = 0, this.skillCheckedSkill, this.secondSkillId = 0, this.search = '', this.pageNum = 0, this.pageSize = 15);
-    }else if (this.type == 'finance-count') {
+    } else if (this.type == 'finance-count') {
       this.getfinanceAllInfo();
-    }else if (this.type == 'financemore') {
+    } else if (this.type == 'financemore') {
       this.getfinanceInfo();
-    }else if (this.type == 'indeustryOutstand') {  
+    } else if (this.type == 'indeustryOutstand') {
       this.getoutstandingInfo();
     }
   }
   // 行业更多数据
-  getLabelMore(industryType, pageNum, pageSize) {
-    this.IndustryMoreData.getIndustryMoreData(getindustryUrl, industryType, pageNum, pageSize).subscribe(
-      res => {
-        if (this.industryNameChecked == undefined) {
-          this.IndustrydetialArr = res.data.list;
-          // console.log(this.IndustrydetialArr, '行业更多数据');
-        } else {
-          for (var i = 0; i < res.data.list.length; i++) {
-            if (res.data.list[i].industryName == this.industryNameChecked) {
-              this.IndustrydetialArr.push(res.data.list[i]);
-            }
-          }
-        }
-      }, error => {
-        console.log(error);
-      }
-    )
-  }
+  // getLabelMore(industryType, pageNum, pageSize) {
+  //   this.IndustryMoreData.getIndustryMoreData(getindustryUrl, industryType, pageNum, pageSize).subscribe(
+  //     res => {
+  //       if (this.industryNameChecked == undefined) {
+  //         this.IndustrydetialArr = res.data.list;
+  //         // console.log(this.IndustrydetialArr, '行业更多数据');
+  //       } else {
+  //         for (var i = 0; i < res.data.list.length; i++) {
+  //           if (res.data.list[i].industryName == this.industryNameChecked) {
+  //             this.IndustrydetialArr.push(res.data.list[i]);
+  //           }
+  //         }
+  //       }
+  //     }, error => {
+  //       console.log(error);
+  //     }
+  //   )
+  // }
   // 技能更多
-  getSkillCheckd(Skilltype, pageNum, pageSize) {
-    this.SkillLabelMoreData.getSkillLabelMoreData(getskillUrl, Skilltype, pageNum, pageSize).subscribe(
-      res => {
-        if (this.skiiNameChecked == undefined) {
-          this.IndustrydetialArr = res.data.list;
-          // console.log(this.IndustrydetialArr, '技能更多')
-        } else {
-          for (var i = 0; i < res.data.list.length; i++) {
-            if (res.data.list[i].fName == this.skiiNameChecked) {
-              this.IndustrydetialArr.push(res.data.list[i]);
-            }
-          }
-        }
-      }, error => {
-        console.log(error);
-      }
-    )
-  }
+  // getSkillCheckd(Skilltype, pageNum, pageSize) {
+  //   this.SkillLabelMoreData.getSkillLabelMoreData(getskillUrl, Skilltype, pageNum, pageSize).subscribe(
+  //     res => {
+  //       if (this.skiiNameChecked == undefined) {
+  //         this.IndustrydetialArr = res.data.list;
+  //         // console.log(this.IndustrydetialArr, '技能更多')
+  //       } else {
+  //         for (var i = 0; i < res.data.list.length; i++) {
+  //           if (res.data.list[i].fName == this.skiiNameChecked) {
+  //             this.IndustrydetialArr.push(res.data.list[i]);
+  //           }
+  //         }
+  //       }
+  //     }, error => {
+  //       console.log(error);
+  //     }
+  //   )
+  // }
   // 行业翘楚
   getoutstandingInfo() {
     this.financedata.getoutstandingData(getoutstandingUrl, 1, 1, 999).subscribe(
       res => {
-        // console.log(res);
         this.financeAllArr = res.data
-        // console.log(this.financeAllArr, "行业翘楚");
       }, error => {
         console.log(error);
       }
@@ -118,9 +116,7 @@ export class IndustrydetialPage {
   getfinanceInfo() {
     this.financedata.getfinanceData(getfinanceUrl, 1, 1, 999).subscribe(
       res => {
-        // console.log(res);
         this.financeAllArr = res.data
-        // console.log(this.financeAllArr, '财务审计');
       }, error => {
         console.log(error);
       }
@@ -130,8 +126,7 @@ export class IndustrydetialPage {
   getfinanceAllInfo() {
     this.financedata.getindustryAllData(getfinanceAllUrl, 1, 1, 999).subscribe(
       res => {
-        this.financeAllArr = res.data
-        // console.log(this.financeAllArr, '全部顾问');
+        this.financeAllArr = res.data;
       }, error => {
         console.log(error);
       }
@@ -140,7 +135,6 @@ export class IndustrydetialPage {
   // 点击搜索按钮
   searchLabel(search, type) {
     this.type = type;
-    // console.log(this.type, 'searchTypesearchTypesearchTypesearchType')
     this.search = search;
     this.isIndustryLabel = true;
     this.skillLabel = true;
@@ -166,7 +160,6 @@ export class IndustrydetialPage {
     this.IndustrySearch.getSearchAdviserList(getSearch, industryId, firstSkillId, secondSkillId, search, pageNum, pageSize).subscribe(
       res => {
         this.financeAllArr = res.data && res.data.list ? res.data.list : [];
-        // console.log(res.data,res,this.financeAllArr,"123123213123")
       }, error => {
         console.log(error);
       }
@@ -248,7 +241,6 @@ export class IndustrydetialPage {
       this.skillLabel = true;
       this.getSearchadviser(this.industryId = this.inputValue['ssid'], this.firstSkillId = 1, this.secondSkillId = 3, '', '', '');
     }
-
   }
   /*跳转到顾问详情*/
   goProjectConsultantBrowserPage(value, index) {

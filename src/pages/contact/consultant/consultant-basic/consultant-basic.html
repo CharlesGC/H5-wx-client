@@ -34,7 +34,7 @@
           <div class="info-rigth">
             <div class="title-name">
               <h3>{{consultantBasicData.nickName || ''}}</h3>
-              <ion-icon class="transgender mr10 men" name="ios-male1" ></ion-icon>
+              <ion-icon class="transgender mr10 men" name="ios-male1"></ion-icon>
               <span class="user-type type-approved" *ngIf="consultantBasicData.status >= 4">已审核</span>
               <span class="user-type type-gray" *ngIf="consultantBasicData.status == 0">未审核</span>
               <!-- <ion-icon name="ios-arrow-forward" item-end color="ion-gray"></ion-icon> -->
@@ -42,7 +42,10 @@
             <p class="info-other-label">
               <span>{{consultantBasicData.years}} </span>
               <span>年工作经验</span>
-              <span class="date-number">{{consultantBasicData.salaryUp | currency :'￥'}} - {{consultantBasicData.salaryDown | currency :'￥'}}</span>
+            </p>
+            <p class="info-other-label">
+              <span class="date-number">{{consultantBasicData.salaryUp | currency :'￥'}} -
+                {{consultantBasicData.salaryDown | currency :'￥'}}</span>
               <span> 元/天</span>
             </p>
             <!-- <p class="info-other-label item-tags skills mt15">
@@ -91,14 +94,15 @@
           <div class="contact-info-cont">
             <p class="contact-info-list" *ngIf="consultantBasicData.country || consultantBasicData.province || consultantBasicData.city || consultantBasicData.address">
               <ion-icon name="place"></ion-icon>
-              <span>{{(consultantBasicData.country || '')+(consultantBasicData.province || '')+(consultantBasicData.city || '')+(consultantBasicData.address||'')}}</span>
+              <span>{{(consultantBasicData.country || '')+(consultantBasicData.province ||
+                '')+(consultantBasicData.city || '')+(consultantBasicData.address||'')}}</span>
             </p>
             <p class="contact-info-list" *ngIf="consultantBasicData.uphone">
               <ion-icon ios="ios-call" md="md-call"></ion-icon>
               <span>{{consultantBasicData.uphone}}</span>
             </p>
             <p class="contact-info-list" *ngIf="consultantBasicData.email">
-              <ion-icon name="message"></ion-icon>
+              <ion-icon name="message1"></ion-icon>
               <span>{{consultantBasicData.email}}</span>
             </p>
             <p class="contact-info-list" *ngIf="consultantBasicData.bankList && consultantBasicData.bankList.length>0">
@@ -293,12 +297,12 @@
       </div>
       <div class="card-item-label mt10">
         <label>学历</label>
-        <p class="card-cont" *ngIf="educationalList_item.degree == 0">初中及以下</p>
-        <p class="card-cont" *ngIf="educationalList_item.degree == 1">高中</p>
-        <p class="card-cont" *ngIf="educationalList_item.degree == 2">大专</p>
-        <p class="card-cont" *ngIf="educationalList_item.degree == 3">本科</p>
+        <p class="card-cont" *ngIf="educationalList_item.degree == 0">博士</p>
+        <p class="card-cont" *ngIf="educationalList_item.degree == 1">硕士</p>
+        <p class="card-cont" *ngIf="educationalList_item.degree == 2">本科</p>
+        <!-- <p class="card-cont" *ngIf="educationalList_item.degree == 3">本科</p>
         <p class="card-cont" *ngIf="educationalList_item.degree == 4">研究生</p>
-        <p class="card-cont" *ngIf="educationalList_item.degree == 5"> 博士</p>
+        <p class="card-cont" *ngIf="educationalList_item.degree == 5"> 博士</p> -->
       </div>
       <div class="msg-footer" (click)="onGoPages(3,educationalList_item)">
         <span class="msg-footer-text">编辑详情</span>
@@ -321,10 +325,10 @@
       </div>
       <div class="card-item-label mt10">
         <label>等级</label>
-        <p class="card-cont" *ngIf="languageList_item.grade == 0">较差</p>
-        <p class="card-cont" *ngIf="languageList_item.grade == 1">一般</p>
+        <p class="card-cont" *ngIf="languageList_item.grade == 0">母语</p>
+        <p class="card-cont" *ngIf="languageList_item.grade == 1">精通</p>
         <p class="card-cont" *ngIf="languageList_item.grade == 2">熟练</p>
-        <p class="card-cont" *ngIf="languageList_item.grade == 3">精通</p>
+        <p class="card-cont" *ngIf="languageList_item.grade == 3">一般</p>
       </div>
       <div class="msg-footer" (click)="onGoPages(4,languageList_item)">
         <span class="msg-footer-text">编辑详情</span>
@@ -370,7 +374,9 @@
             <div class="card-cont">
               <h5>{{certificationList_item.sourceName}}</h5>
               <p>点击查看文件预览</p>
-              <p>{{(certificationList_item.urlSize /1048576).toPrecision(3)>1?(certificationList_item.urlSize /1048576).toPrecision(3) + '  MB':(certificationList_item.urlSize /1048576).toPrecision(3) *1024 + 'KB'}}</p>
+              <p>{{(certificationList_item.urlSize /1048576).toPrecision(3)>1?(certificationList_item.urlSize
+                /1048576).toPrecision(3) + ' MB':(certificationList_item.urlSize /1048576).toPrecision(3) *1024 +
+                'KB'}}</p>
             </div>
           </a>
         </div>
@@ -402,7 +408,8 @@
           <a href="{{resumeList_item.resumeUrl}}" style="text-decoration:none;">
             <p>点击查看文件预览</p>
           </a>
-          <p>{{(resumeList_item.size / 1048576).toPrecision(3) > 1?(resumeList_item.size / 1048576).toPrecision(3) + ' MB':(resumeList_item.size / 1048576).toPrecision(3)*1024+' KB'}}</p>
+          <p>{{(resumeList_item.size / 1048576).toPrecision(3) > 1?(resumeList_item.size / 1048576).toPrecision(3) + '
+            MB':(resumeList_item.size / 1048576).toPrecision(3)*1024+' KB'}}</p>
         </div>
         <ion-icon name="md-close" item-end color="ion-gray" (click)="onResumeDel(resumeList_item.arid)"></ion-icon>
       </div>

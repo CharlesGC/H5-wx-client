@@ -21,7 +21,7 @@ import { HttpClientModule } from '@angular/common/http';
 //页面 自定义的组件
 import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
-import {IndustrydetialPage} from '../pages/industrydetial/industrydetial';
+import {IndustrydetialPage} from '../pages/home/industrydetial/industrydetial';
 import { TabsPage } from '../pages/tabs/tabs';
 // import { HomeSwiperComponent } from '../components/home-swiper/home-swiper';   
 import { PhonebindPage } from '../pages/phonebind/phonebind';

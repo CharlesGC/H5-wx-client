@@ -34,6 +34,7 @@ export class PhonebindPage {
   public isSuccess = false
   public isFailed = false
   public isDisabled:any
+  public isConsultant = false
   constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider, public alertCtrl: AlertController) {
   }
 
@@ -60,6 +61,10 @@ export class PhonebindPage {
   sureFailed() {
     this.isFailed = !this.isFailed
     return
+  }
+  sureConsultant(){
+    this.isConsultant = !this.isConsultant
+    this.navCtrl.popToRoot()
   }
   /*获取验证码*/
   getVerificationCode(phone) {
@@ -134,8 +139,12 @@ export class PhonebindPage {
     this.Provider.getMamenSwiperData(getPhoneCodeUrl).subscribe(res => {
       if (res.code == 200) {
         // this.navCtrl.push(ContactPage);
-        this.isSuccess = true
         //alert('绑定成功！')
+        if(userType == 1){ //1是顾问、0是客户
+          this.isConsultant = true
+        }else{
+          this.isSuccess = true
+        }
       } else {
         this.isFailed = true
       }

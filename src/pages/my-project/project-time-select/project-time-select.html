@@ -6,9 +6,9 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>{{headerTitle}}</ion-title>
-  </ion-navbar>
+    <ion-navbar>
+        <ion-title>{{headerTitle}}</ion-title>
+    </ion-navbar>
 
 </ion-header>
 
@@ -19,59 +19,60 @@
         <p class="browser-file">点击输入框右侧可选择日期单位（日，月，年）</p>
         <ion-list class="list-item-flex mt10">
             <ion-item no-lines>
-            <ion-input type="text" placeholder="请输入项目周期" [(ngModel)]="inputName"></ion-input>
-            <p item-right class="rigth-message">
-                <ion-select interface="action-sheet" placeholder="选择" [(ngModel)]="typeTxt" (ngModelChange)="switchType()"  style="width:100px;max-width:100%;">
-                    <ion-option value="0">日</ion-option>
-                    <ion-option value="1">月</ion-option>
-                    <ion-option value="2">年</ion-option>
-                </ion-select>
-            </p>
+                <ion-input type="text" placeholder="请输入项目周期" [(ngModel)]="inputName"></ion-input>
+                <p item-right class="rigth-message">
+                    <ion-select interface="action-sheet" placeholder="选择" [(ngModel)]="typeTxt" (ngModelChange)="switchType()"
+                        style="width:100px;max-width:100%;">
+                        <ion-option value="0">日</ion-option>
+                        <ion-option value="1">月</ion-option>
+                        <ion-option value="2">年</ion-option>
+                    </ion-select>
+                </p>
             </ion-item>
         </ion-list>
     </div>
 
     <!--项目时间-->
     <div *ngIf="field == 'projectTime'">
-      <ion-list class="list-item-flex mt10">
-          <ion-item (click)="onSelectedClick(0)">
-            <label>0-3 个月</label>
-            <p item-right class="rigth-message">
-                <ion-icon class="color-f46f46" name="checkmark-circle" *ngIf="selected == 0"></ion-icon>
-            </p>
-          </ion-item>
-          <ion-item (click)="onSelectedClick(1)">
-            <label>3-6 个月</label>
-            <p item-right class="rigth-message">
-                <ion-icon class="color-f46f46" name="checkmark-circle" *ngIf="selected == 1"></ion-icon>
-            </p>
-          </ion-item>
-          <ion-item (click)="onSelectedClick(2)">
-            <label>6-12 个月</label>
-            <p item-right class="rigth-message">
-                <ion-icon class="color-f46f46" name="checkmark-circle" *ngIf="selected == 2"></ion-icon>
-            </p>
-          </ion-item>
-          <ion-item no-lines (click)="onSelectedClick(3)">
-            <label>其他时间</label>
-            <p item-right class="rigth-message">
-                <ion-icon class="color-f46f46" name="checkmark-circle" *ngIf="selected == 3"></ion-icon>
-            </p>
-          </ion-item>
+        <ion-list class="list-item-flex mt10">
+            <ion-item (click)="onSelectedClick(0)">
+                <label>0-3 个月</label>
+                <p item-right class="rigth-message">
+                    <ion-icon class="color-f46f46" name="checkmark-circle" *ngIf="selected == 0"></ion-icon>
+                </p>
+            </ion-item>
+            <ion-item (click)="onSelectedClick(1)">
+                <label>3-6 个月</label>
+                <p item-right class="rigth-message">
+                    <ion-icon class="color-f46f46" name="checkmark-circle" *ngIf="selected == 1"></ion-icon>
+                </p>
+            </ion-item>
+            <ion-item (click)="onSelectedClick(2)">
+                <label>6-12 个月</label>
+                <p item-right class="rigth-message">
+                    <ion-icon class="color-f46f46" name="checkmark-circle" *ngIf="selected == 2"></ion-icon>
+                </p>
+            </ion-item>
+            <ion-item no-lines (click)="onSelectedClick(3)">
+                <label>其他时间</label>
+                <p item-right class="rigth-message">
+                    <ion-icon class="color-f46f46" name="checkmark-circle" *ngIf="selected == 3"></ion-icon>
+                </p>
+            </ion-item>
         </ion-list>
         <p class="browser-file" *ngIf="selected == 3">点击输入框输入项目的时长（月）</p>
         <ion-list class="list-item-flex mt10" *ngIf="selected == 3">
-          <ion-item no-lines>
-            <ion-input type="number" placeholder="请输入项目周期" [(ngModel)]="inputName"></ion-input>
-            <p item-right class="rigth-message">
-                <span>月</span>
-                <!-- <ion-select interface="action-sheet" placeholder="选择" [(ngModel)]="typeTxt" (ngModelChange)="switchType()"  style="width:100px;max-width:100%;">
+            <ion-item no-lines>
+                <ion-input type="number" placeholder="请输入项目周期" [(ngModel)]="inputName"></ion-input>
+                <p item-right class="rigth-message">
+                    <span>月</span>
+                    <!-- <ion-select interface="action-sheet" placeholder="选择" [(ngModel)]="typeTxt" (ngModelChange)="switchType()"  style="width:100px;max-width:100%;">
                   <ion-option value="0">日</ion-option>
                   <ion-option value="1">月</ion-option>
                   <ion-option value="2">年</ion-option>
                 </ion-select> -->
-            </p>
-          </ion-item>
+                </p>
+            </ion-item>
         </ion-list>
     </div>
 
@@ -79,22 +80,22 @@
     <div *ngIf="field =='startTime'">
         <ion-list class="list-item-flex mt10">
             <ion-item (click)="onSelectedClick(0)">
-              <label>尽快开始</label>
-              <p item-right class="rigth-message">
-                  <ion-icon class="color-f46f46" name="checkmark-circle" *ngIf="selected == 0"></ion-icon>
-              </p>
+                <label>尽快开始</label>
+                <p item-right class="rigth-message">
+                    <ion-icon class="color-f46f46" name="checkmark-circle" *ngIf="selected == 0"></ion-icon>
+                </p>
             </ion-item>
             <ion-item (click)="onSelectedClick(2)">
-              <label>待商议</label>
-              <p item-right class="rigth-message">
-                  <ion-icon class="color-f46f46" name="checkmark-circle" *ngIf="selected == 2"></ion-icon>
-              </p>
+                <label>待商议</label>
+                <p item-right class="rigth-message">
+                    <ion-icon class="color-f46f46" name="checkmark-circle" *ngIf="selected == 2"></ion-icon>
+                </p>
             </ion-item>
             <ion-item no-lines (click)="onSelectedClick(1)">
-              <label>其他时间</label>
-              <p item-right class="rigth-message">
-                  <ion-icon class="color-f46f46" name="checkmark-circle" *ngIf="selected == 1"></ion-icon>
-              </p>
+                <label>其他时间</label>
+                <p item-right class="rigth-message">
+                    <ion-icon class="color-f46f46" name="checkmark-circle" *ngIf="selected == 1"></ion-icon>
+                </p>
             </ion-item>
             <ion-item class="none-margin bg-black" *ngIf="selected == 1" no-lines>
                 <ion-label>准确开始日期</ion-label>
@@ -104,23 +105,24 @@
                     </ion-datetime>
                 </div>
             </ion-item>
-          </ion-list>
+        </ion-list>
     </div>
 
     <!--是否驻场-->
     <div *ngIf="field == 'deliverMethod'">
         <ion-list class="list-item-flex mt10">
-          <ion-item no-lines>
-              <ion-label>是否驻场</ion-label>
-              <div item-right class="rigth-message">
-                <ion-select [(ngModel)]="typeTxt" (ngModelChange)="switchType()"  interface="action-sheet" style="height:45px;" placeholder="请选择"  style="width:100px;max-width:100%;">
-                  <ion-option value="0">驻场</ion-option>
-                  <ion-option value="1">远程</ion-option>
-                  <ion-option value="2">待商议</ion-option>
-                </ion-select>
-                <!-- <ion-icon name="arrow-forward" class="ml12"></ion-icon> -->
-              </div>
-          </ion-item>
+            <ion-item no-lines>
+                <ion-label>是否驻场</ion-label>
+                <div item-right class="rigth-message">
+                    <ion-select [(ngModel)]="typeTxt" (ngModelChange)="switchType()" interface="action-sheet" style="height:45px;"
+                        placeholder="请选择" style="width:100px;max-width:100%;">
+                        <ion-option value="0">驻场</ion-option>
+                        <ion-option value="1">远程</ion-option>
+                        <ion-option value="2">待商议</ion-option>
+                    </ion-select>
+                    <!-- <ion-icon name="arrow-forward" class="ml12"></ion-icon> -->
+                </div>
+            </ion-item>
         </ion-list>
     </div>
 
@@ -128,49 +130,49 @@
     <div *ngIf="field == 'qualification'">
         <ion-list class="list-item-flex mt10">
             <ion-item (click)="onSelectedClick(0)" no-lines>
-              <label>初级</label>
-              <p item-right class="rigth-message">
-                  <span item-right class="item-value line-overflow">日薪范围 ￥500 - 2000</span>
-                  <span class="right-w50">
-                      <ion-icon class="color-f46f46" name="checkmark-circle" *ngIf="selected == 0"></ion-icon>
-                  </span>
-              </p>
+                <label>初级</label>
+                <p item-right class="rigth-message">
+                    <span item-right class="item-value line-overflow">日薪范围 ￥500 - 2000</span>
+                    <span class="right-w50">
+                        <ion-icon class="color-f46f46" name="checkmark-circle" *ngIf="selected == 0"></ion-icon>
+                    </span>
+                </p>
             </ion-item>
         </ion-list>
         <p class="browser-file-tip">具备 0-3 年的业务或咨询行业工作经验，可协助项目负责人完成项目内容交付或独立完成简单项目的交付。</p>
         <ion-list class="list-item-flex mt10">
             <ion-item (click)="onSelectedClick(1)" no-lines>
-              <label>中级</label>
-              <p item-right class="rigth-message">
-                  <span item-right class="item-value line-overflow">日薪范围 ￥2000 - 4000</span>
-                  <span class="right-w50">
-                    <ion-icon class="color-f46f46" name="checkmark-circle" *ngIf="selected == 1"></ion-icon>
-                  </span>
-              </p>
+                <label>中级</label>
+                <p item-right class="rigth-message">
+                    <span item-right class="item-value line-overflow">日薪范围 ￥2000 - 4000</span>
+                    <span class="right-w50">
+                        <ion-icon class="color-f46f46" name="checkmark-circle" *ngIf="selected == 1"></ion-icon>
+                    </span>
+                </p>
             </ion-item>
         </ion-list>
         <p class="browser-file-tip">具备 0-3 年的业务或咨询行业工作经验，可协助项目负责人完成项目内容交付或独立完成简单项目的交付。</p>
         <ion-list class="list-item-flex mt10">
             <ion-item (click)="onSelectedClick(2)" no-lines>
-              <label>高级</label>
-              <p item-right class="rigth-message">
-                  <span item-right class="item-value line-overflow">日薪范围 ￥4000 - 6000</span>
-                  <span class="right-w50">
-                    <ion-icon class="color-f46f46" name="checkmark-circle" *ngIf="selected == 2"></ion-icon>
-                  </span>
-              </p>
+                <label>高级</label>
+                <p item-right class="rigth-message">
+                    <span item-right class="item-value line-overflow">日薪范围 ￥4000 - 6000</span>
+                    <span class="right-w50">
+                        <ion-icon class="color-f46f46" name="checkmark-circle" *ngIf="selected == 2"></ion-icon>
+                    </span>
+                </p>
             </ion-item>
         </ion-list>
-        <p class="browser-file-tip" >具备 0-3 年的业务或咨询行业工作经验，可协助项目负责人完成项目内容交付或独立完成简单项目的交付。</p>
+        <p class="browser-file-tip">具备 0-3 年的业务或咨询行业工作经验，可协助项目负责人完成项目内容交付或独立完成简单项目的交付。</p>
         <ion-list class="list-item-flex mt10">
             <ion-item (click)="onSelectedClick(3)" no-lines>
-              <label>专家</label>
-              <p item-right class="rigth-message">
-                  <span item-right class="item-value line-overflow">日薪范围 ￥6000 - 10000</span>
-                  <span class="right-w50">
-                    <ion-icon class="color-f46f46" name="checkmark-circle" *ngIf="selected == 3"></ion-icon>
-                  </span>
-              </p>
+                <label>专家</label>
+                <p item-right class="rigth-message">
+                    <span item-right class="item-value line-overflow">日薪范围 ￥6000 - 10000</span>
+                    <span class="right-w50">
+                        <ion-icon class="color-f46f46" name="checkmark-circle" *ngIf="selected == 3"></ion-icon>
+                    </span>
+                </p>
             </ion-item>
         </ion-list>
         <p class="browser-file-tip">具备 0-3 年的业务或咨询行业工作经验，可协助项目负责人完成项目内容交付或独立完成简单项目的交付。</p>
@@ -213,7 +215,7 @@
                 <ion-item>
                     <ion-input type="number" placeholder="请输入预算金额" [(ngModel)]="budgetData.budgetDay" (ionChange)="onInputChange(0)"></ion-input>
                     <p item-right class="rigth-message">
-                        <span>单日   元</span>
+                        <span>单日 元</span>
                         <ion-icon class="icon" name="arrow-forward"></ion-icon>
                     </p>
                 </ion-item>
@@ -261,56 +263,74 @@
                 <label>擅长程度</label>
                 <p item-right class="rigth-message">
                     <span *ngIf="!languageList_item.grade && languageList_item.grade != 0">请选择</span>
-                    <span *ngIf="languageList_item.grade == 0">较差</span>
-                    <span *ngIf="languageList_item.grade == 1">一般</span>
+                    <span *ngIf="languageList_item.grade == 0">母语</span>
+                    <span *ngIf="languageList_item.grade == 1">精通</span>
                     <span *ngIf="languageList_item.grade == 2">熟练</span>
-                    <span *ngIf="languageList_item.grade == 3">精通</span>
+                    <span *ngIf="languageList_item.grade == 3">一般</span>
                     <ion-icon class="icon" name="arrow-forward"></ion-icon>
                 </p>
             </ion-item>
         </ion-list>
         <div class="action-btn mt20">
-            <button ion-button round  (click)="onAddLanguageClick()" class="add-btn">添加一门语言</button>
-            <button ion-button round  (click)="onDelLanguageClick()" class="del-btn" *ngIf="languageList && languageList.length>0">删除上一门语言</button>
+            <button ion-button round (click)="onAddLanguageClick()" class="add-btn">添加一门语言</button>
+            <button ion-button round (click)="onDelLanguageClick()" class="del-btn" *ngIf="languageList && languageList.length>0">删除上一门语言</button>
         </div>
     </div>
-    
+
     <div style="height:50px;"></div>
     <button ion-button expand="full" large class="fixed-bottom" (click)="onSelectSubmit()">保存</button>
 </ion-content>
 <div class="phonebind-modal" [hidden]="!isBudgetDay">
     <div class="modal-bg"></div>
     <div class="modal-box">
-      <div class="modal-top">
-        <div class="modal-top-close">
-          <!-- <ion-icon ios="ios-close" md="md-close" item-rigth (click)="onClose()" color=""></ion-icon> -->
+        <div class="modal-top">
+            <div class="modal-top-close">
+                <!-- <ion-icon ios="ios-close" md="md-close" item-rigth (click)="onClose()" color=""></ion-icon> -->
+            </div>
+            <div class="modal-title">提示</div>
+            <div class="modal-content">
+                <p>预算金额和预算天数不能为空</p>
+            </div>
+            <div class="modal-footer">
+                <button ion-button full large (click)="sureBudgetDay()">确定</button>
+                <!-- <button ion-button full large (click)="onCompanyDel()" class="btn-delete">返回</button> -->
+            </div>
         </div>
-        <div class="modal-title">提示</div>
-        <div class="modal-content">
-          <p>预算金额和预算天数不能为空</p>
-        </div>
-        <div class="modal-footer">
-          <button ion-button full large (click)="sureBudgetDay()">确定</button>
-          <!-- <button ion-button full large (click)="onCompanyDel()" class="btn-delete">返回</button> -->
-        </div>
-      </div>
     </div>
-  </div>
-  <div class="phonebind-modal" [hidden]="!isBudget">
+</div>
+<div class="phonebind-modal" [hidden]="!isBudget">
     <div class="modal-bg"></div>
     <div class="modal-box">
-      <div class="modal-top">
-        <div class="modal-top-close">
-          <!-- <ion-icon ios="ios-close" md="md-close" item-rigth (click)="onClose()" color=""></ion-icon> -->
+        <div class="modal-top">
+            <div class="modal-top-close">
+                <!-- <ion-icon ios="ios-close" md="md-close" item-rigth (click)="onClose()" color=""></ion-icon> -->
+            </div>
+            <div class="modal-title">提示</div>
+            <div class="modal-content">
+                <p>预算金额不能为空</p>
+            </div>
+            <div class="modal-footer">
+                <button ion-button full large (click)="sureBudget()">确定</button>
+                <!-- <button ion-button full large (click)="onCompanyDel()" class="btn-delete">返回</button> -->
+            </div>
         </div>
-        <div class="modal-title">提示</div>
-        <div class="modal-content">
-          <p>预算金额不能为空</p>
-        </div>
-        <div class="modal-footer">
-          <button ion-button full large (click)="sureBudget()">确定</button>
-          <!-- <button ion-button full large (click)="onCompanyDel()" class="btn-delete">返回</button> -->
-        </div>
-      </div>
     </div>
-  </div>
+</div>
+<div class="phonebind-modal" [hidden]="!isBudgetDays">
+    <div class="modal-bg"></div>
+    <div class="modal-box">
+        <div class="modal-top">
+            <div class="modal-top-close">
+                <!-- <ion-icon ios="ios-close" md="md-close" item-rigth (click)="onClose()" color=""></ion-icon> -->
+            </div>
+            <div class="modal-title">提示</div>
+            <div class="modal-content">
+                <p>项目周期请填写数字</p>
+            </div>
+            <div class="modal-footer">
+                <button ion-button full large (click)="sureBudgetDays()">确定</button>
+                <!-- <button ion-button full large (click)="onCompanyDel()" class="btn-delete">返回</button> -->
+            </div>
+        </div>
+    </div>
+</div>

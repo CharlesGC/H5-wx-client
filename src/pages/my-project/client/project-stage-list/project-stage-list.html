@@ -164,4 +164,11 @@
         <button ion-button class="btn-submit" (click)="onAllStageSubmit()">确认阶段</button>
         <button ion-button class="btn-delete" (click)="onCustomerNayStagePlan()">提出异议</button>
     </div>
+    <div class="no-content" *ngIf="isModel">
+      <h4 class="title">提示</h4>
+      <div class="img">
+        <img src="../../../assets/imgs/tuijain.png" alt="">
+      </div>
+      <p class="tip">您还没有阶段信息</p>
+    </div>
   </ion-content>
