@@ -21,6 +21,7 @@ export class ConsultantEducationExpPage {
   public isSubmit = false;
   public isDelete = false;
   public isComplete = false;
+  public isBigTime =false
   constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider) {
     this.educationListData = {};
   }
@@ -73,6 +74,10 @@ export class ConsultantEducationExpPage {
     var arr = Object.keys(this.educationListData);
     if (arr.length < 5) {
       this.isComplete = true;
+      return
+    }
+    if(new Date(educationListData.endTime)< new Date(educationListData.startTime)){
+      this.isBigTime = true
       return
     }
     let getEducationExpUrl = addOrEditEducationalExpUrl + '?openId=' + openId + '&schoolName=' + educationListData.schoolName +

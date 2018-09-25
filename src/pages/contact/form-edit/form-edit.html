@@ -6,9 +6,9 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title></ion-title>
-  </ion-navbar>
+    <ion-navbar>
+        <ion-title></ion-title>
+    </ion-navbar>
 
 </ion-header>
 
@@ -21,7 +21,7 @@
             </div>
         </ion-item>
         <div class="action-btn mt20" *ngIf="inputName.length<3">
-            <button ion-button round  (click)="goSelectTags(0,0,'skillList')">添加专业技能</button>
+            <button ion-button round (click)="goSelectTags(0,0,'skillList')">添加专业技能</button>
         </div>
         <div class="text-des mt20" *ngIf="inputName.length>2">最多只可以添加三个标签哦</div>
     </ion-list>
@@ -33,7 +33,7 @@
             </div>
         </ion-item>
         <div class="action-btn mt20" *ngIf="inputName.length<3">
-            <button ion-button round  (click)="goSelectTags(0,0,'industryList')">添加行业标签</button>
+            <button ion-button round (click)="goSelectTags(0,0,'industryList')">添加行业标签</button>
         </div>
         <div class="text-des mt20" *ngIf="inputName.length>2">最多只可以添加三个标签哦</div>
     </ion-list>
@@ -53,25 +53,27 @@
     </ion-list>
     <ion-list class="mt10">
         <ion-item class="none-margin bg-black" no-lines *ngIf="fieldType == 'text'">
-        <ion-input type="text" placeholder="请输入内容" [(ngModel)]="inputName"></ion-input>
+            <ion-input type="text" placeholder="请输入内容" [(ngModel)]="inputName"></ion-input>
+        </ion-item>
+        <ion-item class="none-margin bg-black" no-lines *ngIf="fieldType == 'price'">
+            <ion-input type="number" placeholder="请输入项目总价" [(ngModel)]="inputName"></ion-input>
         </ion-item>
         <ion-item *ngIf="selectField == 'gender'" no-lines>
             <ion-label>性别</ion-label>
-            <ion-multi-picker class="ion-picker" id="cities" item-content [multiPickerColumns]="genderColumns" [(ngModel)]="inputName" [cancelText]="'取消'" [doneText]="'完成'"></ion-multi-picker>
+            <ion-multi-picker class="ion-picker" id="cities" item-content [multiPickerColumns]="genderColumns"
+                [(ngModel)]="inputName" [cancelText]="'取消'" [doneText]="'完成'"></ion-multi-picker>
         </ion-item>
         <ion-item *ngIf="fieldType == 'province-city'" no-lines>
             <ion-label>城市选择</ion-label>
-            <ion-multi-picker class="ion-picker" id="cities" item-content 
-            [multiPickerColumns]="parentColumns" 
-            [(ngModel)]="inputName" 
-            [cancelText]="'取消'" 
-            [placeholder]="userInfo.province == undefined ? '省-市' : (userInfo.province + ' ' + userInfo.city)" 
-            [doneText]="'完成'">
+            <ion-multi-picker class="ion-picker" id="cities" item-content [multiPickerColumns]="parentColumns"
+                [(ngModel)]="inputName" [cancelText]="'取消'" [placeholder]="userInfo.province == undefined ? '省-市' : (userInfo.province + ' ' + userInfo.city)"
+                [doneText]="'完成'">
             </ion-multi-picker>
         </ion-item>
         <ion-item *ngIf="fieldType == 'select'" no-lines>
             <ion-label>选择内容</ion-label>
-            <ion-multi-picker  class="ion-picker" id="cities" item-content [multiPickerColumns]="parentColumns" [(ngModel)]="inputName" [cancelText]="'取消'" [doneText]="'完成'"></ion-multi-picker>
+            <ion-multi-picker class="ion-picker" id="cities" item-content [multiPickerColumns]="parentColumns"
+                [(ngModel)]="inputName" [cancelText]="'取消'" [doneText]="'完成'"></ion-multi-picker>
         </ion-item>
         <ion-item *ngIf="fieldType == 'textarea'" no-lines>
             <textarea id="textareaValue" placeholder="请输入文本内容" class="item-textarea" [(ngModel)]="inputName"></textarea>
@@ -79,19 +81,20 @@
         <ion-item class="none-margin bg-black" *ngIf="fieldType == 'date'" no-lines>
             <ion-label>请选择时间</ion-label>
             <div item-right class="rigth-message">
-                <ion-datetime displayFormat="YYYY/MM/DD" [(ngModel)]="inputName" max="2022-10-31" doneText="确认" cancelText="取消">
+                <ion-datetime displayFormat="YYYY/MM/DD" [(ngModel)]="inputName" max="2022-10-31" doneText="确认"
+                    cancelText="取消">
                     <ion-icon name="arrow-forward" class="ml12"></ion-icon>
                 </ion-datetime>
             </div>
         </ion-item>
-    <!-- <ion-item class="" *ngIf="selectField == 'industryList'" no-lines>
+        <!-- <ion-item class="" *ngIf="selectField == 'industryList'" no-lines>
         <ion-input type="text" placeholder="请输入工作年限" #company [(ngModel)]="inputName"></ion-input>
         <div item-right class="rigth-message">
           <span>年</span>  
         </div>
     </ion-item> -->
-    
-    <!-- <ion-item class="none-margin bg-black">
+
+        <!-- <ion-item class="none-margin bg-black">
       <ion-label>开始时间</ion-label>
       <div item-right class="rigth-message">
           <ion-datetime displayFormat="YYYY年MM月" [(ngModel)]="myDate">
@@ -128,8 +131,8 @@
     <ion-item class="" no-lines>
         <textarea placeholder="请输入文本内容" class="item-textarea"></textarea>
     </ion-item> -->
-  </ion-list>
-  <button ion-button expand="full" large class="fixed-bottom" (click)="addEmailSubmit(inputName)">保存</button>
+    </ion-list>
+    <button ion-button expand="full" large class="fixed-bottom" (click)="addEmailSubmit(inputName)">保存</button>
 </ion-content>
 
 <div class="phonebind-modal" [hidden]="!isSave">

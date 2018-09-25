@@ -203,7 +203,7 @@ export class FormEditPage {
       citystr,
       callback = this.navParams.get('callback');
     let index = this.navParams.get('index');
-    if (this.fieldType == 'text' || this.fieldType == 'gender' || this.fieldType == 'select' || this.fieldType == 'textarea' || this.fieldType == 'ranger' || this.fieldType == 'date') {
+    if (this.fieldType == 'price' || this.fieldType == 'text' || this.fieldType == 'gender' || this.fieldType == 'select' || this.fieldType == 'textarea' || this.fieldType == 'ranger' || this.fieldType == 'date') {
       value = inValue;
     } else if (this.fieldType == 'province-city') {
       citystr = document.getElementById("cities").innerText;

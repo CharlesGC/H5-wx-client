@@ -283,14 +283,18 @@
 
 page-tabs {
     .icon {
-        font-size: 1.6rem !important;
+        font-size: 14px !important;
     }
 }
 
 .bar-button-md{
-    font-size: 1.6rem;
+    font-size: 14px;
 }
 .returnBtn{
     margin: 0 6px!important;
     padding: 0 5px!important
+}
+.back-button-text{
+    padding-top: 2px;
+    font-size: 14px;
 }

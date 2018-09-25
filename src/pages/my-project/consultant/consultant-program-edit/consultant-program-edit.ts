@@ -5,7 +5,7 @@ import { MamenDataProvider } from '../../../../providers/mamen-data/mamen-data';
 import { ProjectTimeSelectPage } from '../../project-time-select/project-time-select';
 import { addOrEditProgramUrl } from '../../../../providers/requestUrl';
 import { UploadfilePage } from '../../../uploadfile/uploadfile'
- 
+
 /**
  * Generated class for the ConsultantProgramEditPage page.
  *
@@ -27,13 +27,17 @@ export class ConsultantProgramEditPage {
   public fileUrlvalue: any
 
   public programData = {}
-  constructor(public navCtrl: NavController, public navParams: NavParams,private Provider:MamenDataProvider) {
+  public tipstext: any
+  public isshow = false
+  public isdisabled = ''
+  public issuccess = false
+  constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider) {
   }
 
   ionViewDidLoad() {
     this.programData = this.navParams.get('data') || {};
-    
-    console.log(this.programData,'ionViewDidLoad ConsultantProgramEditPage');
+
+    console.log(this.programData, 'ionViewDidLoad ConsultantProgramEditPage');
 
     this.fileUrlvalue = this.programData['certifiedUrl']
     //console.log(this.interactionData,'这是数据')
@@ -63,8 +67,8 @@ export class ConsultantProgramEditPage {
     }
   }
   /* 跳转到上传文件页面 */
-  gouploadfile(){
-    this.navCtrl.push(UploadfilePage,{
+  gouploadfile() {
+    this.navCtrl.push(UploadfilePage, {
       callback: this.setuploadfile,
     })
   }
@@ -104,8 +108,8 @@ export class ConsultantProgramEditPage {
   }
 
   /*设置值（回调函数）*/
-  setValue = (field,value)=> {
-    if(field == 'workload_workloadUnit'){
+  setValue = (field, value) => {
+    if (field == 'workload_workloadUnit') {
       this.programData['workload'] = value[0];
       this.programData['workloadUnit'] = value[1];
     }
@@ -113,54 +117,95 @@ export class ConsultantProgramEditPage {
   }
   /*列表编辑*/
   goFormEditPage(field, value, type) {
-    if(type == 'workload_workloadUnit'){
-      this.navCtrl.push(ProjectTimeSelectPage,{callback:this.setValue,value:value,field:field,type:type});
-    }else{
-      this.navCtrl.push(FormEditPage,{callback:this.setValue,value:value,field:field,type:type});
+    if (type == 'workload_workloadUnit') {
+      this.navCtrl.push(ProjectTimeSelectPage, { callback: this.setValue, value: value, field: field, type: type });
+    } else {
+      this.navCtrl.push(FormEditPage, { callback: this.setValue, value: value, field: field, type: type });
     }
-    
+
+  }
+  sureCancel(){
+    this.isshow = !this.isshow
   }
 
-  getUrlParam(name) {  
+  sureSuccess(){
+    this.issuccess = !this.issuccess
+    this.navCtrl.pop()
+  }
+
+  getUrlParam(name) {
     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象  
     var r = window.location.search.substr(1).match(reg);  //匹配目标参数  
     if (r != null) {
-        return encodeURI(r[2]);  //返回参数值 
+      return encodeURI(r[2]);  //返回参数值 
     } else {
-        return null; 
+      return null;
     }
- }
+  }
   /*新增、编辑请求*/
   onProgramSubmitClick(ppid) {
     let pid = this.navParams.get('pid');
     let programData = this.programData;
-
     // let projectStageDetailUrl = 'http://mamon.yemindream.com/mamon/adviser/addOrEditProgram';
-    const openId = window.sessionStorage.getItem('openId')|| this.getUrlParam('openId');
-    let projectStageDetailUrl = addOrEditProgramUrl + '?openId=' + openId + '&pid='+pid+'&status=-2' +
-                              '&programName='+programData['programName']+
-                              '&programDescription='+programData['programDescription']+
-                              '&workload='+programData['workload']+
-                              '&workloadUnit='+programData['workloadUnit']+
-                              '&deliverable='+programData['deliverable']+
-                              '&price='+programData['price']+
-                              '&planName='+(programData['planName'] || '')+
-                              '&fid='+(programData['fid'] || '')+
-                              '&planUrl='+(programData['planUrl'] || '');
-    if(ppid) {
+    const openId = window.sessionStorage.getItem('openId') || this.getUrlParam('openId');
+    if(!programData['programName']){
+      this.isshow = true
+      this.tipstext = '方案名称不能为空'
+      return
+    }
+    if(!programData['programDescription']){
+      this.isshow = true
+      this.tipstext = '方案描述不能为空'
+      return
+    }
+    if(!programData['workloadUnit']){
+      this.isshow = true
+      this.tipstext = '方案周期不能为空'
+      return
+    }
+    if(!programData['deliverable']){
+      this.isshow = true
+      this.tipstext = '方案规划不能为空'
+      return
+    }
+    if(!programData['price']){
+      this.isshow = true
+      this.tipstext = '项目总价不能为空'
+      return
+    }
+    if(!programData['fid']){
+      this.isshow = true
+      this.tipstext = '方案计划书不能为空'
+      return
+    }
+    let projectStageDetailUrl = addOrEditProgramUrl + '?openId=' + openId + '&pid=' + pid + '&status=-2' +
+      '&programName=' + programData['programName'] +
+      '&programDescription=' + programData['programDescription'] +
+      '&workload=' + programData['workload'] +
+      '&workloadUnit=' + programData['workloadUnit'] +
+      '&deliverable=' + programData['deliverable'] +
+      '&price=' + programData['price'] +
+      '&planName=' + (programData['planName'] || '') +
+      '&fid=' + (programData['fid'] || '') +
+      '&planUrl=' + (programData['planUrl'] || '');
+    if (ppid) {
       projectStageDetailUrl = projectStageDetailUrl + '&ppid=' + ppid;
     }
-    this.Provider.getMamenSwiperData(projectStageDetailUrl).subscribe(res=>{
-      if(res.code==200) {
-        alert('操作成功！');
-        this.navCtrl.pop();
-      }else if(res.code == 207) {
-        window.localStorage.removeItem('openId');
-      }else{
-        alert('请求出错:'+res.msg);
+    
+    this.isdisabled = 'disabled'
+    this.Provider.getMamenSwiperData(projectStageDetailUrl).subscribe(res => {
+      if (res.code == 200) {
+        //alert('操作成功！');
+        this.issuccess = true
+        this.tipstext = '操作成功！'
+        this.isdisabled = ''
+      }else {
+        this.isshow = true
+        this.tipstext = '操作失败，请稍后重试！'
+        //alert('请求出错:' + res.msg);
       }
-    },error=>{
-      console.log('erros===',error);
+    }, error => {
+      console.log('erros===', error);
     })
   }
 

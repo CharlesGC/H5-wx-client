@@ -26,6 +26,7 @@ export class ConsultantStageEditPage {
   public isInteger = false
   public isComplete = false
   public isDateRepeat = false
+  public isBigTime =false
   constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider) {
   }
 
@@ -95,6 +96,10 @@ export class ConsultantStageEditPage {
     var rule = /^([1-9][0-9]{0,1}|100)$/;
     if (rule.test(stageData['percentage']) == false) {
       this.isInteger = true
+      return
+    }
+    if(new Date(endTime)< new Date(startTime)){
+      this.isBigTime = true
       return
     }
     const openId = window.sessionStorage.getItem('openId') || this.getUrlParam('openId');
