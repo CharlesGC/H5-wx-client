@@ -159,15 +159,13 @@ export class ProjectPaymentRecordPage {
     this.Provider.getMamenSwiperData(projectInvoiceDetailUrl).subscribe(res => {
       if (res.code == 200) {
         this.paymentRecordData = res.data;
+        console.log('paymentRecordData',this.paymentRecordData)
         this.paymentRecordData['size'] = (this.paymentRecordData['size'] / 1048576).toPrecision(3)
 
         if (this.paymentRecordData['size'] > 1) {
           this.paymentRecordData['size'] = this.paymentRecordData['size'] + ' MB'
         } else if (this.paymentRecordData['size'] < 1) {
           this.paymentRecordData['size'] = this.paymentRecordData['size'] * 1024 + ' KB'
-        } else if (this.paymentRecordData['size'] == 'NaN') {
-          // this.paymentRecordData = {};
-          //console.log(this.interactionData['typeStr'])
         }
 
         if (this.paymentRecordData['typeStr']) {

@@ -64,6 +64,10 @@ export class ConsultantEducationExpPage {
   sureComplete() {
     this.isComplete = !this.isComplete;
   }
+  sureBigTime(){
+    this.isBigTime=  !this.isBigTime
+    return
+  }
 
   /*数据新增、编辑请求*/
   onEducationExpSubmit() {
