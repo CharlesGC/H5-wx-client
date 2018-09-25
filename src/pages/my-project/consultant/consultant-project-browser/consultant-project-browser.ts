@@ -41,6 +41,7 @@ export class ConsultantProjectBrowserPage {
   public projectProgramCount = {};
   public projectStageCount = {};
   public projectDocumentCount = {};
+  public selectType = '';
   public menu = [
     { name: 'navMenu1', isShow: true }
   ];
@@ -78,12 +79,15 @@ export class ConsultantProjectBrowserPage {
 
   ionViewDidLoad() {
     this.isApply = this.navParams.get('isApply');
-    console.log(this.navParams.get('data'), 'ionViewDidLoad ProjectBrowserPage');
+    this.selectType = this.navParams.get('selectType');
+    console.log(this.selectType, 'ionViewDidLoad ProjectBrowserPage');
     let data = this.navParams.get('data')
     this.getProjectListData(data.pid);
   }
   ionViewDidEnter() {
-    console.log(this.navParams.get('data'), 'ionViewDidEnter ProjectBrowserPage');
+    this.isApply = this.navParams.get('isApply');
+    this.selectType = this.navParams.get('selectType');
+    console.log(this.selectType, 'ionViewDidEnter ProjectBrowserPage');
     let data = this.navParams.get('data')
     this.getProjectListData(data.pid);
     window.sessionStorage.setItem('pid', data.pid || 0);
@@ -236,5 +240,5 @@ export class ConsultantProjectBrowserPage {
       console.log('erros===', error);
     })
   }
-  
+
 }

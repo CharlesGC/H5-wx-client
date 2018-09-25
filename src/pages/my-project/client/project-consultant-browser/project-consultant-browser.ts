@@ -21,6 +21,8 @@ export class ProjectConsultantBrowserPage {
   public applicationDeatil={};
   public ishome='';
   public userType = '';
+  public isInterview =false
+  public isInterviewFailed = false
   constructor(public navCtrl: NavController, public navParams: NavParams,private Provider:MamenDataProvider) {
     this.Selected =0;
   }
@@ -67,7 +69,7 @@ export class ProjectConsultantBrowserPage {
       }else if(res.code == 207) {
         window.localStorage.removeItem('openId');
       }else{
-        alert('请求出错:'+res.msg);
+        //alert('请求出错:'+res.msg);
       }
     },error=>{
       console.log('erros===',error);
@@ -86,13 +88,20 @@ export class ProjectConsultantBrowserPage {
       }else if(res.code == 207) {
         window.localStorage.removeItem('openId');
       }else{
-        alert('请求出错:'+res.msg);
+        //alert('请求出错:'+res.msg);
       }
     },error=>{
       console.log('erros===',error);
     })
   }
-
+  sureInterview(){
+    this.isInterview = !this.isInterview
+    this.navCtrl.pop()
+  }
+  sureInterviewFailed(){
+    this.isInterviewFailed = !this.isInterviewFailed
+    return
+  }
   /*面试、确认、拒绝、忽略*/
   onInterviewOrGnoreSubmit(type){
     if(type == 3){
@@ -104,12 +113,12 @@ export class ProjectConsultantBrowserPage {
     let projectDetailsUrl = changeApplicationStatusUrl + '?openId=' + openId + '&paid='+this.applicationDeatil['paid'] + '&status='+type;
     this.Provider.getMamenSwiperData(projectDetailsUrl).subscribe(res=>{
       if(res.code==200) {
-        alert('操作成功！');
-        this.navCtrl.pop();
-      }else if(res.code == 207) {
-        window.localStorage.removeItem('openId');
+        //alert('操作成功！');
+        //this.navCtrl.pop();
+        this.isInterview = true
       }else{
-        alert('请求出错:'+res.msg);
+        //alert('请求出错:'+res.msg);
+        this.isInterviewFailed = true
       }
     },error=>{
       console.log('erros===',error);
@@ -121,5 +130,4 @@ export class ProjectConsultantBrowserPage {
     let uid = this.navParams.get('uid');
     this.navCtrl.push(ProjectEditStep1Page,{uid:uid,isEdit:true});
   }
-
 }

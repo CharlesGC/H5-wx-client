@@ -148,6 +148,39 @@
 </div>
 
 <ion-content style="background-color: #fcfcfc;">
+    <div class="nav-menu" *ngIf="isShowNavMenu && !isApply">
+        <ion-list class="nav-list-menu" *ngIf="!isApply">
+            <ion-item no-lines (click)="onNavMenuClick(true)">
+                <p class="list-header-left">{{showNavMenuName || '详情'}} ({{showNavMenuNumber}})</p>
+                <div class="list-header-right" item-end>
+                    <span>展开</span>
+                </div>
+            </ion-item>
+        </ion-list>
+        <div class="nav-menu-bg"></div>
+        <ion-list class="nav-menu-list">
+            <ion-item class="nav-menu-item" (click)="onNavMenuItemClick(1,'详情')">
+                <label>详情</label>
+                <ion-icon name="arrow-forward" item-right (click)="isShow=!isShow"></ion-icon>
+            </ion-item>
+            <ion-item class="nav-menu-item" (click)="onNavMenuItemClick(2,'方案')">
+                <label>方案</label>
+                <ion-icon name="arrow-forward" item-right (click)="isShow=!isShow"></ion-icon>
+            </ion-item>
+            <ion-item class="nav-menu-item" (click)="onNavMenuItemClick(3,'阶段',-1)">
+                <label>阶段</label>
+                <ion-icon name="arrow-forward" item-right (click)="isShow=!isShow"></ion-icon>
+            </ion-item>
+            <ion-item class="nav-menu-item" (click)="onNavMenuItemClick(4,'文档',-1)">
+                <label>文档</label>
+                <ion-icon name="arrow-forward" item-right (click)="isShow=!isShow"></ion-icon>
+            </ion-item>
+            <ion-item class="nav-menu-item" (click)="onNavMenuItemClick(5,'收款记录',-1)" no-lines>
+                <label>收款记录</label>
+                <ion-icon name="arrow-forward" item-right (click)="isShow=!isShow"></ion-icon>
+            </ion-item>
+        </ion-list>
+    </div>
     <!-- <ion-item>
           用户信息
           <ion-icon name="ios-arrow-down" item-right  *ngIf="isShow"    (click)="isShow=!isShow"></ion-icon>
@@ -158,14 +191,15 @@
             姓名：{{item.name}} 年龄：{{item.age}}
         </ion-item>
       </ion-list> -->
-    <ion-list class="nav-list-menu" *ngIf="!isApply">
+    <!-- <ion-list class="nav-list-menu" *ngIf="!isApply">
         <ion-item no-lines (click)="onNavMenuClick(true)">
             <p class="list-header-left">{{showNavMenuName || '详情'}} ({{showNavMenuNumber}})</p>
             <div class="list-header-right" item-end>
                 <span>展开</span>
             </div>
         </ion-item>
-    </ion-list>
+    </ion-list> -->
+
     <ion-list class="project-browser-top">
         <div class="bg-top"></div>
         <div class="bg-bottom"></div>
@@ -329,36 +363,36 @@
 <div class="phonebind-modal" [hidden]="!isSuccess">
     <div class="modal-bg"></div>
     <div class="modal-box">
-      <div class="modal-top">
-        <div class="modal-top-close">
-          <!-- <ion-icon ios="ios-close" md="md-close" item-rigth (click)="onClose()" color=""></ion-icon> -->
+        <div class="modal-top">
+            <div class="modal-top-close">
+                <!-- <ion-icon ios="ios-close" md="md-close" item-rigth (click)="onClose()" color=""></ion-icon> -->
+            </div>
+            <div class="modal-title">提示</div>
+            <div class="modal-content">
+                <p>提交成功</p>
+            </div>
+            <div class="modal-footer">
+                <button ion-button full large (click)="sureSuccess()">确定</button>
+                <!-- <button ion-button full large (click)="onCompanyDel()" class="btn-delete">返回</button> -->
+            </div>
         </div>
-        <div class="modal-title">提示</div>
-        <div class="modal-content">
-          <p>提交成功</p>
-        </div>
-        <div class="modal-footer">
-          <button ion-button full large (click)="sureSuccess()">确定</button>
-          <!-- <button ion-button full large (click)="onCompanyDel()" class="btn-delete">返回</button> -->
-        </div>
-      </div>
     </div>
-  </div>
-  <div class="phonebind-modal" [hidden]="!isFailed">
+</div>
+<div class="phonebind-modal" [hidden]="!isFailed">
     <div class="modal-bg"></div>
     <div class="modal-box">
-      <div class="modal-top">
-        <div class="modal-top-close">
-          <!-- <ion-icon ios="ios-close" md="md-close" item-rigth (click)="onClose()" color=""></ion-icon> -->
+        <div class="modal-top">
+            <div class="modal-top-close">
+                <!-- <ion-icon ios="ios-close" md="md-close" item-rigth (click)="onClose()" color=""></ion-icon> -->
+            </div>
+            <div class="modal-title">提示</div>
+            <div class="modal-content">
+                <p>提交失败，请重新提交</p>
+            </div>
+            <div class="modal-footer">
+                <button ion-button full large (click)="sureFailed()">确定</button>
+                <!-- <button ion-button full large (click)="onCompanyDel()" class="btn-delete">返回</button> -->
+            </div>
         </div>
-        <div class="modal-title">提示</div>
-        <div class="modal-content">
-          <p>提交失败，请重新提交</p>
-        </div>
-        <div class="modal-footer">
-          <button ion-button full large (click)="sureFailed()">确定</button>
-          <!-- <button ion-button full large (click)="onCompanyDel()" class="btn-delete">返回</button> -->
-        </div>
-      </div>
     </div>
-  </div>
+</div>
