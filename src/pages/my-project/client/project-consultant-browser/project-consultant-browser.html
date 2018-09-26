@@ -49,7 +49,10 @@
             <div class="info-other">
               <span>{{consultantDetails.years}} </span>
               <span>年工作经验，</span>
-              <span class="color-f46f46">{{consultantDetails.salaryUp}}-{{consultantDetails.salaryDown}} </span>
+            </div>
+            <div class="info-other">
+              <span class="color-f46f46">{{consultantDetails.salaryUp | currency : '￥'}}-{{consultantDetails.salaryDown
+                | currency : '￥'}} </span>
               <span>元/天</span>
             </div>
           </div>
@@ -146,50 +149,50 @@
     <div class="user-other-list">
       <h4>教育经历</h4>
       <ion-card class="card-item" *ngFor="let educationalList_item of consultantDetails.educationalList">
-          <div class="card-item-label">
-            <label>学校</label>
-            <p class="card-cont">{{educationalList_item.schoolName}}</p>
-          </div>
-          <div class="card-item-label mt10">
-            <label>起止日期</label>
-            <p class="card-cont">
-              <span>{{educationalList_item.startTime | date:'yyyy/MM/dd'}}</span>
-              <span> - </span>
-              <span>{{educationalList_item.endTime | date:'yyyy/MM/dd'}}</span>
-            </p>
-          </div>
-          <div class="card-item-label mt10">
-            <label>专业名称</label>
-            <p class="card-cont">{{educationalList_item.profession}}</p>
-          </div>
-          <div class="card-item-label mt10">
-            <label>学历</label>
-            <p class="card-cont" *ngIf="educationalList_item.degree == 0">博士</p>
-            <p class="card-cont" *ngIf="educationalList_item.degree == 1">硕士</p>
-            <p class="card-cont" *ngIf="educationalList_item.degree == 2">本科</p>
-            <!-- <p class="card-cont" *ngIf="educationalList_item.degree == 3">本科</p>
+        <div class="card-item-label">
+          <label>学校</label>
+          <p class="card-cont">{{educationalList_item.schoolName}}</p>
+        </div>
+        <div class="card-item-label mt10">
+          <label>起止日期</label>
+          <p class="card-cont">
+            <span>{{educationalList_item.startTime | date:'yyyy/MM/dd'}}</span>
+            <span> - </span>
+            <span>{{educationalList_item.endTime | date:'yyyy/MM/dd'}}</span>
+          </p>
+        </div>
+        <div class="card-item-label mt10">
+          <label>专业名称</label>
+          <p class="card-cont">{{educationalList_item.profession}}</p>
+        </div>
+        <div class="card-item-label mt10">
+          <label>学历</label>
+          <p class="card-cont" *ngIf="educationalList_item.degree == 0">博士</p>
+          <p class="card-cont" *ngIf="educationalList_item.degree == 1">硕士</p>
+          <p class="card-cont" *ngIf="educationalList_item.degree == 2">本科</p>
+          <!-- <p class="card-cont" *ngIf="educationalList_item.degree == 3">本科</p>
             <p class="card-cont" *ngIf="educationalList_item.degree == 4">研究生</p>
             <p class="card-cont" *ngIf="educationalList_item.degree == 5"> 博士</p> -->
-          </div>
+        </div>
       </ion-card>
     </div>
-  
+
     <!--擅长语言box -->
     <div class="user-other-list">
       <h4>擅长语言</h4>
       <ion-card class="card-item" *ngFor="let languageList_item of consultantDetails.languageList">
-          <div class="card-item-label">
-            <label>语言</label>
-            <p class="card-cont">{{languageList_item.language}}</p>
-          </div>
-          <div class="card-item-label mt10">
-            <label>等级</label>
-            <!-- <p class="card-cont">精通</p> -->
-            <p class="card-cont" *ngIf="languageList_item.grade == 0">母语</p>
-            <p class="card-cont" *ngIf="languageList_item.grade == 1">精通</p>
-            <p class="card-cont" *ngIf="languageList_item.grade == 2">熟练</p>
-            <p class="card-cont" *ngIf="languageList_item.grade == 3">一般</p>
-          </div>
+        <div class="card-item-label">
+          <label>语言</label>
+          <p class="card-cont">{{languageList_item.language}}</p>
+        </div>
+        <div class="card-item-label mt10">
+          <label>等级</label>
+          <!-- <p class="card-cont">精通</p> -->
+          <p class="card-cont" *ngIf="languageList_item.grade == 0">母语</p>
+          <p class="card-cont" *ngIf="languageList_item.grade == 1">精通</p>
+          <p class="card-cont" *ngIf="languageList_item.grade == 2">熟练</p>
+          <p class="card-cont" *ngIf="languageList_item.grade == 3">一般</p>
+        </div>
       </ion-card>
     </div>
     <!--专业认证box -->
@@ -229,16 +232,21 @@
     <div class="user-other-list">
       <p class="browser-file">查看规划相关文件</p>
       <h4 class="mt10">案例附件</h4>
-      <ion-card class="card-item" *ngFor="let successCase_item of applicationDeatil.successCase">
+      <ion-card class="card-item" *ngFor="let resumeList_item of consultantDetails.resumeList">
         <div class="card-item-label">
           <label>
-            <img style="width:66px;height:66px;" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1534233453&di=bd34b76dca47ce86738ff171e3c50122&imgtype=jpg&er=1&src=http%3A%2F%2Fpic.58pic.com%2F58pic%2F14%2F81%2F70%2F29J58PICf2x_1024.jpg">
+            <img style="width:66px;height:66px;" src="assets/imgs/doc.png" *ngIf="formatTypes(resumeList_item.format) == 'doc'">
+            <img style="width:66px;height:66px;" src="assets/imgs/ppt.png" *ngIf="formatTypes(resumeList_item.format) == 'ppt'">
+            <img style="width:66px;height:66px;" src="assets/imgs/xls.png" *ngIf="formatTypes(resumeList_item.format) == 'xls'">
+            <img style="width:66px;height:66px;" src="assets/imgs/png.png" *ngIf="formatTypes(resumeList_item.format) == 'jpg'">
+            <img style="width:66px;height:66px;" src="assets/imgs/pdf.png" *ngIf="formatTypes(resumeList_item.format) == 'pdf'">
           </label>
-          <a href="{{resumeList_item.resumeUr}}" style="text-decoration:none;">
+          <a href="{{resumeList_item.resumeUrl}}" style="text-decoration:none;">
             <div class="card-cont" data-src="resumeList_item.resumeUrl">
               <h5>项目规划意向书</h5>
               <p>点击查看文件预览</p>
-              <p>20 KB</p>
+              <p>{{(resumeList_item.size / 1048576).toPrecision(3) > 1?(resumeList_item.size / 1048576).toPrecision(3)+
+                ' MB':(resumeList_item.size / 1048576).toPrecision(3)+' KB'}}</p>
             </div>
           </a>
         </div>
@@ -259,11 +267,11 @@
   </div>
   <div style="height:100px;"></div>
   <div class="fixed-bottom" *ngIf="applicationDeatil.status==0 || applicationDeatil.status==2">
-    <button ion-button class="btn-submit" (click)="onInterviewOrGnoreSubmit(1)">面试该顾问</button>
+    <button ion-button class="btn-submit" (click)="onInterviewOrGnoreSubmit(1)" [disabled]="isdisabled">面试该顾问</button>
     <button ion-button class="btn-delete" (click)="onInterviewOrGnoreSubmit(3)">忽略</button>
   </div>
   <div class="fixed-bottom" *ngIf="applicationDeatil.status==1">
-    <button ion-button class="btn-submit" (click)="onInterviewOrGnoreSubmit(4)">确认方案候选人</button>
+    <button ion-button class="btn-submit" (click)="onInterviewOrGnoreSubmit(4)" [disabled]="isdisabled">确认方案候选人</button>
     <button ion-button class="btn-delete" (click)="onInterviewOrGnoreSubmit(3)">忽略</button>
   </div>
   <button ion-button expand="full" large class="fixed-bottom" (click)="goProjectStart()" *ngIf="ishome == 'homepage' && userType == 0">发起项目邀请</button>
@@ -287,20 +295,20 @@
   </div>
 </div>
 <div class="phonebind-modal" [hidden]="!isInterviewFailed">
-    <div class="modal-bg"></div>
-    <div class="modal-box">
-      <div class="modal-top">
-        <div class="modal-top-close">
-          <!-- <ion-icon ios="ios-close" md="md-close" item-rigth (click)="onClose()" color=""></ion-icon> -->
-        </div>
-        <div class="modal-title">提示</div>
-        <div class="modal-content">
-          <p>操作失败，请刷新重试</p>
-        </div>
-        <div class="modal-footer">
-          <button ion-button full large (click)="sureInterviewFailed()">确定</button>
-          <!-- <button ion-button full large (click)="onCompanyDel()" class="btn-delete">返回</button> -->
-        </div>
+  <div class="modal-bg"></div>
+  <div class="modal-box">
+    <div class="modal-top">
+      <div class="modal-top-close">
+        <!-- <ion-icon ios="ios-close" md="md-close" item-rigth (click)="onClose()" color=""></ion-icon> -->
+      </div>
+      <div class="modal-title">提示</div>
+      <div class="modal-content">
+        <p>操作失败，请刷新重试</p>
+      </div>
+      <div class="modal-footer">
+        <button ion-button full large (click)="sureInterviewFailed()">确定</button>
+        <!-- <button ion-button full large (click)="onCompanyDel()" class="btn-delete">返回</button> -->
       </div>
     </div>
   </div>
+</div>

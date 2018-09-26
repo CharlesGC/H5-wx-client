@@ -16,15 +16,16 @@ import { ProjectEditStep1Page } from '../project-edit-step1/project-edit-step1';
   templateUrl: 'project-consultant-browser.html',
 })
 export class ProjectConsultantBrowserPage {
-  public Selected:any;
-  public consultantDetails={}
-  public applicationDeatil={};
-  public ishome='';
+  public Selected: any;
+  public consultantDetails = {}
+  public applicationDeatil = {};
+  public ishome = '';
   public userType = '';
-  public isInterview =false
+  public isInterview = false
   public isInterviewFailed = false
-  constructor(public navCtrl: NavController, public navParams: NavParams,private Provider:MamenDataProvider) {
-    this.Selected =0;
+  public isdisabled: any
+  constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider) {
+    this.Selected = 0;
   }
 
   ionViewDidLoad() {
@@ -33,101 +34,117 @@ export class ProjectConsultantBrowserPage {
     let pid = this.navParams.get('pid');
     this.ishome = this.navParams.get('type');
     this.userType = this.navParams.get('userType');
-    if(this.ishome == 'homepage') {
+    if (this.ishome == 'homepage') {
       this.getProjectListData(uid)
-    }else{
+    } else {
       this.getProjectListData(uid)
-      this.getApplicationDeatil(uid,pid);
+      this.getApplicationDeatil(uid, pid);
     }
-    
+
   }
 
   /*点击选中*/
-  onSelectClick(value){
+  onSelectClick(value) {
     this.Selected = value;
   }
 
-  getUrlParam(name) {  
+  getUrlParam(name) {
     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象  
     var r = window.location.search.substr(1).match(reg);  //匹配目标参数  
     if (r != null) {
-        return encodeURI(r[2]);  //返回参数值 
+      return encodeURI(r[2]);  //返回参数值 
     } else {
-        return null; 
+      return null;
     }
- }
+  }
 
   /*项目详情数据请求*/
   getProjectListData(uid) {
     // let projectDetailsUrl = 'http://mamon.yemindream.com/mamon/adviser/getAdviserDetail';
-    const openId = window.sessionStorage.getItem('openId') ||this.getUrlParam('openId');
-    let projectDetailsUrl = getAdviserDetailUrl + '?openId=' + openId + '&uid='+uid;
-    this.Provider.getMamenSwiperData(projectDetailsUrl).subscribe(res=>{
-      if(res.code==200) {
-        console.log(res,'--------');
+    const openId = window.sessionStorage.getItem('openId') || this.getUrlParam('openId');
+    let projectDetailsUrl = getAdviserDetailUrl + '?openId=' + openId + '&uid=' + uid;
+    this.Provider.getMamenSwiperData(projectDetailsUrl).subscribe(res => {
+      if (res.code == 200) {
+        console.log(res, '--------');
         this.consultantDetails = res.data;
-      }else if(res.code == 207) {
+      } else if (res.code == 207) {
         window.localStorage.removeItem('openId');
-      }else{
+      } else {
         //alert('请求出错:'+res.msg);
       }
-    },error=>{
-      console.log('erros===',error);
+    }, error => {
+      console.log('erros===', error);
     })
   }
 
   /*项目申请数据请求*/
-  getApplicationDeatil(uid,pid) {
+  getApplicationDeatil(uid, pid) {
     // let projectDetailsUrl = 'http://mamon.yemindream.com/mamon/recommend/getApplicationDeatil';
-    const openId = window.sessionStorage.getItem('openId') ||this.getUrlParam('openId');
-    let projectDetailsUrl = getApplicationDeatilUrl + '?openId=' + openId + '&uid='+uid + '&pid='+pid;
-    this.Provider.getMamenSwiperData(projectDetailsUrl).subscribe(res=>{
-      if(res.code==200) {
-        console.log(res,'--------');
+    const openId = window.sessionStorage.getItem('openId') || this.getUrlParam('openId');
+    let projectDetailsUrl = getApplicationDeatilUrl + '?openId=' + openId + '&uid=' + uid + '&pid=' + pid;
+    this.Provider.getMamenSwiperData(projectDetailsUrl).subscribe(res => {
+      if (res.code == 200) {
+        //console.log(res,'--------');
         this.applicationDeatil = res.data;
-      }else if(res.code == 207) {
+      } else if (res.code == 207) {
         window.localStorage.removeItem('openId');
-      }else{
+      } else {
         //alert('请求出错:'+res.msg);
       }
-    },error=>{
-      console.log('erros===',error);
+    }, error => {
+      console.log('erros===', error);
     })
   }
-  sureInterview(){
+  sureInterview() {
     this.isInterview = !this.isInterview
     this.navCtrl.pop()
   }
-  sureInterviewFailed(){
+  sureInterviewFailed() {
     this.isInterviewFailed = !this.isInterviewFailed
     return
   }
   /*面试、确认、拒绝、忽略*/
-  onInterviewOrGnoreSubmit(type){
-    if(type == 3){
+  onInterviewOrGnoreSubmit(type) {
+    if (type == 3) {
       this.navCtrl.pop();
       return;
     }
+    this.isdisabled = 'disabled'
     // let projectDetailsUrl = 'http://mamon.yemindream.com/mamon/customer/changeApplicationStatus';
-    const openId = window.sessionStorage.getItem('openId') ||this.getUrlParam('openId');
-    let projectDetailsUrl = changeApplicationStatusUrl + '?openId=' + openId + '&paid='+this.applicationDeatil['paid'] + '&status='+type;
-    this.Provider.getMamenSwiperData(projectDetailsUrl).subscribe(res=>{
-      if(res.code==200) {
+    const openId = window.sessionStorage.getItem('openId') || this.getUrlParam('openId');
+    let projectDetailsUrl = changeApplicationStatusUrl + '?openId=' + openId + '&paid=' + this.applicationDeatil['paid'] + '&status=' + type;
+    this.Provider.getMamenSwiperData(projectDetailsUrl).subscribe(res => {
+      if (res.code == 200) {
         //alert('操作成功！');
         //this.navCtrl.pop();
         this.isInterview = true
-      }else{
+        this.isdisabled = ''
+      } else {
         //alert('请求出错:'+res.msg);
         this.isInterviewFailed = true
       }
-    },error=>{
-      console.log('erros===',error);
+    }, error => {
+      console.log('erros===', error);
     })
   }
 
   /*向顾问发起项目*/
-  goProjectStart(){
+  goProjectStart() {
     let uid = this.navParams.get('uid');
-    this.navCtrl.push(ProjectEditStep1Page,{uid:uid,isEdit:true});
+    this.navCtrl.push(ProjectEditStep1Page, { uid: uid, isEdit: true });
+  }
+
+  formatTypes(value) {
+    if (value.search(/doc/) !== -1 || value.search(/docx/) !== -1) {
+      return 'doc';
+    } else if (value.search(/ppt/) !== -1 || value.search(/pptx/) !== -1) {
+      return 'ppt'
+    } else if (value.search(/xls/) !== -1 || value.search(/xlsx/) !== -1) {
+      return 'xls'
+    } else if (value.search(/jpg/) !== -1 || value.search(/png/) !== -1 || value.search(/jpeg/) !== -1) {
+      return 'jpg'
+    } else if (value.search(/pdf/) !== -1) {
+      return 'pdf'
+    }
   }
 }

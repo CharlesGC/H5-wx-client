@@ -53,8 +53,10 @@
           </div>
           <div class="info-other">
             <span>{{consultantList_item.years}} </span>
-            <span>年工作经验，</span>
-            <span class="color-f46f46">{{consultantList_item.salaryUp}}-{{consultantList_item.salaryDown}} </span>
+            <span>年工作经验</span>
+          </div>
+          <div class="info-other">
+            <span class="color-f46f46">{{consultantList_item.salaryUp | currency : '￥'}}-{{consultantList_item.salaryDown | currency : '￥'}} </span>
             <span>元/天</span>
           </div>
         </div>
