@@ -29,6 +29,11 @@ export class ProjectProgramListPage {
     let status = this.navParams.get('status');
     this.getProjectProgramListData(pid,status);
   }
+  ionViewDidEnter(){
+    let pid = this.navParams.get('pid');
+    let status = this.navParams.get('status');
+    this.getProjectProgramListData(pid,status);
+  }
 
   /*跳转到方案详情页面*/
   goProgramBrowser(ppid) {

@@ -30,6 +30,9 @@ export class ConsultantInteractionSubmitPage {
   public isAdd = false;
   public type = 0;
   public fid: any;
+  public isNoStageBook = false
+  public isDelBook = false
+  public isSubmitSuccess =false
   constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider) {
   }
 
@@ -114,7 +117,14 @@ export class ConsultantInteractionSubmitPage {
       return null;
     }
   }
-
+  sureStageBook() {
+    this.isNoStageBook = !this.isNoStageBook
+    return
+  }
+  sureSubmitSuccess(){
+    this.isSubmitSuccess = !this.isSubmitSuccess
+    this.navCtrl.pop();
+  }
   /*附件、交互物*/
   onInteractionClick() {
     let fid = this.fid; //上传文件返回的id;
@@ -124,6 +134,11 @@ export class ConsultantInteractionSubmitPage {
     let interactionData = this.interactionData;
     // let projectStageDetailUrl = 'http://mamon.yemindream.com/mamon/adviser/submitDocument';
     const openId = window.sessionStorage.getItem('openId') || this.getUrlParam('openId');
+    console.log(fid)
+    if (!fid) {
+      this.isNoStageBook = true
+      return
+    }
     let projectStageDetailUrl = submitDocumentUrl + '?openId=' + openId + '&pid=' + pid +
       '&name=' + interactionData['name'] +
       '&introduction=' + interactionData['introduction'] +
@@ -138,11 +153,12 @@ export class ConsultantInteractionSubmitPage {
     this.Provider.getMamenSwiperData(projectStageDetailUrl).subscribe(res => {
       if (res.code == 200) {
         //alert('操作功能！');
-        this.navCtrl.pop();
+        //this.isNoStageBook = true
+        this.isSubmitSuccess =true
       } else if (res.code == 207) {
         window.localStorage.removeItem('openId');
       } else {
-        alert('请求出错:' + res.msg);
+        //alert('请求出错:' + res.msg);
       }
     }, error => {
       console.log('erros===', error);
@@ -158,7 +174,10 @@ export class ConsultantInteractionSubmitPage {
   setValue = (field, value) => {
     this.interactionData[field] = value;
   }
-
+  sureDelBook() {
+    this.isDelBook = !this.isDelBook
+    this.navCtrl.pop()
+  }
   /*删除文档*/
   onDocumentDel() {
     const pdid = this.interactionData['pdid']
@@ -166,12 +185,12 @@ export class ConsultantInteractionSubmitPage {
     let consultantDocumentDetailsUrl = delDocumentUrl + '?openId=' + openId + '&pdid =' + pdid;
     this.Provider.getMamenSwiperData(consultantDocumentDetailsUrl).subscribe(res => {
       if (res.code == 200) {
-        alert('操作成功！');
-        this.navCtrl.pop();
+        //alert('操作成功！');
+        this.isDelBook = true
       } else if (res.code == 207) {
         window.localStorage.removeItem('openId');
       } else {
-        alert('请求出错:' + res.msg);
+        //alert('请求出错:' + res.msg);
       }
     }, error => {
       console.log('erros===', error);

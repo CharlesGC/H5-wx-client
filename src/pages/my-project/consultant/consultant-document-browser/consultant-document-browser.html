@@ -88,3 +88,22 @@
   </div>
   <!-- <button ion-button expand="full" large class="fixed-bottom" (click)="goPaymentRecord()">提交</button> -->
 </ion-content>
+
+<div class="phonebind-modal" [hidden]="!isDelBook">
+  <div class="modal-bg"></div>
+  <div class="modal-box">
+    <div class="modal-top">
+      <div class="modal-top-close">
+        <!-- <ion-icon ios="ios-close" md="md-close" item-rigth (click)="onClose()" color=""></ion-icon> -->
+      </div>
+      <div class="modal-title">提示</div>
+      <div class="modal-content">
+        <p>删除成功</p>
+      </div>
+      <div class="modal-footer">
+        <button ion-button full large (click)="sureDelBook()">确定</button>
+        <!-- <button ion-button full large (click)="onCompanyDel()" class="btn-delete">返回</button> -->
+      </div>
+    </div>
+  </div>
+</div>

@@ -58,6 +58,9 @@
         <ion-item class="none-margin bg-black" no-lines *ngIf="fieldType == 'price'">
             <ion-input type="number" placeholder="请输入项目总价" [(ngModel)]="inputName"></ion-input>
         </ion-item>
+        <ion-item class="none-margin bg-black" no-lines *ngIf="fieldType == 'percentage'">
+            <ion-input type="number" placeholder="请输入1-100以内的整数" [(ngModel)]="inputName"></ion-input><span item-right>%</span>
+        </ion-item>
         <ion-item *ngIf="selectField == 'gender'" no-lines>
             <ion-label>性别</ion-label>
             <ion-multi-picker class="ion-picker" id="cities" item-content [multiPickerColumns]="genderColumns"

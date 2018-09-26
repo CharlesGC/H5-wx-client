@@ -126,6 +126,43 @@
       </div> -->
   <div class="fixed-bottom" *ngIf="projectStageDetail.adviserStatus==3 || projectStageDetail.adviserStatus==8">
     <button ion-button class="btn-submit" (click)="goPaymentRecord(projectStageDetail.adviserStatus)">添加交互物</button>
-    <button ion-button class="btn-delete" (click)="onStageSubmit()">阶段交付</button>
+    <button ion-button class="btn-delete" (click)="sureStage()" [disabled] = 'isdis'>阶段交付</button>
   </div>
 </ion-content>
+
+<div class="phonebind-modal" [hidden]="!isNoStageBook">
+  <div class="modal-bg"></div>
+  <div class="modal-box">
+    <div class="modal-top">
+      <div class="modal-top-close">
+        <!-- <ion-icon ios="ios-close" md="md-close" item-rigth (click)="onClose()" color=""></ion-icon> -->
+      </div>
+      <div class="modal-title">提示</div>
+      <div class="modal-content">
+        <p>阶段交互物不能为空</p>
+      </div>
+      <div class="modal-footer">
+        <button ion-button full large (click)="sureStageBook()">确定</button>
+        <!-- <button ion-button full large (click)="onCompanyDel()" class="btn-delete">返回</button> -->
+      </div>
+    </div>
+  </div>
+</div>
+<div class="phonebind-modal" [hidden]="!isStage">
+  <div class="modal-bg"></div>
+  <div class="modal-box">
+    <div class="modal-top">
+      <div class="modal-top-close">
+        <!-- <ion-icon ios="ios-close" md="md-close" item-rigth (click)="onClose()" color=""></ion-icon> -->
+      </div>
+      <div class="modal-title">提示</div>
+      <div class="modal-content">
+        <p>请仔细检查所填内容，确认提交后，将提交给平台审核！</p>
+      </div>
+      <div class="modal-footer">
+        <button ion-button full large (click)="onStageSubmit()">确定</button>
+        <button ion-button full large (click)="returnStage()" class="btn-delete">返回</button>
+      </div>
+    </div>
+  </div>
+</div>
