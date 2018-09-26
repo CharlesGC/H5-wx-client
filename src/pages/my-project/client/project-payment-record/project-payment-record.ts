@@ -192,7 +192,7 @@ export class ProjectPaymentRecordPage {
       } else if (res.code == 207) {
         window.localStorage.removeItem('openId');
       } else {
-        alert('请求出错:' + res.msg);
+        //alert('请求出错:' + res.msg);
       }
     }, error => {
       console.log('erros===', error);
@@ -224,7 +224,7 @@ export class ProjectPaymentRecordPage {
       } else if (res.code == 207) {
         window.localStorage.removeItem('openId');
       } else {
-        alert('请求出错:' + res.msg);
+        //alert('请求出错:' + res.msg);
       }
     }, error => {
       console.log('erros===', error);

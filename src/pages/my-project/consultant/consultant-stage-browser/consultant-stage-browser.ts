@@ -22,9 +22,11 @@ import { getAdviserProjectStageDetailUrl, changeStageStatusUrl } from '../../../
   templateUrl: 'consultant-stage-browser.html',
 })
 export class ConsultantStageBrowserPage {
-
+  public isStage = false
+  public isNoStageBook = false
   public stageType:any;
   public projectStageDetail = {};
+  public isdis:any;
   constructor(public navCtrl: NavController, public navParams: NavParams,private Provider:MamenDataProvider) {
     this.stageType = 0;
   }
@@ -98,17 +100,37 @@ export class ConsultantStageBrowserPage {
       return 'pdf'
     }
   }
-
+  sureStageBook(){
+    this.isNoStageBook = !this.isNoStageBook
+    return
+  }
+  sureStage(){
+    if(this.projectStageDetail['document'].length == 0){
+      this.isNoStageBook = true
+      return
+    }
+    this.isStage = true
+    return
+  }
+  returnStage(){
+    this.isStage = !this.isStage
+    return
+  }
   /*提交阶段请求*/
   onStageSubmit() {
     let psid = this.projectStageDetail['psid'];
     // let projectStageDetailUrl = 'http://mamon.yemindream.com/mamon/adviser/changeStageStatus';
     const openId = window.sessionStorage.getItem('openId')|| this.getUrlParam('openId');
     let projectStageDetailUrl = changeStageStatusUrl + '?openId=' + openId + '&type=0' +'&psid='+psid;
+    //console.log(this.projectStageDetail['document'].length,'00000000000')
+    
+    this.isStage = !this.isStage
+    this.isdis = 'disabled'
     this.Provider.getMamenSwiperData(projectStageDetailUrl).subscribe(res=>{
       if(res.code==200) {
-        console.log('提交成功！');
+        this.isStage = !this.isStage;
         this.navCtrl.pop();
+        console.log('提交成功！');
       }else if(res.code == 207) {
         window.localStorage.removeItem('openId');
       }else{

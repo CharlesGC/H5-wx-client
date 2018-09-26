@@ -17,7 +17,7 @@ import { getAdviserDocumentDetailUrl, delDocumentUrl } from '../../../../provide
   templateUrl: 'consultant-document-browser.html',
 })
 export class ConsultantDocumentBrowserPage {
-
+public isDelBook =false
   public invoiceType: any;
   public consultantDocumentDetailData = {};
   public adviserStatus='';
@@ -102,7 +102,10 @@ export class ConsultantDocumentBrowserPage {
   //     return 'pdf'
   //   }
   // }
-
+  sureDelBook(){
+    this.isDelBook = !this.isDelBook
+    this.navCtrl.pop();
+  }
   /*删除操作*/
   onDocumentDel() {
     const pdid = this.consultantDocumentDetailData['pdid']
@@ -110,12 +113,13 @@ export class ConsultantDocumentBrowserPage {
     let consultantDocumentDetailsUrl = delDocumentUrl + '?openId=' + openId + '&pdid=' + pdid;
     this.Provider.getMamenSwiperData(consultantDocumentDetailsUrl).subscribe(res => {
       if (res.code == 200) {
-        console.log('操作成功！');
-        this.navCtrl.pop();
+        this.isDelBook = true
+        //console.log('操作成功！');
+        //this.navCtrl.pop();
       } else if (res.code == 207) {
         window.localStorage.removeItem('openId');
       } else {
-        console.log('请求出错:' + res.msg);
+        //console.log('请求出错:' + res.msg);
       }
     }, error => {
       console.log('erros===', error);
