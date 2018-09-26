@@ -112,15 +112,15 @@
       <h4>项目经历</h4>
       <ion-card class="card-item" *ngFor="let projectList_item of consultantDetails.projectList">
         <div class="card-item-label">
-          <label>项目名称</label>
+          <label class="label">项目名称</label>
           <p class="card-cont">{{projectList_item.projectName}}</p>
         </div>
         <div class="card-item-label mt10">
-          <label>公司名称</label>
+          <label class="label">公司名称</label>
           <p class="card-cont">{{projectList_item.companyName}}</p>
         </div>
         <div class="card-item-label mt10">
-          <label>起止日期</label>
+          <label  class="label">起止日期</label>
           <p class="card-cont">
             <span>{{projectList_item.startTime | date:'yyyy/MM/dd'}} </span>
             <span> - </span>
@@ -128,15 +128,15 @@
           </p>
         </div>
         <div class="card-item-label mt10">
-          <label>担任职位</label>
+          <label class="label">担任职位</label>
           <p class="card-cont">{{projectList_item.role}}</p>
         </div>
         <div class="card-item-label mt10">
-          <label>项目描述</label>
+          <label class="label">项目描述</label>
           <p class="card-cont">{{projectList_item.projectDetails}}</p>
         </div>
         <div class="card-item-label mt10">
-          <label>职责描述</label>
+          <label class="label">职责描述</label>
           <p class="card-cont">{{projectList_item.responsibility}}</p>
         </div>
       </ion-card>

@@ -40,27 +40,27 @@
   </ion-list>
   <ion-list class="describe-list mt10">
     <ion-item no-lines>
-      <h4>任务描述</h4>
+      <h4 class="h4">任务描述</h4>
       <p class="describe-cont">{{projectStageDetail.stageDescription}}</p>
     </ion-item>
   </ion-list>
   <ion-list class="describe-list mt10">
     <ion-item no-lines>
-      <h4>交互标的</h4>
+      <h4 class="h4">交互标的</h4>
       <p class="describe-cont">{{projectStageDetail.deliverable}} </p>
     </ion-item>
   </ion-list>
   <ion-list class="list-item-flex mt10">
     <ion-item>
-      <label >付款比例</label>
+      <label class="label">付款比例</label>
       <span item-right class="item-value">{{projectStageDetail.percentage * 100}} %</span>
     </ion-item>
     <ion-item>
-      <label >付款金额</label>
+      <label class="label">付款金额</label>
       <span item-right class="item-value">{{projectStageDetail.price}}元</span>
     </ion-item>
     <ion-item no-lines>
-      <label>交付方式</label>
+      <label class="label">交付方式</label>
       <span item-right class="item-value" *ngIf="projectStageDetail.paymentMethod == 0">线上</span>
       <span item-right class="item-value" *ngIf="projectStageDetail.paymentMethod == 1">线下</span>
     </ion-item>
