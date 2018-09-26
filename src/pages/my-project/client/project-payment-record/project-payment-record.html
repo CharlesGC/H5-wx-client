@@ -26,13 +26,13 @@
       <ion-item (click)="goFormEditPage('realPrice',paymentRecordData.realPrice,'text')">
         <label>实际付款(必填)</label>
         <p item-right>
-            <span class="item-value">{{paymentRecordData.realPrice}}</span>
+            <span class="item-value">{{paymentRecordData.realPrice | currency:'￥'}}</span>
             <ion-icon class="icon" name="arrow-forward"></ion-icon>
         </p>
       </ion-item>
       <ion-item no-lines>
         <label>应付金额</label>
-        <span item-right class="item-value">{{paymentRecordData.price}} 元</span>
+        <span item-right class="item-value">{{paymentRecordData.price| currency:'￥'}} 元</span>
       </ion-item>
     </ion-list>
     <p class="browser-file">请选择付款信息</p>

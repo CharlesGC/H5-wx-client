@@ -94,7 +94,8 @@
         </div>
         <div class="msg-cont">
           <h4>{{projectListData_item.projectName}}</h4>
-          <p>预算 <span class="demand-number">{{projectListData_item.budget | currency : '￥'}}</span> 元</p>
+          <p *ngIf="projectListData_item.budget">预算 <span class="demand-number">{{projectListData_item.budget | currency : '￥'}}</span> 元</p>
+          <p *ngIf="!projectListData_item.budget">待商议</p>
           <p class="city-date-cont">
             <span *ngIf="projectListData_item.projectLengthType ==0">0-3 个月</span>
             <span *ngIf="projectListData_item.projectLengthType ==1">3-6 个月</span>
