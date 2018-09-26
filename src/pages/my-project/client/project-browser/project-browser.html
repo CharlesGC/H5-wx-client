@@ -175,8 +175,8 @@
             <span>{{projectDetails.province}}</span>
             <span class="mr15"> {{projectDetails.city}}</span>
             <ion-icon name="post"></ion-icon>
-            <span *ngIf="projectDetails.status ==0 || projectDetails.status ==1">未发布</span>
-            <span *ngIf="projectDetails.status != 0 || projectDetails.status != 1"> {{projectDetails.releaseTime |
+            <span *ngIf="projectDetails.status ==0 || projectDetails.status ==1 || projectDetails.status ==7">未发布</span>
+            <span *ngIf="projectDetails.status != 0 || projectDetails.status != 1|| projectDetails.status != 7"> {{projectDetails.releaseTime |
                 date: 'yy/MM/dd'}}</span>
         </p>
         <div class="title-cont">

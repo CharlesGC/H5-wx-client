@@ -346,6 +346,12 @@ page-project-consultant-browser {
         }
     }
     .describe-list {
+        .item-md h4 {
+            font-weight: 600; 
+        }
+        .item-ios h4 {
+            font-weight: 600; 
+        }
         ion-item {
             font-family: PingFangSC;
             font-size: 1.4rem;

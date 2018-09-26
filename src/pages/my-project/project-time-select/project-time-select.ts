@@ -113,10 +113,11 @@ export class ProjectTimeSelectPage {
     this.selected = type;
     //预算方式改变时重置默认值
     if (type == 0) {
+      this.budgetData.budgetDay = null;
       this.budgetData.budget = (this.budgetData.workload || 0) * (this.budgetData.budgetDay || 0);
       this.budgetData.workload = null;
     } else {
-      this.budgetData.budget = this.budgetData.budget;
+      // this.budgetData.budget = this.budgetData.budget;
       this.budgetData.budget = null;
     }
   }
