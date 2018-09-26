@@ -6,24 +6,41 @@
 -->
 <ion-header>
 
-    <ion-navbar>
-      <ion-title>评价</ion-title>
-    </ion-navbar>
-  
-  </ion-header>
-  
-  <ion-content style="background-color: #fcfcfc;">
-    <p class="objection-tip" *ngIf="!evalutionType">请写下你对项目的评价</p>
-    <p class="objection-tip" *ngIf="evalutionType == 'consultantEvalution'">请写下你对项目和客户的评价</p>
-    <p class="objection-tip" *ngIf="evalutionType == 'clientEvalution'">请写下你对项目和顾问的评价</p>
-    <ion-list class="mt10">
-        <ion-item no-lines>
-            <textarea id="textareaValue" placeholder="请输入评价内容" class="item-textarea" [(ngModel)]="inputName"></textarea>
-        </ion-item>
-    </ion-list>
-    <div class="fixed-bottom">
-        <button ion-button class="btn-submit" (click)="onProgramObjectionSubmit(inputName)">提交</button>
-        <button ion-button class="btn-delete" (click)="onCancelClick()">取消</button>
+  <ion-navbar>
+    <ion-title>评价</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content style="background-color: #fcfcfc;">
+  <p class="objection-tip" *ngIf="!evalutionType">请写下你对项目的评价</p>
+  <p class="objection-tip" *ngIf="evalutionType == 'consultantEvalution'">请写下你对项目和客户的评价</p>
+  <p class="objection-tip" *ngIf="evalutionType == 'clientEvalution'">请写下你对项目和顾问的评价</p>
+  <ion-list class="mt10">
+    <ion-item no-lines>
+      <textarea id="textareaValue" placeholder="请输入评价内容" class="item-textarea" [(ngModel)]="inputName"></textarea>
+    </ion-item>
+  </ion-list>
+  <div class="fixed-bottom">
+    <button ion-button class="btn-submit" (click)="onProgramObjectionSubmit(inputName)">提交</button>
+    <button ion-button class="btn-delete" (click)="onCancelClick()">取消</button>
+  </div>
+</ion-content>
+<div class="phonebind-modal" [hidden]="!isEvaluation">
+  <div class="modal-bg"></div>
+  <div class="modal-box">
+    <div class="modal-top">
+      <div class="modal-top-close">
+        <!-- <ion-icon ios="ios-close" md="md-close" item-rigth (click)="onClose()" color=""></ion-icon> -->
+      </div>
+      <div class="modal-title">提示</div>
+      <div class="modal-content">
+        <p>{{tipstext}}</p>
+      </div>
+      <div class="modal-footer">
+        <button ion-button full large (click)="sureEvaluation()">确定</button>
+        <button ion-button full large (click)="onReturn()" class="btn-delete" *ngIf="isFailed">返回</button>
+      </div>
     </div>
-  </ion-content>
-  
+  </div>
+</div>

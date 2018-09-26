@@ -3,7 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import { MamenDataProvider } from '../../../../providers/mamen-data/mamen-data';
 import { ProjectProgramObjectionPage } from '../project-program-objection/project-program-objection';
-import { getProjectProgramDeatilUrl,confirmProgramUrl } from '../../../../providers/requestUrl';
+import { getProjectProgramDeatilUrl, confirmProgramUrl } from '../../../../providers/requestUrl';
 
 /**
  * Generated class for the ProjectProgramBrowserPage page.
@@ -18,8 +18,11 @@ import { getProjectProgramDeatilUrl,confirmProgramUrl } from '../../../../provid
   templateUrl: 'project-program-browser.html',
 })
 export class ProjectProgramBrowserPage {
+  public isProgram = false
+  public tiptext: any
+  public isFailed: any
   public projectProgramDetails = {};
-  constructor(public navCtrl: NavController, public navParams: NavParams,private Provider:MamenDataProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider) {
   }
 
   ionViewDidLoad() {
@@ -32,34 +35,34 @@ export class ProjectProgramBrowserPage {
     this.getProjectListData(ppid)
   }
 
-  getUrlParam(name) {  
+  getUrlParam(name) {
     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象  
     var r = window.location.search.substr(1).match(reg);  //匹配目标参数  
     if (r != null) {
-        return encodeURI(r[2]);  //返回参数值 
+      return encodeURI(r[2]);  //返回参数值 
     } else {
-        return null; 
+      return null;
     }
- }
+  }
 
   /*项目方案详情数据请求*/
   getProjectListData(ppid) {
     // let projectDetailsUrl = 'http://mamon.yemindream.com/mamon/customer/getProjectProgramDeatil';
-    const openId = window.sessionStorage.getItem('openId')|| this.getUrlParam('openId');
-    let projectDetailsUrl = getProjectProgramDeatilUrl + '?openId=' + openId + '&ppid='+ppid;
-    this.Provider.getMamenSwiperData(projectDetailsUrl).subscribe(res=>{
-      if(res.code==200) {
-        console.log(res,'--------');
+    const openId = window.sessionStorage.getItem('openId') || this.getUrlParam('openId');
+    let projectDetailsUrl = getProjectProgramDeatilUrl + '?openId=' + openId + '&ppid=' + ppid;
+    this.Provider.getMamenSwiperData(projectDetailsUrl).subscribe(res => {
+      if (res.code == 200) {
+        console.log(res, '--------');
         this.projectProgramDetails = res.data;
         this.projectProgramDetails['size'] = (this.projectProgramDetails['size'] / 1048576).toPrecision(3)
 
         if (this.projectProgramDetails['size'] > 1) {
           this.projectProgramDetails['size'] = this.projectProgramDetails['size'] + ' MB'
-        } else if(this.projectProgramDetails['size'] < 1){
+        } else if (this.projectProgramDetails['size'] < 1) {
           this.projectProgramDetails['size'] = this.projectProgramDetails['size'] * 1024 + ' KB'
         }
-    
-        if(this.projectProgramDetails['format']){
+
+        if (this.projectProgramDetails['format']) {
           if (this.projectProgramDetails['format'].search(/doc/) !== -1 || this.projectProgramDetails['format'].search(/docx/) !== -1) {
             this.projectProgramDetails['format'] = 'assets/imgs/' + 'doc.png'
           } else if (this.projectProgramDetails['format'].search(/ppt/) !== -1 || this.projectProgramDetails['format'].search(/pptx/) !== -1) {
@@ -72,40 +75,54 @@ export class ProjectProgramBrowserPage {
             this.projectProgramDetails['format'] = 'assets/imgs/' + 'pdf.png'
           }
         }
-      }else if(res.code == 207) {
+      } else if (res.code == 207) {
         window.localStorage.removeItem('openId');
-      }else{
-        alert('请求出错:'+res.msg);
+      } else {
+        alert('请求出错:' + res.msg);
       }
-    },error=>{
-      console.log('erros===',error);
+    }, error => {
+      console.log('erros===', error);
     })
   }
 
   /*提出异议*/
   onObjectionClick() {
     let ppid = this.navParams.get('ppid');
-    this.navCtrl.push(ProjectProgramObjectionPage,{type:'program',ppid:ppid});
+    this.navCtrl.push(ProjectProgramObjectionPage, { type: 'program', ppid: ppid });
   }
-
+  onReturnBack() {
+    this.isProgram = !this.isProgram
+    return
+  }
+  sureProgram() {
+    this.isProgram = true
+    this.tiptext = "是否确定该方案？"
+  }
   /*确认方案请求*/
   onConfirmProgramSubmit() {
+    if(this.isFailed == false){
+      this.navCtrl.pop()
+      return
+    }else if (this.isFailed == true){
+      this.isProgram = !this.isProgram
+      return
+    }
     let ppid = this.navParams.get('ppid');
     // let projectDetailsUrl = 'http://mamon.yemindream.com/mamon/customer/confirmProgram';
-    const openId = window.sessionStorage.getItem('openId')|| this.getUrlParam('openId');
-    let projectDetailsUrl = confirmProgramUrl + '?openId=' + openId + '&ppid='+ppid + '&status=2';
-    this.Provider.getMamenSwiperData(projectDetailsUrl).subscribe(res=>{
-      if(res.code==200) {
+    const openId = window.sessionStorage.getItem('openId') || this.getUrlParam('openId');
+    let projectDetailsUrl = confirmProgramUrl + '?openId=' + openId + '&ppid=' + ppid + '&status=2';
+    this.Provider.getMamenSwiperData(projectDetailsUrl).subscribe(res => {
+      if (res.code == 200) {
         //alert('操作成功！');
-        this.navCtrl.pop();
-      }else if(res.code == 207) {
-        window.localStorage.removeItem('openId');
-      }else{
-        console.log('请求出错:'+res.msg);
+        this.tiptext = "操作成功！"
+        this.isFailed = false
+      } else {
+        this.tiptext = "操作失败，请稍后重试！"
+        this.isFailed = true
+        //console.log('请求出错:' + res.msg);
       }
-    },error=>{
-      console.log('erros===',error);
+    }, error => {
+      console.log('erros===', error);
     })
   }
-
 }

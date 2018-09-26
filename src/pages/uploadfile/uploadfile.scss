@@ -60,9 +60,10 @@ page-uploadfile {
         background-color: #ffffff;
         box-shadow: 0 1px 10px 0 rgba(0, 0, 0, .05);
         position: relative;
+        box-sizing: border-box;
         img {
             max-width: 66px;
-            height: auto;
+            height: 66px;
             float: left;
         }
         .file-title {
