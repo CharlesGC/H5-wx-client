@@ -18,6 +18,7 @@ import { getDocumentDetailUrl } from '../../../../providers/requestUrl';
   templateUrl: 'project-decument-browser.html',
 })
 export class ProjectDecumentBrowserPage {
+  public isDelBook =false
   public invoiceType: any;
   public consultantDocumentDetailData = {};
   constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider) {

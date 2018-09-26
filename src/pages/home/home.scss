@@ -12,9 +12,8 @@ page-home {
             width: 100%;
             height: 190px;
             object-fit: contain;
-            
-            box-shadow: 0 0 10px 5px #000;
-            opacity: 0.1;
+            box-shadow: 0 0 10px 5px #aaa;
+            // opacity: 0.1;
             background-color: #fff;
             .swiper-pagination-bullet {
                 border-radius: 1.5px;
@@ -329,6 +328,7 @@ page-home {
                                 .img {
                                     width: 100%;
                                     height: 100%;
+                                    border-radius: 3px;
                                 }
                                 // .img-span {
                                 //     display: block;
@@ -399,12 +399,12 @@ page-home {
                             }
                             .qiaochu-duc {                               
                                 font-size: 14px;
-                                width:12rem;
+                                width:155px;
                                 height: auto;
                                 font-family: PingFangSC;
                                 text-align: justify;
                                 color: #4a4a4a;
-                                margin: 0 20px 0 20px;
+                                margin: 0 20px;
                                 display:-webkit-box;
                                 -webkit-line-clamp:3;
                                 -webkit-box-orient:vertical;

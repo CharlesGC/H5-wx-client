@@ -12,11 +12,17 @@ page-speed {
         }
         .label-ios {
             margin: 0;
+            line-height: 52px;
+        }
+        .label-md  {
+            margin: 0;
+            line-height: 52px;
         }
         ion-label {
             overflow: initial;
             height: 100%;
         }
+
         .company-list {
             background-color: #fcfcfc;
             margin-bottom: 49px;
@@ -30,7 +36,8 @@ page-speed {
                     font-size: 12px;
                     font-weight: 600;
                     color: #c7c7c7;
-                    line-height: 47px;
+                    line-height: 57px;
+                    padding-left: 5px;
                 }
             }
             .item-tarea {
@@ -43,6 +50,11 @@ page-speed {
                 background: #fff;
                 .text-input-ios {
                     margin: 0;
+                }
+                .text-input-md {
+                    margin: 0;
+                    /* padding: 0; */
+                    width: calc(100% - 8px - 8px);
                 }
                 .ion-textarea {
                     font-family: PingFangSC;
@@ -324,50 +336,78 @@ page-speed {
                 background: #fcfcfc;
             }
             .release-btn {
-                margin-bottom: 40px;
-                background: #fff;
-                .label-ios {
-                    display: flex;
-                    justify-content: space-between;
-                    margin: 0;
-                    line-height: 54px;
+                font-family: PingFangSC;
+                font-size: 14px;
+                font-weight: 600;
+                .left-icon {
+                    color: #ff6536;
+                    margin-right: 8px;
+                    font-size: 15px;
+                    margin-top: 3px;
+                    object-fit: contain;
                 }
-                width: 100%;
-                margin-top: 10px;
-                display: flex;
-                .backone {
-                    width: 48%;
-                    height: 20px;
-                    display: flex;
-                    span:nth-child(1) {
-                        display: block;
-                        width: 15px;
-                        height: 15px;
-                        object-fit: contain;
-                        ion-icon {
-                            font-size: 15px;
-                            font-weight: 600;
-                            color: #ff6536;
-                        }
-                    }
-                    span:nth-child(2) {
-                        display: block;
-                        width: 141px;
-                        height: 20px;
-                        font-family: PingFangSC;
-                        font-size: 14px;
-                        font-weight: 600;
-                        color: #4a4a4a;
-                        margin-left: 8px;
-                    }
+                .left-title {
+                    color: #4a4a4a;
                 }
-                .two {
-                    height: 20px;
-                    font-family: PingFangSC;
-                    font-size: 14px;
-                    text-align: right;
+                .rigth-message {
+                    font-size: 12px;
                     color: #9b9b9b;
+                    span {
+                        font-family: PingFangSC;
+                        font-size: 12px;
+                        font-weight: normal;
+                        font-style: normal;
+                        font-stretch: normal;
+                        line-height: normal;
+                        letter-spacing: normal;
+                        text-align: right;
+                        color: #9b9b9b;
+                    }
                 }
+                // margin-bottom: 40px;
+                // background: #fff;
+                // .label-ios {
+                //     display: flex;
+                //     justify-content: space-between;
+                //     margin: 0;
+                //     line-height: 54px;
+                // }
+                // width: 100%;
+                // margin-top: 10px;
+                // display: flex;
+                // .backone {
+                //     width: 48%;
+                //     height: 20px;
+                //     display: flex;
+                //     span:nth-child(1) {
+                //         display: block;
+                //         width: 15px;
+                //         height: 15px;
+                //         object-fit: contain;
+                //         ion-icon {
+                //             font-size: 15px;
+                //             font-weight: 600;
+                //             color: #ff6536;
+                //         }
+                //     }
+                //     span:nth-child(2) {
+                //         display: block;
+                //         width: 141px;
+                //         height: 20px;
+                //         font-family: PingFangSC;
+                //         font-size: 14px;
+                //         font-weight: 600;
+                //         color: #4a4a4a;
+                //         margin-left: 8px;
+                //     }
+                // }
+                // .two {
+                //     height: 20px;
+                //     font-family: PingFangSC;
+                //     font-size: 14px;
+                //     text-align: right;
+                //     color: #9b9b9b;
+                // }
             }
         }
         .speed-footer {
