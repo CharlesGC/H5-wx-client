@@ -35,6 +35,7 @@ export class TabsPage {
     const openId = window.sessionStorage.getItem('openId') || this.getUrlParam('openId') || window.localStorage.getItem('openId');
     if(openId){
       this.getUserInfo(openId)
+      !window.sessionStorage.getItem('openId') && window.sessionStorage.setItem('openId',openId);
     }else{
 
     }
