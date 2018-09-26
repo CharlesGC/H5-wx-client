@@ -32,6 +32,7 @@ export class ProjectPaymentRecordPage {
   public fileUrlvalue: any
   public paymentRecordData = {}
   public payerList = {};
+  public isComplete = false;
   constructor(public navCtrl: NavController, public navParams: NavParams, private transfer: FileTransfer, private file: File, private Provider: MamenDataProvider) {
   }
 
@@ -80,7 +81,10 @@ export class ProjectPaymentRecordPage {
       callback: this.setuploadfile,
     })
   }
-
+  // 弹框提示确定返回
+  sureComplete() {
+    this.isComplete = !this.isComplete;
+  }
   setuploadfile = (obj, name) => {
     this.filestatus = true;
     this.filetitle = name;
@@ -206,6 +210,11 @@ export class ProjectPaymentRecordPage {
     let psid = this.navParams.get('id');
     let invoiceData = this.paymentRecordData;
     // let projectInvoiceDetailUrl = 'http://mamon.yemindream.com/mamon/customer/addPayMent';
+    if(!invoiceData['realPrice'] || !invoiceData['payer'] || !invoiceData['payerBank'] || 
+    !invoiceData['payerAccount'] || !invoiceData['payee'] || !invoiceData['payeeBank'] || !invoiceData['payeeAccount']) {
+      this.isComplete = true;
+      return;
+    }
     const openId = window.sessionStorage.getItem('openId') || this.getUrlParam('openId');
     let projectInvoiceDetailUrl = addPayMentUrl + '?openId=' + openId + '&psid=' + psid +
       '&payer=' + invoiceData['payer'] +

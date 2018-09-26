@@ -66,15 +66,23 @@
             </ion-item>
         </div>
         <div class="promptbot">请选择发布类型（目前为快速发布模式）</div>
-        <button ion-item (click)="goRelease()" class="release-btn">
+        <ion-item class="release-btn" (click)="goRelease()">
+            <ion-icon class="left-icon" name="add-circle" start isActive></ion-icon>
+            <span class="left-title">前往完整发布</span>
+            <div item-right class="rigth-message">
+              <span>提供更详细的项目细节</span>
+              <ion-icon name="arrow-forward" class="ml12" color="ion-gray"></ion-icon>
+            </div>
+          </ion-item>
+        <!-- <button ion-item (click)="goRelease()" class="release-btn">
             <div class="backone">
                 <span>
-                    <ion-icon name="add-circle-outline"></ion-icon>
+                    <ion-icon name="add-circle"></ion-icon>
                 </span>
                 <span>前往完整发布</span>
             </div>
             <span class="two">提供更详细的项目细节</span>
-        </button>
+        </button> -->
     </ion-list>
     <div class="speed-footer" (click)="onSpeedReleaseSubmit(fieldValue)">发布</div>
     <!--弹出框-->
@@ -138,12 +146,11 @@
         </div>
     </div>
     <!-- 录音小于300弹框 -->
-    <div class="phonebind-modal" [hidden]="!isTime">
+    <!-- <div class="phonebind-modal" [hidden]="!isTime">
         <div class="modal-bg"></div>
         <div class="modal-box">
             <div class="modal-top">
                 <div class="modal-top-close">
-                    <!-- <ion-icon ios="ios-close" md="md-close" item-rigth (click)="onClose()" color=""></ion-icon> -->
                 </div>
                 <div class="modal-title">提示</div>
                 <div class="modal-content">
@@ -151,9 +158,8 @@
                 </div>
                 <div class="modal-footer">
                     <button ion-button full large (click)="surehidden()">确定</button>
-                    <!-- <button ion-button full large (click)="onCompanyDel()" class="btn-delete">返回</button> -->
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 </ion-content>

@@ -39,7 +39,7 @@ page-choose-identity {
         width: calc(100% - 30px);
         box-shadow: 0 1px 10px 0 rgba(0, 0, 0, 0.05);
         ion-icon {
-            font-size: 24px;
+            font-size: 24px !important;
         }
         &.checked {
             color: #4a4a4a;

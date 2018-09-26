@@ -103,8 +103,12 @@ export class SelectTagsPage {
     this.Provider.getMamenSwiperData(getpaymentListUrl).subscribe(res=>{
       if(res.code==200) {
         if(!search && !sfid) {
+           
           this.skillList = res.data && res.data.list.length>0 ? res.data.list.map(f=>({text:f.fName,id:f.sfid})):[];
-          console.log(this.skillList,'this.skillList')
+          console.log(this.skillList,'11111111111111111111111')
+          let sid = this.skillList.length > 0 ? this.skillList[0].id : '';
+          console.log(sid,'=========================')
+          sid && this.getSkillData(sid,'');
         }else{
           this.skillSecondaryList = res.data && res.data.list.length>0 ? res.data.list.map(f=>({text:f.sName,id:f.ssid})):[];
           if(this.skillSecondaryList.length<1){
