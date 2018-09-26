@@ -76,11 +76,10 @@ export class ProjectEditStep3Page {
     let grade = this.projectData['planguage'] && this.projectData['planguage'].length > 0 ? this.projectData['planguage'].map(f => f.grade).join(',') : '';
     let pid = projectData['pid'];
     // 必填项校验
-    if((!projectData.startTimeType && projectData.startTimeType !=0) || (!projectData.deliverMethod && projectData.deliverMethod !=0) || !projectData.province  || (!projectData.budgetType && projectData.budgetType !=0)) {
+    if((!projectData.startTimeType && projectData.startTimeType !=0) || (!projectData.deliverMethod && projectData.deliverMethod !=0) || !projectData.province  || (!projectData.budgetType && projectData.budgetType !=0) || (!projectData.planguage || projectData.planguage.length<1)) {
       this.isComplete = true;
       return;
     }
-
     // let projectStageDetailUrl = 'http://mamon.yemindream.com/mamon/customer/releaseProject';
     const openId = window.sessionStorage.getItem('openId') || this.getUrlParam('openId');
     let projectStageDetailUrl = releaseProjectUrl + '?openId=' + openId +

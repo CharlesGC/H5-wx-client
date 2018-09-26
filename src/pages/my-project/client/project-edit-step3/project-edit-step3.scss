@@ -149,13 +149,13 @@ page-project-edit-step3 {
             box-shadow: 0 1px 10px 0 rgba(0, 0, 0, 0.05);
             .modal-content {
                 overflow: auto;
-                text-align: left;
+                text-align: center;
                 font-size: 12px;
                 line-height: 1.8;
                 font-weight: 500;
-                p{
-                    text-indent: 2rem;
-                }
+                // p{
+                //     text-indent: 2rem;
+                // }
                 .modal-center {
                     text-align: center;
                 }

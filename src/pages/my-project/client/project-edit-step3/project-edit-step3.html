@@ -98,14 +98,17 @@
       </label>
       <p item-right class="rigth-message">
         <span item-right class="item-value line-overflow" *ngIf="projectData.budgetType == 2">待商议</span>
-        <span item-right class="item-value line-overflow" *ngIf="projectData.budgetType == 0 || projectData.budgetType == 1">{{projectData.budget | currency : '￥'}}
+        <span item-right class="item-value line-overflow" *ngIf="projectData.budgetType == 0 || projectData.budgetType == 1">{{projectData.budget
+          | currency : '￥'}}
           元
         </span>
         <ion-icon class="icon" name="arrow-forward"></ion-icon>
       </p>
     </ion-item>
     <ion-item (click)="goFormEditPage('planguage',projectData.planguage,'timeSelect')">
-      <label>语言要求</label>
+      <label>语言要求
+        <span class="required-field ml5">(必填)</span>
+      </label>
       <p item-right class="rigth-message">
         <span item-right class="item-value line-overflow" *ngIf="projectData.planguage && projectData.planguage.length>0">
           <span *ngFor="let languageList_item of projectData.planguage">{{languageList_item.language}} .
@@ -198,7 +201,7 @@
       </div>
       <div class="modal-title">提示</div>
       <div class="modal-content">
-        <p class="modal-center">请填写完整</p>
+        <p class="modal-center">请将必填项填写完整</p>
       </div>
       <div class="modal-footer">
         <button ion-button full large (click)="sureComplete()">确定</button>
