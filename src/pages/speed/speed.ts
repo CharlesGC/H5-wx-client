@@ -222,28 +222,9 @@ export class SpeedPage {
               isShowProgressTips: 1, // 默认为1，显示进度提示
               success: (res) => {
                 var serverId = res.serverId
-                // var serverId = '549549549595';
+                // var serverId = 0;
                 //把录音在微信服务器上的id（res.serverId）发送到自己的服务器供下载。
                 if (serverId != '') {
-                  // $.ajax({
-                  //   url: '/mamon/wechat/uploadLocal',
-                  //   type: 'post',
-                  //   data: { 'serverId': serverId },
-                  //   dataType: "json",
-                  //   async: false,
-                  //   success: (data) => {
-                  //     // let audioData = [];
-                  //     _this.audioData.push(data.data);
-                  //     _this.changeDetectorRef.markForCheck();
-                  //     _this.changeDetectorRef.detectChanges();
-                  //     // alert(_this.audioData);
-                  //     _this.localId = '';
-                  //   },
-                  //   error: function (xhr, errorType, error) {
-                  //     this.isRecord = true;
-                  //   }
-                  // })
-                
                   this.UploadData.getUpload(getUploadLocal,serverId).subscribe(
                         res => {
                           this.audioData.push(res.data);

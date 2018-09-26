@@ -100,7 +100,11 @@
             <ion-item class="none-margin bg-black" *ngIf="selected == 1" no-lines>
                 <ion-label>准确开始日期</ion-label>
                 <div item-right class="rigth-message">
-                    <ion-datetime displayFormat="YYYY/MM/DD" [(ngModel)]="inputName" placeholder="请选择">
+                    <ion-datetime displayFormat="YYYY/MM/DD" [(ngModel)]="inputName" 
+                        placeholder="请选择" 
+                        doneText="确认"
+                        cancelText="取消"
+                        max="2022-10-31">
                         <ion-icon name="arrow-forward" class="ml12"></ion-icon>
                     </ion-datetime>
                 </div>
@@ -115,7 +119,7 @@
                 <ion-label>是否驻场</ion-label>
                 <div item-right class="rigth-message">
                     <ion-select [(ngModel)]="typeTxt" (ngModelChange)="switchType()" interface="action-sheet" style="height:45px;"
-                        placeholder="请选择" style="width:100px;max-width:100%;">
+                        placeholder="请选择" style="width:100px;max-width:100%;" cancelText="取消">
                         <ion-option value="0">驻场</ion-option>
                         <ion-option value="1">远程</ion-option>
                         <ion-option value="2">待商议</ion-option>
