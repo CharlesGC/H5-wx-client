@@ -46,6 +46,12 @@ page-project-stage-browser {
     }
 
     .describe-list {
+        .item-md h4 {
+            font-weight: 600;
+        }
+        .item-ios h4 {
+            font-weight: 600;
+        }
         ion-item {
             font-family: PingFangSC;
             font-size: 1.4rem;
@@ -105,6 +111,12 @@ page-project-stage-browser {
             line-height: normal;
             letter-spacing: normal;
             color: #4a4a4a;
+            .label-md label {
+                font-weight: 600;
+            }
+            .label-ios label {
+                font-weight: 600;
+            }
             label{
                 font-weight: 600;
             }
@@ -148,7 +160,7 @@ page-project-stage-browser {
                 font-stretch: normal;
                 line-height: normal;
                 letter-spacing: normal;
-                label {
+                .card-label {
                     min-width: 70px;
                     color: #9b9b9b;
                 }

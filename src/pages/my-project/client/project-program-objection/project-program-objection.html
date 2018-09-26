@@ -15,12 +15,31 @@
 <ion-content style="background-color: #fcfcfc;">
   <p class="objection-tip">{{title}}</p>
   <ion-list class="mt10">
-      <ion-item no-lines>
-          <textarea id="textareaValue" placeholder="请输入文本内容" class="item-textarea" [(ngModel)]="inputName"></textarea>
-      </ion-item>
+    <ion-item no-lines>
+      <textarea id="textareaValue" placeholder="请输入文本内容" class="item-textarea" [(ngModel)]="inputName"></textarea>
+    </ion-item>
   </ion-list>
   <div class="fixed-bottom">
-      <button ion-button class="btn-submit" (click)="onProgramObjectionSubmit(inputName)">提交</button>
-      <button ion-button class="btn-delete" (click)="onCancelClick()">取消</button>
+    <button ion-button class="btn-submit" (click)="onProgramObjectionSubmit(inputName)">提交</button>
+    <button ion-button class="btn-delete" (click)="onCancelClick()">取消</button>
   </div>
 </ion-content>
+<!-- 提出异议成功弹出框 -->
+<div class="phonebind-modal" [hidden]="!isPosePrompt">
+  <div class="modal-bg"></div>
+  <div class="modal-box">
+    <div class="modal-top">
+      <div class="modal-top-close">
+        <!-- <ion-icon ios="ios-close" md="md-close" item-rigth (click)="onClose()" color=""></ion-icon> -->
+      </div>
+      <div class="modal-title">提示</div>
+      <div class="modal-content">
+        <p>{{tiptext}}</p>
+      </div>
+      <div class="modal-footer">
+        <button ion-button full large (click)="surePrompt()">确定</button>
+        <button ion-button full large (click)="ReturnBack()" class="btn-delete" *ngIf="isreturnBtn">返回</button>
+      </div>
+    </div>
+  </div>
+</div>

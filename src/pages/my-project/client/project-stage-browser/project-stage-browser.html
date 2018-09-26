@@ -52,11 +52,11 @@
   </ion-list>
   <ion-list class="list-item-flex mt10">
     <ion-item>
-      <label>付款比例</label>
+      <label >付款比例</label>
       <span item-right class="item-value">{{projectStageDetail.percentage * 100}} %</span>
     </ion-item>
     <ion-item>
-      <label>付款金额</label>
+      <label >付款金额</label>
       <span item-right class="item-value">{{projectStageDetail.price}}元</span>
     </ion-item>
     <ion-item no-lines>
@@ -93,11 +93,11 @@
       </ion-item>
       <ion-item class="lines-top" no-lines>
         <div class="card-item-label">
-          <label>文档名称</label>
+          <label class="card-label">文档名称</label>
           <p class="card-cont">{{document_item.sourceName}}</p>
         </div>
         <div class="card-item-label mt10">
-          <label>文档描述</label>
+          <label class="card-label">文档描述</label>
           <p class="card-cont">{{document_item.introduction}}</p>
         </div>
         <div class="msg-footer" (click)="goDocumentBrowser(document_item.pdid)">

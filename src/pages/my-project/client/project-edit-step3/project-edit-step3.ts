@@ -62,6 +62,7 @@ export class ProjectEditStep3Page {
   }
   sureFailed() {
     this.isfailed = !this.isfailed
+    return
   }
   /*保存提交*/
   goProjectSubmit() {

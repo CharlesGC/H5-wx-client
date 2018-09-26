@@ -41,7 +41,10 @@ export class ConsultantProjectExpPage {
     this.projecListData = this.navParams.get('data') || {};
     console.log('ionViewDidLoad ConsultantProjectExpPage');
   }
-
+  sureBigTime(){
+    this.isBigTime = !this.isBigTime
+    return
+  }
   /*跳转到数据处理页面*/
   goFormEditPage(field, value, type) {
     this.navCtrl.push(FormEditPage, { callback: this.setValue, value: value, field: field, type: type });

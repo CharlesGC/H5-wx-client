@@ -223,9 +223,9 @@ export class FormEditPage {
         }
       }
       value = inValue;
-      console.log(inValue, this.inputName,'citystr');
-      if(this.inputName.length>0 && this.arrRepeat(this.inputName.map(d=>d.id))) {
-        console.log(111111)
+      console.log(inValue, this.inputName, 'citystr');
+      if (this.inputName.length > 0 && this.arrRepeat(this.inputName.map(d => d.id))) {
+        console.log(111111, this.inputName);
         this.isSave = true;
       }
     }
@@ -234,18 +234,19 @@ export class FormEditPage {
     } else {
       callback(this.selectField, value);
     }
-    console.log(citystr, this.userInfo,!this.isSave, inValue, 'value');
+    console.log(citystr, this.userInfo, !this.isSave, inValue, 'value');
     !this.isSave && this.navCtrl.pop();
   }
 
   /*判断数组是否重复*/
-  arrRepeat(arr){
-    var arrStr = JSON.stringify(arr),str;
-    for (var i = 0; i < arr.length; i++) {
-      if (arrStr.indexOf(arr[i]) != arrStr.lastIndexOf(arr[i])){
+  arrRepeat(arr) {
+    var hash = {};
+    for (var i in arr) {
+      if (hash[arr[i]]) {
         return true;
       }
-    };
+      hash[arr[i]] = true;
+    }
     return false;
   }
 
@@ -278,7 +279,7 @@ export class FormEditPage {
     // let getpaymentListUrl = 'http://mamon.yemindream.com/mamon/company/getIndustryList';
     // const openId = window.sessionStorage.getItem('openId') || this.getUrlParam('openId') || 'o2GZp1Gsud1OVuaw5AH_e28m3kOw'
     let getpaymentListUrl = getIndustryListUrl; //'http://mamon.yemindream.com/mamon/company/getIndustryList';
-    const openId = window.sessionStorage.getItem('openId')||this.getUrlParam('openId');
+    const openId = window.sessionStorage.getItem('openId') || this.getUrlParam('openId');
     getpaymentListUrl = getpaymentListUrl + '?openId=' + openId;
     this.Provider.getMamenSwiperData(getpaymentListUrl).subscribe(res => {
       if (res.code == 200) {
@@ -294,8 +295,8 @@ export class FormEditPage {
   /*技能 请求*/
   getSkillData(sfid) {
     let getpaymentListUrl = `${getSkillUrl}?type=1`; //'http://mamon.yemindream.com/mamon/index/getSkill?type=1';
-    if(sfid) {
-      getpaymentListUrl =  `${getSkillSecondaryUrl}?sfid=${sfid}`; //'http://mamon.yemindream.com/mamon/index/getSkillSecondary?sfid='+sfid;
+    if (sfid) {
+      getpaymentListUrl = `${getSkillSecondaryUrl}?sfid=${sfid}`; //'http://mamon.yemindream.com/mamon/index/getSkillSecondary?sfid='+sfid;
     }
 
     getpaymentListUrl = getpaymentListUrl;

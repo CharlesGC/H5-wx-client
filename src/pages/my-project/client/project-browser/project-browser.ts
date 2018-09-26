@@ -29,6 +29,7 @@ import { getProjectDetailUrl, releaseProjectUrl, getProjectSignUpAdviserCountUrl
 })
 export class ProjectBrowserPage {
   public isShowNavMenu = false;
+  public isAllTypes =false
   public showNavMenuName = '';
   public showNavMenuNumber = 0;
   public projectDetails = {}
@@ -78,6 +79,10 @@ export class ProjectBrowserPage {
     this.isFailed = !this.isFailed
     return
   }
+  sureAllTypes(){
+    this.isAllTypes = !this.isAllTypes
+    return
+  }
   /*点击菜单触发*/
   onNavMenuItemClick(type,typeName,status) {
     this.showNavMenuName = typeName;
@@ -116,6 +121,7 @@ export class ProjectBrowserPage {
       if(res.code==200) {
         console.log(res,'--------');
         this.projectDetails = res.data;
+        console.log(this.projectDetails,'123456')
       }else if(res.code == 207) {
         window.localStorage.removeItem('openId');
       }else{
@@ -132,6 +138,10 @@ export class ProjectBrowserPage {
     const openId = window.sessionStorage.getItem('openId')|| this.getUrlParam('openId');
     let creleaseProjectUrl = releaseProjectUrl + '?openId=' + openId + '&pid='+pid;
     //TODO  对数据进行校验
+    if(!this.projectDetails['description'] || !this.projectDetails['target'] || !this.projectDetails['pSkill'] || !this.projectDetails['pIndustry'] || !this.projectDetails['budgetDay'] || !this.projectDetails['workload'] || !this.projectDetails['budget'] || !this.projectDetails['startTime'] || !this.projectDetails['projectLengthType'] || !this.projectDetails['deliverMethod'] || !this.projectDetails['qualification'] || !this.projectDetails['planguage'] || !this.projectDetails['companyName'] || !this.projectDetails['principalName'] || !this.projectDetails['principalPhone'] || !this.projectDetails['principalEmail']){
+      this.isAllTypes = true
+      return
+    }
     this.Provider.getMamenSwiperData(creleaseProjectUrl).subscribe(res=>{
       if(res.code==200) {
         //alert('发布成功！');
@@ -157,7 +167,7 @@ export class ProjectBrowserPage {
        this.projectSignCount = res.data || {};
       //  this.showNavMenuNumber = res.data ? res.data.allCount : 0;
       }else if(res.code == 207) {
-        window.localStorage.removeItem('openId');
+        window.localStorage.removeItem('openId'); 
       }else{
         //alert('请求出错:'+res.msg);
       }

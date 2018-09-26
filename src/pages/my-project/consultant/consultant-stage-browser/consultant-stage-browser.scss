@@ -45,6 +45,12 @@ page-consultant-stage-browser {
         }
     }
     .describe-list {
+        .item-md h4 {
+            font-weight: 600;
+        }
+        .item-ios h4 {
+            font-weight: 600;
+        }
         ion-item {
             font-family: PingFangSC;
             font-size: 1.4rem;
@@ -103,6 +109,12 @@ page-consultant-stage-browser {
             line-height: normal;
             letter-spacing: normal;
             color: #4a4a4a;
+            .label-md label {
+                font-weight: 600;
+            }
+            .label-ios label {
+                font-weight: 600;
+            }
             label {
                 font-weight: 600;
             }

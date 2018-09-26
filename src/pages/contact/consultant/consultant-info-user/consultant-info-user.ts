@@ -21,11 +21,12 @@ import { ConsultantInfoAvatarPage } from '../../../../pages/contact/consultant/c
 export class ConsultantInfoUserPage {
   public userInfoData: any;
   public userAvatarPic: string;
-
+  public isContactAddress =false
   public isuName = false;
   public isSkill = false;
   public isComplete = false
   public salaryDown = false
+  public isWorkDay = false
   constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider) {
     this.userInfoData = {};
   }
@@ -40,6 +41,10 @@ export class ConsultantInfoUserPage {
   sureComplete() {
     this.isComplete = !this.isComplete
     this.navCtrl.pop()
+  }
+  sureWorkDay(){
+    this.isWorkDay = !this.isWorkDay
+    return
   }
   /* 跳转到头像设置页面 */
   goAvatarEditPage() {
@@ -101,6 +106,10 @@ export class ConsultantInfoUserPage {
     this.salaryDown = !this.salaryDown
     return
   }
+  sureContactAddress(){
+    this.isContactAddress = !this.isContactAddress
+    return
+  }
   /*提交请求*/
   onInfoUserSubmit() {
     const openId = window.sessionStorage.getItem('openId') || this.getUrlParam('openId');
@@ -124,6 +133,15 @@ export class ConsultantInfoUserPage {
     if (this.userInfoData.skillList.length == 0) {
       this.isSkill = true;
       return;
+    }
+    if(!this.userInfoData.address){
+      this.isContactAddress = true
+      return
+    }
+    var workdays = /^[0-9]*$/
+    if(workdays.test(userInfoData.years) == false){
+      this.isWorkDay = true
+      return
     }
     // let getCompanyDetailUrl = 'http://mamon.yemindream.com/mamon/adviser/editAdviser';
 
