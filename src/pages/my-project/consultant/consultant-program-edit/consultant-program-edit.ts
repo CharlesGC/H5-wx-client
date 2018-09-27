@@ -181,7 +181,7 @@ export class ConsultantProgramEditPage {
     if(!value){
       this.tipstext = '确认提交该方案吗？'
       return
-    }else if(value){
+    }else{
       this.tipstext = '确认保存该方案吗？'
       this.ppid = value
     }
