@@ -42,7 +42,7 @@ attention-tip {
             margin-left: 55px;
             margin-top: 5px;
             display: block;
-            width: 149px;
+            width: auto;
             height: 17px;
             font-family: PingFangSC;
             font-size: 12px;
@@ -64,6 +64,7 @@ attention-tip {
             top: 13px;
             text-align: center;
             color: #fff;
+            line-height: 23px;
         }
     }
     .attention-modal{
@@ -83,6 +84,12 @@ attention-tip {
             top: 156px;
             left: 50%;
             transform: translateX(-50%);
+            img{
+                position: relative;
+                left: 50%;
+                transform: translateX(-50%);
+                top: 20px
+            }
             .close-icon{
                 display: block;
                 width: 40px;

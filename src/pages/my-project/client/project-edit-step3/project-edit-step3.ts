@@ -87,11 +87,11 @@ export class ProjectEditStep3Page {
       '&cid=' + projectData['cid'] +
       '&principalName=' + projectData['principalName'] +
       '&principalPosition=' + projectData['principalPosition'] +
-      '&principalPhone=' + projectData['principalPhone'] +
-      '&principalEmail=' + projectData['principalEmail'] +
-      '&projectName=' + projectData['projectName'] +
+      '&principalPhone=' + (projectData['principalPhone'] || '') +
+      '&principalEmail=' + (projectData['principalEmail'] || '') +
+      '&projectName=' + (projectData['projectName'] || '') +
       '&description=' + projectData['description'] +
-      '&target=' + projectData['target'] +
+      '&target=' + (projectData['target'] || '') +
       '&industrys=' + industrys +
       '&skills=' + skills +
       '&projectLengthType=' + projectData['projectLengthType'] +
@@ -193,6 +193,7 @@ export class ProjectEditStep3Page {
       this.projectData['projectLengthType'] = value[0] || 0;
       this.projectData['projectLength'] = value[1] || '';
     } else if (field == 'startTime') {
+      console.log(value,'valuevaluevaluevaluevaluevalue');
       this.projectData['startTimeType'] = value[0] || 0;
       this.projectData['startTime'] = value[1] || '';
     } else if (field == 'deliverMethod') {
@@ -235,15 +236,15 @@ export class ProjectEditStep3Page {
       '&target=' + (projectData['target'] || '')+
       '&industrys=' + (industrys || '') +
       '&skills=' + (skills || '')+
-      '&projectLengthType=' + (projectData['projectLengthType'] || '')+
+      '&projectLengthType=' + projectData['projectLengthType']+
       '&projectLength=' + (projectData['projectLength'] || '')+
-      '&startTimeType=' + (projectData['startTimeType'] || '')+
+      '&startTimeType=' + (projectData['startTimeType'])+
       '&startTime=' + (projectData['startTime'] || '')+
-      '&deliverMethod=' + (projectData['deliverMethod'] || '') +
-      '&budgetType=' + (projectData['budgetType'] || '')+
+      '&deliverMethod=' + (projectData['deliverMethod']) +
+      '&budgetType=' + (projectData['budgetType'])+
       '&budgetDay=' + (projectData['budgetDay'] || 0) +
       '&workload=' + (projectData['workload'] || 0) +
-      '&budget=' + (projectData['budget'] || '') +
+      '&budget=' + (projectData['budget']) +
       '&languages=' + (language || '') +
       '&grades=' + (grade || '')+
       '&otherIndustrys=' + (otherIndustrys || '')+

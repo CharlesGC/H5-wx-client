@@ -69,6 +69,10 @@ page-project-edit-step2 {
             }
             .rigth-message {
                 text-align: right;
+                display: flex;
+                .icon {
+                    line-height: 22px;
+                }
             }
         }
     }

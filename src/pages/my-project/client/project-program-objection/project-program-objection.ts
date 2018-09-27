@@ -90,9 +90,10 @@ export class ProjectProgramObjectionPage {
     this.Provider.getMamenSwiperData(url).subscribe(res => {
       if (res.code == 200) {
         //alert('操作成功！');
-        this.isPosePrompt = true
-        this.tiptext = '操作成功'
-        this.isFailed = false
+        // this.isPosePrompt = true
+        // this.tiptext = '操作成功'
+        // this.isFailed = false
+        this.navCtrl.pop();
       } else {
         //alert('请求出错:' + res.msg);
         this.isPosePrompt = true

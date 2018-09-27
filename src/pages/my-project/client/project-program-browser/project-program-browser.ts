@@ -98,6 +98,7 @@ export class ProjectProgramBrowserPage {
   sureProgram() {
     this.isProgram = true
     this.tiptext = "是否确定该方案？"
+    return
   }
   /*确认方案请求*/
   onConfirmProgramSubmit() {
@@ -108,7 +109,6 @@ export class ProjectProgramBrowserPage {
       this.isProgram = !this.isProgram
       return
     }
-    this.isdisabled = 'disabled'
     let ppid = this.navParams.get('ppid');
     // let projectDetailsUrl = 'http://mamon.yemindream.com/mamon/customer/confirmProgram';
     const openId = window.sessionStorage.getItem('openId') || this.getUrlParam('openId');
@@ -116,12 +116,10 @@ export class ProjectProgramBrowserPage {
     this.Provider.getMamenSwiperData(projectDetailsUrl).subscribe(res => {
       if (res.code == 200) {
         //alert('操作成功！');
-        this.tiptext = "操作成功！"
-        this.isFailed = false
-        this.isdisabled = ''
+        this.navCtrl.pop()
       } else {
         this.tiptext = "操作失败，请稍后重试！"
-        this.isFailed = true
+        // this.isFailed = true
         //console.log('请求出错:' + res.msg);
       }
     }, error => {

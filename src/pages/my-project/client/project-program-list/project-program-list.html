@@ -101,7 +101,7 @@
         </p>
         <div class="msg-cont">
           <h4>{{program_item.programName}}</h4>
-          <p>报价 <span class="fweight600">{{program_item.price}} 元</span></p>
+          <p>报价 <span class="fweight600">{{program_item.price  | currency : '￥'}} 元</span></p>
         </div>
         <div class="msg-cont-line2 mt10">
           <p class="line2-left">

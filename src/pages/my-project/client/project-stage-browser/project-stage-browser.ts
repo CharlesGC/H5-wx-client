@@ -48,7 +48,7 @@ export class ProjectStageBrowserPage {
   goPaymentRecord(stageType) {
     let id = this.navParams.get('id')
     if (stageType == 2) {
-      this.navCtrl.push(ProjectPaymentRecordPage, { id: id, cid: this.projectStageDetail['cid'] });
+      this.navCtrl.push(ProjectPaymentRecordPage, { id: id, cid: this.projectStageDetail['cid'] ,data:this.projectStageDetail});
     } else if (stageType == 6) {
       this.navCtrl.push(ProjectSubmitInvoicePage, { id: id });
     }
@@ -86,24 +86,23 @@ export class ProjectStageBrowserPage {
     this.isTipsPrompt = true
     this.tipstext = '确认该阶段吗？'
   }
+  onReturnBack(){
+    this.isTipsPrompt = !this.isTipsPrompt
+    return
+  }
   /*确认阶段 、提出异议*/
   onAllStageSubmit(psid, type) {
-    if(this.isFailed == false){
-      this.isTipsPrompt = !this.isTipsPrompt
-      this.navCtrl.pop()
-    }else if(this.isFailed == true){
+    if(this.isFailed == true){
       this.isTipsPrompt =!this.isTipsPrompt
       return
     }
-    this.isdisabled = 'disabled'
     // let projectStageDetailUrl = 'http://mamon.yemindream.com/mamon/customer/confirmStage';
     const openId = window.sessionStorage.getItem('openId') || this.getUrlParam('openId');
     let projectStageDetailUrl = confirmStageUrl + '?openId=' + openId + '&psid=' + psid + '&status=' + type;
     this.Provider.getMamenSwiperData(projectStageDetailUrl).subscribe(res => {
       if (res.code == 200) {
-        this.tipstext = '确认成功'
-        this.isFailed = false
-        this.isdisabled = ''
+        this.isTipsPrompt = !this.isTipsPrompt
+        this.navCtrl.pop()
       }else {
         this.tipstext = '操作失败，请稍后重试'
         this.isFailed = true

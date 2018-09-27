@@ -2,21 +2,21 @@
   <!-- 轮播图部分 -->
   <div *ngIf="swiperArr" (click)="goSwiperDetail()">
     <ion-slides pager class="swiper_content" does-continue="true" auto-play="true" loop="true" slide-interval=2000>
-      <ion-slide *ngFor="let item_swiperArr of swiperArr" class="swiper_list" >
+      <ion-slide *ngFor="let item_swiperArr of swiperArr" class="swiper_list">
         <img [src]="item_swiperArr.bannerUrl" />
         <div class="img-text">
           <div>{{item_swiperArr.title}}</div>
           <div>{{item_swiperArr.note}}</div>
-          <div >
-            <span>点击了解更多</span>
-            <span>></span>
+          <div>
+            <!-- <span>点击了解更多</span> -->
+            <!-- <span>></span> -->
           </div>
         </div>
       </ion-slide>
     </ion-slides>
   </div>
   <!-- 行业部分 -->
-  <div class="hy_container" *ngIf="IndustryArr">
+  <!-- <div class="hy_container" *ngIf="IndustryArr">
     <div class="hy_content">
       <div class="title-cont">
         <h4>麦盟顾问 - 行业</h4>
@@ -36,7 +36,7 @@
         </ul>
       </div>
     </div>
-  </div>
+  </div> -->
   <!-- 技能 -->
   <div class="jn_container" *ngIf="skillArr">
     <div class="jn_content">
@@ -70,36 +70,36 @@
         </div>
       </div>
       <div class="qu_u">
-          <li *ngFor="let item of outstandingArr.data" class="qu_list" (click)="financeAllList(item,i)">
-            <div class="text_box">
-              <div class="celebrity-img">
-                <img [src]="item.avatar" class="img" alt="">
-                <!-- <span class="img-span">
+        <li *ngFor="let item of outstandingArr.data" class="qu_list" (click)="financeAllList(item,i)">
+          <div class="text_box">
+            <div class="celebrity-img">
+              <img [src]="item.avatar" class="img" alt="">
+              <!-- <span class="img-span">
                   <img src="../../assets/imgs/mingxin.png" alt="">
                 </span> -->
-              </div>
-              <div class="text_labar">
-                <span class="adviserName">{{item.adviserName}}</span>
-                <ul class="text_content">
-                  <li *ngFor="let j of item.industryList.slice(0,1)" class="text_list">
-                    <span>{{j.alName || '行业'}}</span>
-                  </li>
-                </ul>
-              </div>
-              <div class="text_jinyan">工作经验：{{item.workingYears || '0年'}}年</div>
-              <p class="qiaochu-duc">{{item.introduction}}</p>
             </div>
-          </li>
+            <div class="text_labar">
+              <span class="adviserName">{{item.adviserName}}</span>
+              <ul class="text_content">
+                <li *ngFor="let j of item.industryList.slice(0,1)" class="text_list">
+                  <span>{{j.alName || '行业'}}</span>
+                </li>
+              </ul>
+            </div>
+            <div class="text_jinyan">工作经验：{{item.workingYears || '0年'}}年</div>
+            <p class="qiaochu-duc">{{item.introduction}}</p>
+          </div>
+        </li>
       </div>
     </div>
   </div>
 
   <div class="text-img" (click)="goContactPage($event)">
-    <img src="../../assets/imgs/banner.png" alt="">
+    <img src="../../assets/imgs/guwenrukou.png" alt="">
   </div>
 
   <!-- 财务审计 -->
-  <div class="contant-finance" *ngIf = "financesArrLength">
+  <div class="contant-finance" *ngIf="financesArrLength">
     <div class="title-cont">
       <h4>财务审计顾问</h4>
       <div (click)="financemore('','','financemore')">
@@ -132,7 +132,7 @@
     </ion-list>
   </div>
   <!-- 麦盟案例 -->
-  <div class="case_container" *ngIf = "caseArr">
+  <div class="case_container" *ngIf="caseArr">
     <ul class="case_content">
       <div class="title-cont">
         <h4>麦盟案例</h4>
@@ -144,25 +144,25 @@
       <div class="case_img">
         <ion-slides pager class="swiper_content1" does-continue="true" auto-play="true" loop="true" slide-interval=2000>
           <ion-slide *ngFor="let item of caseArr" class="case_swiper">
-              <div class="code_text">
-                  <div>{{item.note}}</div>
-                  <div>来自麦盟智库的专家回答</div>
+            <div class="code_text">
+              <div>{{item.note}}</div>
+              <!-- <div>来自麦盟智库的专家回答</div>
                   <div (click)="goToOtherPage()">
                     <span>点击了解更多</span>
-                    <span>></span>
-                  </div>
-                </div>
+                    <span>></span> -->
+              <!-- </div> -->
+            </div>
             <div class="swiper_img">
               <img src="{{item.bannerUrl}}" />
             </div>
-           
+
           </ion-slide>
         </ion-slides>
       </div>
     </ul>
   </div>
   <!-- 全部顾问 -->
-  <div class="contant-cont" *ngIf ="financeAllArrlength">
+  <div class="contant-cont" *ngIf="financeAllArrlength">
     <div class="title-cont">
       <h4>全部顾问</h4>
       <div (click)="FinancCount('','','finance-count')">

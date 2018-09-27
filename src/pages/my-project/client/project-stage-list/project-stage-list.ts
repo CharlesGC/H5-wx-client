@@ -35,6 +35,9 @@ export class ProjectStageListPage {
   public projectDetails = {}
   public projectSignCount = {};
   public isConsultantListShow = false;
+  public isTipPrompt = false
+public tiptext : any
+public isFaild :any
   constructor(public navCtrl: NavController, public navParams: NavParams,private Provider:MamenDataProvider) {
   }
 
@@ -150,21 +153,33 @@ export class ProjectStageListPage {
       console.log('erros===',error);
     })
   }
-
+  sureTipPrompt(){
+    this.isTipPrompt = true
+    this.tiptext = '确认该阶段吗？'
+    return
+  }
+  onReturnBack(){
+    this.isTipPrompt = !this.isTipPrompt
+    return
+  }
   /*确认阶段*/
   onAllStageSubmit() {
+    if(this.isFaild == true){
+      this.isTipPrompt = !this.isTipPrompt
+      return
+    }
     let pid = this.navParams.get('pid');
     // let projectStageDetailUrl = 'http://mamon.yemindream.com/mamon/customer/customerConfirmStagePlan';
     const openId = window.sessionStorage.getItem('openId') || this.getUrlParam('openId');
     let projectStageDetailUrl = customerConfirmStagePlanUrl + '?openId=' + openId +'&pid='+pid;
     this.Provider.getMamenSwiperData(projectStageDetailUrl).subscribe(res=>{
       if(res.code==200) {
-        alert('提交成功！');
+        //alert('提交成功！');
         this.navCtrl.pop();
-      }else if(res.code == 207) {
-        window.localStorage.removeItem('openId');
       }else{
-        alert('请求出错:'+res.msg);
+        this.tiptext = '确认失败，请重新确认！'
+        //alert('请求出错:'+res.msg);
+        this.isFaild = true
       }
     },error=>{
       console.log('erros===',error);

@@ -24,13 +24,13 @@
       <ion-item>
         <label>应付金额</label>
         <p item-right class="rigth-message">
-            <span item-right class="item-value line-overflow">{{projectPaymentDetails.price || 0}} 元</span>
+            <span item-right class="item-value line-overflow">{{(projectPaymentDetails.price || 0)| currency : '￥'}} 元</span>
         </p>
       </ion-item>
       <ion-item no-lines>
         <label>实际支付</label>
         <p item-right class="rigth-message">
-            <span item-right class="item-value line-overflow">{{projectPaymentDetails.realPrice || 0}} 元</span>
+            <span item-right class="item-value line-overflow">{{(projectPaymentDetails.realPrice || 0)| currency : '￥'}} 元</span>
         </p>
       </ion-item>
     </ion-list>

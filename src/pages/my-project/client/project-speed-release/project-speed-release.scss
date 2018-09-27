@@ -36,6 +36,18 @@ page-project-speed-release {
               height: 145px;
               background-color: #ffffff;
               margin-top: 31px;
+              .speed-text {
+                padding: 0 15px;
+                font-weight: 700;
+                font-size: 14px;
+                color: #4a4a4a;
+              }
+              .p15 {
+                margin: 15px;
+                font-family: PingFangSC;
+                font-size: 14px;
+                color: #4a4a4a;
+              }
               label {
                 width: 141px;
                 height: 20px;
@@ -176,7 +188,6 @@ page-project-speed-release {
                           }
                       }
                     }
-            
                     .click-play {
                         width: 57px;
                         height: 17px;

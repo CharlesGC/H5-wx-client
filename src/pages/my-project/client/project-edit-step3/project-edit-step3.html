@@ -26,10 +26,10 @@
       <label>所在行业</label>
       <p item-right class="rigth-message">
         <!-- <span class="item-value line-overflow">阿里拉拉</span> -->
-        <span *ngIf="projectData.industryList && projectData.industryList.length<1"></span>
-        <span *ngIf="projectData.industryList && projectData.industryList.length==1">{{projectData.industryList[0].text
+        <span *ngIf="projectData.industryList && projectData.industryList.length<1" class="item-value line-overflow"></span>
+        <span *ngIf="projectData.industryList && projectData.industryList.length==1" class="item-value line-overflow">{{projectData.industryList[0].text
           || projectData.industryList[0].industryName}}</span>
-        <span *ngIf="projectData.industryList && projectData.industryList.length>1">{{projectData.industryList[0].text
+        <span *ngIf="projectData.industryList && projectData.industryList.length>1" class="item-value line-overflow">{{projectData.industryList[0].text
           || projectData.industryList[0].industryName}}
           等</span>
         <ion-icon class="icon" name="arrow-forward"></ion-icon>
@@ -39,10 +39,10 @@
       <label>专长领域</label>
       <p item-right class="rigth-message">
         <!-- <span item-right class="item-value line-overflow">请输入对接人姓名</span> -->
-        <span *ngIf="projectData.skillList && projectData.skillList.length<1"></span>
-        <span *ngIf="projectData.skillList && projectData.skillList.length==1">{{projectData.skillList[0].text ||
+        <span *ngIf="projectData.skillList && projectData.skillList.length<1" class="item-value line-overflow"></span>
+        <span *ngIf="projectData.skillList && projectData.skillList.length==1" class="item-value line-overflow">{{projectData.skillList[0].text ||
           projectData.skillList[0].skillName}}</span>
-        <span *ngIf="projectData.skillList && projectData.skillList.length>1">{{projectData.skillList[0].text ||
+        <span *ngIf="projectData.skillList && projectData.skillList.length>1" class="item-value line-overflow">{{projectData.skillList[0].text ||
           projectData.skillList[0].skillName}} 等</span>
         <ion-icon class="icon" name="arrow-forward"></ion-icon>
       </p>
