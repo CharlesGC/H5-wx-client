@@ -139,11 +139,16 @@ export class SelectTagsPage {
   onInputChange(type) {
     console.log(type,'typetypetypetype')
     if(type == 'industryList'){
-      this.getpaymentListData(this.inputName)
+      this.getpaymentListData(this.inputName);
     }else {
-      this.isSkillSecondary = false;
-      this.isSearchSkillSecondary = false;
-      console.log(this.isSkillSecondary,this.isSearchSkillSecondary,2222222222222222222 );
+      // console.log(this.isSkillSecondary,this.isSearchSkillSecondary,2222222222222222222 );
+      if(this.inputName) {
+        this.isSkillSecondary = false;
+        this.isSearchSkillSecondary = false;
+      }else {
+        this.isSkillSecondary = true;
+        this.isSearchSkillSecondary = true;
+      }
       this.getSkillData('',this.inputName);
     }
   }

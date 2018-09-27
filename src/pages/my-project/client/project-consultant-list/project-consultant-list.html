@@ -117,8 +117,9 @@
         <div class="consultant-info-right">
           <div>
             <h4 class="mr10">{{consultantList_item.nickName}}</h4>
-            <ion-icon class="transgender mr10 men" name="ios-transgender" *ngIf="consultantList_item.gender == 1"></ion-icon>
-            <ion-icon class="transgender mr10 women" name="ios-transgender" *ngIf="consultantList_item.gender == 2"></ion-icon>
+            <ion-icon class="transgender mr10 men" name="male1" *ngIf="consultantList_item.gender == 1"></ion-icon>
+            <ion-icon class="transgender mr10 women" name="male1" *ngIf="consultantList_item.gender == 2"></ion-icon>
+            <span class="info-status" *ngIf="consultantList_item.ustatus == 0">未审核</span>
             <span class="info-status" *ngIf="consultantList_item.ustatus == 4">已审核</span>
             <span class="info-status" *ngIf="consultantList_item.ustatus == 5">面试通过</span>
             <span class="info-status" *ngIf="consultantList_item.ustatus == 6">项目通过</span>
