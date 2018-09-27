@@ -140,28 +140,19 @@ export class ConsultantProgramListPage {
   onAddProgramClick(data) {
     let pid = this.navParams.get('pid');
     if (data) {
-      this.navCtrl.push(ConsultantProgramEditPage, { isAdd: true, pid: pid, data: data });
+      this.navCtrl.push(ConsultantProgramEditPage, { isAdd: false, pid: pid, data: data });
     } else {
-      this.navCtrl.push(ConsultantProgramEditPage, { isAdd: false, pid: pid });
+      this.navCtrl.push(ConsultantProgramEditPage, { isAdd: true, pid: pid });
     }
 
   }
   sureTipPrompt(){
     this.isTipPrompt = true
     this.tiptext = '确认提交该方案吗？'
-    this.isdisabled = 'disabled'
     return
   }
   /*提交方案*/
   onProgramSubmitted() {
-    if(this.isFailed == false){
-      this.isTipPrompt = !this.isTipPrompt
-      this.navCtrl.pop()
-      return
-    }else if (this.isFailed == true){
-      this.isTipPrompt = !this.isTipPrompt 
-      return
-    }
     let pid = this.navParams.get('pid');
     // let projectStageDetailUrl = 'http://mamon.yemindream.com/mamon/adviser/addOrEditProgram';
     const openId = window.sessionStorage.getItem('openId') || this.getUrlParam('openId');
@@ -169,15 +160,16 @@ export class ConsultantProgramListPage {
 
     this.Provider.getMamenSwiperData(projectStageDetailUrl).subscribe(res => {
       if (res.code == 200) {
-        this.tiptext = '提交成功'
-        this.isFailed = false
-        this.isdisabled = ''
+        // this.tiptext = '提交成功'
+        // this.isFailed = false
+        // this.isdisabled = ''
         //console.log('操作成功！');
-        //this.navCtrl.pop();
+        this.isTipPrompt = !this.isTipPrompt;
+        this.navCtrl.pop();
       } else {
         this.tiptext= '操作失败，请稍后再试'
         this.isFailed= true
-        this.isdisabled = ''
+        // this.isdisabled = ''
         //console.log('请求出错:' + res.msg);
       }
     }, error => {

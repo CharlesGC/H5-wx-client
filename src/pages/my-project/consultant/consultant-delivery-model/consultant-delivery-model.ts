@@ -87,9 +87,11 @@ export class ConsultantDeliveryModelPage {
     
     if(!deliveryModelData['logisticsCompany']){
       this.isCourierCompany = true
+      return;
     }
     if(!deliveryModelData['logisticsNumber']){
       this.isTrackingNumber = true
+      return;
     }
 
     this.isContent = !this.isContent
@@ -108,8 +110,8 @@ export class ConsultantDeliveryModelPage {
     this.Provider.getMamenSwiperData(projectStageDetailUrl).subscribe(res => {
       if (res.code == 200) {
         //alert('操作功能！');
-        //this.navCtrl.pop();
-        this.isSubmit = true
+        this.navCtrl.pop();
+        // this.isSubmit = true
       } else if (res.code == 207) {
         window.localStorage.removeItem('openId');
       } else {

@@ -50,11 +50,11 @@
   <ion-list class="list-item-flex mt10">
     <ion-item>
       <label>付款比例</label>
-      <span item-right class="item-value">{{projectStageDetail.percentage * 100}} %</span>
+      <span item-right class="item-value">{{projectStageDetail.percentage }} %</span>
     </ion-item>
     <ion-item>
       <label>付款金额</label>
-      <span item-right class="item-value">{{projectStageDetail.price}}元</span>
+      <span item-right class="item-value">{{projectStageDetail.price | currency: '￥'}}元</span>
     </ion-item>
     <ion-item no-lines>
       <label>交互方式</label>
@@ -102,7 +102,7 @@
       </ion-item>
     </ion-list>
   </div>
-  
+
   <!--顾问修改意见-->
   <ion-list class="describe-list mt40">
     <ion-item no-lines *ngFor="let proposal_item of projectStageDetail.proposal">

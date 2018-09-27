@@ -47,15 +47,15 @@
   </ion-list>
   <div class="user-other-list">
     <ion-list class="card-item">
-      <ion-item no-lines *ngIf="fileurl">
+      <ion-item no-lines *ngIf="interactionData.deliverableUrl">
         <div class="card-item-label">
           <label>
-            <img style="width:66px;height:66px;" src="{{interactionData.typeStr || filetypeicon}}">
+            <img style="width:66px;height:66px;" src="{{interactionData.format || filetypeicon}}">
           </label>
           <div class="card-cont" data-src="url">
             <h5>{{interactionData.sourceName || filetitle}}</h5>
             <p class="action-browser-file">点击查看文件预览</p>
-            <p class="browser-size">{{interactionData.urlSize || filesize}}</p>
+            <p class="browser-size">{{interactionData.size || filesize}}</p>
           </div>
         </div>
       </ion-item>

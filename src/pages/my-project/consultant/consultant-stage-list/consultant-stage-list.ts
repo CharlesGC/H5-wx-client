@@ -180,7 +180,7 @@ export class ConsultantStageListPage {
   }
   sureTips(){
     this.isTipsPrompt = true
-    this.isdisabled = 'disabled'
+    // this.isdisabled = 'disabled'
     this.tipstext = "请确认是否提交该阶段？"
     return
   }
@@ -207,10 +207,11 @@ export class ConsultantStageListPage {
     let projectStageDetailUrl = changeStageStatusUrl + '?openId=' + openId + '&type=1' + '&pid=' + pid;
     this.Provider.getMamenSwiperData(projectStageDetailUrl).subscribe(res => {
       if (res.code == 200) {
-        this.tipstext = "提交成功"
-        this.isFailed = false
+        // this.tipstext = "提交成功"
+        // this.isFailed = false
         //alert('提交成功！');
-        //this.navCtrl.pop();
+        this.isTipsPrompt = !this.isTipsPrompt;
+        this.navCtrl.pop();
       } else {
         //alert('请求出错:' + res.msg);
         this.isTipsPrompt = true
