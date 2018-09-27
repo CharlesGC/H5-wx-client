@@ -197,17 +197,17 @@
     </ion-list>
     <ion-list class="describe-list mt10">
         <ion-item no-lines>
-            <h4>项目描述</h4>
+            <h4 class="h4">项目描述</h4>
             <p class="describe-cont">{{projectDetails.description}}</p>
         </ion-item>
         <ion-item no-lines>
-            <h4>交付标的</h4>
+            <h4 class="h4">交付标的</h4>
             <p class="describe-cont">{{projectDetails.target}}</p>
         </ion-item>
     </ion-list>
     <ion-list class="describe-list mt10">
         <ion-item no-lines>
-            <h4 class="mb15">专长领域</h4>
+            <h4 class="mb15 h4">专长领域</h4>
             <p class="tags-cont skills" *ngIf="projectDetails.pSkill && projectDetails.pSkill.length>0">
                 <span *ngFor="let pskill_tag of projectDetails.pSkill" class="tag">{{pskill_tag.skillName}}</span>
                 <!-- <span class="tag">供应链</span>
@@ -218,7 +218,7 @@
             </p>
         </ion-item>
         <ion-item no-lines>
-            <h4 class="mb15">所在行业</h4>
+            <h4 class="mb15 h4">所在行业</h4>
             <p class="tags-cont industry" *ngIf="projectDetails.pIndustry && projectDetails.pIndustry.length>0">
                 <span *ngFor="let pIndustry_tag of projectDetails.pIndustry" class="tag">{{pIndustry_tag.industryName}}</span>
                 <!-- <span class="tag">生态互联网</span>
@@ -229,17 +229,17 @@
     </ion-list>
     <ion-list class="list-item-flex mt10">
         <ion-item>
-            <label>预算方式</label>
+            <label class="label">预算方式</label>
             <span item-right class="item-value" *ngIf="projectDetails.budgetType == 0">每日费用</span>
             <span item-right class="item-value" *ngIf="projectDetails.budgetType == 1">固定单价</span>
             <span item-right class="item-value" *ngIf="projectDetails.budgetType == 2">待商议</span>
         </ion-item>
         <ion-item>
-            <label>预算金额</label>
+            <label class="label">预算金额</label>
             <span item-right class="item-value">{{projectDetails.budgetDay | currency: '￥' }}</span>
         </ion-item>
         <ion-item no-lines>
-            <label>大致天数</label>
+            <label class="label">大致天数</label>
             <span item-right class="item-value">{{projectDetails.workload}} 天</span>
         </ion-item>
     </ion-list>
@@ -252,14 +252,14 @@
     </ion-list>
     <ion-list class="list-item-flex mt10">
         <ion-item>
-            <label>开始时间</label>
+            <label class="lebal">开始时间</label>
             <span item-right class="item-value" *ngIf="projectDetails.startTimeType==0">越快越好</span>
             <span item-right class="item-value" *ngIf="projectDetails.startTimeType==1">{{projectDetails.startTime |
                 date:'yyyy/MM/dd'}}</span>
             <span item-right class="item-value" *ngIf="projectDetails.startTimeType==2">待商议</span>
         </ion-item>
         <ion-item>
-            <label>项目时长</label>
+            <label class="lebal">项目时长</label>
             <span item-right class="item-value" *ngIf="projectDetails.projectLengthType == 0">0-3 个月</span>
             <span item-right class="item-value" *ngIf="projectDetails.projectLengthType == 1">3-6 个月</span>
             <span item-right class="item-value" *ngIf="projectDetails.projectLengthType == 2">6-12 个月</span>
@@ -267,7 +267,7 @@
                 个月</span>
         </ion-item>
         <ion-item no-lines>
-            <label>是否驻场</label>
+            <label class="lebal">是否驻场</label>
             <span item-right class="item-value" *ngIf="projectDetails.deliverMethod ==0">驻场</span>
             <span item-right class="item-value" *ngIf="projectDetails.deliverMethod ==1">半驻场</span>
             <span item-right class="item-value" *ngIf="projectDetails.deliverMethod ==2">非驻场</span>
@@ -276,14 +276,14 @@
     </ion-list>
     <ion-list class="list-item-flex mt10">
         <ion-item>
-            <label>资质要求</label>
+            <label class="lebal">资质要求</label>
             <span item-right class="item-value" *ngIf="projectDetails.qualification == 0">初级</span>
             <span item-right class="item-value" *ngIf="projectDetails.qualification == 1">中级</span>
             <span item-right class="item-value" *ngIf="projectDetails.qualification == 2">高级</span>
             <span item-right class="item-value" *ngIf="projectDetails.qualification == 3">专家</span>
         </ion-item>
         <ion-item no-lines>
-            <label>语言要求</label>
+            <label class="lebal">语言要求</label>
             <span item-right class="item-value" *ngFor="let planguage_tag of projectDetails.planguage">
                 {{planguage_tag.language}} .
                 <span *ngIf="planguage_tag.grade == 0">母语</span>
@@ -295,23 +295,23 @@
     </ion-list>
     <ion-list class="list-item-flex mt10">
         <ion-item>
-            <label>公司</label>
+            <label class="lebal">公司</label>
             <span item-right class="item-value">{{projectDetails.companyName}}</span>
         </ion-item>
         <ion-item>
-            <label>业务负责人</label>
+            <label class="lebal">业务负责人</label>
             <span item-right class="item-value">{{projectDetails.principalName}}</span>
         </ion-item>
         <ion-item>
-            <label>职务</label>
+            <label class="lebal">职务</label>
             <span item-right class="item-value">{{projectDetails.principalPosition}}</span>
         </ion-item>
         <ion-item>
-            <label>电话号码</label>
+            <label class="lebal">电话号码</label>
             <span item-right class="item-value">{{projectDetails.principalPhone}}</span>
         </ion-item>
         <ion-item no-lines>
-            <label>工作邮箱</label>
+            <label class="lebal">工作邮箱</label>
             <span item-right class="item-value">{{projectDetails.principalEmail}}</span>
         </ion-item>
     </ion-list>

@@ -207,11 +207,13 @@
         <div *ngIf="selected == 1 || selected == 0">
             <div class="item-card">
                 <div class="item-card-left" [ngClass]="{'checked':selected == 0}" (click)="onSelectedClick(0)">
-                    <ion-icon class="color-f46f46" name="checkmark-circle"></ion-icon>
+                    <img src="../../../assets/imgs/coins-1.png" alt="">
+                    <!-- <ion-icon class="color-f46f46" name="checkmark-circle"></ion-icon> -->
                     <h4>日薪结算</h4>
                 </div>
                 <div class="item-card-left" [ngClass]="{'checked':selected == 1}" (click)="onSelectedClick(1)">
-                    <ion-icon class="color-f46f46" name="checkmark-circle"></ion-icon>
+                    <img src="../../../assets/imgs/credit-card-1.png" alt="">
+                    <!-- <ion-icon class="color-f46f46" name="checkmark-circle"></ion-icon> -->
                     <h4>固定单价</h4>
                 </div>
             </div>

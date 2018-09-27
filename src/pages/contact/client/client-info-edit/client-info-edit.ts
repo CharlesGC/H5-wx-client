@@ -205,7 +205,7 @@ export class ClientInfoEditPage {
       '&priority=' + (this.isdefault ? 1 : 0) +
       '&phone=' + newCompanyDetaiData['companyPhone'] +
       '&otherIndustrys=' + otherIndustrys +
-      '&website=' + newCompanyDetaiData['webSite'];
+      '&website=' + (newCompanyDetaiData['webSite'] || '');
     // '&zipCode='+companyDetaiData.webSite;
     if (cid) {
       getCompanyDetailUrl = getCompanyDetailUrl + '&cid=' + cid;

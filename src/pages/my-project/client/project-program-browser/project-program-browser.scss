@@ -40,10 +40,10 @@ page-project-program-browser {
         }
     }
     .describe-list {
-        .item-md h4 {
+        .item-md .h4 {
             font-weight: 600;
         }
-        .item-ios h4 {
+        .item-ios .h4 {
             font-weight: 600;
         }
         ion-item {
@@ -55,7 +55,7 @@ page-project-program-browser {
             line-height: normal;
             letter-spacing: normal;
             color: #4a4a4a;
-            h4 {
+            .h4 {
                 font-weight: 600;
             }
             .describe-cont {
@@ -103,13 +103,13 @@ page-project-program-browser {
             line-height: normal;
             letter-spacing: normal;
             color: #4a4a4a;
-            .label-md label {
+            .label-md .label {
                 font-weight: 600;
             }
-            .label-ios label {
+            .label-ios .label {
                 font-weight: 600;
             }
-            label{
+            .label{
                 font-weight: 600;
             }
             .item-value {
