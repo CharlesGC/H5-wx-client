@@ -12,6 +12,9 @@ attention-tip {
         height: 49px;
         background: rgba(0, 0, 0, 0.5);
         z-index: 10;
+        &.bot0 {
+            bottom: 0;
+        }
         .icon-wrap{
             display:block;
             float: left;
@@ -23,7 +26,7 @@ attention-tip {
             }
         }
         .attention-title{
-            width: 54px;
+            width: 60px;
             height: 20px;
             font-family: PingFangSC;
             font-size: 14px;
@@ -105,7 +108,7 @@ attention-tip {
             .title{
                 display:block;
                 padding-top:4px;
-                width: 173px;
+                width: 180px;
                 height: 20px;
                 text-align:center;
                 font-family: PingFangSC;
@@ -120,7 +123,7 @@ attention-tip {
             }
             .desc{
                 display:block;
-                width: 171px;
+                width: 176px;
                 height: 17px;
                 font-family: PingFangSC;
                 font-size: 12px;
@@ -136,7 +139,7 @@ attention-tip {
             }
             .desc-letter{
                 display: block;
-                width: 126px;
+                width: 135px;
                 height: 17px;
                 font-family: PingFangSC;
                 font-size: 12px;

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component,Input } from '@angular/core';
 
 /**
  * Generated class for the AttentionTipComponent component.
@@ -10,15 +10,20 @@ import { Component } from '@angular/core';
   selector: 'attention-tip',
   templateUrl: 'attention-tip.html'
 })
+
 export class AttentionTipComponent {
+  @Input() bottom:any;
   public isShowdata = false;
   text: string;
 
   constructor() {
     console.log('Hello AttentionTipComponent Component');
+    // console.log(this.bottom)
   }
 
   isShow(){
     this.isShowdata = !this.isShowdata;
   }
+
+
 }

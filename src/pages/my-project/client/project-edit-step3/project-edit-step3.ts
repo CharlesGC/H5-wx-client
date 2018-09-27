@@ -54,7 +54,7 @@ export class ProjectEditStep3Page {
   sureSubmit() {
     this.isSubmit = !this.isSubmit
     if(this.gotype == 1){
-      this.navCtrl.push(ProjectBrowserPage,{data:this.projectData});
+      this.navCtrl.push(ProjectBrowserPage);
     }else{
       this.navCtrl.push(ProjectListPage);
     }
@@ -90,7 +90,7 @@ export class ProjectEditStep3Page {
       '&principalPhone=' + (projectData['principalPhone'] || '') +
       '&principalEmail=' + (projectData['principalEmail'] || '') +
       '&projectName=' + (projectData['projectName'] || '') +
-      '&description=' + projectData['description'] +
+      '&description=' + (projectData['description'] || '') +
       '&target=' + (projectData['target'] || '') +
       '&industrys=' + industrys +
       '&skills=' + skills +

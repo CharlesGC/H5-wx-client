@@ -105,5 +105,6 @@
   <ion-infinite-scroll (ionInfinite)="loadMore($event)" [enabled]="enabled" threshold="100px" distance="1%" position:button>
     <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="加载更多"></ion-infinite-scroll-content>
   </ion-infinite-scroll>
-  <attention-tip style="bottom:0"></attention-tip>
 </ion-content>
+<attention-tip [bottom]='1'></attention-tip>
+
