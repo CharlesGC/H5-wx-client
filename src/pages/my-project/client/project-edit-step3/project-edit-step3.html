@@ -69,15 +69,14 @@
         <ion-icon class="icon" name="arrow-forward"></ion-icon>
       </p>
     </ion-item>
-    <ion-item (click)="goFormEditPage('deliverMethod',projectData.deliverMethod,'timeSelect')">
+    <ion-item (click)="goFormEditPage('deliverMethod',projectData.deliverMethod,'select')">
       <label>是否驻场
         <span class="required-field ml5">(必填)</span>
       </label>
       <p item-right class="rigth-message">
         <span item-right class="item-value line-overflow" *ngIf="projectData.deliverMethod == 0">驻场</span>
-        <span item-right class="item-value line-overflow" *ngIf="projectData.deliverMethod == 1">半驻场</span>
-        <span item-right class="item-value line-overflow" *ngIf="projectData.deliverMethod == 2">非驻场</span>
-        <span item-right class="item-value line-overflow" *ngIf="projectData.deliverMethod == 3">待商议</span>
+        <span item-right class="item-value line-overflow" *ngIf="projectData.deliverMethod == 1">非驻场</span>
+        <span item-right class="item-value line-overflow" *ngIf="projectData.deliverMethod == 2">待商议</span>
         <ion-icon class="icon" name="arrow-forward"></ion-icon>
       </p>
     </ion-item>

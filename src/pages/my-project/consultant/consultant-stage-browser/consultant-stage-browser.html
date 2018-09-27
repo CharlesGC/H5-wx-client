@@ -99,10 +99,21 @@
           <span class="msg-footer-text">查看详情</span>
           <ion-icon name="arrow-forward" class="ml12"></ion-icon>
         </div>
-        <p class="describe-cont">{{document_item.opinion}}</p>
       </ion-item>
     </ion-list>
   </div>
+  
+  <!--顾问修改意见-->
+  <ion-list class="describe-list mt40">
+    <ion-item no-lines *ngFor="let proposal_item of projectStageDetail.proposal">
+      <div class="top-lines">
+        <h4 class="top-lines-left">修改意见</h4>
+        <span class="top-lines-right">{{proposal_item.createTime | date:'yy/MM/dd'}}</span>
+      </div>
+      <p class="describe-cont">{{proposal_item.opinion}}</p>
+    </ion-item>
+  </ion-list>
+
   <div style="height:100px;"></div>
   <button ion-button expand="full" large class="fixed-bottom bg-gry" (click)="goAccountEdit()" *ngIf="projectStageDetail.adviserStatus==0 || projectStageDetail.adviserStatus==4">
     等待客户确认中

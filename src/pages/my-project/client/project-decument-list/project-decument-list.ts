@@ -3,7 +3,14 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { MamenDataProvider } from '../../../../providers/mamen-data/mamen-data';
 
 import { ProjectDecumentBrowserPage } from '../project-decument-browser/project-decument-browser'
-import { getDocumentListUrl } from '../../../../providers/requestUrl';
+import { getDocumentListUrl,getProjectSignUpAdviserCountUrl } from '../../../../providers/requestUrl';
+
+import { ProjectProgramListPage } from '../project-program-list/project-program-list';
+import { ProjectStageListPage } from '../project-stage-list/project-stage-list';
+import { ProjectPaymentListPage } from '../project-payment-list/project-payment-list';
+import { ProjectInvoiceListPage } from '../project-invoice-list/project-invoice-list';
+import { ProjectBrowserPage } from '../project-browser/project-browser';
+import { ProjectConsultantListPage } from '../project-consultant-list/project-consultant-list';
 
 /**
  * Generated class for the ProjectDecumentListPage page.
@@ -20,6 +27,12 @@ import { getDocumentListUrl } from '../../../../providers/requestUrl';
 export class ProjectDecumentListPage {
   public documentListData = [];
   public isModal = false;
+  public showNavMenuName = '';
+  public showNavMenuNumber = 0;
+  public isShowNavMenu = false;
+  public projectDetails = {}
+  public projectSignCount = {};
+  public isConsultantListShow = false;
   constructor(public navCtrl: NavController, public navParams: NavParams,private Provider:MamenDataProvider) {
   }
 
@@ -30,9 +43,63 @@ export class ProjectDecumentListPage {
     console.log('ionViewDidLoad ProjectDecumentListPage');
   }
 
+  ionViewDidEnter() {
+    let pid = this.navParams.get('pid');
+    let status = this.navParams.get('status');
+    this.getProjectDocumentListDataData(pid,status);
+    this.getProjectSignCount(pid);
+    this.projectDetails = this.navParams.get('data') || {};
+  }
+
   /*跳转到文档详情页面*/
   goDocumentBrowser(data) {
     this.navCtrl.push(ProjectDecumentBrowserPage,{type:data.type})
+  }
+
+  /*点击展开、收起*/
+  onNavMenuClick(value) {
+    this.isShowNavMenu = value;
+  }
+  /*顾问状态展开*/
+  onConsultantToggle(){
+    this.isConsultantListShow = !this.isConsultantListShow;
+  }
+  /*点击菜单触发*/
+  onNavMenuItemClick(type,typeName,status,number) {
+    this.showNavMenuName = typeName;
+    this.isShowNavMenu = false;
+    if(type == 0){
+      this.navCtrl.push(ProjectBrowserPage,{pid:this.projectDetails['pid'],status:status,data:this.projectDetails});
+    }else if(type == 1){
+      this.navCtrl.push(ProjectConsultantListPage,{pid:this.projectDetails['pid'],status:status,data:this.projectDetails});
+    }else if(type == 2){
+      this.navCtrl.push(ProjectProgramListPage,{pid:this.projectDetails['pid'],status:status,data:this.projectDetails});
+    }else if(type == 3) {
+      this.navCtrl.push(ProjectStageListPage,{pid:this.projectDetails['pid'],status:status,type:this.projectDetails['status'],data:this.projectDetails});
+    }else if(type == 4) {
+      let pid = this.navParams.get('pid');
+      let status = this.navParams.get('status');
+      this.getProjectDocumentListDataData(pid,status);
+    }else if(type == 5) {
+      this.navCtrl.push(ProjectPaymentListPage,{pid:this.projectDetails['pid'],status:status,data:this.projectDetails});
+    }else if(type == 6) {
+      this.navCtrl.push(ProjectInvoiceListPage,{pid:this.projectDetails['pid'],status:status,data:this.projectDetails});
+    }
+  }
+
+  /*项目顾问类型数量请求*/
+  getProjectSignCount(pid) {
+    const openId = window.sessionStorage.getItem('openId')|| this.getUrlParam('openId')
+    let projectSignCountUrl = getProjectSignUpAdviserCountUrl + '?openId=' + openId + '&pid='+pid;
+    this.Provider.getMamenSwiperData(projectSignCountUrl).subscribe(res=>{
+      if(res.code==200) {
+       this.projectSignCount = res.data || {};
+      }else{
+        alert('请求出错');
+      }
+    },error=>{
+      console.log('erros===',error);
+    })
   }
 
   getUrlParam(name) {  
@@ -53,7 +120,6 @@ export class ProjectDecumentListPage {
     if(status !== ''){
       projectStageListUrl = projectStageListUrl + '&type='+status;
     }
-    console.log(projectStageListUrl,status != '',status,'有值');
     this.Provider.getMamenSwiperData(projectStageListUrl).subscribe(res=>{
       if(res.code==200) {
         this.documentListData = res.data;
@@ -68,6 +134,11 @@ export class ProjectDecumentListPage {
     },error=>{
       console.log('erros===',error);
     })
+  }
+
+  /*返回项目列表页*/
+  goback() {
+    this.navCtrl.popTo(this.navCtrl.getByIndex(1))
   }
 
 }

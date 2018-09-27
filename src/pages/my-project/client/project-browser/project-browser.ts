@@ -43,6 +43,7 @@ export class ProjectBrowserPage {
   public isApply = false;
   public isSuccess = false
   public isFailed = false
+  public isConsultantListShow = false;
   constructor(public navCtrl: NavController, public navParams: NavParams,private Provider:MamenDataProvider) {
   }
 
@@ -89,18 +90,22 @@ export class ProjectBrowserPage {
     this.isShowNavMenu = false;
     // this.showNavMenuNumber = 2
     if(type == 1){
-      this.navCtrl.push(ProjectConsultantListPage,{pid:this.projectDetails['pid'],status:status});
+      this.navCtrl.push(ProjectConsultantListPage,{pid:this.projectDetails['pid'],status:status,data:this.projectDetails});
     }else if(type == 2){
-      this.navCtrl.push(ProjectProgramListPage,{pid:this.projectDetails['pid'],status:status});
+      this.navCtrl.push(ProjectProgramListPage,{pid:this.projectDetails['pid'],status:status,data:this.projectDetails});
     }else if(type == 3) {
-      this.navCtrl.push(ProjectStageListPage,{pid:this.projectDetails['pid'],status:status,type:this.projectDetails['status']});
+      this.navCtrl.push(ProjectStageListPage,{pid:this.projectDetails['pid'],status:status,type:this.projectDetails['status'],data:this.projectDetails});
     }else if(type == 4) {
-      this.navCtrl.push(ProjectDecumentListPage,{pid:this.projectDetails['pid'],status:status});
+      this.navCtrl.push(ProjectDecumentListPage,{pid:this.projectDetails['pid'],status:status,data:this.projectDetails});
     }else if(type == 5) {
-      this.navCtrl.push(ProjectPaymentListPage,{pid:this.projectDetails['pid'],status:status});
+      this.navCtrl.push(ProjectPaymentListPage,{pid:this.projectDetails['pid'],status:status,data:this.projectDetails});
     }else if(type == 6) {
-      this.navCtrl.push(ProjectInvoiceListPage,{pid:this.projectDetails['pid'],status:status});
+      this.navCtrl.push(ProjectInvoiceListPage,{pid:this.projectDetails['pid'],status:status,data:this.projectDetails});
     }
+  }
+  /*顾问状态展开*/
+  onConsultantToggle(){
+    this.isConsultantListShow = !this.isConsultantListShow;
   }
   getUrlParam(name) {  
     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象  

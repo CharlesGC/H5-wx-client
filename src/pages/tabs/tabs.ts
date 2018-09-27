@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ContactPage } from '../contact/contact';
 import { HomePage } from '../home/home';
 // import {ReleasePage} from '../release/release';
@@ -9,6 +10,7 @@ import { DemandContentPage } from '../demand-content/demand-content';
 import { RecommendConsultantListPage } from '../recommend/recommend-consultant-list/recommend-consultant-list';
 import { RecommendClientListPage } from '../recommend/recommend-client-list/recommend-client-list';
 import { SpeedPage } from '../speed/speed';
+import { ChooseIdentityPage } from '../choose-identity/choose-identity';
 import { getUserByopenIdUrl,getWxOpenidUrl } from '../../providers/requestUrl';
 import { MamenDataProvider } from '../../providers/mamen-data/mamen-data';
 
@@ -26,7 +28,7 @@ export class TabsPage {
   public tab4Root:any;
   tab5Root = ContactPage;
   public isshow = false;
-  constructor(private Provider:MamenDataProvider) {
+  constructor(public navCtrl: NavController,private Provider:MamenDataProvider) {
     this.tab4Root = RecommendConsultantListPage
   }
  
@@ -55,6 +57,9 @@ export class TabsPage {
 
   onSelectFriend(e) {
     const user = window.sessionStorage.getItem('user') ? JSON.parse(window.sessionStorage.getItem('user')) : {type:-1};
+    if(user.status == 1){
+      this.navCtrl.push(ChooseIdentityPage);
+    }
     if(user.type == -1){
       this.onLogin();
     }

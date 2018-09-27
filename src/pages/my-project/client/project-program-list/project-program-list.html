@@ -1,14 +1,95 @@
 
-<ion-header>
-
-  <ion-navbar>
+<ion-header class="project-header">
+  <ion-navbar hideBackButton="true">
+    <ion-buttons side="left"  style="order: 0">
+      <button ion-button icon-only color="royal" (click)="goback()" class="returnBtn">
+        <ion-icon name="arrow-back">&nbsp;返回</ion-icon>
+      </button>
+    </ion-buttons>
     <ion-title>方案列表</ion-title>
   </ion-navbar>
-
 </ion-header>
 
+<!--菜单展开时-->
+<div class="nav-menu" *ngIf="isShowNavMenu && !isApply">
+    <ion-list class="nav-list-menu">
+        <ion-item no-lines (click)="onNavMenuClick(false)">
+            <p class="list-header-left">{{showNavMenuName || '方案'}}</p>
+            <div class="list-header-right" item-end>
+                <span>收起</span>
+            </div>
+        </ion-item>
+    </ion-list>
+    <div class="nav-menu-bg"></div>
+    <ion-list class="nav-menu-list" [hidden]="projectDetails.status == 0">
+      <ion-item class="nav-menu-item" (click)="onNavMenuItemClick(0,'详情')">
+          <label>详情</label>
+          <ion-icon name="arrow-forward" item-right (click)="isShow=!isShow"></ion-icon>
+      </ion-item>
+      <ion-item class="nav-menu-item" (click)="onConsultantToggle()">
+          <label>顾问 </label>
+          <ion-icon name="arrow-forward" item-right (click)="isShow=!isShow" [ngClass]="{'rotate':isConsultantListShow==true}"></ion-icon>
+      </ion-item>
+          <ion-item class="nav-menu-item" (click)="onNavMenuItemClick(1,'所有顾问','',projectSignCount.allCount)" *ngIf="isConsultantListShow">
+              <label class="ml25">所有顾问（{{projectSignCount.allCount || 0}}） </label>
+              <ion-icon name="arrow-forward" item-right (click)="isShow=!isShow"></ion-icon>
+          </ion-item>
+          <ion-item class="nav-menu-item" (click)="onNavMenuItemClick(1,'已推荐',0,projectSignCount.recommendedCount)" *ngIf="isConsultantListShow">
+              <label class="ml25">已推荐（{{projectSignCount.recommendedCount || 0}}） </label>
+              <ion-icon name="arrow-forward" item-right (click)="isShow=!isShow"></ion-icon>
+          </ion-item>
+          <ion-item class="nav-menu-item" (click)="onNavMenuItemClick(1,'待面试',1,projectSignCount.interviewCount)" *ngIf="isConsultantListShow">
+              <label class="ml25">待面试（{{projectSignCount.interviewCount || 0}}） </label>
+              <ion-icon name="arrow-forward" item-right (click)="isShow=!isShow"></ion-icon>
+          </ion-item>
+          <ion-item class="nav-menu-item" (click)="onNavMenuItemClick(1,'方案待确认',6,projectSignCount.programConfirmedCount)" *ngIf="isConsultantListShow">
+              <label class="ml25">方案待确认（{{projectSignCount.programConfirmedCount || 0}}） </label>
+              <ion-icon name="arrow-forward" item-right (click)="isShow=!isShow"></ion-icon>
+          </ion-item>
+          <ion-item class="nav-menu-item" (click)="onNavMenuItemClick(1,'已聘用',5,projectSignCount.employCount)" *ngIf="isConsultantListShow">
+              <label class="ml25">已聘用（{{projectSignCount.employCount || 0}}） </label>
+              <ion-icon name="arrow-forward" item-right (click)="isShow=!isShow"></ion-icon>
+          </ion-item>
+      <ion-item class="nav-menu-item" (click)="onNavMenuItemClick(2,'方案','')">
+          <label>方案</label>
+          <ion-icon name="arrow-forward" item-right (click)="isShow=!isShow"></ion-icon>
+      </ion-item>
+      <ion-item class="nav-menu-item" (click)="onNavMenuItemClick(3,'阶段',-1)">
+          <label>阶段</label>
+          <ion-icon name="arrow-forward" item-right (click)="isShow=!isShow"></ion-icon>
+      </ion-item>
+      <ion-item class="nav-menu-item" (click)="onNavMenuItemClick(4,'文档',-1)">
+          <label>文档</label>
+          <ion-icon name="arrow-forward" item-right (click)="isShow=!isShow"></ion-icon>
+      </ion-item>
+      <ion-item class="nav-menu-item" (click)="onNavMenuItemClick(5,'支付记录',-1)">
+          <label>支付记录</label>
+          <ion-icon name="arrow-forward" item-right (click)="isShow=!isShow"></ion-icon>
+      </ion-item>
+      <ion-item class="nav-menu-item" no-lines (click)="onNavMenuItemClick(6,'发票',-1)">
+          <label>发票</label>
+          <ion-icon name="arrow-forward" item-right (click)="isShow=!isShow"></ion-icon>
+      </ion-item>
+      <ion-item class="nav-menu-item" no-lines *ngIf="isConsultantListShow">
+          <label></label>
+      </ion-item>
+      <ion-item class="nav-menu-item" no-lines *ngIf="isConsultantListShow">
+          <label></label>
+      </ion-item>
+  </ion-list>
+</div>
+
 <ion-content style="background-color: #fcfcfc;">
-    <ion-list>
+  <!--菜单收起-->
+  <ion-list class="nav-list-menu" *ngIf="!isApply">
+    <ion-item no-lines (click)="onNavMenuClick(true)">
+        <p class="list-header-left">{{showNavMenuName || '方案'}}</p>
+        <div class="list-header-right" item-end>
+            <span>展开</span>
+        </div>
+    </ion-item>
+  </ion-list>
+  <ion-list class="mt-list">
       <ion-item class="message-item mt20" no-lines *ngFor="let program_item of projectProgramListData">
         <p class="msg-title">
           <span class="msg-title-left" *ngIf="program_item.status == 0">待查看</span>

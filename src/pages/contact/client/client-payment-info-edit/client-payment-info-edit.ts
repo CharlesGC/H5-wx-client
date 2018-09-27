@@ -34,6 +34,11 @@ export class ClientPaymentInfoEditPage {
     console.log(this.isdefault, this.paymentDetail, 'ionViewDidLoad ClientPaymentInfoEditPage');
   }
 
+  ionViewDidEnter() {
+    this.paymentDetail = this.navParams.get('data') || {};
+    this.isdefault = this.paymentDetail.type == 1;
+  }
+
   /*跳转到数据处理页面*/
   goFormEditPage(field, value, type) {
     this.navCtrl.push(FormEditPage, { callback: this.setValue, value: value, field: field, type: type });
@@ -69,7 +74,6 @@ export class ClientPaymentInfoEditPage {
     if (!cpid) {
       getCompanyListUrl = addCompanyPayerUrl + '?cid=' + cid;
     }
-    console.log(paymentDetail)
     if (!this.paymentDetail.name || !this.paymentDetail.bankName || !this.paymentDetail.account) {
       this.isComplete = true
       return

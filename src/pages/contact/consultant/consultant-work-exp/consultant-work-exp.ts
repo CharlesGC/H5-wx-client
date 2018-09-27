@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { DomSanitizer } from '@angular/platform-browser';//引入
 import { MamenDataProvider } from '../../../../providers/mamen-data/mamen-data';
 
 import { FormEditPage } from '../../form-edit/form-edit';
@@ -24,7 +25,7 @@ export class ConsultantWorkExpPage {
   public isDelete = false;
   public isComplete = false;
   public isBigTime  = false
-  constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider,public sanitizer: DomSanitizer) {
     this.workListData = {}
   }
 
@@ -32,6 +33,10 @@ export class ConsultantWorkExpPage {
     console.log(this.companyName, 'ionViewDidLoad ConsultantWorkExpPage');
     this.workListData = this.navParams.get('data');
     console.log(this.workListData, 123123);
+  }
+
+  assembleHTML(strHTML) {
+    return this.sanitizer.bypassSecurityTrustHtml(strHTML);
   }
 
   /*跳转到数据处理页面*/

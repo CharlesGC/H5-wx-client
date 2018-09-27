@@ -38,7 +38,7 @@
     <ion-item class="" (click)="goFormEditPage('gender',userInfoData.gender,'gender')">
       <span class="left-title">性别</span>
       <div item-right class="rigth-message">
-        <span>{{userInfoData.gender == 0?'未知':(userInfoData.gender == 1? '男':'女')}}</span>
+        <span>{{userInfoData.gender == 0?'保密':(userInfoData.gender == 1? '男':'女')}}</span>
         <ion-icon name="arrow-forward" class="ml12"></ion-icon>
       </div>
     </ion-item>

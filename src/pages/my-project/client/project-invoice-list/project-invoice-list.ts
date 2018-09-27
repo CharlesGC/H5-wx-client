@@ -3,7 +3,14 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { MamenDataProvider } from '../../../../providers/mamen-data/mamen-data';
 
 import { ProjectInvoiceBrowserPage } from '../project-invoice-browser/project-invoice-browser'
-import { getInvoiceListUrl } from '../../../../providers/requestUrl';
+import { getInvoiceListUrl,getProjectSignUpAdviserCountUrl } from '../../../../providers/requestUrl';
+
+import { ProjectProgramListPage } from '../project-program-list/project-program-list';
+import { ProjectStageListPage } from '../project-stage-list/project-stage-list';
+import { ProjectPaymentListPage } from '../project-payment-list/project-payment-list';
+import { ProjectBrowserPage } from '../project-browser/project-browser';
+import { ProjectConsultantListPage } from '../project-consultant-list/project-consultant-list';
+import { ProjectDecumentListPage } from '../project-decument-list/project-decument-list';
 /**
  * Generated class for the ProjectInvoiceListPage page.
  *
@@ -19,6 +26,12 @@ import { getInvoiceListUrl } from '../../../../providers/requestUrl';
 export class ProjectInvoiceListPage {
   public projectInvoiceListData =[];
   public isModel = false;
+  public showNavMenuName = '';
+  public showNavMenuNumber = 0;
+  public isShowNavMenu = false;
+  public projectDetails = {}
+  public projectSignCount = {};
+  public isConsultantListShow = false;
   constructor(public navCtrl: NavController, public navParams: NavParams,private Provider:MamenDataProvider) {
   }
 
@@ -27,6 +40,60 @@ export class ProjectInvoiceListPage {
     let status = this.navParams.get('status');
     this.getProjectInvoiceListDataData(pid,status);
     console.log('ionViewDidLoad ProjectInvoiceListPage');
+  }
+
+  ionViewDidEnter() {
+    let pid = this.navParams.get('pid');
+    let status = this.navParams.get('status');
+    this.getProjectInvoiceListDataData(pid,status);
+    this.getProjectSignCount(pid);
+    this.projectDetails = this.navParams.get('data') || {};
+  }
+
+   /*点击展开、收起*/
+   onNavMenuClick(value) {
+    this.isShowNavMenu = value;
+  }
+  /*顾问状态展开*/
+  onConsultantToggle(){
+    this.isConsultantListShow = !this.isConsultantListShow;
+  }
+  /*点击菜单触发*/
+  onNavMenuItemClick(type,typeName,status,number) {
+    this.showNavMenuName = typeName;
+    this.isShowNavMenu = false;
+    if(type == 0){
+      this.navCtrl.push(ProjectBrowserPage,{pid:this.projectDetails['pid'],status:status,data:this.projectDetails});
+    }else if(type == 1){
+      this.navCtrl.push(ProjectConsultantListPage,{pid:this.projectDetails['pid'],status:status,data:this.projectDetails});
+    }else if(type == 2){
+      this.navCtrl.push(ProjectProgramListPage,{pid:this.projectDetails['pid'],status:status,data:this.projectDetails});
+    }else if(type == 3) {
+      this.navCtrl.push(ProjectStageListPage,{pid:this.projectDetails['pid'],status:status,type:this.projectDetails['status'],data:this.projectDetails});
+    }else if(type == 4) {
+      this.navCtrl.push(ProjectDecumentListPage,{pid:this.projectDetails['pid'],status:status,data:this.projectDetails});
+    }else if(type == 5) {
+      this.navCtrl.push(ProjectPaymentListPage,{pid:this.projectDetails['pid'],status:status,data:this.projectDetails});
+    }else if(type == 6) {
+      let pid = this.navParams.get('pid');
+      let status = this.navParams.get('status');
+      this.getProjectInvoiceListDataData(pid,status);
+    }
+  }
+
+  /*项目顾问类型数量请求*/
+  getProjectSignCount(pid) {
+    const openId = window.sessionStorage.getItem('openId')|| this.getUrlParam('openId')
+    let projectSignCountUrl = getProjectSignUpAdviserCountUrl + '?openId=' + openId + '&pid='+pid;
+    this.Provider.getMamenSwiperData(projectSignCountUrl).subscribe(res=>{
+      if(res.code==200) {
+       this.projectSignCount = res.data || {};
+      }else{
+        alert('请求出错');
+      }
+    },error=>{
+      console.log('erros===',error);
+    })
   }
 
   /*跳转到发票详情页面*/
@@ -66,6 +133,11 @@ export class ProjectInvoiceListPage {
     },error=>{
       console.log('erros===',error);
     })
+  }
+
+  /*返回项目列表页*/
+  goback() {
+    this.navCtrl.popTo(this.navCtrl.getByIndex(1))
   }
 
 }

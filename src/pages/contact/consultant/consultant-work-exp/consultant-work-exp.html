@@ -44,6 +44,7 @@
     <ion-item class="" (click)="goFormEditPage('workDescription',workListData.workDescription,'textarea')" no-lines>
       <span class="left-title">职责描述</span>
       <div item-right class="rigth-message">
+        <!-- <span class="line-overflow" [innerHTML]="assembleHTML(workListData.workDescription)"></span> -->
         <span class="line-overflow">{{workListData.workDescription}}</span>
         <ion-icon name="arrow-forward" class="ml12"></ion-icon>
       </div>
