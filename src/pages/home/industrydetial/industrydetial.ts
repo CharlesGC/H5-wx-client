@@ -35,6 +35,7 @@ export class IndustrydetialPage {
   public id: any;
   public name: any;
   public financeAllArr = [];
+  // public bottom = '11110'
   constructor(public navCtrl: NavController, public navParams: NavParams, public IndustryMoreData: MamenDataProvider,
     public SkillLabelMoreData: MamenDataProvider,
     public Skilltwolabel: MamenDataProvider, public IndustrySearch: MamenDataProvider,
