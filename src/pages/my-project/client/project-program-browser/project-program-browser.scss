@@ -40,12 +40,6 @@ page-project-program-browser {
         }
     }
     .describe-list {
-        .item-md .h4 {
-            font-weight: 600;
-        }
-        .item-ios .h4 {
-            font-weight: 600;
-        }
         ion-item {
             font-family: PingFangSC;
             font-size: 1.4rem;
@@ -55,8 +49,10 @@ page-project-program-browser {
             line-height: normal;
             letter-spacing: normal;
             color: #4a4a4a;
-            .h4 {
-                font-weight: 600;
+            h4 {
+                font-weight: bold !important;
+                color: #4a4a4a;
+                font-family:PingFangSC; 
             }
             .describe-cont {
                 margin-top: 8px;
@@ -103,14 +99,8 @@ page-project-program-browser {
             line-height: normal;
             letter-spacing: normal;
             color: #4a4a4a;
-            .label-md .label {
-                font-weight: 600;
-            }
-            .label-ios .label {
-                font-weight: 600;
-            }
-            .label{
-                font-weight: 600;
+            label{
+                font-weight: 600 !important;
             }
             .item-value {
                 color: #cfcfcf;

@@ -19,7 +19,7 @@
     </ion-item>
   </ion-list>
   <div class="tags-tip">请选择行业，可在上方输入关键词快速查询</div>
-  <div class="skill-cont" *ngIf="isSkillSecondary">
+  <div class="skill-cont" *ngIf="isSkillSecondary && isSearchSkillSecondary">
     <div class="skill-tegs1">
       <ion-list class="select-list-item">
         <ion-item *ngFor="let skillList_item of skillList; let i = index" (click)="onSkillSecondaryList(skillList_item,i)"
@@ -40,6 +40,15 @@
       </ion-list>
     </div>
   </div>
+
+  <ion-list class="select-list-item1" *ngIf="!isSearchSkillSecondary">
+      <ion-item *ngFor="let skillSecondaryList_item of skillSecondaryList" (click)="onSelectClick(skillSecondaryList_item)">
+        {{skillSecondaryList_item.text}}
+      </ion-item>
+      <ion-item no-lines>
+      </ion-item>
+  </ion-list>
+
   <ion-list>
     <ion-item *ngIf="inputName && skillSecondaryList.length<1" (click)="onSelectClick({id:-1,text:inputName})" no-lines>
       <span>{{inputName}}</span>
@@ -86,9 +95,10 @@
 </div>  -->
 <ion-footer class="footer-btn">
   <ion-toolbar>
-    <div class="fixed-bottom">
+    <!-- <div class="fixed-bottom">
       <button ion-button class="btn-submit" (click)="onSelectSubmit()">保存</button>
-      <button ion-button class="btn-delete" (click)="onSelectDel()">删除</button>
-    </div>
+      <button ion-button class="btn-delete delete" (click)="onSelectDel()">删除</button>
+    </div> -->
+    <button ion-button expand="full" large class="fixed-bottom" (click)="onSelectDel()">删除</button>
   </ion-toolbar>
 </ion-footer>
