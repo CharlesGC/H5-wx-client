@@ -101,9 +101,7 @@ export class ProjectConsultantBrowserPage {
     this.isTipPrompt = true
     this.isdisabled = 'disabled'
     if (type == 3) {
-      this.tiptext = '确定忽略该顾问吗？'
-      this.type = 3
-      return;
+      this.navCtrl.pop();
     }else if (type == 1) {
       this.tiptext = '确定面试该顾问吗？'
       this.type = 1
@@ -116,10 +114,6 @@ export class ProjectConsultantBrowserPage {
   }
 
   sureTipPrompt() {
-    if(this.type == 3){
-      this.isTipPrompt = !this.isTipPrompt
-      this.navCtrl.pop();
-    }
     if(this.isFailed == false){
       this.navCtrl.pop()
       this.isTipPrompt = !this.isTipPrompt
