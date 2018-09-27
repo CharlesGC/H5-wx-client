@@ -21,6 +21,11 @@ import { ProjectDecumentBrowserPage } from '../project-decument-browser/project-
   templateUrl: 'project-stage-browser.html',
 })
 export class ProjectStageBrowserPage {
+  public isTipsPrompt =false
+  public tipstext : any 
+  public isFailed : any
+  public tiptext: any
+  public isdisabled: any
   public stageType: any;
   public projectStageDetail = {};
   constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider) {
@@ -77,20 +82,32 @@ export class ProjectStageBrowserPage {
       console.log('erros===', error);
     })
   }
-
+  sureTipsPrompt(){
+    this.isTipsPrompt = true
+    this.tipstext = '确认该阶段吗？'
+  }
   /*确认阶段 、提出异议*/
   onAllStageSubmit(psid, type) {
+    if(this.isFailed == false){
+      this.isTipsPrompt = !this.isTipsPrompt
+      this.navCtrl.pop()
+    }else if(this.isFailed == true){
+      this.isTipsPrompt =!this.isTipsPrompt
+      return
+    }
+    this.isdisabled = 'disabled'
     // let projectStageDetailUrl = 'http://mamon.yemindream.com/mamon/customer/confirmStage';
     const openId = window.sessionStorage.getItem('openId') || this.getUrlParam('openId');
     let projectStageDetailUrl = confirmStageUrl + '?openId=' + openId + '&psid=' + psid + '&status=' + type;
     this.Provider.getMamenSwiperData(projectStageDetailUrl).subscribe(res => {
       if (res.code == 200) {
-        alert('提交成功！');
-        this.navCtrl.pop();
-      } else if (res.code == 207) {
-        window.localStorage.removeItem('openId');
-      } else {
-        alert('请求出错:' + res.msg);
+        this.tipstext = '确认成功'
+        this.isFailed = false
+        this.isdisabled = ''
+      }else {
+        this.tipstext = '操作失败，请稍后重试'
+        this.isFailed = true
+        //alert('请求出错:' + res.msg);
       }
     }, error => {
       console.log('erros===', error);

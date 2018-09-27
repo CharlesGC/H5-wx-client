@@ -152,13 +152,17 @@ export class FormEditPage {
       this.parentColumns = this.degree
     } else if (this.selectField == 'paymentMethod') {
       this.parentColumns = this.paymentMethod
-    }
-    else if (this.selectField == 'industryList') {
+    }else if (this.selectField == 'industryList') {
       // this.getpaymentListData();
       this.selectList = (value && value.length) ? value.map(f => ({ ...f, id: (f.ilid || f.alId) })) : [{ id: 0 }];
     } else if (this.fieldType == 'date') {
       this.inputName = new Date(value);
-
+    }else if (this.fieldType == 'percentage'){
+      if(value< 1){
+        this.inputName = value*100
+      }else if(value >1){
+        this.inputName = value
+      }
     }
   }
 
@@ -192,7 +196,12 @@ export class FormEditPage {
       // this.inputName = [{ilid:2,industryName:'办公服务/办公用品'},{ilid:6,industryName:'航空/航天'}];
     } else if (this.fieldType == 'date') {
       this.inputName = new Date(value);
-
+    }else if (this.fieldType == 'percentage'){
+      if(value< 1){
+        this.inputName = value*100
+      }else if(value >1){
+        this.inputName = value
+      }
     }
     console.log(this.fieldType, value, this.selectList, 'ionViewDidLoad FormEditPage');
   }
