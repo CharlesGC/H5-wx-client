@@ -20,6 +20,7 @@ export class ProjectProgramObjectionPage {
   public isreturnBtn = false
   public tiptext: any
   public title = '请写下您的修改意见';
+  public isFailed: any
   constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider) {
   }
 
@@ -53,11 +54,16 @@ export class ProjectProgramObjectionPage {
     }
   }
 
-  surePrompt(){
-    this.isPosePrompt = !this.isPosePrompt
-    this.navCtrl.pop()
+  surePrompt() {
+    if (this.isFailed == false) {
+      this.isPosePrompt = !this.isPosePrompt
+      this.navCtrl.pop()
+    } else if (this.isFailed == true) {
+      this.isPosePrompt = !this.isPosePrompt
+      return
+    }
   }
-  ReturnBack(){
+  ReturnBack() {
     this.isPosePrompt = !this.isPosePrompt
     return
   }
@@ -86,11 +92,13 @@ export class ProjectProgramObjectionPage {
         //alert('操作成功！');
         this.isPosePrompt = true
         this.tiptext = '操作成功'
+        this.isFailed = false
       } else {
         //alert('请求出错:' + res.msg);
         this.isPosePrompt = true
         this.tiptext = '操作失败，请稍后再试'
         this.isreturnBtn = true
+        this.isFailed = true
       }
     }, error => {
       console.log('erros===', error);

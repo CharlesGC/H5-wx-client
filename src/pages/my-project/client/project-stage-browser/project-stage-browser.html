@@ -52,21 +52,14 @@
   </ion-list>
   <ion-list class="list-item-flex mt10">
     <ion-item>
-<<<<<<< HEAD
-      <label >付款比例</label>
-      <span item-right class="item-value">{{projectStageDetail.percentage<1?(projectStageDetail.percentage) *100 :projectStageDetail.percentage}} %</span>
-    </ion-item>
+      <label>付款比例</label>
+      <span item-right class="item-value">{{projectStageDetail.percentage < 1?(projectStageDetail.percentage) *100
+          :projectStageDetail.percentage}} % 
+      </span> 
+    </ion-item> 
     <ion-item>
-      <label >付款金额</label>
+      <label>付款金额</label>
       <span item-right class="item-value">{{projectStageDetail.price | currency : '￥'}}元</span>
-=======
-      <label class="label">付款比例</label>
-      <span item-right class="item-value">{{projectStageDetail.percentage * 100}} %</span>
-    </ion-item>
-    <ion-item>
-      <label class="label">付款金额</label>
-      <span item-right class="item-value">{{projectStageDetail.price}}元</span>
->>>>>>> 5d237128f60a610eb47c95aac5a8fa4353838284
     </ion-item>
     <ion-item no-lines>
       <label class="label">交付方式</label>

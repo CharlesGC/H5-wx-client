@@ -241,8 +241,25 @@
   <div style="height:100px;"></div>
   <button ion-button expand="full" large class="fixed-bottom" (click)="goEvalutionPage()" *ngIf="projectDetails.appStatus ==9 && !isApply">评价</button>
   <div class="fixed-bottom" *ngIf="!projectDetails.appStatus && projectDetails.appStatus != 0 && selectType != 3">
-  <!-- <div class="fixed-bottom" *ngIf="projectDetails.status==2||projectDetails.status==3||projectDetails.status==12"> -->
+    <!-- <div class="fixed-bottom" *ngIf="projectDetails.status==2||projectDetails.status==3||projectDetails.status==12"> -->
     <button ion-button class="btn-submit" (click)="onApplicationProject()">申请该项目</button>
-    <button ion-button class="btn-delete" (click)="onIgnoreProject(projectDetails.pid)">忽略</button>
+    <button ion-button class="btn-delete" (click)="sureTipPrompt()" [disabled]='isdisabled'>忽略</button>
   </div>
 </ion-content>
+<div class="phonebind-modal" [hidden]="!isTipPrompt">
+  <div class="modal-bg"></div>
+  <div class="modal-box">
+    <div class="modal-top">
+      <div class="modal-top-close">
+        <!-- <ion-icon ios="ios-close" md="md-close" item-rigth (click)="onClose()" color=""></ion-icon> -->
+      </div>
+      <div class="modal-title">提示</div>
+      <div class="modal-content">
+        <p>{{tipstext}}</p>
+      </div>
+      <div class="modal-footer">
+        <button ion-button full large (click)="onIgnoreProject(projectDetails.pid)">确定</button>
+      </div>
+    </div>
+  </div>
+</div>

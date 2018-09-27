@@ -10,7 +10,7 @@ import { ConsultantStageListPage } from '../consultant-stage-list/consultant-sta
 import { ConsultantDocumentListPage } from '../consultant-document-list/consultant-document-list';
 import { ConsultantCollectionListPage } from '../consultant-collection-list/consultant-collection-list';
 import { PorjectEvalutionPage } from '../../porject-evalution/porject-evalution';
-import { demandDeatilUrl,ignoreProjectUrl } from '../../../../providers/requestUrl';
+import { demandDeatilUrl, ignoreProjectUrl } from '../../../../providers/requestUrl';
 import { ConsultantProjectListPage } from '../consultant-project-list/consultant-project-list';
 
 /**
@@ -42,6 +42,10 @@ export class ConsultantProjectBrowserPage {
   public projectStageCount = {};
   public projectDocumentCount = {};
   public selectType = '';
+  public isTipPrompt = false
+  public tipstext: any
+  public isFailed: any
+  public isdisabled: any
   public menu = [
     { name: 'navMenu1', isShow: true }
   ];
@@ -214,27 +218,38 @@ export class ConsultantProjectBrowserPage {
   }
   // 返回项目列表页
   goback() {
-    console.log(1111)
     let isApply = this.navParams.get('isApply');
-    if(isApply){
+    if (isApply) {
       this.navCtrl.pop();
-    }else{
+    } else {
       this.navCtrl.popTo(this.navCtrl.getByIndex(1))
     }
   }
-
+  sureTipPrompt() {
+    this.isTipPrompt = true
+    this.tipstext = '确定忽略该项目吗？'
+  }
   /*忽略该项目*/
   onIgnoreProject(pid) {
+    if(this.isFailed == false){
+      this.navCtrl.pop();
+      return
+    }else if(this.isFailed == true){
+      this.isTipPrompt = !this.isTipPrompt
+      return
+    }
+    this.isdisabled = 'disabled'
     const openId = window.sessionStorage.getItem('openId') || this.getUrlParam('openId');
     let projectDetailsUrl = ignoreProjectUrl + '?openId=' + openId + '&pid=' + pid;
     this.Provider.getMamenSwiperData(projectDetailsUrl).subscribe(res => {
       if (res.code == 200) {
-        alert('忽略成功!')
-        this.navCtrl.pop();
-      } else if (res.code == 207) {
-        window.localStorage.removeItem('openId');
+        this.tipstext = '操作成功'
+        this.isFailed = false
+        this.isdisabled = ''
+        //this.navCtrl.pop();
       } else {
-        alert('请求出错:' + res.msg);
+        this.tipstext = '操作失败'
+        this.isFailed = true
       }
     }, error => {
       console.log('erros===', error);
