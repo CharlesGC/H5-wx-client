@@ -122,15 +122,10 @@ export class ConsultantStageBrowserPage {
     // let projectStageDetailUrl = 'http://mamon.yemindream.com/mamon/adviser/changeStageStatus';
     const openId = window.sessionStorage.getItem('openId')|| this.getUrlParam('openId');
     let projectStageDetailUrl = changeStageStatusUrl + '?openId=' + openId + '&type=0' +'&psid='+psid;
-    //console.log(this.projectStageDetail['document'].length,'00000000000')
-    
-    this.isStage = !this.isStage
-    this.isdis = 'disabled'
     this.Provider.getMamenSwiperData(projectStageDetailUrl).subscribe(res=>{
       if(res.code==200) {
         this.isStage = !this.isStage;
         this.navCtrl.pop();
-        console.log('提交成功！');
       }else if(res.code == 207) {
         window.localStorage.removeItem('openId');
       }else{

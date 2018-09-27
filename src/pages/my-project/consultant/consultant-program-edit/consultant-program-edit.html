@@ -76,16 +76,16 @@
   </ion-list>
   <div class="user-other-list">
     <ion-list class="card-item">
-      <a href="{{programData['certifiedUrl']}}" style="text-decoration:none">
-        <ion-item no-lines *ngIf="programData['certifiedUrl']">
+      <a href="{{programData['planUrl']}}" style="text-decoration:none">
+        <ion-item no-lines *ngIf="programData['planUrl']">
           <div class="card-item-label">
             <label>
-              <img style="width:66px;height:66px;" src="{{programData['typeStr'] || filetypeicon}}">
+              <img style="width:66px;height:66px;" src="{{programData['format'] || filetypeicon}}">
             </label>
             <div class="card-cont" data-src="url">
-              <h5>{{programData.sourceName || filetitle}}</h5>
+              <h5>{{programData.planName || filetitle}}</h5>
               <!-- <p class="action-browser-file">点击查看文件预览</p> -->
-              <p class="browser-size">{{programData.urlSize || filesize}}</p>
+              <p class="browser-size">{{programData.size || filesize}}</p>
             </div>
           </div>
         </ion-item>

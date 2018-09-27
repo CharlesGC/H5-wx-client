@@ -42,30 +42,30 @@ export class ConsultantInteractionSubmitPage {
     this.type = this.navParams.get('type') || 0;
     this.interactionData = this.navParams.get('data') || {}
 
-    this.fileUrlvalue = this.interactionData['certifiedUrl']
+    this.fileUrlvalue = this.interactionData['deliverableUrl']
     //console.log(this.interactionData,'这是数据')
-    this.interactionData['urlSize'] = (this.interactionData['urlSize'] / 1048576).toPrecision(3)
+    this.interactionData['size'] = (this.interactionData['size'] / 1048576).toPrecision(3)
 
-    if (this.interactionData['urlSize'] > 1) {
-      this.interactionData['urlSize'] = this.interactionData['urlSize'] + ' MB'
-    } else if (this.interactionData['urlSize'] < 1) {
-      this.interactionData['urlSize'] = this.interactionData['urlSize'] * 1024 + ' KB'
-    } else if (this.interactionData['urlSize'] == 'NaN') {
+    if (this.interactionData['size'] > 1) {
+      this.interactionData['size'] = this.interactionData['size'] + ' MB'
+    } else if (this.interactionData['size'] < 1) {
+      this.interactionData['size'] = this.interactionData['size'] * 1024 + ' KB'
+    } else if (this.interactionData['size'] == 'NaN') {
       // this.interactionData = {};
       //console.log(this.interactionData['typeStr'])
     }
 
-    if (this.interactionData['typeStr']) {
-      if (this.interactionData['typeStr'].search(/doc/) !== -1 || this.interactionData['typeStr'].search(/docx/) !== -1) {
-        this.interactionData['typeStr'] = 'assets/imgs/' + 'doc.png'
-      } else if (this.interactionData['typeStr'].search(/ppt/) !== -1 || this.interactionData['typeStr'].search(/pptx/) !== -1) {
-        this.interactionData['typeStr'] = 'assets/imgs/' + 'ppt.png'
-      } else if (this.interactionData['typeStr'].search(/xls/) !== -1 || this.interactionData['typeStr'].search(/xlsx/) !== -1) {
-        this.interactionData['typeStr'] = 'assets/imgs/' + 'xls.png'
-      } else if (this.interactionData['typeStr'].search(/jpg/) !== -1 || this.interactionData['typeStr'].search(/png/) !== -1 || this.interactionData['typeStr'].search(/jpeg/) !== -1) {
-        this.interactionData['typeStr'] = 'assets/imgs/' + 'png.png'
-      } else if (this.interactionData['typeStr'].search(/pdf/) !== -1) {
-        this.interactionData['typeStr'] = 'assets/imgs/' + 'pdf.png'
+    if (this.interactionData['format']) {
+      if (this.interactionData['format'].search(/doc/) !== -1 || this.interactionData['format'].search(/docx/) !== -1) {
+        this.interactionData['format'] = 'assets/imgs/' + 'doc.png'
+      } else if (this.interactionData['format'].search(/ppt/) !== -1 || this.interactionData['format'].search(/pptx/) !== -1) {
+        this.interactionData['format'] = 'assets/imgs/' + 'ppt.png'
+      } else if (this.interactionData['format'].search(/xls/) !== -1 || this.interactionData['format'].search(/xlsx/) !== -1) {
+        this.interactionData['format'] = 'assets/imgs/' + 'xls.png'
+      } else if (this.interactionData['format'].search(/jpg/) !== -1 || this.interactionData['format'].search(/png/) !== -1 || this.interactionData['format'].search(/jpeg/) !== -1) {
+        this.interactionData['format'] = 'assets/imgs/' + 'png.png'
+      } else if (this.interactionData['format'].search(/pdf/) !== -1) {
+        this.interactionData['format'] = 'assets/imgs/' + 'pdf.png'
       }
     }
   }
@@ -78,7 +78,6 @@ export class ConsultantInteractionSubmitPage {
   setuploadfile = (obj, name) => {
     this.filestatus = true;
     this.filetitle = name;
-    console.log(obj)
     var a = obj.fileSize / 1048576;
     this.filesize = a.toPrecision(3);
     this.fileurl = obj.url;
@@ -90,8 +89,8 @@ export class ConsultantInteractionSubmitPage {
     }
 
     this.interactionData['sourceName'] = this.filetitle
-    this.interactionData['certifiedUrl'] = this.fileurl
-    this.interactionData['urlSize'] = this.filesize
+    this.interactionData['deliverableUrl'] = this.fileurl
+    this.interactionData['size'] = this.filesize
     this.fid = obj.fid
 
     if (types.indexOf('doc') == 0 || types.indexOf('docx') == 0) {

@@ -60,18 +60,18 @@ export class HomePage {
       }
     )
   }
-  // 行业数据 
-  // getindustryInfo() {
-  //   this.industrydata.getIndustryData(getindustryUrl, 0).subscribe(
-  //     res => {
-  //       // console.log(res);
-  //       this.IndustryArr = res.data.list;
-  //       // console.log(this.IndustryArr);
-  //     }, error => {
-  //       console.log(error);
-  //     }
-  //   )
-  // }
+  行业数据 
+  getindustryInfo() {
+    this.industrydata.getIndustryData(getindustryUrl, 0).subscribe(
+      res => {
+        // console.log(res);
+        this.IndustryArr = res.data.list;
+        // console.log(this.IndustryArr);
+      }, error => {
+        console.log(error);
+      }
+    )
+  }
   //技能数据
   getskillInfo() {
     this.skilldata.getSkillLabelData(getskillUrl, 0).subscribe(

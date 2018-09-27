@@ -90,7 +90,7 @@ export class ProjectEditStep3Page {
       '&principalPhone=' + (projectData['principalPhone'] || '') +
       '&principalEmail=' + (projectData['principalEmail'] || '') +
       '&projectName=' + (projectData['projectName'] || '') +
-      '&description=' + projectData['description'] +
+      '&description=' + (projectData['description'] || '') +
       '&target=' + (projectData['target'] || '') +
       '&industrys=' + industrys +
       '&skills=' + skills +

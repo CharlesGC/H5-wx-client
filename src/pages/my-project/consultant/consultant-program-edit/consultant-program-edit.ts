@@ -33,13 +33,14 @@ export class ConsultantProgramEditPage {
   public isFailed: any
   public ppid: any
   public checkFailed  = false
+  public isAdd:any;
   constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider) {
   }
 
   ionViewDidLoad() {
     this.programData = this.navParams.get('data') || {};
-
-    console.log(this.programData, 'ionViewDidLoad ConsultantProgramEditPage');
+    this.isAdd = this.navParams.get('isAdd');
+    console.log(this.isAdd,this.programData, 'ionViewDidLoad ConsultantProgramEditPage');
 
     this.fileUrlvalue = this.programData['certifiedUrl']
     //console.log(this.interactionData,'这是数据')
@@ -68,6 +69,10 @@ export class ConsultantProgramEditPage {
       }
     }
   }
+  ionViewDidEnter(){
+    this.isAdd = this.navParams.get('isAdd');
+    console.log(this.isAdd,'修改')
+  }
   /* 跳转到上传文件页面 */
   gouploadfile() {
     this.navCtrl.push(UploadfilePage, {
@@ -89,9 +94,9 @@ export class ConsultantProgramEditPage {
       this.filesize = this.filesize * 1024 + ' KB'
     }
 
-    this.programData['sourceName'] = this.filetitle
-    this.programData['certifiedUrl'] = this.fileurl
-    this.programData['urlSize'] = this.filesize
+    this.programData['planName'] = this.filetitle
+    this.programData['planUrl'] = this.fileurl
+    this.programData['size'] = this.filesize
     this.programData['fid'] = obj.fid
 
     if (types.indexOf('doc') == 0 || types.indexOf('docx') == 0) {
@@ -170,7 +175,7 @@ export class ConsultantProgramEditPage {
       this.checkFailed =false
       return
     }
-    if (!programData['fid']) {
+    if (!programData['planUrl'] && !programData['fid']) {
       this.isTipPrompt = true
       this.tipstext = '方案计划书不能为空'
       this.checkFailed =false
@@ -178,12 +183,11 @@ export class ConsultantProgramEditPage {
     }
     this.isTipPrompt = true
     this.checkFailed = true
-    if(!value){
-      this.tipstext = '确认提交该方案吗？'
-      return
-    }else{
+    if(value){
       this.tipstext = '确认保存该方案吗？'
       this.ppid = value
+    }else{
+      this.tipstext = '确认提交该方案吗？'
     }
   }
 

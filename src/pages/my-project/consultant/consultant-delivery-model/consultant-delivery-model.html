@@ -30,7 +30,7 @@
     </ion-item>
     <ion-item no-lines>
       <label>收款额度</label>
-      <span item-right class="item-value">{{deliveryModelData.price}} 元</span>
+      <span item-right class="item-value">{{deliveryModelData.price | currency: '￥'}} 元</span>
     </ion-item>
   </ion-list>
   <div class="registration-matters mt10">
