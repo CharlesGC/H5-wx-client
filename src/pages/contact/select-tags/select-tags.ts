@@ -27,6 +27,7 @@ export class SelectTagsPage {
   public skillSecondaryList = [];
   public skillChecked:any;
   public isSkillSecondary=true;
+  public isSearchSkillSecondary = true;
   constructor(public navCtrl: NavController, public navParams: NavParams, private Provider:MamenDataProvider) {
     this.selectListData = []
     this.inputName = ''
@@ -116,7 +117,7 @@ export class SelectTagsPage {
           }else{
             this.isSkillSecondary=true;
           }
-          console.log(this.skillSecondaryList,'this.skillSecondaryList')
+          console.log(this.isSkillSecondary,this.skillSecondaryList,'this.skillSecondaryList')
         }
         
       }else if(res.code == 207) {
@@ -140,6 +141,9 @@ export class SelectTagsPage {
     if(type == 'industryList'){
       this.getpaymentListData(this.inputName)
     }else {
+      this.isSkillSecondary = false;
+      this.isSearchSkillSecondary = false;
+      console.log(this.isSkillSecondary,this.isSearchSkillSecondary,2222222222222222222 );
       this.getSkillData('',this.inputName);
     }
   }
