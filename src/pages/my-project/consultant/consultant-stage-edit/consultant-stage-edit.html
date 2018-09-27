@@ -64,7 +64,7 @@
         <ion-item (click)="goFormEditPage('percentage',stageData.percentage,'percentage')">
             <label>付款占比<span class="required-field ml5">(必填)</span></label>
             <p item-right class="rigth-message">
-                <span item-right class="item-value line-overflow" style="margin-right:0;">{{stageData.percentage || '请输入'}}</span>
+                <span item-right class="item-value line-overflow" style="margin-right:0;">{{(stageData['percentage'])< 1? stageData.percentage*100:stageData.percentage || '请输入'}}</span>
                 <span item-right *ngIf = "stageData.percentage">%</span>
                 <ion-icon class="icon" name="arrow-forward"></ion-icon>
             </p>

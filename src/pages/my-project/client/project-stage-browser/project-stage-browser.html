@@ -53,11 +53,21 @@
   <ion-list class="list-item-flex mt10">
     <ion-item>
       <label>付款比例</label>
+<<<<<<< HEAD
       <span item-right class="item-value">{{projectStageDetail.percentage * 100}} %</span>
     </ion-item>
     <ion-item>
       <label>付款金额</label>
       <span item-right class="item-value">{{projectStageDetail.price}}元</span>
+=======
+      <span item-right class="item-value">{{projectStageDetail.percentage < 1?(projectStageDetail.percentage) *100
+          :projectStageDetail.percentage}} % 
+      </span> 
+    </ion-item> 
+    <ion-item>
+      <label>付款金额</label>
+      <span item-right class="item-value">{{projectStageDetail.price | currency : '￥'}}元</span>
+>>>>>>> 15d5cde188f7a1a6e9aac52b9a0a8cf5dc9c2519
     </ion-item>
     <ion-item no-lines>
       <label>交付方式</label>
@@ -123,7 +133,25 @@
   <button ion-button expand="full" large class="fixed-bottom" (click)="goPaymentRecord(projectStageDetail.customerStatus)"
     *ngIf="projectStageDetail.customerStatus==6">提交发票信息</button>
   <div class="fixed-bottom" *ngIf="projectStageDetail.customerStatus==5">
-    <button ion-button class="btn-submit" (click)="onAllStageSubmit(projectStageDetail.psid,6)">确认阶段</button>
+    <button ion-button class="btn-submit" (click)="sureTipsPrompt()" [disabled]="isdisabled">确认阶段</button>
     <button ion-button class="btn-delete" (click)="onCustomerNayDocument(projectStageDetail.psid)">提出异议</button>
   </div>
 </ion-content>
+<div class="phonebind-modal" [hidden]="!isTipsPrompt">
+  <div class="modal-bg"></div>
+  <div class="modal-box">
+    <div class="modal-top">
+      <div class="modal-top-close">
+        <!-- <ion-icon ios="ios-close" md="md-close" item-rigth (click)="onClose()" color=""></ion-icon> -->
+      </div>
+      <div class="modal-title">提示</div>
+      <div class="modal-content">
+        <p>{{tipstext}}</p>
+      </div>
+      <div class="modal-footer">
+        <button ion-button full large (click)="onAllStageSubmit(projectStageDetail.psid,6)">确定</button>
+        <button ion-button full large (click)="onReturnBack()" class="btn-delete" *ngIf="isFailed">返回</button>
+      </div>
+    </div>
+  </div>
+</div>

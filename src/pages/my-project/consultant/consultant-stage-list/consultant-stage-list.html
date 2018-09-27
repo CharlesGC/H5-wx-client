@@ -63,7 +63,7 @@
     <div class="no-content">
       <h4 class="title">项目阶段</h4>
       <div class="img">
-          <img src="../../../../assets/imgs/tuijain.png" alt="">
+        <img src="../../../../assets/imgs/tuijain.png" alt="">
       </div>
       <p class="tip">当前分类暂时为空，点击下方按钮添加阶段。</p>
     </div>
@@ -233,8 +233,26 @@
     <button ion-button expand="full" large class="fixed-bottom bg-gry" (click)="goAccountEdit()" *ngIf="projectType == 7">等待客户确认中</button>
     <button ion-button expand="full" large class="fixed-bottom" (click)="onAddStageClick()" *ngIf="!projectStageListData || projectStageListData.length<1">添加阶段</button>
     <div class="fixed-bottom" *ngIf="projectType == 10">
-      <button ion-button class="btn-submit" (click)="onAllStageSubmit()">提交阶段</button>
+      <button ion-button class="btn-submit" (click)="sureTips()" [disabled]="isdisabled">提交阶段</button>
       <button ion-button class="btn-delete" (click)="onAddStageClick()">添加阶段</button>
     </div>
   </div>
 </ion-content>
+<div class="phonebind-modal" [hidden]="!isTipsPrompt">
+  <div class="modal-bg"></div>
+  <div class="modal-box">
+    <div class="modal-top">
+      <div class="modal-top-close">
+        <!-- <ion-icon ios="ios-close" md="md-close" item-rigth (click)="onClose()" color=""></ion-icon> -->
+      </div>
+      <div class="modal-title">提示</div>
+      <div class="modal-content">
+        <p>{{tipstext}}</p>
+      </div>
+      <div class="modal-footer">
+        <button ion-button full large (click)="onAllStageSubmit()">确定</button>
+        <button ion-button full large (click)="onrReturnback()" class="btn-delete">返回</button>
+      </div>
+    </div>
+  </div>
+</div>

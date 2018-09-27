@@ -93,7 +93,7 @@ export class ProjectPaymentRecordPage {
     this.filesize = a.toPrecision(3);
     this.fileurl = obj.url;
     this.paymentRecordData['sourceName'] = this.filetitle
-    this.paymentRecordData['urlSize'] = this.filesize
+    this.paymentRecordData['size'] = this.filesize
     this.paymentRecordData['certifiedUrl'] = this.fileurl
     this.paymentRecordData['fid'] = obj.fid
 
@@ -114,7 +114,7 @@ export class ProjectPaymentRecordPage {
     } else if (types.indexOf('pdf') == 0) {
       this.filetypeicon = 'assets/imgs/' + 'pdf.png'
     }
-    this.paymentRecordData['typeStr'] = this.filetypeicon
+    //this.paymentRecordData['typeStr'] = this.filetypeicon
     //console.log(this.filetypeicon)
   }
 
