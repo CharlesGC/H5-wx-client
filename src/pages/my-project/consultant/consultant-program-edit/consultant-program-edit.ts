@@ -32,6 +32,7 @@ export class ConsultantProgramEditPage {
   public isdisabled = ''
   public isFailed: any
   public ppid: any
+  public checkFailed  = false
   constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider) {
   }
 
@@ -142,45 +143,55 @@ export class ConsultantProgramEditPage {
     if (!programData['programName']) {
       this.isTipPrompt = true
       this.tipstext = '方案名称不能为空'
+      this.checkFailed =false
       return
     }
     if (!programData['programDescription']) {
       this.isTipPrompt = true
       this.tipstext = '方案描述不能为空'
+      this.checkFailed =false
       return
     }
     if (!programData['workloadUnit']) {
       this.isTipPrompt = true
       this.tipstext = '方案周期不能为空'
+      this.checkFailed =false
       return
     }
     if (!programData['deliverable']) {
       this.isTipPrompt = true
       this.tipstext = '方案规划不能为空'
+      this.checkFailed =false
       return
     }
     if (!programData['price']) {
       this.isTipPrompt = true
       this.tipstext = '项目总价不能为空'
+      this.checkFailed =false
       return
     }
     if (!programData['fid']) {
       this.isTipPrompt = true
       this.tipstext = '方案计划书不能为空'
+      this.checkFailed =false
       return
     }
     this.isTipPrompt = true
-    this.isdisabled = 'disabled'
+    this.checkFailed = true
     if(!value){
       this.tipstext = '确认提交该方案吗？'
       return
-    }else if(value){
+    }else{
       this.tipstext = '确认保存该方案吗？'
       this.ppid = value
     }
   }
 
   sureTipPrompt() {
+    if(this.checkFailed == false){
+      this.isTipPrompt = !this.isTipPrompt
+      return
+    }
     if(this.isFailed == false){
       this.isTipPrompt = !this.isTipPrompt
       this.navCtrl.pop()
@@ -209,9 +220,10 @@ export class ConsultantProgramEditPage {
     this.Provider.getMamenSwiperData(projectStageDetailUrl).subscribe(res => {
       if (res.code == 200) {
         //alert('操作成功！');
-        this.tipstext = '操作成功！'
-        this.isdisabled = ''
+        //this.tipstext = '操作成功！'
+        //his.isdisabled = ''
         this.isFailed = false
+        this.navCtrl.pop()
       } else {
         this.tipstext = '操作失败，请稍后重试！'
         //alert('请求出错:' + res.msg);
@@ -225,6 +237,7 @@ export class ConsultantProgramEditPage {
 
   onReturnBack() {
     this.isTipPrompt = !this.isTipPrompt
+    this.isdisabled = ''
     return
   }
 }
