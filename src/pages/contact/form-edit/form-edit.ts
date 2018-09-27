@@ -171,7 +171,12 @@ export class FormEditPage {
       this.selectList = (value && value.length) ? value.map(f => ({ ...f, id: (f.ilid || f.alId) })) : [{ id: 0 }];
     } else if (this.fieldType == 'date') {
       this.inputName = new Date(value);
-
+    }else if (this.fieldType == 'percentage'){
+      if(value< 1){
+        this.inputName = value*100
+      }else if(value >1){
+        this.inputName = value
+      }
     }
   }
 
@@ -208,12 +213,18 @@ export class FormEditPage {
     } else if (this.fieldType == 'date') {
       this.inputName = new Date(value);
 
-    }  
     // else if(this.fieldType == 'textarea') {
     //   console.log(this.inputName,'未开始时')
     //   this.inputName=this.inputName.replaceAll("<br>", "\n");
     //   console.log(this.inputName,'转换后开始时')
     // }
+    }else if (this.fieldType == 'percentage'){
+      if(value< 1){
+        this.inputName = value*100
+      }else if(value >1){
+        this.inputName = value
+      }
+    }
     console.log(this.fieldType, value, this.selectList, 'ionViewDidLoad FormEditPage');
   }
 

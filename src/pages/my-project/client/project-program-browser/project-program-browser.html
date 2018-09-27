@@ -22,19 +22,19 @@
   </ion-list>
   <ion-list class="describe-list">
     <ion-item no-lines>
-      <h4 class="h4">方案描述</h4>
+      <h4>方案描述</h4>
       <p class="describe-cont">{{projectProgramDetails.programDescription}}</p>
     </ion-item>
   </ion-list>
   <ion-list class="describe-list mt10">
     <ion-item no-lines>
-      <h4 class="h4">项目规划与交付物</h4>
+      <h4>项目规划与交付物</h4>
       <p class="describe-cont">{{projectProgramDetails.deliverable}} </p>
     </ion-item>
   </ion-list>
   <ion-list class="list-item-flex mt10">
     <ion-item>
-      <label class="label">项目周期</label>
+      <label>项目周期</label>
       <span item-right class="item-value">{{projectProgramDetails.workload}}
         <span *ngIf="projectProgramDetails.workloadUnit == 0">天</span>
         <span *ngIf="projectProgramDetails.workloadUnit == 1">周</span>
@@ -42,7 +42,7 @@
       </span>
     </ion-item>
     <ion-item no-lines>
-      <label class="label">项目总价</label>
+      <label>项目总价</label>
       <span item-right class="item-value">{{projectProgramDetails.price}} 元</span>
     </ion-item>
   </ion-list>
@@ -77,7 +77,7 @@
   <button ion-button expand="full" large class="fixed-bottom bg-gry" *ngIf="projectProgramDetails.status == 5 ||projectProgramDetails.status == 4 || projectProgramDetails.status == 0">等待顾问修改中</button>
   <button ion-button expand="full" large class="fixed-bottom bg-gry" *ngIf="projectProgramDetails.status == 3">未采用</button>
   <div class="fixed-bottom" *ngIf="projectProgramDetails.status == 1">
-    <button ion-button class="btn-submit" (click)="sureProgram()">确认方案</button>
+    <button ion-button class="btn-submit" (click)="sureProgram()" [disabled]="isdisabled">确认方案</button>
     <button ion-button class="btn-delete" (click)="onObjectionClick(3)">提出异议</button>
   </div>
 </ion-content>

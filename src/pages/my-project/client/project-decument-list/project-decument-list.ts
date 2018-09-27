@@ -39,7 +39,7 @@ export class ProjectDecumentListPage {
   ionViewDidLoad() {
     let pid = this.navParams.get('pid');
     let status = this.navParams.get('status');
-    this.getProjectDocumentListDataData(pid,status);
+    this.getProjectDocumentListDataData(pid, status);
     console.log('ionViewDidLoad ProjectDecumentListPage');
   }
 
@@ -53,7 +53,7 @@ export class ProjectDecumentListPage {
 
   /*跳转到文档详情页面*/
   goDocumentBrowser(data) {
-    this.navCtrl.push(ProjectDecumentBrowserPage,{type:data.type})
+    this.navCtrl.push(ProjectDecumentBrowserPage, { type: data.type, id: data.id })
   }
 
   /*点击展开、收起*/
@@ -102,37 +102,37 @@ export class ProjectDecumentListPage {
     })
   }
 
-  getUrlParam(name) {  
+  getUrlParam(name) {
     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象  
     var r = window.location.search.substr(1).match(reg);  //匹配目标参数  
     if (r != null) {
-        return encodeURI(r[2]);  //返回参数值 
+      return encodeURI(r[2]);  //返回参数值 
     } else {
-        return null; 
+      return null;
     }
- }
+  }
 
   /*项目阶段列表数据请求*/
-  getProjectDocumentListDataData(pid,status) {
+  getProjectDocumentListDataData(pid, status) {
     // let projectStageListUrl = 'http://mamon.yemindream.com/mamon/customer/getDocumentList';
-    const openId = window.sessionStorage.getItem('openId')|| this.getUrlParam('openId');
-    let projectStageListUrl = getDocumentListUrl + '?openId=' + openId + '&pid='+pid;
-    if(status !== ''){
-      projectStageListUrl = projectStageListUrl + '&type='+status;
+    const openId = window.sessionStorage.getItem('openId') || this.getUrlParam('openId');
+    let projectStageListUrl = getDocumentListUrl + '?openId=' + openId + '&pid=' + pid;
+    if (status !== '') {
+      projectStageListUrl = projectStageListUrl + '&type=' + status;
     }
-    this.Provider.getMamenSwiperData(projectStageListUrl).subscribe(res=>{
-      if(res.code==200) {
+    this.Provider.getMamenSwiperData(projectStageListUrl).subscribe(res => {
+      if (res.code == 200) {
         this.documentListData = res.data;
-        if(!this.documentListData || this.documentListData.length < 1){
+        if (!this.documentListData || this.documentListData.length < 1) {
           this.isModal = true;
         }
-      }else if(res.code == 207) {
+      } else if (res.code == 207) {
         window.localStorage.removeItem('openId');
-      }else{
-        alert('请求出错:'+res.msg);
+      } else {
+        alert('请求出错:' + res.msg);
       }
-    },error=>{
-      console.log('erros===',error);
+    }, error => {
+      console.log('erros===', error);
     })
   }
 
@@ -141,4 +141,18 @@ export class ProjectDecumentListPage {
     this.navCtrl.popTo(this.navCtrl.getByIndex(1))
   }
 
+  /* 根据typeStr来判断文件类型 */
+  formatTypes(value) {
+    if (value.search(/doc/) !== -1 || value.search(/docx/) !== -1) {
+      return 'doc';
+    } else if (value.search(/ppt/) !== -1 || value.search(/pptx/) !== -1) {
+      return 'ppt'
+    } else if (value.search(/xls/) !== -1 || value.search(/xlsx/) !== -1) {
+      return 'xls'
+    } else if (value.search(/jpg/) !== -1 || value.search(/png/) !== -1 || value.search(/jpeg/) !== -1) {
+      return 'jpg'
+    } else if (value.search(/pdf/) !== -1) {
+      return 'pdf'
+    }
+  }
 }

@@ -19,6 +19,7 @@ import { getProjectProgramDeatilUrl, confirmProgramUrl } from '../../../../provi
 })
 export class ProjectProgramBrowserPage {
   public isProgram = false
+  public isdisabled :any
   public tiptext: any
   public isFailed: any
   public projectProgramDetails = {};
@@ -107,6 +108,7 @@ export class ProjectProgramBrowserPage {
       this.isProgram = !this.isProgram
       return
     }
+    this.isdisabled = 'disabled'
     let ppid = this.navParams.get('ppid');
     // let projectDetailsUrl = 'http://mamon.yemindream.com/mamon/customer/confirmProgram';
     const openId = window.sessionStorage.getItem('openId') || this.getUrlParam('openId');
@@ -116,6 +118,7 @@ export class ProjectProgramBrowserPage {
         //alert('操作成功！');
         this.tiptext = "操作成功！"
         this.isFailed = false
+        this.isdisabled = ''
       } else {
         this.tiptext = "操作失败，请稍后重试！"
         this.isFailed = true

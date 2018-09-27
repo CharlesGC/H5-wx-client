@@ -52,7 +52,7 @@
     <ion-item no-lines (click)="goFormEditPage('price',programData.price,'price')">
       <label>项目总价</label>
       <p item-right>
-        <span class="item-value">{{(programData.price | currency  :'￥') || '请输入'}}</span>
+        <span class="item-value">{{(programData.price | currency :'￥') || '请输入'}}</span>
         <ion-icon class="icon" name="arrow-forward"></ion-icon>
       </p>
     </ion-item>
@@ -84,7 +84,7 @@
             </label>
             <div class="card-cont" data-src="url">
               <h5>{{programData.sourceName || filetitle}}</h5>
-              <p class="action-browser-file">点击查看文件预览</p>
+              <!-- <p class="action-browser-file">点击查看文件预览</p> -->
               <p class="browser-size">{{programData.urlSize || filesize}}</p>
             </div>
           </div>
@@ -94,45 +94,28 @@
   </div>
   <div style="height:100px;"></div>
   <button ion-button expand="full" large class="fixed-bottom" (click)="onProgramSubmitClick()" *ngIf="isAdd" [disabled]="isdisabled">提交</button>
-  <button ion-button expand="full" large class="fixed-bottom" (click)="onProgramSubmitClick(programData.ppid)" *ngIf="!isAdd" [disabled]="isdisabled">保存修改</button>
+  <button ion-button expand="full" large class="fixed-bottom" (click)="onProgramSubmitClick(programData.ppid)" *ngIf="!isAdd"
+    [disabled]="isdisabled">保存修改</button>
   <!-- <div class="fixed-bottom" *ngIf="!isAdd">
           <button ion-button class="btn-submit" (click)="onProgramSubmitClick()">保存修改</button>
           <button ion-button class="btn-delete" (click)="onBankAccountDel()">删除</button>
       </div> -->
 </ion-content>
-<div class="phonebind-modal" [hidden]="!isshow">
-    <div class="modal-bg"></div>
-    <div class="modal-box">
-        <div class="modal-top">
-            <div class="modal-top-close">
-                <!-- <ion-icon ios="ios-close" md="md-close" item-rigth (click)="onClose()" color=""></ion-icon> -->
-            </div>
-            <div class="modal-title">提示</div>
-            <div class="modal-content">
-                <p>{{tipstext}}</p>
-            </div>
-            <div class="modal-footer">
-                <button ion-button full large (click)="sureCancel()">确定</button>
-                <!-- <button ion-button full large (click)="onCompanyDel()" class="btn-delete">返回</button> -->
-            </div>
-        </div>
+<div class="phonebind-modal" [hidden]="!isTipPrompt">
+  <div class="modal-bg"></div>
+  <div class="modal-box">
+    <div class="modal-top">
+      <div class="modal-top-close">
+        <!-- <ion-icon ios="ios-close" md="md-close" item-rigth (click)="onClose()" color=""></ion-icon> -->
+      </div>
+      <div class="modal-title">提示</div>
+      <div class="modal-content">
+        <p>{{tipstext}}</p>
+      </div>
+      <div class="modal-footer">
+        <button ion-button full large (click)="sureTipPrompt()">确定</button>
+        <button ion-button full large (click)="onReturnBack()" class="btn-delete">返回</button>
+      </div>
     </div>
-</div>
-<div class="phonebind-modal" [hidden]="!issuccess">
-    <div class="modal-bg"></div>
-    <div class="modal-box">
-        <div class="modal-top">
-            <div class="modal-top-close">
-                <!-- <ion-icon ios="ios-close" md="md-close" item-rigth (click)="onClose()" color=""></ion-icon> -->
-            </div>
-            <div class="modal-title">提示</div>
-            <div class="modal-content">
-                <p>{{tipstext}}</p>
-            </div>
-            <div class="modal-footer">
-                <button ion-button full large (click)="sureSuccess()">确定</button>
-                <!-- <button ion-button full large (click)="onCompanyDel()" class="btn-delete">返回</button> -->
-            </div>
-        </div>
-    </div>
+  </div>
 </div>

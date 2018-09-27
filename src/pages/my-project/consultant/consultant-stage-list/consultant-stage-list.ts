@@ -24,6 +24,10 @@ import { getAdviserProjectStageListUrl, changeStageStatusUrl, projectStagePropos
   templateUrl: 'consultant-stage-list.html',
 })
 export class ConsultantStageListPage {
+  public isTipsPrompt = false
+  public isFailed: any
+  public tipstext: any
+  public isdisabled: any
 
   public projectStageListData: any;
   public status = -1;
@@ -170,7 +174,16 @@ export class ConsultantStageListPage {
     })
   }
 
-
+  onrReturnback() {
+    this.isTipsPrompt = !this.isTipsPrompt
+    return
+  }
+  sureTips(){
+    this.isTipsPrompt = true
+    this.isdisabled = 'disabled'
+    this.tipstext = "请确认是否提交该阶段？"
+    return
+  }
 
   /*添加阶段*/
   onAddStageClick() {
@@ -181,18 +194,28 @@ export class ConsultantStageListPage {
 
   /*提交阶段*/
   onAllStageSubmit() {
+    if(this.isFailed == false){
+      this.isTipsPrompt = !this.isTipsPrompt
+      this.navCtrl.pop()
+    }else if(this.isFailed == true){
+      this.isTipsPrompt = !this.isTipsPrompt
+      return
+    }
     let pid = this.navParams.get('pid');
     // let projectStageDetailUrl = 'http://mamon.yemindream.com/mamon/adviser/changeStageStatus';
     const openId = window.sessionStorage.getItem('openId') || this.getUrlParam('openId');
     let projectStageDetailUrl = changeStageStatusUrl + '?openId=' + openId + '&type=1' + '&pid=' + pid;
     this.Provider.getMamenSwiperData(projectStageDetailUrl).subscribe(res => {
       if (res.code == 200) {
+        this.tipstext = "提交成功"
+        this.isFailed = false
         //alert('提交成功！');
-        this.navCtrl.pop();
-      } else if (res.code == 207) {
-        window.localStorage.removeItem('openId');
+        //this.navCtrl.pop();
       } else {
         //alert('请求出错:' + res.msg);
+        this.isTipsPrompt = true
+        this.tipstext = "提交失败，请稍后再试"
+        this.isFailed = true
       }
     }, error => {
       console.log('erros===', error);

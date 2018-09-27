@@ -28,9 +28,10 @@ export class ConsultantProgramEditPage {
 
   public programData = {}
   public tipstext: any
-  public isshow = false
+  public isTipPrompt = false
   public isdisabled = ''
-  public issuccess = false
+  public isFailed: any
+  public ppid: any
   constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider) {
   }
 
@@ -124,14 +125,6 @@ export class ConsultantProgramEditPage {
     }
 
   }
-  sureCancel(){
-    this.isshow = !this.isshow
-  }
-
-  sureSuccess(){
-    this.issuccess = !this.issuccess
-    this.navCtrl.pop()
-  }
 
   getUrlParam(name) {
     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象  
@@ -142,42 +135,64 @@ export class ConsultantProgramEditPage {
       return null;
     }
   }
+
   /*新增、编辑请求*/
-  onProgramSubmitClick(ppid) {
-    let pid = this.navParams.get('pid');
+  onProgramSubmitClick(value) {
     let programData = this.programData;
-    // let projectStageDetailUrl = 'http://mamon.yemindream.com/mamon/adviser/addOrEditProgram';
-    const openId = window.sessionStorage.getItem('openId') || this.getUrlParam('openId');
-    if(!programData['programName']){
-      this.isshow = true
+    if (!programData['programName']) {
+      this.isTipPrompt = true
       this.tipstext = '方案名称不能为空'
       return
     }
-    if(!programData['programDescription']){
-      this.isshow = true
+    if (!programData['programDescription']) {
+      this.isTipPrompt = true
       this.tipstext = '方案描述不能为空'
       return
     }
-    if(!programData['workloadUnit']){
-      this.isshow = true
+    if (!programData['workloadUnit']) {
+      this.isTipPrompt = true
       this.tipstext = '方案周期不能为空'
       return
     }
-    if(!programData['deliverable']){
-      this.isshow = true
+    if (!programData['deliverable']) {
+      this.isTipPrompt = true
       this.tipstext = '方案规划不能为空'
       return
     }
-    if(!programData['price']){
-      this.isshow = true
+    if (!programData['price']) {
+      this.isTipPrompt = true
       this.tipstext = '项目总价不能为空'
       return
     }
-    if(!programData['fid']){
-      this.isshow = true
+    if (!programData['fid']) {
+      this.isTipPrompt = true
       this.tipstext = '方案计划书不能为空'
       return
     }
+    this.isTipPrompt = true
+    this.isdisabled = 'disabled'
+    if(!value){
+      this.tipstext = '确认提交该方案吗？'
+      return
+    }else if(value){
+      this.tipstext = '确认保存该方案吗？'
+      this.ppid = value
+    }
+  }
+
+  sureTipPrompt() {
+    if(this.isFailed == false){
+      this.isTipPrompt = !this.isTipPrompt
+      this.navCtrl.pop()
+      return
+    }else if (this.isFailed == true){
+      this.isTipPrompt = !this.isTipPrompt
+      return
+    }
+    let programData = this.programData;
+    let pid = this.navParams.get('pid');
+    // let projectStageDetailUrl = 'http://mamon.yemindream.com/mamon/adviser/addOrEditProgram';
+    const openId = window.sessionStorage.getItem('openId') || this.getUrlParam('openId');
     let projectStageDetailUrl = addOrEditProgramUrl + '?openId=' + openId + '&pid=' + pid + '&status=-2' +
       '&programName=' + programData['programName'] +
       '&programDescription=' + programData['programDescription'] +
@@ -188,25 +203,28 @@ export class ConsultantProgramEditPage {
       '&planName=' + (programData['planName'] || '') +
       '&fid=' + (programData['fid'] || '') +
       '&planUrl=' + (programData['planUrl'] || '');
-    if (ppid) {
-      projectStageDetailUrl = projectStageDetailUrl + '&ppid=' + ppid;
+    if (this.ppid) {
+      projectStageDetailUrl = projectStageDetailUrl + '&ppid=' + this.ppid;
     }
-    
-    this.isdisabled = 'disabled'
     this.Provider.getMamenSwiperData(projectStageDetailUrl).subscribe(res => {
       if (res.code == 200) {
         //alert('操作成功！');
-        this.issuccess = true
         this.tipstext = '操作成功！'
         this.isdisabled = ''
-      }else {
-        this.isshow = true
+        this.isFailed = false
+      } else {
         this.tipstext = '操作失败，请稍后重试！'
         //alert('请求出错:' + res.msg);
+        this.isFailed = true
+        this.isdisabled = ''
       }
     }, error => {
       console.log('erros===', error);
     })
   }
 
+  onReturnBack() {
+    this.isTipPrompt = !this.isTipPrompt
+    return
+  }
 }

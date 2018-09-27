@@ -26,7 +26,7 @@ export class ConsultantStageEditPage {
   public isInteger = false
   public isComplete = false
   public isDateRepeat = false
-  public isBigTime =false
+  public isBigTime = false
   constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider) {
   }
 
@@ -63,12 +63,16 @@ export class ConsultantStageEditPage {
     this.isInteger = !this.isInteger
     return
   }
-  sureComplete(){
+  sureComplete() {
     this.isComplete = !this.isComplete
     return
   }
-  sureDateRepeat(){
+  sureDateRepeat() {
     this.isDateRepeat = !this.isDateRepeat
+    return
+  }
+  sureBigTime(){
+    this.isBigTime = !this.isBigTime
     return
   }
   /*新增、编辑请求*/
@@ -78,16 +82,16 @@ export class ConsultantStageEditPage {
     let stageData = this.stageData;
     var monthDate = (new Date(stageData['startTime']).getMonth() + 1).toString()
     var lessDate = (new Date(stageData['startTime']).getDate()).toString()
-    if(lessDate.length < 2){
+    if (lessDate.length < 2) {
       lessDate = '0' + lessDate
     }
-    if(monthDate.length < 2){
-      monthDate = '0'+ monthDate
+    if (monthDate.length < 2) {
+      monthDate = '0' + monthDate
     }
     let startTime = stageData['startTime'] ? (new Date(stageData['startTime']).getFullYear() + '-' + monthDate + '-' + lessDate) : '';
     let endTime = stageData['endTime'] ? (new Date(stageData['endTime']).getFullYear() + '-' + (new Date(stageData['endTime']).getMonth() + 1) + '-' + new Date(stageData['endTime']).getDate()) : '';
     // let projectStageDetailUrl = 'http://mamon.yemindream.com/mamon/adviser/addOrEditStage';
-    
+
     var arr = Object.keys(stageData);
     if (arr.length < 9) {
       this.isComplete = true;
@@ -98,7 +102,7 @@ export class ConsultantStageEditPage {
       this.isInteger = true
       return
     }
-    if(new Date(endTime)< new Date(startTime)){
+    if (new Date(endTime) < new Date(startTime)) {
       this.isBigTime = true
       return
     }
@@ -110,7 +114,7 @@ export class ConsultantStageEditPage {
       '&stageDescription=' + (stageData['stageDescription'] || '') +
       '&deliverable=' + (stageData['deliverable'] || '') +
       '&note=' + (stageData['note'] || '') +
-      '&percentage=' + ((stageData['percentage'] / 100) || 0) +
+      '&percentage=' + ((stageData['percentage']) || 0) +
       '&price=' + (stageData['price'] || 0) +
       '&paymentMethod=' + (stageData['paymentMethod'] || '');
     if (psid) {
@@ -122,7 +126,7 @@ export class ConsultantStageEditPage {
         this.navCtrl.pop();
       } else if (res.code == 207) {
         window.localStorage.removeItem('openId');
-      } else if( res.code == 214){
+      } else if (res.code == 214) {
         this.isDateRepeat = true
       } else {
         console.log('请求出错:' + res.msg);

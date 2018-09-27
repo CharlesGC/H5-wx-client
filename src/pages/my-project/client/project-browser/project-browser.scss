@@ -246,12 +246,6 @@ page-project-browser {
         }
     }
     .describe-list {
-        .item-md .h4 {
-            font-weight: 600; 
-        }
-        .item-ios .h4 {
-            font-weight: 600; 
-        }
         ion-item {
             font-family: PingFangSC;
             font-size: 1.4rem;
@@ -261,7 +255,7 @@ page-project-browser {
             line-height: normal;
             letter-spacing: normal;
             color: #4a4a4a;
-            .h4 {
+            h4 {
                 font-weight: 600;
             }
             .describe-cont {
@@ -309,13 +303,8 @@ page-project-browser {
             line-height: normal;
             letter-spacing: normal;
             color: #4a4a4a;
-            .label-md .label {
-                font-weight: 600;
-            }
-            .label-ios .label {
-                font-weight: 600;
-            }
-            .label {
+            
+            label {
                 font-weight: 600;
             }
             .item-value {
