@@ -98,15 +98,16 @@ export class ProjectConsultantBrowserPage {
   }
   /*面试、确认、拒绝、忽略*/
   onInterviewOrGnoreSubmit(type) {
-    this.isTipPrompt = true
-    this.isdisabled = 'disabled'
+    //this.isdisabled = 'disabled'
     if (type == 3) {
       this.navCtrl.pop();
     }else if (type == 1) {
+      this.isTipPrompt = true
       this.tiptext = '确定面试该顾问吗？'
       this.type = 1
       return
     }else if(type == 4){
+      this.isTipPrompt = true
       this.tiptext = '确定该顾问为方案候选人吗？'
       this.type = 4
       return
@@ -125,13 +126,15 @@ export class ProjectConsultantBrowserPage {
     let projectDetailsUrl = changeApplicationStatusUrl + '?openId=' + openId + '&paid=' + this.applicationDeatil['paid'] + '&status=' + this.type;
     this.Provider.getMamenSwiperData(projectDetailsUrl).subscribe(res => {
       if (res.code == 200) {
-        this.tiptext = '操作成功'
-        this.isFailed = false
-        this.isdisabled = ''
+        //this.tiptext = '操作成功'
+        //this.isFailed = false
+        this.isTipPrompt =!this.isTipPrompt
+        //this.isdisabled = ''
+        this.navCtrl.pop()
       } else {
         this.tiptext = '操作失败，请稍后重试'
         this.isFailed = true
-        this.isdisabled = ''
+        //this.isdisabled = ''
       }
     }, error => {
       console.log('erros===', error);

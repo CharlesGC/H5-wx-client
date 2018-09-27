@@ -177,7 +177,6 @@ export class ConsultantProgramEditPage {
       return
     }
     this.isTipPrompt = true
-    this.isdisabled = 'disabled'
     this.checkFailed = true
     if(!value){
       this.tipstext = '确认提交该方案吗？'
@@ -221,9 +220,10 @@ export class ConsultantProgramEditPage {
     this.Provider.getMamenSwiperData(projectStageDetailUrl).subscribe(res => {
       if (res.code == 200) {
         //alert('操作成功！');
-        this.tipstext = '操作成功！'
-        this.isdisabled = ''
+        //this.tipstext = '操作成功！'
+        //his.isdisabled = ''
         this.isFailed = false
+        this.navCtrl.pop()
       } else {
         this.tipstext = '操作失败，请稍后重试！'
         //alert('请求出错:' + res.msg);
