@@ -83,6 +83,12 @@ attention-tip {
             top: 156px;
             left: 50%;
             transform: translateX(-50%);
+            img{
+                position: relative;
+                left: 50%;
+                transform: translateX(-50%);
+                top: 20px
+            }
             .close-icon{
                 display: block;
                 width: 40px;

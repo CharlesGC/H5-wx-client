@@ -33,12 +33,17 @@ export class ProjectPaymentRecordPage {
   public paymentRecordData = {}
   public payerList = {};
   public isComplete = false;
+  public data = {};
+  public isCompleteRecord = false
+  public tipstext :any
+  public isFailed :any
   constructor(public navCtrl: NavController, public navParams: NavParams, private transfer: FileTransfer, private file: File, private Provider: MamenDataProvider) {
   }
 
   ionViewDidLoad() {
     let psid = this.navParams.get('id')
     this.getProjectPaymentRecordDetail(psid);
+    this.data = this.navParams.get('data');
     console.log('ionViewDidLoad ProjectPaymentRecordPage');
   }
 
@@ -202,17 +207,30 @@ export class ProjectPaymentRecordPage {
       console.log('erros===', error);
     })
   }
-
-  /*添加支付记录提交*/
-  goPaymentRecord() {
-    let psid = this.navParams.get('id');
+  sureCompleteRecord(){
+    this.isCompleteRecord = true
     let invoiceData = this.paymentRecordData;
     // let projectInvoiceDetailUrl = 'http://mamon.yemindream.com/mamon/customer/addPayMent';
     if(!invoiceData['realPrice'] || !invoiceData['payer'] || !invoiceData['payerBank'] || 
     !invoiceData['payerAccount'] || !invoiceData['payee'] || !invoiceData['payeeBank'] || !invoiceData['payeeAccount']) {
-      this.isComplete = true;
+      this.tipstext = '请填写完整信息';
       return;
     }
+    this.tipstext = '确认提交支付信息吗？'
+    return
+  }
+  onCompanyDel(){
+    this.isCompleteRecord = !this.isCompleteRecord
+    return
+  }
+  /*添加支付记录提交*/
+  goPaymentRecord() {
+    if(this.isFailed == true){
+      this.isCompleteRecord = !this.isCompleteRecord
+      return
+    }
+    let psid = this.navParams.get('id');
+    let invoiceData = this.paymentRecordData;
     const openId = window.sessionStorage.getItem('openId') || this.getUrlParam('openId');
     let projectInvoiceDetailUrl = addPayMentUrl + '?openId=' + openId + '&psid=' + psid +
       '&payer=' + invoiceData['payer'] +
@@ -228,12 +246,12 @@ export class ProjectPaymentRecordPage {
     this.Provider.getMamenSwiperData(projectInvoiceDetailUrl).subscribe(res => {
       if (res.code == 200) {
         console.log(res, '--------');
-        this.paymentRecordData = res.data;
+        this.paymentRecordData = res.data || {};
         this.navCtrl.pop();
-      } else if (res.code == 207) {
-        window.localStorage.removeItem('openId');
       } else {
         //alert('请求出错:' + res.msg);
+        this.tipstext = '操作错误，请稍后再试'
+        this.isFailed = true
       }
     }, error => {
       console.log('erros===', error);

@@ -241,7 +241,7 @@
     <button ion-button expand="full" large class="fixed-bottom bg-gry" (click)="goAccountEdit()"  *ngIf="stageType == 15">等待顾问修改中</button>
     <!-- <button ion-button expand="full" large class="fixed-bottom" (click)="goAccountEdit()">点击查看合同</button> -->
     <div class="fixed-bottom" *ngIf="stageType == 13">
-        <button ion-button class="btn-submit" (click)="onAllStageSubmit()">确认阶段</button>
+        <button ion-button class="btn-submit" (click)="sureTipPrompt()">确认阶段</button>
         <button ion-button class="btn-delete" (click)="onCustomerNayStagePlan()">提出异议</button>
     </div>
     <div class="no-content" *ngIf="isModel">
@@ -252,3 +252,21 @@
       <p class="tip">您还没有阶段信息</p>
     </div>
   </ion-content>
+  <div class="phonebind-modal" [hidden]="!isTipPrompt">
+      <div class="modal-bg"></div>
+      <div class="modal-box">
+        <div class="modal-top">
+          <div class="modal-top-close">
+            <!-- <ion-icon ios="ios-close" md="md-close" item-rigth (click)="onClose()" color=""></ion-icon> -->
+          </div>
+          <div class="modal-title">提示</div>
+          <div class="modal-content">
+            <p>{{tiptext}}</p>
+          </div>
+          <div class="modal-footer">
+            <button ion-button full large (click)="onAllStageSubmit()">确定</button>
+            <button ion-button full large (click)="onReturnBack()" class="btn-delete">返回</button>
+          </div>
+        </div>
+      </div>
+    </div>

@@ -12,13 +12,21 @@
 
 <ion-content style="background-color: #fcfcfc;">
     <ion-list class="browser-top">
-      <h4>节水系统问题诊断与提升优化</h4>
+      <!-- <h4>节水系统问题诊断与提升优化</h4>
       <p class="browser-top-p mt15">
           <ion-icon name="ios-paper-outline" class="mr3"></ion-icon>
           <span>阶段周期</span>
           <span>2018-06-05</span>
           <span> 至 </span>
           <span>2018-07-08</span>
+      </p> -->
+      <h4>{{data.stageName}}</h4>
+      <p class="browser-top-p mt15">
+        <ion-icon name="ios-paper-outline" class="mr3"></ion-icon>
+        <span>阶段周期</span>
+        <span>{{data.startTime | date: 'yyyy-MM-dd'}}</span>
+        <span> 至 </span>
+        <span>{{data.endTime | date: 'yyyy-MM-dd'}}</span>
       </p>
     </ion-list>
     <p class="browser-file">请填写金额信息</p>
@@ -105,7 +113,7 @@
       </ion-list>
     </div>
     <div style="height:100px;"></div>
-    <button ion-button expand="full" large class="fixed-bottom" (click)="goPaymentRecord()">提交</button>
+    <button ion-button expand="full" large class="fixed-bottom" (click)="sureCompleteRecord()">提交</button>
 </ion-content>
 <!-- 填写完整弹框 -->
 <div class="phonebind-modal " [hidden]="!isComplete">
@@ -126,4 +134,21 @@
     </div>
   </div>
 </div>
-
+<div class="phonebind-modal " [hidden]="!isCompleteRecord">
+    <div class="modal-bg"></div>
+    <div class="modal-box">
+      <div class="modal-top">
+        <div class="modal-top-close">
+          <!-- <ion-icon ios="ios-close" md="md-close" item-rigth (click)="onClose()" color=""></ion-icon> -->
+        </div>
+        <div class="modal-title">提示</div>
+        <div class="modal-content">
+          <p class="modal-center">{{tipstext}}</p>
+        </div>
+        <div class="modal-footer">
+          <button ion-button full large (click)="goPaymentRecord()">确定</button>
+          <button ion-button full large (click)="onCompanyDel()" class="btn-delete">返回</button>
+        </div>
+      </div>
+    </div>
+  </div>

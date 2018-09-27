@@ -104,7 +104,7 @@
           <span>{{paymentListData_item.createTime | date: 'yyyy/MM/dd'}} </span>
         </p>
         <div class="msg-cont">
-          <h4>应付 {{paymentListData_item.price || 0}} 元 / 实付 {{paymentListData_item.realPrice || 0}} 元</h4>
+          <h4>应付 {{(paymentListData_item.price|| 0) | currency : '￥' }} 元 / 实付 {{(paymentListData_item.realPrice || 0)  | currency : '￥'}} 元</h4>
           <p>整体进度 <span class="fweight600">第二阶段</span></p>
           <p class="mt5">流水号 <span class="fweight600">{{paymentListData_item.serialNumber}}</span></p>
         </div>

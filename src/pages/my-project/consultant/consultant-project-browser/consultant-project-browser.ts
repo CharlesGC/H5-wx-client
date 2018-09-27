@@ -231,29 +231,29 @@ export class ConsultantProjectBrowserPage {
   }
   /*忽略该项目*/
   onIgnoreProject(pid) {
-    if(this.isFailed == false){
-      this.navCtrl.pop();
-      return
-    }else if(this.isFailed == true){
+    if(this.isFailed == true){
       this.isTipPrompt = !this.isTipPrompt
       return
     }
-    this.isdisabled = 'disabled'
     const openId = window.sessionStorage.getItem('openId') || this.getUrlParam('openId');
     let projectDetailsUrl = ignoreProjectUrl + '?openId=' + openId + '&pid=' + pid;
     this.Provider.getMamenSwiperData(projectDetailsUrl).subscribe(res => {
       if (res.code == 200) {
-        this.tipstext = '操作成功'
-        this.isFailed = false
-        this.isdisabled = ''
-        //this.navCtrl.pop();
+        // this.tipstext = '操作成功'
+        // this.isFailed = false
+        // this.isdisabled = ''
+        this.isTipPrompt = !this.isTipPrompt
+        this.navCtrl.pop();
       } else {
-        this.tipstext = '操作失败'
+        this.tipstext = '操作失败，请稍后重试'
         this.isFailed = true
       }
     }, error => {
       console.log('erros===', error);
     })
   }
-
+  onReturnBack(){
+    this.isTipPrompt = !this.isTipPrompt
+    return
+  }
 }
