@@ -26,6 +26,8 @@ page-home {
             box-shadow: 0 0 10px 5px #aaa;
             // opacity: 0.1;
             // background-color: #fff;
+            margin-bottom: 10px;
+            box-shadow: 0 0px 10px 5px rgba(0, 0, 0, 0.085);
             .swiper-pagination-bullet {
                 border-radius: 1.5px;
                 display: inline-block;
@@ -609,7 +611,7 @@ page-home {
                     }
                     .case_img {
                         width: 100%;
-                        height: 171px;
+                        // height: 171px;
                         .swiper_content1 {
                             object-fit: contain;
                             // opacity: 0.68;
