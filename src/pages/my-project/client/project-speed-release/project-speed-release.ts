@@ -92,6 +92,7 @@ autoPlay(e,index) {
       }
     } 
   }
+
   // 请求openId
   getUrlParam(name) {  
     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象  

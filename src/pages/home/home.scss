@@ -8,13 +8,24 @@ page-home {
         .list-ios {
             margin: 0 ; 
         }
+        ion-slides {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+        .slide-zoom {
+            text-align: center;
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
         .swiper_content {
             width: 100%;
             height: 190px;
             object-fit: contain;
             box-shadow: 0 0 10px 5px #aaa;
             // opacity: 0.1;
-            background-color: #fff;
+            // background-color: #fff;
             .swiper-pagination-bullet {
                 border-radius: 1.5px;
                 display: inline-block;
@@ -32,6 +43,7 @@ page-home {
                 width: 100%;
                 img {
                     width: 100%;
+                    height: 100%;
                 }
                 .img-text {
                     width: 80%;
@@ -409,6 +421,7 @@ page-home {
                                 -webkit-line-clamp:3;
                                 -webkit-box-orient:vertical;
                                 overflow:hidden;
+                                word-break: break-all;
                             }
                         }
                     }

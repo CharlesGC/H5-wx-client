@@ -41,7 +41,7 @@ export class HomePage {
   }
   ionViewDidLoad() {
     this.getswiperInfo();
-    this.getindustryInfo();
+    // this.getindustryInfo();
     this.getskillInfo();
     this.getcaseInfo();
     this.getoutstandingInfo();
@@ -61,17 +61,17 @@ export class HomePage {
     )
   }
   // 行业数据 
-  getindustryInfo() {
-    this.industrydata.getIndustryData(getindustryUrl, 0).subscribe(
-      res => {
-        // console.log(res);
-        this.IndustryArr = res.data.list;
-        // console.log(this.IndustryArr);
-      }, error => {
-        console.log(error);
-      }
-    )
-  }
+  // getindustryInfo() {
+  //   this.industrydata.getIndustryData(getindustryUrl, 0).subscribe(
+  //     res => {
+  //       // console.log(res);
+  //       this.IndustryArr = res.data.list;
+  //       // console.log(this.IndustryArr);
+  //     }, error => {
+  //       console.log(error);
+  //     }
+  //   )
+  // }
   //技能数据
   getskillInfo() {
     this.skilldata.getSkillLabelData(getskillUrl, 0).subscribe(
@@ -175,13 +175,13 @@ export class HomePage {
     }
   }
   //行业详情
-  goToOtherPage(value, index, type) {
-    this.navCtrl.push(IndustrydetialPage, {
-      type: type,
-      id: value ? this.IndustryArr[index].ilid : '',
-      name: value ? this.IndustryArr[index].industryName : '',
-    });
-  }
+  // goToOtherPage(value, index, type) {
+  //   this.navCtrl.push(IndustrydetialPage, {
+  //     type: type,
+  //     id: value ? this.IndustryArr[index].ilid : '',
+  //     name: value ? this.IndustryArr[index].industryName : '',
+  //   });
+  // }
   // 技能详情
   InfoskillMore(value, index, type) {
     this.navCtrl.push(IndustrydetialPage, {
