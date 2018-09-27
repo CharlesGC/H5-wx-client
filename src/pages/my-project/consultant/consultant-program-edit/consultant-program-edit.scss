@@ -105,20 +105,27 @@ page-consultant-program-edit {
             color: #4a4a4a;
             label {
                 font-weight: 600;
+                width: 150px
             }
             .icon {
                 font-size: 1.6rem;
                 vertical-align: middle;
                 color: #cfcfcf;
             }
-            .item-value {
-                color: #9b9b9b;
-                margin-right: 1rem;
-                &.color-f46f46 {
-                    color: #f46f46;
-                }
-                &.font12 {
-                    font-size: 1.2rem;
+            p {
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                text-align:  right;
+                width: calc(100% - 150px);
+                .item-value {
+                    color: #9b9b9b;
+                    margin-right: 1rem;
+                    &.color-f46f46 {
+                        color: #f46f46;
+                    }
+                    &.font12 {
+                        font-size: 1.2rem;
+                    }
                 }
             }
         }
@@ -152,7 +159,8 @@ page-consultant-program-edit {
                 line-height: normal;
                 letter-spacing: normal;
                 label {
-                    min-width: 70px;
+                    min-width: 66px;
+                    min-height: 66px;
                     color: #9b9b9b;
                 }
                 .card-cont {
@@ -162,6 +170,7 @@ page-consultant-program-edit {
                     line-height: 20px;
                     color: #4a4a4a;
                     white-space: normal;
+                    position: relative;
                     h5 {
                         font-family: PingFangSC;
                         font-size: 1.6rem;
@@ -182,7 +191,9 @@ page-consultant-program-edit {
                     }
                     .browser-size {
                         font-size: 1.2rem;
-                        margin-top: 10px;
+                        //margin-top: 10px;
+                        position: absolute;
+                        bottom: 0;
                     }
                 }
             }

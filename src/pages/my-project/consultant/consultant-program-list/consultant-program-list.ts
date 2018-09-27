@@ -29,6 +29,12 @@ export class ConsultantProgramListPage {
   public showNavMenuName = '';
   public projectProgramDetails = {};
   public projectDetails = {};
+
+  public isTipPrompt = false
+  public tiptext: any
+  public isFailed: any
+  public isdisabled: any
+
   constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider) {
   }
 
@@ -100,7 +106,7 @@ export class ConsultantProgramListPage {
       if (res.code == 200) {
         this.projectProgramDetails = res.data;
         console.log(this.projectProgramDetails)
-        if(!this.projectProgramDetails) return;
+        if (!this.projectProgramDetails) return;
         this.projectProgramDetails['size'] = (this.projectProgramDetails['size'] / 1048576).toPrecision(3)
 
         if (this.projectProgramDetails['size'] > 1) {
@@ -140,21 +146,39 @@ export class ConsultantProgramListPage {
     }
 
   }
-
+  sureTipPrompt(){
+    this.isTipPrompt = true
+    this.tiptext = '确认提交该方案吗？'
+    this.isdisabled = 'disabled'
+    return
+  }
   /*提交方案*/
   onProgramSubmitted() {
+    if(this.isFailed == false){
+      this.isTipPrompt = !this.isTipPrompt
+      this.navCtrl.pop()
+      return
+    }else if (this.isFailed == true){
+      this.isTipPrompt = !this.isTipPrompt 
+      return
+    }
     let pid = this.navParams.get('pid');
-
     // let projectStageDetailUrl = 'http://mamon.yemindream.com/mamon/adviser/addOrEditProgram';
     const openId = window.sessionStorage.getItem('openId') || this.getUrlParam('openId');
     let projectStageDetailUrl = addOrEditProgramUrl + '?openId=' + openId + '&pid=' + pid + '&status=-1&ppid=' + this.projectProgramDetails['ppid'];
 
     this.Provider.getMamenSwiperData(projectStageDetailUrl).subscribe(res => {
       if (res.code == 200) {
-        console.log('操作成功！');
-        this.navCtrl.pop();
+        this.tiptext = '提交成功'
+        this.isFailed = false
+        this.isdisabled = ''
+        //console.log('操作成功！');
+        //this.navCtrl.pop();
       } else {
-        console.log('请求出错:' + res.msg);
+        this.tiptext= '操作失败，请稍后再试'
+        this.isFailed= true
+        this.isdisabled = ''
+        //console.log('请求出错:' + res.msg);
       }
     }, error => {
       console.log('erros===', error);
@@ -163,5 +187,9 @@ export class ConsultantProgramListPage {
   // 返回项目列表页
   goback() {
     this.navCtrl.popTo(this.navCtrl.getByIndex(1))
+  }
+  onReturnBack(){
+    this.isTipPrompt = !this.isTipPrompt
+    return
   }
 }

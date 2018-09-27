@@ -62,7 +62,7 @@
   <div class="no-content">
     <h4 class="title">项目方案</h4>
     <div class="img">
-        <img src="../../../../assets/imgs/tuijain.png" alt="">
+      <img src="../../../../assets/imgs/tuijain.png" alt="">
     </div>
     <p class="tip">当前分类暂时为空，点击下方按钮添加方案。</p>
   </div>
@@ -141,7 +141,25 @@
   <button ion-button expand="full" large class="fixed-bottom bg-gry" (click)="goAccountEdit()" *ngIf="projectProgramDetails.status == -1 ||projectProgramDetails.status == 1">等待客户确认中</button>
   <!-- <button ion-button expand="full" large class="fixed-bottom" (click)="onAddProgramClick(projectProgramDetails)" *ngIf="projectProgramDetails.status == -1 ||projectProgramDetails.status == 1||projectProgramDetails.status == 4">编辑</button> -->
   <div class="fixed-bottom" *ngIf="projectProgramDetails.status == 5 || projectProgramDetails.status == 4 || projectProgramDetails.status == -2">
-    <button ion-button class="btn-submit" (click)="onProgramSubmitted()">提交方案</button>
+    <button ion-button class="btn-submit" (click)="sureTipPrompt()" [disabled]='isdisabled'>提交方案</button>
     <button ion-button class="btn-delete" (click)="onAddProgramClick(projectProgramDetails)">编辑</button>
   </div>
 </ion-content>
+<div class="phonebind-modal" [hidden]="!isTipPrompt">
+  <div class="modal-bg"></div>
+  <div class="modal-box">
+    <div class="modal-top">
+      <div class="modal-top-close">
+        <!-- <ion-icon ios="ios-close" md="md-close" item-rigth (click)="onClose()" color=""></ion-icon> -->
+      </div>
+      <div class="modal-title">提示</div>
+      <div class="modal-content">
+        <p>{{tiptext}}</p>
+      </div>
+      <div class="modal-footer">
+        <button ion-button full large (click)="onProgramSubmitted()">确定</button>
+        <button ion-button full large (click)="onReturnBack()" class="btn-delete">返回</button>
+      </div>
+    </div>
+  </div>
+</div>

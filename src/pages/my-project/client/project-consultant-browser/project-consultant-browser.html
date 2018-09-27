@@ -123,7 +123,7 @@
           <p class="card-cont">{{projectList_item.companyName}}</p>
         </div>
         <div class="card-item-label mt10">
-          <label  class="label">起止日期</label>
+          <label class="label">起止日期</label>
           <p class="card-cont">
             <span>{{projectList_item.startTime | date:'yyyy/MM/dd'}} </span>
             <span> - </span>
@@ -268,15 +268,15 @@
   <div style="height:100px;"></div>
   <div class="fixed-bottom" *ngIf="applicationDeatil.status==0 || applicationDeatil.status==2">
     <button ion-button class="btn-submit" (click)="onInterviewOrGnoreSubmit(1)" [disabled]="isdisabled">面试该顾问</button>
-    <button ion-button class="btn-delete" (click)="onInterviewOrGnoreSubmit(3)">忽略</button>
+    <button ion-button class="btn-delete" (click)="onInterviewOrGnoreSubmit(3)" [disabled]="isdisabled">忽略</button>
   </div>
   <div class="fixed-bottom" *ngIf="applicationDeatil.status==1">
     <button ion-button class="btn-submit" (click)="onInterviewOrGnoreSubmit(4)" [disabled]="isdisabled">确认方案候选人</button>
-    <button ion-button class="btn-delete" (click)="onInterviewOrGnoreSubmit(3)">忽略</button>
+    <button ion-button class="btn-delete" (click)="onInterviewOrGnoreSubmit(3)" [disabled]="isdisabled">忽略</button>
   </div>
   <button ion-button expand="full" large class="fixed-bottom" (click)="goProjectStart()" *ngIf="ishome == 'homepage' && userType == 0">发起项目邀请</button>
 </ion-content>
-<div class="phonebind-modal" [hidden]="!isInterview">
+<div class="phonebind-modal" [hidden]="!isTipPrompt">
   <div class="modal-bg"></div>
   <div class="modal-box">
     <div class="modal-top">
@@ -285,29 +285,11 @@
       </div>
       <div class="modal-title">提示</div>
       <div class="modal-content">
-        <p>操作成功</p>
+        <p>{{tiptext}}</p>
       </div>
       <div class="modal-footer">
-        <button ion-button full large (click)="sureInterview()">确定</button>
-        <!-- <button ion-button full large (click)="onCompanyDel()" class="btn-delete">返回</button> -->
-      </div>
-    </div>
-  </div>
-</div>
-<div class="phonebind-modal" [hidden]="!isInterviewFailed">
-  <div class="modal-bg"></div>
-  <div class="modal-box">
-    <div class="modal-top">
-      <div class="modal-top-close">
-        <!-- <ion-icon ios="ios-close" md="md-close" item-rigth (click)="onClose()" color=""></ion-icon> -->
-      </div>
-      <div class="modal-title">提示</div>
-      <div class="modal-content">
-        <p>操作失败，请刷新重试</p>
-      </div>
-      <div class="modal-footer">
-        <button ion-button full large (click)="sureInterviewFailed()">确定</button>
-        <!-- <button ion-button full large (click)="onCompanyDel()" class="btn-delete">返回</button> -->
+        <button ion-button full large (click)="sureTipPrompt()">确定</button>
+        <button ion-button full large (click)="onReturnBack()" class="btn-delete">返回</button>
       </div>
     </div>
   </div>

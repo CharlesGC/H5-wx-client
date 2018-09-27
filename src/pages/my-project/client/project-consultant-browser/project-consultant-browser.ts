@@ -21,9 +21,11 @@ export class ProjectConsultantBrowserPage {
   public applicationDeatil = {};
   public ishome = '';
   public userType = '';
-  public isInterview = false
-  public isInterviewFailed = false
   public isdisabled: any
+  public isTipPrompt = false
+  public tiptext: any
+  public isFailed: any
+  public type :any
   constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider) {
     this.Selected = 0;
   }
@@ -40,7 +42,6 @@ export class ProjectConsultantBrowserPage {
       this.getProjectListData(uid)
       this.getApplicationDeatil(uid, pid);
     }
-
   }
 
   /*点击选中*/
@@ -95,39 +96,58 @@ export class ProjectConsultantBrowserPage {
       console.log('erros===', error);
     })
   }
-  sureInterview() {
-    this.isInterview = !this.isInterview
-    this.navCtrl.pop()
-  }
-  sureInterviewFailed() {
-    this.isInterviewFailed = !this.isInterviewFailed
-    return
-  }
   /*面试、确认、拒绝、忽略*/
   onInterviewOrGnoreSubmit(type) {
-    if (type == 3) {
-      this.navCtrl.pop();
-      return;
-    }
+    this.isTipPrompt = true
     this.isdisabled = 'disabled'
-    // let projectDetailsUrl = 'http://mamon.yemindream.com/mamon/customer/changeApplicationStatus';
+    if (type == 3) {
+      this.tiptext = '确定忽略该顾问吗？'
+      this.type = 3
+      return;
+    }else if (type == 1) {
+      this.tiptext = '确定面试该顾问吗？'
+      this.type = 1
+      return
+    }else if(type == 4){
+      this.tiptext = '确定该顾问为方案候选人吗？'
+      this.type = 4
+      return
+    }
+  }
+
+  sureTipPrompt() {
+    if(this.type == 3){
+      this.isTipPrompt = !this.isTipPrompt
+      this.navCtrl.pop();
+    }
+    if(this.isFailed == false){
+      this.navCtrl.pop()
+      this.isTipPrompt = !this.isTipPrompt
+    }else if(this.isFailed == true){
+      this.isTipPrompt = !this.isTipPrompt
+      return
+    }
     const openId = window.sessionStorage.getItem('openId') || this.getUrlParam('openId');
-    let projectDetailsUrl = changeApplicationStatusUrl + '?openId=' + openId + '&paid=' + this.applicationDeatil['paid'] + '&status=' + type;
+    let projectDetailsUrl = changeApplicationStatusUrl + '?openId=' + openId + '&paid=' + this.applicationDeatil['paid'] + '&status=' + this.type;
     this.Provider.getMamenSwiperData(projectDetailsUrl).subscribe(res => {
       if (res.code == 200) {
-        //alert('操作成功！');
-        //this.navCtrl.pop();
-        this.isInterview = true
+        this.tiptext = '操作成功'
+        this.isFailed = false
         this.isdisabled = ''
       } else {
-        //alert('请求出错:'+res.msg);
-        this.isInterviewFailed = true
+        this.tiptext = '操作失败，请稍后重试'
+        this.isFailed = true
+        this.isdisabled = ''
       }
     }, error => {
       console.log('erros===', error);
     })
   }
-
+  onReturnBack(){
+    this.isTipPrompt =!this.isTipPrompt
+    this.isdisabled = ''
+    return
+  }
   /*向顾问发起项目*/
   goProjectStart() {
     let uid = this.navParams.get('uid');
