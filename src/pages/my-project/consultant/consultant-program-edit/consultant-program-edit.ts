@@ -32,6 +32,7 @@ export class ConsultantProgramEditPage {
   public isdisabled = ''
   public isFailed: any
   public ppid: any
+  public checkFailed  = false
   constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider) {
   }
 
@@ -142,35 +143,42 @@ export class ConsultantProgramEditPage {
     if (!programData['programName']) {
       this.isTipPrompt = true
       this.tipstext = '方案名称不能为空'
+      this.checkFailed =false
       return
     }
     if (!programData['programDescription']) {
       this.isTipPrompt = true
       this.tipstext = '方案描述不能为空'
+      this.checkFailed =false
       return
     }
     if (!programData['workloadUnit']) {
       this.isTipPrompt = true
       this.tipstext = '方案周期不能为空'
+      this.checkFailed =false
       return
     }
     if (!programData['deliverable']) {
       this.isTipPrompt = true
       this.tipstext = '方案规划不能为空'
+      this.checkFailed =false
       return
     }
     if (!programData['price']) {
       this.isTipPrompt = true
       this.tipstext = '项目总价不能为空'
+      this.checkFailed =false
       return
     }
     if (!programData['fid']) {
       this.isTipPrompt = true
       this.tipstext = '方案计划书不能为空'
+      this.checkFailed =false
       return
     }
     this.isTipPrompt = true
     this.isdisabled = 'disabled'
+    this.checkFailed = true
     if(!value){
       this.tipstext = '确认提交该方案吗？'
       return
@@ -181,6 +189,10 @@ export class ConsultantProgramEditPage {
   }
 
   sureTipPrompt() {
+    if(this.checkFailed == false){
+      this.isTipPrompt = !this.isTipPrompt
+      return
+    }
     if(this.isFailed == false){
       this.isTipPrompt = !this.isTipPrompt
       this.navCtrl.pop()
@@ -225,6 +237,7 @@ export class ConsultantProgramEditPage {
 
   onReturnBack() {
     this.isTipPrompt = !this.isTipPrompt
+    this.isdisabled = ''
     return
   }
 }
