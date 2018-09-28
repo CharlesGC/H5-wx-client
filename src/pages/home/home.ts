@@ -7,6 +7,7 @@ import { ProjectConsultantBrowserPage } from '../my-project/client/project-consu
 import { ChooseIdentityPage } from '../../pages/choose-identity/choose-identity';
 import { SwiperDetailPage } from './swiper-detail/swiper-detail';
 import { IndustrymorePage } from '../industrymore/industrymore';
+import { HttpClient, HttpParams } from '@angular/common/http';
 // declare var onBridgeReady;
 
 // import { ViewChild } from '@angular/core';
@@ -35,7 +36,7 @@ export class HomePage {
   public sausage: boolean;
   public mushrooms: boolean;
 
-  constructor(public navCtrl: NavController, private swiperdata: MamenDataProvider, private industrydata: MamenDataProvider,
+  constructor(public navCtrl: NavController, private swiperdata: MamenDataProvider, private industrydata: MamenDataProvider,private http: HttpClient,
     private skilldata: MamenDataProvider, private casedata: MamenDataProvider, private outstanddata: MamenDataProvider, private financedata: MamenDataProvider, private financeAlldata: MamenDataProvider) {
     this.IndustryArr = [];
   }
@@ -173,6 +174,11 @@ export class HomePage {
     } else {
 
     }
+
+    this.http.request('get','https://api.weixin.qq.com/cgi-bin/user/info?access_token=ACCESS_TOKEN&openid=OPENID&lang=zh_CN').subscribe(res => {
+      console.log(res)
+    });
+
   }
   //行业详情
   // goToOtherPage(value, index, type) {
