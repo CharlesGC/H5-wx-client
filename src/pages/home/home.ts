@@ -174,11 +174,6 @@ export class HomePage {
     } else {
 
     }
-
-    this.http.request('get','https://api.weixin.qq.com/cgi-bin/user/info?access_token=ACCESS_TOKEN&openid=OPENID&lang=zh_CN').subscribe(res => {
-      console.log(res)
-    });
-
   }
   //行业详情
   // goToOtherPage(value, index, type) {
