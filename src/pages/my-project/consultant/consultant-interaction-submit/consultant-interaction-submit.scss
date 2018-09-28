@@ -121,6 +121,13 @@ page-consultant-interaction-submit {
                     font-size: 1.2rem;
                 }
             }
+            .rigth-message {
+                text-align: right;
+                display: flex;
+                .icon {
+                    line-height: 2rem;
+                }
+            }
         }
     }
     .user-other-list {
