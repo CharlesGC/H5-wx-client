@@ -27,6 +27,7 @@ export class ConsultantCollectionListPage {
   public showNavMenuName = '';
   public projectInvoiceListData = [];
   public projectDetails = {}
+  public isCont = false;
   constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider) {
   }
 
@@ -57,20 +58,20 @@ export class ConsultantCollectionListPage {
     if (type == 1) {
       this.navCtrl.push(ConsultantProjectBrowserPage, { data: this.projectDetails, pid: this.projectDetails['pid'], status: status || '' });
     } else if (type == 2) {
-      this.projectDetails['appStatus'] != 0 && this.projectDetails['appStatus'] != 1 &&
-        this.projectDetails['appStatus'] != 2 && this.projectDetails['appStatus'] != 3 &&
+      // this.projectDetails['appStatus'] != 0 && this.projectDetails['appStatus'] != 1 &&
+      //   this.projectDetails['appStatus'] != 2 && this.projectDetails['appStatus'] != 3 &&
         this.navCtrl.push(ConsultantProgramListPage, { pid: this.projectDetails['pid'], status: status || '', data: this.projectDetails });
     } else if (type == 3) {
-      this.projectDetails['appStatus'] != 6 && this.projectDetails['appStatus'] != 4 &&
-        this.projectDetails['appStatus'] != 0 && this.projectDetails['appStatus'] != 1 &&
-        this.projectDetails['appStatus'] != 2 && this.projectDetails['appStatus'] != 3 &&
+      // this.projectDetails['appStatus'] != 6 && this.projectDetails['appStatus'] != 4 &&
+      //   this.projectDetails['appStatus'] != 0 && this.projectDetails['appStatus'] != 1 &&
+      //   this.projectDetails['appStatus'] != 2 && this.projectDetails['appStatus'] != 3 &&
         this.navCtrl.push(ConsultantStageListPage, {
           pid: this.projectDetails['pid'], status: status,
           projectType: this.projectDetails['appStatus'], programPrice: this.projectDetails['finalPrice'], data: this.projectDetails
         });
     } else if (type == 4) {
-      this.projectDetails['appStatus'] != 0 && this.projectDetails['appStatus'] != 1 &&
-        this.projectDetails['appStatus'] != 2 && this.projectDetails['appStatus'] != 3 &&
+      // this.projectDetails['appStatus'] != 0 && this.projectDetails['appStatus'] != 1 &&
+      //   this.projectDetails['appStatus'] != 2 && this.projectDetails['appStatus'] != 3 &&
         this.navCtrl.push(ConsultantDocumentListPage, { pid: this.projectDetails['pid'], status: status, data: this.projectDetails });
     } else if (type == 5) {
       // this.projectDetails['appStatus'] !=6&&this.projectDetails['appStatus'] !=4&&
@@ -108,7 +109,8 @@ export class ConsultantCollectionListPage {
     // }
     this.Provider.getMamenSwiperData(projectPaymentUrl).subscribe(res => {
       if (res.code == 200) {
-        this.projectInvoiceListData = res.data;
+        this.projectInvoiceListData = res.data || []
+        this.isCont = this.projectInvoiceListData.length<1 ? true : false;
       } else if (res.code == 207) {
         window.localStorage.removeItem('openId');
       } else {
@@ -121,5 +123,8 @@ export class ConsultantCollectionListPage {
   // 返回项目列表页
   goback() {
     this.navCtrl.popTo(this.navCtrl.getByIndex(1))
+  }
+  gotodo() {
+    this.navCtrl.pop();
   }
 }

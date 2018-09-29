@@ -146,18 +146,18 @@ export class ConsultantInfoUserPage {
     // let getCompanyDetailUrl = 'http://mamon.yemindream.com/mamon/adviser/editAdviser';
 
     let getCompanyDetailUrl = editAdviserUrl + '?openId=' + openId + '&avatar=' + userInfoData.avatar +
-      '&nickName=' + userInfoData.nickName +
-      '&uname=' + userInfoData.uname +
+      '&nickName=' + (userInfoData.nickName || '') +
+      '&uname=' + (userInfoData.uname || '') +
       '&gender=' + userInfoData.gender +
       '&years=' + userInfoData.years +
       '&industrys=' + industryList +
       '&skills=' + skillList +
       '&salaryUp=' + userInfoData.salaryUp +
       '&salaryDown=' + userInfoData.salaryDown +
-      '&address=' + userInfoData.address +
+      '&address=' + (userInfoData.address || '') +
       '&otherIndustrys=' + otherIndustrys +
       '&otherSkills=' + otherSkills +
-      '&introduction=' + userInfoData.introduction || '';
+      '&introduction=' + (userInfoData.introduction || '');
     // '&zipCode='+companyDetaiData.webSite;
     if (uid) {
       getCompanyDetailUrl = getCompanyDetailUrl + '&uid=' + uid;

@@ -397,11 +397,11 @@
     <ion-card class="card-item" *ngFor="let resumeList_item of consultantBasicData.resumeList" style="padding-bottom:15px;">
       <div class="card-item-label">
         <label>
-          <img style="width:66px;height:66px;" src="assets/imgs/doc.png" *ngIf="resumeList_item.format == 'docx'">
-          <img style="width:66px;height:66px;" src="assets/imgs/ppt.png" *ngIf="resumeList_item.format == 'ppt'">
-          <img style="width:66px;height:66px;" src="assets/imgs/xls.png" *ngIf="resumeList_item.format == 'xls'">
-          <img style="width:66px;height:66px;" src="assets/imgs/png.png" *ngIf="resumeList_item.format == 'jpg'">
-          <img style="width:66px;height:66px;" src="assets/imgs/pdf.png" *ngIf="resumeList_item.format == 'pdf'">
+          <img style="width:66px;height:66px;" src="assets/imgs/doc.png" *ngIf="formatTypes(resumeList_item.format) == 'doc'">
+          <img style="width:66px;height:66px;" src="assets/imgs/ppt.png" *ngIf="formatTypes(resumeList_item.format) == 'ppt'">
+          <img style="width:66px;height:66px;" src="assets/imgs/xls.png" *ngIf="formatTypes(resumeList_item.format) == 'xls'">
+          <img style="width:66px;height:66px;" src="assets/imgs/png.png" *ngIf="formatTypes(resumeList_item.format) == 'jpg'">
+          <img style="width:66px;height:66px;" src="assets/imgs/pdf.png" *ngIf="formatTypes(resumeList_item.format) == 'pdf'">
         </label>
         <div class="card-cont">
           <h5>{{resumeList_item.resumeName}}</h5>

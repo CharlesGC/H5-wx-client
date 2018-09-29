@@ -160,6 +160,7 @@ export class ConsultantBasicPage {
 
   /* 根据url来判断文件类型 */
   formatTypes(value) {
+    if(!value) return '';
     if (value.search(/doc/) !== -1 || value.search(/docx/) !== -1) {
       return 'doc';
     } else if (value.search(/ppt/) !== -1 || value.search(/pptx/) !== -1) {

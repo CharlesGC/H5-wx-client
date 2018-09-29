@@ -181,14 +181,14 @@ export class ConsultantProgramEditPage {
       this.checkFailed =false
       return
     }
-    this.isTipPrompt = true
-    this.checkFailed = true
     if(value){
       this.tipstext = '确认保存该方案吗？'
       this.ppid = value
     }else{
       this.tipstext = '确认提交该方案吗？'
     }
+    this.isTipPrompt = true
+    this.checkFailed = true
   }
 
   sureTipPrompt() {

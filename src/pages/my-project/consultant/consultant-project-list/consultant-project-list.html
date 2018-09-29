@@ -182,17 +182,18 @@
       </div> -->
     </ion-item>
   </ion-list>
-</ion-content>
-<div class="no-box" *ngIf="!projectListData">
-  <div class="no-content">
-    <h4 class="title">我的项目</h4>
-    <div class="img">
-        <img src="../../../../assets/imgs/tuijain.png" alt="">
+  <div class="no-box" *ngIf="!projectListData">
+    <div class="no-content">
+      <h4 class="title">我的项目</h4>
+      <div class="img">
+          <img src="../../../../assets/imgs/tuijain.png" alt="">
+      </div>
+      <p class="tip">当前项目暂时为空，您还没有申请过项目!</p>
     </div>
-    <p class="tip">当前项目暂时为空，您还没有申请过项目!</p>
+    <button ion-button expand="full" large class="fixed-bottom" (click)="onSpeedStageClick()">返回</button>
   </div>
-  <button ion-button expand="full" large class="fixed-bottom" (click)="onSpeedStageClick()">返回</button>
-</div>
+</ion-content>
+
 <!--弹出框-->
 <div class="phonebind-modal" [hidden]="!isShow">
   <div class="modal-bg"></div>

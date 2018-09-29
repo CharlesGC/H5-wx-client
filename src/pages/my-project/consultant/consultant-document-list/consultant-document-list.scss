@@ -106,5 +106,46 @@ page-consultant-document-list {
         }
 
     }
+    .no-content {
+        vertical-align: middle;
+        text-align: center;
+        margin-top: 40%;
+        .title {
+            font-family: PingFangSC;
+            font-size: 1.4rem;
+            font-weight: 600;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: normal;
+            letter-spacing: normal;
+            text-align: center;
+            color: #f46f46;
+        }
+        .img {
+            width: 120px;
+            height: 120px;
+            border-radius: 3px;
+            background-color: #f1f1f1;
+            border: dashed 2px #cfcfcf;
+            margin: 20px auto;
+        }
+        .tip {
+            width: 20rem;
+            font-family: PingFangSC;
+            font-size: 1.4rem;
+            font-weight: normal;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: 1.29;
+            letter-spacing: normal;
+            color: #4a4a4a;
+            margin: 0 auto;
+            margin-top: 40px;
+        }
+        .btn {
+            width: 20rem;
+            margin-top: 2rem;
+        }
+    }
 
 }

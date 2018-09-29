@@ -50,34 +50,29 @@
 </div>
 
 <ion-content style="background-color: #fcfcfc;">
+  <ion-list class="nav-list-menu">
+    <ion-item no-lines (click)="onNavMenuClick(true)">
+      <p class="list-header-left">{{showNavMenuName || '阶段'}}</p>
+      <div class="list-header-right" item-end>
+        <span>展开</span>
+      </div>
+    </ion-item>
+  </ion-list>
 
   <div *ngIf="!!projectStageListData && projectStageListData.length<1">
-    <ion-list class="nav-list-menu">
-      <ion-item no-lines (click)="onNavMenuClick(true)">
-        <p class="list-header-left">{{showNavMenuName || '阶段'}}</p>
-        <div class="list-header-right" item-end>
-          <span>展开</span>
-        </div>
-      </ion-item>
-    </ion-list>
     <div class="no-content">
       <h4 class="title">项目阶段</h4>
       <div class="img">
         <img src="../../../../assets/imgs/tuijain.png" alt="">
       </div>
-      <p class="tip">当前分类暂时为空，点击下方按钮添加阶段。</p>
+      <p class="tip" *ngIf="isAction">当前分类暂时为空，点击下方按钮添加阶段。</p>
+      <p class="tip" *ngIf="!isAction">该分类暂无内容，项目发展到不同阶段时，不同的分类下会有对应的新增内容</p>
+      <button class="btn" ion-button (click)="gotodo()" *ngIf="!isAction">返回</button>
     </div>
-    <button ion-button expand="full" large class="fixed-bottom" (click)="onAddStageClick()" *ngIf="projectStageListData.length<1">添加阶段</button>
+    <button ion-button expand="full" large class="fixed-bottom" (click)="onAddStageClick()" *ngIf="isAction">添加阶段</button>
   </div>
+  
   <div *ngIf="projectStageListData && projectStageListData.length>0">
-    <ion-list class="nav-list-menu">
-      <ion-item no-lines (click)="onNavMenuClick(true)">
-        <p class="list-header-left">{{showNavMenuName || '阶段'}}</p>
-        <div class="list-header-right" item-end>
-          <span>展开</span>
-        </div>
-      </ion-item>
-    </ion-list>
     <ion-list class="mt20">
       <ion-item class="message-item mt20" no-lines *ngFor="let projectStage_item of projectStageListData">
         <p class="msg-title">

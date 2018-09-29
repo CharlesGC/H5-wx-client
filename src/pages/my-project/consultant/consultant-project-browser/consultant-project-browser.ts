@@ -120,39 +120,22 @@ export class ConsultantProjectBrowserPage {
       let data = this.navParams.get('data');
       this.getProjectListData(data.pid);
     } else if (type == 2) {
-      this.projectDetails['appStatus'] != 0 && this.projectDetails['appStatus'] != 1 &&
-        this.projectDetails['appStatus'] != 2 && this.projectDetails['appStatus'] != 3 &&
+      // this.projectDetails['appStatus'] != 0 && this.projectDetails['appStatus'] != 1 &&
+      //   this.projectDetails['appStatus'] != 2 && this.projectDetails['appStatus'] != 3 &&
         this.navCtrl.push(ConsultantProgramListPage, { pid: this.projectDetails['pid'], status: status || '', data: this.projectDetails });
-      // console.log(this.navCtrl['index'],'----',this.app)
-      // this.app.getRootNav().push(ConsultantProjectListPage);
-      // this.navCtrl.setRoot(ConsultantProjectListPage);
-      // this.navCtrl.parent.select(3)
-      // this.navCtrl.remove(12)
-      // this.app.navPop().
-      // this.navCtrl.popToRoot().then(()=>{
-      //   this.navCtrl.push(ConsultantProjectListPage);
-      // });
-      // this.navCtrl.popToRoot().push(ConsultantProjectListPage);
-      // let SecondPage = this.modalCtrl.create(ConsultantProjectListPage);
-      // SecondPage.present;
-      // this.navCtrl.setRoot(ConsultantProjectListPage);
-      // this.app.getRootNav().setRoot("LoginPage");
     } else if (type == 3) {
-      this.projectDetails['appStatus'] != 6 && this.projectDetails['appStatus'] != 4 &&
-        this.projectDetails['appStatus'] != 0 && this.projectDetails['appStatus'] != 1 &&
-        this.projectDetails['appStatus'] != 2 && this.projectDetails['appStatus'] != 3 &&
         this.navCtrl.push(ConsultantStageListPage, {
           pid: this.projectDetails['pid'], status: status, projectType: this.projectDetails['appStatus'],
           programPrice: this.projectDetails['finalPrice'], data: this.projectDetails
         });
     } else if (type == 4) {
-      this.projectDetails['appStatus'] != 0 && this.projectDetails['appStatus'] != 1 &&
-        this.projectDetails['appStatus'] != 2 && this.projectDetails['appStatus'] != 3 &&
+      // this.projectDetails['appStatus'] != 0 && this.projectDetails['appStatus'] != 1 &&
+      //   this.projectDetails['appStatus'] != 2 && this.projectDetails['appStatus'] != 3 &&
         this.navCtrl.push(ConsultantDocumentListPage, { pid: this.projectDetails['pid'], status: status, data: this.projectDetails });
     } else if (type == 5) {
-      this.projectDetails['appStatus'] != 6 && this.projectDetails['appStatus'] != 4 &&
-        this.projectDetails['appStatus'] != 0 && this.projectDetails['appStatus'] != 1 &&
-        this.projectDetails['appStatus'] != 2 && this.projectDetails['appStatus'] != 3 &&
+      // this.projectDetails['appStatus'] != 6 && this.projectDetails['appStatus'] != 4 &&
+      //   this.projectDetails['appStatus'] != 0 && this.projectDetails['appStatus'] != 1 &&
+      //   this.projectDetails['appStatus'] != 2 && this.projectDetails['appStatus'] != 3 &&
         this.navCtrl.push(ConsultantCollectionListPage, { pid: this.projectDetails['pid'], status: status, data: this.projectDetails });
     }
   }

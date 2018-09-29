@@ -34,7 +34,8 @@ export class ConsultantProgramListPage {
   public tiptext: any
   public isFailed: any
   public isdisabled: any
-
+  public isAction:any;
+  public isCont:any;
   constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider) {
   }
 
@@ -57,21 +58,21 @@ export class ConsultantProgramListPage {
       let pid = this.navParams.get('pid');
       this.getProjectListData(pid);
     } else if (type == 3) {
-      this.projectDetails['appStatus'] != 6 && this.projectDetails['appStatus'] != 4 &&
-        this.projectDetails['appStatus'] != 0 && this.projectDetails['appStatus'] != 1 &&
-        this.projectDetails['appStatus'] != 2 && this.projectDetails['appStatus'] != 3 &&
+      // this.projectDetails['appStatus'] != 6 && this.projectDetails['appStatus'] != 4 &&
+      //   this.projectDetails['appStatus'] != 0 && this.projectDetails['appStatus'] != 1 &&
+      //   this.projectDetails['appStatus'] != 2 && this.projectDetails['appStatus'] != 3 &&
         this.navCtrl.push(ConsultantStageListPage, {
           pid: this.projectDetails['pid'], status: status,
           projectType: this.projectDetails['appStatus'], programPrice: this.projectDetails['finalPrice'], data: this.projectDetails
         });
     } else if (type == 4) {
-      this.projectDetails['appStatus'] != 0 && this.projectDetails['appStatus'] != 1 &&
-        this.projectDetails['appStatus'] != 2 && this.projectDetails['appStatus'] != 3 &&
+      // this.projectDetails['appStatus'] != 0 && this.projectDetails['appStatus'] != 1 &&
+      //   this.projectDetails['appStatus'] != 2 && this.projectDetails['appStatus'] != 3 &&
         this.navCtrl.push(ConsultantDocumentListPage, { pid: this.projectDetails['pid'], status: status, data: this.projectDetails });
     } else if (type == 5) {
-      this.projectDetails['appStatus'] != 6 && this.projectDetails['appStatus'] != 4 &&
-        this.projectDetails['appStatus'] != 0 && this.projectDetails['appStatus'] != 1 &&
-        this.projectDetails['appStatus'] != 2 && this.projectDetails['appStatus'] != 3 &&
+      // this.projectDetails['appStatus'] != 6 && this.projectDetails['appStatus'] != 4 &&
+      //   this.projectDetails['appStatus'] != 0 && this.projectDetails['appStatus'] != 1 &&
+      //   this.projectDetails['appStatus'] != 2 && this.projectDetails['appStatus'] != 3 &&
         this.navCtrl.push(ConsultantCollectionListPage, { pid: this.projectDetails['pid'], status: status, data: this.projectDetails });
     }
   }
@@ -80,11 +81,23 @@ export class ConsultantProgramListPage {
     console.log('ionViewDidLoad ProjectProgramBrowserPage');
     let pid = this.navParams.get('pid');
     this.getProjectListData(pid);
+    let data = this.navParams.get('data') || {};
+    this.getIsAction(data);
   }
   ionViewDidEnter() {
     let pid = this.navParams.get('pid');
     this.getProjectListData(pid);
     this.projectDetails = this.navParams.get('data') || {};
+    this.getIsAction(this.projectDetails);
+  }
+
+  getIsAction(data){
+    if(data.appStatus != 0 && data.appStatus != 1 && data.appStatus != 2 &&data.appStatus != 3){
+      this.isAction = true;
+    }else{
+      this.isAction = false;
+    }
+    console.log(this.isAction,'this.isActionthis.isAction')
   }
 
   getUrlParam(name) {
@@ -105,7 +118,12 @@ export class ConsultantProgramListPage {
     this.Provider.getMamenSwiperData(projectDetailsUrl).subscribe(res => {
       if (res.code == 200) {
         this.projectProgramDetails = res.data;
-        console.log(this.projectProgramDetails)
+        if(!this.projectProgramDetails){
+          this.isCont = true;
+          this.projectProgramDetails = {};
+        }else{
+          this.isCont = false;
+        }
         if (!this.projectProgramDetails) return;
         this.projectProgramDetails['size'] = (this.projectProgramDetails['size'] / 1048576).toPrecision(3)
 
@@ -183,5 +201,9 @@ export class ConsultantProgramListPage {
   onReturnBack(){
     this.isTipPrompt = !this.isTipPrompt
     return
+  }
+
+  gotodo() {
+    this.navCtrl.pop();
   }
 }

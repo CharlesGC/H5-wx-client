@@ -52,6 +52,16 @@
       </div>
     </ion-item>
   </ion-list>
+
+  <div class="no-content" *ngIf="isCont">
+    <h4 class="title">收款记录</h4>
+    <div class="img">
+      <img src="../../../../assets/imgs/tuijain.png" alt="">
+    </div>
+    <p class="tip">该分类暂无内容，项目发展到不同阶段时，不同的分类下会有对应的新增内容</p>
+    <button class="btn" ion-button (click)="gotodo()" *ngIf="!isAction">返回</button>
+  </div>
+
   <ion-list>
     <ion-item class="message-item mt20" no-lines *ngFor="let projectInvoiceListData_item of projectInvoiceListData">
       <p class="msg-title">

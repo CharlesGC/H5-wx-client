@@ -12,6 +12,7 @@ import { ProjectListPage } from '../my-project/client/project-list/project-list'
 import { ConsultantProjectListPage } from '../my-project/consultant/consultant-project-list/consultant-project-list';
 import { ProjectProgramObjectionPage } from '../my-project/client/project-program-objection/project-program-objection';
 import { MessageCenterPage } from '../message-center/message-center';
+import { UseTheHelpPage } from '../contact/use-the-help/use-the-help';
 import { getUserByopenIdUrl,getWxOpenidUrl } from '../../providers/requestUrl';
 
 
@@ -251,8 +252,10 @@ export class ContactPage {
   }
 }
 
-goPhonebindPage(){
-  // this.navCtrl.push(ChooseIdentityPage);
+/*使用帮助跳转*/
+goUseTheHelpPage(){
+  const user = window.sessionStorage.getItem('user') ? JSON.parse(window.sessionStorage.getItem('user')) : {};
+  this.navCtrl.push(UseTheHelpPage,{userType:user.type});
 }
 
 

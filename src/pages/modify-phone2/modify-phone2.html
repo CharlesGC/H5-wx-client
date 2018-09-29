@@ -8,28 +8,46 @@ c pages and navigation.
   
   </ion-header>
   <ion-content class="phonebind-from">
-      <ion-list class="mt10">
-        <ion-item class="bg-black">
-          <ion-input type="text" placeholder="请输入手机号" #phone ></ion-input>
-        </ion-item>
-        <ion-item lines="none" class="none-margin bg-black">
-          <ion-input type="password" placeholder="请输入验证码" #code></ion-input>
-          <button item-right ion-button large class="ion-button-code" (click)="getVerificationCode(phone)">{{phoneCodeText|| '获取验证码'}}</button>
-        </ion-item>
-        <ion-item no-lines class="mt20 bg-none">
-          <!-- <ion-label>我已认真阅读同意<a color="primary" (click)="showAlert()">《麦盟 XXX 条款》</a></ion-label> -->
-          <!-- <ion-checkbox ></ion-checkbox> -->
-        </ion-item>
-        <!-- <div style="position: fixed;right: 18px;top: 220px;color: #FF6536;z-index: 9999;" (click)="getVerificationCode(phone)">{{phoneCodeText}}</div> -->
-        <!-- <ion-item class="mt20 item-button">
-            <button ion-button expand="full" large (click)="bindSubmit(phone,code)">登录</button>
-        </ion-item> -->
-      </ion-list>
-      <!-- <ion-list>
-        <ion-item><ion-button expand="full">绑定</ion-button></ion-item>
-      </ion-list> -->
-      <button ion-button expand="full" large class="fixed-bottom" (click)="modifysubmit(phone,code)">绑定</button>
-    </ion-content>
+  <ion-list class="mt10">
+    <ion-item class="bg-black">
+      <ion-input type="text" placeholder="请输入手机号" #phone ></ion-input>
+    </ion-item>
+    <ion-item lines="none" class="none-margin bg-black">
+      <ion-input type="password" placeholder="请输入验证码" #code></ion-input>
+      <button item-right ion-button large class="ion-button-code" (click)="getVerificationCode(phone)">{{phoneCodeText|| '获取验证码'}}</button>
+    </ion-item>
+    <ion-item no-lines class="mt20 bg-none">
+      <!-- <ion-label>我已认真阅读同意<a color="primary" (click)="showAlert()">《麦盟 XXX 条款》</a></ion-label> -->
+      <!-- <ion-checkbox ></ion-checkbox> -->
+    </ion-item>
+    <!-- <div style="position: fixed;right: 18px;top: 220px;color: #FF6536;z-index: 9999;" (click)="getVerificationCode(phone)">{{phoneCodeText}}</div> -->
+    <!-- <ion-item class="mt20 item-button">
+        <button ion-button expand="full" large (click)="bindSubmit(phone,code)">登录</button>
+    </ion-item> -->
+  </ion-list>
+  <!-- <ion-list>
+    <ion-item><ion-button expand="full">绑定</ion-button></ion-item>
+  </ion-list> -->
+  <button ion-button expand="full" large class="fixed-bottom" (click)="modifysubmit(phone,code)">绑定</button>
+</ion-content>
+<div class="phonebind-modal" [hidden]="!isHavePhone">
+  <div class="modal-bg"></div>
+  <div class="modal-box">
+    <div class="modal-top">
+      <div class="modal-top-close">
+        <!-- <ion-icon ios="ios-close" md="md-close" item-rigth (click)="onClose()" color=""></ion-icon> -->
+      </div>
+      <div class="modal-title">提示</div>
+      <div class="modal-content height-auto">
+        <p>手机号已存在！</p>
+      </div>
+      <div class="modal-footer">
+        <button ion-button full large (click)="sureHavePhone()">确定</button>
+        <!-- <button ion-button full large (click)="onCompanyDel()" class="btn-delete">返回</button> -->
+      </div>
+    </div>
+  </div>
+</div>
     
     
     

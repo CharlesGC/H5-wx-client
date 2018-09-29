@@ -119,7 +119,7 @@ export class ProjectPaymentRecordPage {
     } else if (types.indexOf('pdf') == 0) {
       this.filetypeicon = 'assets/imgs/' + 'pdf.png'
     }
-    //this.paymentRecordData['typeStr'] = this.filetypeicon
+    this.paymentRecordData['typeStr'] = this.filetypeicon
     //console.log(this.filetypeicon)
   }
 

@@ -44,16 +44,16 @@ export class ConsultantInteractionSubmitPage {
 
     this.fileUrlvalue = this.interactionData['deliverableUrl']
     //console.log(this.interactionData,'这是数据')
-    this.interactionData['size'] = (this.interactionData['size'] / 1048576).toPrecision(3)
+    // this.interactionData['size'] = (Number(this.interactionData['size']) / 1048576).toPrecision(3)
 
-    if (this.interactionData['size'] > 1) {
-      this.interactionData['size'] = this.interactionData['size'] + ' MB'
-    } else if (this.interactionData['size'] < 1) {
-      this.interactionData['size'] = this.interactionData['size'] * 1024 + ' KB'
-    } else if (this.interactionData['size'] == 'NaN') {
-      // this.interactionData = {};
-      //console.log(this.interactionData['typeStr'])
-    }
+    // if (this.interactionData['size'] > 1) {
+    //   this.interactionData['size'] = this.interactionData['size'] + ' MB'
+    // } else if (this.interactionData['size'] < 1) {
+    //   this.interactionData['size'] = this.interactionData['size'] * 1024 + ' KB'
+    // } else if (this.interactionData['size'] == 'NaN') {
+    //   // this.interactionData = {};
+    //   //console.log(this.interactionData['typeStr'])
+    // }
 
     if (this.interactionData['format']) {
       if (this.interactionData['format'].search(/doc/) !== -1 || this.interactionData['format'].search(/docx/) !== -1) {
@@ -126,11 +126,12 @@ export class ConsultantInteractionSubmitPage {
   }
   /*附件、交互物*/
   onInteractionClick() {
-    let fid = this.fid; //上传文件返回的id;
+    
     let pid = this.navParams.get('pid') || this.interactionData['pid'];
     let psid = this.navParams.get('psid') || this.interactionData['psid'];
     let pdid = this.navParams.get('pdid') || this.interactionData['pdid'];
     let interactionData = this.interactionData;
+    let fid = this.fid || interactionData['fid']; //上传文件返回的id;
     // let projectStageDetailUrl = 'http://mamon.yemindream.com/mamon/adviser/submitDocument';
     const openId = window.sessionStorage.getItem('openId') || this.getUrlParam('openId');
     console.log(fid)

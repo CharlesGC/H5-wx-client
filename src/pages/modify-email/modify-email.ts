@@ -43,7 +43,6 @@ export class ModifyEmailPage {
     this.Provider.getMamenSwiperData(getPhoneCodeUrl).subscribe(res=>{
       if(res.code==200) {
         // this.navCtrl.push(ChooseIdentityPage);
-        alert('发送成功！');
         // this.navCtrl.push(ContactPage);
         this.navCtrl.popToRoot();
       }else if(res.code==209){

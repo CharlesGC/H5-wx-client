@@ -179,11 +179,11 @@
       <span item-right class="item-value" *ngIf="projectDetails.budgetType == 1">固定单价</span>
       <span item-right class="item-value" *ngIf="projectDetails.budgetType == 2">待商议</span>
     </ion-item>
-    <ion-item>
+    <ion-item *ngIf="projectDetails.budgetType == 0">
       <label>预算金额</label>
       <span item-right class="item-value">{{projectDetails.budgetDay | currency :'￥'}}</span>
     </ion-item>
-    <ion-item no-lines>
+    <ion-item no-lines *ngIf="projectDetails.budgetType == 0">
       <label>大致天数</label>
       <span item-right class="item-value">{{projectDetails.workload}} 天</span>
     </ion-item>

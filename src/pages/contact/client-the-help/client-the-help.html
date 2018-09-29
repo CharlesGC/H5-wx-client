@@ -1,0 +1,261 @@
+<!--
+  Generated template for the ConsultantTheHelpPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <ion-navbar>
+      <ion-title>{{tabbarTitle}}</ion-title>
+    </ion-navbar>
+  
+  </ion-header>
+  
+  
+  <ion-content class="use-content">
+    <!--box1内容-->
+    <div class="box" *ngIf="type == 'client-1'">
+        <h4 class="title">我如何发布新的项目？</h4>
+        <div class="cont-tip">
+          <p>企业用户点击底部导航栏“+”，即可发布项目，我们为您提供“快速发布”与“正常发布”两种方式。</p>
+          <p>-若您选择“快速发布”，只需简单描述项目内容，平台工作人员会与您联系以获取更多项目信息。</p>
+          <p>-若您选择“正常发布”，需填写项目必填信息，且您填写的信息越详实越有利于我们为您匹配合适的顾问。</p>
+          <p>注意，平台默认您进入“快速发布”页面，您也可选择“前往正常发布”页面选项，但需要保存草稿，否则会丢失当前进度。</p>
+          <p>如您在发布需求过程中遇到任何问题，请拨打麦盟服务电话XX，由麦盟平台项目经理为您提供免费的服务。</p>
+        </div>
+        <h4 class="title">发布入口</h4>
+        <div class="img-tip">
+          <div class="img-tip-left">
+            <img src="../../../assets/imgs/cli-use-help-1-a.png">
+            <p class="mt0">发布入口</p>
+          </div>
+          <div class="img-tip-right">
+            <img src="../../../assets/imgs/cli-use-help-1-b.png">
+            <p class="mt0">切换发布入口</p>
+          </div>
+        </div>
+    </div>
+  
+    <!--box2内容-->
+    <div class="box" *ngIf="type == 'client-2'">
+        <h4 class="title">我如何选择顾问 ？</h4>
+        <div class="cont-tip">
+          <p>当您的项目成功发布后，平台会为您优选并推荐顾问，当然，您也可以对心仪的顾问发起项目邀请。
+            推荐的顾问会显示在您的项目所属的顾问列表以及推荐列表中，在此可以查看顾问信息并且进行后续操作。
+            当您确认唯一一份项目方案时，您可与该顾问签订合同并正式开启项目。</p>
+            <p>路径：</p>
+            <p class="mt20">1.首页→顾问列表→顾问详情</p>
+            <p>2.推荐→顾问详情</p>
+        </div>
+        <h4 class="title">顾问邀请入口</h4>
+        <div class="img-tip">
+          <div class="img-tip-left">
+            <img src="../../../assets/imgs/cli-use-help-2-a.png">
+            <p class="mt0">顾问查找</p>
+          </div>
+          <div class="img-tip-right">
+            <img src="../../../assets/imgs/cli-use-help-2-b.png">
+            <p class="mt0">顾问邀请</p>
+          </div>
+        </div>
+        <h4 class="title">推荐顾问入口</h4>
+        <div class="img-tip">
+          <div class="img-tip-left">
+            <img src="../../../assets/imgs/cli-use-help-2-c.png">
+            <p class="mt0">推荐列表</p>
+          </div>
+          <div class="img-tip-right">
+            <img src="../../../assets/imgs/cli-use-help-2-d.png">
+            <p class="mt0">面试入口</p>
+          </div>
+        </div>
+    </div>
+    
+    <!--box3内容-->  
+    <div class="box" *ngIf="type == 'client-3'">
+        <h4 class="title">我如何确认阶段的收付？</h4>
+        <div class="cont-tip">
+          <p>当顾问完成某一阶段的工作并提交阶段交付之后，您可以通过‘消息中心’或者在“我的项目”中进入对应项目的阶段详情进行阶段验收，或提出交付意见以便顾问进行修改。</p>
+          <p>操作路径：</p>
+          <p>-从‘消息中心’选择‘对应消息’进入。</p>
+          <p>-或者通过以下路径：我的→我的项目→对应项目→阶段列表→阶段详情</p>
+        </div>
+        <h4 class="title">收付入口</h4>
+        <div class="img-tip">
+          <div class="img-tip-left">
+            <img src="../../../assets/imgs/cli-use-help-3-a.png">
+            <p class="mt0">我的项目</p>
+          </div>
+          <div class="img-tip-right">
+            <img src="../../../assets/imgs/cli-use-help-3-b.png">
+            <p class="mt0">对应项目</p>
+          </div>
+        </div>
+        <div class="img-tip">
+          <div class="img-tip-left">
+            <img src="../../../assets/imgs/cli-use-help-3-c.png">
+            <p class="mt0">阶段列表</p>
+          </div>
+          <div class="img-tip-right">
+            <img src="../../../assets/imgs/cli-use-help-3-d.png">
+            <p class="mt0">付费入口</p>
+          </div>
+        </div>
+    </div>
+  
+    <!--box4内容-->       
+    <div class="box" *ngIf="type == 'client-4'">
+        <h4 class="title">平台会给我提供发票么？</h4>
+        <div class="cont-tip">
+          <p>当每一个阶段交付被您确认后，您都可以在‘阶段详情页’中提出发票申请。需注意的是，
+            申请普票和专票所需要提供的信息不同，您可以在‘个人信息’中的‘公司信息’处修改完善对应信息。</p>
+          <p>当平台寄出发票后，您可以在发票记录中查看快递单号。</p>
+          <p>您可以从‘消息中心’选择‘对应消息’进入。 或者通过以下路径：</p>
+          <p>申请路径：我的→我的项目→对应项目→阶段列表→阶段详情</p>
+          <p>查看路径：我的→我的项目→对应项目→发票列表→发票详情</p>
+        </div>
+        <h4 class="title">发票信息入口</h4>
+        <div class="img-tip">
+          <div class="img-tip-left">
+            <img src="../../../assets/imgs/cli-use-help-4-a.png">
+            <p class="mt0">个人信息</p>
+          </div>
+          <div class="img-tip-right">
+            <img src="../../../assets/imgs/cli-use-help-4-b.png">
+            <p class="mt0">发票信息入口</p>
+          </div>
+        </div>
+        <div class="img-tip">
+          <div class="img-tip-left">
+            <img src="../../../assets/imgs/cli-use-help-3-c.png">
+            <p class="mt0">阶段列表</p>
+          </div>
+          <div class="img-tip-right">
+            <img src="../../../assets/imgs/cli-use-help-3-d.png">
+            <p class="mt0">付费入口</p>
+          </div>
+        </div>
+    </div>
+  
+    <!--box5内容-->       
+    <div class="box" *ngIf="type == 'client-5'">
+        <h4 class="title">我可以查看我的支付记录么？</h4>
+        <div class="cont-tip">
+          <p>可以。您的支付记录与发票记录都保存在您的项目信息中，您可以点击“支付记录”与“发票记录”来查看您的支付记录以及发票记录。</p>
+          <p> 查看路径：</p>
+          <p>个人中心→我的项目→项目详情→支付列表→支付详情</p>
+          <p>个人中心→我的项目→项目详情→发票列表→发票详情</p>
+        </div>
+        <h4 class="title">支付记录入口</h4>
+        <div class="img-tip">
+          <div class="img-tip-left">
+            <img src="../../../assets/imgs/cli-use-help-5-a.png">
+            <p class="mt0">支付列表入口</p>
+          </div>
+          <div class="img-tip-right">
+            <img src="../../../assets/imgs/cli-use-help-5-b.png">
+            <p class="mt0">支付详情入口</p>
+          </div>
+        </div>
+        <h4 class="title">发票详情入口</h4>
+        <div class="img-tip">
+          <div class="img-tip-left">
+            <img src="../../../assets/imgs/cli-use-help-5-c.png">
+            <p class="mt0">发票列表入口</p>
+          </div>
+          <div class="img-tip-right">
+            <img src="../../../assets/imgs/cli-use-help-5-d.png">
+            <p class="mt0">发票详情入口</p>
+          </div>
+        </div>
+    </div>
+  
+    <!--box6内容-->       
+    <div class="box" *ngIf="type == 'client-6'">
+        <h4 class="title">我无法实时关注项目内容，平台会提醒我进行操作么？</h4>
+        <div class="cont-tip">
+          <p>平台提供站内消息、短信提醒与邮箱提醒三种提醒方式，您还可以进入到消息中心，点击查看并对具体消息提醒进行后续操作。</p>
+        </div>
+        <h4 class="title">消息入口</h4>
+        <div class="img-tip">
+          <div class="img-tip-left">
+            <img src="../../../assets/imgs/cli-use-help-6-a.png">
+            <p class="mt0">消息列表入口</p>
+          </div>
+          <div class="img-tip-right">
+            <img src="../../../assets/imgs/cli-use-help-6-b.png">
+            <p class="mt0">消息详情入口</p>
+          </div>
+        </div>
+    </div>
+  
+    <!--box7内容-->       
+    <div class="box" *ngIf="type == 'client-7'">
+        <h4 class="title">我如何确认方案、阶段计划内容？</h4>
+        <div class="cont-tip">
+            <p>当项目方案、阶段计划、阶段交付有新的进展时，平台会通过站内消息、短信提醒与邮箱提醒等形式通知您。
+              此时，您可以通过‘消息中心’点击相关消息快速跳转至所界面，您亦可以通过以下路径进入：</p>
+            <p>确认方案：个人中心→我的项目→项目详情→方案列表→方案详情</p>
+            <p>阶段计划：个人中心→我的项目→项目详情→阶段列表</p>
+          </div>
+        <h4 class="title">方案确认入口</h4>
+        <div class="img-tip">
+          <div class="img-tip-left">
+            <img src="../../../assets/imgs/cli-use-help-7-a.png">
+            <p class="mt0">方案列表</p>
+          </div>
+          <div class="img-tip-right">
+            <img src="../../../assets/imgs/cli-use-help-7-b.png">
+            <p class="mt0">方案详情</p>
+          </div>
+        </div>
+        <h4 class="title">阶段确认入口</h4>
+        <div class="img-tip">
+          <div class="img-tip-left">
+            <img src="../../../assets/imgs/cli-use-help-7-c.png">
+            <p class="mt0">阶段入口</p>
+          </div>
+          <div class="img-tip-right">
+            <img src="../../../assets/imgs/cli-use-help-7-d.png">
+            <p class="mt0">确认阶段计划</p>
+          </div>
+        </div>
+    </div>
+  
+    <!--box8内容-->       
+    <div class="box" *ngIf="type == 'client-8'">
+        <h4 class="title">当我确认了唯一方案后还可以查看其他推荐顾问 的信息么？</h4>
+        <div class="cont-tip">
+          <p>可以，您可以查看所有被推荐的顾问信息与顾问所提交的方案</p>
+        </div>
+    </div>
+
+    <!--box9内容-->       
+    <div class="box" *ngIf="type == 'client-9'">
+        <h4 class="title">为何我需要确认阶段计划？</h4>
+        <div class="cont-tip">
+          <p>您好，虽然阶段内容可能在方案中已经确认，但由于多数项目开展与项目付款都具有一定的阶段性，
+            对分阶段计划的确认有助于平台跟进项目进展、把控项目质量，以便为您和顾问提供更有力的保障。</p>
+        </div>
+    </div>
+
+    <!--box10内容-->       
+    <div class="box" *ngIf="type == 'client-10'">
+        <h4 class="title">如何确保项目质量？</h4>
+        <div class="cont-tip">
+          <p>（1）严格的审核机制：麦盟平台上的顾问都经过麦盟团队的严格审核。</p>
+          <p>（2）顾问推荐助您优选：平台会根据项目需求为您匹配并推荐合适的顾问，您可在被推荐顾问中进行意向顾问的挑选。</p>
+          <p>（3）全过程跟进：平台将全程跟进并确保您的项目进度与质量。</p>
+        </div>
+    </div>
+
+    <!--box11内容-->       
+    <div class="box" *ngIf="type == 'client-11'">
+        <h4 class="title">2.发布项目需要收费吗？</h4>
+        <div class="cont-tip">
+          <p>暂无回答</p>
+        </div>
+    </div>
+  </ion-content>
+  

@@ -19,6 +19,7 @@ import { getRecommendListUrl } from '../../../providers/requestUrl';
 export class RecommendClientListPage {
 
   public projectConsultantListData = [];
+  public isCont = false;
   constructor(public navCtrl: NavController, public navParams: NavParams,private Provider:MamenDataProvider) {
   }
 
@@ -53,7 +54,8 @@ export class RecommendClientListPage {
     let projectListsDataUrl = getRecommendListUrl + '?openId=' + openId;
     this.Provider.getMamenSwiperData(projectListsDataUrl).subscribe(res=>{
       if(res.code==200) {
-        this.projectConsultantListData = res.data;
+        this.projectConsultantListData = res.data || [];
+        this.isCont = this.projectConsultantListData.length<1 ? true : false;
       }else if(res.code == 207) {
         window.localStorage.removeItem('openId');
       }else{

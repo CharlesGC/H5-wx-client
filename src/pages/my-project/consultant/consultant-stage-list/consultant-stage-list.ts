@@ -37,6 +37,7 @@ export class ConsultantStageListPage {
   public showNavMenuName = '';
   public projectDetails = {};
   public projectStageProposalList = [];
+  public isAction = false;
   constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider) {
   }
 
@@ -45,8 +46,9 @@ export class ConsultantStageListPage {
     let status = this.navParams.get('status');
     this.status = this.navParams.get('type');
     this.projectType = this.navParams.get('projectType');
+    let data = this.navParams.get('data');
     this.getProjectStageListData(pid, status);
-    console.log(this.projectStageListData, !!this.projectStageListData && this.projectStageListData.length < 1, '--------');
+    this.getIsAction(data)
   }
 
   ionViewDidEnter() {
@@ -55,7 +57,17 @@ export class ConsultantStageListPage {
     this.getProjectStageListData(pid, status);
     this.getProjectStageProposalList(pid, status);
     this.projectDetails = this.navParams.get('data') || {};
-    console.log(this.projectStageListData, !!this.projectStageListData && this.projectStageListData.length < 1, '=======');
+    this.getIsAction(this.projectDetails)
+  }
+
+  getIsAction(data){
+    if(data.appStatus != 0 && data.appStatus != 1 && 
+      data.appStatus != 2 &&data.appStatus != 3&&
+      data.appStatus != 4 &&data.appStatus != 6){
+      this.isAction = true;
+    }else{
+      this.isAction = false;
+    }
   }
 
   /*点击展开、收起*/
@@ -71,8 +83,8 @@ export class ConsultantStageListPage {
     if (type == 1) {
       this.navCtrl.push(ConsultantProjectBrowserPage, { data: this.projectDetails, pid: this.projectDetails['pid'], status: status || '' });
     } else if (type == 2) {
-      this.projectDetails['appStatus'] != 0 && this.projectDetails['appStatus'] != 1 &&
-        this.projectDetails['appStatus'] != 2 && this.projectDetails['appStatus'] != 3 &&
+      // this.projectDetails['appStatus'] != 0 && this.projectDetails['appStatus'] != 1 &&
+      //   this.projectDetails['appStatus'] != 2 && this.projectDetails['appStatus'] != 3 &&
         this.navCtrl.push(ConsultantProgramListPage, { pid: this.projectDetails['pid'], status: status || '', data: this.projectDetails });
     } else if (type == 3) {
       let pid = this.navParams.get('pid');
@@ -85,13 +97,13 @@ export class ConsultantStageListPage {
       // this.navCtrl.push(ConsultantStageListPage,{pid:this.projectDetails['pid'],status:status,
       // projectType:this.projectDetails['appStatus'],programPrice:this.projectDetails['finalPrice']});
     } else if (type == 4) {
-      this.projectDetails['appStatus'] != 0 && this.projectDetails['appStatus'] != 1 &&
-        this.projectDetails['appStatus'] != 2 && this.projectDetails['appStatus'] != 3 &&
+      // this.projectDetails['appStatus'] != 0 && this.projectDetails['appStatus'] != 1 &&
+      //   this.projectDetails['appStatus'] != 2 && this.projectDetails['appStatus'] != 3 &&
         this.navCtrl.push(ConsultantDocumentListPage, { pid: this.projectDetails['pid'], status: status, data: this.projectDetails });
     } else if (type == 5) {
-      this.projectDetails['appStatus'] != 6 && this.projectDetails['appStatus'] != 4 &&
-        this.projectDetails['appStatus'] != 0 && this.projectDetails['appStatus'] != 1 &&
-        this.projectDetails['appStatus'] != 2 && this.projectDetails['appStatus'] != 3 &&
+      // this.projectDetails['appStatus'] != 6 && this.projectDetails['appStatus'] != 4 &&
+      //   this.projectDetails['appStatus'] != 0 && this.projectDetails['appStatus'] != 1 &&
+      //   this.projectDetails['appStatus'] != 2 && this.projectDetails['appStatus'] != 3 &&
         this.navCtrl.push(ConsultantCollectionListPage, { pid: this.projectDetails['pid'], status: status, data: this.projectDetails });
     }
   }
@@ -225,5 +237,8 @@ export class ConsultantStageListPage {
   // 返回项目列表页
   goback() {
     this.navCtrl.popTo(this.navCtrl.getByIndex(1))
+  }
+  gotodo() {
+    this.navCtrl.pop();
   }
 }

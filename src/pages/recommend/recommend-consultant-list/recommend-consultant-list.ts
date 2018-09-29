@@ -63,7 +63,6 @@ export class RecommendConsultantListPage {
       if(res.code==200) {
         this.projectListData = res.data || [];
         this.isCont = this.projectListData.length<1 ? true : false;
-        console.log(this.isCont,'*****')
       }else if(res.code == 207) {
         window.localStorage.removeItem('openId');
       }else{

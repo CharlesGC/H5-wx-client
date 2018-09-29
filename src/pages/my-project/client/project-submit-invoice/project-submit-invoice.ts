@@ -114,10 +114,7 @@ export class ProjectSubmitInvoicePage {
                               '&bankNumber='+invoiceData['account'];
     this.Provider.getMamenSwiperData(projectInvoiceDetailUrl).subscribe(res=>{
       if(res.code==200) {
-        this.invoiceData = res.data;
         this.navCtrl.pop();
-      }else if(res.code == 207) {
-        window.localStorage.removeItem('openId');
       }else{
         alert('请求出错:'+res.msg);
       }

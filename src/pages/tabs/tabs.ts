@@ -57,11 +57,10 @@ export class TabsPage {
 
   onSelectFriend(e) {
     const user = window.sessionStorage.getItem('user') ? JSON.parse(window.sessionStorage.getItem('user')) : {type:-1};
-    if(user.status == 1){
-      this.navCtrl.push(ChooseIdentityPage);
-    }
     const openId = window.sessionStorage.getItem('openId') || this.getUrlParam('openId') || window.localStorage.getItem('openId');
-    if(openId){
+    if(!openId && user.status == 1){
+      this.navCtrl.push(ChooseIdentityPage);
+    }else if(openId){
       this.getUserInfoEd(openId);
       !window.sessionStorage.getItem('openId') && window.sessionStorage.setItem('openId',openId);
     }else{

@@ -21,11 +21,15 @@ import { changePhoneUrl,sendSmsCodeUrl } from '../../providers/requestUrl';
 export class ModifyPhone2Page {
   public phoneCodeText = '获取验证码';
   public isFlag = true;
+  public isHavePhone = false;
   constructor(public navCtrl: NavController, public navParams: NavParams,private Provider:MamenDataProvider) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ModifyPhone2Page');
+  }
+  sureHavePhone() {
+    this.isHavePhone = !this.isHavePhone;
   }
   getUrlParam(name) {  
     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象  
@@ -80,7 +84,11 @@ export class ModifyPhone2Page {
       let checkCodeUrl = changePhoneUrl+'?openId='+openId + '&newphone=' + phone.value + '&code=' + code.value;
       this.Provider.getMamenSwiperData(checkCodeUrl).subscribe(res=>{
         if(res.code==200) {
-          this.navCtrl.push(ContactPage);
+          this.navCtrl.popToRoot();
+        }else if (res.code == 204) {
+          this.isHavePhone = true;
+        }else{
+          alert(res.msg+': 网络异常')
         }
       },error=>{
         console.log('erros===',error);

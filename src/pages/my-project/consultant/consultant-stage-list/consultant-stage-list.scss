@@ -143,6 +143,7 @@ page-consultant-stage-list {
             margin: 20px auto;
         }
         .tip {
+            width: 20rem;
             font-family: PingFangSC;
             font-size: 1.4rem;
             font-weight: normal;
@@ -150,9 +151,13 @@ page-consultant-stage-list {
             font-stretch: normal;
             line-height: 1.29;
             letter-spacing: normal;
-            text-align: center;
             color: #4a4a4a;
+            margin: 0 auto;
             margin-top: 40px;
+        }
+        .btn {
+            width: 20rem;
+            margin-top: 2rem;
         }
     }
     .describe-list {

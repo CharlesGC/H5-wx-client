@@ -41,7 +41,7 @@ public isDelBook =false
       if (res.code == 200) {
         this.consultantDocumentDetailData = res.data;
         console.log(this.consultantDocumentDetailData,'这是数据')
-        this.consultantDocumentDetailData['size'] = (this.consultantDocumentDetailData['size'] / 1048576).toPrecision(3)
+        this.consultantDocumentDetailData['size'] = (Number(this.consultantDocumentDetailData['size']) / 1048576).toPrecision(3)
 
         if (this.consultantDocumentDetailData['size'] > 1) {
           this.consultantDocumentDetailData['size'] = this.consultantDocumentDetailData['size'] + ' MB'

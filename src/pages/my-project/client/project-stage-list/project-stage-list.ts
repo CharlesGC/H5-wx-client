@@ -4,7 +4,7 @@ import { MamenDataProvider } from '../../../../providers/mamen-data/mamen-data';
 
 import { ProjectStageBrowserPage } from '../project-stage-browser/project-stage-browser';
 import { ProjectProgramObjectionPage } from '../project-program-objection/project-program-objection';
-import { getProjectStageListUrl, customerConfirmStagePlanUrl,getProjectSignUpAdviserCountUrl } from '../../../../providers/requestUrl';
+import { getProjectStageListUrl,getProjectDetailUrl, customerConfirmStagePlanUrl,getProjectSignUpAdviserCountUrl } from '../../../../providers/requestUrl';
 
 import { ProjectBrowserPage } from '../project-browser/project-browser';
 import { ProjectProgramListPage } from '../project-program-list/project-program-list';
@@ -54,6 +54,7 @@ public isFaild :any
     let pid = this.navParams.get('pid');
     let status = this.navParams.get('status');
     this.stageType = this.navParams.get('type');
+    this.getProjectListData(pid);
     this.getProjectStageListData(pid,status);
     this.getProjectSignCount(pid);
     this.projectDetails = this.navParams.get('data') || {};
@@ -180,6 +181,24 @@ public isFaild :any
         this.tiptext = '确认失败，请重新确认！'
         //alert('请求出错:'+res.msg);
         this.isFaild = true
+      }
+    },error=>{
+      console.log('erros===',error);
+    })
+  }
+
+  /*项目详情数据请求*/
+  getProjectListData(pid) {
+    // let projectDetailsUrl = 'http://mamon.yemindream.com/mamon/customer/getProjectDetail';
+    const openId = window.sessionStorage.getItem('openId')|| this.getUrlParam('openId')
+    let projectDetailsUrl = getProjectDetailUrl + '?openId=' + openId + '&pid='+pid;
+    this.Provider.getMamenSwiperData(projectDetailsUrl).subscribe(res=>{
+      if(res.code==200) {
+        this.projectDetails = res.data;
+      }else if(res.code == 207) {
+        window.localStorage.removeItem('openId');
+      }else{
+        //alert('请求出错:'+res.msg);
       }
     },error=>{
       console.log('erros===',error);

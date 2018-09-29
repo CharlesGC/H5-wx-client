@@ -57,6 +57,10 @@ import { ClientPaymentInfoPage } from '../pages/contact/client/client-payment-in
 import { ClientPaymentInfoEditPage } from '../pages/contact/client/client-payment-info-edit/client-payment-info-edit';
 import { ClientInvoiceEditPage } from '../pages/contact/client/client-invoice-edit/client-invoice-edit';
 
+import { UseTheHelpPage } from '../pages/contact/use-the-help/use-the-help';
+import { ClientTheHelpPage } from '../pages/contact/client-the-help/client-the-help';
+import { ConsultantTheHelpPage } from '../pages/contact/consultant-the-help/consultant-the-help';
+
 /*个人中心页面组件（顾问）*/
 import { ConsultantBasicPage } from '../pages/contact/consultant/consultant-basic/consultant-basic';
 import { ConsultantInfoUserPage } from '../pages/contact/consultant/consultant-info-user/consultant-info-user';
@@ -186,6 +190,10 @@ import { ImageCropperModule } from 'ngx-image-cropper';
     ReleaseSuccessPage,
     CompanyPage,
 
+    UseTheHelpPage,
+    ClientTheHelpPage,
+    ConsultantTheHelpPage,
+
     ProjectListPage,
     ProjectBrowserPage,
     ProjectConsultantListPage,
@@ -302,6 +310,10 @@ import { ImageCropperModule } from 'ngx-image-cropper';
     AppointDatePage,
     ReleaseSuccessPage,
     CompanyPage,
+
+    UseTheHelpPage,
+    ClientTheHelpPage,
+    ConsultantTheHelpPage,
 
     ProjectListPage,
     ProjectBrowserPage,
