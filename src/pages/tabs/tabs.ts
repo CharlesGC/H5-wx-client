@@ -60,6 +60,14 @@ export class TabsPage {
     if(user.status == 1){
       this.navCtrl.push(ChooseIdentityPage);
     }
+    const openId = window.sessionStorage.getItem('openId') || this.getUrlParam('openId') || window.localStorage.getItem('openId');
+    if(openId){
+      this.getUserInfoEd(openId);
+      !window.sessionStorage.getItem('openId') && window.sessionStorage.setItem('openId',openId);
+    }else{
+      this.onLogin();
+    }
+    
     if(user.type == -1){
       this.onLogin();
     }
@@ -99,6 +107,9 @@ export class TabsPage {
         this.user = res.data;
         window.sessionStorage.setItem('user',JSON.stringify(res.data))
         window.localStorage.setItem('user',JSON.stringify(res.data));
+        // if(!this.user || this.user['status'] == 1 || this.user['status'] == 2){
+        //   this.navCtrl.push(ChooseIdentityPage);
+        // }
         if(this.user['type'] && this.user['type'] == 1){
           this.isshow = false;
           this.tab4Root = RecommendConsultantListPage
@@ -113,6 +124,38 @@ export class TabsPage {
         window.localStorage.removeItem('openId');
         window.sessionStorage.removeItem('openId');
         // this.onLogin();
+      }
+    },error=>{
+      console.log('erros===',error);
+    })
+  }
+
+  getUserInfoEd(openId) {
+
+    let chooseIdentyUrl = getUserByopenIdUrl + '?openId=' + openId;
+    this.Provider.getMamenSwiperData(chooseIdentyUrl).subscribe(res=>{
+      console.log(res,'点击斡旋111')
+      if(res.code==200) {
+        this.user = res.data;
+        window.sessionStorage.setItem('user',JSON.stringify(res.data))
+        window.localStorage.setItem('user',JSON.stringify(res.data));
+        if(!this.user || this.user['status'] == 1 || this.user['status'] == 2){
+          this.navCtrl.push(ChooseIdentityPage);
+        }
+        if(this.user['type'] && this.user['type'] == 1){
+          this.isshow = false;
+          this.tab4Root = RecommendConsultantListPage
+        }else if(this.user['type'] && this.user['type'] == 0){
+          this.isshow = true;
+          this.tab4Root = RecommendClientListPage;
+        }
+      }else if(res.code == 207) {
+        window.localStorage.removeItem('openId');
+        window.sessionStorage.removeItem('openId');
+      }else if(res.code == 203) {
+        window.localStorage.removeItem('openId');
+        window.sessionStorage.removeItem('openId');
+        this.onLogin();
       }
     },error=>{
       console.log('erros===',error);

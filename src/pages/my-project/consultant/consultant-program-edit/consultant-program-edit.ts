@@ -157,7 +157,7 @@ export class ConsultantProgramEditPage {
       this.checkFailed =false
       return
     }
-    if (!programData['workloadUnit']) {
+    if (!programData['workload']) {
       this.isTipPrompt = true
       this.tipstext = '方案周期不能为空'
       this.checkFailed =false
@@ -226,8 +226,9 @@ export class ConsultantProgramEditPage {
         //alert('操作成功！');
         //this.tipstext = '操作成功！'
         //his.isdisabled = ''
-        this.isFailed = false
-        this.navCtrl.pop()
+        // this.isFailed = false
+        this.isTipPrompt = !this.isTipPrompt
+        this.navCtrl.pop();
       } else {
         this.tipstext = '操作失败，请稍后重试！'
         //alert('请求出错:' + res.msg);
