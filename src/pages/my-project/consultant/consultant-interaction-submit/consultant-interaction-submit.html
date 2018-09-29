@@ -15,15 +15,15 @@
   <ion-list class="list-item-flex mt10">
     <ion-item (click)="goFormEditPage('name',interactionData.name,'text')">
       <label>文档名称</label>
-      <p item-right>
-        <span class="item-value">{{interactionData.name || '请输入'}}</span>
+      <p item-right class="rigth-message">
+        <span class="item-value line-overflow">{{interactionData.name || '请输入'}}</span>
         <ion-icon class="icon" name="arrow-forward"></ion-icon>
       </p>
     </ion-item>
     <ion-item no-lines (click)="goFormEditPage('introduction',interactionData.introduction,'textarea')">
       <label>文档描述</label>
-      <p item-right>
-        <span class="item-value">{{interactionData.introduction || '请输入'}}</span>
+      <p item-right class="rigth-message">
+        <span class="item-value line-overflow">{{interactionData.introduction || '请输入'}}</span>
         <ion-icon class="icon" name="arrow-forward"></ion-icon>
       </p>
     </ion-item>
@@ -38,9 +38,9 @@
         </ion-item> -->
     <ion-item (click)="gouploadfile()" no-lines>
       <label>交付物原件</label>
-      <p item-right>
-        <span class="item-value" *ngIf="filestatus == true">重新上传</span>
-        <span class="item-value" *ngIf="filestatus == false">点击预览或上传</span>
+      <p item-right class="rigth-message">
+        <span class="item-value line-overflow" *ngIf="filestatus == true">重新上传</span>
+        <span class="item-value line-overflow" *ngIf="filestatus == false">点击预览或上传</span>
         <ion-icon class="icon" name="arrow-forward"></ion-icon>
       </p>
     </ion-item>

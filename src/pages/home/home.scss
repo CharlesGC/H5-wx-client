@@ -314,6 +314,7 @@ page-home {
                     display: flex;
                     overflow: scroll;
                     overflow-y: hidden;
+                    // overflow-x: hidden;
                     margin-top: 15px;
                     // padding-bottom: 25px;
                     .qu_list {
@@ -329,7 +330,7 @@ page-home {
                             height: 100%;
                             border-radius: 3px;
                             background-color: #ffffff;
-                            box-shadow: 0 1px 10px 0 rgba(0, 0, 0, 0.05);
+                            // box-shadow: 0 1px 10px 5px rgba(0, 0, 0, 0.05);
                             display: flex;
                             flex-direction: column;
                             align-items: flex-start;
@@ -645,7 +646,7 @@ page-home {
                                 img {
                                     width: 100%;
                                     // opacity: 0.82;
-                                    padding:0 15px;
+                                    padding:0 5px;
                                 }
                                .code_text {
                                 width: 80%;
@@ -823,5 +824,10 @@ page-home {
     }
     .list-ios >.item-block:last-child {
         border-bottom: 0;
+    }
+    .wwwww {
+        width: 100px;
+        height: 100px;
+        border: 1px solid red;
     }
 }
