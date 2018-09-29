@@ -56,24 +56,24 @@ export class HomePage {
       res => {
         // console.log(res);
         this.swiperArr = res.data;
-        // console.log(this.swiperArr);
+        console.log(this.swiperArr);
       }, error => {
         console.log(error);
       }
     )
   }
-  行业数据 
-  getindustryInfo() {
-    this.industrydata.getIndustryData(getindustryUrl, 0).subscribe(
-      res => {
-        // console.log(res);
-        this.IndustryArr = res.data.list;
-        // console.log(this.IndustryArr);
-      }, error => {
-        console.log(error);
-      }
-    )
-  }
+  // 行业数据 
+  // getindustryInfo() {
+  //   this.industrydata.getIndustryData(getindustryUrl, 0).subscribe(
+  //     res => {
+  //       // console.log(res);
+  //       this.IndustryArr = res.data.list;
+  //       // console.log(this.IndustryArr);
+  //     }, error => {
+  //       console.log(error);
+  //     }
+  //   )
+  // }
   //技能数据
   getskillInfo() {
     this.skilldata.getSkillLabelData(getskillUrl, 0).subscribe(
@@ -184,6 +184,14 @@ export class HomePage {
   //     name: value ? this.IndustryArr[index].industryName : '',
   //   });
   // }
+  // 点击跳转到轮播图详情
+  goSwiperDetail(index) {
+    console.log(index,'indexindexindexindex')
+    this.navCtrl.push(SwiperDetailPage,{
+      index:index
+    });
+  }
+
   // 技能详情
   InfoskillMore(value, index, type) {
     this.navCtrl.push(IndustrydetialPage, {
@@ -238,10 +246,6 @@ export class HomePage {
     } else {
       this.navCtrl.push(PhonebindPage);
     }
-  }
-  // 点击跳转到轮播图详情
-  goSwiperDetail() {
-    this.navCtrl.push(SwiperDetailPage);
   }
   /**更多案例列表 */
   goCasemorePage(){

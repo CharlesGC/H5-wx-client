@@ -165,7 +165,7 @@ export class ConsultantProgramEditPage {
     }
     if (!programData['deliverable']) {
       this.isTipPrompt = true
-      this.tipstext = '方案规划不能为空'
+      this.tipstext = '项目规划不能为空'
       this.checkFailed =false
       return
     }

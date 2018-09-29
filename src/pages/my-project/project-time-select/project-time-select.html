@@ -140,7 +140,7 @@
                 </p>
             </ion-item>
         </ion-list>
-        <p class="browser-file-tip">具备 0-3 年的业务或咨询行业工作经验，可协助项目负责人完成项目内容交付或独立完成简单项目的交付。</p>
+        <p class="browser-file-tip">具备 3-5 年的业务或咨询行业工作经验，可协助项目负责人完成项目内容交付或独立完成简单项目的交付。</p>
         <ion-list class="list-item-flex mt10">
             <ion-item (click)="onSelectedClick(1)" no-lines>
                 <label>中级</label>
@@ -152,7 +152,7 @@
                 </p>
             </ion-item>
         </ion-list>
-        <p class="browser-file-tip">具备 0-3 年的业务或咨询行业工作经验，可协助项目负责人完成项目内容交付或独立完成简单项目的交付。</p>
+        <p class="browser-file-tip">具备 5-8 年的业务或咨询行业工作经验，可独立完成项目管理并确保内容交付。</p>
         <ion-list class="list-item-flex mt10">
             <ion-item (click)="onSelectedClick(2)" no-lines>
                 <label>高级</label>
@@ -164,7 +164,7 @@
                 </p>
             </ion-item>
         </ion-list>
-        <p class="browser-file-tip">具备 0-3 年的业务或咨询行业工作经验，可协助项目负责人完成项目内容交付或独立完成简单项目的交付。</p>
+        <p class="browser-file-tip">具备 8-12 年的业务或咨询行业工作经验，对某一行业及业务领域有独到见解，可辅导或领导整个项目团队解决业务难题从而达成或超出项目预期。</p>
         <ion-list class="list-item-flex mt10">
             <ion-item (click)="onSelectedClick(3)" no-lines>
                 <label>专家</label>
@@ -176,7 +176,8 @@
                 </p>
             </ion-item>
         </ion-list>
-        <p class="browser-file-tip">具备 0-3 年的业务或咨询行业工作经验，可协助项目负责人完成项目内容交付或独立完成简单项目的交付。</p>
+        <p class="browser-file-tip">具备 12 年以上的业务或咨询行业工作经验，是某一行业或领域公认的专家或意见领袖，可引导企业客户或项目团队进行问题专项讨论或研究，从而达成或超出项目预期。
+            </p>
     </div>
 
     <!--项目预算-->
@@ -204,12 +205,14 @@
         <div *ngIf="selected == 1 || selected == 0">
             <div class="item-card">
                 <div class="item-card-left" [ngClass]="{'checked':selected == 0}" (click)="onSelectedClick(0)">
-                    <img src="../../../assets/imgs/coins-1.png" alt="">
+                    <img src="../../../assets/imgs/coins-1.png" alt="" [hidden]="isCoins1">
+                    <img src="../../../assets/imgs/coins-2.png" alt="" [hidden]="isCoins2">
                     <!-- <ion-icon class="color-f46f46" name="checkmark-circle"></ion-icon> -->
                     <h4>日薪结算</h4>
                 </div>
                 <div class="item-card-left" [ngClass]="{'checked':selected == 1}" (click)="onSelectedClick(1)">
-                    <img src="../../../assets/imgs/credit-card-1.png" alt="">
+                    <img src="../../../assets/imgs/credit-card-1.png" alt="" [hidden]="isCard1">
+                    <img src="../../../assets/imgs/credit-card-2.png" alt="" [hidden]="isCard2">
                     <!-- <ion-icon class="color-f46f46" name="checkmark-circle"></ion-icon> -->
                     <h4>固定单价</h4>
                 </div>

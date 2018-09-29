@@ -38,9 +38,9 @@
         </ion-item> -->
     <ion-item (click)="gouploadfile()" no-lines>
       <label>交付物原件</label>
-      <p item-right>
-        <span class="item-value" *ngIf="filestatus == true">重新上传</span>
-        <span class="item-value" *ngIf="filestatus == false">点击预览或上传</span>
+      <p item-right class="rigth-message">
+        <span class="item-value line-overflow" *ngIf="filestatus == true">重新上传</span>
+        <span class="item-value line-overflow" *ngIf="filestatus == false">点击预览或上传</span>
         <ion-icon class="icon" name="arrow-forward"></ion-icon>
       </p>
     </ion-item>
