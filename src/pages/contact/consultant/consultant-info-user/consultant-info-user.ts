@@ -26,14 +26,14 @@ export class ConsultantInfoUserPage {
   public isSkill = false;
   public isComplete = false
   public salaryDown = false
-  public isWorkDay = false
+  //public isWorkDay = false
   constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider) {
     this.userInfoData = {};
   }
-  sureNameBack() {
-    this.isuName = !this.isuName
-    return
-  }
+  // sureNameBack() {
+  //   this.isuName = !this.isuName
+  //   return
+  // }
   sureSkillBack() {
     this.isSkill = !this.isSkill
     return
@@ -42,10 +42,10 @@ export class ConsultantInfoUserPage {
     this.isComplete = !this.isComplete
     this.navCtrl.pop()
   }
-  sureWorkDay(){
-    this.isWorkDay = !this.isWorkDay
-    return
-  }
+  // sureWorkDay(){
+  //   this.isWorkDay = !this.isWorkDay
+  //   return
+  // }
   /* 跳转到头像设置页面 */
   goAvatarEditPage() {
     this.navCtrl.push(ConsultantInfoAvatarPage, { callback: this.setuserAvatarPic });
@@ -126,10 +126,10 @@ export class ConsultantInfoUserPage {
       this.salaryDown = true
       return
     }
-    if (this.userInfoData.uname == '') {
-      this.isuName = true;
-      return;
-    }
+    // if (this.userInfoData.uname == '') {
+    //   this.isuName = true;
+    //   return;
+    // }
     if (this.userInfoData.skillList.length == 0) {
       this.isSkill = true;
       return;
@@ -138,19 +138,19 @@ export class ConsultantInfoUserPage {
       this.isContactAddress = true
       return
     }
-    var workdays = /^[0-9]*$/
-    if(workdays.test(userInfoData.years) == false){
-      this.isWorkDay = true
-      return
-    }
+    // var workdays = /^[0-9]*$/
+    // if(workdays.test(userInfoData.years) == false){
+    //   this.isWorkDay = true
+    //   return
+    // }
     // let getCompanyDetailUrl = 'http://mamon.yemindream.com/mamon/adviser/editAdviser';
 
     let getCompanyDetailUrl = editAdviserUrl + '?openId=' + openId + '&avatar=' + userInfoData.avatar +
       '&nickName=' + (userInfoData.nickName || '') +
       '&uname=' + (userInfoData.uname || '') +
       '&gender=' + userInfoData.gender +
-      '&years=' + userInfoData.years +
       '&industrys=' + industryList +
+      '&years=' + (userInfoData.years || '') +
       '&skills=' + skillList +
       '&salaryUp=' + userInfoData.salaryUp +
       '&salaryDown=' + userInfoData.salaryDown +

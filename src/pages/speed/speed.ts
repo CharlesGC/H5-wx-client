@@ -52,6 +52,7 @@ export class SpeedPage {
   }
   ionViewDidEnter() {
     this.audioData = [];
+    this.description = '';
     //当页面进入初始化的时候
     let elements = document.querySelectorAll(".tabbar");
     if (elements != null) {
@@ -267,7 +268,7 @@ export class SpeedPage {
     this.description = value;
     let Arr = this.audioData || [];
     this.voice = Arr.length > 0 ? Arr.map(f => f.url).join(",") : '';
-    if(!this.description && this.description!=0) {
+    if(!this.description && this.description !=0) {
       this.isComplete = true;
       return;
     }

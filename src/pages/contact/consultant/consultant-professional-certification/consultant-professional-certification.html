@@ -47,7 +47,7 @@
   <div class="bg clearfix mt20" *ngIf="certificationListData['certifiedUrl']">
     <img style="width:66px;height:66px;" src="{{this.certificationListData['typeStr'] || filetypeicon}}">
     <span class="file-title">{{certificationListData.sourceName || filetitle}}</span>
-    <span class="file-desc">点击查看文件预览</span>
+    <!-- <span class="file-desc">点击查看文件预览</span> -->
     <span class="file-size">{{certificationListData.urlSize || filesize}}</span>
   </div>
   <div class="phonebind-modal" [hidden]="!isSubmit">

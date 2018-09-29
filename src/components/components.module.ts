@@ -8,27 +8,32 @@ import { HomeSwiperComponent } from './home-swiper/home-swiper';
 import { IndustryComponent } from './industry/industry';
 import { IndustrprfileComponent } from './industrprfile/industrprfile';
 import { AttentionTipComponent } from './attention-tip/attention-tip';
+import { TellphoneTipComponent } from './tellphone-tip/tellphone-tip';
 
 
 @NgModule({
-	declarations: [ ActionsheetComponent,
-    UserlistComponent,
-    HomeSwiperComponent,
-    IndustryComponent,
-    IndustrprfileComponent,
-    AttentionTipComponent,
-    AttentionTipComponent ],
-	imports: [ BrowserModule ],
-	exports: [ ActionsheetComponent,
-    UserlistComponent,
-    HomeSwiperComponent,
-    IndustryComponent,
-    IndustrprfileComponent,
-    AttentionTipComponent,
-    AttentionTipComponent ]
+	declarations: [
+		ActionsheetComponent,
+		UserlistComponent,
+		HomeSwiperComponent,
+		IndustryComponent,
+		IndustrprfileComponent,
+		AttentionTipComponent,
+		TellphoneTipComponent,
+	],
+	imports: [BrowserModule],
+	exports: [
+		ActionsheetComponent,
+		UserlistComponent,
+		HomeSwiperComponent,
+		IndustryComponent,
+		IndustrprfileComponent,
+		AttentionTipComponent,
+		TellphoneTipComponent,
+	]
 })
 export class ComponentsModule {
-	constructor(){
+	constructor() {
 
 	}
 
@@ -41,9 +46,9 @@ export class ComponentsModule {
 	isAuthorized() {
 		let url = '';
 		let isLogin = '';
-		if(isLogin) {
+		if (isLogin) {
 
-		}else{
+		} else {
 
 		}
 	}

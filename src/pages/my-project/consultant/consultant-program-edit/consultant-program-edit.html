@@ -13,7 +13,9 @@
 <ion-content style="background-color: #fcfcfc;">
   <ion-list class="list-item-flex mt10">
     <ion-item (click)="goFormEditPage('programName',programData.programName,'text')" no-lines>
-      <label>方案名称</label>
+      <label>方案名称
+          <span class="required-field ml5">(必填)</span>
+      </label>
       <p item-right>
         <span class="item-value">{{programData.programName || '请输入'}}</span>
         <ion-icon class="icon" name="arrow-forward"></ion-icon>
@@ -22,14 +24,18 @@
   </ion-list>
   <ion-list class="list-item-flex mt10">
     <ion-item (click)="goFormEditPage('programDescription',programData.programDescription,'textarea')">
-      <label>方案描述</label>
+      <label>方案描述
+          <span class="required-field ml5">(必填)</span>
+      </label>
       <p item-right>
         <span class="item-value">{{programData.programDescription || '方案的详情描述'}}</span>
         <ion-icon class="icon" name="arrow-forward"></ion-icon>
       </p>
     </ion-item>
     <ion-item no-lines (click)="goFormEditPage('deliverable',programData.deliverable,'textarea')">
-      <label>项目规划与交付物</label>
+      <label>项目规划与交付物
+          <span class="required-field ml5">(必填)</span>
+      </label>
       <p item-right>
         <span class="item-value">{{programData.deliverable || '请输入'}}</span>
         <ion-icon class="icon" name="arrow-forward"></ion-icon>
@@ -38,7 +44,9 @@
   </ion-list>
   <ion-list class="list-item-flex mt10">
     <ion-item (click)="goFormEditPage('workload_workloadUnit',[programData.workload,programData.workloadUnit],'workload_workloadUnit')">
-      <label>项目周期</label>
+      <label>项目周期
+          <span class="required-field ml5">(必填)</span>
+      </label>
       <p item-right>
         <span class="item-value">{{programData.workload}}
           <span *ngIf="programData.workloadUnit == 0">天</span>
@@ -50,7 +58,9 @@
       </p>
     </ion-item>
     <ion-item no-lines (click)="goFormEditPage('price',programData.price,'price')">
-      <label>项目总价</label>
+      <label>项目总价
+          <span class="required-field ml5">(必填)</span>
+      </label>
       <p item-right>
         <span class="item-value">{{(programData.price | currency :'￥') || '请输入'}}</span>
         <ion-icon class="icon" name="arrow-forward"></ion-icon>
@@ -66,7 +76,9 @@
           </p>
         </ion-item> -->
     <ion-item (click)="gouploadfile()" no-lines>
-      <label>方案计划书</label>
+      <label>方案计划书
+          <span class="required-field ml5">(必填)</span>
+      </label>
       <p item-right>
         <span class="item-value" *ngIf="filestatus == true">重新上传</span>
         <span class="item-value" *ngIf="filestatus == false">点击预览或上传</span>

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController,LoadingController  } from 'ionic-angular';
+import { NavController,LoadingController, Form  } from 'ionic-angular';
 import { PhonebindPage } from '../phonebind/phonebind';
 import { RegisterPage } from '../register/register';
 import { ChooseIdentityPage } from '../choose-identity/choose-identity';
@@ -14,6 +14,8 @@ import { ProjectProgramObjectionPage } from '../my-project/client/project-progra
 import { MessageCenterPage } from '../message-center/message-center';
 import { UseTheHelpPage } from '../contact/use-the-help/use-the-help';
 import { getUserByopenIdUrl,getWxOpenidUrl } from '../../providers/requestUrl';
+import { ContactusPage } from "./contactus/contactus";
+import { AboutusPage } from "./aboutus/aboutus";
 
 
 // 引入微信服务
@@ -111,7 +113,15 @@ export class ContactPage {
       this.navCtrl.push(ClientBasicPage,{user:user});
     }
   }
+  //跳转到联系我们页面
+  goContactusPage(){
+    this.navCtrl.push(ContactusPage);
+  }
 
+  //跳转到关于我们页面
+  goAboutusPage(){
+    this.navCtrl.push(AboutusPage)
+  }
   ionViewDidEnter() {
     let elements = document.querySelectorAll(".tabbar");
     if (elements != null) {

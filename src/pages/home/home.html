@@ -1,8 +1,8 @@
 <ion-content class="content">
   <!-- 轮播图部分 -->
-  <div *ngIf="swiperArr" (click)="goSwiperDetail()">
+  <div *ngIf="swiperArr">
     <ion-slides pager class="swiper_content" does-continue="true" auto-play="true" loop="true" slide-interval=2000>
-      <ion-slide *ngFor="let item_swiperArr of swiperArr" class="swiper_list">
+      <ion-slide *ngFor="let item_swiperArr of swiperArr;let i=index" class="swiper_list" (click)="goSwiperDetail(i)">
         <img [src]="item_swiperArr.bannerUrl" />
         <div class="img-text">
           <div>{{item_swiperArr.title}}</div>
@@ -94,10 +94,13 @@
     </div>
   </div>
 
+  
   <div class="text-img" (click)="goContactPage($event)">
     <img src="../../assets/imgs/guwenrukou.png" alt="">
   </div>
-
+  <!-- <div (click)=goCasemorePage() style="width:100%;height:200px;">更多案例
+      <img src="../../assets/imgs/time.jpg" alt="">
+    </div> -->
   <!-- 财务审计 -->
   <div class="contant-finance" *ngIf="financesArrLength">
     <div class="title-cont">
@@ -136,7 +139,7 @@
     <ul class="case_content">
       <div class="title-cont">
         <h4>麦盟案例</h4>
-        <div>
+        <div (click)="goCasemorePage()">
           <span>更多</span>
           <ion-icon name="arrow-forward"></ion-icon>
         </div>
@@ -194,4 +197,4 @@
   </div>
   <!-- <div (click)="goProjectSpeed()" class="wwwww"></div> -->
 </ion-content>
-<attention-tip></attention-tip>
+<attention-tip></attention-tip> 

@@ -105,9 +105,7 @@
       </p>
     </ion-item>
     <ion-item (click)="goFormEditPage('planguage',projectData.planguage,'timeSelect')">
-      <label>语言要求
-        <span class="required-field ml5">(必填)</span>
-      </label>
+      <label>语言要求</label>
       <p item-right class="rigth-message">
         <span item-right class="item-value line-overflow" *ngIf="projectData.planguage && projectData.planguage.length>0">
           <span *ngFor="let languageList_item of projectData.planguage">{{languageList_item.language}} .
@@ -171,6 +169,23 @@
     </div>
   </div>
 </div>
+<div class="phonebind-modal" [hidden]="!isReleaseFailed">
+    <div class="modal-bg"></div>
+    <div class="modal-box">
+      <div class="modal-top">
+        <div class="modal-top-close">
+          <!-- <ion-icon ios="ios-close" md="md-close" item-rigth (click)="onClose()" color=""></ion-icon> -->
+        </div>
+        <div class="modal-content">
+          <p>发布失败，请稍后再试！</p>
+        </div>
+        <div class="modal-footer">
+          <button ion-button full large (click)="ReleaseFailed()">确定</button>
+          <!-- <button ion-button full large (click)="onCompanyDel()" class="btn-delete">返回</button> -->
+        </div>
+      </div>
+    </div>
+  </div>
 <!-- 返回快速发布弹框 -->
 <div class="phonebind-modal" [hidden]="!isSpeed">
   <div class="modal-bg"></div>
@@ -200,7 +215,7 @@
       </div>
       <div class="modal-title">提示</div>
       <div class="modal-content">
-        <p class="modal-center">请将必填项填写完整</p>
+        <p class="modal-center">请将所有必填项填写完整</p>
       </div>
       <div class="modal-footer">
         <button ion-button full large (click)="sureComplete()">确定</button>

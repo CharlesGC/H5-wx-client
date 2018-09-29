@@ -7,6 +7,8 @@ import { ProjectConsultantBrowserPage } from '../my-project/client/project-consu
 import { ChooseIdentityPage } from '../../pages/choose-identity/choose-identity';
 import { SwiperDetailPage } from './swiper-detail/swiper-detail';
 import { IndustrymorePage } from '../industrymore/industrymore';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { CasemorePage } from "./casemore/casemore";
 // declare var onBridgeReady;
 
 // import { ViewChild } from '@angular/core';
@@ -35,7 +37,7 @@ export class HomePage {
   public sausage: boolean;
   public mushrooms: boolean;
 
-  constructor(public navCtrl: NavController, private swiperdata: MamenDataProvider, private industrydata: MamenDataProvider,
+  constructor(public navCtrl: NavController, private swiperdata: MamenDataProvider, private industrydata: MamenDataProvider,private http: HttpClient,
     private skilldata: MamenDataProvider, private casedata: MamenDataProvider, private outstanddata: MamenDataProvider, private financedata: MamenDataProvider, private financeAlldata: MamenDataProvider) {
     this.IndustryArr = [];
   }
@@ -54,24 +56,24 @@ export class HomePage {
       res => {
         // console.log(res);
         this.swiperArr = res.data;
-        // console.log(this.swiperArr);
+        console.log(this.swiperArr);
       }, error => {
         console.log(error);
       }
     )
   }
-  行业数据 
-  getindustryInfo() {
-    this.industrydata.getIndustryData(getindustryUrl, 0).subscribe(
-      res => {
-        // console.log(res);
-        this.IndustryArr = res.data.list;
-        // console.log(this.IndustryArr);
-      }, error => {
-        console.log(error);
-      }
-    )
-  }
+  // 行业数据 
+  // getindustryInfo() {
+  //   this.industrydata.getIndustryData(getindustryUrl, 0).subscribe(
+  //     res => {
+  //       // console.log(res);
+  //       this.IndustryArr = res.data.list;
+  //       // console.log(this.IndustryArr);
+  //     }, error => {
+  //       console.log(error);
+  //     }
+  //   )
+  // }
   //技能数据
   getskillInfo() {
     this.skilldata.getSkillLabelData(getskillUrl, 0).subscribe(
@@ -182,6 +184,14 @@ export class HomePage {
   //     name: value ? this.IndustryArr[index].industryName : '',
   //   });
   // }
+  // 点击跳转到轮播图详情
+  goSwiperDetail(index) {
+    console.log(index,'indexindexindexindex')
+    this.navCtrl.push(SwiperDetailPage,{
+      index:index
+    });
+  }
+
   // 技能详情
   InfoskillMore(value, index, type) {
     this.navCtrl.push(IndustrydetialPage, {
@@ -237,8 +247,8 @@ export class HomePage {
       this.navCtrl.push(PhonebindPage);
     }
   }
-  // 点击跳转到轮播图详情
-  goSwiperDetail() {
-    this.navCtrl.push(SwiperDetailPage);
+  /**更多案例列表 */
+  goCasemorePage(){
+    this.navCtrl.push(CasemorePage);
   }
 }
