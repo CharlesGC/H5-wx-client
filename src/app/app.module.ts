@@ -15,13 +15,13 @@ import { ComponentsModule } from '../components/components.module';
 //引入根组件
 import { MyApp } from './app.component';
 //引入http模块
-import { HttpModule,Http } from '@angular/http';
+import { HttpModule, Http } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 
 //页面 自定义的组件
 import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
-import {IndustrydetialPage} from '../pages/home/industrydetial/industrydetial';
+import { IndustrydetialPage } from '../pages/home/industrydetial/industrydetial';
 import { TabsPage } from '../pages/tabs/tabs';
 // import { HomeSwiperComponent } from '../components/home-swiper/home-swiper';   
 import { PhonebindPage } from '../pages/phonebind/phonebind';
@@ -32,20 +32,20 @@ import { ModifyPhonePage } from '../pages/modify-phone/modify-phone';
 import { ModifyPhone2Page } from '../pages/modify-phone2/modify-phone2';
 import { ModifyEmailPage } from '../pages/modify-email/modify-email';
 import { AddEmailPage } from '../pages/add-email/add-email';
-import {AddSkillPage} from '../pages/add-skill/add-skill';
+import { AddSkillPage } from '../pages/add-skill/add-skill';
 import { SwiperDetailPage } from '../pages/home/swiper-detail/swiper-detail';
 // import {ReleasePage} from '../pages/release/release';
-import {ReleaseTwoPage} from '../pages/release-two/release-two';
-import {AddIndustryPage} from '../pages/add-industry/add-industry';
-import {SearchIndustryPage} from '../pages/search-industry/search-industry';
-import {SpeedPage} from '../pages/speed/speed';
-import {ReleaseThreePage} from '../pages/release-three/release-three';
-import {AptitudePage} from '../pages/aptitude/aptitude';
-import {BudgetPage} from '../pages/budget/budget';
-import {DateStartPage} from '../pages/date-start/date-start';
-import {AppointDatePage} from '../pages/appoint-date/appoint-date';
-import {ReleaseSuccessPage} from '../pages/release-success/release-success';
-import {CompanyPage} from '../pages/company/company';
+import { ReleaseTwoPage } from '../pages/release-two/release-two';
+import { AddIndustryPage } from '../pages/add-industry/add-industry';
+import { SearchIndustryPage } from '../pages/search-industry/search-industry';
+import { SpeedPage } from '../pages/speed/speed';
+import { ReleaseThreePage } from '../pages/release-three/release-three';
+import { AptitudePage } from '../pages/aptitude/aptitude';
+import { BudgetPage } from '../pages/budget/budget';
+import { DateStartPage } from '../pages/date-start/date-start';
+import { AppointDatePage } from '../pages/appoint-date/appoint-date';
+import { ReleaseSuccessPage } from '../pages/release-success/release-success';
+import { CompanyPage } from '../pages/company/company';
 import { MessageCenterPage } from '../pages/message-center/message-center'
 import { DemandContentPage } from '../pages/demand-content/demand-content'
 
@@ -69,7 +69,7 @@ import { ConsultantLanguageExpPage } from '../pages/contact/consultant/consultan
 import { ConsultantEducationExpPage } from '../pages/contact/consultant/consultant-education-exp/consultant-education-exp';
 
 /*我的项目-客户*/
-import { ProjectListPage } from '../pages/my-project/client/project-list/project-list' ;
+import { ProjectListPage } from '../pages/my-project/client/project-list/project-list';
 import { ProjectBrowserPage } from '../pages/my-project/client/project-browser/project-browser';
 import { ProjectConsultantListPage } from '../pages/my-project/client/project-consultant-list/project-consultant-list';
 import { ProjectConsultantBrowserPage } from '../pages/my-project/client/project-consultant-browser/project-consultant-browser';
@@ -87,7 +87,7 @@ import { ProjectInvoiceListPage } from '../pages/my-project/client/project-invoi
 import { ProjectInvoiceBrowserPage } from '../pages/my-project/client/project-invoice-browser/project-invoice-browser';
 import { ProjectEditStep1Page } from '../pages/my-project/client/project-edit-step1/project-edit-step1';
 import { ProjectEditStep2Page } from '../pages/my-project/client/project-edit-step2/project-edit-step2';
-import { ProjectEditStep3Page } from '../pages/my-project/client/project-edit-step3/project-edit-step3'; 
+import { ProjectEditStep3Page } from '../pages/my-project/client/project-edit-step3/project-edit-step3';
 import { ProjectCompanyListPage } from '../pages/my-project/client/project-company-list/project-company-list';
 import { ProjectTimeSelectPage } from '../pages/my-project/project-time-select/project-time-select';
 import { ProjectCollectBankPage } from '../pages/my-project/project-collect-bank/project-collect-bank';
@@ -135,9 +135,20 @@ import { FileUploadModule } from 'ng2-file-upload';
 import { UploadfilePage } from '../pages/uploadfile/uploadfile'
 import { ImageCropperModule } from 'ngx-image-cropper';
 
+/* 个人中心页的联系我们 */
+import { ContactusPage } from '../pages/contact/contactus/contactus';
+
+/**个人中心的关于我们 */
+import { AboutusPage } from "../pages/contact/aboutus/aboutus";
+
+/* 更多案例 */
+import { CasemorePage } from "../pages/home/casemore/casemore";
+
+/* 使用协议 */
+import { UseAgreementPage } from "../pages/contact/aboutus/use-agreement/use-agreement"
 @NgModule({
   /*申明组件*/
-  declarations: [   
+  declarations: [
     MyApp,
     ContactPage,
     HomePage,
@@ -233,7 +244,12 @@ import { ImageCropperModule } from 'ngx-image-cropper';
 
     RecommendConsultantListPage,
     RecommendClientListPage,
-    UploadfilePage
+    UploadfilePage,
+
+    ContactusPage,
+    AboutusPage,
+    CasemorePage,
+    UseAgreementPage
   ],
   /*引入的模块 依赖的模块*/
   imports: [
@@ -243,7 +259,7 @@ import { ImageCropperModule } from 'ngx-image-cropper';
     HttpClientModule,
     MultiPickerModule, //选择器
     // IonicModule.forRoot(MyApp)
-    IonicModule.forRoot(MyApp,{
+    IonicModule.forRoot(MyApp, {
       tabsHideOnSubPages: 'true', //隐藏全部子页面
       backButtonText: '返回'  //配置返回按钮
     }),
@@ -349,16 +365,21 @@ import { ImageCropperModule } from 'ngx-image-cropper';
 
     RecommendConsultantListPage,
     RecommendClientListPage,
-    UploadfilePage
+    UploadfilePage,
+
+    ContactusPage,
+    AboutusPage,
+    CasemorePage,
+    UseAgreementPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
     MamenDataProvider,
     Camera,
     File,
     FileTransfer
   ]
 })
-export class AppModule {}
+export class AppModule { }

@@ -1,0 +1,63 @@
+page-aboutus {
+    position: relative;
+    p {
+        margin: 0;
+    }
+    a {
+        text-decoration: none;
+    }
+    .mb20{
+        margin-bottom: 20px;
+    }
+    .header-wrap {
+        img{
+            width:64px;
+            height: 64px;
+        }
+        text-align: center;
+        margin-top: 14px;
+        .title {
+            margin-top: 10px;
+        }
+    }
+    .content-wrap {
+        margin: 15px 30px 0 30px;
+        p {
+            color: #333333;
+            font-size: 12px;
+            line-height: 18px;
+            font-family: PingFangSC;
+            font-weight: 400;
+        }
+    }
+    .content-list {
+        margin: 30px 50px 0 50px;
+        ul {
+            padding: 0;
+            color: #FF6536;
+            font-size: 12px;
+            line-height: 18px;
+            font-weight: 400;
+            font-family: PingFangSC;
+            li {
+                padding-top: 10px;
+                padding-bottom: 10px;
+            }
+        }
+    }
+    .footer-wrap {
+        width: 100%;
+        position: absolute;
+        bottom: 10px;
+        text-align: center;
+        font-size: 12px;
+        line-height: 18px;
+        font-weight: 400;
+        font-family: PingFangSC;
+        p{
+            span{
+                color: #cdcdcd;
+            }
+        }
+    }
+}

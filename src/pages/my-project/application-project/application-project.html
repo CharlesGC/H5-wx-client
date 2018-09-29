@@ -28,7 +28,7 @@
   </ion-list>
   <ion-list class="list-item-flex mt10">
     <ion-item (click)="goFormEditPage('introduction',projectData.introduction,'text')">
-      <label>胜任介绍</label>
+      <label>胜任介绍<span class="required-field ml5">(必填)</span></label>
       <div item-right class="rigth-message">
         <p class="item-value line-overflow">{{projectData.introduction || '请输入'}}</p>
         <span class="go-icon line19">
@@ -37,7 +37,7 @@
       </div>
     </ion-item>
     <ion-item (click)="goFormEditPage('proposal',projectData.proposal,'text')">
-      <label>项目规划</label>
+      <label>项目规划<span class="required-field ml5">(必填)</span></label>
       <div item-right class="rigth-message">
         <p item-right class="item-value line-overflow">{{projectData.proposal || '请输入'}}</p>
         <span class="go-icon line31">
@@ -53,7 +53,7 @@
             </div>
           </ion-item> -->
     <ion-item no-lines (click)="gouploadfile()">
-      <label>案例附件</label>
+      <label>案例附件<span class="required-field ml5">(必填)</span></label>
       <div item-right class="rigth-message">
         <p item-right class="item-value line-overflow">{{filestatus == false?'上传文件附件':'重新上传'}}</p>
         <span class="go-icon line33">

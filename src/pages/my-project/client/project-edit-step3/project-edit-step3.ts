@@ -30,6 +30,7 @@ export class ProjectEditStep3Page {
   public isSubmit = false
   public isfailed = false
   public gotype = 0
+  public isReleaseFailed = false
   constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider) {
     this.projectData = {};
   }
@@ -64,6 +65,10 @@ export class ProjectEditStep3Page {
     this.isfailed = !this.isfailed
     return
   }
+  ReleaseFailed(){
+    this.isReleaseFailed = !this.isReleaseFailed
+    return
+  }
   /*保存提交*/
   goProjectSubmit() {
     this.projectData['otherIndustrys'] = this.getOtherIndustrys(this.projectData['industryList']);
@@ -77,7 +82,7 @@ export class ProjectEditStep3Page {
     let grade = this.projectData['planguage'] && this.projectData['planguage'].length > 0 ? this.projectData['planguage'].map(f => f.grade).join(',') : '';
     let pid = projectData['pid'];
     // 必填项校验
-    if((!projectData.startTimeType && projectData.startTimeType !=0) || (!projectData.deliverMethod && projectData.deliverMethod !=0) || !projectData.province  || (!projectData.budgetType && projectData.budgetType !=0) || (!projectData.planguage || projectData.planguage.length<1)) {
+    if((!projectData.startTimeType && projectData.startTimeType !=0) || (!projectData.deliverMethod && projectData.deliverMethod !=0) || (!projectData.province ) || (!projectData.budgetType && projectData.budgetType !=0)) {
       this.isComplete = true;
       return;
     }
@@ -86,7 +91,7 @@ export class ProjectEditStep3Page {
     let projectStageDetailUrl = releaseProjectUrl + '?openId=' + openId +
       '&cid=' + projectData['cid'] +
       '&principalName=' + projectData['principalName'] +
-      '&principalPosition=' + projectData['principalPosition'] +
+      '&principalPosition=' + (projectData['principalPosition'] || '')+
       '&principalPhone=' + (projectData['principalPhone'] || '') +
       '&principalEmail=' + (projectData['principalEmail'] || '') +
       '&projectName=' + (projectData['projectName'] || '') +
@@ -94,8 +99,8 @@ export class ProjectEditStep3Page {
       '&target=' + (projectData['target'] || '') +
       '&industrys=' + industrys +
       '&skills=' + skills +
-      '&projectLengthType=' + projectData['projectLengthType'] +
-      '&projectLength=' + projectData['projectLength'] +
+      '&projectLengthType=' + (projectData['projectLengthType'] || '')+
+      '&projectLength=' + (projectData['projectLength'] || '') +
       '&startTimeType=' + projectData['startTimeType'] +
       '&startTime=' + projectData['startTime'] +
       '&deliverMethod=' + projectData['deliverMethod'] +
@@ -109,20 +114,18 @@ export class ProjectEditStep3Page {
       '&otherSkills=' + otherSkills +
       '&province=' + projectData['province'] +
       '&city=' + projectData['city'] +
-      '&qualification=' + projectData['qualification'];
+      '&qualification=' + (projectData['qualification'] || '');
 
     if (pid) {
       projectStageDetailUrl = projectStageDetailUrl + '&pid=' + pid;
     }
-
-   
     
     this.Provider.getMamenSwiperData(projectStageDetailUrl).subscribe(res => {
       if (res.code == 200) {
         this.isShow = true;
-      } else if (res.code == 213) {
-        //alert(res.msg);
       } else {
+        this.isReleaseFailed = true
+        return
         //alert('请求出错:' + res.msg);
       }
     }, error => {
@@ -236,7 +239,7 @@ export class ProjectEditStep3Page {
       '&target=' + (projectData['target'] || '')+
       '&industrys=' + (industrys || '') +
       '&skills=' + (skills || '')+
-      '&projectLengthType=' + projectData['projectLengthType']+
+      '&projectLengthType=' + projectData['projectLengthType' || '']+
       '&projectLength=' + (projectData['projectLength'] || '')+
       '&startTimeType=' + (projectData['startTimeType'])+
       '&startTime=' + (projectData['startTime'] || '')+

@@ -31,6 +31,7 @@ export class ProjectTimeSelectPage {
   public isBudget = false
   public isBudgetDays = false
   public isBudgetPrice = false
+  public isNoLanguage = false
   customPopoverOptions: any = {
     header: 'Hair Color',
     subHeader: 'Select your hair color',
@@ -138,6 +139,10 @@ export class ProjectTimeSelectPage {
     this.isBudgetDays = !this.isBudgetDays
     return
   }
+  sureHaveLanguage(){
+    this.isNoLanguage = !this.isNoLanguage
+    return
+  }
   /*保存数据并返回页面*/
   onSelectSubmit() {
     let callback = this.navParams.get('callback');
@@ -171,6 +176,12 @@ export class ProjectTimeSelectPage {
       }
       callback(this.field, [this.selected, this.budgetData.budgetDay, this.budgetData.workload, this.budgetData.budget || '']);
     } else if (this.field == 'planguage') {
+      for(var i = 0;i<this.languageList.length;i++){
+        if(!this.languageList[i].language){
+          this.isNoLanguage = true
+          return
+        }
+      }
       callback(this.field, this.languageList);
     }
     this.navCtrl.pop();

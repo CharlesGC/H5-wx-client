@@ -79,8 +79,8 @@ attention-tip {
         left: 0;
         top:0;
         .qrcode-wrap{
-            width: 251px;
-            height: 313px;
+            width: 20.92rem;
+            height: 26.08rem;
             background-image: url('../../assets/imgs/attantion-wrap.svg');
             background-size:100%;
             position: absolute;
@@ -88,6 +88,8 @@ attention-tip {
             left: 50%;
             transform: translateX(-50%);
             img{
+                width: 87%;
+                height: auto;
                 position: relative;
                 left: 50%;
                 transform: translateX(-50%);

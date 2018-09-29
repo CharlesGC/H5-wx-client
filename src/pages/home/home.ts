@@ -8,6 +8,7 @@ import { ChooseIdentityPage } from '../../pages/choose-identity/choose-identity'
 import { SwiperDetailPage } from './swiper-detail/swiper-detail';
 import { IndustrymorePage } from '../industrymore/industrymore';
 import { HttpClient, HttpParams } from '@angular/common/http';
+import { CasemorePage } from "./casemore/casemore";
 // declare var onBridgeReady;
 
 // import { ViewChild } from '@angular/core';
@@ -241,5 +242,9 @@ export class HomePage {
   // 点击跳转到轮播图详情
   goSwiperDetail() {
     this.navCtrl.push(SwiperDetailPage);
+  }
+  /**更多案例列表 */
+  goCasemorePage(){
+    this.navCtrl.push(CasemorePage);
   }
 }
