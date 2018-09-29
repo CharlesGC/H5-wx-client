@@ -11,8 +11,8 @@
 </ion-header>
 
 <ion-content style="background-color: #fcfcfc;">
-    <ion-list class="browser-top">
-      <!-- <h4>节水系统问题诊断与提升优化</h4>
+  <ion-list class="browser-top">
+    <!-- <h4>节水系统问题诊断与提升优化</h4>
       <p class="browser-top-p mt15">
           <ion-icon name="ios-paper-outline" class="mr3"></ion-icon>
           <span>阶段周期</span>
@@ -20,72 +20,72 @@
           <span> 至 </span>
           <span>2018-07-08</span>
       </p> -->
-      <h4>{{data.stageName}}</h4>
-      <p class="browser-top-p mt15">
-        <ion-icon name="ios-paper-outline" class="mr3"></ion-icon>
-        <span>阶段周期</span>
-        <span>{{data.startTime | date: 'yyyy-MM-dd'}}</span>
-        <span> 至 </span>
-        <span>{{data.endTime | date: 'yyyy-MM-dd'}}</span>
+    <h4>{{data.stageName}}</h4>
+    <p class="browser-top-p mt15">
+      <ion-icon name="ios-paper-outline" class="mr3"></ion-icon>
+      <span>阶段周期</span>
+      <span>{{data.startTime | date: 'yyyy-MM-dd'}}</span>
+      <span> 至 </span>
+      <span>{{data.endTime | date: 'yyyy-MM-dd'}}</span>
+    </p>
+  </ion-list>
+  <p class="browser-file">请填写金额信息</p>
+  <ion-list class="list-item-flex mt10">
+    <ion-item (click)="goFormEditPage('realPrice',paymentRecordData.realPrice,'text')">
+      <label>实际付款
+        <span class="required-field ml5">(必填)</span>
+      </label>
+      <p item-right>
+        <span class="item-value">{{paymentRecordData.realPrice | currency:'￥'}}</span>
+        <ion-icon class="icon" name="arrow-forward"></ion-icon>
       </p>
-    </ion-list>
-    <p class="browser-file">请填写金额信息</p>
-    <ion-list class="list-item-flex mt10">
-      <ion-item (click)="goFormEditPage('realPrice',paymentRecordData.realPrice,'text')">
-        <label>实际付款
-          <span class="required-field ml5">(必填)</span>
-        </label>
-        <p item-right>
-            <span class="item-value">{{paymentRecordData.realPrice | currency:'￥'}}</span>
-            <ion-icon class="icon" name="arrow-forward"></ion-icon>
-        </p>
-      </ion-item>
-      <ion-item no-lines>
-        <label>应付金额</label>
-        <span item-right class="item-value">{{paymentRecordData.price| currency:'￥'}} 元</span>
-      </ion-item>
-    </ion-list>
-    <p class="browser-file">请选择付款信息</p>
-    <ion-list class="list-item-flex mt10">
-      <ion-item (click)="goFormEditPage('taxNumber',paymentRecordData.taxNumber,'selectPaymentBank')">
-        <label>付款人
-          <span class="required-field ml5">(必填)</span>
-        </label>
-        <p item-right>
-            <span class="item-value">{{paymentRecordData.payer}}</span>
-            <ion-icon class="icon" name="arrow-forward"></ion-icon>
-        </p>
-      </ion-item>
-      <ion-item no-lines>
-        <label>{{paymentRecordData.payerBank}}</label>
-        <span item-right class="item-value">{{paymentRecordData.payerAccount}}</span>
-      </ion-item>
-    </ion-list>
-    <p class="browser-file">收款信息</p>
-    <ion-list class="list-item-flex mt10">
-      <ion-item>
-        <label>收款人
-          <span class="required-field ml5">(必填)</span>
-        </label>
-        <span item-right class="item-value">{{paymentRecordData.payee}}</span>
-      </ion-item>
-      <ion-item no-lines>
-        <label>{{paymentRecordData.payeeBank}}</label>
-        <span item-right class="item-value">{{paymentRecordData.payeeAccount}}</span>
-      </ion-item>
-    </ion-list>
-    <p class="browser-file">请上传付款凭证</p>
-    <ion-list class="list-item-flex mt10">
-        <ion-item no-lines (click)="gouploadfile()">
-          <label>付款凭证</label>
-          <p item-right>
-            <span class="item-value" *ngIf="filestatus == true">重新上传</span>
-            <span class="item-value" *ngIf="filestatus == false">点击预览或上传</span>
-            <ion-icon class="icon" name="arrow-forward"></ion-icon>
-          </p>
-      </ion-item>
-    </ion-list> 
-    <!-- <p class="browser-file">请上传付款凭证</p>
+    </ion-item>
+    <ion-item no-lines>
+      <label>应付金额</label>
+      <span item-right class="item-value">{{paymentRecordData.price| currency:'￥'}} 元</span>
+    </ion-item>
+  </ion-list>
+  <p class="browser-file">请选择付款信息</p>
+  <ion-list class="list-item-flex mt10">
+    <ion-item (click)="goFormEditPage('taxNumber',paymentRecordData.taxNumber,'selectPaymentBank')">
+      <label>付款人
+        <span class="required-field ml5">(必填)</span>
+      </label>
+      <p item-right>
+        <span class="item-value">{{paymentRecordData.payer}}</span>
+        <ion-icon class="icon" name="arrow-forward"></ion-icon>
+      </p>
+    </ion-item>
+    <ion-item no-lines>
+      <label>{{paymentRecordData.payerBank}}</label>
+      <span item-right class="item-value">{{paymentRecordData.payerAccount}}</span>
+    </ion-item>
+  </ion-list>
+  <p class="browser-file">收款信息</p>
+  <ion-list class="list-item-flex mt10">
+    <ion-item>
+      <label>收款人
+        <span class="required-field ml5">(必填)</span>
+      </label>
+      <span item-right class="item-value">{{paymentRecordData.payee}}</span>
+    </ion-item>
+    <ion-item no-lines>
+      <label>{{paymentRecordData.payeeBank}}</label>
+      <span item-right class="item-value">{{paymentRecordData.payeeAccount}}</span>
+    </ion-item>
+  </ion-list>
+  <p class="browser-file">请上传付款凭证</p>
+  <ion-list class="list-item-flex mt10">
+    <ion-item no-lines (click)="gouploadfile()">
+      <label>付款凭证</label>
+      <p item-right>
+        <span class="item-value" *ngIf="filestatus == true">重新上传</span>
+        <span class="item-value" *ngIf="filestatus == false">点击预览或上传</span>
+        <ion-icon class="icon" name="arrow-forward"></ion-icon>
+      </p>
+    </ion-item>
+  </ion-list>
+  <!-- <p class="browser-file">请上传付款凭证</p>
     <ion-list class="list-item-flex mt10">
         <ion-item no-lines>
           <label>付款凭证</label>
@@ -96,24 +96,24 @@
           </p>
       </ion-item>
     </ion-list> -->
-    <div class="user-other-list">
-      <ion-list class="card-item" *ngIf="paymentRecordData.typeStr">
-          <ion-item no-lines>
-              <div class="card-item-label">
-                <label>
-                  <img style="width:66px;height:66px;" src="{{paymentRecordData.typeStr || filetypeicon}}">
-                </label>
-                  <div class="card-cont" data-src="url">
-                    <h5>{{paymentRecordData.sourceName || filetitle}}</h5>
-                    <!-- <p class="action-browser-file">点击查看文件预览</p> -->
-                    <p class="browser-size">{{paymentRecordData.size || filesize}}</p>
-                  </div>
-              </div>
-          </ion-item>
-      </ion-list>
-    </div>
-    <div style="height:100px;"></div>
-    <button ion-button expand="full" large class="fixed-bottom" (click)="sureCompleteRecord()">提交</button>
+  <div class="user-other-list">
+    <ion-list class="card-item" *ngIf="paymentRecordData.typeStr">
+      <ion-item no-lines>
+        <div class="card-item-label">
+          <label>
+            <img style="width:66px;height:66px;" src="{{paymentRecordData.typeStr || filetypeicon}}">
+          </label>
+          <div class="card-cont" data-src="url">
+            <h5>{{paymentRecordData.sourceName || filetitle}}</h5>
+            <!-- <p class="action-browser-file">点击查看文件预览</p> -->
+            <p class="browser-size">{{paymentRecordData.size || filesize}}</p>
+          </div>
+        </div>
+      </ion-item>
+    </ion-list>
+  </div>
+  <div style="height:100px;"></div>
+  <button ion-button expand="full" large class="fixed-bottom" (click)="sureCompleteRecord()">提交</button>
 </ion-content>
 <!-- 填写完整弹框 -->
 <div class="phonebind-modal " [hidden]="!isComplete">
@@ -135,20 +135,20 @@
   </div>
 </div>
 <div class="phonebind-modal " [hidden]="!isCompleteRecord">
-    <div class="modal-bg"></div>
-    <div class="modal-box">
-      <div class="modal-top">
-        <div class="modal-top-close">
-          <!-- <ion-icon ios="ios-close" md="md-close" item-rigth (click)="onClose()" color=""></ion-icon> -->
-        </div>
-        <div class="modal-title">提示</div>
-        <div class="modal-content">
-          <p class="modal-center">{{tipstext}}</p>
-        </div>
-        <div class="modal-footer">
-          <button ion-button full large (click)="goPaymentRecord()">确定</button>
-          <button ion-button full large (click)="onCompanyDel()" class="btn-delete">返回</button>
-        </div>
+  <div class="modal-bg"></div>
+  <div class="modal-box">
+    <div class="modal-top">
+      <div class="modal-top-close">
+        <!-- <ion-icon ios="ios-close" md="md-close" item-rigth (click)="onClose()" color=""></ion-icon> -->
+      </div>
+      <div class="modal-title">提示</div>
+      <div class="modal-content">
+        <p class="modal-center">{{tipstext}}</p>
+      </div>
+      <div class="modal-footer">
+        <button ion-button full large (click)="goPaymentRecord()">确定</button>
+        <button ion-button full large (click)="onCompanyDel()" class="btn-delete">返回</button>
       </div>
     </div>
   </div>
+</div>

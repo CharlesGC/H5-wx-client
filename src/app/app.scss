@@ -318,18 +318,31 @@ page-tabs {
     padding: 0 5px!important;
     color: #ff6536;
 }
+.bar-button-ios{
+    font-size: 14px;
+    margin: 0 8px!important;
+    padding: 0 5px!important;
+    color: #ff6536;
+}
 .bar-button-md[icon-only] ion-icon{
+    line-height: normal;
+    padding: 0
+}
+.bar-button-ios[icon-only] ion-icon{
     line-height: normal;
     padding: 0
 }
 .back-button-icon-md{
     padding: 0 4px 0 0;
 }
+.back-button-icon-ios{
+    padding: 0 4px 0 0;
+}
 .returnBtn{
     margin-left: 0px;
 }
 .back-button-text{
-    padding-top: 2px;
+    //padding-top: 2px;
     font-size: 14px;
 }
 ion-buttons{

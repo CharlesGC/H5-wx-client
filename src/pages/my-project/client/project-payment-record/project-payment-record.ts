@@ -214,9 +214,11 @@ export class ProjectPaymentRecordPage {
     if(!invoiceData['realPrice'] || !invoiceData['payer'] || !invoiceData['payerBank'] || 
     !invoiceData['payerAccount'] || !invoiceData['payee'] || !invoiceData['payeeBank'] || !invoiceData['payeeAccount']) {
       this.tipstext = '请填写完整信息';
+      this.isFailed = true
       return;
     }
     this.tipstext = '确认提交支付信息吗？'
+    this.isFailed = false
     return
   }
   onCompanyDel(){

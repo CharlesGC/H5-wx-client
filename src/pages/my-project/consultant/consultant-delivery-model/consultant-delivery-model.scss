@@ -105,6 +105,10 @@ page-consultant-delivery-model {
             color: #4a4a4a;
             label {
                 font-weight: 600;
+                .required-field{
+                    font-size: 1rem;
+                    color: #f46f46;
+                }
             }
             .icon {
                 font-size: 1.6rem;

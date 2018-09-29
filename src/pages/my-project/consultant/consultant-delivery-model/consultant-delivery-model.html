@@ -51,14 +51,18 @@
   <p class="browser-file">快递信息</p>
   <ion-list class="list-item-flex mt10">
     <ion-item (click)="goFormEditPage('logisticsCompany',deliveryModelData.logisticsCompany,'text')">
-      <label>快递公司</label>
+      <label>快递公司
+          <span class="required-field ml5">(必填)</span>
+      </label>
       <p item-right>
         <span class="item-value">{{deliveryModelData.logisticsCompany || '请输入'}}</span>
         <ion-icon class="icon" name="arrow-forward"></ion-icon>
       </p>
     </ion-item>
     <ion-item no-lines (click)="goFormEditPage('logisticsNumber',deliveryModelData.logisticsNumber,'text')">
-      <label>快递单号</label>
+      <label>快递单号
+          <span class="required-field ml5">(必填)</span>
+      </label>
       <p item-right>
         <span class="item-value">{{deliveryModelData.logisticsNumber || '请输入'}}</span>
         <ion-icon class="icon" name="arrow-forward"></ion-icon>
