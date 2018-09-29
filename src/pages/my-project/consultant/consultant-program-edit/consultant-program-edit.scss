@@ -105,12 +105,31 @@ page-consultant-program-edit {
             color: #4a4a4a;
             label {
                 font-weight: 600;
-                width: 150px
+                width: 150px;
+                .required-field {
+                    font-size: 1rem;
+                    color: #f46f46;
+                }
             }
             .icon {
                 font-size: 1.6rem;
                 vertical-align: middle;
                 color: #cfcfcf;
+            }
+            .with0 {
+                width: 135px;
+                display: flex;
+                text-align: right;
+                .s100 {
+                    display: inline-block;
+                    // width: 150px;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                    overflow: hidden;
+                }
+                .m6 {
+                    margin-top: 3px;
+                }
             }
             p {
                 text-overflow: ellipsis;
