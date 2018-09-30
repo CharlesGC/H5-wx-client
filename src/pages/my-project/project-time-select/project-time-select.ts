@@ -167,6 +167,7 @@ export class ProjectTimeSelectPage {
       callback(this.field, [this.inputName, this.typeTxt]);
     } else if (this.field == 'projectTime') {
       let typeTxt = this.typeTxt == 0 ? '天' : (this.typeTxt == 1 ? '月' : '年')
+      console.log(this.selected)
       callback(this.field, [this.selected, (this.inputName ? this.inputName : 0)]);
     } else if (this.field == 'startTime') {
       callback(this.field, [this.selected, this.inputName]);
