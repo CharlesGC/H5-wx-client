@@ -265,7 +265,7 @@ export class ContactPage {
 /*使用帮助跳转*/
 goUseTheHelpPage(){
   const user = window.sessionStorage.getItem('user') ? JSON.parse(window.sessionStorage.getItem('user')) : {};
-  this.navCtrl.push(UseTheHelpPage,{userType:user.type});
+  // this.navCtrl.push(UseTheHelpPage,{userType:user.type});
 }
 
 

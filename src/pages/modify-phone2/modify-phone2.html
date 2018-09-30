@@ -10,10 +10,10 @@ c pages and navigation.
   <ion-content class="phonebind-from">
   <ion-list class="mt10">
     <ion-item class="bg-black">
-      <ion-input type="text" placeholder="请输入手机号" #phone ></ion-input>
+      <ion-input type="tel" placeholder="请输入手机号" #phone ></ion-input>
     </ion-item>
     <ion-item lines="none" class="none-margin bg-black">
-      <ion-input type="password" placeholder="请输入验证码" #code></ion-input>
+      <ion-input type="number" placeholder="请输入验证码" #code></ion-input>
       <button item-right ion-button large class="ion-button-code" (click)="getVerificationCode(phone)">{{phoneCodeText|| '获取验证码'}}</button>
     </ion-item>
     <ion-item no-lines class="mt20 bg-none">

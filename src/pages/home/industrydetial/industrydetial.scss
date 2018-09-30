@@ -83,10 +83,37 @@ page-industrydetial {
                }
             }
           }
+        .bgf {
+                background-color: #fff;
+                ion-label {
+                    margin-right: 0;
+                }
+          }
           .search_item {
                 margin: 0; 
                 display: flex;
                 justify-content: space-around;
+                background-color: #fff;
+                
+                .input-search {
+                    width: 100%;
+                    background:none;  
+                    outline:none;  
+                    border:0px;
+                    font-family: PingFangSC;
+                    font-size: 14px !important;
+                    font-weight: 600;
+                    color: #4a4a4a;
+                    border-width: 0;
+                    caret-color:#ff6536;
+                }
+                .item-search {
+                    .icon {
+                        // opacity: 0.4;
+                        color: #cfcfcf;
+                        font-size: 20px !important;
+                    }
+                }
                 .label-md {
                     margin: 0;
                     display: flex;
@@ -112,28 +139,12 @@ page-industrydetial {
                         // margin-left: 15px;
                         width: 100%;
                         display: flex;
-                        .input-search {
-                            width: 100%;
-                            background:none;  
-                            outline:none;  
-                            border:0px;
-                            font-family: PingFangSC;
-                            font-size: 14px;
-                            font-weight: 600;
-                            color: #4a4a4a;
-                            border-width: 0;
-                            caret-color:#ff6536;
-                        }
+                        
                         // input::-webkit-input-placeholder, textarea::-webkit-input-placeholder { 
                         //     color: #ff6536!important; 
                         //     }
                     }
-                    .item-search {
-                        .icon {
-                            opacity: 0.4;
-                            color: #4a4a4a;
-                        }
-                    }
+                    
                 } 
           }
           ion-item {
@@ -179,7 +190,7 @@ page-industrydetial {
                         display: block;
                     }
                     span:nth-child(1) {
-                        width: 140px;
+                        width: 100%;
                         height: 35px;
                         font-family: PingFangSC;
                         font-size: 14px;
@@ -198,13 +209,14 @@ page-industrydetial {
                         ion-icon {
                             transform: scale(0.7);
                             font-size: 10px !important;
+                            margin-right: .6rem;
                         }
                     }
                 }
                 .border {
                     border-right: 0;
                     span:nth-child(1) {
-                        padding-left: 5px;
+                        padding-left: 15px;
                     }
                 }
                 .item-input1 {
