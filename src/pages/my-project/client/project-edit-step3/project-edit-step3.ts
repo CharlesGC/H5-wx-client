@@ -81,6 +81,7 @@ export class ProjectEditStep3Page {
     let language = this.projectData['planguage'] && this.projectData['planguage'].length > 0 ? this.projectData['planguage'].map(f => f.language).join(',') : '';
     let grade = this.projectData['planguage'] && this.projectData['planguage'].length > 0 ? this.projectData['planguage'].map(f => f.grade).join(',') : '';
     let pid = projectData['pid'];
+    let projectLengthType = !projectData['projectLengthType'] && projectData['projectLengthType'] !=0 ? '' : projectData['projectLengthType'];
     // 必填项校验
     if((!projectData.startTimeType && projectData.startTimeType !=0) || (!projectData.deliverMethod && projectData.deliverMethod !=0) || (!projectData.province ) || (!projectData.budgetType && projectData.budgetType !=0)) {
       this.isComplete = true;
@@ -99,7 +100,7 @@ export class ProjectEditStep3Page {
       '&target=' + (projectData['target'] || '') +
       '&industrys=' + industrys +
       '&skills=' + skills +
-      '&projectLengthType=' + (projectData['projectLengthType'] || '')+
+      '&projectLengthType=' + projectLengthType+
       '&projectLength=' + (projectData['projectLength'] || '') +
       '&startTimeType=' + projectData['startTimeType'] +
       '&startTime=' + projectData['startTime'] +
@@ -193,7 +194,9 @@ export class ProjectEditStep3Page {
       this.projectData['city'] = value['city'] || ''
       return;
     } else if (field == 'projectTime') {
-      this.projectData['projectLengthType'] = value[0] || 0;
+      
+      // console.log(projectLengthType,'projectLengthTypeprojectLengthTypeprojectLengthTypeprojectLengthType');
+      this.projectData['projectLengthType'] = value[0];
       this.projectData['projectLength'] = value[1] || '';
     } else if (field == 'startTime') {
       console.log(value,'valuevaluevaluevaluevaluevalue');
@@ -226,6 +229,7 @@ export class ProjectEditStep3Page {
     let language = this.projectData['planguage'] && this.projectData['planguage'].length > 0 ? this.projectData['planguage'].map(f => f.language).join(',') : '';
     let grade = this.projectData['planguage'] && this.projectData['planguage'].length > 0 ? this.projectData['planguage'].map(f => f.grade).join(',') : '';
     let pid = projectData['pid'];
+    let projectLengthType = !projectData['projectLengthType'] && projectData['projectLengthType'] !== 0 ? '' :projectData['projectLengthType'];
     // let projectStageDetailUrl = 'http://mamon.yemindream.com/mamon/customer/savaraft';
     const openId = window.sessionStorage.getItem('openId') || this.getUrlParam('openId') || 'o2GZp1Gsud1OVuaw5AH_e28m3kOw'
     let projectStageDetailUrl = savaraftUrl + '?openId=' + openId +
@@ -239,7 +243,7 @@ export class ProjectEditStep3Page {
       '&target=' + (projectData['target'] || '')+
       '&industrys=' + (industrys || '') +
       '&skills=' + (skills || '')+
-      '&projectLengthType=' + projectData['projectLengthType' || '']+
+      '&projectLengthType=' + projectLengthType+
       '&projectLength=' + (projectData['projectLength'] || '')+
       '&startTimeType=' + (projectData['startTimeType'])+
       '&startTime=' + (projectData['startTime'] || '')+
