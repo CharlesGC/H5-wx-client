@@ -277,6 +277,15 @@
         }
     }
 }
+.rigth-message {
+    .line-overflow {
+        display: inline-block;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        width: 16rem;
+    }
+}
 
 /*选择框对齐方式修改*/
 .picker-toolbar {

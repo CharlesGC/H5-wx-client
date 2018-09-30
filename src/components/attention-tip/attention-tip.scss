@@ -1,4 +1,167 @@
-attention-tip {
+.content-md~attention-tip {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    .attention-bottom-wrap{
+        position: fixed;
+        bottom: 5.6rem;
+        left: 0;
+        width: 100%;
+        height: 49px;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 10;
+        &.bot0 {
+            bottom: 0;
+        }
+        .icon-wrap{
+            display:block;
+            float: left;
+            img{
+                width: 32px;
+                height: 32px;
+                margin-left:15px;
+                margin-top: 8px;
+            }
+        }
+        .attention-title{
+            width: 70px;
+            height: 20px;
+            font-family: PingFangSC;
+            font-size: 14px;
+            font-weight: 500;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: normal;
+            letter-spacing: -0.7px;
+            text-align: right;
+            color: #ffffff;
+            margin-left:40px;
+            display: block;
+            padding-top: 4px;
+        }
+        .attention-desc{
+            margin-left: 55px;
+            margin-top: 5px;
+            display: block;
+            width: auto;
+            height: 17px;
+            font-family: PingFangSC;
+            font-size: 12px;
+            font-weight: normal;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: normal;
+            letter-spacing: -0.6px;
+            color: #ffffff;
+        }
+        .attention-btn{
+            position: absolute;
+            width: 63px;
+            height: 23px;
+            border-radius: 11.5px;
+            background-color: #ff6536;
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+            right: 15px;
+            top: 13px;
+            text-align: center;
+            color: #fff;
+            line-height: 23px;
+        }
+    }
+    .attention-modal{
+        width: 100%;
+        height: 100%;
+        z-index: 20;
+        position: absolute;
+        background: rgba(0,0,0,.6);
+        left: 0;
+        top:0;
+        .qrcode-wrap{
+            width: 260px;
+            height: 340px;
+            background-image: url('../../assets/imgs/attantion-wrap.svg');
+            background-size:100%;
+            background-repeat: no-repeat;
+            position: absolute;
+            top: 4rem;
+            left: 50%;
+            transform: translateX(-50%);
+            img{
+                width: 250px;
+                height: auto;
+                position: relative;
+                left: 50%;
+                transform: translateX(-50%);
+                top: 20px
+            }
+            .close-icon{
+                display: block;
+                width: 40px;
+                height: 40px;
+                background-image : url('../../assets/imgs/qrcode-close.svg');
+                background-size:100%;
+                position: absolute;
+                top: 360px;
+                left: 50%;
+                transform: translateX(-50%);
+                border-radius: 50%;
+            }
+            .title{
+                display:block;
+                padding-top:4px;
+                width: 180px;
+                height: 20px;
+                text-align:center;
+                font-family: PingFangSC;
+                font-size: 14px;
+                font-weight: 500;
+                font-style: normal;
+                font-stretch: normal;
+                line-height: normal;
+                letter-spacing: -0.7px;
+                color: #ff6536;
+                margin: 0 auto
+            }
+            .desc{
+                display:block;
+                width: 176px;
+                height: 17px;
+                font-family: PingFangSC;
+                font-size: 12px;
+                font-weight: normal;
+                font-style: normal;
+                font-stretch: normal;
+                line-height: normal;
+                letter-spacing: -0.6px;
+                color: #ff6536;
+                margin: 0 auto;
+                text-align: center;
+                padding-top: 2px;
+            }
+            .desc-letter{
+                display: block;
+                width: 135px;
+                height: 17px;
+                font-family: PingFangSC;
+                font-size: 12px;
+                font-weight: normal;
+                font-style: normal;
+                font-stretch: normal;
+                line-height: normal;
+                letter-spacing: -0.6px;
+                color: #ff6536;
+                text-align: center;
+                position: absolute;
+                bottom: 30px;
+                left: 50%;
+                transform: translateX(-50%)
+            }
+        }
+    }
+}
+.content-ios~attention-tip {
     width: 100%;
     height: 100%;
     position: absolute;

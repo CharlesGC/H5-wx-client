@@ -38,6 +38,7 @@ export class ProjectEditStep3Page {
   ionViewDidLoad() {
     this.projectData = this.navParams.get('projectData') || {};
     this.projectData['industryList'] = this.projectData['pIndustry'] ? this.projectData['pIndustry'] : [];
+    console.log(this.projectData['industryList'],'+++999888')
     this.projectData['skillList'] = this.projectData['pSkill'] ? this.projectData['pSkill'] : [];
     this.isEdit = this.navParams.get('isEdit') || false;
     console.log(this.projectData, 'ionViewDidLoad ProjectEditStep3Page');
@@ -54,18 +55,18 @@ export class ProjectEditStep3Page {
   }
   sureSubmit() {
     this.isSubmit = !this.isSubmit
-    if(this.gotype == 1){
+    if (this.gotype == 1) {
       this.navCtrl.push(ProjectBrowserPage);
-    }else{
+    } else {
       this.navCtrl.push(ProjectListPage);
     }
-    
+
   }
   sureFailed() {
     this.isfailed = !this.isfailed
     return
   }
-  ReleaseFailed(){
+  ReleaseFailed() {
     this.isReleaseFailed = !this.isReleaseFailed
     return
   }
@@ -82,7 +83,7 @@ export class ProjectEditStep3Page {
     let grade = this.projectData['planguage'] && this.projectData['planguage'].length > 0 ? this.projectData['planguage'].map(f => f.grade).join(',') : '';
     let pid = projectData['pid'];
     // 必填项校验
-    if((!projectData.startTimeType && projectData.startTimeType !=0) || (!projectData.deliverMethod && projectData.deliverMethod !=0) || (!projectData.province ) || (!projectData.budgetType && projectData.budgetType !=0)) {
+    if ((!projectData.startTimeType && projectData.startTimeType != 0) || (!projectData.deliverMethod && projectData.deliverMethod != 0) || (!projectData.province) || (!projectData.budgetType && projectData.budgetType != 0)) {
       this.isComplete = true;
       return;
     }
@@ -91,7 +92,7 @@ export class ProjectEditStep3Page {
     let projectStageDetailUrl = releaseProjectUrl + '?openId=' + openId +
       '&cid=' + projectData['cid'] +
       '&principalName=' + projectData['principalName'] +
-      '&principalPosition=' + (projectData['principalPosition'] || '')+
+      '&principalPosition=' + (projectData['principalPosition'] || '') +
       '&principalPhone=' + (projectData['principalPhone'] || '') +
       '&principalEmail=' + (projectData['principalEmail'] || '') +
       '&projectName=' + (projectData['projectName'] || '') +
@@ -99,7 +100,7 @@ export class ProjectEditStep3Page {
       '&target=' + (projectData['target'] || '') +
       '&industrys=' + industrys +
       '&skills=' + skills +
-      '&projectLengthType=' + (projectData['projectLengthType'] || '')+
+      '&projectLengthType=' + (projectData['projectLengthType'] || '') +
       '&projectLength=' + (projectData['projectLength'] || '') +
       '&startTimeType=' + projectData['startTimeType'] +
       '&startTime=' + projectData['startTime'] +
@@ -119,7 +120,7 @@ export class ProjectEditStep3Page {
     if (pid) {
       projectStageDetailUrl = projectStageDetailUrl + '&pid=' + pid;
     }
-    
+
     this.Provider.getMamenSwiperData(projectStageDetailUrl).subscribe(res => {
       if (res.code == 200) {
         this.isShow = true;
@@ -145,25 +146,25 @@ export class ProjectEditStep3Page {
         return 1;
       }
     })
-  } 
+  }
 
   /*列表编辑*/
   goFormEditPage(field, value, type) {
-    
+
     if (field == 'skillList') {
-      
-      value = value && value.length ? value.map(d => ({ id: d.psid || d.id, text: d.skillName||d.text })) : [];
-      console.log(value,'============');
+
+      value = value && value.length ? value.map(d => ({ id: d.psid || d.id, text: d.skillName || d.text })) : [];
+      console.log(value, '============');
     } else if (field == 'industryList') {
-      console.log(value,'industryListindustryListindustryListindustryList');
-      value = value && value.length ? value.map(d => ({ id: d.piid || d.id, text: d.industryName||d.text })) : [];
+      value = value && value.length ? value.map(d => ({ id: d.piid || d.id, text: d.industryName || d.text })) : [];
+      console.log(value, 'industryListindustryListindustryListindustryList');
     }
+
     if (type == 'timeSelect') {
       this.navCtrl.push(ProjectTimeSelectPage, { callback: this.setValue, value: value, field: field, type: type });
     } else {
       this.navCtrl.push(FormEditPage, { callback: this.setValue, value: value, field: field, type: type });
     }
-
   }
 
   // /*设置值（回调函数）*/
@@ -187,7 +188,7 @@ export class ProjectEditStep3Page {
 
   /*设置值（回调函数）*/
   setValue = (field, value) => {
-    console.log(field, value, 11112312);
+    //console.log(field, value, 11112312);
     if (field == 'province-city') {
       this.projectData['province'] = value['province'] || ''
       this.projectData['city'] = value['city'] || ''
@@ -196,7 +197,7 @@ export class ProjectEditStep3Page {
       this.projectData['projectLengthType'] = value[0] || 0;
       this.projectData['projectLength'] = value[1] || '';
     } else if (field == 'startTime') {
-      console.log(value,'valuevaluevaluevaluevaluevalue');
+      console.log(value, 'valuevaluevaluevaluevaluevalue');
       this.projectData['startTimeType'] = value[0] || 0;
       this.projectData['startTime'] = value[1] || '';
     } else if (field == 'deliverMethod') {
@@ -208,6 +209,10 @@ export class ProjectEditStep3Page {
       this.projectData['budgetDay'] = value[1] || '';
       this.projectData['workload'] = value[2] || '';
       this.projectData['budget'] = value[3] || '';
+    } else if (field == 'industryList') {
+      this.projectData['industryList'] = value
+    } else if (field == 'skillList') {
+      this.projectData['skillList'] = value
     } else {
       this.projectData[field] = value;
     }
@@ -232,28 +237,28 @@ export class ProjectEditStep3Page {
       '&cid=' + projectData['cid'] +
       '&principalName=' + (projectData['principalName'] || '') +
       '&principalPosition=' + (projectData['principalPosition'] || '') +
-      '&principalPhone=' + (projectData['principalPhone'] || '')+
-      '&principalEmail=' +( projectData['principalEmail'] || '') +
+      '&principalPhone=' + (projectData['principalPhone'] || '') +
+      '&principalEmail=' + (projectData['principalEmail'] || '') +
       '&projectName=' + (projectData['projectName'] || '') +
       '&description=' + (projectData['description'] || '') +
-      '&target=' + (projectData['target'] || '')+
+      '&target=' + (projectData['target'] || '') +
       '&industrys=' + (industrys || '') +
-      '&skills=' + (skills || '')+
-      '&projectLengthType=' + projectData['projectLengthType' || '']+
-      '&projectLength=' + (projectData['projectLength'] || '')+
-      '&startTimeType=' + (projectData['startTimeType'])+
-      '&startTime=' + (projectData['startTime'] || '')+
+      '&skills=' + (skills || '') +
+      '&projectLengthType=' + projectData['projectLengthType' || ''] +
+      '&projectLength=' + (projectData['projectLength'] || '') +
+      '&startTimeType=' + (projectData['startTimeType']) +
+      '&startTime=' + (projectData['startTime'] || '') +
       '&deliverMethod=' + (projectData['deliverMethod']) +
-      '&budgetType=' + (projectData['budgetType'])+
+      '&budgetType=' + (projectData['budgetType']) +
       '&budgetDay=' + (projectData['budgetDay'] || 0) +
       '&workload=' + (projectData['workload'] || 0) +
       '&budget=' + (projectData['budget']) +
       '&languages=' + (language || '') +
-      '&grades=' + (grade || '')+
-      '&otherIndustrys=' + (otherIndustrys || '')+
-      '&otherSkills=' + (otherSkills || '')+
-      '&province=' + (projectData['province'] || '')+
-      '&city=' + (projectData['city'] || '')+
+      '&grades=' + (grade || '') +
+      '&otherIndustrys=' + (otherIndustrys || '') +
+      '&otherSkills=' + (otherSkills || '') +
+      '&province=' + (projectData['province'] || '') +
+      '&city=' + (projectData['city'] || '') +
       '&qualification=' + (projectData['qualification'] || '');
     if (pid) {
       projectStageDetailUrl = projectStageDetailUrl + '&pid=' + pid;
@@ -264,7 +269,7 @@ export class ProjectEditStep3Page {
         //alert('保存成功！')
         this.gotype = type;
         this.isSubmit = true
-      }else {
+      } else {
         this.isfailed = true
       }
     }, error => {
