@@ -63,7 +63,7 @@
   <div class="qc_container" *ngIf="outstandingArr">
     <div class="qu_content">
       <div class="title-cont">
-        <h4>行业翘楚</h4>
+        <h4>明星顾问</h4>
         <div (click)="outstanding('','','indeustryOutstand')">
           <span>更多</span>
           <ion-icon name="arrow-forward"></ion-icon>
@@ -94,7 +94,7 @@
     </div>
   </div>
 
-  
+
   <div class="text-img" (click)="goContactPage($event)">
     <img src="../../assets/imgs/guwenrukou.png" alt="">
   </div>
@@ -104,7 +104,7 @@
   <!-- 财务审计 -->
   <div class="contant-finance" *ngIf="financesArrLength">
     <div class="title-cont">
-      <h4>财务审计顾问</h4>
+      <h4>采购与供应链顾问</h4>
       <div (click)="financemore('','','financemore')">
         <span>更多</span>
         <span>
@@ -139,28 +139,31 @@
     <ul class="case_content">
       <div class="title-cont">
         <h4>麦盟案例</h4>
-        <div (click)="goCasemorePage()">
+        <!-- <div >
           <span>更多</span>
           <ion-icon name="arrow-forward"></ion-icon>
-        </div>
+        </div> -->
       </div>
-      <div class="case_img">
-        <ion-slides pager class="swiper_content1" does-continue="true" auto-play="true" loop="true" slide-interval=2000>
+      <div class="case_img" (click)="goCasemorePage()">
+        <div class="swiper_img" *ngFor="let item of caseArr">
+          <img src="{{item.bannerUrl}}" />
+        </div>
+        <!-- <ion-slides pager class="swiper_content1" >
           <ion-slide *ngFor="let item of caseArr" class="case_swiper">
             <div class="code_text">
               <div>{{item.note}}</div>
-              <!-- <div>来自麦盟智库的专家回答</div>
+              <div>来自麦盟智库的专家回答</div>
                   <div (click)="goToOtherPage()">
                     <span>点击了解更多</span>
-                    <span>></span> -->
-              <!-- </div> -->
+                    <span>></span>
+              </div>
             </div>
-            <div class="swiper_img">
+            <div class="swiper_img" *ngFor="let item of caseArr">
               <img src="{{item.bannerUrl}}" />
             </div>
 
           </ion-slide>
-        </ion-slides>
+        </ion-slides> -->
       </div>
     </ul>
   </div>
@@ -197,4 +200,4 @@
   </div>
   <!-- <div (click)="goProjectSpeed()" class="wwwww"></div> -->
 </ion-content>
-<attention-tip></attention-tip> 
+<attention-tip></attention-tip>

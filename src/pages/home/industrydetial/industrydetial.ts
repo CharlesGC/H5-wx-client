@@ -35,6 +35,7 @@ export class IndustrydetialPage {
   public id: any;
   public name: any;
   public financeAllArr = [];
+  public BlurInput:any;
   // public bottom = '11110'
   constructor(public navCtrl: NavController, public navParams: NavParams, public IndustryMoreData: MamenDataProvider,
     public SkillLabelMoreData: MamenDataProvider,
@@ -134,9 +135,13 @@ export class IndustrydetialPage {
     )
   }
   // 点击搜索按钮
-  searchLabel(search, type) {
+  searchLabel(value, type) {
+    console.log(111111111111111111111);
+    // this.BlurInput = setTimeout(() => {
+    //   this.blurInput()
+    // }, 1000);
     this.type = type;
-    this.search = search;
+    this.search = value;
     this.isIndustryLabel = true;
     this.skillLabel = true;
     this.getSearchadviser(this.industryId = 0, this.firstSkillId = 0, this.secondSkillId = 0, this.search, '', '');
@@ -147,7 +152,6 @@ export class IndustrydetialPage {
     this.isIndustryLabel = !this.isIndustryLabel;
     this.skillLabel = true;
     this.getinstudryListData();
-
   }
   // 技能下拉
   downSkill(type) {
