@@ -191,8 +191,9 @@
         <p class="card-cont">{{workList_item.role}}</p>
       </div>
       <div class="card-item-label mt10">
-        <label>职责描述</label>
-        <p class="card-cont">{{workList_item.workDescription}}</p>
+        <label>职责描述</label> 
+        <!-- <p class="card-cont">{{workList_item.workDescription}}</p> -->
+        <p class="card-cont"[innerHTML]="assembleHTML(workList_item.workDescription)"></p>
       </div>
       <div class="msg-footer" (click)="onGoPages(1,workList_item)">
         <span class="msg-footer-text">编辑详情</span>
