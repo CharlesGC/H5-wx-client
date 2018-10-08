@@ -22,14 +22,13 @@ export class TabsPage {
   public user ={}
   tab1Root = HomePage;
   tab2Root = DemandContentPage;
-  // tab3Root = ReleasePage;
-  tab3Root = SpeedPage;
-  // tab2Root = PhonebindPage;
+  // tab3Root = SpeedPage;
+  public tab3Root:any;
   public tab4Root:any;
   tab5Root = ContactPage;
   public isshow = false;
   constructor(public navCtrl: NavController,private Provider:MamenDataProvider) {
-    this.tab4Root = RecommendConsultantListPage
+    // this.tab4Root = RecommendConsultantListPage
   }
  
   ngOnInit() {
@@ -59,17 +58,20 @@ export class TabsPage {
     const user = window.sessionStorage.getItem('user') ? JSON.parse(window.sessionStorage.getItem('user')) : {type:-1};
     const openId = window.sessionStorage.getItem('openId') || this.getUrlParam('openId') || window.localStorage.getItem('openId');
     if(!openId && user.status == 1){
+      console.log(1111)
       this.navCtrl.push(ChooseIdentityPage);
     }else if(openId){
+      console.log(2222)
       this.getUserInfoEd(openId);
       !window.sessionStorage.getItem('openId') && window.sessionStorage.setItem('openId',openId);
     }else{
+      console.log(3333)
       this.onLogin();
     }
     
-    if(user.type == -1){
-      this.onLogin();
-    }
+    // if(user.type == -1){
+    //   this.onLogin();
+    // }
   }
 
   /*判断用户身份请求*/
@@ -133,7 +135,6 @@ export class TabsPage {
 
     let chooseIdentyUrl = getUserByopenIdUrl + '?openId=' + openId;
     this.Provider.getMamenSwiperData(chooseIdentyUrl).subscribe(res=>{
-      console.log(res,'点击斡旋111')
       if(res.code==200) {
         this.user = res.data;
         window.sessionStorage.setItem('user',JSON.stringify(res.data))
@@ -152,9 +153,9 @@ export class TabsPage {
         window.localStorage.removeItem('openId');
         window.sessionStorage.removeItem('openId');
       }else if(res.code == 203) {
+        this.navCtrl.push(ChooseIdentityPage);
         window.localStorage.removeItem('openId');
         window.sessionStorage.removeItem('openId');
-        this.onLogin();
       }
     },error=>{
       console.log('erros===',error);
@@ -162,16 +163,18 @@ export class TabsPage {
   }
 
   ngDoCheck (){
-    // console.log('我最先执行~~改变时')
-    // console.log('ngDoCheck','ngDoCheck进行时');
     const user = window.sessionStorage.getItem('user') ? JSON.parse(window.sessionStorage.getItem('user')) : {type:-1};
-    // user.type == 0
     if(user.type == 1){
       this.isshow = false;
       this.tab4Root = RecommendConsultantListPage
-    }else if(user.type == 0 || user.type == -1){
+    // }else if(user.type == 0 || user.type == -1){
+    }else if(user.type == 0){
       this.isshow = true;
+      this.tab3Root = SpeedPage;
       this.tab4Root = RecommendClientListPage;
+    }else if(user.type == -1){
+      this.isshow = true;
+      this.tab4Root = ''
     }
    
   }

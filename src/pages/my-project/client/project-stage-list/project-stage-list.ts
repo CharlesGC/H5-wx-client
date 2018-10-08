@@ -195,6 +195,9 @@ public isFaild :any
     this.Provider.getMamenSwiperData(projectDetailsUrl).subscribe(res=>{
       if(res.code==200) {
         this.projectDetails = res.data;
+        if(this.projectDetails){
+          this.stageType = this.projectDetails['status'];
+        }
       }else if(res.code == 207) {
         window.localStorage.removeItem('openId');
       }else{

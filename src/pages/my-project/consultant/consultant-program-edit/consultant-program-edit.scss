@@ -121,6 +121,7 @@ page-consultant-program-edit {
                 display: flex;
                 text-align: right;
                 .s100 {
+                    flex: 1;
                     display: inline-block;
                     // width: 150px;
                     text-overflow: ellipsis;

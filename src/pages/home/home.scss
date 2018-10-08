@@ -613,102 +613,114 @@ page-home {
                     }
                     .case_img {
                         width: 100%;
-                        // height: 171px;
-                        .swiper_content1 {
-                            object-fit: contain;
-                            // opacity: 0.68;
-                            background-color: #fff;
-                            .swiper-pagination-bullet {
-                                border-radius: 1.5px;
-                                display: inline-block;
-                                width: 13.8px;
-                                height: 3px;
-                                background: #fff;
-                                // opacity: .2;
-                                pointer-events: auto;
-                            }
-                            .swiper-pagination-bullet-active {
-                                background: #fff;
-                                // opacity: 1;
-                            }
-                            .case_swiper {
+                        object-fit: contain;
+                        background-color: #fff;
+                        .swiper_img {
+                            width: 100%;
+                            img {
                                 width: 100%;
-                                // height: 15rem;
-                                .slide-zoom {
-                                    text-align: center;
-                                    display: block;
-                                    width: 100%;
-                                    height: 100%;
-                                }
-                                .swiper_img {
-                                    width: 100%;
-                                    // height: 14.25rem;
-                                }
-                                img {
-                                    width: 100%;
-                                    // opacity: 0.82;
-                                    padding:0 5px;
-                                }
-                               .code_text {
-                                width: 80%;
-                                margin-left: 3rem;
-                                // margin-top: -12rem;
-                                position: absolute;
-                                top: 21px;
-                                display: flex;
-                                flex-direction: column;
-                                text-align:left;
-                                div:nth-child(1) {
-                                    width: 24.91rem;
-                                    height: 2rem;
-                                    font-family: PingFangSC;
-                                    font-size: 1.5rem;
-                                    font-weight: 600;
-                                    color: #ffffff;
-                                    text-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-                                    z-index: 999;
-                                    text-overflow:ellipsis;
-                                    white-space:nowrap;
-                                    overflow:hidden; 
-                                }
-                                div:nth-child(2) {
-                                    width: 17.25rem;
-                                    height: 2.83rem;
-                                    font-family: PingFangSC;
-                                    font-size: 1rem;
-                                    color: #ffffff;
-                                    margin-top: .8rem;
-                                    z-index: 999;
-                                }
-                                div:nth-child(3) {
-                                    width: 7.5rem;
-                                    height: 1.2rem;
-                                    font-family: PingFangSC;
-                                    font-size: 10px;
-                                    font-weight: normal;
-                                    font-style: normal;
-                                    font-stretch: normal;
-                                    line-height: normal;
-                                    letter-spacing: normal;
-                                    color: #ffffff;
-                                    margin-top: 2rem;
-                                    z-index: 999;
-                                    .icon {
-                                        z-index: 999;
-                                        width: 0.4rem;
-                                        height: .9rem;
-                                        background-color: #ffff;
-                                        position: relative;
-                                        top: rem;
-                                        left: 2rem;
-                                        top: .1rem;
-                                    }
-                                }
-                               }
+                                // opacity: 0.82;
+                                padding:0 5px;
                             }
                         }
-                       
+                        
                     }
+                    // .case_img {
+                       
+                    //     // height: 171px;
+                    //     .swiper_content1 {
+                    //         object-fit: contain;
+                    //         background-color: #fff;
+                    //         .swiper-pagination-bullet {
+                    //             border-radius: 1.5px;
+                    //             display: inline-block;
+                    //             width: 13.8px;
+                    //             height: 3px;
+                    //             background: #fff;
+                    //             // opacity: .2;
+                    //             pointer-events: auto;
+                    //         }
+                    //         .swiper-pagination-bullet-active {
+                    //             background: #fff;
+                    //             // opacity: 1;
+                    //         }
+                    //         .case_swiper {
+                    //             width: 100%;
+                    //             // height: 15rem;
+                    //             .slide-zoom {
+                    //                 text-align: center;
+                    //                 display: block;
+                    //                 width: 100%;
+                    //                 height: 100%;
+                    //             }
+                    //             .swiper_img {
+                    //                 width: 100%;
+                    //             }
+                    //             img {
+                    //                 width: 100%;
+                    //                 // opacity: 0.82;
+                    //                 padding:0 5px;
+                    //             }
+                    //            .code_text {
+                    //             width: 80%;
+                    //             margin-left: 3rem;
+                    //             // margin-top: -12rem;
+                    //             position: absolute;
+                    //             top: 21px;
+                    //             display: flex;
+                    //             flex-direction: column;
+                    //             text-align:left;
+                    //             div:nth-child(1) {
+                    //                 width: 24.91rem;
+                    //                 height: 2rem;
+                    //                 font-family: PingFangSC;
+                    //                 font-size: 1.5rem;
+                    //                 font-weight: 600;
+                    //                 color: #ffffff;
+                    //                 text-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+                    //                 z-index: 999;
+                    //                 text-overflow:ellipsis;
+                    //                 white-space:nowrap;
+                    //                 overflow:hidden; 
+                    //             }
+                    //             div:nth-child(2) {
+                    //                 width: 17.25rem;
+                    //                 height: 2.83rem;
+                    //                 font-family: PingFangSC;
+                    //                 font-size: 1rem;
+                    //                 color: #ffffff;
+                    //                 margin-top: .8rem;
+                    //                 z-index: 999;
+                    //             }
+                    //             div:nth-child(3) {
+                    //                 width: 7.5rem;
+                    //                 height: 1.2rem;
+                    //                 font-family: PingFangSC;
+                    //                 font-size: 10px;
+                    //                 font-weight: normal;
+                    //                 font-style: normal;
+                    //                 font-stretch: normal;
+                    //                 line-height: normal;
+                    //                 letter-spacing: normal;
+                    //                 color: #ffffff;
+                    //                 margin-top: 2rem;
+                    //                 z-index: 999;
+                    //                 .icon {
+                    //                     z-index: 999;
+                    //                     width: 0.4rem;
+                    //                     height: .9rem;
+                    //                     background-color: #ffff;
+                    //                     position: relative;
+                    //                     top: rem;
+                    //                     left: 2rem;
+                    //                     top: .1rem;
+                    //                 }
+                    //             }
+                    //            }
+                    //         }
+                    //     }
+                       
+                    // }
                 }
             }
     }

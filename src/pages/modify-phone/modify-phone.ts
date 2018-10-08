@@ -41,7 +41,7 @@ export class ModifyPhonePage {
   /*跳转页面（下一步），TODO 要放在一个页面进行*/
   goModifyPhone2Page(code) {
     // let checkCodeUrl = 'http://mamon.yemindream.com/mamon/user/checkCode'
-    const openId = this.getUrlParam('openId')
+    const openId = window.sessionStorage.getItem('openId')|| this.getUrlParam('openId');
     
     let checkCodeDataUrl = checkCodeUrl+'?openId='+openId + '&oldPhone=' + this.uphone + '&code=' + code.value;
     this.Provider.getMamenSwiperData(checkCodeDataUrl).subscribe(res=>{
@@ -61,7 +61,7 @@ export class ModifyPhonePage {
   getVerificationCode(){
     let phone = this.uphone;
     // const openId = window.sessionStorage.getItem('openId')
-    const openId =  this.getUrlParam('openId')
+    const openId =  window.sessionStorage.getItem('openId')|| this.getUrlParam('openId');
     // let getPhoneCodeUrl = 'http://mamon.yemindream.com/mamon/user/sendSmsCode'
     if(!this.isFlag) return;
     if(phone.length < 11) {
