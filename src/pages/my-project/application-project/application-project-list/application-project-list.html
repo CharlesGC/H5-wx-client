@@ -1,0 +1,52 @@
+<!--
+  Generated template for the ApplicationProjectListPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>案例附件列表</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <div class="bg clearfix mt20" *ngFor="let item of list">
+    <img style="width:66px;height:66px;" src="assets/imgs/doc.png" *ngIf="formatTypes(item.type) == 'doc'">
+    <img style="width:66px;height:66px;" src="assets/imgs/ppt.png" *ngIf="formatTypes(item.type) == 'ppt'">
+    <img style="width:66px;height:66px;" src="assets/imgs/xls.png" *ngIf="formatTypes(item.type) == 'xls'">
+    <img style="width:66px;height:66px;" src="assets/imgs/png.png" *ngIf="formatTypes(item.type) == 'jpg'">
+    <img style="width:66px;height:66px;" src="assets/imgs/pdf.png" *ngIf="formatTypes(item.type) == 'pdf'">
+    <span class="file-title">{{item.name}}</span>
+    <!-- <span class="file-desc">点击查看文件预览</span> -->
+    <span class="file-size">{{(item.size / 1048576).toPrecision(3) > 1?(item.size / 1048576).toPrecision(3) + '
+      MB':(item.size / 1048576).toPrecision(3)*1024+' KB'}}</span>
+  </div>
+  <button ion-button round class="btn-upload" (click)="gouploadfile('projectfilelist')">
+    上传附件
+  </button>
+  <div class="fixed-bottom">
+    <button ion-button class="btn-submit" (click)="saveProjectFile()">保存</button>
+  </div>
+</ion-content>
+<!-- <div class="phonebind-modal" [hidden]="!isSubmit">
+  <div class="modal-bg"></div>
+  <div class="modal-box">
+    <div class="modal-top">
+      <div class="modal-top-close">
+        <ion-icon ios="ios-close" md="md-close" item-rigth (click)="onClose()" color=""></ion-icon>
+      </div>
+      <div class="modal-title">提示</div>
+      <div class="modal-content">
+        <p>上传成功</p>
+      </div>
+      <div class="modal-footer">
+        <button ion-button full large (click)="sureBack()">确定</button>
+        <button ion-button full large (click)="onCompanyDel()" class="btn-delete">返回</button>
+      </div>
+    </div>
+  </div>
+</div> -->

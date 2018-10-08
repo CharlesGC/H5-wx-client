@@ -6,6 +6,7 @@ import { FormEditPage } from '../../contact/form-edit/form-edit';
 import { DemandContentPage } from '../../demand-content/demand-content';
 import { submitApplicationUrl } from '../../../providers/requestUrl';
 import { UploadfilePage } from '../../uploadfile/uploadfile'
+import { ApplicationProjectListPage } from './application-project-list/application-project-list'
 
 /**
  * Generated class for the ApplicationProjectPage page.
@@ -31,6 +32,7 @@ export class ApplicationProjectPage {
   public tip_isShow = false;
   public success_isShow = false;
   public isComplete = false
+  public pacids:any;
   constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider) {
   }
 
@@ -113,7 +115,6 @@ export class ApplicationProjectPage {
   }
   /*设置值（回调函数）*/
   setValue = (field, value) => {
-
     this.projectData[field] = value;
   }
 
@@ -130,7 +131,7 @@ export class ApplicationProjectPage {
   /*提交申请*/
   onApplicationSubmit() {
     console.log(this.projectData['introduction']);
-    if (!this.projectData['introduction'] || !this.projectData['proposal'] || !this.projectData['fid']) {
+    if (!this.projectData['introduction'] || !this.projectData['proposal']) {
       this.isComplete = true
       return
     }
@@ -143,13 +144,13 @@ export class ApplicationProjectPage {
   /*确定提交*/
   onDetermine() {
     let projectData = this.projectData;
+    console.log(projectData,this.pacids,'this.pacids');
     // let projectDetailsUrl = 'http://mamon.yemindream.com/mamon/adviser/submitApplication';
     const openId = window.sessionStorage.getItem('openId') || this.getUrlParam('openId')
     let projectDetailsUrl = submitApplicationUrl + '?openId=' + openId + '&pid=' + projectData['pid'] +
       '&introduction=' + projectData['introduction'] +
       '&proposal=' + projectData['proposal'] +
-      '&fid=' + projectData['fid'] +
-      '&pacids=' + (projectData['pacids'] || '');
+      '&pacids=' + this.pacids;
 
     this.Provider.getMamenSwiperData(projectDetailsUrl).subscribe(res => {
       if (res.code == 200) {
@@ -178,4 +179,11 @@ export class ApplicationProjectPage {
     this.navCtrl.popToRoot()
   }
 
+  /** 跳转到项目附件列表页 */
+  goApplicationProjectListPage(){
+    this.navCtrl.push(ApplicationProjectListPage,{callback:this.getPacIds})
+  }
+  getPacIds = (value)=>{
+    this.pacids = (value && value.length > 0) ? value.map(f=>f.id).join(',') :'';
+  }
 }
