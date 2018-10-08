@@ -36,7 +36,7 @@ export class SpeedPage {
   public voice: any;
   public isShow = false;
   public isChange = false;
-  public isComplete =false;
+  public isComplete = false;
   public isTime = false;
   // public Url:any;
   constructor(public navCtrl: NavController, public navParams: NavParams,
@@ -154,7 +154,7 @@ export class SpeedPage {
     //     });
     //   }
     // });
-    this.WechatData.getWechatJs(getWechatJsConfig,url).subscribe(
+    this.WechatData.getWechatJs(getWechatJsConfig, url).subscribe(
       res => {
         console.log(res);
         wx.config({
@@ -226,18 +226,18 @@ export class SpeedPage {
                 // var serverId = 0;
                 //把录音在微信服务器上的id（res.serverId）发送到自己的服务器供下载。
                 if (serverId != '') {
-                  this.UploadData.getUpload(getUploadLocal,serverId).subscribe(
-                        res => {
-                          this.audioData.push(res.data);
-                          this.changeDetectorRef.markForCheck();
-                          this.changeDetectorRef.detectChanges();
-                            console.log(this.audioData,11111111111);
-                            this.localId = '';
-                        }, error => {
-                          console.log(error);
-                          this.isRecord = true;
-                        }
-                    )
+                  this.UploadData.getUpload(getUploadLocal, serverId).subscribe(
+                    res => {
+                      this.audioData.push(res.data);
+                      this.changeDetectorRef.markForCheck();
+                      this.changeDetectorRef.detectChanges();
+                      console.log(this.audioData, 11111111111);
+                      this.localId = '';
+                    }, error => {
+                      console.log(error);
+                      this.isRecord = true;
+                    }
+                  )
                 }
               }
             });
@@ -268,17 +268,17 @@ export class SpeedPage {
     this.description = value;
     let Arr = this.audioData || [];
     this.voice = Arr.length > 0 ? Arr.map(f => f.url).join(",") : '';
-    if(!this.description && this.description !=0) {
+    if (!this.description && this.description != 0) {
       this.isComplete = true;
       return;
     }
     this.speedVoiceData.getSpeedReleaseData(getSpeedrelease, openId, this.description, this.voice).subscribe(
-      res => { 
+      res => {
         if (res.code == 200) {
           this.speedVoiceReleaseArr = res.data;
           console.log(this.speedVoiceReleaseArr);
           this.isShow = true;
-        }else {
+        } else {
           console.log('请求出错：' + res.msg)
         }
       }, error => {
@@ -286,8 +286,8 @@ export class SpeedPage {
       }
     )
   }
-   // 确定
-   sureComplete() {
+  // 确定
+  sureComplete() {
     this.isComplete = !this.isComplete;
   }
   /*功能之后跳转*/

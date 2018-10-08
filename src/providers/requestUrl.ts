@@ -310,6 +310,12 @@ export const ignoreProjectUrl = getAPIPath + 'adviser/ignoreProject';
 /*获取openid请求*/
 export const getWxOpenidUrl = getAPIPath + 'wechat/getWxOpenid';
 
+/* 隐藏微信关注菜单 */
+export const hideAttentionMenuUrl = getAPIPath + 'wechat/wechatJsConfig';
+
+/** 请求申请项目附件列表 */
+export const getApplicationProjectList = getAPIPath + 'adviser/submitApplicationCase';
+
 
 
 

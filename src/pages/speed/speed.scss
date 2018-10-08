@@ -61,6 +61,10 @@ page-speed {
                     font-size: 14px;
                     font-weight: 600;
                     color: #000;
+                    .text-input-ios {
+                        height: 100%;
+                        padding: 10px 0;
+                    }
                 }
             }
             .speech-prompt {
@@ -307,7 +311,7 @@ page-speed {
                         text-align: center;
                         margin-top: 48px;
                         ion-icon {
-                            font-size: 30px;
+                            font-size: 30px !important;
                             margin-left: 55px;
                         }
                     }
@@ -320,7 +324,7 @@ page-speed {
                         letter-spacing: 0.2px;
                         text-align: center;
                         color: #505050;
-                        padding: 0 15px 0 30px;
+                        padding: 0 15px 0 35px;
                         margin-top: 15px;
                     }
                 }

@@ -94,7 +94,7 @@ page-industrydetial {
                 display: flex;
                 justify-content: space-around;
                 background-color: #fff;
-                
+                padding: 0 16px;
                 .input-search {
                     width: 100%;
                     background:none;  
@@ -108,6 +108,7 @@ page-industrydetial {
                     caret-color:#ff6536;
                 }
                 .item-search {
+                    padding-top: 12px;
                     .icon {
                         // opacity: 0.4;
                         color: #cfcfcf;
@@ -127,28 +128,28 @@ page-industrydetial {
                 .input-wrapper {
                     background: #fff;
                 }
-                .search_content {
-                    width: 375px;
-                    // height: 50px;
-                    background-color: #ffffff; 
-                    display: flex;
-                    justify-content: space-around;
-                    align-items: center;
-                    // line-height: 50px;
-                    .item-input-wrapper {
-                        // margin-left: 15px;
-                        width: 100%;
-                        display: flex;
+                // .search_content {
+                //     width: 375px;
+                //     // height: 50px;
+                //     background-color: #ffffff; 
+                //     display: flex;
+                //     justify-content: space-around;
+                //     align-items: center;
+                //     // line-height: 50px;
+                //     .item-input-wrapper {
+                //         // margin-left: 15px;
+                //         width: 100%;
+                //         display: flex;
                         
-                        // input::-webkit-input-placeholder, textarea::-webkit-input-placeholder { 
-                        //     color: #ff6536!important; 
-                        //     }
-                    }
+                //         // input::-webkit-input-placeholder, textarea::-webkit-input-placeholder { 
+                //         //     color: #ff6536!important; 
+                //         //     }
+                //     }
                     
-                } 
+                // } 
           }
           ion-item {
-            .search_content .item-search .icon {
+            .search_item .item-search .icon {
                 opacity: 0.4;
                 color: #4a4a4a;
                 padding-right: 15px;

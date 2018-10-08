@@ -3,7 +3,7 @@ import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-an
 import globalConfig from '../../config.js';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { MamenDataProvider } from '../../providers/mamen-data/mamen-data';
-import { resumeUpLoadUrl } from '../../providers/requestUrl';
+import { resumeUpLoadUrl, getApplicationProjectList } from '../../providers/requestUrl';
 /**
 * Generated class for the UploadfilePage page.
 *
@@ -18,7 +18,6 @@ import { resumeUpLoadUrl } from '../../providers/requestUrl';
 })
 export class UploadfilePage {
 	public uploadUrl = globalConfig.filesUpload;
-	public Flagyingyezhizhao = true;
 	private filestatus = false;
 	private fileUrl = '';
 	private filetitle = '';
@@ -69,6 +68,10 @@ export class UploadfilePage {
 			})
 			this.navCtrl.pop();
 			this.isSubmit = !this.isSubmit;
+		} else if (this.pagetype == 'projectfilelist') {
+			this.isSubmit = !this.isSubmit;
+			this.navCtrl.pop();
+			//console.log(callback)
 		} else {
 			this.navCtrl.pop();
 			this.isSubmit = !this.isSubmit;
@@ -133,6 +136,33 @@ export class UploadfilePage {
 					this.isSubmit = true;
 				}, 1000)
 			});
+		} else if (this.pagetype == 'projectfilelist') {
+			let $this = this;
+			if (!this.fileData) {
+				return;
+			}
+			let file = this.fileData;
+			let formData = new FormData();
+			formData.append('file', file);
+			//console.log(this.fileData,'文件信息');
+			this.presentLoadingDefault()
+			this.http.post(this.uploadUrl, formData).subscribe(res => {
+				this.fid = res['data'].fid;
+				const openId = window.sessionStorage.getItem('openId') || this.getUrlParam('openId');
+				let getApplicationProjectListUrl = getApplicationProjectList + '?openId=' + openId + '&fid=' + (this.fid || '')
+				this.Provider.getMamenSwiperData(getApplicationProjectListUrl).subscribe(res => {
+					let callback = this.navParams.get('callback');
+					this.fileData.id = res.data
+					callback(this.fileData)
+					//console.log(res,'999999')
+					this.loading.dismiss();
+					setTimeout(() => {
+						this.isSubmit = true;
+					}, 1000)
+				})
+				//let callback = this.navParams.get('callback');
+				//callback(this.fileData, $this.filetitle);
+			});
 		} else {
 			let $this = this;
 			if (!this.fileData) {
@@ -143,10 +173,10 @@ export class UploadfilePage {
 			formData.append('file', file);
 			this.presentLoadingDefault()
 			this.http.post(this.uploadUrl, formData).subscribe(res => {
-				console.log('请求结束', res);
+				//console.log('请求结束', res);
 				//let tempRes = JSON.parse(res);
 				this.fileData = res['data'];
-				console.log(this.fileData, '+++')
+				//console.log(this.fileData, '+++')
 				let callback = this.navParams.get('callback');
 				callback(this.fileData, $this.filetitle);
 				this.loading.dismiss();

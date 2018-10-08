@@ -14,8 +14,9 @@ import { CasemorePage } from "./casemore/casemore";
 // import { ViewChild } from '@angular/core';
 
 // import { Slides } from 'ionic-angular';
-
+declare var wx: any;
 import { getswipreUrl, getindustryUrl, getskillUrl, getcaseUrl, getoutstandingUrl, getfinanceUrl, getfinanceAllUrl } from '../../providers/dataUrl';
+import { hideAttentionMenuUrl } from '../../providers/requestUrl'
 
 @Component({
   selector: 'page-home',
@@ -37,7 +38,7 @@ export class HomePage {
   public sausage: boolean;
   public mushrooms: boolean;
 
-  constructor(public navCtrl: NavController, private swiperdata: MamenDataProvider, private industrydata: MamenDataProvider,private http: HttpClient,
+  constructor(public navCtrl: NavController, private swiperdata: MamenDataProvider, private industrydata: MamenDataProvider, private http: HttpClient,
     private skilldata: MamenDataProvider, private casedata: MamenDataProvider, private outstanddata: MamenDataProvider, private financedata: MamenDataProvider, private financeAlldata: MamenDataProvider) {
     this.IndustryArr = [];
   }
@@ -49,6 +50,7 @@ export class HomePage {
     this.getoutstandingInfo();
     this.getfinanceInfo();
     this.getfinanceAllInfo();
+    this.isAttention()
   }
   //  轮播图数据
   getswiperInfo() {
@@ -186,9 +188,9 @@ export class HomePage {
   // }
   // 点击跳转到轮播图详情
   goSwiperDetail(index) {
-    console.log(index,'indexindexindexindex')
-    this.navCtrl.push(SwiperDetailPage,{
-      index:index
+    console.log(index, 'indexindexindexindex')
+    this.navCtrl.push(SwiperDetailPage, {
+      index: index
     });
   }
 
@@ -248,7 +250,28 @@ export class HomePage {
     }
   }
   /**更多案例列表 */
-  goCasemorePage(){
+  goCasemorePage() {
     this.navCtrl.push(CasemorePage);
+  }
+
+  //隐藏底部分享菜单
+  isAttention() {
+    let url = location.href.split('#')[0]; // 当前网页的URL，不包含#及其后面部分
+    let data = { url: url };
+    this.http.get(hideAttentionMenuUrl).subscribe(res => {
+      if (res['code'] == 200) {
+        wx.config({
+          debug: false,
+          appId: res['data'].appid,
+          timestamp: res['data'].timestamp,
+          nonceStr: res['data'].nonceStr,
+          signature: res['data'].signature,
+          jsApiList: ['hideOptionMenu']
+        });
+        wx.ready(function () {
+          wx.hideOptionMenu();
+        });
+      }
+    })
   }
 }

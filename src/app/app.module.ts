@@ -150,6 +150,9 @@ import { CasemorePage } from "../pages/home/casemore/casemore";
 
 /* 使用协议 */
 import { UseAgreementPage } from "../pages/contact/aboutus/use-agreement/use-agreement"
+
+/** 案例附件列表 */
+import { ApplicationProjectListPage } from "../pages/my-project/application-project/application-project-list/application-project-list"
 @NgModule({
   /*申明组件*/
   declarations: [
@@ -257,7 +260,8 @@ import { UseAgreementPage } from "../pages/contact/aboutus/use-agreement/use-agr
     ContactusPage,
     AboutusPage,
     CasemorePage,
-    UseAgreementPage
+    UseAgreementPage,
+    ApplicationProjectListPage
   ],
   /*引入的模块 依赖的模块*/
   imports: [
@@ -271,7 +275,6 @@ import { UseAgreementPage } from "../pages/contact/aboutus/use-agreement/use-agr
       tabsHideOnSubPages: 'true', //隐藏全部子页面
       backButtonText: '返回'  //配置返回按钮
     }),
-
     FileUploadModule,
     ImageCropperModule
   ],
@@ -382,7 +385,8 @@ import { UseAgreementPage } from "../pages/contact/aboutus/use-agreement/use-agr
     ContactusPage,
     AboutusPage,
     CasemorePage,
-    UseAgreementPage
+    UseAgreementPage,
+    ApplicationProjectListPage
   ],
   providers: [
     StatusBar,

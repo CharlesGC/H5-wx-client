@@ -23,7 +23,8 @@ export class ConsultantDeliveryModelPage {
   public isCourierCompany = false
   public isTrackingNumber = false
   public isContent = false
-  public isSubmit =false
+  public isSubmit = false
+  public isFailed = false
   constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider) {
   }
 
@@ -59,24 +60,38 @@ export class ConsultantDeliveryModelPage {
       console.log('erros===', error);
     })
   }
-  sureCourierCompany(){
+  sureCourierCompany() {
     this.isCourierCompany = !this.isCourierCompany
     return
   }
-  sureTrackingNumber(){
+  sureTrackingNumber() {
     this.isTrackingNumber = !this.isTrackingNumber
     return
   }
-  sureContent(){
+  sureContent() {    
+    let deliveryModelData = this.deliveryModelData;
+
+    if (!deliveryModelData['logisticsCompany']) {
+      this.isCourierCompany = true
+      return;
+    }
+    if (!deliveryModelData['logisticsNumber']) {
+      this.isTrackingNumber = true
+      return;
+    }
     this.isContent = true
     return
   }
-  sureSubmit(){
+  sureSubmit() {
     this.isSubmit = !this.isSubmit
     this.navCtrl.pop();
   }
-  onCancel(){
+  onCancel() {
     this.isContent = !this.isContent
+    return
+  }
+  sureFailed(){
+    this.isFailed = !this.isFailed
     return
   }
   /*付款申请信息提交*/
@@ -84,38 +99,36 @@ export class ConsultantDeliveryModelPage {
     let pid = this.navParams.get('pid');
     let psid = this.navParams.get('psid');
     let deliveryModelData = this.deliveryModelData;
-    
-    if(!deliveryModelData['logisticsCompany']){
-      this.isCourierCompany = true
-      return;
-    }
-    if(!deliveryModelData['logisticsNumber']){
-      this.isTrackingNumber = true
-      return;
-    }
+    // if (!deliveryModelData['logisticsCompany']) {
+    //   this.isCourierCompany = true
+    //   return;
+    // }
+    // if (!deliveryModelData['logisticsNumber']) {
+    //   this.isTrackingNumber = true
+    //   return;
+    // }
 
-    this.isContent = !this.isContent
     // let projectStageDetailUrl = 'http://mamon.yemindream.com/mamon/adviser/applyMoney';
     const openId = window.sessionStorage.getItem('openId') || this.getUrlParam('openId');
     let projectStageDetailUrl = applyMoneyUrl + '?openId=' + openId + '&pid=' + pid + '&psid=' + psid +
       '&payerBank=' + deliveryModelData['bankAccount'] +
       '&payerAccount=' + deliveryModelData['account'] +
       '&logisticsCompany=' + deliveryModelData['logisticsCompany'] +
-      '&logisticsNumber=' + deliveryModelData['logisticsNumber']+
-      '&payee=' + deliveryModelData['accountHolder']+
-      '&payeeBank=' + deliveryModelData['bankAccount']+
-      '&payeeAccount=' + deliveryModelData['account']+
+      '&logisticsNumber=' + deliveryModelData['logisticsNumber'] +
+      '&payee=' + deliveryModelData['accountHolder'] +
+      '&payeeBank=' + deliveryModelData['bankAccount'] +
+      '&payeeAccount=' + deliveryModelData['account'] +
       '&realPrice=' + deliveryModelData['price'];
 
+    this.isContent = !this.isContent
     this.Provider.getMamenSwiperData(projectStageDetailUrl).subscribe(res => {
       if (res.code == 200) {
         //alert('操作功能！');
         this.navCtrl.pop();
         // this.isSubmit = true
-      } else if (res.code == 207) {
-        window.localStorage.removeItem('openId');
       } else {
-        alert('请求出错:' + res.msg);
+        this.isFailed = true
+        //alert('请求出错:' + res.msg);
       }
     }, error => {
       console.log('erros===', error);
