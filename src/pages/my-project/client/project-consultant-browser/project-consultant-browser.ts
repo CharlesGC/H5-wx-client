@@ -1,15 +1,16 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { MamenDataProvider } from '../../../../providers/mamen-data/mamen-data';
-import { getAdviserDetailUrl, getApplicationDeatilUrl, changeApplicationStatusUrl } from '../../../../providers/requestUrl';
+import { getAdviserDetailUrl, getApplicationDeatilUrl, changeApplicationStatusUrl, getAttentionUserInfo, hideAttentionMenuUrl } from '../../../../providers/requestUrl';
 import { ProjectEditStep1Page } from '../project-edit-step1/project-edit-step1';
+import { HttpClient, HttpParams } from '@angular/common/http';
 /**
  * Generated class for the ProjectConsultantBrowserPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
-
+declare var wx: any;
 @IonicPage()
 @Component({
   selector: 'page-project-consultant-browser',
@@ -25,8 +26,9 @@ export class ProjectConsultantBrowserPage {
   public isTipPrompt = false
   public tiptext: any
   public isFailed: any
-  public type :any
-  constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider) {
+  public type: any;
+  public attstate: any;
+  constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider, private http: HttpClient) {
     this.Selected = 0;
   }
 
@@ -44,11 +46,38 @@ export class ProjectConsultantBrowserPage {
     }
   }
 
+  ionViewDidEnter() {
+    const openId = window.sessionStorage.getItem('openId');
+    let getAttentionUserInfoUrl = getAttentionUserInfo + '?openId=' + openId;
+    this.http.get(getAttentionUserInfoUrl).subscribe(res => {
+      this.attstate = res['data'].subscribe;
+    });
+    this.isAttention();
+  }
   /*点击选中*/
   onSelectClick(value) {
     this.Selected = value;
   }
-
+  //隐藏底部分享菜单
+  isAttention() {
+    // let url = location.href.split('#')[0]; // 当前网页的URL，不包含#及其后面部分
+    // let data = { url: url };
+    this.http.get(hideAttentionMenuUrl).subscribe(res => {
+      if (res['code'] == 200) {
+        wx.config({
+          debug: false,
+          appId: res['data'].appid,
+          timestamp: res['data'].timestamp,
+          nonceStr: res['data'].nonceStr,
+          signature: res['data'].signature,
+          jsApiList: ['showOptionMenu']
+        });
+        wx.ready(function () {
+          wx.showOptionMenu();
+        });
+      }
+    })
+  }
   getUrlParam(name) {
     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象  
     var r = window.location.search.substr(1).match(reg);  //匹配目标参数  
@@ -101,12 +130,12 @@ export class ProjectConsultantBrowserPage {
     //this.isdisabled = 'disabled'
     if (type == 3) {
       this.navCtrl.pop();
-    }else if (type == 1) {
+    } else if (type == 1) {
       this.isTipPrompt = true
       this.tiptext = '确定面试该顾问吗？'
       this.type = 1
       return
-    }else if(type == 4){
+    } else if (type == 4) {
       this.isTipPrompt = true
       this.tiptext = '确定该顾问为方案候选人吗？'
       this.type = 4
@@ -115,10 +144,10 @@ export class ProjectConsultantBrowserPage {
   }
 
   sureTipPrompt() {
-    if(this.isFailed == false){
+    if (this.isFailed == false) {
       this.navCtrl.pop()
       this.isTipPrompt = !this.isTipPrompt
-    }else if(this.isFailed == true){
+    } else if (this.isFailed == true) {
       this.isTipPrompt = !this.isTipPrompt
       return
     }
@@ -128,7 +157,7 @@ export class ProjectConsultantBrowserPage {
       if (res.code == 200) {
         //this.tiptext = '操作成功'
         //this.isFailed = false
-        this.isTipPrompt =!this.isTipPrompt
+        this.isTipPrompt = !this.isTipPrompt
         //this.isdisabled = ''
         this.navCtrl.pop()
       } else {
@@ -140,8 +169,8 @@ export class ProjectConsultantBrowserPage {
       console.log('erros===', error);
     })
   }
-  onReturnBack(){
-    this.isTipPrompt =!this.isTipPrompt
+  onReturnBack() {
+    this.isTipPrompt = !this.isTipPrompt
     this.isdisabled = ''
     return
   }

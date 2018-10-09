@@ -12,8 +12,8 @@ import { ProjectEditStep1Page } from '../project-edit-step1/project-edit-step1';
 import { ApplicationProjectPage } from '../../application-project/application-project';
 import { PorjectEvalutionPage } from '../../porject-evalution/porject-evalution';
 import { getProjectDetailUrl, releaseProjectUrl, getProjectSignUpAdviserCountUrl,
-  getProjectProgramCountUrl,getProjectStageCountUrl,getProjectDocumentCountUrl } from '../../../../providers/requestUrl';
-
+  getProjectProgramCountUrl,getProjectStageCountUrl,getProjectDocumentCountUrl,hideAttentionMenuUrl,getAttentionUserInfo} from '../../../../providers/requestUrl';
+  import { HttpClient, HttpParams } from '@angular/common/http';
 
 /**
  * Generated class for the ProjectBrowserPage page.
@@ -21,7 +21,7 @@ import { getProjectDetailUrl, releaseProjectUrl, getProjectSignUpAdviserCountUrl
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
-
+declare var wx: any;
 @IonicPage()
 @Component({
   selector: 'page-project-browser',
@@ -44,7 +44,8 @@ export class ProjectBrowserPage {
   public isSuccess = false
   public isFailed = false
   public isConsultantListShow = false;
-  constructor(public navCtrl: NavController, public navParams: NavParams,private Provider:MamenDataProvider) {
+  public attstate:any;
+  constructor(public navCtrl: NavController, public navParams: NavParams,private Provider:MamenDataProvider,private http:HttpClient) {
   }
 
   ionViewDidLoad() {
@@ -65,8 +66,35 @@ export class ProjectBrowserPage {
     let data = this.navParams.get('data')
     this.getProjectListData(data.pid);
     this.getProjectSignCount(data.pid);
+    const openId = window.sessionStorage.getItem('openId');
+    let getAttentionUserInfoUrl = getAttentionUserInfo + '?openId=' + openId;
+    //console.log(getAttentionUserInfo)
+    this.http.get(getAttentionUserInfoUrl).subscribe(res => {
+      this.attstate = res['data'].subscribe;
+      //console.log(res,'ccc')
+    });
+    this.isAttention();
   }
-
+//隐藏底部分享菜单
+  isAttention() {
+    // let url = location.href.split('#')[0]; // 当前网页的URL，不包含#及其后面部分
+    // let data = { url: url };
+    this.http.get(hideAttentionMenuUrl).subscribe(res => {
+      if (res['code'] == 200) {
+        wx.config({
+          debug: false,
+          appId: res['data'].appid,
+          timestamp: res['data'].timestamp,
+          nonceStr: res['data'].nonceStr,
+          signature: res['data'].signature,
+          jsApiList: ['showOptionMenu']
+        });
+        wx.ready(function () {
+          wx.showOptionMenu();
+        });
+      }
+    })
+  }
   /*点击展开、收起*/
   onNavMenuClick(value) {
     console.log(value,'value');

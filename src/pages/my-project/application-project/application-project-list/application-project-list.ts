@@ -35,6 +35,9 @@ export class ApplicationProjectListPage {
     callback(this.list)
     this.navCtrl.pop()
   }
+  onDelItem(value){
+    this.list.splice(value,1)
+  }
   /* 根据url来判断文件类型 */
   formatTypes(value) {
     if(!value) return '';
