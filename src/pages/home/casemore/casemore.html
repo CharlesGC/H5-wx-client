@@ -13,7 +13,7 @@
 </ion-header>
 
 
-<ion-content>
+<ion-content style="background:#fcfcfc">
   <ion-card>
     <img src="../../../assets/imgs/bitmap1.png" />
     <ion-card-content>
@@ -101,4 +101,6 @@
       <div class="content-bottom">麦盟影响力，您的竞争力</div>
     </ion-card-content>
   </ion-card>
+  <div style="height:66px;"></div>
 </ion-content>
+<attention-tip *ngIf='attstate == 0'></attention-tip>

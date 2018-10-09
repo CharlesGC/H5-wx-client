@@ -3,7 +3,9 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { MamenDataProvider } from '../../../providers/mamen-data/mamen-data';
 import { getindustryUrl, getskillUrl, getskilltwoUrl, getSearch, getfinanceAllUrl, getfinanceUrl, getoutstandingUrl } from '../../../providers/dataUrl';
 import { ProjectConsultantBrowserPage } from '../../my-project/client/project-consultant-browser/project-consultant-browser';
-
+import { hideAttentionMenuUrl,getAttentionUserInfo } from '../../../providers/requestUrl'
+import { HttpClient, HttpParams } from '@angular/common/http';
+declare var wx: any;
 @IonicPage()
 @Component({
   selector: 'page-industrydetial',
@@ -36,11 +38,12 @@ export class IndustrydetialPage {
   public name: any;
   public financeAllArr = [];
   public BlurInput:any;
+  public attstate:boolean;
   // public bottom = '11110'
   constructor(public navCtrl: NavController, public navParams: NavParams, public IndustryMoreData: MamenDataProvider,
     public SkillLabelMoreData: MamenDataProvider,
     public Skilltwolabel: MamenDataProvider, public IndustrySearch: MamenDataProvider,
-    public financedata: MamenDataProvider) {
+    public financedata: MamenDataProvider,private http: HttpClient) {
   }
   ionViewDidLoad() {
     //this.doRefresh('');
@@ -65,6 +68,15 @@ export class IndustrydetialPage {
     } else if (this.type == 'indeustryOutstand') {
       this.getoutstandingInfo();
     }
+  }
+
+  ionViewDidEnter(){
+    const openId = window.sessionStorage.getItem('openId');
+    let getAttentionUserInfoUrl = getAttentionUserInfo + '?openId=' + openId;
+    this.http.get(getAttentionUserInfoUrl).subscribe(res=>{
+      this.attstate = res['data'].subscribe;
+    });
+    this.isAttention();
   }
   // 行业更多数据
   // getLabelMore(industryType, pageNum, pageSize) {
@@ -260,5 +272,25 @@ export class IndustrydetialPage {
       //toast提示
       //alert("加载成功");
     }, 2000);
+  }
+  //隐藏底部分享菜单
+  isAttention() {
+    // let url = location.href.split('#')[0]; // 当前网页的URL，不包含#及其后面部分
+    // let data = { url: url };
+    this.http.get(hideAttentionMenuUrl).subscribe(res => {
+      if (res['code'] == 200) {
+        wx.config({
+          debug: false,
+          appId: res['data'].appid,
+          timestamp: res['data'].timestamp,
+          nonceStr: res['data'].nonceStr,
+          signature: res['data'].signature,
+          jsApiList: ['showOptionMenu']
+        });
+        wx.ready(function () {
+          wx.showOptionMenu();
+        });
+      }
+    })
   }
 }

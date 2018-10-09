@@ -14,10 +14,9 @@ import { CasemorePage } from "./casemore/casemore";
 // import { ViewChild } from '@angular/core';
 
 // import { Slides } from 'ionic-angular';
-declare var wx: any;
 import { getswipreUrl, getindustryUrl, getskillUrl, getcaseUrl, getoutstandingUrl, getfinanceUrl, getfinanceAllUrl } from '../../providers/dataUrl';
-import { hideAttentionMenuUrl } from '../../providers/requestUrl'
-
+import {hideAttentionMenuUrl, getAttentionUserInfo } from '../../providers/requestUrl'
+declare var wx: any;
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -36,7 +35,8 @@ export class HomePage {
   public financeAllArrlength: any;
   public pepperoni: boolean;
   public sausage: boolean;
-  public mushrooms: boolean;
+  public mushrooms: boolean; 
+  public attstate:any;
 
   constructor(public navCtrl: NavController, private swiperdata: MamenDataProvider, private industrydata: MamenDataProvider, private http: HttpClient,
     private skilldata: MamenDataProvider, private casedata: MamenDataProvider, private outstanddata: MamenDataProvider, private financedata: MamenDataProvider, private financeAlldata: MamenDataProvider) {
@@ -50,7 +50,6 @@ export class HomePage {
     this.getoutstandingInfo();
     this.getfinanceInfo();
     this.getfinanceAllInfo();
-    this.isAttention()
   }
   //  轮播图数据
   getswiperInfo() {
@@ -177,6 +176,11 @@ export class HomePage {
     } else {
 
     }
+    let getAttentionUserInfoUrl = getAttentionUserInfo + '?openId=' + openId;
+    this.http.get(getAttentionUserInfoUrl).subscribe(res=>{
+      this.attstate = res['data'].subscribe;
+    });
+    this.isAttention();
   }
   //行业详情
   // goToOtherPage(value, index, type) {
@@ -253,11 +257,10 @@ export class HomePage {
   goCasemorePage() {
     this.navCtrl.push(CasemorePage);
   }
-
   //隐藏底部分享菜单
   isAttention() {
-    let url = location.href.split('#')[0]; // 当前网页的URL，不包含#及其后面部分
-    let data = { url: url };
+    // let url = location.href.split('#')[0]; // 当前网页的URL，不包含#及其后面部分
+    // let data = { url: url };
     this.http.get(hideAttentionMenuUrl).subscribe(res => {
       if (res['code'] == 200) {
         wx.config({
@@ -266,10 +269,10 @@ export class HomePage {
           timestamp: res['data'].timestamp,
           nonceStr: res['data'].nonceStr,
           signature: res['data'].signature,
-          jsApiList: ['hideOptionMenu']
+          jsApiList: ['showOptionMenu']
         });
         wx.ready(function () {
-          wx.hideOptionMenu();
+          wx.showOptionMenu();
         });
       }
     })

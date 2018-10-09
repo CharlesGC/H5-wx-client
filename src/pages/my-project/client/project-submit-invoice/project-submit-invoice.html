@@ -13,7 +13,7 @@
 </ion-header>
 
 <ion-content style="background-color: #fcfcfc;">
-  <ion-list class="browser-top">
+  <!-- <ion-list class="browser-top">
     <h4>节水系统问题诊断与提升优化</h4>
     <p class="browser-top-p mt15">
       <ion-icon name="ios-paper-outline" class="mr3"></ion-icon>
@@ -21,6 +21,16 @@
       <span>2018-06-05</span>
       <span> 至 </span>
       <span>2018-07-08</span>
+    </p>
+  </ion-list> -->
+  <ion-list class="browser-top">
+    <h4>{{stageData.stageName}}</h4>
+    <p class="browser-top-p mt15">
+      <ion-icon name="ios-paper-outline" class="mr3"></ion-icon>
+      <span>阶段周期</span>
+      <span>{{stageData.startTime | date: 'yyyy-MM-dd'}}</span>
+      <span> 至 </span>
+      <span>{{stageData.endTime | date: 'yyyy-MM-dd'}}</span>
     </p>
   </ion-list>
   <p class="browser-file">请选择发票类型</p>
@@ -143,7 +153,7 @@
     </ion-list>
   </div>
   <div style="height:100px;"></div>
-  <button ion-button expand="full" large class="fixed-bottom" (click)="goInvoiceSubmit()">提交</button>
+  <button ion-button expand="full" large class="fixed-bottom" (click)="sureSubmit()">提交</button>
 </ion-content>
 
 <div class="phonebind-modal" [hidden]="!isComplete">
@@ -160,6 +170,60 @@
       <div class="modal-footer">
         <button ion-button full large (click)="sureComplete()">确定</button>
         <!-- <button ion-button full large (click)="onCompanyDel()" class="btn-delete">返回</button> -->
+      </div>
+    </div>
+  </div>
+</div>
+<div class="phonebind-modal" [hidden]="!isSubmit">
+  <div class="modal-bg"></div>
+  <div class="modal-box">
+    <div class="modal-top">
+      <div class="modal-top-close">
+        <!-- <ion-icon ios="ios-close" md="md-close" item-rigth (click)="onClose()" color=""></ion-icon> -->
+      </div>
+      <div class="modal-title">提示</div>
+      <div class="modal-content">
+        <p>确认提交该发票信息吗？</p>
+      </div>
+      <div class="modal-footer">
+        <button ion-button full large (click)="goInvoiceSubmit()">确定</button>
+        <button ion-button full large (click)="onReturnBack()" class="btn-delete">返回</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="phonebind-modal" [hidden]="!isFailed">
+  <div class="modal-bg"></div>
+  <div class="modal-box">
+    <div class="modal-top">
+      <div class="modal-top-close">
+        <!-- <ion-icon ios="ios-close" md="md-close" item-rigth (click)="onClose()" color=""></ion-icon> -->
+      </div>
+      <div class="modal-title">提示</div>
+      <div class="modal-content">
+        <p>提交失败，请稍后重试。</p>
+      </div>
+      <div class="modal-footer">
+        <button ion-button full large (click)="sureFailed()">确定</button>
+        <!-- <button ion-button full large (click)="onReturnBack()" class="btn-delete">返回</button> -->
+      </div>
+    </div>
+  </div>
+</div>
+<div class="phonebind-modal" [hidden]="!isSpecialInvoice">
+  <div class="modal-bg"></div>
+  <div class="modal-box">
+    <div class="modal-top">
+      <div class="modal-top-close">
+        <!-- <ion-icon ios="ios-close" md="md-close" item-rigth (click)="onClose()" color=""></ion-icon> -->
+      </div>
+      <div class="modal-title">提示</div>
+      <div class="modal-content">
+        <p>您若要选择增值税专用发票。则请前往个人中心将该公司下的发票信息补充完整。</p>
+      </div>
+      <div class="modal-footer">
+        <button ion-button full large (click)="sureSpecialInvoice()">前往个人中心</button>
+        <button ion-button full large (click)="onGeneralinvoice()" class="btn-delete">返回</button>
       </div>
     </div>
   </div>

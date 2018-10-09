@@ -84,7 +84,7 @@ export class ProjectStageBrowserPage {
   }
   sureTipsPrompt(){
     this.isTipsPrompt = true
-    this.tipstext = `确认该阶段吗？<br>确认该阶段后，请返回到阶段列表进行付款操作。`
+    this.tipstext = '确认该阶段吗？确认该阶段后，请返回到阶段列表进行付款操作，并添加支付记录。'
   }
   onReturnBack(){
     this.isTipsPrompt = !this.isTipsPrompt

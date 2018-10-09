@@ -156,7 +156,7 @@ public isFaild :any
   }
   sureTipPrompt(){
     this.isTipPrompt = true
-    this.tiptext = '确认该阶段吗？'
+    this.tiptext = '确认阶段吗？'
     return
   }
   onReturnBack(){

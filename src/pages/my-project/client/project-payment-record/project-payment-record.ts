@@ -93,9 +93,9 @@ export class ProjectPaymentRecordPage {
   setuploadfile = (obj, name) => {
     this.filestatus = true;
     this.filetitle = name;
-    console.log(obj)
-    var a = obj.fileSize / 1048576;
-    this.filesize = a.toPrecision(3);
+    //console.log(obj)
+    // var a = obj.fileSize / 1048576;
+    this.filesize = (obj.fileSize / 1048576).toPrecision(3);
     this.fileurl = obj.url;
     this.paymentRecordData['sourceName'] = this.filetitle
     this.paymentRecordData['size'] = this.filesize
@@ -248,6 +248,7 @@ export class ProjectPaymentRecordPage {
     this.Provider.getMamenSwiperData(projectInvoiceDetailUrl).subscribe(res => {
       if (res.code == 200) {
         console.log(res, '--------');
+        this.isCompleteRecord =!this.isCompleteRecord
         this.paymentRecordData = res.data || {};
         this.navCtrl.pop();
       } else {

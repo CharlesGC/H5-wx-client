@@ -169,6 +169,7 @@ page-consultant-interaction-submit {
                     line-height: 20px;
                     color: #4a4a4a;
                     white-space: normal;
+                    position: relative;
                     h5 {
                         font-family: PingFangSC;
                         font-size: 1.6rem;
@@ -188,8 +189,10 @@ page-consultant-interaction-submit {
                         letter-spacing: 0.2px;
                     }
                     .browser-size {
+                        position: absolute;
+                        bottom: 2px;
                         font-size: 1.2rem;
-                        margin-top: 10px;
+                        // margin-top: 10px;
                     }
                 }
             }

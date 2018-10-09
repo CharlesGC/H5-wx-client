@@ -14,7 +14,7 @@
 
 
 <ion-content>
-  <div class="bg clearfix mt20" *ngFor="let item of list">
+  <div class="bg clearfix mt20" *ngFor="let item of list;let i = index">
     <img style="width:66px;height:66px;" src="assets/imgs/doc.png" *ngIf="formatTypes(item.type) == 'doc'">
     <img style="width:66px;height:66px;" src="assets/imgs/ppt.png" *ngIf="formatTypes(item.type) == 'ppt'">
     <img style="width:66px;height:66px;" src="assets/imgs/xls.png" *ngIf="formatTypes(item.type) == 'xls'">
@@ -24,6 +24,7 @@
     <!-- <span class="file-desc">点击查看文件预览</span> -->
     <span class="file-size">{{(item.size / 1048576).toPrecision(3) > 1?(item.size / 1048576).toPrecision(3) + '
       MB':(item.size / 1048576).toPrecision(3)*1024+' KB'}}</span>
+    <ion-icon class="deletefile" name="md-close" item-end color="ion-gray" (click)="onDelItem(i)"></ion-icon>
   </div>
   <button ion-button round class="btn-upload" (click)="gouploadfile('projectfilelist')">
     上传附件
