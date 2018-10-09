@@ -240,7 +240,7 @@ export class FormEditPage {
       // console.log(inValue,'未开始时')
       // var reg=new RegExp("\n","g"); //new RegExp("\r\n","g")
       // inValue= inValue.replace(reg,"<br>"); 
-      // inValue=inValue.replaceAll("<br>", "\n");
+      // // inValue=inValue.replaceAll("<br>", "\n");
       // console.log(inValue,'转换后开始时')
       value = inValue;
     }else if (this.fieldType == 'province-city') {

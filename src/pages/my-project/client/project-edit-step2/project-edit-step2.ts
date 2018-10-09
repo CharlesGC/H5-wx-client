@@ -87,7 +87,7 @@ export class ProjectEditStep2Page {
   sureSubmit() {
     this.isSubmit = !this.isSubmit
     if(this.gotype == 1){
-      this.navCtrl.push(ProjectBrowserPage);
+      // this.navCtrl.push(ProjectBrowserPage);
     }else{
       this.navCtrl.push(ProjectListPage);
     }

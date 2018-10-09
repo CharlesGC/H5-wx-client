@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-an
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
 import { File } from '@ionic-native/file';
+import { DomSanitizer } from '@angular/platform-browser';
 
 import { MamenDataProvider } from '../../../../providers/mamen-data/mamen-data';
 
@@ -35,9 +36,15 @@ export class ConsultantBasicPage {
   public format: boolean;
   public isDelete = false;
   public arid:any;
-  constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider, public loadingCtrl: LoadingController, private camera: Camera,
+  constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider, 
+    public loadingCtrl: LoadingController, private camera: Camera,public sanitizer:DomSanitizer,
     private transfer: FileTransfer, private file: File, ) {
     this.consultantBasicData = {};
+  }
+
+  /*转换html标签处理*/
+  assembleHTML(strHTML:any){
+    return this.sanitizer.bypassSecurityTrustHtml(strHTML);
   }
 
   ionViewDidLoad() {
