@@ -32,10 +32,10 @@ export class ProjectTimeSelectPage {
   public isBudgetDays = false
   public isBudgetPrice = false
   public isNoLanguage = false
-  public isCoins1 = true;
-  public isCoins2 = true;
-  public isCard1 = true;
-  public isCard2 = true;
+  // public isCoins1 = true;
+  // public isCoins2 = true;
+  // public isCard1 = true;
+  // public isCard2 = true;
   customPopoverOptions: any = {
     header: 'Hair Color',
     subHeader: 'Select your hair color',
@@ -121,17 +121,17 @@ export class ProjectTimeSelectPage {
       this.budgetData.budgetDay = null;
       this.budgetData.budget = (this.budgetData.workload || 0) * (this.budgetData.budgetDay || 0);
       this.budgetData.workload = null;
-      this.isCoins2 = false;
-      this.isCoins1 = true;
-      this.isCard1 = true;
-      this.isCard2 = false;
+      // this.isCoins1 = true;
+      // this.isCoins2 = false;
+      // this.isCard1 = true;
+      // this.isCard2 = false;
     } else {
       // this.budgetData.budget = this.budgetData.budget;
       this.budgetData.budget = null;
-      this.isCoins2 = true;
-      this.isCoins1 = false;
-      this.isCard1 = false;
-      this.isCard2 = true;
+      // this.isCoins1 = false;
+      // this.isCoins2 = true;
+      // this.isCard1 = false;
+      // this.isCard2 = true;
     }
   }
 

@@ -110,6 +110,7 @@ export class HomePage {
           title: '行业翘楚',
           data: res.data
         };
+        console.log(this.outstandingArr.data,"111111111111111111")
       }, error => {
         console.log(error);
       }
@@ -206,7 +207,7 @@ export class HomePage {
   outstanding(value, index, type) {
     this.navCtrl.push(IndustrydetialPage, {
       // type: 'indeustryOutstand'
-      type: type
+      type: type 
     });
   }
   // 财务审计

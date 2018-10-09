@@ -296,36 +296,38 @@ page-speed {
                     }
                 }
                 .item-import {
-                    width: 42%;
+                    width: 40%;
                     height: 155px;
-                    margin-right: 7px;
+                    margin-right: 10px;
                     box-shadow: 0 1px 10px 0 rgba(0, 0, 0, 0.05);
                     .item-ios {
                         padding-left: 10px;
                     }
                     .icon-shape {
-                        width: 22px;
+                        // width: 22px;
                         height: 33px;
                         object-fit: contain;
                         color: #ff6536;
                         text-align: center;
-                        margin-top: 48px;
+                        // padding: 40px 20px 40px 40px;
+                        padding: 40px;
                         ion-icon {
                             font-size: 30px !important;
-                            margin-left: 55px;
+                            // margin-left: 55px;
+                            // padding: 0 40px;
                         }
                     }
                     .Lonespeech {
-                        width: 90.8px;
+                        // width: 90.8px;
                         height: 17px;
                         font-family: PingFangSC;
                         font-size: 12px;
-                        font-weight: 600;
+                        font-weight: 700;
                         letter-spacing: 0.2px;
                         text-align: center;
                         color: #505050;
-                        padding: 0 15px 0 35px;
-                        margin-top: 15px;
+                        // padding: 15px 20px 15px 20px;
+                        padding: 15px 0;
                     }
                 }
             }

@@ -319,15 +319,15 @@ page-home {
                     padding-bottom: 5px;
                     // padding-bottom: 25px;
                     .qu_list {
-                        width: 15.5rem;
+                        width: 186px;
                         list-style: none;
-                        margin-right: .9rem;
+                        margin-right: 20px;
                         height: 25rem;
                         border-radius: 3px;
-                        box-shadow: 0 1px 10px 0 rgba(0, 0, 0, 0.05);
+                        box-shadow: 3px 1px 10px 2px rgba(0, 0, 0, 0.05);
                         .text_box {
                             // position: relative;  
-                            width: 100%;
+                            width: 186px;
                             height: 100%;
                             border-radius: 3px;
                             background-color: #ffffff;
@@ -337,10 +337,9 @@ page-home {
                             align-items: flex-start;
                             margin-left: 5px;
                             .celebrity-img {
-                                width: 100%;
-                                height: 12.084rem;
-                                border-radius: 3px;
-                                background-color: #d8d8d8;
+                                width: 95px;
+                                height: 95px;
+                                margin: 25px auto;
                                 .img {
                                     width: 100%;
                                     height: 100%;
@@ -356,48 +355,46 @@ page-home {
                                 // }
                             }
                             .text_labar {
-                                width: 150px;
+                                // width: 150px;
                                 display: flex;
                                 flex: row;
                                 margin-top: 10px;
-                                margin: 10px 20px 0 20px;
-                                
+                                margin: 10px 20px 0 10px;
                                 .adviserName {
-                                    overflow: hidden;
-                                    text-overflow: ellipsis;
-                                    white-space: nowrap; 
+                                    // overflow: hidden;
+                                    // text-overflow: ellipsis;
+                                    // white-space: nowrap; 
                                     text-align: left;
-                                }
-                                span {
                                     display: block;
-                                    width: 49px;
-                                    height: 18px;
+                                    width:90px;
+                                    // height: 18px;
                                     font-family: PingFangSC;
-                                    font-size: 16px;
+                                    font-size: 14px;
                                     font-weight: 600;
                                     line-height: 1.13;
                                     color: #4a4a4a;
                                 }
                                 .text_content {
-                                    width: 70px;
+                                    width: 65px;
                                     height: 17px;
-                                    margin: 0px 20px 0 10px;
+                                    margin: 0px 20px 0 5px;
                                     padding: 0;
                                     .text_list {
-                                        width: 100%;
+                                        // width: 100%;
                                         list-style: none;
-                                        span {  
+                                        .alName {  
                                             display: block;  
-                                            width: 100%;                                  
+                                            width: 72px;                                 
                                             font-family: PingFangSC;
-                                            font-size: 12px;
+                                            font-size: 10px;
                                             font-weight: 500;
                                             color: #ff6537;
-                                            margin-top: 3px;
+                                            // margin-top: 3px;
                                             // margin-left: -10px;
-                                            overflow: hidden;
-                                            text-overflow:ellipsis;
-                                            white-space: nowrap;
+                                            // overflow: hidden;
+                                            // text-overflow:ellipsis;
+                                            // white-space: nowrap;
+                                            transform: scale(0.875)
                                         }
                                     }
                                    
@@ -410,17 +407,17 @@ page-home {
                                 font-family: PingFangSC;
                                 font-size: 12px;
                                 color: #4a4a4a;
-                                margin: 10px 20px 10px 20px;
+                                margin: 10px 20px 10px 10px;
                                 
                             }
                             .qiaochu-duc {                               
-                                font-size: 14px;
-                                width:112px;
+                                font-size: 12px;
+                                width:146px;
                                 height: auto;
                                 font-family: PingFangSC;
                                 text-align: justify;
                                 color: #4a4a4a;
-                                margin: 0 20px;
+                                margin: 0 10px;
                                 display:-webkit-box;
                                 -webkit-line-clamp:3;
                                 -webkit-box-orient:vertical;
@@ -511,17 +508,21 @@ page-home {
                     border-radius: 50%;
                    } 
                    p {
-                    width: 55px;
-                    height: 22px;
+                    width: 60px;
+                    height: 36px;
                     font-family: PingFangSC;
-                    font-size: 16px;
+                    font-size: 14px;
                     font-weight: 600;
                     text-align: center;
                     color: #4a4a4a;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                    white-space: nowrap; 
-                    margin-top: 15px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    // overflow: hidden;
+                    // text-overflow: ellipsis;
+                    // white-space: nowrap; 
+                    word-break : break-all;
+                    margin-top: 5px;
                    }
                 }
                 .contant-item-right {
@@ -766,28 +767,39 @@ page-home {
         .contant-item {
             display: flex;
             .contant-item-left{
-               .item-img {
-                width: 55px;
-                height: 55px;
-                border-radius: 50%;
-               } 
+                .img-center {
+                    width: 56px;
+                    height: 56px;
+                    text-align:center;
+                    vertical-align:middle;
+                    overflow:hidden ;
+                }
+            //    .item-img {
+            //     width: 55px;
+            //     height: 55px;
+            //     border-radius: 50%;
+            //    } 
                p {
-                width: 55px;
-                height: 22px;
-                font-family: PingFangSC;
-                font-size: 16px;
+                width: 60px;
+                height: 36px;
+                font-family: Arial;
+                font-size: 14px;
                 font-weight: 600;
                 text-align: center;
                 color: #4a4a4a;
-                overflow: hidden;
-                text-overflow: ellipsis;
-                white-space: nowrap; 
-                text-align: center;
-                margin-top: 15px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                // overflow: hidden;
+                // text-overflow: ellipsis;
+                // white-space: nowrap; 
+                // text-align: center;
+                word-break:break-all;
+                margin-top: 5px;
                }
             }
             .contant-item-right {
-                margin-left: -15px;
+                // margin-left: -15px;
                 p:nth-child(1) {
                     width: 265px;
                     // height: 36px;

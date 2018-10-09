@@ -205,14 +205,14 @@
         <div *ngIf="selected == 1 || selected == 0">
             <div class="item-card">
                 <div class="item-card-left" [ngClass]="{'checked':selected == 0}" (click)="onSelectedClick(0)">
-                    <img src="../../../assets/imgs/coins-1.png" alt="" [hidden]="isCoins1">
-                    <img src="../../../assets/imgs/coins-2.png" alt="" [hidden]="isCoins2">
+                    <img src="../../../assets/imgs/coins-1.png" alt="" *ngIf="selected == 1">
+                    <img src="../../../assets/imgs/coins-2.png" alt="" *ngIf="selected == 0">
                     <!-- <ion-icon class="color-f46f46" name="checkmark-circle"></ion-icon> -->
                     <h4>日薪结算</h4>
                 </div>
                 <div class="item-card-left" [ngClass]="{'checked':selected == 1}" (click)="onSelectedClick(1)">
-                    <img src="../../../assets/imgs/credit-card-1.png" alt="" [hidden]="isCard1">
-                    <img src="../../../assets/imgs/credit-card-2.png" alt="" [hidden]="isCard2">
+                    <img src="../../../assets/imgs/credit-card-1.png" alt="" *ngIf="selected == 1">
+                    <img src="../../../assets/imgs/credit-card-2.png" alt="" *ngIf="selected == 0">
                     <!-- <ion-icon class="color-f46f46" name="checkmark-circle"></ion-icon> -->
                     <h4>固定单价</h4>
                 </div>

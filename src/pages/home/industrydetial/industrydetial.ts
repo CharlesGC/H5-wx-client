@@ -128,7 +128,7 @@ export class IndustrydetialPage {
   getfinanceAllInfo() {
     this.financedata.getindustryAllData(getfinanceAllUrl, 1, 1, 999).subscribe(
       res => {
-        this.financeAllArr = res.data;
+        this.financeAllArr = res.data; 
       }, error => {
         console.log(error);
       }
@@ -252,7 +252,7 @@ export class IndustrydetialPage {
     const user = window.sessionStorage.getItem('user') ? JSON.parse(window.sessionStorage.getItem('user')) : {};
     this.navCtrl.push(ProjectConsultantBrowserPage, { uid: value.uid, type: 'homepage', userType: user.type });
   }
-  //下拉刷型界面
+  //下拉刷新界面
   doRefresh(refresher) {
     setTimeout(() => {
       console.log('加载完成后，关闭刷新');
@@ -261,4 +261,28 @@ export class IndustrydetialPage {
       //alert("加载成功");
     }, 2000);
   }
+  // 上拉加载
+  // loadMore(loadEvent){
+  //   let newArr = [];
+  //   this.pageNum++;
+  //   this.IndustryMoreData.getIndustryMoreData(getindustryUrl,1,this.pageNum,this.pageSize).subscribe(
+  //       res=>{
+  //         newArr = this.IndustrydetialArr.concat(res.data.list);
+  //       this.IndustrydetialArr = newArr;
+  //       setTimeout(() => {
+  //         loadEvent.complete();
+  //       }, 2000);
+  //       /*如果已经是最后一页，则禁止上拉加载*/
+  //         if( res.data.list == 0){
+  //           console.log('加载完');
+  //           this.enabled=false;
+  //         }
+  //       },error=>{
+  //         console.log(error);
+  //         this.pageNum--;
+  //         loadEvent.complete();  
+  //         console.log('加载失败');
+  //       }
+  //   )
+  // }
 }
