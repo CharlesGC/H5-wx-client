@@ -50,9 +50,6 @@ export class ConsultantProgramEditPage {
       this.programData['urlSize'] = this.programData['urlSize'] + ' MB'
     } else if (this.programData['urlSize'] < 1) {
       this.programData['urlSize'] = this.programData['urlSize'] * 1024 + ' KB'
-    } else if (this.programData['urlSize'] == 'NaN') {
-      // this.programData = {};
-      //console.log(this.programData['typeStr'])
     }
 
     if (this.programData['typeStr']) {
@@ -116,7 +113,7 @@ export class ConsultantProgramEditPage {
     } else if (types.indexOf('pdf') == 0) {
       this.filetypeicon = 'assets/imgs/' + 'pdf.png'
     }
-    this.programData['typeStr'] = this.filetypeicon
+    this.programData['format'] = this.filetypeicon;
     //console.log(this.filetypeicon)
   }
 

@@ -10,7 +10,8 @@ import { ConsultantStageListPage } from '../consultant-stage-list/consultant-sta
 import { ConsultantDocumentListPage } from '../consultant-document-list/consultant-document-list';
 import { ConsultantCollectionListPage } from '../consultant-collection-list/consultant-collection-list';
 import { PorjectEvalutionPage } from '../../porject-evalution/porject-evalution';
-import { demandDeatilUrl, ignoreProjectUrl } from '../../../../providers/requestUrl';
+import { demandDeatilUrl, ignoreProjectUrl, getAttentionUserInfo, hideAttentionMenuUrl } from '../../../../providers/requestUrl';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { ConsultantProjectListPage } from '../consultant-project-list/consultant-project-list';
 
 /**
@@ -19,7 +20,7 @@ import { ConsultantProjectListPage } from '../consultant-project-list/consultant
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
-
+declare var wx: any;
 @IonicPage()
 @Component({
   selector: 'page-consultant-project-browser',
@@ -50,8 +51,8 @@ export class ConsultantProjectBrowserPage {
     { name: 'navMenu1', isShow: true }
   ];
   public isApply = false;
-  constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider, public platform: Platform, 
-    private app: App, public modalCtrl: ModalController,public sanitizer:DomSanitizer) {
+  public attstate: any
+  constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider, public platform: Platform, private app: App, public modalCtrl: ModalController, private http: HttpClient,public sanitizer:DomSanitizer) {
 
     // this.initializeApp();
 
@@ -100,8 +101,34 @@ export class ConsultantProjectBrowserPage {
     let data = this.navParams.get('data')
     this.getProjectListData(data.pid);
     window.sessionStorage.setItem('pid', data.pid || 0);
-
-
+    const openId = window.sessionStorage.getItem('openId');
+    let getAttentionUserInfoUrl = getAttentionUserInfo + '?openId=' + openId;
+    //console.log(getAttentionUserInfo)
+    this.http.get(getAttentionUserInfoUrl).subscribe(res => {
+      this.attstate = res['data'].subscribe;
+      //console.log(res,'ccc')
+    });
+    this.isAttention();
+  }
+  //隐藏底部分享菜单
+  isAttention() {
+    // let url = location.href.split('#')[0]; // 当前网页的URL，不包含#及其后面部分
+    // let data = { url: url };
+    this.http.get(hideAttentionMenuUrl).subscribe(res => {
+      if (res['code'] == 200) {
+        wx.config({
+          debug: false,
+          appId: res['data'].appid,
+          timestamp: res['data'].timestamp,
+          nonceStr: res['data'].nonceStr,
+          signature: res['data'].signature,
+          jsApiList: ['showOptionMenu']
+        });
+        wx.ready(function () {
+          wx.showOptionMenu();
+        });
+      }
+    })
   }
   /*点击展开、收起*/
   onNavMenuClick(value) {
@@ -127,21 +154,21 @@ export class ConsultantProjectBrowserPage {
     } else if (type == 2) {
       // this.projectDetails['appStatus'] != 0 && this.projectDetails['appStatus'] != 1 &&
       //   this.projectDetails['appStatus'] != 2 && this.projectDetails['appStatus'] != 3 &&
-        this.navCtrl.push(ConsultantProgramListPage, { pid: this.projectDetails['pid'], status: status || '', data: this.projectDetails });
+      this.navCtrl.push(ConsultantProgramListPage, { pid: this.projectDetails['pid'], status: status || '', data: this.projectDetails });
     } else if (type == 3) {
-        this.navCtrl.push(ConsultantStageListPage, {
-          pid: this.projectDetails['pid'], status: status, projectType: this.projectDetails['appStatus'],
-          programPrice: this.projectDetails['finalPrice'], data: this.projectDetails
-        });
+      this.navCtrl.push(ConsultantStageListPage, {
+        pid: this.projectDetails['pid'], status: status, projectType: this.projectDetails['appStatus'],
+        programPrice: this.projectDetails['finalPrice'], data: this.projectDetails
+      });
     } else if (type == 4) {
       // this.projectDetails['appStatus'] != 0 && this.projectDetails['appStatus'] != 1 &&
       //   this.projectDetails['appStatus'] != 2 && this.projectDetails['appStatus'] != 3 &&
-        this.navCtrl.push(ConsultantDocumentListPage, { pid: this.projectDetails['pid'], status: status, data: this.projectDetails });
+      this.navCtrl.push(ConsultantDocumentListPage, { pid: this.projectDetails['pid'], status: status, data: this.projectDetails });
     } else if (type == 5) {
       // this.projectDetails['appStatus'] != 6 && this.projectDetails['appStatus'] != 4 &&
       //   this.projectDetails['appStatus'] != 0 && this.projectDetails['appStatus'] != 1 &&
       //   this.projectDetails['appStatus'] != 2 && this.projectDetails['appStatus'] != 3 &&
-        this.navCtrl.push(ConsultantCollectionListPage, { pid: this.projectDetails['pid'], status: status, data: this.projectDetails });
+      this.navCtrl.push(ConsultantCollectionListPage, { pid: this.projectDetails['pid'], status: status, data: this.projectDetails });
     }
   }
 
@@ -219,7 +246,7 @@ export class ConsultantProjectBrowserPage {
   }
   /*忽略该项目*/
   onIgnoreProject(pid) {
-    if(this.isFailed == true){
+    if (this.isFailed == true) {
       this.isTipPrompt = !this.isTipPrompt
       return
     }
@@ -240,7 +267,7 @@ export class ConsultantProjectBrowserPage {
       console.log('erros===', error);
     })
   }
-  onReturnBack(){
+  onReturnBack() {
     this.isTipPrompt = !this.isTipPrompt
     return
   }

@@ -168,6 +168,7 @@ page-project-payment-record {
                     line-height: 20px;
                     color: #4a4a4a;
                     white-space: normal;
+                    position: relative;
                     h5{
                         font-family: PingFangSC;
                         font-size: 1.6rem;
@@ -187,8 +188,9 @@ page-project-payment-record {
                         letter-spacing: 0.2px;
                     }
                     .browser-size {
+                        position: absolute;
+                        bottom: 5px;
                         font-size: 1.2rem;
-                        margin-top: 10px;
                     }
                 }
             }

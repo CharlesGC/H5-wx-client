@@ -205,14 +205,14 @@
         <div *ngIf="selected == 1 || selected == 0">
             <div class="item-card">
                 <div class="item-card-left" [ngClass]="{'checked':selected == 0}" (click)="onSelectedClick(0)">
-                    <img src="../../../assets/imgs/coins-1.png" alt="" [hidden]="isCoins1">
-                    <img src="../../../assets/imgs/coins-2.png" alt="" [hidden]="isCoins2">
+                    <img src="../../../assets/imgs/coins-1.png" alt="" *ngIf="selected == 1">
+                    <img src="../../../assets/imgs/coins-2.png" alt="" *ngIf="selected == 0">
                     <!-- <ion-icon class="color-f46f46" name="checkmark-circle"></ion-icon> -->
                     <h4>日薪结算</h4>
                 </div>
                 <div class="item-card-left" [ngClass]="{'checked':selected == 1}" (click)="onSelectedClick(1)">
-                    <img src="../../../assets/imgs/credit-card-1.png" alt="" [hidden]="isCard1">
-                    <img src="../../../assets/imgs/credit-card-2.png" alt="" [hidden]="isCard2">
+                    <img src="../../../assets/imgs/credit-card-1.png" alt="" *ngIf="selected == 1">
+                    <img src="../../../assets/imgs/credit-card-2.png" alt="" *ngIf="selected == 0">
                     <!-- <ion-icon class="color-f46f46" name="checkmark-circle"></ion-icon> -->
                     <h4>固定单价</h4>
                 </div>
@@ -295,7 +295,7 @@
             </div>
             <div class="modal-title">提示</div>
             <div class="modal-content">
-                <p>预算金额和预算天数不能为空</p>
+                <p>预算金额和预算天数需要填写完整</p>
             </div>
             <div class="modal-footer">
                 <button ion-button full large (click)="sureBudgetDay()">确定</button>
@@ -353,6 +353,42 @@
             </div>
             <div class="modal-footer">
                 <button ion-button full large (click)="sureHaveLanguage()">确定</button>
+                <!-- <button ion-button full large (click)="onCompanyDel()" class="btn-delete">返回</button> -->
+            </div>
+        </div>
+    </div>
+</div>
+<div class="phonebind-modal" [hidden]="!isProjectTime">
+    <div class="modal-bg"></div>
+    <div class="modal-box">
+        <div class="modal-top">
+            <div class="modal-top-close">
+                <!-- <ion-icon ios="ios-close" md="md-close" item-rigth (click)="onClose()" color=""></ion-icon> -->
+            </div>
+            <div class="modal-title">提示</div>
+            <div class="modal-content">
+                <p>项目时长请填写两位数以内的整数</p>
+            </div>
+            <div class="modal-footer">
+                <button ion-button full large (click)="sureProjectTime()">确定</button>
+                <!-- <button ion-button full large (click)="onCompanyDel()" class="btn-delete">返回</button> -->
+            </div>
+        </div>
+    </div>
+</div>
+<div class="phonebind-modal" [hidden]="!isMaxBudget">
+    <div class="modal-bg"></div>
+    <div class="modal-box">
+        <div class="modal-top">
+            <div class="modal-top-close">
+                <!-- <ion-icon ios="ios-close" md="md-close" item-rigth (click)="onClose()" color=""></ion-icon> -->
+            </div>
+            <div class="modal-title">提示</div>
+            <div class="modal-content">
+                <p>金额最大不能超过五位整数</p>
+            </div>
+            <div class="modal-footer">
+                <button ion-button full large (click)="sureMaxBudget()">确定</button>
                 <!-- <button ion-button full large (click)="onCompanyDel()" class="btn-delete">返回</button> -->
             </div>
         </div>

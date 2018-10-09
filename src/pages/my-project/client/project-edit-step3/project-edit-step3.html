@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>项目详情编辑3</ion-title>
+    <ion-title>项目详情编辑</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -97,10 +97,7 @@
       </label>
       <p item-right class="rigth-message">
         <span item-right class="item-value line-overflow" *ngIf="projectData.budgetType == 2">待商议</span>
-        <span item-right class="item-value line-overflow" *ngIf="projectData.budgetType == 0 || projectData.budgetType == 1">{{projectData.budget
-          | currency : '￥'}}
-          元
-        </span>
+        <span item-right class="item-value line-overflow" *ngIf="projectData.budgetType == 0 || projectData.budgetType == 1">{{projectData.budget | currency : '￥'}}元</span>
         <ion-icon class="icon" name="arrow-forward"></ion-icon>
       </p>
     </ion-item>

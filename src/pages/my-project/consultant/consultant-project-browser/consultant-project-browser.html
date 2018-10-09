@@ -195,6 +195,7 @@
     <div class="mb15">
       <!-- <span class="budget-symbol">￥</span> -->
       <span class="budget-number">{{projectDetails.budget |currency: '￥'}}</span>
+      <span class="budget-number" *ngIf="!projectDetails.budget">待商议</span>
     </div>
   </ion-list>
   <ion-list class="list-item-flex mt10">
@@ -248,6 +249,7 @@
     <button ion-button class="btn-delete" (click)="sureTipPrompt()" [disabled]='isdisabled'>忽略</button>
   </div>
 </ion-content>
+<attention-tip *ngIf='attstate == 0' [bottom]='1'></attention-tip>
 <div class="phonebind-modal" [hidden]="!isTipPrompt">
   <div class="modal-bg"></div>
   <div class="modal-box">

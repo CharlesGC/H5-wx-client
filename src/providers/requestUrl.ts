@@ -316,6 +316,8 @@ export const hideAttentionMenuUrl = getAPIPath + 'wechat/wechatJsConfig';
 /** 请求申请项目附件列表 */
 export const getApplicationProjectList = getAPIPath + 'adviser/submitApplicationCase';
 
+/** 判断用户是否关注了公众号 */
+export const getAttentionUserInfo = getAPIPath + 'wechat/getUserInfo';
 
 
 

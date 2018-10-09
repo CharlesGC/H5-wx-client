@@ -81,8 +81,8 @@
             <div class="text_labar">
               <span class="adviserName">{{item.adviserName}}</span>
               <ul class="text_content">
-                <li *ngFor="let j of item.industryList.slice(0,1)" class="text_list">
-                  <span>{{j.alName || '行业'}}</span>
+                <li *ngFor="let j of item.skillList.slice(0,1)" class="text_list">
+                  <span class="alName">{{j.asName || '行业'}}</span>
                 </li>
               </ul>
             </div>
@@ -180,7 +180,9 @@
       <ion-item *ngFor="let financeAll_item of financeAllArrlength" style="white-space:normal;" (click)="financeAllList(financeAll_item,i)">
         <div class="contant-item">
           <div class="contant-item-left" item-start>
-            <img [src]="financeAll_item.avatar" class="item-img">
+            <div class="img-center">
+                <img [src]="financeAll_item.avatar" class="item-img">
+            </div>
             <p>{{financeAll_item.adviserName}}</p>
           </div>
           <div class="contant-item-right">
@@ -200,4 +202,4 @@
   </div>
   <!-- <div (click)="goProjectSpeed()" class="wwwww"></div> -->
 </ion-content>
-<attention-tip></attention-tip>
+<attention-tip *ngIf='attstate == 0'></attention-tip>

@@ -32,16 +32,14 @@ export class ProjectTimeSelectPage {
   public isBudgetDays = false
   public isBudgetPrice = false
   public isNoLanguage = false
-  public isCoins1 = true;
-  public isCoins2 = true;
-  public isCard1 = true;
-  public isCard2 = true;
+  public isMaxBudget = false
   customPopoverOptions: any = {
     header: 'Hair Color',
     subHeader: 'Select your hair color',
     message: 'Only select your dominant hair color'
   };
   public headerTitle = '信息编辑'
+  public isProjectTime = false
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
@@ -121,17 +119,17 @@ export class ProjectTimeSelectPage {
       this.budgetData.budgetDay = null;
       this.budgetData.budget = (this.budgetData.workload || 0) * (this.budgetData.budgetDay || 0);
       this.budgetData.workload = null;
-      this.isCoins2 = false;
-      this.isCoins1 = true;
-      this.isCard1 = true;
-      this.isCard2 = false;
+      // this.isCoins1 = true;
+      // this.isCoins2 = false;
+      // this.isCard1 = true;
+      // this.isCard2 = false;
     } else {
       // this.budgetData.budget = this.budgetData.budget;
       this.budgetData.budget = null;
-      this.isCoins2 = true;
-      this.isCoins1 = false;
-      this.isCard1 = false;
-      this.isCard2 = true;
+      // this.isCoins1 = false;
+      // this.isCoins2 = true;
+      // this.isCard1 = false;
+      // this.isCard2 = true;
     }
   }
 
@@ -147,18 +145,28 @@ export class ProjectTimeSelectPage {
     this.isBudget = !this.isBudget
     return
   }
-  sureBudgetDays(){
+  sureBudgetDays() {
     this.isBudgetDays = !this.isBudgetDays
     return
   }
-  sureHaveLanguage(){
+  sureHaveLanguage() {
     this.isNoLanguage = !this.isNoLanguage
+    return
+  }
+  sureProjectTime() {
+    this.isProjectTime = !this.isProjectTime
+    return
+  }
+  sureMaxBudget(){
+    this.isMaxBudget = !this.isMaxBudget
     return
   }
   /*保存数据并返回页面*/
   onSelectSubmit() {
     let callback = this.navParams.get('callback');
     var isnum = /^[0-9]*$/;
+    var tennum = /^\d{1,2}$/;
+    var fivenum = /^\d{1,5}$/;
     if (this.field == 'workload_workloadUnit') {
       if (isnum.test(this.inputName) == false) {
         this.isBudgetDays = true
@@ -167,7 +175,13 @@ export class ProjectTimeSelectPage {
       callback(this.field, [this.inputName, this.typeTxt]);
     } else if (this.field == 'projectTime') {
       let typeTxt = this.typeTxt == 0 ? '天' : (this.typeTxt == 1 ? '月' : '年')
-      console.log(this.selected)
+      if (this.inputName) {
+        console.log(this.inputName)
+        if (tennum.test(this.inputName) == false) {
+          this.isProjectTime = true
+          return
+        }
+      }
       callback(this.field, [this.selected, (this.inputName ? this.inputName : 0)]);
     } else if (this.field == 'startTime') {
       callback(this.field, [this.selected, this.inputName]);
@@ -181,16 +195,25 @@ export class ProjectTimeSelectPage {
           this.isBudgetDay = true
           return
         }
+        console.log(this.budgetData.budgetDay.toString())
+        if (fivenum.test((this.budgetData.budgetDay).toString()) == false) {
+          this.isMaxBudget = true
+          return
+        }
       } else if (this.selected == 1) {
         if (!this.budgetData.budget) {
           this.isBudget = true
           return
         }
+        if (fivenum.test((this.budgetData.budget).toString()) == false) {
+          this.isMaxBudget = true
+          return
+        }
       }
       callback(this.field, [this.selected, this.budgetData.budgetDay, this.budgetData.workload, this.budgetData.budget || '']);
     } else if (this.field == 'planguage') {
-      for(var i = 0;i<this.languageList.length;i++){
-        if(!this.languageList[i].language){
+      for (var i = 0; i < this.languageList.length; i++) {
+        if (!this.languageList[i].language) {
           this.isNoLanguage = true
           return
         }
