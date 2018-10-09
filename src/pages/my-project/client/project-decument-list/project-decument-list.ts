@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { DomSanitizer } from '@angular/platform-browser';
 import { MamenDataProvider } from '../../../../providers/mamen-data/mamen-data';
 
 import { ProjectDecumentBrowserPage } from '../project-decument-browser/project-decument-browser'
@@ -33,9 +34,12 @@ export class ProjectDecumentListPage {
   public projectDetails = {}
   public projectSignCount = {};
   public isConsultantListShow = false;
-  constructor(public navCtrl: NavController, public navParams: NavParams,private Provider:MamenDataProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,private Provider:MamenDataProvider,public sanitizer:DomSanitizer) {
   }
-
+  /*转换html标签处理*/
+  assembleHTML(strHTML:any){
+    return this.sanitizer.bypassSecurityTrustHtml(strHTML);
+  }
   ionViewDidLoad() {
     let pid = this.navParams.get('pid');
     let status = this.navParams.get('status');

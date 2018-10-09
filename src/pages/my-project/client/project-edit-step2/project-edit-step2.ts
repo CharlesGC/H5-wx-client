@@ -36,6 +36,16 @@ export class ProjectEditStep2Page {
     this.projectData = this.navParams.get('projectData');
     this.isEdit = this.navParams.get('isEdit') || false;
     console.log(this.projectData, 'ionViewDidLoad ProjectEditStep2Page');
+
+    this.projectData['description'] = this.projectData['description'] ? this.projectData['description'].replace(/<br>/g, "\n") : '';
+    this.projectData['target'] = this.projectData['target'] ? this.projectData['target'].replace(/<br>/g, "\n") : '';
+    this.projectData['note'] = this.projectData['note'] ? this.projectData['note'].replace(/<br>/g, "\n") : '';
+  }
+
+  ionViewWillEnter(){
+    this.projectData['description'] = this.projectData['description'] ? this.projectData['description'].replace(/<br>/g, "\n") : '';
+    this.projectData['target'] = this.projectData['target'] ? this.projectData['target'].replace(/<br>/g, "\n") : '';
+    this.projectData['note'] = this.projectData['note'] ? this.projectData['note'].replace(/<br>/g, "\n") : '';
   }
 
   /*跳转到下一步页面*/
@@ -59,7 +69,11 @@ export class ProjectEditStep2Page {
 
   /*设置值（回调函数）*/
   setValue = (field, value) => {
-    this.projectData[field] = value;
+    if(field == 'description' || field == 'target' ||　field == 'note'){
+      this.projectData[field] = value ? value.replace(/<br>/g, "\n") : '';
+    }else{
+      this.projectData[field] = value;
+    }
   }
   /*点击返回快速发布*/
   goSpeedPage() {
@@ -101,6 +115,11 @@ export class ProjectEditStep2Page {
     let projectData = this.projectData;
     // let projectStageDetailUrl = 'http://mamon.yemindream.com/mamon/customer/savaraft';
     const openId = window.sessionStorage.getItem('openId') || this.getUrlParam('openId');
+    let reg=new RegExp("\n","g");
+    let description = projectData['description'] ? projectData['description'].replace(reg,"<br>") : '';
+    let target = projectData['target'] ? projectData['target'].replace(reg,"<br>") : '';
+    let note = projectData['note'] ? projectData['note'].replace(reg,"<br>") : '';
+    
     let projectStageDetailUrl = savaraftUrl + '?openId=' + openId +
       '&cid=' + projectData['cid'] +
       '&principalName=' + (projectData['principalName'] || '') +
@@ -108,9 +127,9 @@ export class ProjectEditStep2Page {
       '&principalPhone=' + (projectData['principalPhone'] || '') +
       '&principalEmail=' + (projectData['principalEmail'] || '') +
       '&projectName=' + (projectData['projectName'] || '') +
-      '&description=' + projectData['description'] +
-      '&target=' + (projectData['target'] || '') +
-      '&note=' + (projectData['note'] || '');
+      '&description=' + description +
+      '&target=' + target +
+      '&note=' + note;
     if (pid) {
       projectStageDetailUrl = projectStageDetailUrl + '&pid=' + pid;
     }
@@ -125,6 +144,13 @@ export class ProjectEditStep2Page {
     }, error => {
       console.log('erros===', error);
     })
+  }
+  /*页面准备离开时触发*/
+  ionViewWillLeave(){
+    let reg=new RegExp("\n","g");
+    this.projectData['description'] = this.projectData['description'] ? this.projectData['description'].replace(reg,"<br>") : '';
+    this.projectData['target'] = this.projectData['target'] ? this.projectData['target'].replace(reg,"<br>") : '';
+    this.projectData['note'] = this.projectData['note'] ? this.projectData['note'].replace(reg,"<br>") : '';
   }
 
 }

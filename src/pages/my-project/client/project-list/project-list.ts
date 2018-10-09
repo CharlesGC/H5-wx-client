@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { DomSanitizer } from '@angular/platform-browser';
 import { MamenDataProvider } from '../../../../providers/mamen-data/mamen-data';
 
 import { ProjectBrowserPage } from '../project-browser/project-browser';
@@ -26,8 +27,12 @@ export class ProjectListPage {
   public showNavMenuNumber = 0;
   public projectCount = {}
   public projectListData = [];
-  constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider,public sanitizer:DomSanitizer) {
     this.navCtrl = navCtrl
+  }
+  /*转换html标签处理*/
+  assembleHTML(strHTML:any){
+    return this.sanitizer.bypassSecurityTrustHtml(strHTML);
   }
 
   ionViewDidLoad() {

@@ -58,6 +58,10 @@ export class ConsultantInfoUserPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad ConsultantInfoUserPage');
     this.userInfoData = this.navParams.get('consultantAdviser') || {}
+    this.userInfoData['introduction'] = this.userInfoData['introduction'] ? this.userInfoData['introduction'].replace(/<br>/g, "\n") : '';
+  }
+  ionViewWillEnter(){
+    this.userInfoData['introduction'] = this.userInfoData['introduction'] ? this.userInfoData['introduction'].replace(/<br>/g, "\n") : '';
   }
 
   //跳转到银行账号页面
@@ -87,7 +91,9 @@ export class ConsultantInfoUserPage {
       this.userInfoData[field] = value && value.length > 0 ? value.map(f => ({ ...f, ssid: f.id, asName: f.text })) : [];
     } else if (field == 'industryList') {
       this.userInfoData[field] = value && value.length > 0 ? value.map(f => ({ ...f, ilid: f.id, alName: f.text })) : [];
-    } else {
+    } else if(field == 'introduction'){
+      this.userInfoData[field] = value ? value.replace(/<br>/g, "\n") : '';
+    }else {
       this.userInfoData[field] = value;
     }
   }
@@ -144,6 +150,8 @@ export class ConsultantInfoUserPage {
     //   return
     // }
     // let getCompanyDetailUrl = 'http://mamon.yemindream.com/mamon/adviser/editAdviser';
+    let reg=new RegExp("\n","g");
+    let introduction = userInfoData.introduction ? userInfoData.introduction.replace(reg,"<br>") : '';
 
     let getCompanyDetailUrl = editAdviserUrl + '?openId=' + openId + '&avatar=' + userInfoData.avatar +
       '&nickName=' + (userInfoData.nickName || '') +
@@ -157,7 +165,7 @@ export class ConsultantInfoUserPage {
       '&address=' + (userInfoData.address || '') +
       '&otherIndustrys=' + otherIndustrys +
       '&otherSkills=' + otherSkills +
-      '&introduction=' + (userInfoData.introduction || '');
+      '&introduction=' + introduction;
     // '&zipCode='+companyDetaiData.webSite;
     if (uid) {
       getCompanyDetailUrl = getCompanyDetailUrl + '&uid=' + uid;
@@ -175,6 +183,11 @@ export class ConsultantInfoUserPage {
       console.log('erros===', error);
     })
 
+  }
+  /*页面准备离开时触发*/
+  ionViewWillLeave(){
+    let reg=new RegExp("\n","g");
+    this.userInfoData.introduction = this.userInfoData.introduction ? this.userInfoData.introduction.replace(reg,"<br>") : '';
   }
 
   getUrlParam(name) {

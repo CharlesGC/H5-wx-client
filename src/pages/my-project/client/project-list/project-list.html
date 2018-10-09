@@ -104,7 +104,8 @@
             <span><ion-icon name="place"></ion-icon>{{projectListData_item.province}} . {{projectListData_item.city}}</span>
             <span *ngIf="projectListData_item.releaseTime"><ion-icon name="post"></ion-icon>发布时间 {{projectListData_item.releaseTime}}</span>
           </p>
-          <div class="demand-content-cont mt10">{{projectListData_item.description}}</div>
+          <!-- <div class="demand-content-cont mt10">{{projectListData_item.description}}</div> -->
+          <div class="demand-content-cont mt10" [innerHTML]="assembleHTML(projectListData_item.description)"></div>
         </div>
         <div class="project-stage-list mt20" *ngIf="projectListData_item.projectStageList &&projectListData_item.projectStageList.length>0">
           <div class="stage-list-left">

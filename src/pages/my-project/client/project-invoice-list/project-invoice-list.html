@@ -96,7 +96,7 @@
           <span class="msg-title-left" *ngIf="projectInvoiceListData_item.invoiceType == 1">增值税普通发票</span>
         </p>
         <div class="msg-cont">
-          <h4>{{projectInvoiceListData_item.invoiceLetterhead}} · {{(projectInvoiceListData_item.price) || 0}} 元 {{ 1000 | number}}</h4>
+          <h4>{{projectInvoiceListData_item.invoiceLetterhead}} · {{(projectInvoiceListData_item.price || 0) | currency : '￥'}} 元</h4>
           <p>{{projectInvoiceListData_item.logisticsCompany}} <span class="fweight600">{{projectInvoiceListData_item.logisticsNumber}}</span></p> 
           <p class="mt5">流水号 <span class="fweight600">{{projectInvoiceListData_item.serialNumber}}</span></p>
         </div>

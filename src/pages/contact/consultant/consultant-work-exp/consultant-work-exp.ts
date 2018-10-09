@@ -32,7 +32,10 @@ export class ConsultantWorkExpPage {
   ionViewDidLoad() {
     console.log(this.companyName, 'ionViewDidLoad ConsultantWorkExpPage');
     this.workListData = this.navParams.get('data');
-    console.log(this.workListData, 123123);
+    this.workListData['workDescription'] = this.workListData['workDescription'] ? this.workListData['workDescription'].replace(/<br>/g, "\n") : '';
+  }
+  ionViewWillEnter(){
+    this.workListData['workDescription'] = this.workListData['workDescription'] ? this.workListData['workDescription'].replace(/<br>/g, "\n") : '';
   }
 
   assembleHTML(strHTML) {
@@ -47,7 +50,7 @@ export class ConsultantWorkExpPage {
   /*设置值（回调函数）*/
   setValue = (field, value) => {
     this.workListData[field] = value;
-    console.log(this.workListData, value, field, 'this.workListData-----')
+    this.workListData['workDescription'] = this.workListData['workDescription'] ? this.workListData['workDescription'].replace(/<br>/g, "\n") : '';
   }
   getUrlParam(name) {
     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象  
@@ -74,6 +77,16 @@ export class ConsultantWorkExpPage {
     this.isBigTime = !this.isBigTime
     return
   }
+  /*时间格式转换*/
+  getMyDate(date) {
+    let myDate = new Date(date);
+    let myYear = myDate.getFullYear();
+    var myMonth = myDate.getMonth() + 1;
+    let newMyMonth = myMonth>=10?myMonth:'0'+myMonth;
+    let myDay = myDate.getDate();
+    let newMyDay = myDay>=10?myDay:'0'+myDay;
+    return myYear + '-' + newMyMonth + '-' + newMyDay;
+  }
   /*数据新增、编辑请求*/
   onWorkExpSubmit() {
     const openId = window.sessionStorage.getItem('openId') || this.getUrlParam('openId');
@@ -90,12 +103,17 @@ export class ConsultantWorkExpPage {
       this.isBigTime = true
       return
     }
+    let startTime = this.getMyDate(workListData.startTime);
+    let endTime = this.getMyDate(workListData.endTime);
+    let reg=new RegExp("\n","g"); //new RegExp("\r\n","g")
+    let workDescription = workListData.workDescription ? workListData.workDescription.replace(reg,"<br>") : ''; 
+
     let getWorkExpUrl = addOrEditWorkExpUrl + '?openId=' + openId + '&companyName=' + workListData.companyName +
-      '&startTime=' + (workListData.startTime || '') +
-      '&endTime=' + (workListData.endTime || '') +
+      '&startTime=' + startTime +
+      '&endTime=' + endTime +
       '&department=' + workListData.department +
       '&role=' + workListData.role +
-      '&workDescription=' + workListData.workDescription;
+      '&workDescription=' + workDescription;
     if (aweid) {
       getWorkExpUrl = getWorkExpUrl + '&aweid=' + aweid;
     }
@@ -109,6 +127,11 @@ export class ConsultantWorkExpPage {
     }, error => {
       console.log('erros===', error);
     })
+  }
+  /*页面准备离开时触发*/
+  ionViewWillLeave(){
+    let reg=new RegExp("\n","g");
+    this.workListData.workDescription = this.workListData.workDescription ? this.workListData.workDescription.replace(reg,"<br>") : ''; 
   }
   /*数据删除请求*/
   onWorkExpDel() {

@@ -41,6 +41,10 @@ export class ProjectDecumentBrowserPage {
     }
   }
 
+  ionViewWillEnter(){
+    this.consultantDocumentDetailData['introduction'] = this.consultantDocumentDetailData['introduction'] ? this.consultantDocumentDetailData['introduction'].replace(/<br>/g, "\n") : '';
+  }
+
   /*项目支付记录详情数据请求*/
   getConsultantDocumentDetails(id) {
     // let consultantDocumentDetailsUrl = 'http://mamon.yemindream.com/mamon/adviser/getDocumentDetail';
@@ -50,6 +54,7 @@ export class ProjectDecumentBrowserPage {
       if (res.code == 200) {
         console.log(res, '--------');
         this.consultantDocumentDetailData = res.data;
+        this.consultantDocumentDetailData['introduction'] = this.consultantDocumentDetailData['introduction'] ? this.consultantDocumentDetailData['introduction'].replace(/<br>/g, "\n") : '';
         this.consultantDocumentDetailData['size'] = (this.consultantDocumentDetailData['size'] / 1048576).toPrecision(3)
 
         if (this.consultantDocumentDetailData['size'] > 1) {
@@ -79,6 +84,12 @@ export class ProjectDecumentBrowserPage {
     }, error => {
       console.log('erros===', error);
     })
+  }
+
+  /*页面准备离开时触发*/
+  ionViewWillLeave(){
+    let reg=new RegExp("\n","g");
+    this.consultantDocumentDetailData['introduction'] = this.consultantDocumentDetailData['introduction'] ? this.consultantDocumentDetailData['introduction'].replace(reg,"<br>") : '';
   }
 
   /*编辑操作*/

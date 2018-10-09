@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { DomSanitizer } from '@angular/platform-browser';
 import { MamenDataProvider } from '../../../../providers/mamen-data/mamen-data';
 
 import { ProjectPaymentRecordPage } from '../project-payment-record/project-payment-record';
@@ -28,10 +29,13 @@ export class ProjectStageBrowserPage {
   public isdisabled: any
   public stageType: any;
   public projectStageDetail = {};
-  constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider,public sanitizer:DomSanitizer) {
     this.stageType = 0;
   }
-
+  /*转换html标签处理*/
+  assembleHTML(strHTML:any){
+    return this.sanitizer.bypassSecurityTrustHtml(strHTML);
+  }
   ionViewDidLoad() {
     this.stageType = this.navParams.get('type') || 0;
     console.log(this.stageType, 'ionViewDidLoad ProjectStageBrowserPage');
@@ -50,7 +54,7 @@ export class ProjectStageBrowserPage {
     if (stageType == 2) {
       this.navCtrl.push(ProjectPaymentRecordPage, { id: id, cid: this.projectStageDetail['cid'] ,data:this.projectStageDetail});
     } else if (stageType == 6) {
-      this.navCtrl.push(ProjectSubmitInvoicePage, { id: id });
+      this.navCtrl.push(ProjectSubmitInvoicePage, { id: id, data: this.projectStageDetail});
     }
 
   }

@@ -133,7 +133,8 @@
       </div>
       <div class="card-item-label mt10">
         <label>文档描述</label>
-        <p class="card-cont">{{documentListData_item.introduction}}</p>
+        <!-- <p class="card-cont">{{documentListData_item.introduction}}</p> -->
+        <p class="card-cont" [innerHTML]="assembleHTML(documentListData_item.introduction)">{{documentListData_item.introduction}}</p>
       </div>
       <div class="msg-footer" (click)="goDocumentBrowser(documentListData_item)">
         <span class="msg-footer-text">查看详情</span>

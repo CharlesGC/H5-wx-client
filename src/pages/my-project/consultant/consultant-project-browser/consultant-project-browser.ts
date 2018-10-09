@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-
+import { DomSanitizer } from '@angular/platform-browser';
 import { IonicPage, NavController, NavParams, Nav, Platform, App, ModalController } from 'ionic-angular';
 // import { StatusBar, Splashscreen } from 'ionic-native';
 
@@ -50,7 +50,8 @@ export class ConsultantProjectBrowserPage {
     { name: 'navMenu1', isShow: true }
   ];
   public isApply = false;
-  constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider, public platform: Platform, private app: App, public modalCtrl: ModalController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider, public platform: Platform, 
+    private app: App, public modalCtrl: ModalController,public sanitizer:DomSanitizer) {
 
     // this.initializeApp();
 
@@ -80,7 +81,11 @@ export class ConsultantProjectBrowserPage {
   // }
 
 
-
+  /*转换html标签处理*/
+  assembleHTML(strHTML:any){
+    return this.sanitizer.bypassSecurityTrustHtml(strHTML);
+  }
+  
   ionViewDidLoad() {
     this.isApply = this.navParams.get('isApply');
     this.selectType = this.navParams.get('selectType');

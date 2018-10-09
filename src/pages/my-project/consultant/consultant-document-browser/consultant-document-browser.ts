@@ -30,6 +30,10 @@ public isDelBook =false
     let id = this.navParams.get('id');
     this.adviserStatus = this.navParams.get('adviserStatus') || ''
     this.getConsultantDocumentDetails(id);
+    
+  }
+  ionViewWillEnter(){
+    this.consultantDocumentDetailData['introduction'] = this.consultantDocumentDetailData['introduction'] ? this.consultantDocumentDetailData['introduction'].replace(/<br>/g, "\n") : '';
   }
 
   /*项目文档详情数据请求*/
@@ -40,7 +44,7 @@ public isDelBook =false
     this.Provider.getMamenSwiperData(consultantDocumentDetailsUrl).subscribe(res => {
       if (res.code == 200) {
         this.consultantDocumentDetailData = res.data;
-        console.log(this.consultantDocumentDetailData,'这是数据')
+        this.consultantDocumentDetailData['introduction'] = this.consultantDocumentDetailData['introduction'] ? this.consultantDocumentDetailData['introduction'].replace(/<br>/g, "\n") : '';
         this.consultantDocumentDetailData['size'] = (Number(this.consultantDocumentDetailData['size']) / 1048576).toPrecision(3)
 
         if (this.consultantDocumentDetailData['size'] > 1) {
@@ -71,6 +75,11 @@ public isDelBook =false
     }, error => {
       console.log('erros===', error);
     })
+  }
+  /*页面准备离开时触发*/
+  ionViewWillLeave(){
+    let reg=new RegExp("\n","g");
+    this.consultantDocumentDetailData['introduction'] = this.consultantDocumentDetailData['introduction'] ? this.consultantDocumentDetailData['introduction'].replace(reg,"<br>") : '';
   }
   getUrlParam(name) {
     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象  

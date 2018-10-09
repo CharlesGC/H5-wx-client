@@ -68,6 +68,12 @@ export class ConsultantProgramEditPage {
         this.programData['typeStr'] = 'assets/imgs/' + 'pdf.png'
       }
     }
+    this.programData['programDescription'] = this.programData['programDescription'] ? this.programData['programDescription'].replace(/<br>/g, "\n") : '';
+    this.programData['deliverable'] = this.programData['deliverable'] ? this.programData['deliverable'].replace(/<br>/g, "\n") : '';
+  }
+  ionViewWillEnter(){
+    this.programData['programDescription'] = this.programData['programDescription'] ? this.programData['programDescription'].replace(/<br>/g, "\n") : '';
+    this.programData['deliverable'] = this.programData['deliverable'] ? this.programData['deliverable'].replace(/<br>/g, "\n") : '';
   }
   ionViewDidEnter(){
     this.isAdd = this.navParams.get('isAdd');
@@ -120,7 +126,12 @@ export class ConsultantProgramEditPage {
       this.programData['workload'] = value[0];
       this.programData['workloadUnit'] = value[1];
     }
-    this.programData[field] = value;
+    if(field == 'programDescription' || field == 'deliverable'){
+      this.programData[field] = value ? value.replace(/<br>/g, "\n") : '';
+    }else{
+      this.programData[field] = value;
+    }
+    
   }
   /*列表编辑*/
   goFormEditPage(field, value, type) {
@@ -206,14 +217,18 @@ export class ConsultantProgramEditPage {
     }
     let programData = this.programData;
     let pid = this.navParams.get('pid');
+    let reg=new RegExp("\n","g");
+    let programDescription = programData['programDescription'] ? programData['programDescription'].replace(reg,"<br>") : '';
+    let deliverable = programData['deliverable'] ? programData['deliverable'].replace(reg,"<br>") : '';
+
     // let projectStageDetailUrl = 'http://mamon.yemindream.com/mamon/adviser/addOrEditProgram';
     const openId = window.sessionStorage.getItem('openId') || this.getUrlParam('openId');
     let projectStageDetailUrl = addOrEditProgramUrl + '?openId=' + openId + '&pid=' + pid + '&status=-2' +
       '&programName=' + programData['programName'] +
-      '&programDescription=' + programData['programDescription'] +
+      '&programDescription=' + programDescription +
       '&workload=' + programData['workload'] +
       '&workloadUnit=' + programData['workloadUnit'] +
-      '&deliverable=' + programData['deliverable'] +
+      '&deliverable=' + deliverable +
       '&price=' + programData['price'] +
       '&planName=' + (programData['planName'] || '') +
       '&fid=' + (programData['fid'] || '') +
@@ -238,6 +253,12 @@ export class ConsultantProgramEditPage {
     }, error => {
       console.log('erros===', error);
     })
+  }
+  /*页面准备离开时触发*/
+  ionViewWillLeave(){
+    let reg=new RegExp("\n","g");
+    this.programData['programDescription'] = this.programData['programDescription'] ? this.programData['programDescription'].replace(reg,"<br>") : '';
+    this.programData['deliverable'] = this.programData['deliverable'] ? this.programData['deliverable'].replace(reg,"<br>") : '';
   }
 
   onReturnBack() {

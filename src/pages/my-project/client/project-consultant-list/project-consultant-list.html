@@ -134,7 +134,8 @@
           </div>
         </div>
       </div>
-      <div class="consultant-des">{{consultantList_item.introduction}}</div>
+      <!-- <div class="consultant-des">{{consultantList_item.introduction}}</div> -->
+      <div class="consultant-des" [innerHTML]="assembleHTML(consultantList_item.introduction)"></div>
       <div>
         <p class="tags-cont skills">
           <span class="tag" *ngFor="let adviserSkill_tag of consultantList_item.adviserSkill">{{adviserSkill_tag}}</span>

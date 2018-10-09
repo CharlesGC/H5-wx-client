@@ -53,6 +53,7 @@ export class ConsultantBasicPage {
     this.presentLoading(true);
   }
   ionViewDidEnter() {
+    console.log(this.consultantBasicData,'this.consultantBasicData----')
     this.getConsultantBasicData();
   }
 
@@ -146,7 +147,6 @@ export class ConsultantBasicPage {
     this.Provider.getMamenSwiperData(getCompanyListUrl).subscribe(res => {
       if (res.code == 200) {
         this.consultantBasicData = res.data;
-        console.log(this.consultantBasicData, '这是数据')
         this.isLoading = false
         this.presentLoading(false);
         for (var i = 0; i < this.consultantBasicData.length; i++) {

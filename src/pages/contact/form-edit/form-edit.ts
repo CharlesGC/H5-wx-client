@@ -165,6 +165,9 @@ export class FormEditPage {
       this.parentColumns = this.paymentMethod
     } else if(this.selectField == 'deliverMethod') {
       this.parentColumns = this.deliverMethod
+    } else if(this.fieldType == 'textarea'){
+      var str = value ? value.replace(/<br>/g, "\n") : '';
+      this.inputName = str;
     }
     else if (this.selectField == 'industryList') {
       // this.getpaymentListData();
@@ -205,7 +208,11 @@ export class FormEditPage {
       this.parentColumns = this.paymentMethod
     }  else if(this.selectField == 'deliverMethod') {
       this.parentColumns = this.deliverMethod
-    } else if (this.selectField == 'industryList') {
+    } else if(this.fieldType == 'textarea'){
+      var str = value ? value.replace(/<br>/g, "\n") : '';
+      this.inputName = str;
+      console.log(this.inputName,str,'this.inputName')
+    }else if (this.selectField == 'industryList') {
       //this.getpaymentListData();
       this.selectList = (value && value.length) ? value.map(f => ({ ...f, id: (f.ilid || f.alId) })) : [{ id: 0 }];
       console.log(value, this.selectList, '=========-----========');
@@ -237,11 +244,11 @@ export class FormEditPage {
     if (this.fieldType == 'percentage' || this.fieldType == 'price' || this.fieldType == 'text' || this.fieldType == 'gender' || this.fieldType == 'select'  || this.fieldType == 'ranger' || this.fieldType == 'date') {
       value = inValue;
     } else if(this.fieldType == 'textarea') {
-      // console.log(inValue,'未开始时')
-      // var reg=new RegExp("\n","g"); //new RegExp("\r\n","g")
-      // inValue= inValue.replace(reg,"<br>"); 
-      // // inValue=inValue.replaceAll("<br>", "\n");
-      // console.log(inValue,'转换后开始时')
+      console.log(inValue,'未开始时')
+      var reg=new RegExp("\n","g"); //new RegExp("\r\n","g")
+      inValue= inValue.replace(reg,"<br>"); 
+      // inValue=inValue.replaceAll("<br>", "\n");
+      console.log(inValue,'转换后开始时')
       value = inValue;
     }else if (this.fieldType == 'province-city') {
       citystr = document.getElementById("cities").innerText;

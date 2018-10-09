@@ -196,11 +196,13 @@
     <ion-list class="describe-list mt10">
         <ion-item no-lines>
             <h4>项目描述</h4>
-            <p class="describe-cont">{{projectDetails.description}}</p>
+            <p class="describe-cont" [innerHTML]="assembleHTML(projectDetails.description)"></p>
+            <!-- <p class="describe-cont" >{{projectDetails.description}}</p> -->
         </ion-item>
         <ion-item no-lines>
             <h4>交付标的</h4>
-            <p class="describe-cont">{{projectDetails.target}}</p>
+            <!-- <p class="describe-cont">{{projectDetails.target}}</p> -->
+            <p class="describe-cont" [innerHTML]="assembleHTML(projectDetails.target)"></p>
         </ion-item>
     </ion-list>
     <ion-list class="describe-list mt10">

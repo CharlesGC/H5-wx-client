@@ -38,13 +38,15 @@
   <ion-list class="describe-list mt10">
     <ion-item no-lines>
       <h4>任务描述</h4>
-      <p class="describe-cont">{{projectStageDetail.stageDescription}}</p>
+      <!-- <p class="describe-cont">{{projectStageDetail.stageDescription}}</p> -->
+      <p class="describe-cont" [innerHTML]="assembleHTML(projectStageDetail.stageDescription)"></p>
     </ion-item>
   </ion-list>
   <ion-list class="describe-list mt10">
     <ion-item no-lines>
       <h4>交互标的</h4>
-      <p class="describe-cont">{{projectStageDetail.deliverable}} </p>
+      <!-- <p class="describe-cont">{{projectStageDetail.deliverable}} </p> -->
+      <p class="describe-cont" [innerHTML]="assembleHTML(projectStageDetail.deliverable)"></p>
     </ion-item>
   </ion-list>
   <ion-list class="list-item-flex mt10">
@@ -93,7 +95,8 @@
         </div>
         <div class="card-item-label mt10">
           <label>文档描述</label>
-          <p class="card-cont">{{document_item.introduction}}</p>
+          <!-- <p class="card-cont">{{document_item.introduction}}</p> -->
+          <p class="card-cont" [innerHTML]="assembleHTML(document_item.introduction)"></p>
         </div>
         <div class="msg-footer" (click)="goDocumentBrowser(document_item.pdid)">
           <span class="msg-footer-text">查看详情</span>

@@ -40,7 +40,8 @@
             发布时间 {{projectListData_item.releaseTime | date:'yy/MM/dd'}}
           </span>
         </p>
-        <div class="demand-content-cont mt10">{{projectListData_item.description}}</div>
+        <!-- <div class="demand-content-cont mt10">{{projectListData_item.description}}</div> -->
+        <div class="demand-content-cont mt10" [innerHTML]="assembleHTML(projectListData_item.description)"></div>
       </div>
       <div class="msg-footer" (click)="onProjectBrowserClick(projectListData_item)">
         <span class="msg-footer-text">查看项目详情</span>

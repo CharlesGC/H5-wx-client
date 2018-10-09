@@ -24,7 +24,7 @@
         <ion-item (click)="goFormEditPage('startTime',stageData.startTime,'date')">
             <label>开始时间<span class="required-field ml5">(必填)</span></label>
             <p item-right class="rigth-message">
-                <span item-right class="item-value line-overflow">{{(stageData.startTime | date: 'yyyy-MM-dd') ||
+                <span class="item-value line-overflow">{{(stageData.startTime | date: 'yyyy-MM-dd') ||
                     '请选择'}}</span>
                 <ion-icon class="icon" name="arrow-forward"></ion-icon>
             </p>
@@ -32,7 +32,7 @@
         <ion-item (click)="goFormEditPage('endTime',stageData.endTime,'date')" no-lines>
             <label>结束时间<span class="required-field ml5">(必填)</span></label>
             <p item-right class="rigth-message">
-                <span item-right class="item-value line-overflow">{{(stageData.endTime | date: 'yyyy-MM-dd') || '请选择'}}</span>
+                <span class="item-value line-overflow">{{(stageData.endTime | date: 'yyyy-MM-dd') || '请选择'}}</span>
                 <ion-icon class="icon" name="arrow-forward"></ion-icon>
             </p>
         </ion-item>
@@ -41,21 +41,21 @@
         <ion-item (click)="goFormEditPage('stageDescription',stageData.stageDescription,'textarea')">
             <label>阶段描述<span class="required-field ml5">(必填)</span></label>
             <p item-right class="rigth-message">
-                <span item-right class="item-value line-overflow">{{stageData.stageDescription || '阶段的详情描述'}}</span>
+                <span class="item-value line-overflow">{{stageData.stageDescription || '阶段的详情描述'}}</span>
                 <ion-icon class="icon" name="arrow-forward"></ion-icon>
             </p>
         </ion-item>
         <ion-item (click)="goFormEditPage('deliverable',stageData.deliverable,'textarea')">
             <label>交付标的<span class="required-field ml5">(必填)</span></label>
             <p item-right class="rigth-message">
-                <span item-right class="item-value line-overflow">{{stageData.deliverable || '预期交互物内容及类型'}}</span>
+                <span class="item-value line-overflow">{{stageData.deliverable || '预期交互物内容及类型'}}</span>
                 <ion-icon class="icon" name="arrow-forward"></ion-icon>
             </p>
         </ion-item>
         <ion-item (click)="goFormEditPage('note',stageData.note,'textarea')" no-lines>
             <label>阶段备注<span class="required-field ml5">(必填)</span></label>
             <p item-right class="rigth-message">
-                <span item-right class="item-value line-overflow">{{stageData.note || '请输入'}}</span>
+                <span class="item-value line-overflow">{{stageData.note || '请输入'}}</span>
                 <ion-icon class="icon" name="arrow-forward"></ion-icon>
             </p>
         </ion-item>
@@ -64,15 +64,17 @@
         <ion-item (click)="goFormEditPage('percentage',stageData.percentage,'percentage')">
             <label>付款占比<span class="required-field ml5">(必填)</span></label>
             <p item-right class="rigth-message">
-                <span item-right class="item-value line-overflow" style="margin-right:0;">{{(stageData['percentage'])< 1? stageData.percentage*100:stageData.percentage || '请输入'}}</span>
-                <span item-right *ngIf = "stageData.percentage">%</span>
+                <span class="item-value line-overflow">
+                    {{(stageData['percentage'])< 1? stageData.percentage*100:stageData.percentage || '请输入'}}
+                    <span *ngIf = "stageData.percentage">%</span>
+                </span>
                 <ion-icon class="icon" name="arrow-forward"></ion-icon>
             </p>
         </ion-item>
         <ion-item no-lines>
             <label>付款金额<span class="required-field ml5">(必填)</span></label>
             <p item-right class="rigth-message">
-                <span item-right class="item-value line-overflow color-ff6536">{{stageData.price | currency: '￥'}}</span>
+                <span class="item-value line-overflow color-ff6536">{{stageData.price | currency: '￥'}}</span>
                 <!-- <ion-icon class="icon" name="arrow-forward"></ion-icon> -->
             </p>
         </ion-item>
@@ -81,9 +83,9 @@
         <ion-item (click)="goFormEditPage('paymentMethod',stageData.paymentMethod,'select')" no-lines>
             <label>交付方式<span class="required-field ml5">(必填)</span></label>
             <p item-right class="rigth-message">
-                <span item-right class="item-value line-overflow" *ngIf="!stageData.paymentMethod && stageData.paymentMethod != 0">请选择</span>
-                <span item-right class="item-value line-overflow" *ngIf="stageData.paymentMethod == 0">线上</span>
-                <span item-right class="item-value line-overflow" *ngIf="stageData.paymentMethod == 1">线下</span>
+                <span class="item-value line-overflow" *ngIf="!stageData.paymentMethod && stageData.paymentMethod != 0">请选择</span>
+                <span class="item-value line-overflow" *ngIf="stageData.paymentMethod == 0">线上</span>
+                <span class="item-value line-overflow" *ngIf="stageData.paymentMethod == 1">线下</span>
                 <ion-icon class="icon" name="arrow-forward"></ion-icon>
             </p>
         </ion-item>

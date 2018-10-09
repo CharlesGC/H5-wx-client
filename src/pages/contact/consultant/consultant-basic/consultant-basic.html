@@ -75,11 +75,11 @@
                   </p> -->
           </div>
         </ion-item>
-
-        <ion-item no-lines text-wrap class="user-introdection">
-          {{consultantBasicData.introduction}}
-        </ion-item>
-        <ion-item no-lines class="info-rigth" *ngIf="(consultantBasicData.skillList && consultantBasicData.skillList.length > 0) || (consultantBasicData.industryList &&  consultantBasicData.industryList.length>0)">
+        <!-- <ion-item no-lines text-wrap class="user-introdection" >{{consultantBasicData.introduction}}</ion-item> -->
+        <ion-item no-lines text-wrap class="user-introdection" [innerHTML]="assembleHTML(consultantBasicData.introduction)"></ion-item>
+        <ion-item no-lines class="info-rigth" 
+                  *ngIf="(consultantBasicData.skillList && consultantBasicData.skillList.length > 0) || 
+                  (consultantBasicData.industryList &&  consultantBasicData.industryList.length>0)">
           <p class="info-other-label item-tags skills">
             <span calss="mt5" *ngFor="let skillList_item of consultantBasicData.skillList">{{skillList_item.asName}}</span>
           </p>
@@ -193,7 +193,7 @@
       <div class="card-item-label mt10">
         <label>职责描述</label> 
         <!-- <p class="card-cont">{{workList_item.workDescription}}</p> -->
-        <p class="card-cont"[innerHTML]="assembleHTML(workList_item.workDescription)"></p>
+        <p class="card-cont" [innerHTML]="assembleHTML(workList_item.workDescription)"></p>
       </div>
       <div class="msg-footer" (click)="onGoPages(1,workList_item)">
         <span class="msg-footer-text">编辑详情</span>
@@ -258,12 +258,14 @@
         <p class="card-cont">{{projectList_item.role}}</p>
       </div>
       <div class="card-item-label mt10">
-        <label>项目描述</label>
-        <p class="card-cont">{{projectList_item.projectDetails}}</p>
+        <label>项目描述</label> 
+        <!-- <p class="card-cont">{{projectList_item.projectDetails}}</p> -->
+        <p class="card-cont" [innerHTML]="assembleHTML(projectList_item.projectDetails)"></p>
       </div>
       <div class="card-item-label mt10">
         <label>职责描述</label>
-        <p class="card-cont">{{projectList_item.responsibility}}</p>
+        <!-- <p class="card-cont">{{projectList_item.responsibility}}</p> -->
+        <p class="card-cont" [innerHTML]="assembleHTML(projectList_item.responsibility)"></p>
       </div>
       <div class="msg-footer" (click)="onGoPages(2,projectList_item)">
         <span class="msg-footer-text">编辑详情</span>

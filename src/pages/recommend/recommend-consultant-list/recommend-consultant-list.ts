@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { DomSanitizer } from '@angular/platform-browser';
 import { MamenDataProvider } from '../../../providers/mamen-data/mamen-data';
 import { ProjectBrowserPage } from '../../my-project/client/project-browser/project-browser';
 import { ConsultantProjectBrowserPage } from '../../my-project/consultant/consultant-project-browser/consultant-project-browser';
@@ -24,10 +25,13 @@ export class RecommendConsultantListPage {
   public pageNum = 0;
   public pageSize = 999;
   public isCont = false;
-  constructor(public navCtrl: NavController, public navParams: NavParams,private Provider:MamenDataProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,private Provider:MamenDataProvider,public sanitizer:DomSanitizer) {
     this.selected = 2;
   }
-
+  /*转换html标签处理*/
+  assembleHTML(strHTML:any){
+    return this.sanitizer.bypassSecurityTrustHtml(strHTML);
+  }
   ionViewDidLoad() {
     console.log(1123123112,'推荐')
     // this.getProjectListData(this.selected);

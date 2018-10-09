@@ -39,7 +39,13 @@ export class ConsultantProjectExpPage {
   }
   ionViewDidLoad() {
     this.projecListData = this.navParams.get('data') || {};
+    this.projecListData['projectDetails'] = this.projecListData['projectDetails'] ? this.projecListData['projectDetails'].replace(/<br>/g, "\n") : '';
+    this.projecListData['responsibility'] = this.projecListData['responsibility'] ? this.projecListData['responsibility'].replace(/<br>/g, "\n") : '';
     console.log('ionViewDidLoad ConsultantProjectExpPage');
+  }
+  ionViewWillEnter(){
+    this.projecListData['projectDetails'] = this.projecListData['projectDetails'] ? this.projecListData['projectDetails'].replace(/<br>/g, "\n") : '';
+    this.projecListData['responsibility'] = this.projecListData['responsibility'] ? this.projecListData['responsibility'].replace(/<br>/g, "\n") : '';
   }
   sureBigTime(){
     this.isBigTime = !this.isBigTime
@@ -52,7 +58,11 @@ export class ConsultantProjectExpPage {
 
   /*设置值（回调函数）*/
   setValue = (field, value) => {
-    this.projecListData[field] = value;
+    if(field == 'projectDetails' ||　field == 'responsibility') {
+      this.projecListData[field] = value ? value.replace(/<br>/g, "\n") : '';
+    }else{
+      this.projecListData[field] = value;
+    }
   }
   getUrlParam(name) {
     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象  
@@ -62,6 +72,16 @@ export class ConsultantProjectExpPage {
     } else {
       return null;
     }
+  }
+  /*时间格式转换*/
+  getMyDate(date) {
+    let myDate = new Date(date);
+    let myYear = myDate.getFullYear();
+    var myMonth = myDate.getMonth() + 1;
+    let newMyMonth = myMonth>=10?myMonth:'0'+myMonth;
+    let myDay = myDate.getDate();
+    let newMyDay = myDay>=10?myDay:'0'+myDay;
+    return myYear + '-' + newMyMonth + '-' + newMyDay;
   }
 
   /*数据新增、编辑请求*/
@@ -79,13 +99,19 @@ export class ConsultantProjectExpPage {
       this.isBigTime = true
       return
     }
+    let startTime = this.getMyDate(projecListData.startTime);
+    let endTime = this.getMyDate(projecListData.endTime);
+    let reg=new RegExp("\n","g");
+    let projectDetails = projecListData.projectDetails ? projecListData.projectDetails.replace(reg,"<br>") : ''; 
+    let responsibility = projecListData.responsibility ? projecListData.responsibility.replace(reg,"<br>") : ''; 
+
     let getProjectExpUrl = addOrEditProjectExpUrl + '?openId=' + openId + '&projectName=' + projecListData.projectName +
       '&companyName=' + projecListData.companyName +
-      '&startTime=' + (projecListData.startTime || '') +
-      '&endTime=' + (projecListData.endTime || '') +
-      '&projectDetails=' + projecListData.projectDetails +
+      '&startTime=' + startTime +
+      '&endTime=' + endTime +
+      '&projectDetails=' + projectDetails +
       '&role=' + projecListData.role +
-      '&responsibility=' + projecListData.responsibility;
+      '&responsibility=' + responsibility;
     if (apeid) {
       getProjectExpUrl = getProjectExpUrl + '&apeid=' + apeid;
     }
@@ -100,6 +126,13 @@ export class ConsultantProjectExpPage {
     }, error => {
       console.log('erros===', error);
     })
+  }
+
+  /*页面准备离开时触发*/
+  ionViewWillLeave(){
+    let reg=new RegExp("\n","g");
+    this.projecListData.projectDetails = this.projecListData.projectDetails ? this.projecListData.projectDetails.replace(reg,"<br>") : ''; 
+    this.projecListData.responsibility = this.projecListData.responsibility ? this.projecListData.responsibility.replace(reg,"<br>") : '';  
   }
 
   /*数据删除请求*/

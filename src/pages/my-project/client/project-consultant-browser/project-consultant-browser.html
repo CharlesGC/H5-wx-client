@@ -58,7 +58,8 @@
             </div>
           </div>
         </div>
-        <div class="consultant-des">{{consultantDetails.introduction}}</div>
+        <!-- <div class="consultant-des">{{consultantDetails.introduction}}</div> -->
+        <div class="consultant-des" [innerHTML]="assembleHTML(consultantDetails.introduction)"></div>
         <div>
           <p class="tags-cont skills">
             <span class="tag" *ngFor="let adviserSkill_tag of consultantDetails.skillList">{{adviserSkill_tag.asName ||
@@ -107,7 +108,8 @@
         </div>
         <div class="card-item-label mt10">
           <label>职责描述</label>
-          <p class="card-cont">{{workList_item.workDescription}}</p>
+          <!-- <p class="card-cont">{{workList_item.workDescription}}</p> -->
+          <p class="card-cont" [innerHTML]="assembleHTML(workList_item.workDescription)"></p>
         </div>
       </ion-card>
     </div>
@@ -137,11 +139,13 @@
         </div>
         <div class="card-item-label mt10">
           <label>项目描述</label>
-          <p class="card-cont">{{projectList_item.projectDetails}}</p>
+          <!-- <p class="card-cont">{{projectList_item.projectDetails}}</p> -->
+          <p class="card-cont" [innerHTML]="assembleHTML(projectList_item.projectDetails)"></p>
         </div>
         <div class="card-item-label mt10">
           <label>职责描述</label>
-          <p class="card-cont">{{projectList_item.responsibility}}</p>
+          <!-- <p class="card-cont">{{projectList_item.responsibility}}</p> -->
+          <p class="card-cont" [innerHTML]="assembleHTML(projectList_item.responsibility)"></p>
         </div>
       </ion-card>
     </div>
@@ -222,12 +226,14 @@
       <ion-item no-lines>
         <!-- <h4>项目描述</h4> -->
         <h4>胜任简介</h4>
-        <p class="describe-cont">{{applicationDeatil.introduction}}</p>
+        <!-- <p class="describe-cont">{{applicationDeatil.introduction}}</p> -->
+        <p class="describe-cont" [innerHTML]="assembleHTML(applicationDeatil.introduction)"></p>
       </ion-item>
       <ion-item no-lines>
         <!-- <h4>交付标的</h4> -->
         <h4>项目规划</h4>
-        <p class="describe-cont">{{applicationDeatil.proposal}}</p>
+        <!-- <p class="describe-cont">{{applicationDeatil.proposal}}</p> -->
+        <p class="describe-cont" [innerHTML]="assembleHTML(applicationDeatil.proposal)"></p>
       </ion-item>
     </ion-list>
     <div class="user-other-list">

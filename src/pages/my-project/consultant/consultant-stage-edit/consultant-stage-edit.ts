@@ -35,6 +35,16 @@ export class ConsultantStageEditPage {
     this.isAdd = this.navParams.get('isAdd') || false;
     this.programPrice = this.navParams.get('programPrice') || 0;
     this.stageData = this.navParams.get('data') || {};
+
+    this.stageData['stageDescription'] = this.stageData['stageDescription'] ? this.stageData['stageDescription'].replace(/<br>/g, "\n") : '';
+    this.stageData['deliverable'] = this.stageData['deliverable'] ? this.stageData['deliverable'].replace(/<br>/g, "\n") : '';
+    this.stageData['note'] = this.stageData['note'] ? this.stageData['note'].replace(/<br>/g, "\n") : '';
+  }
+
+  ionViewWillEnter(){
+    this.stageData['stageDescription'] = this.stageData['stageDescription'] ? this.stageData['stageDescription'].replace(/<br>/g, "\n") : '';
+    this.stageData['deliverable'] = this.stageData['deliverable'] ? this.stageData['deliverable'].replace(/<br>/g, "\n") : '';
+    this.stageData['note'] = this.stageData['note'] ? this.stageData['note'].replace(/<br>/g, "\n") : '';
   }
 
   /*列表编辑*/
@@ -47,7 +57,12 @@ export class ConsultantStageEditPage {
     if (field == 'percentage') {
       this.stageData['price'] = ((value / 100) || 0) * this.programPrice;
     }
-    this.stageData[field] = value;
+    if(field == 'stageDescription' || field == 'deliverable' || field == 'note'){
+      this.stageData[field] = value ? value.replace(/<br>/g, "\n") : '';
+    }else{
+      this.stageData[field] = value;
+    }
+    
   }
 
   getUrlParam(name) {
@@ -106,14 +121,20 @@ export class ConsultantStageEditPage {
       this.isBigTime = true
       return
     }
+    
     const openId = window.sessionStorage.getItem('openId') || this.getUrlParam('openId');
+    let reg=new RegExp("\n","g");
+    let stageDescription = stageData['stageDescription'] ? stageData['stageDescription'].replace(reg,"<br>") : '';
+    let deliverable = stageData['deliverable'] ? stageData['deliverable'].replace(reg,"<br>") : '';
+    let note = stageData['note'] ? stageData['note'].replace(reg,"<br>") : '';
+
     let projectStageDetailUrl = addOrEditStageUrl + '?openId=' + openId + '&pid=' + pid +
       '&stageName=' + stageData['stageName'] +
       '&startTime=' + startTime +
       '&endTime=' + endTime +
-      '&stageDescription=' + (stageData['stageDescription'] || '') +
-      '&deliverable=' + (stageData['deliverable'] || '') +
-      '&note=' + (stageData['note'] || '') +
+      '&stageDescription=' + stageDescription +
+      '&deliverable=' + deliverable +
+      '&note=' + note +
       '&percentage=' + ((stageData['percentage']) || 0) +
       '&price=' + (stageData['price'] || 0) +
       '&paymentMethod=' + (stageData['paymentMethod'] || '');
@@ -122,10 +143,7 @@ export class ConsultantStageEditPage {
     }
     this.Provider.getMamenSwiperData(projectStageDetailUrl).subscribe(res => {
       if (res.code == 200) {
-        console.log(res, '--------');
         this.navCtrl.pop();
-      } else if (res.code == 207) {
-        window.localStorage.removeItem('openId');
       } else if (res.code == 214) {
         this.isDateRepeat = true
       } else {
@@ -134,6 +152,14 @@ export class ConsultantStageEditPage {
     }, error => {
       console.log('erros===', error);
     })
+  }
+
+  /*页面准备离开时触发*/
+  ionViewWillLeave(){
+    let reg=new RegExp("\n","g");
+    this.stageData['stageDescription'] = this.stageData['stageDescription'] ? this.stageData['stageDescription'].replace(reg,"<br>") : '';
+    this.stageData['deliverable'] = this.stageData['deliverable'] ? this.stageData['deliverable'].replace(reg,"<br>") : '';
+    this.stageData['note'] = this.stageData['note'] ? this.stageData['note'].replace(reg,"<br>") : '';
   }
 
   /*删除操作请求*/

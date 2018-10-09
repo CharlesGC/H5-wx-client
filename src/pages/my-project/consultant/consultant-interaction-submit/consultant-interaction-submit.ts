@@ -68,6 +68,11 @@ export class ConsultantInteractionSubmitPage {
         this.interactionData['format'] = 'assets/imgs/' + 'pdf.png'
       }
     }
+    this.interactionData['introduction'] = this.interactionData['introduction'] ? this.interactionData['introduction'].replace(/<br>/g, "\n") : '';
+  }
+
+  ionViewWillEnter(){
+    this.interactionData['introduction'] = this.interactionData['introduction'] ? this.interactionData['introduction'].replace(/<br>/g, "\n") : '';
   }
 
   /** 跳转到上传页面 */
@@ -139,9 +144,12 @@ export class ConsultantInteractionSubmitPage {
       this.isNoStageBook = true
       return
     }
+    let reg=new RegExp("\n","g");
+    let introduction = interactionData['introduction'] ? interactionData['introduction'].replace(reg,"<br>") : '';
+
     let projectStageDetailUrl = submitDocumentUrl + '?openId=' + openId + '&pid=' + pid +
       '&name=' + interactionData['name'] +
-      '&introduction=' + interactionData['introduction'] +
+      '&introduction=' + introduction +
       '&type=' + this.type +
       '&fid=' + fid;
     if (pdid) {
@@ -164,7 +172,11 @@ export class ConsultantInteractionSubmitPage {
       console.log('erros===', error);
     })
   }
-
+  /*页面准备离开时触发*/
+  ionViewWillLeave(){
+    let reg=new RegExp("\n","g");
+    this.interactionData['introduction'] = this.interactionData['introduction'] ? this.interactionData['introduction'].replace(reg,"<br>") : '';
+  }
   /*列表编辑*/
   goFormEditPage(field, value, type) {
     this.navCtrl.push(FormEditPage, { callback: this.setValue, value: value, field: field, type: type });
@@ -172,7 +184,11 @@ export class ConsultantInteractionSubmitPage {
 
   /*设置值（回调函数）*/
   setValue = (field, value) => {
-    this.interactionData[field] = value;
+    if(field == 'introduction'){
+      this.interactionData[field] = value ? value.replace(/<br>/g, "\n") : '';
+    }else{
+      this.interactionData[field] = value;
+    }
   }
   sureDelBook() {
     this.isDelBook = !this.isDelBook

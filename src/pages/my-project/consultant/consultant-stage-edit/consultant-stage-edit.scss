@@ -5,7 +5,7 @@ page-consultant-stage-edit {
     .item-inner {
         .rigth-message {
             .line-overflow {
-                display: initial;
+                // display: initial;
             }
         }
     }
@@ -55,6 +55,7 @@ page-consultant-stage-edit {
                 font-size: 1.6rem;
                 vertical-align: middle;
                 color: #cfcfcf;
+                line-height: 2rem;
             }
             .item-value {
                 color: #9b9b9b;
@@ -68,6 +69,7 @@ page-consultant-stage-edit {
             }
             .rigth-message {
                 text-align: right;
+                display: flex;
             }
         }
     }

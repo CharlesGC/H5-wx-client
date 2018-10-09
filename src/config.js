@@ -3,8 +3,8 @@ module.exports = {
   name: '管理测试',
   footer: '',
   api: {
-    host: 'http://matest.yemindream.com',
-    // host: 'http://matest.mf-tal.com',
+    // host: 'http://matest.yemindream.com',
+    host: 'http://matest.mf-tal.com',
     // host: 'http://100.168.1.149:8181',
     port: 80,
     // port: 8181,
@@ -13,12 +13,13 @@ module.exports = {
     timeout: 15000
   },
   //文件上传地址
-  // filesUpload: 'http://matest.mf-tal.com/mafile/mamonfile/uploadFile',
+  filesUpload: 'http://matest.mf-tal.com/mafile/mamonfile/uploadFile',
   // filesUpload: 'http://100.168.1.149:8181/mafile/mamonfile/uploadFile',
-  filesUpload: 'http://matest.yemindream.com/mafile/mamonfile/uploadFile',
+  // filesUpload: 'http://matest.yemindream.com/mafile/mamonfile/uploadFile',
   // filesUpload: 'http://100.168.1.48:8100/mafile/mamonfile/uploadFile',
   //头像上传地址
-  avatarUpload: 'http://matest.yemindream.com/mafile/mamonfile/uploadAvatarPic',
+  // avatarUpload: 'http://matest.yemindream.com/mafile/mamonfile/uploadAvatarPic',
+  avatarUpload: 'http://matest.mf-tal.com/mafile/mamonfile/uploadAvatarPic',
   //文件查看地址
   // filesUrl: 'http://100.168.1.199:8080/files',
 
