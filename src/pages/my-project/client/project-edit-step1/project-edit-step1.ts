@@ -90,25 +90,31 @@ export class ProjectEditStep1Page {
   // 确定
   sureComplete() {
     this.isComplete = !this.isComplete;
+    return
   }
   // 邮箱确定
   sureEmail() {
     this.isEmailProper = !this.isEmailProper;
+    return
   }
   // 电话确定
   surePhone() {
     this.isPhoneProper = !this.isPhoneProper;
+    return
   }
   sureSubmit(){
     this.isSubmit = !this.isSubmit
-    if(this.gotype == 1){
-      this.navCtrl.push(ProjectBrowserPage);
-    }else{
-      this.navCtrl.push(ProjectListPage);
-    }
+    return
+    // if(this.gotype == 1){
+    //   this.navCtrl.push(ProjectBrowserPage);
+    // }else{
+    //   this.navCtrl.push(ProjectListPage);
+    //   return
+    // }
   }
   sureFailed(){
     this.isfailed = !this.isfailed
+    return
   }
   /*列表编辑*/
   goFormEditPage(field, value, type) {
@@ -191,5 +197,4 @@ export class ProjectEditStep1Page {
     // this.navCtrl.goToRoot(HomePage); 
     this.navCtrl.parent.select(0);
   }
-
 }

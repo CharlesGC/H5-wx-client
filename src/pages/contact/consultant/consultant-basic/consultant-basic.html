@@ -39,11 +39,11 @@
               <span class="user-type type-gray" *ngIf="consultantBasicData.status == 0">未审核</span>
               <!-- <ion-icon name="ios-arrow-forward" item-end color="ion-gray"></ion-icon> -->
             </div>
-            <p class="info-other-label">
+            <p class="info-other-label" *ngIf="consultantBasicData.years">
               <span>{{consultantBasicData.years}} </span>
               <span>年工作经验</span>
             </p>
-            <p class="info-other-label">
+            <p class="info-other-label" *ngIf="consultantBasicData.salaryUp">
               <span class="date-number">{{consultantBasicData.salaryUp | currency :'￥'}} -
                 {{consultantBasicData.salaryDown | currency :'￥'}}</span>
               <span> 元/天</span>
@@ -77,8 +77,7 @@
         </ion-item>
         <!-- <ion-item no-lines text-wrap class="user-introdection" >{{consultantBasicData.introduction}}</ion-item> -->
         <ion-item no-lines text-wrap class="user-introdection" [innerHTML]="assembleHTML(consultantBasicData.introduction)"></ion-item>
-        <ion-item no-lines class="info-rigth" 
-                  *ngIf="(consultantBasicData.skillList && consultantBasicData.skillList.length > 0) || 
+        <ion-item no-lines class="info-rigth" *ngIf="(consultantBasicData.skillList && consultantBasicData.skillList.length > 0) || 
                   (consultantBasicData.industryList &&  consultantBasicData.industryList.length>0)">
           <p class="info-other-label item-tags skills">
             <span calss="mt5" *ngFor="let skillList_item of consultantBasicData.skillList">{{skillList_item.asName}}</span>
@@ -92,7 +91,11 @@
         <!-- <ion-item class="contact-item mt15"> -->
         <div class="contact-info mt15">
           <div class="contact-info-cont">
-            <p class="contact-info-list">
+            <p class="content-info-title">
+              <ion-icon name="lock" style="display:inline-block;"></ion-icon>
+              <span style="display:block">框内信息仅个人可见</span>
+            </p>
+            <p class="contact-info-list" *ngIf="consultantBasicData.country || consultantBasicData.province || consultantBasicData.city || consultantBasicData.address">
               <ion-icon name="place"></ion-icon>
               <span>{{(consultantBasicData.country || '')+(consultantBasicData.province ||
                 '')+(consultantBasicData.city || '')+(consultantBasicData.address||'')}}</span>
@@ -191,7 +194,7 @@
         <p class="card-cont">{{workList_item.role}}</p>
       </div>
       <div class="card-item-label mt10">
-        <label>职责描述</label> 
+        <label>职责描述</label>
         <!-- <p class="card-cont">{{workList_item.workDescription}}</p> -->
         <p class="card-cont" [innerHTML]="assembleHTML(workList_item.workDescription)"></p>
       </div>
@@ -258,7 +261,7 @@
         <p class="card-cont">{{projectList_item.role}}</p>
       </div>
       <div class="card-item-label mt10">
-        <label>项目描述</label> 
+        <label>项目描述</label>
         <!-- <p class="card-cont">{{projectList_item.projectDetails}}</p> -->
         <p class="card-cont" [innerHTML]="assembleHTML(projectList_item.projectDetails)"></p>
       </div>
@@ -407,12 +410,13 @@
           <img style="width:66px;height:66px;" src="assets/imgs/pdf.png" *ngIf="formatTypes(resumeList_item.format) == 'pdf'">
         </label>
         <div class="card-cont">
-          <h5>{{resumeList_item.resumeName}}</h5>
-          <a href="{{resumeList_item.resumeUrl}}" style="text-decoration:none;">
+          <a href="{{resumeList_item.resumeUrl}}" style="text-decoration:none;" download="">
+            <h5>{{resumeList_item.resumeName}}</h5>
             <p>点击查看文件预览</p>
+            <p>{{(resumeList_item.size / 1048576).toPrecision(3) > 1?(resumeList_item.size / 1048576).toPrecision(3) +
+              '
+              MB':(resumeList_item.size / 1048576).toPrecision(3)*1024+' KB'}}</p>
           </a>
-          <p>{{(resumeList_item.size / 1048576).toPrecision(3) > 1?(resumeList_item.size / 1048576).toPrecision(3) + '
-            MB':(resumeList_item.size / 1048576).toPrecision(3)*1024+' KB'}}</p>
         </div>
         <ion-icon name="md-close" item-end color="ion-gray" (click)="onResumeDel(resumeList_item.arid)"></ion-icon>
       </div>

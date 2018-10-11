@@ -33,6 +33,7 @@ export class ProjectTimeSelectPage {
   public isBudgetPrice = false
   public isNoLanguage = false
   public isMaxBudget = false
+  public isMaxBudgetData = false
   customPopoverOptions: any = {
     header: 'Hair Color',
     subHeader: 'Select your hair color',
@@ -161,12 +162,17 @@ export class ProjectTimeSelectPage {
     this.isMaxBudget = !this.isMaxBudget
     return
   }
+  sureMaxBudgetData(){
+    this.isMaxBudgetData = !this.isMaxBudgetData
+    return
+  }
   /*保存数据并返回页面*/
   onSelectSubmit() {
     let callback = this.navParams.get('callback');
     var isnum = /^[0-9]*$/;
     var tennum = /^\d{1,2}$/;
     var fivenum = /^\d{1,5}$/;
+    var ninenum = /^\d{1,9}$/;
     if (this.field == 'workload_workloadUnit') {
       if (isnum.test(this.inputName) == false) {
         this.isBudgetDays = true
@@ -205,8 +211,8 @@ export class ProjectTimeSelectPage {
           this.isBudget = true
           return
         }
-        if (fivenum.test((this.budgetData.budget).toString()) == false) {
-          this.isMaxBudget = true
+        if (ninenum.test((this.budgetData.budget).toString()) == false) {
+          this.isMaxBudgetData = true
           return
         }
       }
