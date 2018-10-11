@@ -121,8 +121,9 @@
           </div>
           <div class="contant-item-right">
             <p>{{finance_item.introduction}}</p>
-            <p class="industryLabel">
-              <span *ngFor="let item of finance_item.industryList.slice(0,2)">{{item.alName}}</span>
+            <p class="industryLabel item-tags">
+              <span *ngFor="let item of finance_item.skillList.slice(0,2)">{{item.asName}}</span>
+              <span style="width:30px;">…</span>
             </p>
             <p>
               <span>工作经验：</span>
@@ -188,7 +189,8 @@
           <div class="contant-item-right">
             <p>{{financeAll_item.introduction}}</p>
             <p class="industryLabel">
-              <span *ngFor="let item of financeAll_item.industryList.slice(0,2)">{{item.alName}}</span>
+              <span *ngFor="let item of financeAll_item.skillList.slice(0,2)">{{item.asName}}</span>
+              <span style="width:30px;">…</span>
             </p>
             <p>
               <span>工作经验：</span>

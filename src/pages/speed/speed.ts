@@ -126,9 +126,9 @@ export class SpeedPage {
     this.changeDetectorRef.detectChanges();
   }
   // 阻止默认事件
-  touchmoveDefault(event) {
-    event.preventDefault();
-  }
+  // touchmoveDefault(event) {
+  //   event.preventDefault();
+  // }
   // 长按语音输入
   startTouch(event) {
     // var _this = this;
@@ -172,17 +172,30 @@ export class SpeedPage {
     this.START = new Date().getTime();
     console.log(this.START, 'getTime');
     this.recordTimer = setTimeout(() => {
-      wx.startRecord({
-        success: function () {
-          localStorage.rainAllowRecord = 'true';
-          wx.startRecord();
-          //  alert('录音开始'); 
-          return;
-        },
-        cancel: function () {
-          this.isRecord = false;
-        }
-      })
+      if (!localStorage.rainAllowRecord || localStorage.rainAllowRecord !== 'true') {
+        wx.startRecord({
+          success: function () {
+            localStorage.rainAllowRecord = 'true';
+            wx.stopRecord();
+            return;
+          },
+          cancel: function () {
+            this.isRecord = false;
+            // alert('用户拒绝授权录音');
+          }
+        });
+      }
+      // wx.startRecord({
+      //   success: function () {
+      //     localStorage.rainAllowRecord = 'true';
+      //     wx.startRecord();
+      //     //  alert('录音开始'); 
+      //     return;
+      //   },
+      //   cancel: function () {
+      //     this.isRecord = false;
+      //   }
+      // })
       localStorage.rainAllowRecord = 'true';
     }, 300);
     event.preventDefault();
@@ -192,10 +205,10 @@ export class SpeedPage {
     console.log(event + "************")
     // event.preventDefault();
     this.isRecord = false;
-    // this.END = new Date().getTime();
+    this.END = new Date().getTime();
     /*小于300ms，不录音*/
-    if ((new Date().getTime()- this.START) < 300) {
-      // this.END = 0;
+    if ((this.END  - this.START) < 300) {
+      this.END = 0;
       this.START = 0;
       wx.stopRecord({
         success: function (res) {

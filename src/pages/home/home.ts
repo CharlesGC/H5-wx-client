@@ -36,7 +36,6 @@ export class HomePage {
   public sausage: boolean;
   public mushrooms: boolean; 
   public attstate:any;
-
   constructor(public navCtrl: NavController, private swiperdata: MamenDataProvider, private industrydata: MamenDataProvider, private http: HttpClient,
     private skilldata: MamenDataProvider, private casedata: MamenDataProvider, private outstanddata: MamenDataProvider, private financedata: MamenDataProvider, private financeAlldata: MamenDataProvider) {
     this.IndustryArr = [];
