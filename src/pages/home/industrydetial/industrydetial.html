@@ -93,7 +93,7 @@
             <p>{{instry_skill.adviserName}}</p>
           </div>
           <div class="contant-item-right">
-            <p>{{instry_skill.introduction}}</p>
+            <p [innerHTML]="assembleHTML(instry_skill.introduction)"></p>
             <div class="industryLabel">
               <span class="span" *ngFor="let skill_right of instry_skill.skillList.slice(0,2)">{{skill_right.asName}}</span>
             </div>

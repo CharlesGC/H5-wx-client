@@ -239,7 +239,7 @@
     <div class="user-other-list">
       <p class="browser-file">查看规划相关文件</p>
       <h4 class="mt10">案例附件</h4>
-      <ion-card class="card-item" *ngFor="let resumeList_item of consultantDetails.resumeList">
+      <ion-card class="card-item" *ngFor="let resumeList_item of applicationDeatil.successCase">
         <div class="card-item-label">
           <label>
             <img style="width:66px;height:66px;" src="assets/imgs/doc.png" *ngIf="formatTypes(resumeList_item.format) == 'doc'">
@@ -248,9 +248,9 @@
             <img style="width:66px;height:66px;" src="assets/imgs/png.png" *ngIf="formatTypes(resumeList_item.format) == 'jpg'">
             <img style="width:66px;height:66px;" src="assets/imgs/pdf.png" *ngIf="formatTypes(resumeList_item.format) == 'pdf'">
           </label>
-          <a href="{{resumeList_item.resumeUrl}}" style="text-decoration:none;">
-            <div class="card-cont" data-src="resumeList_item.resumeUrl">
-              <h5>{{resumeList_item.resumeName}}</h5>
+          <a href="{{resumeList_item.annexUrl}}" style="text-decoration:none;">
+            <div class="card-cont" data-src="resumeList_item.annexUrl">
+              <h5>{{resumeList_item.annexName}}</h5>
               <p>点击查看文件预览</p>
               <p>{{(resumeList_item.size / 1048576).toPrecision(3) > 1?(resumeList_item.size / 1048576).toPrecision(3)+
                 ' MB':(resumeList_item.size / 1048576).toPrecision(3)+' KB'}}</p>

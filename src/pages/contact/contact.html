@@ -34,8 +34,10 @@
       </ion-thumbnail>
       <div class="title-name">
         <h2>{{user.nickName}}</h2>
-        <span class="user-type" *ngIf="user.status >= 4">已审核</span>
+        <span class="user-type" *ngIf="user.status == 4">已审核</span>
         <span class="user-type" *ngIf="user.status == 0">未审核</span>
+        <span class="user-type" *ngIf="user.status == 5">面试通过</span>
+        <span class="user-type" *ngIf="user.status == 6">项目通过</span>
       </div>
       <p class="title-skills-list mt10">
         <span>查看并修改个人资料</span>

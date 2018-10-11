@@ -29,10 +29,22 @@ export class DemandContentPage {
   }
 
   ionViewDidLoad() {
+    let elements = document.querySelectorAll(".tabbar");
+    if (elements != null) {
+      Object.keys(elements).map((key) => {
+        elements[key].style.display = 'flex';
+      });
+    }
     // this.getProjectListData(this.selected);
   }
 
   ionViewDidEnter() {
+    let elements = document.querySelectorAll(".tabbar");
+    if (elements != null) {
+      Object.keys(elements).map((key) => {
+        elements[key].style.display = 'flex';
+      });
+    }
     console.log('ionViewDidLoad DemandContentPage');
     const openId = window.sessionStorage.getItem('openId');
     let getAttentionUserInfoUrl = getAttentionUserInfo + '?openId=' + openId;

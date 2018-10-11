@@ -87,7 +87,7 @@
               </ul>
             </div>
             <div class="text_jinyan">工作经验：{{item.workingYears || '0年'}}年</div>
-            <p class="qiaochu-duc">{{item.introduction}}</p>
+            <p class="qiaochu-duc" [innerHTML]="assembleHTML(item.introduction)"></p>
           </div>
         </li>
       </div>
@@ -120,7 +120,7 @@
             <p>{{finance_item.adviserName}}</p>
           </div>
           <div class="contant-item-right">
-            <p>{{finance_item.introduction}}</p>
+            <p [innerHTML]="assembleHTML(finance_item.introduction)"></p>
             <p class="industryLabel">
               <span *ngFor="let item of finance_item.industryList.slice(0,2)">{{item.alName}}</span>
             </p>
@@ -186,7 +186,7 @@
             <p>{{financeAll_item.adviserName}}</p>
           </div>
           <div class="contant-item-right">
-            <p>{{financeAll_item.introduction}}</p>
+            <p [innerHTML]="assembleHTML(financeAll_item.introduction)"></p>
             <p class="industryLabel">
               <span *ngFor="let item of financeAll_item.industryList.slice(0,2)">{{item.alName}}</span>
             </p>

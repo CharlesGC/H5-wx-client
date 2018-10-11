@@ -347,7 +347,12 @@ page-tabs {
 }
 .back-button-icon-ios{
     padding: 0 4px 0 0;
+    font-size: 14px !important;
 }
+.ion-ios-arrow-back,.ion-md-arrow-back {
+    font-size: 14px !important;
+}
+
 .returnBtn{
     margin-left: 0px;
 }

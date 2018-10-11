@@ -107,6 +107,8 @@ export class ProjectBrowserPage {
   sureSuccess(){
     this.isSuccess =!this.isSuccess
     // this.navCtrl.pop()
+    let data = this.navParams.get('data');
+    this.getProjectListData(data.pid);
     this.navCtrl.popTo(this.navCtrl.getByIndex(1))
   }
   sureFailed(){

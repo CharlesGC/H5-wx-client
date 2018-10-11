@@ -12,6 +12,7 @@ import { ConsultantStageListPage } from '../my-project/consultant/consultant-sta
 import { ConsultantStageBrowserPage } from '../my-project/consultant/consultant-stage-browser/consultant-stage-browser';
 import { ProjectStageBrowserPage } from '../my-project/client/project-stage-browser/project-stage-browser'; 
 import { ProjectInvoiceListPage } from '../my-project/client/project-invoice-list/project-invoice-list';
+import { DemandContentPage } from '../demand-content/demand-content';
 
 /**
  * Generated class for the MessageCenterPage page.
@@ -89,7 +90,10 @@ export class MessageCenterPage {
     }
     //跳转到项目详情backType:2
     else if(data.backType == 2){
-        // this.props.history.push(`/project/${data.pid}`);
+      this.navCtrl.popTo(this.navCtrl.parent.select(1))
+      // this.navCtrl.setRoot(DemandContentPage);
+      // this.navCtrl.push(DemandContentPage);
+      // this.navCtrl.parent.select(1);
     }
     //跳转到项目详情backType:3
     else if(data.backType == 3){
@@ -141,7 +145,7 @@ export class MessageCenterPage {
         // this.navCtrl.push(ConsultantStageBrowserPage,{id: params.psid, pid: data.pid, programPrice: params.finalPrice});
       }
     }
-}
+  }
 
   /*跳转到详情页面*/
   goProjectBrowserPage(data) {
