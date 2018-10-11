@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { FormEditPage } from '../../contact/form-edit/form-edit';
-
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { hideAttentionMenuUrl, getAttentionUserInfo } from '../../../providers/requestUrl'
+declare var wx: any;
 /**
  * Generated class for the ProjectTimeSelectPage page.
  *
@@ -42,7 +44,7 @@ export class ProjectTimeSelectPage {
   public headerTitle = '信息编辑'
   public isProjectTime = false
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private http: HttpClient) {
   }
 
   ionViewDidLoad() {
@@ -100,8 +102,29 @@ export class ProjectTimeSelectPage {
       // this.languageList = value || [];
     }
     console.log(this.field, 'this.field');
+    this.isAttention();
   }
-
+  //隐藏底部分享菜单
+  isAttention() {
+    // let url = location.href.split('#')[0]; // 当前网页的URL，不包含#及其后面部分
+    // let data = { url: url };
+    this.http.get(hideAttentionMenuUrl).subscribe(res => {
+      if (res['code'] == 200) {
+        wx.config({
+          debug: false,
+          appId: res['data'].appid,
+          timestamp: res['data'].timestamp,
+          nonceStr: res['data'].nonceStr,
+          signature: res['data'].signature,
+          jsApiList: ['hideOptionMenu']
+        });
+        wx.ready(function () {
+          //wx.showOptionMenu();
+          wx.hideOptionMenu();
+        });
+      }
+    })
+  }
   /*额度、天数改变时*/
   onInputChange(type) {
     if (type == 0) {
@@ -149,11 +172,11 @@ export class ProjectTimeSelectPage {
     this.isProjectTime = !this.isProjectTime
     return
   }
-  sureMaxBudget(){
+  sureMaxBudget() {
     this.isMaxBudget = !this.isMaxBudget
     return
   }
-  sureMaxBudgetData(){
+  sureMaxBudgetData() {
     this.isMaxBudgetData = !this.isMaxBudgetData
     return
   }

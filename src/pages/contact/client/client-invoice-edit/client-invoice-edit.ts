@@ -4,7 +4,9 @@ import { MamenDataProvider } from '../../../../providers/mamen-data/mamen-data';
 
 import { FormEditPage } from '../../form-edit/form-edit'
 import { editCompanyPayTaxesUrl, delPayTaxesUrl } from '../../../../providers/requestUrl';
-
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { hideAttentionMenuUrl, getAttentionUserInfo } from '../../../../providers/requestUrl'
+declare var wx: any;
 /**
  * Generated class for the ClientInvoiceEditPage page.
  *
@@ -24,17 +26,17 @@ export class ClientInvoiceEditPage {
   public isDisabled: any
   public isSuccess = false
   public isfailed = false
-  constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider, private http: HttpClient) {
     this.invoiceData = {}
   }
-
-
+  ionViewDidEnter() {
+    this.isAttention();
+  }
   ionViewDidLoad() {
     this.invoiceData = this.navParams.get('companyDetaiData') || {};
     //console.log(this.invoiceData, 'this.invoiceData');
     //console.log(this.invoiceData, 'ionViewDidLoad ClientInvoiceEditPage');
   }
-
   /*跳转到数据处理页面*/
   goFormEditPage(field, value, type) {
     this.navCtrl.push(FormEditPage, { callback: this.setValue, value: value, field: field, type: type });
@@ -56,7 +58,7 @@ export class ClientInvoiceEditPage {
     this.isSuccess = !this.isSuccess
     this.navCtrl.pop()
   }
-  sureFailed(){
+  sureFailed() {
     this.isfailed = !this.isfailed
     return
   }
@@ -119,5 +121,27 @@ export class ClientInvoiceEditPage {
   onClose() {
     this.isDelInvoice = !this.isDelInvoice
     return
+  }
+
+  //隐藏底部分享菜单
+  isAttention() {
+    // let url = location.href.split('#')[0]; // 当前网页的URL，不包含#及其后面部分
+    // let data = { url: url };
+    this.http.get(hideAttentionMenuUrl).subscribe(res => {
+      if (res['code'] == 200) {
+        wx.config({
+          debug: false,
+          appId: res['data'].appid,
+          timestamp: res['data'].timestamp,
+          nonceStr: res['data'].nonceStr,
+          signature: res['data'].signature,
+          jsApiList: ['hideOptionMenu']
+        });
+        wx.ready(function () {
+          //wx.showOptionMenu();
+          wx.hideOptionMenu();
+        });
+      }
+    })
   }
 }

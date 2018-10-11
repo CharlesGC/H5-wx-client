@@ -1,14 +1,15 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { MamenDataProvider } from '../../../../providers/mamen-data/mamen-data';
-import { programObjectionUrl, customerNayStagePlanUrl, customerNayDocumentUrl } from '../../../../providers/requestUrl';
+import { programObjectionUrl, customerNayStagePlanUrl, customerNayDocumentUrl, hideAttentionMenuUrl, getAttentionUserInfo } from '../../../../providers/requestUrl';
+import { HttpClient, HttpParams } from '@angular/common/http';
 /**
  * Generated class for the ProjectProgramObjectionPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
-
+declare var wx: any;
 @IonicPage()
 @Component({
   selector: 'page-project-program-objection',
@@ -21,7 +22,7 @@ export class ProjectProgramObjectionPage {
   public tiptext: any
   public title = '请写下您的修改意见';
   public isFailed: any
-  constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider, private http: HttpClient) {
   }
 
   ionViewDidLoad() {
@@ -37,8 +38,29 @@ export class ProjectProgramObjectionPage {
     } else if (type == 'nayDocument') {
       this.title = '请写下您对该阶段交付物的修改意见'
     }
+    this.isAttention();
   }
-
+  //隐藏底部分享菜单
+  isAttention() {
+    // let url = location.href.split('#')[0]; // 当前网页的URL，不包含#及其后面部分
+    // let data = { url: url };
+    this.http.get(hideAttentionMenuUrl).subscribe(res => {
+      if (res['code'] == 200) {
+        wx.config({
+          debug: false,
+          appId: res['data'].appid,
+          timestamp: res['data'].timestamp,
+          nonceStr: res['data'].nonceStr,
+          signature: res['data'].signature,
+          jsApiList: ['hideOptionMenu']
+        });
+        wx.ready(function () {
+          //wx.showOptionMenu();
+          wx.hideOptionMenu();
+        });
+      }
+    })
+  }
   /*取消请求*/
   onCancelClick() {
     this.navCtrl.pop();

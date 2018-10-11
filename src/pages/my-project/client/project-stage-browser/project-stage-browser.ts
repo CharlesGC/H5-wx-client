@@ -6,9 +6,10 @@ import { MamenDataProvider } from '../../../../providers/mamen-data/mamen-data';
 import { ProjectPaymentRecordPage } from '../project-payment-record/project-payment-record';
 import { ProjectSubmitInvoicePage } from '../project-submit-invoice/project-submit-invoice';
 import { ProjectProgramObjectionPage } from '../project-program-objection/project-program-objection';
-import { getProjectStageDetailUrl, confirmStageUrl } from '../../../../providers/requestUrl';
+import { getProjectStageDetailUrl, confirmStageUrl, hideAttentionMenuUrl, getAttentionUserInfo } from '../../../../providers/requestUrl';
 import { ProjectDecumentBrowserPage } from '../project-decument-browser/project-decument-browser';
-
+import { HttpClient, HttpParams } from '@angular/common/http';
+declare var wx: any;
 /**
  * Generated class for the ProjectStageBrowserPage page.
  *
@@ -22,18 +23,18 @@ import { ProjectDecumentBrowserPage } from '../project-decument-browser/project-
   templateUrl: 'project-stage-browser.html',
 })
 export class ProjectStageBrowserPage {
-  public isTipsPrompt =false
-  public tipstext : any 
-  public isFailed : any
+  public isTipsPrompt = false
+  public tipstext: any
+  public isFailed: any
   public tiptext: any
   public isdisabled: any
   public stageType: any;
   public projectStageDetail = {};
-  constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider,public sanitizer:DomSanitizer) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider, public sanitizer: DomSanitizer, private http: HttpClient) {
     this.stageType = 0;
   }
   /*转换html标签处理*/
-  assembleHTML(strHTML:any){
+  assembleHTML(strHTML: any) {
     return this.sanitizer.bypassSecurityTrustHtml(strHTML);
   }
   ionViewDidLoad() {
@@ -46,15 +47,36 @@ export class ProjectStageBrowserPage {
   ionViewDidEnter() {
     let id = this.navParams.get('id')
     this.getProjectStageDetail(id);
+    this.isAttention();
   }
-
+  //隐藏底部分享菜单
+  isAttention() {
+    // let url = location.href.split('#')[0]; // 当前网页的URL，不包含#及其后面部分
+    // let data = { url: url };
+    this.http.get(hideAttentionMenuUrl).subscribe(res => {
+      if (res['code'] == 200) {
+        wx.config({
+          debug: false,
+          appId: res['data'].appid,
+          timestamp: res['data'].timestamp,
+          nonceStr: res['data'].nonceStr,
+          signature: res['data'].signature,
+          jsApiList: ['hideOptionMenu']
+        });
+        wx.ready(function () {
+          //wx.showOptionMenu();
+          wx.hideOptionMenu();
+        });
+      }
+    })
+  }
   /*跳转到添加支付记录页面*/
   goPaymentRecord(stageType) {
     let id = this.navParams.get('id')
     if (stageType == 2) {
-      this.navCtrl.push(ProjectPaymentRecordPage, { id: id, cid: this.projectStageDetail['cid'] ,data:this.projectStageDetail});
+      this.navCtrl.push(ProjectPaymentRecordPage, { id: id, cid: this.projectStageDetail['cid'], data: this.projectStageDetail });
     } else if (stageType == 6) {
-      this.navCtrl.push(ProjectSubmitInvoicePage, { id: id, data: this.projectStageDetail});
+      this.navCtrl.push(ProjectSubmitInvoicePage, { id: id, data: this.projectStageDetail });
     }
 
   }
@@ -86,18 +108,18 @@ export class ProjectStageBrowserPage {
       console.log('erros===', error);
     })
   }
-  sureTipsPrompt(){
+  sureTipsPrompt() {
     this.isTipsPrompt = true
     this.tipstext = '确认是否提交阶段交互物？'
   }
-  onReturnBack(){
+  onReturnBack() {
     this.isTipsPrompt = !this.isTipsPrompt
     return
   }
   /*确认阶段 、提出异议*/
   onAllStageSubmit(psid, type) {
-    if(this.isFailed == true){
-      this.isTipsPrompt =!this.isTipsPrompt
+    if (this.isFailed == true) {
+      this.isTipsPrompt = !this.isTipsPrompt
       return
     }
     // let projectStageDetailUrl = 'http://mamon.yemindream.com/mamon/customer/confirmStage';
@@ -107,7 +129,7 @@ export class ProjectStageBrowserPage {
       if (res.code == 200) {
         this.isTipsPrompt = !this.isTipsPrompt
         this.navCtrl.pop()
-      }else {
+      } else {
         this.tipstext = '操作失败，请稍后重试'
         this.isFailed = true
         //alert('请求出错:' + res.msg);

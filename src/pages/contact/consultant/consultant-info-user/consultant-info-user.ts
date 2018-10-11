@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { MamenDataProvider } from '../../../../providers/mamen-data/mamen-data';
-
 import { ConsultantBankAccountPage } from '../consultant-bank-account/consultant-bank-account'
 import { FormEditPage } from '../../form-edit/form-edit'
 import { editAdviserUrl, getAdviserInfoUrl } from '../../../../providers/requestUrl';
 import { ConsultantInfoAvatarPage } from '../../../../pages/contact/consultant/consultant-info-avatar/consultant-info-avatar'
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { hideAttentionMenuUrl, getAttentionUserInfo } from '../../../../providers/requestUrl'
+declare var wx: any;
 /**
  * Generated class for the ConsultantInfoUserPage page.
  *
@@ -21,13 +23,13 @@ import { ConsultantInfoAvatarPage } from '../../../../pages/contact/consultant/c
 export class ConsultantInfoUserPage {
   public userInfoData: any;
   public userAvatarPic: string;
-  public isContactAddress =false
+  public isContactAddress = false
   public isuName = false;
   public isSkill = false;
   public isComplete = false
   public salaryDown = false
   //public isWorkDay = false
-  constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider, private http: HttpClient) {
     this.userInfoData = {};
   }
   // sureNameBack() {
@@ -60,7 +62,7 @@ export class ConsultantInfoUserPage {
     this.userInfoData = this.navParams.get('consultantAdviser') || {}
     this.userInfoData['introduction'] = this.userInfoData['introduction'] ? this.userInfoData['introduction'].replace(/<br>/g, "\n") : '';
   }
-  ionViewWillEnter(){
+  ionViewWillEnter() {
     this.userInfoData['introduction'] = this.userInfoData['introduction'] ? this.userInfoData['introduction'].replace(/<br>/g, "\n") : '';
   }
 
@@ -91,9 +93,9 @@ export class ConsultantInfoUserPage {
       this.userInfoData[field] = value && value.length > 0 ? value.map(f => ({ ...f, ssid: f.id, asName: f.text })) : [];
     } else if (field == 'industryList') {
       this.userInfoData[field] = value && value.length > 0 ? value.map(f => ({ ...f, ilid: f.id, alName: f.text })) : [];
-    } else if(field == 'introduction'){
+    } else if (field == 'introduction') {
       this.userInfoData[field] = value ? value.replace(/<br>/g, "\n") : '';
-    }else {
+    } else {
       this.userInfoData[field] = value;
     }
   }
@@ -112,7 +114,7 @@ export class ConsultantInfoUserPage {
     this.salaryDown = !this.salaryDown
     return
   }
-  sureContactAddress(){
+  sureContactAddress() {
     this.isContactAddress = !this.isContactAddress
     return
   }
@@ -140,7 +142,7 @@ export class ConsultantInfoUserPage {
       this.isSkill = true;
       return;
     }
-    if(!this.userInfoData.address){
+    if (!this.userInfoData.address) {
       this.isContactAddress = true
       return
     }
@@ -150,8 +152,8 @@ export class ConsultantInfoUserPage {
     //   return
     // }
     // let getCompanyDetailUrl = 'http://mamon.yemindream.com/mamon/adviser/editAdviser';
-    let reg=new RegExp("\n","g");
-    let introduction = userInfoData.introduction ? userInfoData.introduction.replace(reg,"<br>") : '';
+    let reg = new RegExp("\n", "g");
+    let introduction = userInfoData.introduction ? userInfoData.introduction.replace(reg, "<br>") : '';
 
     let getCompanyDetailUrl = editAdviserUrl + '?openId=' + openId + '&avatar=' + userInfoData.avatar +
       '&nickName=' + (userInfoData.nickName || '') +
@@ -185,9 +187,9 @@ export class ConsultantInfoUserPage {
 
   }
   /*页面准备离开时触发*/
-  ionViewWillLeave(){
-    let reg=new RegExp("\n","g");
-    this.userInfoData.introduction = this.userInfoData.introduction ? this.userInfoData.introduction.replace(reg,"<br>") : '';
+  ionViewWillLeave() {
+    let reg = new RegExp("\n", "g");
+    this.userInfoData.introduction = this.userInfoData.introduction ? this.userInfoData.introduction.replace(reg, "<br>") : '';
   }
 
   getUrlParam(name) {
@@ -204,5 +206,31 @@ export class ConsultantInfoUserPage {
   getConsultantInfoData() {
     let url = getAdviserInfoUrl;
     // let url = 'http://mamon.yemindream.com/mamon/adviser/getAdviserInfo'
+  }
+
+  ionViewDidEnter() {
+    this.isAttention();
+  }
+
+  //隐藏底部分享菜单
+  isAttention() {
+    // let url = location.href.split('#')[0]; // 当前网页的URL，不包含#及其后面部分
+    // let data = { url: url };
+    this.http.get(hideAttentionMenuUrl).subscribe(res => {
+      if (res['code'] == 200) {
+        wx.config({
+          debug: false,
+          appId: res['data'].appid,
+          timestamp: res['data'].timestamp,
+          nonceStr: res['data'].nonceStr,
+          signature: res['data'].signature,
+          jsApiList: ['hideOptionMenu']
+        });
+        wx.ready(function () {
+          //wx.showOptionMenu();
+          wx.hideOptionMenu();
+        });
+      }
+    })
   }
 }

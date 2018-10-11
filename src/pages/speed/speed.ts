@@ -6,7 +6,8 @@ import { MamenDataProvider } from '../../providers/mamen-data/mamen-data';
 import { ProjectListPage } from '../../pages/my-project/client/project-list/project-list';
 import { ProjectEditStep1Page } from '../my-project/client/project-edit-step1/project-edit-step1';
 import { getWechatJsConfig, getUploadLocal, getSpeedrelease } from '../../providers/dataUrl';
-
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { hideAttentionMenuUrl, getAttentionUserInfo } from '../../providers/requestUrl'
 declare var wx: any;
 // declare var $: any;
 @IonicPage()
@@ -41,7 +42,7 @@ export class SpeedPage {
   // public Url:any;
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public WechatData: MamenDataProvider, public UploadData: MamenDataProvider,
-    public changeDetectorRef: ChangeDetectorRef, public speedVoiceData: MamenDataProvider) {
+    public changeDetectorRef: ChangeDetectorRef, public speedVoiceData: MamenDataProvider, private http: HttpClient) {
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad SpeedPage');
@@ -60,6 +61,28 @@ export class SpeedPage {
         elements[key].style.display = 'none';
       });
     }
+    this.isAttention();
+  }
+  //隐藏底部分享菜单
+  isAttention() {
+    // let url = location.href.split('#')[0]; // 当前网页的URL，不包含#及其后面部分
+    // let data = { url: url };
+    this.http.get(hideAttentionMenuUrl).subscribe(res => {
+      if (res['code'] == 200) {
+        wx.config({
+          debug: false,
+          appId: res['data'].appid,
+          timestamp: res['data'].timestamp,
+          nonceStr: res['data'].nonceStr,
+          signature: res['data'].signature,
+          jsApiList: ['hideOptionMenu']
+        });
+        wx.ready(function () {
+          //wx.showOptionMenu();
+          wx.hideOptionMenu();
+        });
+      }
+    })
   }
   //点击完整发布
   goRelease() {
@@ -126,9 +149,9 @@ export class SpeedPage {
     this.changeDetectorRef.detectChanges();
   }
   // 阻止默认事件
-  touchmoveDefault(event) {
-    event.preventDefault();
-  }
+  // touchmoveDefault(event) {
+  //   event.preventDefault();
+  // }
   // 长按语音输入
   startTouch(event) {
     // var _this = this;
@@ -172,17 +195,30 @@ export class SpeedPage {
     this.START = new Date().getTime();
     console.log(this.START, 'getTime');
     this.recordTimer = setTimeout(() => {
-      wx.startRecord({
-        success: function () {
-          localStorage.rainAllowRecord = 'true';
-          wx.startRecord();
-          //  alert('录音开始'); 
-          return;
-        },
-        cancel: function () {
-          this.isRecord = false;
-        }
-      })
+      if (!localStorage.rainAllowRecord || localStorage.rainAllowRecord !== 'true') {
+        wx.startRecord({
+          success: function () {
+            localStorage.rainAllowRecord = 'true';
+            wx.stopRecord();
+            return;
+          },
+          cancel: function () {
+            this.isRecord = false;
+            // alert('用户拒绝授权录音');
+          }
+        });
+      }
+      // wx.startRecord({
+      //   success: function () {
+      //     localStorage.rainAllowRecord = 'true';
+      //     wx.startRecord();
+      //     //  alert('录音开始'); 
+      //     return;
+      //   },
+      //   cancel: function () {
+      //     this.isRecord = false;
+      //   }
+      // })
       localStorage.rainAllowRecord = 'true';
     }, 300);
     event.preventDefault();
@@ -192,10 +228,10 @@ export class SpeedPage {
     console.log(event + "************")
     // event.preventDefault();
     this.isRecord = false;
-    // this.END = new Date().getTime();
+    this.END = new Date().getTime();
     /*小于300ms，不录音*/
-    if ((new Date().getTime()- this.START) < 300) {
-      // this.END = 0;
+    if ((this.END  - this.START) < 300) {
+      this.END = 0;
       this.START = 0;
       wx.stopRecord({
         success: function (res) {

@@ -5,12 +5,11 @@ import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-nati
 import { File } from '@ionic-native/file';
 import { FormEditPage } from '../../../contact/form-edit/form-edit';
 import { MamenDataProvider } from '../../../../providers/mamen-data/mamen-data';
-
 import { ProjectCollectBankPage } from '../../project-collect-bank/project-collect-bank';
-import { getPayMentByPsidUrl, addPayMentUrl } from '../../../../providers/requestUrl';
-
+import { getPayMentByPsidUrl, addPayMentUrl, hideAttentionMenuUrl, getAttentionUserInfo } from '../../../../providers/requestUrl';
 import { UploadfilePage } from '../../../uploadfile/uploadfile'
-
+import { HttpClient, HttpParams } from '@angular/common/http';
+declare var wx: any;
 /**
  * Generated class for the ProjectPaymentRecordPage page.
  *
@@ -35,9 +34,9 @@ export class ProjectPaymentRecordPage {
   public isComplete = false;
   public data = {};
   public isCompleteRecord = false
-  public tipstext :any
-  public isFailed :any
-  constructor(public navCtrl: NavController, public navParams: NavParams, private transfer: FileTransfer, private file: File, private Provider: MamenDataProvider) {
+  public tipstext: any
+  public isFailed: any
+  constructor(public navCtrl: NavController, public navParams: NavParams, private transfer: FileTransfer, private file: File, private Provider: MamenDataProvider, private http: HttpClient) {
   }
 
   ionViewDidLoad() {
@@ -46,7 +45,31 @@ export class ProjectPaymentRecordPage {
     this.data = this.navParams.get('data');
     console.log('ionViewDidLoad ProjectPaymentRecordPage');
   }
+  ionViewDidEnter() {
+    this.isAttention();
+  }
 
+  //隐藏底部分享菜单
+  isAttention() {
+    // let url = location.href.split('#')[0]; // 当前网页的URL，不包含#及其后面部分
+    // let data = { url: url };
+    this.http.get(hideAttentionMenuUrl).subscribe(res => {
+      if (res['code'] == 200) {
+        wx.config({
+          debug: false,
+          appId: res['data'].appid,
+          timestamp: res['data'].timestamp,
+          nonceStr: res['data'].nonceStr,
+          signature: res['data'].signature,
+          jsApiList: ['hideOptionMenu']
+        });
+        wx.ready(function () {
+          //wx.showOptionMenu();
+          wx.hideOptionMenu();
+        });
+      }
+    })
+  }
   fileupload() {
     // ionic 官方文档例子漏写了这句话
     // http://ionicframework.com/docs/native/file-transfer/
@@ -168,7 +191,7 @@ export class ProjectPaymentRecordPage {
     this.Provider.getMamenSwiperData(projectInvoiceDetailUrl).subscribe(res => {
       if (res.code == 200) {
         this.paymentRecordData = res.data;
-        console.log('paymentRecordData',this.paymentRecordData)
+        console.log('paymentRecordData', this.paymentRecordData)
         this.paymentRecordData['size'] = (this.paymentRecordData['size'] / 1048576).toPrecision(3)
 
         if (this.paymentRecordData['size'] > 1) {
@@ -207,12 +230,12 @@ export class ProjectPaymentRecordPage {
       console.log('erros===', error);
     })
   }
-  sureCompleteRecord(){
+  sureCompleteRecord() {
     this.isCompleteRecord = true
     let invoiceData = this.paymentRecordData;
     // let projectInvoiceDetailUrl = 'http://mamon.yemindream.com/mamon/customer/addPayMent';
-    if(!invoiceData['realPrice'] || !invoiceData['payer'] || !invoiceData['payerBank'] || 
-    !invoiceData['payerAccount'] || !invoiceData['payee'] || !invoiceData['payeeBank'] || !invoiceData['payeeAccount']) {
+    if (!invoiceData['realPrice'] || !invoiceData['payer'] || !invoiceData['payerBank'] ||
+      !invoiceData['payerAccount'] || !invoiceData['payee'] || !invoiceData['payeeBank'] || !invoiceData['payeeAccount']) {
       this.tipstext = '请填写完整信息';
       this.isFailed = true
       return;
@@ -221,13 +244,13 @@ export class ProjectPaymentRecordPage {
     this.isFailed = false
     return
   }
-  onCompanyDel(){
+  onCompanyDel() {
     this.isCompleteRecord = !this.isCompleteRecord
     return
   }
   /*添加支付记录提交*/
   goPaymentRecord() {
-    if(this.isFailed == true){
+    if (this.isFailed == true) {
       this.isCompleteRecord = !this.isCompleteRecord
       return
     }
@@ -248,7 +271,7 @@ export class ProjectPaymentRecordPage {
     this.Provider.getMamenSwiperData(projectInvoiceDetailUrl).subscribe(res => {
       if (res.code == 200) {
         console.log(res, '--------');
-        this.isCompleteRecord =!this.isCompleteRecord
+        this.isCompleteRecord = !this.isCompleteRecord
         this.paymentRecordData = res.data || {};
         this.navCtrl.pop();
       } else {

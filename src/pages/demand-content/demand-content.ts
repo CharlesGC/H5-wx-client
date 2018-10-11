@@ -1,9 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { DomSanitizer } from '@angular/platform-browser';
-
 import { MamenDataProvider } from '../../providers/mamen-data/mamen-data';
-
 import { ProjectBrowserPage } from '../my-project/client/project-browser/project-browser';
 import { ConsultantProjectBrowserPage } from '../my-project/consultant/consultant-project-browser/consultant-project-browser';
 import { demandListUrl, getAttentionUserInfo, hideAttentionMenuUrl } from '../../providers/requestUrl';

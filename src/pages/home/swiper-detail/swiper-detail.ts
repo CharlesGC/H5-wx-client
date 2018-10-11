@@ -34,7 +34,7 @@ export class SwiperDetailPage {
       this.title = "“麦盟趣镜”自由，更挑战！";
     } else if (this.index == 4) {
       this.title = "顾问之路高大上？其实很简单";
-    }else {
+    } else {
       this.title = "麦盟-自由顾问精英聚集地";
     }
   }

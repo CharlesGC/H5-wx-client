@@ -262,10 +262,10 @@ export class IndustrydetialPage {
             loadEvent.complete();
           }, 2000);
           /*如果已经是最后一页，则禁止上拉加载*/
-          if (res.data.list == 0 || res.data.list<15) {
+          if (res.data.list == 0 || res.data.list < 15) {
             console.log('加载完');
 
-            
+
             this.enabled = false;
           }
         }, error => {

@@ -4,8 +4,9 @@ import { DomSanitizer } from '@angular/platform-browser';
 
 import { MamenDataProvider } from '../../../../providers/mamen-data/mamen-data';
 import { ProjectProgramObjectionPage } from '../project-program-objection/project-program-objection';
-import { getProjectProgramDeatilUrl, confirmProgramUrl } from '../../../../providers/requestUrl';
-
+import { getProjectProgramDeatilUrl, confirmProgramUrl,hideAttentionMenuUrl, getAttentionUserInfo } from '../../../../providers/requestUrl';
+import { HttpClient, HttpParams } from '@angular/common/http';
+declare var wx: any;
 /**
  * Generated class for the ProjectProgramBrowserPage page.
  *
@@ -24,7 +25,7 @@ export class ProjectProgramBrowserPage {
   public tiptext: any
   public isFailed: any
   public projectProgramDetails = {};
-  constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider,public sanitizer:DomSanitizer) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider,public sanitizer:DomSanitizer,private http: HttpClient) {
   }
   /*转换html标签处理*/
   assembleHTML(strHTML:any){
@@ -37,9 +38,30 @@ export class ProjectProgramBrowserPage {
   }
   ionViewDidEnter() {
     let ppid = this.navParams.get('ppid');
-    this.getProjectListData(ppid)
+    this.getProjectListData(ppid);
+    this.isAttention();
   }
-
+ //隐藏底部分享菜单
+   isAttention() {
+     // let url = location.href.split('#')[0]; // 当前网页的URL，不包含#及其后面部分
+     // let data = { url: url };
+     this.http.get(hideAttentionMenuUrl).subscribe(res => {
+       if (res['code'] == 200) {
+         wx.config({
+           debug: false,
+           appId: res['data'].appid,
+           timestamp: res['data'].timestamp,
+           nonceStr: res['data'].nonceStr,
+           signature: res['data'].signature,
+           jsApiList: ['hideOptionMenu']
+         });
+         wx.ready(function () {
+           //wx.showOptionMenu();
+     wx.hideOptionMenu();
+         });
+       }
+     })
+   }
   getUrlParam(name) {
     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象  
     var r = window.location.search.substr(1).match(reg);  //匹配目标参数  

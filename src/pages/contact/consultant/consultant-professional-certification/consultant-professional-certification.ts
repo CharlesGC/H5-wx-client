@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { MamenDataProvider } from '../../../../providers/mamen-data/mamen-data';
-
 import { FormEditPage } from '../../form-edit/form-edit';
-import { addOrEditCertificationUrl, delCertificationUrl } from '../../../../providers/requestUrl';
+import { addOrEditCertificationUrl, delCertificationUrl, hideAttentionMenuUrl, getAttentionUserInfo } from '../../../../providers/requestUrl';
 import { UploadfilePage } from '../../../uploadfile/uploadfile'
+import { HttpClient, HttpParams } from '@angular/common/http';
+declare var wx: any;
 /**
  * Generated class for the ConsultantProfessionalCertificationPage page.
  *
@@ -29,7 +30,8 @@ export class ConsultantProfessionalCertificationPage {
   public isSubmit = false;
   public isDelete = false;
   public isComplete = false;
-  constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider, private http: HttpClient
+  ) {
     this.certificationListData = {};
   }
   sureBack() {
@@ -53,11 +55,11 @@ export class ConsultantProfessionalCertificationPage {
 
     if (this.certificationListData.urlSize > 1) {
       this.certificationListData.urlSize = this.certificationListData.urlSize + ' MB'
-    } else if(this.certificationListData.urlSize < 1){
+    } else if (this.certificationListData.urlSize < 1) {
       this.certificationListData.urlSize = this.certificationListData.urlSize * 1024 + ' KB'
     }
 
-    if(this.certificationListData['typeStr']){
+    if (this.certificationListData['typeStr']) {
       if (this.certificationListData['typeStr'].search(/doc/) !== -1 || this.certificationListData['typeStr'].search(/docx/) !== -1) {
         this.certificationListData['typeStr'] = 'assets/imgs/' + 'doc.png'
       } else if (this.certificationListData['typeStr'].search(/ppt/) !== -1 || this.certificationListData['typeStr'].search(/pptx/) !== -1) {
@@ -158,7 +160,7 @@ export class ConsultantProfessionalCertificationPage {
     this.filestatus = true;
     this.filetitle = name;
     this.fileurl = obj.url;
-    
+
     var a = obj.fileSize / 1048576;
     this.filesize = a.toPrecision(3);
     if (this.filesize > 1) {
@@ -186,5 +188,29 @@ export class ConsultantProfessionalCertificationPage {
     }
     this.certificationListData['typeStr'] = this.filetypeicon
   }
+  ionViewDidEnter() {
+    this.isAttention();
+  }
 
+  //隐藏底部分享菜单
+  isAttention() {
+    // let url = location.href.split('#')[0]; // 当前网页的URL，不包含#及其后面部分
+    // let data = { url: url };
+    this.http.get(hideAttentionMenuUrl).subscribe(res => {
+      if (res['code'] == 200) {
+        wx.config({
+          debug: false,
+          appId: res['data'].appid,
+          timestamp: res['data'].timestamp,
+          nonceStr: res['data'].nonceStr,
+          signature: res['data'].signature,
+          jsApiList: ['hideOptionMenu']
+        });
+        wx.ready(function () {
+          //wx.showOptionMenu();
+          wx.hideOptionMenu();
+        });
+      }
+    })
+  }
 }

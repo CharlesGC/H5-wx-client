@@ -12,7 +12,9 @@ import { ConsultantDocumentListPage } from '../consultant-document-list/consulta
 import { ConsultantCollectionListPage } from '../consultant-collection-list/consultant-collection-list';
 
 import { ProjectListPage } from '../../client/project-list/project-list'
-
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { hideAttentionMenuUrl, getAttentionUserInfo } from '../../../../providers/requestUrl'
+declare var wx: any;
 /**
  * Generated class for the ConsultantProgramListPage page.
  *
@@ -35,13 +37,13 @@ export class ConsultantProgramListPage {
   public tiptext: any
   public isFailed: any
   public isdisabled: any
-  public isAction:any;
-  public isCont:any;
+  public isAction: any;
+  public isCont: any;
   constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider,
-    public sanitizer:DomSanitizer) {
+    public sanitizer: DomSanitizer, private http: HttpClient) {
   }
   /*转换html标签处理*/
-  assembleHTML(strHTML:any){
+  assembleHTML(strHTML: any) {
     return this.sanitizer.bypassSecurityTrustHtml(strHTML);
   }
 
@@ -67,19 +69,19 @@ export class ConsultantProgramListPage {
       // this.projectDetails['appStatus'] != 6 && this.projectDetails['appStatus'] != 4 &&
       //   this.projectDetails['appStatus'] != 0 && this.projectDetails['appStatus'] != 1 &&
       //   this.projectDetails['appStatus'] != 2 && this.projectDetails['appStatus'] != 3 &&
-        this.navCtrl.push(ConsultantStageListPage, {
-          pid: this.projectDetails['pid'], status: status,
-          projectType: this.projectDetails['appStatus'], programPrice: this.projectDetails['finalPrice'], data: this.projectDetails
-        });
+      this.navCtrl.push(ConsultantStageListPage, {
+        pid: this.projectDetails['pid'], status: status,
+        projectType: this.projectDetails['appStatus'], programPrice: this.projectDetails['finalPrice'], data: this.projectDetails
+      });
     } else if (type == 4) {
       // this.projectDetails['appStatus'] != 0 && this.projectDetails['appStatus'] != 1 &&
       //   this.projectDetails['appStatus'] != 2 && this.projectDetails['appStatus'] != 3 &&
-        this.navCtrl.push(ConsultantDocumentListPage, { pid: this.projectDetails['pid'], status: status, data: this.projectDetails });
+      this.navCtrl.push(ConsultantDocumentListPage, { pid: this.projectDetails['pid'], status: status, data: this.projectDetails });
     } else if (type == 5) {
       // this.projectDetails['appStatus'] != 6 && this.projectDetails['appStatus'] != 4 &&
       //   this.projectDetails['appStatus'] != 0 && this.projectDetails['appStatus'] != 1 &&
       //   this.projectDetails['appStatus'] != 2 && this.projectDetails['appStatus'] != 3 &&
-        this.navCtrl.push(ConsultantCollectionListPage, { pid: this.projectDetails['pid'], status: status, data: this.projectDetails });
+      this.navCtrl.push(ConsultantCollectionListPage, { pid: this.projectDetails['pid'], status: status, data: this.projectDetails });
     }
   }
 
@@ -95,15 +97,37 @@ export class ConsultantProgramListPage {
     this.getProjectListData(pid);
     this.projectDetails = this.navParams.get('data') || {};
     this.getIsAction(this.projectDetails);
+    this.isAttention();
   }
 
-  getIsAction(data){
-    if(data.appStatus != 0 && data.appStatus != 1 && data.appStatus != 2 &&data.appStatus != 3){
+  //隐藏底部分享菜单
+  isAttention() {
+    // let url = location.href.split('#')[0]; // 当前网页的URL，不包含#及其后面部分
+    // let data = { url: url };
+    this.http.get(hideAttentionMenuUrl).subscribe(res => {
+      if (res['code'] == 200) {
+        wx.config({
+          debug: false,
+          appId: res['data'].appid,
+          timestamp: res['data'].timestamp,
+          nonceStr: res['data'].nonceStr,
+          signature: res['data'].signature,
+          jsApiList: ['hideOptionMenu']
+        });
+        wx.ready(function () {
+          //wx.showOptionMenu();
+          wx.hideOptionMenu();
+        });
+      }
+    })
+  }
+  getIsAction(data) {
+    if (data.appStatus != 0 && data.appStatus != 1 && data.appStatus != 2 && data.appStatus != 3) {
       this.isAction = true;
-    }else{
+    } else {
       this.isAction = false;
     }
-    console.log(this.isAction,'this.isActionthis.isAction')
+    console.log(this.isAction, 'this.isActionthis.isAction')
   }
 
   getUrlParam(name) {
@@ -124,10 +148,10 @@ export class ConsultantProgramListPage {
     this.Provider.getMamenSwiperData(projectDetailsUrl).subscribe(res => {
       if (res.code == 200) {
         this.projectProgramDetails = res.data;
-        if(!this.projectProgramDetails){
+        if (!this.projectProgramDetails) {
           this.isCont = true;
           this.projectProgramDetails = {};
-        }else{
+        } else {
           this.isCont = false;
         }
         if (!this.projectProgramDetails) return;
@@ -170,7 +194,7 @@ export class ConsultantProgramListPage {
     }
 
   }
-  sureTipPrompt(){
+  sureTipPrompt() {
     this.isTipPrompt = true
     this.tiptext = '确认提交该方案吗？'
     return
@@ -191,8 +215,8 @@ export class ConsultantProgramListPage {
         this.isTipPrompt = !this.isTipPrompt;
         this.navCtrl.pop();
       } else {
-        this.tiptext= '操作失败，请稍后再试'
-        this.isFailed= true
+        this.tiptext = '操作失败，请稍后再试'
+        this.isFailed = true
         // this.isdisabled = ''
         //console.log('请求出错:' + res.msg);
       }
@@ -209,7 +233,7 @@ export class ConsultantProgramListPage {
     }
     this.navCtrl.popTo(this.navCtrl.getByIndex(1))
   }
-  onReturnBack(){
+  onReturnBack() {
     this.isTipPrompt = !this.isTipPrompt
     return
   }
