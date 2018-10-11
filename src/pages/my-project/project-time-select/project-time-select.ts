@@ -112,24 +112,15 @@ export class ProjectTimeSelectPage {
 
   /*选择发生变化时执行*/
   onSelectedClick(type) {
-
     this.selected = type;
     //预算方式改变时重置默认值
     if (type == 0) {
       this.budgetData.budgetDay = null;
       this.budgetData.budget = (this.budgetData.workload || 0) * (this.budgetData.budgetDay || 0);
       this.budgetData.workload = null;
-      // this.isCoins1 = true;
-      // this.isCoins2 = false;
-      // this.isCard1 = true;
-      // this.isCard2 = false;
     } else {
       // this.budgetData.budget = this.budgetData.budget;
       this.budgetData.budget = null;
-      // this.isCoins1 = false;
-      // this.isCoins2 = true;
-      // this.isCard1 = false;
-      // this.isCard2 = true;
     }
   }
 

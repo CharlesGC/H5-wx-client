@@ -108,7 +108,6 @@ export class SpeedPage {
           spinner1[i]['style'].display = 'none';
           spinner[i]['style'].display = 'block';
         }
-
       } else {
         spinner1[i]['style'].display = 'none';
         spinner[i]['style'].display = 'block';
@@ -176,7 +175,6 @@ export class SpeedPage {
       wx.startRecord({
         success: function () {
           localStorage.rainAllowRecord = 'true';
-          // this.isRecord = true;
           wx.startRecord();
           //  alert('录音开始'); 
           return;
@@ -185,7 +183,7 @@ export class SpeedPage {
           this.isRecord = false;
         }
       })
-      // localStorage.rainAllowRecord = 'true';
+      localStorage.rainAllowRecord = 'true';
     }, 300);
     event.preventDefault();
   }
@@ -194,10 +192,10 @@ export class SpeedPage {
     console.log(event + "************")
     // event.preventDefault();
     this.isRecord = false;
-    this.END = new Date().getTime();
+    // this.END = new Date().getTime();
     /*小于300ms，不录音*/
-    if ((this.END- this.START) < 300) {
-      this.END = 0;
+    if ((new Date().getTime()- this.START) < 300) {
+      // this.END = 0;
       this.START = 0;
       wx.stopRecord({
         success: function (res) {

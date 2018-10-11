@@ -143,6 +143,7 @@ page-swiper-detail {
                     font-family: PingFangSC;
                     text-align: left;
                     font-weight: Regular;
+                    margin-top: -15px;
                     p:nth-child(2) {
                         margin-top: 20px;
                     }
@@ -295,6 +296,7 @@ page-swiper-detail {
                 .detailTwo-label3 {
                     margin-top: 36px;  
                     .label3-img {
+                        margin-top: 26px;
                         .img-text {
                             margin-top: 10px;
                         }
@@ -349,14 +351,22 @@ page-swiper-detail {
                     margin-top: 38px;
                 }
                 .detailThree-decription {
-                    p {
-                        margin-top: 30px;
+                    p:nth-child(6) {
+                        padding-bottom: 30px;
                     }
+                    p {
+                        margin-top: 20px;
+                        padding: 0 10px;
+                    }
+                }
+                .Bc2 {
+                    border: 1px solid #c2c2c2;
                 }
                 .detailThree-img2 {
                     margin: 28px 0 24px 0;
                 }
                 .taset {
+                    margin-top: 30px;
                     p {
                         margin: 0;
                     }
@@ -364,7 +374,6 @@ page-swiper-detail {
                 .detailThree-border {
                     height: 20px;
                     background-color: #FF6536;
-                    margin-top: 40px;
                 }
             }
             .detailFive {
@@ -388,7 +397,7 @@ page-swiper-detail {
                        }
                     }
                     p {
-                        padding-left: 40px;
+                        padding-left: 28px;
                         padding-right: 60px;
                     }
                 }
@@ -396,7 +405,7 @@ page-swiper-detail {
                     margin-top: 30px;
                 }
                 .detailFive-img3 {
-                    margin-top: 36px;
+                    margin-top: 20px;
                     margin-bottom: 22px;
                     .top {
                         position: relative;
@@ -428,15 +437,26 @@ page-swiper-detail {
                     margin-top: 40px;
                 }
                 .dashed {
-                    height: 220px;
+                    height: 210px;
                     width: 100%;
                     margin-top: 40px;
                     border: 1px dashed #979797;
                     border-radius: 8px;
                     position: relative;
-                    .detailFive-decription1 {
-                        padding:0 10px;
+                    .mt26 {
+                        padding: 0 10px;
+                        margin-top: 26px;
+                        margin-bottom: 44px;
+                        p {
+                            margin: 0;
+                        }
+                        p:nth-child(2) {
+                            margin-top: 30px;
+                        }
                     }
+                    // .detailFive-decription1 {
+                    //     padding:0 10px;
+                    // }
                     .dashed-img {
                         img {
                             width: 45px;
