@@ -121,8 +121,6 @@
           </div>
           <div class="contant-item-right">
             <p [innerHTML]="assembleHTML(finance_item.introduction)"></p>
-            <p class="industryLabel">
-              <span *ngFor="let item of finance_item.industryList.slice(0,2)">{{item.alName}}</span>
             <p class="industryLabel item-tags">
               <span *ngFor="let item of finance_item.skillList.slice(0,2)">{{item.asName}}</span>
               <span style="width:30px;">…</span>

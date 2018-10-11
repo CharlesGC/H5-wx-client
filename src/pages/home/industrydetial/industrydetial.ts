@@ -94,7 +94,7 @@ export class IndustrydetialPage {
   }
   // 财务审计
   getfinanceInfo() {
-    this.financedata.getfinanceData(getfinanceUrl, 1, 1, 999).subscribe(
+    this.financedata.getfinanceData(getfinanceUrl, 2, 1, 999).subscribe(
       res => {
         this.financeAllArr = res.data
       }, error => {
