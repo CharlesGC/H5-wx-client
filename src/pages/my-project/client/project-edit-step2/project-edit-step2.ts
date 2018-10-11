@@ -100,11 +100,14 @@ export class ProjectEditStep2Page {
 
   sureSubmit() {
     this.isSubmit = !this.isSubmit
-    if(this.gotype == 1){
-      // this.navCtrl.push(ProjectBrowserPage);
-    }else{
-      this.navCtrl.push(ProjectListPage);
-    }
+    return
+    // if(this.gotype == 1){
+    //   this.navCtrl.push(ProjectBrowserPage);
+    //   return
+    // }else{
+    //   this.navCtrl.push(ProjectListPage);
+    //   return
+    // }
   }
   sureFailed() {
     this.isfailed = !this.isfailed

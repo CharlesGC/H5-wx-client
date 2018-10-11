@@ -10,13 +10,12 @@ import { IndustrymorePage } from '../industrymore/industrymore';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { CasemorePage } from "./casemore/casemore";
 // declare var onBridgeReady;
-
 // import { ViewChild } from '@angular/core';
-
 // import { Slides } from 'ionic-angular';
 import { getswipreUrl, getindustryUrl, getskillUrl, getcaseUrl, getoutstandingUrl, getfinanceUrl, getfinanceAllUrl } from '../../providers/dataUrl';
 import {hideAttentionMenuUrl, getAttentionUserInfo } from '../../providers/requestUrl'
 declare var wx: any;
+
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -180,6 +179,7 @@ export class HomePage {
     let getAttentionUserInfoUrl = getAttentionUserInfo + '?openId=' + openId;
     this.http.get(getAttentionUserInfoUrl).subscribe(res=>{
       this.attstate = res['data'].subscribe;
+      console.log(res,'1111222233334444')
     });
     this.isAttention();
   }

@@ -56,9 +56,10 @@ export class ProjectEditStep3Page {
   sureSubmit() {
     this.isSubmit = !this.isSubmit
     if (this.gotype == 1) {
-      this.navCtrl.push(ProjectBrowserPage);
+      this.navCtrl.push(ProjectBrowserPage,{data:this.projectData});
     } else {
-      this.navCtrl.push(ProjectListPage);
+      // this.navCtrl.push(ProjectListPage);
+      return
     }
 
   }
@@ -153,16 +154,13 @@ export class ProjectEditStep3Page {
 
   /*列表编辑*/
   goFormEditPage(field, value, type) {
-
     if (field == 'skillList') {
-
       value = value && value.length ? value.map(d => ({ id: d.psid || d.id, text: d.skillName || d.text })) : [];
       console.log(value, '============');
     } else if (field == 'industryList') {
       value = value && value.length ? value.map(d => ({ id: d.piid || d.id, text: d.industryName || d.text })) : [];
       console.log(value, 'industryListindustryListindustryListindustryList');
     }
-
     if (type == 'timeSelect') {
       this.navCtrl.push(ProjectTimeSelectPage, { callback: this.setValue, value: value, field: field, type: type });
     } else {
@@ -287,8 +285,8 @@ export class ProjectEditStep3Page {
 
   /*功能之后跳转*/
   goClientProjectPage() {
-    this.navCtrl.push(ProjectListPage);
     this.isShow = false;
+    this.navCtrl.push(ProjectListPage);
   }
   /*点击返回快速发布*/
   goSpeedPage() {
@@ -297,8 +295,8 @@ export class ProjectEditStep3Page {
   }
   /*跳转到快速发布页面*/
   goClientProjectSpeedPage() {
-    this.navCtrl.push(SpeedPage);
     this.isSpeed = false;
+    this.navCtrl.push(SpeedPage);
   }
   /*点击返回*/
   onCompanyDel() {

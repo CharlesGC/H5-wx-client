@@ -28,6 +28,7 @@ export class ConsultantStageBrowserPage {
   public stageType:any;
   public projectStageDetail = {};
   public isdis:any;
+  public isSubmitFailed =false
   constructor(public navCtrl: NavController, public navParams: NavParams,private Provider:MamenDataProvider,public sanitizer:DomSanitizer) {
     this.stageType = 0;
   }
@@ -120,6 +121,10 @@ export class ConsultantStageBrowserPage {
     this.isStage = !this.isStage
     return
   }
+  onSubmitFailed(){
+    this.isSubmitFailed = !this.isSubmitFailed;
+    return
+  }
   /*提交阶段请求*/
   onStageSubmit() {
     let psid = this.projectStageDetail['psid'];
@@ -130,9 +135,8 @@ export class ConsultantStageBrowserPage {
       if(res.code==200) {
         this.isStage = !this.isStage;
         this.navCtrl.pop();
-      }else if(res.code == 207) {
-        window.localStorage.removeItem('openId');
       }else{
+        this.isSubmitFailed = true;
         console.log('请求出错:'+res.msg);
       }
     },error=>{

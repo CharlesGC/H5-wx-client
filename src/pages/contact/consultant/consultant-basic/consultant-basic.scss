@@ -192,6 +192,20 @@ page-consultant-basic {
         }
         .contact-info-cont {
             padding: 15px 20px;
+            .content-info-title{
+                text-align: center;
+                ion-icon{
+                    width: 16px;
+                    height: 16px;
+                    color: #FF7E57;
+                }
+                span{
+                    font-size: 10px;
+                    line-height: 14px;
+                    font-family: PingFangSC;
+                    color: #9B9B9B;
+                }
+            }
             p {
                 font-family: PingFangSC;
                 font-size: 12px;
@@ -470,7 +484,7 @@ page-consultant-basic {
             .modal-content {
                 overflow: auto;
                 text-align: center;
-                font-size: 12px;
+                font-size: 14px;
                 line-height: 1.8;
                 font-weight: 500;
                 p {

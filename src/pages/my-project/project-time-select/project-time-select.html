@@ -177,7 +177,7 @@
             </ion-item>
         </ion-list>
         <p class="browser-file-tip">具备 12 年以上的业务或咨询行业工作经验，是某一行业或领域公认的专家或意见领袖，可引导企业客户或项目团队进行问题专项讨论或研究，从而达成或超出项目预期。
-            </p>
+        </p>
     </div>
 
     <!--项目预算-->
@@ -385,10 +385,28 @@
             </div>
             <div class="modal-title">提示</div>
             <div class="modal-content">
-                <p>金额最大不能超过五位整数</p>
+                <p>日薪单日金额最大不能超过五位整数</p>
             </div>
             <div class="modal-footer">
                 <button ion-button full large (click)="sureMaxBudget()">确定</button>
+                <!-- <button ion-button full large (click)="onCompanyDel()" class="btn-delete">返回</button> -->
+            </div>
+        </div>
+    </div>
+</div>
+<div class="phonebind-modal" [hidden]="!isMaxBudgetData">
+    <div class="modal-bg"></div>
+    <div class="modal-box">
+        <div class="modal-top">
+            <div class="modal-top-close">
+                <!-- <ion-icon ios="ios-close" md="md-close" item-rigth (click)="onClose()" color=""></ion-icon> -->
+            </div>
+            <div class="modal-title">提示</div>
+            <div class="modal-content">
+                <p>固定单价金额最大不能超过九位整数</p>
+            </div>
+            <div class="modal-footer">
+                <button ion-button full large (click)="sureMaxBudgetData()">确定</button>
                 <!-- <button ion-button full large (click)="onCompanyDel()" class="btn-delete">返回</button> -->
             </div>
         </div>

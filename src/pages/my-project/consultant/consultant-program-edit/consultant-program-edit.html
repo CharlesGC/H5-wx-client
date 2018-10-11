@@ -23,13 +23,13 @@
     </ion-item>
   </ion-list>
   <ion-list class="list-item-flex mt10">
-    <ion-item (click)="goFormEditPage('programDescription',programData.programDescription,'textarea')">
+    <ion-item no-lines (click)="goFormEditPage('programDescription',programData.programDescription,'textarea')">
       <label>方案描述
           <span class="required-field ml5">(必填)</span>
       </label>
-      <p item-right>
-        <span class="item-value">{{programData.programDescription || '方案的详情描述'}}</span>
-        <ion-icon class="icon" name="arrow-forward"></ion-icon>
+      <p item-right class="with0">
+        <span class="item-value s100">{{programData.programDescription || '方案的详情描述'}}</span>
+        <ion-icon class="icon m6" name="arrow-forward"></ion-icon>
       </p>
     </ion-item>
     <ion-item no-lines (click)="goFormEditPage('deliverable',programData.deliverable,'textarea')">

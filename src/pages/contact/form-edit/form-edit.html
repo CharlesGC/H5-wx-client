@@ -79,7 +79,7 @@
                 [(ngModel)]="inputName" [cancelText]="'取消'" [doneText]="'完成'"></ion-multi-picker>
         </ion-item>
         <ion-item *ngIf="fieldType == 'textarea'" no-lines>
-            <textarea id="textareaValue" placeholder="请输入文本内容" class="item-textarea" [(ngModel)]="inputName"></textarea>
+            <textarea id="textareaValue" placeholder="请输入文本内容，字数上限300字" class="item-textarea" [(ngModel)]="inputName" maxlength="300"></textarea>
         </ion-item>
         <ion-item class="none-margin bg-black" *ngIf="fieldType == 'date'" no-lines>
             <ion-label>请选择时间</ion-label>

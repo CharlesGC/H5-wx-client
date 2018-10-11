@@ -4,7 +4,6 @@ import { MamenDataProvider } from '../../providers/mamen-data/mamen-data';
 
 import { ContactPage } from '../contact/contact';
 import { getAddEmailUrl } from '../../providers/requestUrl';
-
 /**
  * 
  * Generated class for the AddEmailPage page.
@@ -12,7 +11,6 @@ import { getAddEmailUrl } from '../../providers/requestUrl';
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
-
 @IonicPage()
 @Component({
   selector: 'page-add-email',
@@ -48,18 +46,18 @@ export class AddEmailPage {
     }
 
     let getPhoneCodeUrl = getAddEmailUrl + '?openId=' + openId + '&mail=' + mail.value;
-      this.Provider.getMamenSwiperData(getPhoneCodeUrl).subscribe(res => {
-        if (res.code == 200) {
-          // this.navCtrl.push(ChooseIdentityPage);
-          // alert('绑定成功！');
-          // this.navCtrl.push(ContactPage);
-          this.isEmail = true
-        } else {
-          //alert('请求出错：'+res.msg)
-        }
-      }, error => {
-        console.log('erros===', error);
-      })
+    this.Provider.getMamenSwiperData(getPhoneCodeUrl).subscribe(res => {
+      if (res.code == 200) {
+        // this.navCtrl.push(ChooseIdentityPage);
+        // alert('绑定成功！');
+        // this.navCtrl.push(ContactPage);
+        this.isEmail = true
+      } else {
+        //alert('请求出错：'+res.msg)
+      }
+    }, error => {
+      console.log('erros===', error);
+    })
 
   }
 
