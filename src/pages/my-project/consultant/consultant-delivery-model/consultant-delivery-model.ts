@@ -68,7 +68,7 @@ export class ConsultantDeliveryModelPage {
     this.isTrackingNumber = !this.isTrackingNumber
     return
   }
-  sureContent() {    
+  sureContent() {
     let deliveryModelData = this.deliveryModelData;
 
     if (!deliveryModelData['logisticsCompany']) {
@@ -90,7 +90,7 @@ export class ConsultantDeliveryModelPage {
     this.isContent = !this.isContent
     return
   }
-  sureFailed(){
+  sureFailed() {
     this.isFailed = !this.isFailed
     return
   }
@@ -107,7 +107,6 @@ export class ConsultantDeliveryModelPage {
     //   this.isTrackingNumber = true
     //   return;
     // }
-
     // let projectStageDetailUrl = 'http://mamon.yemindream.com/mamon/adviser/applyMoney';
     const openId = window.sessionStorage.getItem('openId') || this.getUrlParam('openId');
     let projectStageDetailUrl = applyMoneyUrl + '?openId=' + openId + '&pid=' + pid + '&psid=' + psid +
@@ -119,10 +118,9 @@ export class ConsultantDeliveryModelPage {
       '&payeeBank=' + deliveryModelData['bankAccount'] +
       '&payeeAccount=' + deliveryModelData['account'] +
       '&realPrice=' + deliveryModelData['price'];
-
-    this.isContent = !this.isContent
     this.Provider.getMamenSwiperData(projectStageDetailUrl).subscribe(res => {
       if (res.code == 200) {
+        this.isContent = !this.isContent
         //alert('操作功能！');
         this.navCtrl.pop();
         // this.isSubmit = true

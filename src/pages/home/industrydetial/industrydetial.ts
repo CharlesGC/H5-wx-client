@@ -3,7 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { MamenDataProvider } from '../../../providers/mamen-data/mamen-data';
 import { getindustryUrl, getskillUrl, getskilltwoUrl, getSearch, getfinanceAllUrl, getfinanceUrl, getoutstandingUrl } from '../../../providers/dataUrl';
 import { ProjectConsultantBrowserPage } from '../../my-project/client/project-consultant-browser/project-consultant-browser';
-import { hideAttentionMenuUrl,getAttentionUserInfo } from '../../../providers/requestUrl'
+import { hideAttentionMenuUrl, getAttentionUserInfo } from '../../../providers/requestUrl'
 import { HttpClient, HttpParams } from '@angular/common/http';
 declare var wx: any;
 @IonicPage()
@@ -37,13 +37,13 @@ export class IndustrydetialPage {
   public id: any;
   public name: any;
   public financeAllArr = [];
-  public BlurInput:any;
-  public attstate:boolean;
+  public BlurInput: any;
+  public attstate: boolean;
   // public bottom = '11110'
   constructor(public navCtrl: NavController, public navParams: NavParams, public IndustryMoreData: MamenDataProvider,
     public SkillLabelMoreData: MamenDataProvider,
     public Skilltwolabel: MamenDataProvider, public IndustrySearch: MamenDataProvider,
-    public financedata: MamenDataProvider,private http: HttpClient) {
+    public financedata: MamenDataProvider, private http: HttpClient) {
   }
   ionViewDidLoad() {
     //this.doRefresh('');
@@ -69,53 +69,14 @@ export class IndustrydetialPage {
       this.getoutstandingInfo();
     }
   }
-
-  ionViewDidEnter(){
+  ionViewDidEnter() {
     const openId = window.sessionStorage.getItem('openId');
     let getAttentionUserInfoUrl = getAttentionUserInfo + '?openId=' + openId;
-    this.http.get(getAttentionUserInfoUrl).subscribe(res=>{
+    this.http.get(getAttentionUserInfoUrl).subscribe(res => {
       this.attstate = res['data'].subscribe;
     });
     this.isAttention();
   }
-  // 行业更多数据
-  // getLabelMore(industryType, pageNum, pageSize) {
-  //   this.IndustryMoreData.getIndustryMoreData(getindustryUrl, industryType, pageNum, pageSize).subscribe(
-  //     res => {
-  //       if (this.industryNameChecked == undefined) {
-  //         this.IndustrydetialArr = res.data.list;
-  //         // console.log(this.IndustrydetialArr, '行业更多数据');
-  //       } else {
-  //         for (var i = 0; i < res.data.list.length; i++) {
-  //           if (res.data.list[i].industryName == this.industryNameChecked) {
-  //             this.IndustrydetialArr.push(res.data.list[i]);
-  //           }
-  //         }
-  //       }
-  //     }, error => {
-  //       console.log(error);
-  //     }
-  //   )
-  // }
-  // 技能更多
-  // getSkillCheckd(Skilltype, pageNum, pageSize) {
-  //   this.SkillLabelMoreData.getSkillLabelMoreData(getskillUrl, Skilltype, pageNum, pageSize).subscribe(
-  //     res => {
-  //       if (this.skiiNameChecked == undefined) {
-  //         this.IndustrydetialArr = res.data.list;
-  //         // console.log(this.IndustrydetialArr, '技能更多')
-  //       } else {
-  //         for (var i = 0; i < res.data.list.length; i++) {
-  //           if (res.data.list[i].fName == this.skiiNameChecked) {
-  //             this.IndustrydetialArr.push(res.data.list[i]);
-  //           }
-  //         }
-  //       }
-  //     }, error => {
-  //       console.log(error);
-  //     }
-  //   )
-  // }
   // 行业翘楚
   getoutstandingInfo() {
     this.financedata.getoutstandingData(getoutstandingUrl, 1, 1, 999).subscribe(
@@ -140,7 +101,7 @@ export class IndustrydetialPage {
   getfinanceAllInfo() {
     this.financedata.getindustryAllData(getfinanceAllUrl, 1, 1, 999).subscribe(
       res => {
-        this.financeAllArr = res.data; 
+        this.financeAllArr = res.data;
       }, error => {
         console.log(error);
       }
@@ -266,37 +227,48 @@ export class IndustrydetialPage {
   }
   //下拉刷新界面
   doRefresh(refresher) {
-    setTimeout(() => {
-      console.log('加载完成后，关闭刷新');
-      refresher.complete();
-      //toast提示
-      //alert("加载成功");
-    }, 2000);
+    this.pageNum = 0;
+    this.enabled = true;
+    this.IndustrySearch.getSearchAdviserList(getSearch, this.industryId = 0, this.firstSkillId = 0,
+      this.secondSkillId = 0, this.search = '', this.pageNum = 0, this.pageSize = 15).subscribe(
+        res => {
+          this.financeAllArr = res.data && res.data.list ? res.data.list : [];
+          /*如果已经是最后一页，则禁止上拉加载*/
+          setTimeout(() => {
+            this.IndustrydetialArr = res.data.list;
+            refresher && refresher.cancel();
+            console.log('刷新成功')
+          }, 2000);
+        }, error => {
+          console.log(error);
+          refresher && refresher.cancel();
+        }
+      )
   }
   // 上拉加载
-  // loadMore(loadEvent){
-  //   let newArr = [];
-  //   this.pageNum++;
-  //   this.IndustryMoreData.getIndustryMoreData(getindustryUrl,1,this.pageNum,this.pageSize).subscribe(
-  //       res=>{
-  //         newArr = this.IndustrydetialArr.concat(res.data.list);
-  //       this.IndustrydetialArr = newArr;
-  //       setTimeout(() => {
-  //         loadEvent.complete();
-  //       }, 2000);
-  //       /*如果已经是最后一页，则禁止上拉加载*/
-  //         if( res.data.list == 0){
-  //           console.log('加载完');
-  //           this.enabled=false;
-  //         }
-  //       },error=>{
-  //         console.log(error);
-  //         this.pageNum--;
-  //         loadEvent.complete();  
-  //         console.log('加载失败');
-  //       }
-  //   )
-  // }
+  loadMore(loadEvent) {
+    //   let newArr = [];
+    this.pageNum++;
+    this.IndustrySearch.getSearchAdviserList(getSearch, this.industryId = 0, this.firstSkillId = 0,
+      this.secondSkillId = 0, this.search = '', this.pageNum = 0, this.pageSize = 15).subscribe(
+        res => {
+          this.financeAllArr = res.data && res.data.list ? res.data.list : [];
+          setTimeout(() => {
+            loadEvent.complete();
+          }, 2000);
+          /*如果已经是最后一页，则禁止上拉加载*/
+          if (res.data.list == 0 || res.data.list<15) {
+            console.log('加载完');
+
+            
+            this.enabled = false;
+          }
+        }, error => {
+          console.log(error);
+          loadEvent.complete();
+        }
+      )
+  }
 
   //隐藏底部分享菜单
   isAttention() {

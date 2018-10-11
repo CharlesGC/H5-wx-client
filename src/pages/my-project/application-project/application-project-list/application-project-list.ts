@@ -22,6 +22,18 @@ export class ApplicationProjectListPage {
 
   ionViewDidLoad() {
     //console.log('ionViewDidLoad ApplicationProjectListPeage');
+    let listdata = this.navParams.get('data') || '';
+    console.log(listdata);
+    if(listdata){
+      this.list = listdata;
+    }
+  }
+  ionViewDidEnter(){
+    let listdata = this.navParams.get('data') || '';
+    console.log(listdata);
+    if(listdata){
+      this.list = listdata;
+    }
   }
   gouploadfile(value) {
     this.navCtrl.push(UploadfilePage,{type:value,callback:this.setProjectList})

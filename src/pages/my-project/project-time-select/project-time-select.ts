@@ -33,6 +33,7 @@ export class ProjectTimeSelectPage {
   public isBudgetPrice = false
   public isNoLanguage = false
   public isMaxBudget = false
+  public isMaxBudgetData = false
   customPopoverOptions: any = {
     header: 'Hair Color',
     subHeader: 'Select your hair color',
@@ -112,24 +113,15 @@ export class ProjectTimeSelectPage {
 
   /*选择发生变化时执行*/
   onSelectedClick(type) {
-
     this.selected = type;
     //预算方式改变时重置默认值
     if (type == 0) {
       this.budgetData.budgetDay = null;
       this.budgetData.budget = (this.budgetData.workload || 0) * (this.budgetData.budgetDay || 0);
       this.budgetData.workload = null;
-      // this.isCoins1 = true;
-      // this.isCoins2 = false;
-      // this.isCard1 = true;
-      // this.isCard2 = false;
     } else {
       // this.budgetData.budget = this.budgetData.budget;
       this.budgetData.budget = null;
-      // this.isCoins1 = false;
-      // this.isCoins2 = true;
-      // this.isCard1 = false;
-      // this.isCard2 = true;
     }
   }
 
@@ -161,12 +153,17 @@ export class ProjectTimeSelectPage {
     this.isMaxBudget = !this.isMaxBudget
     return
   }
+  sureMaxBudgetData(){
+    this.isMaxBudgetData = !this.isMaxBudgetData
+    return
+  }
   /*保存数据并返回页面*/
   onSelectSubmit() {
     let callback = this.navParams.get('callback');
     var isnum = /^[0-9]*$/;
     var tennum = /^\d{1,2}$/;
     var fivenum = /^\d{1,5}$/;
+    var ninenum = /^\d{1,9}$/;
     if (this.field == 'workload_workloadUnit') {
       if (isnum.test(this.inputName) == false) {
         this.isBudgetDays = true
@@ -205,8 +202,8 @@ export class ProjectTimeSelectPage {
           this.isBudget = true
           return
         }
-        if (fivenum.test((this.budgetData.budget).toString()) == false) {
-          this.isMaxBudget = true
+        if (ninenum.test((this.budgetData.budget).toString()) == false) {
+          this.isMaxBudgetData = true
           return
         }
       }

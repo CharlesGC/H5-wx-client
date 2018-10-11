@@ -156,7 +156,7 @@ public isFaild :any
   }
   sureTipPrompt(){
     this.isTipPrompt = true
-    this.tiptext = '确认阶段吗？'
+    this.tiptext = '确认阶段吗？确认阶段后，请返回到阶段列表进行付款操作，并添加支付记录。'
     return
   }
   onReturnBack(){

@@ -30,6 +30,7 @@ export class UploadfilePage {
 	public isDelete = false;
 	public isComplete = false;
 	public loading: any;
+	public isFailed = false
 	constructor(public navCtrl: NavController, public navParams: NavParams, private http: HttpClient, private Provider: MamenDataProvider, public loadingCtrl: LoadingController) {
 		this.filetitle = navParams.get('title')
 		this.filesize = navParams.get('size')
@@ -129,11 +130,23 @@ export class UploadfilePage {
 			formData.append('file', file);
 			this.presentLoadingDefault()
 			this.http.post(this.uploadUrl, formData).subscribe(res => {
-				console.log('请求结束', res);
-				this.fid = res['data'].fid;
+				if (res['code'] == 200) {
+					this.fid = res['data'].fid;
+					this.loading.dismiss();
+					setTimeout(() => {
+						this.isSubmit = true;
+					}, 1000)
+				} else {
+					this.loading.dismiss();
+					setTimeout(() => {
+						this.isFailed = true;
+					}, 1000)
+				}
+			}, error => {
+				console.log('请求失败', error);
 				this.loading.dismiss();
 				setTimeout(() => {
-					this.isSubmit = true;
+					this.isFailed = true;
 				}, 1000)
 			});
 		} else if (this.pagetype == 'projectfilelist') {
@@ -147,21 +160,44 @@ export class UploadfilePage {
 			//console.log(this.fileData,'文件信息');
 			this.presentLoadingDefault()
 			this.http.post(this.uploadUrl, formData).subscribe(res => {
-				this.fid = res['data'].fid;
-				const openId = window.sessionStorage.getItem('openId') || this.getUrlParam('openId');
-				let getApplicationProjectListUrl = getApplicationProjectList + '?openId=' + openId + '&fid=' + (this.fid || '')
-				this.Provider.getMamenSwiperData(getApplicationProjectListUrl).subscribe(res => {
-					let callback = this.navParams.get('callback');
-					this.fileData.id = res.data
-					callback(this.fileData)
-					//console.log(res,'999999')
+				if (res['code'] == 200) {
+					this.fid = res['data'].fid;
+					const openId = window.sessionStorage.getItem('openId') || this.getUrlParam('openId');
+					let getApplicationProjectListUrl = getApplicationProjectList + '?openId=' + openId + '&fid=' + (this.fid || '')
+					this.Provider.getMamenSwiperData(getApplicationProjectListUrl).subscribe(res => {
+						if (res['code'] == 200) {
+							let callback = this.navParams.get('callback');
+							this.fileData.id = res.data
+							callback(this.fileData)
+							this.loading.dismiss();
+							setTimeout(() => {
+								this.isSubmit = true;
+							}, 1000)
+						} else {
+							this.loading.dismiss();
+							setTimeout(() => {
+								this.isFailed = true;
+							}, 1000)
+						}
+					}, error => {
+						console.log('请求失败');
+						this.loading.dismiss();
+						setTimeout(() => {
+							this.isFailed = true;
+						}, 1000)
+					})
+				} else {
 					this.loading.dismiss();
 					setTimeout(() => {
-						this.isSubmit = true;
+						this.isFailed = true;
 					}, 1000)
-				})
-				//let callback = this.navParams.get('callback');
-				//callback(this.fileData, $this.filetitle);
+				}
+			}, error => {
+				console.log('请求失败',error);
+				this.loading.dismiss();
+				setTimeout(() => {
+					this.isFailed = true;
+				}, 1000)
 			});
 		} else {
 			let $this = this;
@@ -173,18 +209,27 @@ export class UploadfilePage {
 			formData.append('file', file);
 			this.presentLoadingDefault()
 			this.http.post(this.uploadUrl, formData).subscribe(res => {
-				//console.log('请求结束', res);
-				//let tempRes = JSON.parse(res);
-				this.fileData = res['data'];
-				//console.log(this.fileData, '+++')
-				let callback = this.navParams.get('callback');
-				callback(this.fileData, $this.filetitle);
+				if (res['code'] == 200) {
+					this.fileData = res['data'];
+					let callback = this.navParams.get('callback');
+					callback(this.fileData, $this.filetitle);
+					this.loading.dismiss();
+					setTimeout(() => {
+						this.isSubmit = true;
+					}, 1000);
+				} else {
+					console.log('请求失败');
+					this.loading.dismiss();
+					setTimeout(() => {
+						this.isFailed = true;
+					}, 1000)
+				}
+			}, error => {
+				console.log('请求失败',error);
 				this.loading.dismiss();
 				setTimeout(() => {
-					this.isSubmit = true;
+					this.isFailed = true;
 				}, 1000)
-				//alert('其他')
-				//$this.navCtrl.pop()
 			});
 		}
 

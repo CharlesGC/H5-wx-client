@@ -33,6 +33,7 @@ export class ApplicationProjectPage {
   public success_isShow = false;
   public isComplete = false
   public pacids:any;
+  public projectlist:any
   constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider) {
   }
 
@@ -130,7 +131,7 @@ export class ApplicationProjectPage {
 
   /*提交申请*/
   onApplicationSubmit() {
-    console.log(this.projectData['introduction']);
+    //console.log(this.projectData['introduction']);
     if (!this.projectData['introduction'] || !this.projectData['proposal']) {
       this.isComplete = true
       return
@@ -181,9 +182,11 @@ export class ApplicationProjectPage {
 
   /** 跳转到项目附件列表页 */
   goApplicationProjectListPage(){
-    this.navCtrl.push(ApplicationProjectListPage,{callback:this.getPacIds})
+    this.navCtrl.push(ApplicationProjectListPage,{callback:this.getPacIds,data:this.projectlist})
   }
   getPacIds = (value)=>{
+    this.projectlist = value
     this.pacids = (value && value.length > 0) ? value.map(f=>f.id).join(',') :'';
   }
+
 }

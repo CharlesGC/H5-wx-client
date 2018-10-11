@@ -351,8 +351,12 @@ page-tabs {
 .returnBtn{
     margin-left: 0px;
 }
-.back-button-text{
+.back-button-text-md{
     margin-top: 2px;
+    font-size: 14px;
+}
+.back-button-text-ios{
+    margin-top: 1px;
     font-size: 14px;
 }
 ion-buttons{

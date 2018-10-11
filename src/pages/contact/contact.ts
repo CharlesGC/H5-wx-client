@@ -13,14 +13,13 @@ import { ConsultantProjectListPage } from '../my-project/consultant/consultant-p
 import { ProjectProgramObjectionPage } from '../my-project/client/project-program-objection/project-program-objection';
 import { MessageCenterPage } from '../message-center/message-center';
 import { UseTheHelpPage } from '../contact/use-the-help/use-the-help';
-import { getUserByopenIdUrl,getWxOpenidUrl } from '../../providers/requestUrl';
+import { getUserByopenIdUrl,getWxOpenidUrl,hideAttentionMenuUrl } from '../../providers/requestUrl';
 import { ContactusPage } from "./contactus/contactus";
 import { AboutusPage } from "./aboutus/aboutus";
-
-
+import { HttpClient } from "@angular/common/http"
 // 引入微信服务
 declare let Wechat;
-
+declare var wx: any;
 @Component({
   selector: 'page-contact',
   templateUrl: 'contact.html',
@@ -34,8 +33,7 @@ export class ContactPage {
   public singleValue =10
   // public isshow=true;
   public isGoto = false;
-  constructor(public navCtrl: NavController,private Provider:MamenDataProvider,public loadingCtrl:LoadingController) {
-    
+  constructor(public navCtrl: NavController,private Provider:MamenDataProvider,public loadingCtrl:LoadingController,private http:HttpClient) {
   }
 
   ionViewDidLoad(){
@@ -45,11 +43,9 @@ export class ContactPage {
     }else{
       this.getUserInfo(openId);
     }
-    
   }
 
   itemSelected(item){
-
   }
 
   //跳转到我的项目页面
@@ -64,7 +60,6 @@ export class ContactPage {
       // user.projectCount>0 && this.navCtrl.push(ProjectListPage);
      this.navCtrl.push(ProjectListPage);
     }
-    
   }
 
   //跳转到消息中心
@@ -72,14 +67,31 @@ export class ContactPage {
     this.navCtrl.push(MessageCenterPage);
   }
 
-  
+  //隐藏底部分享菜单
+  isAttention() {
+    // let url = location.href.split('#')[0]; // 当前网页的URL，不包含#及其后面部分
+    // let data = { url: url };
+    this.http.get(hideAttentionMenuUrl).subscribe(res => {
+      if (res['code'] == 200) {
+        wx.config({
+          debug: false,
+          appId: res['data'].appid,
+          timestamp: res['data'].timestamp,
+          nonceStr: res['data'].nonceStr,
+          signature: res['data'].signature,
+          jsApiList: ['hideOptionMenu']
+        });
+        wx.ready(function () {
+          wx.hideOptionMenu();
+        });
+      }
+    })
+  }
   //判断是否跳转页面
   goPhonebind(){
     this.navCtrl.push(PhonebindPage);
-    
   }
   goToOtherPage() {
-
   }
   //跳转注册页面
   goRegisterPage() {
@@ -153,6 +165,7 @@ export class ContactPage {
       this.isLogin = true;
       this.user = user
     }
+    this.isAttention();
   }
 
   getUserInfo(openId) {
