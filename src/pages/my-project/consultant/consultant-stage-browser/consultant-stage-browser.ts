@@ -8,8 +8,9 @@ import { ProjectPaymentRecordPage } from '../../client/project-payment-record/pr
 import { ConsultantInteractionSubmitPage } from '../consultant-interaction-submit/consultant-interaction-submit';
 import { ConsultantStageEditPage } from '../consultant-stage-edit/consultant-stage-edit';
 import { ConsultantDocumentBrowserPage } from '../consultant-document-browser/consultant-document-browser';
-import { getAdviserProjectStageDetailUrl, changeStageStatusUrl } from '../../../../providers/requestUrl';
-
+import { getAdviserProjectStageDetailUrl, changeStageStatusUrl, hideAttentionMenuUrl, getAttentionUserInfo } from '../../../../providers/requestUrl';
+import { HttpClient, HttpParams } from '@angular/common/http';
+declare var wx: any;
 /**
  * Generated class for the ConsultantStageBrowserPage page.
  *
@@ -25,15 +26,15 @@ import { getAdviserProjectStageDetailUrl, changeStageStatusUrl } from '../../../
 export class ConsultantStageBrowserPage {
   public isStage = false
   public isNoStageBook = false
-  public stageType:any;
+  public stageType: any;
   public projectStageDetail = {};
-  public isdis:any;
-  public isSubmitFailed =false
-  constructor(public navCtrl: NavController, public navParams: NavParams,private Provider:MamenDataProvider,public sanitizer:DomSanitizer) {
+  public isdis: any;
+  public isSubmitFailed = false
+  constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider, public sanitizer: DomSanitizer, private http: HttpClient) {
     this.stageType = 0;
   }
   /*转换html标签处理*/
-  assembleHTML(strHTML:any){
+  assembleHTML(strHTML: any) {
     return this.sanitizer.bypassSecurityTrustHtml(strHTML);
   }
   ionViewDidLoad() {
@@ -43,51 +44,72 @@ export class ConsultantStageBrowserPage {
     this.getProjectStageDetail(id);
   }
 
-  ionViewDidEnter(){
+  ionViewDidEnter() {
     let id = this.navParams.get('id')
     this.getProjectStageDetail(id);
+    this.isAttention();
   }
-
-  getUrlParam(name) {  
+  //隐藏底部分享菜单
+  isAttention() {
+    // let url = location.href.split('#')[0]; // 当前网页的URL，不包含#及其后面部分
+    // let data = { url: url };
+    this.http.get(hideAttentionMenuUrl).subscribe(res => {
+      if (res['code'] == 200) {
+        wx.config({
+          debug: false,
+          appId: res['data'].appid,
+          timestamp: res['data'].timestamp,
+          nonceStr: res['data'].nonceStr,
+          signature: res['data'].signature,
+          jsApiList: ['hideOptionMenu']
+        });
+        wx.ready(function () {
+          //wx.showOptionMenu();
+          wx.hideOptionMenu();
+        });
+      }
+    })
+  }
+  getUrlParam(name) {
     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象  
     var r = window.location.search.substr(1).match(reg);  //匹配目标参数  
     if (r != null) {
-        return encodeURI(r[2]);  //返回参数值 
+      return encodeURI(r[2]);  //返回参数值 
     } else {
-        return null; 
+      return null;
     }
- }
+  }
 
   /*跳转到添加支付记录页面*/
-  goPaymentRecord(stageType){
+  goPaymentRecord(stageType) {
     let id = this.navParams.get('id')
-    if(stageType == 3 || stageType == 8) {
-      this.navCtrl.push(ConsultantInteractionSubmitPage,{isAdd:true,pid:this.projectStageDetail['pid'],psid:this.projectStageDetail['psid']});
-    }else if(stageType == 5){
-      this.navCtrl.push(ConsultantDeliveryModelPage,{pid:this.projectStageDetail['pid'],psid:this.projectStageDetail['psid']});
-    }else if(stageType == -1 || stageType == 1) {
+    if (stageType == 3 || stageType == 8) {
+      this.navCtrl.push(ConsultantInteractionSubmitPage, { isAdd: true, pid: this.projectStageDetail['pid'], psid: this.projectStageDetail['psid'] });
+    } else if (stageType == 5) {
+      this.navCtrl.push(ConsultantDeliveryModelPage, { pid: this.projectStageDetail['pid'], psid: this.projectStageDetail['psid'] });
+    } else if (stageType == -1 || stageType == 1) {
       let programPrice = this.navParams.get('programPrice');
-      this.navCtrl.push(ConsultantStageEditPage,{isAdd:false,pid:this.projectStageDetail['pid'],programPrice:programPrice,data:this.projectStageDetail});
+      this.navCtrl.push(ConsultantStageEditPage, { isAdd: false, pid: this.projectStageDetail['pid'], programPrice: programPrice, data: this.projectStageDetail });
     }
-    
+
   }
 
   /*项目阶段详情数据请求*/
   getProjectStageDetail(id) {
     // let projectStageDetailUrl = 'http://mamon.yemindream.com/mamon/adviser/getProjectStageDetail';
-    const openId = window.sessionStorage.getItem('openId')|| this.getUrlParam('openId');
-    let projectStageDetailUrl = getAdviserProjectStageDetailUrl + '?openId=' + openId + '&id='+id;
-    this.Provider.getMamenSwiperData(projectStageDetailUrl).subscribe(res=>{
-      if(res.code==200) {
-        console.log(res,'--------');
+    const openId = window.sessionStorage.getItem('openId') || this.getUrlParam('openId');
+    let projectStageDetailUrl = getAdviserProjectStageDetailUrl + '?openId=' + openId + '&id=' + id;
+    this.Provider.getMamenSwiperData(projectStageDetailUrl).subscribe(res => {
+      if (res.code == 200) {
+        console.log(res, '--------');
         this.projectStageDetail = res.data || {};
-      }else if(res.code == 207) {
+      } else if (res.code == 207) {
         window.localStorage.removeItem('openId');
-      }else{
-        console.log('请求出错:'+res.msg);
+      } else {
+        console.log('请求出错:' + res.msg);
       }
-    },error=>{
-      console.log('erros===',error);
+    }, error => {
+      console.log('erros===', error);
     })
   }
 
@@ -105,23 +127,23 @@ export class ConsultantStageBrowserPage {
       return 'pdf'
     }
   }
-  sureStageBook(){
+  sureStageBook() {
     this.isNoStageBook = !this.isNoStageBook
     return
   }
-  sureStage(){
-    if(this.projectStageDetail['document'].length == 0){
+  sureStage() {
+    if (this.projectStageDetail['document'].length == 0) {
       this.isNoStageBook = true
       return
     }
     this.isStage = true
     return
   }
-  returnStage(){
+  returnStage() {
     this.isStage = !this.isStage
     return
   }
-  onSubmitFailed(){
+  onSubmitFailed() {
     this.isSubmitFailed = !this.isSubmitFailed;
     return
   }
@@ -129,24 +151,24 @@ export class ConsultantStageBrowserPage {
   onStageSubmit() {
     let psid = this.projectStageDetail['psid'];
     // let projectStageDetailUrl = 'http://mamon.yemindream.com/mamon/adviser/changeStageStatus';
-    const openId = window.sessionStorage.getItem('openId')|| this.getUrlParam('openId');
-    let projectStageDetailUrl = changeStageStatusUrl + '?openId=' + openId + '&type=0' +'&psid='+psid;
-    this.Provider.getMamenSwiperData(projectStageDetailUrl).subscribe(res=>{
-      if(res.code==200) {
+    const openId = window.sessionStorage.getItem('openId') || this.getUrlParam('openId');
+    let projectStageDetailUrl = changeStageStatusUrl + '?openId=' + openId + '&type=0' + '&psid=' + psid;
+    this.Provider.getMamenSwiperData(projectStageDetailUrl).subscribe(res => {
+      if (res.code == 200) {
         this.isStage = !this.isStage;
         this.navCtrl.pop();
-      }else{
+      } else {
         this.isSubmitFailed = true;
-        console.log('请求出错:'+res.msg);
+        console.log('请求出错:' + res.msg);
       }
-    },error=>{
-      console.log('erros===',error);
+    }, error => {
+      console.log('erros===', error);
     })
   }
 
   /*编辑详情*/
-  goDocumentBrowser(id){
-    this.navCtrl.push(ConsultantDocumentBrowserPage,{id:id,adviserStatus:this.projectStageDetail['adviserStatus']});
+  goDocumentBrowser(id) {
+    this.navCtrl.push(ConsultantDocumentBrowserPage, { id: id, adviserStatus: this.projectStageDetail['adviserStatus'] });
   }
 
 }

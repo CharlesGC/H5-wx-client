@@ -8,6 +8,10 @@ import { FormEditPage } from '../../form-edit/form-edit';
 
 import { delCompanyUrl, getCompanyDetailUrl, addOrUpdateCompanyUrl } from '../../../../providers/requestUrl';
 import { STATE_NEW } from 'ionic-angular/umd/navigation/nav-util';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { hideAttentionMenuUrl, getAttentionUserInfo } from '../../../../providers/requestUrl'
+declare var wx: any;
+
 
 /**
  * Generated class for the ClientInfoEditPage page.
@@ -30,9 +34,9 @@ export class ClientInfoEditPage {
   public isPhoneProper = false;
   public isComplete = false
   public isSuccess = false
-  public isDisabled:any
+  public isDisabled: any
   public isfailed = false
-  constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider, private http: HttpClient) {
     // this.companyDetaiData = {}
   }
 
@@ -42,6 +46,7 @@ export class ClientInfoEditPage {
     console.log('ionViewDidLoad ClientInfoEditPage');
   }
   ionViewDidEnter() {
+    this.isAttention();
     this.cid = this.navParams.get('cid') || ''
     //进行判断（在返回要重新拉取数据时回调）
     // this.getCompanyDetailData();
@@ -68,15 +73,15 @@ export class ClientInfoEditPage {
     this.isPhoneProper = !this.isPhoneProper;
     return
   }
-  sureComplete(){
+  sureComplete() {
     this.isComplete = !this.isComplete
     return
   }
-  sureSuccess(){
+  sureSuccess() {
     this.isSuccess = !this.isSuccess
     this.navCtrl.pop()
   }
-  sureFailed(){
+  sureFailed() {
     this.isfailed = !this.isfailed
     return
   }
@@ -162,7 +167,7 @@ export class ClientInfoEditPage {
 
   /*获取行业其他值*/
   getOtherIndustrys(data) {
-    if(!data){return ''}
+    if (!data) { return '' }
     return data.map(d => {
       if (d.id == -1) {
         return d.text;
@@ -179,12 +184,12 @@ export class ClientInfoEditPage {
     let newCompanyDetaiData = this.companyDetaiData || {};
     let cid = newCompanyDetaiData['cid'] || 0;
     // let industryList = companyDetaiData.industryList ? companyDetaiData.industryList.map(f=>f.ilid).join(','):'';
-    let industryList = newCompanyDetaiData['industryList'] ? newCompanyDetaiData  ['industryList'].map(f => f.ilid).join(',') : '';
+    let industryList = newCompanyDetaiData['industryList'] ? newCompanyDetaiData['industryList'].map(f => f.ilid).join(',') : '';
     //console.log(industryList, 123);
     newCompanyDetaiData['otherIndustrys'] = this.getOtherIndustrys(newCompanyDetaiData['industryList']);
     let otherIndustrys = this.companyDetaiData['otherIndustrys'] && this.companyDetaiData['otherIndustrys'].length > 0 ? this.companyDetaiData['otherIndustrys'].join(',') : '';
     // let getCompanyDetailUrl = 'http://mamon.yemindream.com/mamon/company/addOrUpdateCompany';
-    if( Object.keys(this.companyDetaiData).length < 8 ){
+    if (Object.keys(this.companyDetaiData).length < 8) {
       this.isComplete = true
       console.log('cancel')
       return
@@ -217,10 +222,31 @@ export class ClientInfoEditPage {
         this.isSuccess = true
       } else {
         this.isfailed = true
-        this.isDisabled=''
+        this.isDisabled = ''
       }
     }, error => {
       console.log('erros===', error);
+    })
+  }
+  //隐藏底部分享菜单
+  isAttention() {
+    // let url = location.href.split('#')[0]; // 当前网页的URL，不包含#及其后面部分
+    // let data = { url: url };
+    this.http.get(hideAttentionMenuUrl).subscribe(res => {
+      if (res['code'] == 200) {
+        wx.config({
+          debug: false,
+          appId: res['data'].appid,
+          timestamp: res['data'].timestamp,
+          nonceStr: res['data'].nonceStr,
+          signature: res['data'].signature,
+          jsApiList: ['hideOptionMenu']
+        });
+        wx.ready(function () {
+          //wx.showOptionMenu();
+          wx.hideOptionMenu();
+        });
+      }
     })
   }
 }

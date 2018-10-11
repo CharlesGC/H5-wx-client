@@ -5,7 +5,9 @@ import { MamenDataProvider } from '../../../../providers/mamen-data/mamen-data';
 import { ProjectTimeSelectPage } from '../../project-time-select/project-time-select';
 import { addOrEditProgramUrl } from '../../../../providers/requestUrl';
 import { UploadfilePage } from '../../../uploadfile/uploadfile'
-
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { hideAttentionMenuUrl, getAttentionUserInfo } from '../../../../providers/requestUrl'
+declare var wx: any;
 /**
  * Generated class for the ConsultantProgramEditPage page.
  *
@@ -32,15 +34,15 @@ export class ConsultantProgramEditPage {
   public isdisabled = ''
   public isFailed: any
   public ppid: any
-  public checkFailed  = false
-  public isAdd:any;
-  constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider) {
+  public checkFailed = false
+  public isAdd: any;
+  constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider, private http: HttpClient) {
   }
 
   ionViewDidLoad() {
     this.programData = this.navParams.get('data') || {};
     this.isAdd = this.navParams.get('isAdd');
-    console.log(this.isAdd,this.programData, 'ionViewDidLoad ConsultantProgramEditPage');
+    console.log(this.isAdd, this.programData, 'ionViewDidLoad ConsultantProgramEditPage');
 
     this.fileUrlvalue = this.programData['certifiedUrl']
     //console.log(this.interactionData,'这是数据')
@@ -68,13 +70,35 @@ export class ConsultantProgramEditPage {
     this.programData['programDescription'] = this.programData['programDescription'] ? this.programData['programDescription'].replace(/<br>/g, "\n") : '';
     this.programData['deliverable'] = this.programData['deliverable'] ? this.programData['deliverable'].replace(/<br>/g, "\n") : '';
   }
-  ionViewWillEnter(){
+  ionViewWillEnter() {
     this.programData['programDescription'] = this.programData['programDescription'] ? this.programData['programDescription'].replace(/<br>/g, "\n") : '';
     this.programData['deliverable'] = this.programData['deliverable'] ? this.programData['deliverable'].replace(/<br>/g, "\n") : '';
   }
-  ionViewDidEnter(){
+  ionViewDidEnter() {
     this.isAdd = this.navParams.get('isAdd');
-    console.log(this.isAdd,'修改')
+    console.log(this.isAdd, '修改');
+    this.isAttention();
+  }
+  //隐藏底部分享菜单
+  isAttention() {
+    // let url = location.href.split('#')[0]; // 当前网页的URL，不包含#及其后面部分
+    // let data = { url: url };
+    this.http.get(hideAttentionMenuUrl).subscribe(res => {
+      if (res['code'] == 200) {
+        wx.config({
+          debug: false,
+          appId: res['data'].appid,
+          timestamp: res['data'].timestamp,
+          nonceStr: res['data'].nonceStr,
+          signature: res['data'].signature,
+          jsApiList: ['hideOptionMenu']
+        });
+        wx.ready(function () {
+          //wx.showOptionMenu();
+          wx.hideOptionMenu();
+        });
+      }
+    })
   }
   /* 跳转到上传文件页面 */
   gouploadfile() {
@@ -123,12 +147,12 @@ export class ConsultantProgramEditPage {
       this.programData['workload'] = value[0];
       this.programData['workloadUnit'] = value[1];
     }
-    if(field == 'programDescription' || field == 'deliverable'){
+    if (field == 'programDescription' || field == 'deliverable') {
       this.programData[field] = value ? value.replace(/<br>/g, "\n") : '';
-    }else{
+    } else {
       this.programData[field] = value;
     }
-    
+
   }
   /*列表编辑*/
   goFormEditPage(field, value, type) {
@@ -156,43 +180,43 @@ export class ConsultantProgramEditPage {
     if (!programData['programName']) {
       this.isTipPrompt = true
       this.tipstext = '方案名称不能为空'
-      this.checkFailed =false
+      this.checkFailed = false
       return
     }
     if (!programData['programDescription']) {
       this.isTipPrompt = true
       this.tipstext = '方案描述不能为空'
-      this.checkFailed =false
+      this.checkFailed = false
       return
     }
     if (!programData['workload']) {
       this.isTipPrompt = true
       this.tipstext = '方案周期不能为空'
-      this.checkFailed =false
+      this.checkFailed = false
       return
     }
     if (!programData['deliverable']) {
       this.isTipPrompt = true
       this.tipstext = '项目规划不能为空'
-      this.checkFailed =false
+      this.checkFailed = false
       return
     }
     if (!programData['price']) {
       this.isTipPrompt = true
       this.tipstext = '项目总价不能为空'
-      this.checkFailed =false
+      this.checkFailed = false
       return
     }
     if (!programData['planUrl'] && !programData['fid']) {
       this.isTipPrompt = true
       this.tipstext = '方案计划书不能为空'
-      this.checkFailed =false
+      this.checkFailed = false
       return
     }
-    if(value){
+    if (value) {
       this.tipstext = '确认保存该方案吗？'
       this.ppid = value
-    }else{
+    } else {
       this.tipstext = '确认提交该方案吗？'
     }
     this.isTipPrompt = true
@@ -200,23 +224,23 @@ export class ConsultantProgramEditPage {
   }
 
   sureTipPrompt() {
-    if(this.checkFailed == false){
+    if (this.checkFailed == false) {
       this.isTipPrompt = !this.isTipPrompt
       return
     }
-    if(this.isFailed == false){
+    if (this.isFailed == false) {
       this.isTipPrompt = !this.isTipPrompt
       this.navCtrl.pop()
       return
-    }else if (this.isFailed == true){
+    } else if (this.isFailed == true) {
       this.isTipPrompt = !this.isTipPrompt
       return
     }
     let programData = this.programData;
     let pid = this.navParams.get('pid');
-    let reg=new RegExp("\n","g");
-    let programDescription = programData['programDescription'] ? programData['programDescription'].replace(reg,"<br>") : '';
-    let deliverable = programData['deliverable'] ? programData['deliverable'].replace(reg,"<br>") : '';
+    let reg = new RegExp("\n", "g");
+    let programDescription = programData['programDescription'] ? programData['programDescription'].replace(reg, "<br>") : '';
+    let deliverable = programData['deliverable'] ? programData['deliverable'].replace(reg, "<br>") : '';
 
     // let projectStageDetailUrl = 'http://mamon.yemindream.com/mamon/adviser/addOrEditProgram';
     const openId = window.sessionStorage.getItem('openId') || this.getUrlParam('openId');
@@ -252,10 +276,10 @@ export class ConsultantProgramEditPage {
     })
   }
   /*页面准备离开时触发*/
-  ionViewWillLeave(){
-    let reg=new RegExp("\n","g");
-    this.programData['programDescription'] = this.programData['programDescription'] ? this.programData['programDescription'].replace(reg,"<br>") : '';
-    this.programData['deliverable'] = this.programData['deliverable'] ? this.programData['deliverable'].replace(reg,"<br>") : '';
+  ionViewWillLeave() {
+    let reg = new RegExp("\n", "g");
+    this.programData['programDescription'] = this.programData['programDescription'] ? this.programData['programDescription'].replace(reg, "<br>") : '';
+    this.programData['deliverable'] = this.programData['deliverable'] ? this.programData['deliverable'].replace(reg, "<br>") : '';
   }
 
   onReturnBack() {

@@ -4,7 +4,9 @@ import { MamenDataProvider } from '../../../../providers/mamen-data/mamen-data';
 import { FormEditPage } from '../../form-edit/form-edit';
 import { editUserUrl } from '../../../../providers/requestUrl';
 import { ConsultantInfoAvatarPage } from '../../consultant/consultant-info-avatar/consultant-info-avatar'
-
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { hideAttentionMenuUrl, getAttentionUserInfo } from '../../../../providers/requestUrl'
+declare var wx: any;
 /**
  * Generated class for the ClientInfoUserPage page.
  *
@@ -20,14 +22,16 @@ import { ConsultantInfoAvatarPage } from '../../consultant/consultant-info-avata
 export class ClientInfoUserPage {
   public user: any;
   public fromData: any;
-  public isSubmit= false
-  public isfailed= false
-  public isDisabled:any
-  constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider) {
+  public isSubmit = false
+  public isfailed = false
+  public isDisabled: any
+  constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider, private http: HttpClient) {
     this.user = {};
     this.fromData = {}
   }
-
+  ionViewDidEnter() {
+    this.isAttention();
+  }
   ionViewDidLoad() {
     this.user = this.navParams.get('user');
     console.log('ionViewDidLoad ClientInfoUserPage');
@@ -40,11 +44,11 @@ export class ClientInfoUserPage {
   setuserAvatarPic = (value) => {
     this.user.avatar = value
   }
-  sureSubmit(){
+  sureSubmit() {
     this.isSubmit = !this.isSubmit
     this.navCtrl.pop();
   }
-  sureFailed(){
+  sureFailed() {
     this.isfailed = !this.isfailed
     return
   }
@@ -96,5 +100,26 @@ export class ClientInfoUserPage {
   /*设置值（回调函数）*/
   setValue = (field, value) => {
     this.user[field] = value;
+  }
+  //隐藏底部分享菜单
+  isAttention() {
+    // let url = location.href.split('#')[0]; // 当前网页的URL，不包含#及其后面部分
+    // let data = { url: url };
+    this.http.get(hideAttentionMenuUrl).subscribe(res => {
+      if (res['code'] == 200) {
+        wx.config({
+          debug: false,
+          appId: res['data'].appid,
+          timestamp: res['data'].timestamp,
+          nonceStr: res['data'].nonceStr,
+          signature: res['data'].signature,
+          jsApiList: ['hideOptionMenu']
+        });
+        wx.ready(function () {
+          //wx.showOptionMenu();
+          wx.hideOptionMenu();
+        });
+      }
+    })
   }
 }

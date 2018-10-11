@@ -3,8 +3,9 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { MamenDataProvider } from '../../../../providers/mamen-data/mamen-data';
 
 import { FormEditPage } from '../../../contact/form-edit/form-edit';
-import { getInvoiceByPsidUrl, addInvoiceUrl } from '../../../../providers/requestUrl';
-
+import { getInvoiceByPsidUrl, addInvoiceUrl, hideAttentionMenuUrl, getAttentionUserInfo } from '../../../../providers/requestUrl';
+import { HttpClient, HttpParams } from '@angular/common/http';
+declare var wx: any;
 /**
  * Generated class for the ProjectSubmitInvoicePage page.
  *
@@ -24,8 +25,8 @@ export class ProjectSubmitInvoicePage {
   public isSubmit = false;
   public isFailed = false;
   public isSpecialInvoice = false;
-  public stageData={};
-  constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider) {
+  public stageData = {};
+  constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider, private http: HttpClient) {
     this.selected = 1;
   }
 
@@ -35,21 +36,44 @@ export class ProjectSubmitInvoicePage {
     this.stageData = this.navParams.get('data')
     this.getProjectInvoiceDetail(psid);
   }
-
+  ionViewDidEnter() {
+    this.isAttention();
+  }
+  //隐藏底部分享菜单
+  isAttention() {
+    // let url = location.href.split('#')[0]; // 当前网页的URL，不包含#及其后面部分
+    // let data = { url: url };
+    this.http.get(hideAttentionMenuUrl).subscribe(res => {
+      if (res['code'] == 200) {
+        wx.config({
+          debug: false,
+          appId: res['data'].appid,
+          timestamp: res['data'].timestamp,
+          nonceStr: res['data'].nonceStr,
+          signature: res['data'].signature,
+          jsApiList: ['hideOptionMenu']
+        });
+        wx.ready(function () {
+          //wx.showOptionMenu();
+          wx.hideOptionMenu();
+        });
+      }
+    })
+  }
   /*点击选择事件*/
-  onSelectInvoice(type) { 
-    if(type == 0){
-      if(!this.invoiceData['openBank'] || !this.invoiceData['account']){
+  onSelectInvoice(type) {
+    if (type == 0) {
+      if (!this.invoiceData['openBank'] || !this.invoiceData['account']) {
         this.isSpecialInvoice = true;
         return
       }
     }
     this.selected = type;
   }
-  sureSpecialInvoice(){
+  sureSpecialInvoice() {
     this.navCtrl.popToRoot();
   }
-  onGeneralinvoice(){
+  onGeneralinvoice() {
     this.isSpecialInvoice = !this.isSpecialInvoice;
     this.selected = 1;
   }
@@ -125,7 +149,7 @@ export class ProjectSubmitInvoicePage {
     this.isComplete = !this.isComplete
     return
   }
-  sureFailed(){
+  sureFailed() {
     this.isFailed = !this.isFailed
     return
   }
@@ -148,7 +172,7 @@ export class ProjectSubmitInvoicePage {
     this.isSubmit = true
     return
   }
-  onReturnBack(){
+  onReturnBack() {
     this.isSubmit = !this.isSubmit
     return
   }

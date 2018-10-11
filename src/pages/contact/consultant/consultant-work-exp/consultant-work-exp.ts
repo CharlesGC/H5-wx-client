@@ -2,10 +2,10 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { DomSanitizer } from '@angular/platform-browser';//引入
 import { MamenDataProvider } from '../../../../providers/mamen-data/mamen-data';
-
 import { FormEditPage } from '../../form-edit/form-edit';
-import { addOrEditWorkExpUrl, delWorkExpUrl } from '../../../../providers/requestUrl';
-
+import { addOrEditWorkExpUrl, delWorkExpUrl, hideAttentionMenuUrl, getAttentionUserInfo } from '../../../../providers/requestUrl';
+import { HttpClient, HttpParams } from '@angular/common/http';
+declare var wx: any;
 /**
  * Generated class for the ConsultantWorkExpPage page.
  *
@@ -24,8 +24,8 @@ export class ConsultantWorkExpPage {
   public isSubmit = false;
   public isDelete = false;
   public isComplete = false;
-  public isBigTime  = false
-  constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider,public sanitizer: DomSanitizer) {
+  public isBigTime = false
+  constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider, public sanitizer: DomSanitizer,private http: HttpClient) {
     this.workListData = {}
   }
 
@@ -34,10 +34,34 @@ export class ConsultantWorkExpPage {
     this.workListData = this.navParams.get('data');
     this.workListData['workDescription'] = this.workListData['workDescription'] ? this.workListData['workDescription'].replace(/<br>/g, "\n") : '';
   }
-  ionViewWillEnter(){
+  ionViewWillEnter() {
     this.workListData['workDescription'] = this.workListData['workDescription'] ? this.workListData['workDescription'].replace(/<br>/g, "\n") : '';
   }
+  ionViewDidEnter() {
+    this.isAttention();
+  }
 
+  //隐藏底部分享菜单
+  isAttention() {
+    // let url = location.href.split('#')[0]; // 当前网页的URL，不包含#及其后面部分
+    // let data = { url: url };
+    this.http.get(hideAttentionMenuUrl).subscribe(res => {
+      if (res['code'] == 200) {
+        wx.config({
+          debug: false,
+          appId: res['data'].appid,
+          timestamp: res['data'].timestamp,
+          nonceStr: res['data'].nonceStr,
+          signature: res['data'].signature,
+          jsApiList: ['hideOptionMenu']
+        });
+        wx.ready(function () {
+          //wx.showOptionMenu();
+          wx.hideOptionMenu();
+        });
+      }
+    })
+  }
   assembleHTML(strHTML) {
     return this.sanitizer.bypassSecurityTrustHtml(strHTML);
   }
@@ -73,7 +97,7 @@ export class ConsultantWorkExpPage {
   sureComplete() {
     this.isComplete = !this.isComplete
   }
-  sureBigTime(){
+  sureBigTime() {
     this.isBigTime = !this.isBigTime
     return
   }
@@ -82,15 +106,15 @@ export class ConsultantWorkExpPage {
     let myDate = new Date(date);
     let myYear = myDate.getFullYear();
     var myMonth = myDate.getMonth() + 1;
-    let newMyMonth = myMonth>=10?myMonth:'0'+myMonth;
+    let newMyMonth = myMonth >= 10 ? myMonth : '0' + myMonth;
     let myDay = myDate.getDate();
-    let newMyDay = myDay>=10?myDay:'0'+myDay;
+    let newMyDay = myDay >= 10 ? myDay : '0' + myDay;
     return myYear + '-' + newMyMonth + '-' + newMyDay;
   }
   /*数据新增、编辑请求*/
   onWorkExpSubmit() {
     const openId = window.sessionStorage.getItem('openId') || this.getUrlParam('openId');
-    let workListData = this.workListData;0
+    let workListData = this.workListData; 0
     let aweid = workListData.aweid || 0;
     //console.log(workListData.startTime, workListData.endTime, workListData.department)
     // let getWorkExpUrl = 'http://mamon.yemindream.com/mamon/adviser/addOrEditWorkExp';
@@ -99,14 +123,14 @@ export class ConsultantWorkExpPage {
       this.isComplete = true;
       return
     }
-    if(new Date(workListData.endTime)< new Date(workListData.startTime)){
+    if (new Date(workListData.endTime) < new Date(workListData.startTime)) {
       this.isBigTime = true
       return
     }
     let startTime = this.getMyDate(workListData.startTime);
     let endTime = this.getMyDate(workListData.endTime);
-    let reg=new RegExp("\n","g"); //new RegExp("\r\n","g")
-    let workDescription = workListData.workDescription ? workListData.workDescription.replace(reg,"<br>") : ''; 
+    let reg = new RegExp("\n", "g"); //new RegExp("\r\n","g")
+    let workDescription = workListData.workDescription ? workListData.workDescription.replace(reg, "<br>") : '';
 
     let getWorkExpUrl = addOrEditWorkExpUrl + '?openId=' + openId + '&companyName=' + workListData.companyName +
       '&startTime=' + startTime +
@@ -129,9 +153,9 @@ export class ConsultantWorkExpPage {
     })
   }
   /*页面准备离开时触发*/
-  ionViewWillLeave(){
-    let reg=new RegExp("\n","g");
-    this.workListData.workDescription = this.workListData.workDescription ? this.workListData.workDescription.replace(reg,"<br>") : ''; 
+  ionViewWillLeave() {
+    let reg = new RegExp("\n", "g");
+    this.workListData.workDescription = this.workListData.workDescription ? this.workListData.workDescription.replace(reg, "<br>") : '';
   }
   /*数据删除请求*/
   onWorkExpDel() {

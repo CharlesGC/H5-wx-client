@@ -5,9 +5,11 @@ import { ProjectEditStep2Page } from '../project-edit-step2/project-edit-step2';
 import { ProjectCompanyListPage } from '../project-company-list/project-company-list';
 import { FormEditPage } from '../../../contact/form-edit/form-edit';
 import { ProjectListPage } from '../project-list/project-list';
-import { savaraftUrl } from '../../../../providers/requestUrl';
+import { savaraftUrl,hideAttentionMenuUrl, getAttentionUserInfo } from '../../../../providers/requestUrl';
 import { SpeedPage } from '../../../speed/speed';
-import {ProjectBrowserPage } from '../project-browser/project-browser'
+import { ProjectBrowserPage } from '../project-browser/project-browser'
+import { HttpClient, HttpParams } from '@angular/common/http';
+declare var wx: any;
 /**
  * Generated class for the ProjectEditStep1Page page.
  *
@@ -28,9 +30,9 @@ export class ProjectEditStep1Page {
   public isEmailProper = false;
   public isPhoneProper = false;
   public isSubmit = false
-  public isfailed =false
+  public isfailed = false
   public gotype = 0
-  constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider, private http: HttpClient) {
     this.projectData = {}
   }
 
@@ -58,8 +60,30 @@ export class ProjectEditStep1Page {
         elements[key].style.display = 'none';
       });
     }
+    this.isAttention();
   }
 
+  //隐藏底部分享菜单
+  isAttention() {
+    // let url = location.href.split('#')[0]; // 当前网页的URL，不包含#及其后面部分
+    // let data = { url: url };
+    this.http.get(hideAttentionMenuUrl).subscribe(res => {
+      if (res['code'] == 200) {
+        wx.config({
+          debug: false,
+          appId: res['data'].appid,
+          timestamp: res['data'].timestamp,
+          nonceStr: res['data'].nonceStr,
+          signature: res['data'].signature,
+          jsApiList: ['hideOptionMenu']
+        });
+        wx.ready(function () {
+          //wx.showOptionMenu();
+          wx.hideOptionMenu();
+        });
+      }
+    })
+  }
   //当退出页面的时候
   // ionViewWillLeave() {
   //   let elements = document.querySelectorAll(".tabbar");
@@ -102,7 +126,7 @@ export class ProjectEditStep1Page {
     this.isPhoneProper = !this.isPhoneProper;
     return
   }
-  sureSubmit(){
+  sureSubmit() {
     this.isSubmit = !this.isSubmit
     return
     // if(this.gotype == 1){
@@ -112,7 +136,7 @@ export class ProjectEditStep1Page {
     //   return
     // }
   }
-  sureFailed(){
+  sureFailed() {
     this.isfailed = !this.isfailed
     return
   }
@@ -156,7 +180,7 @@ export class ProjectEditStep1Page {
     let projectStageDetailUrl = savaraftUrl + '?openId=' + openId +
       '&cid=' + (projectData['cid'] || '') +
       '&principalName=' + (projectData['principalName'] || '') +
-      '&principalPosition=' +( projectData['principalPosition'] || '') +
+      '&principalPosition=' + (projectData['principalPosition'] || '') +
       '&principalPhone=' + (projectData['principalPhone'] || '') +
       '&principalEmail=' + (projectData['principalEmail'] || '');
     if (pid) {
@@ -169,7 +193,7 @@ export class ProjectEditStep1Page {
       if (res.code == 200) {
         //alert('操作成功！');
         this.isSubmit = true
-        this.gotype =type
+        this.gotype = type
       } else {
         //alert('请求出错:' + res.msg);
         this.isfailed = true

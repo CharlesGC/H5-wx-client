@@ -4,8 +4,9 @@ import { MamenDataProvider } from '../../../../providers/mamen-data/mamen-data';
 import { ConsultantStageListPage } from '../consultant-stage-list/consultant-stage-list';
 
 import { FormEditPage } from '../../../contact/form-edit/form-edit';
-import { addOrEditStageUrl, delStageUrl } from '../../../../providers/requestUrl';
-
+import { addOrEditStageUrl, delStageUrl, hideAttentionMenuUrl, getAttentionUserInfo } from '../../../../providers/requestUrl';
+import { HttpClient, HttpParams } from '@angular/common/http';
+declare var wx: any;
 /**
  * Generated class for the ConsultantStageEditPage page.
  *
@@ -27,7 +28,7 @@ export class ConsultantStageEditPage {
   public isComplete = false
   public isDateRepeat = false
   public isBigTime = false
-  constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider, private http: HttpClient) {
   }
 
   ionViewDidLoad() {
@@ -41,12 +42,36 @@ export class ConsultantStageEditPage {
     this.stageData['note'] = this.stageData['note'] ? this.stageData['note'].replace(/<br>/g, "\n") : '';
   }
 
-  ionViewWillEnter(){
+  ionViewWillEnter() {
     this.stageData['stageDescription'] = this.stageData['stageDescription'] ? this.stageData['stageDescription'].replace(/<br>/g, "\n") : '';
     this.stageData['deliverable'] = this.stageData['deliverable'] ? this.stageData['deliverable'].replace(/<br>/g, "\n") : '';
     this.stageData['note'] = this.stageData['note'] ? this.stageData['note'].replace(/<br>/g, "\n") : '';
   }
+  ionViewDidEnter() {
+    this.isAttention();
+  }
 
+  //隐藏底部分享菜单
+  isAttention() {
+    // let url = location.href.split('#')[0]; // 当前网页的URL，不包含#及其后面部分
+    // let data = { url: url };
+    this.http.get(hideAttentionMenuUrl).subscribe(res => {
+      if (res['code'] == 200) {
+        wx.config({
+          debug: false,
+          appId: res['data'].appid,
+          timestamp: res['data'].timestamp,
+          nonceStr: res['data'].nonceStr,
+          signature: res['data'].signature,
+          jsApiList: ['hideOptionMenu']
+        });
+        wx.ready(function () {
+          //wx.showOptionMenu();
+          wx.hideOptionMenu();
+        });
+      }
+    })
+  }
   /*列表编辑*/
   goFormEditPage(field, value, type) {
     this.navCtrl.push(FormEditPage, { callback: this.setValue, value: value, field: field, type: type });
@@ -57,12 +82,12 @@ export class ConsultantStageEditPage {
     if (field == 'percentage') {
       this.stageData['price'] = ((value / 100) || 0) * this.programPrice;
     }
-    if(field == 'stageDescription' || field == 'deliverable' || field == 'note'){
+    if (field == 'stageDescription' || field == 'deliverable' || field == 'note') {
       this.stageData[field] = value ? value.replace(/<br>/g, "\n") : '';
-    }else{
+    } else {
       this.stageData[field] = value;
     }
-    
+
   }
 
   getUrlParam(name) {
@@ -86,7 +111,7 @@ export class ConsultantStageEditPage {
     this.isDateRepeat = !this.isDateRepeat
     return
   }
-  sureBigTime(){
+  sureBigTime() {
     this.isBigTime = !this.isBigTime
     return
   }
@@ -121,12 +146,12 @@ export class ConsultantStageEditPage {
       this.isBigTime = true
       return
     }
-    
+
     const openId = window.sessionStorage.getItem('openId') || this.getUrlParam('openId');
-    let reg=new RegExp("\n","g");
-    let stageDescription = stageData['stageDescription'] ? stageData['stageDescription'].replace(reg,"<br>") : '';
-    let deliverable = stageData['deliverable'] ? stageData['deliverable'].replace(reg,"<br>") : '';
-    let note = stageData['note'] ? stageData['note'].replace(reg,"<br>") : '';
+    let reg = new RegExp("\n", "g");
+    let stageDescription = stageData['stageDescription'] ? stageData['stageDescription'].replace(reg, "<br>") : '';
+    let deliverable = stageData['deliverable'] ? stageData['deliverable'].replace(reg, "<br>") : '';
+    let note = stageData['note'] ? stageData['note'].replace(reg, "<br>") : '';
 
     let projectStageDetailUrl = addOrEditStageUrl + '?openId=' + openId + '&pid=' + pid +
       '&stageName=' + stageData['stageName'] +
@@ -155,11 +180,11 @@ export class ConsultantStageEditPage {
   }
 
   /*页面准备离开时触发*/
-  ionViewWillLeave(){
-    let reg=new RegExp("\n","g");
-    this.stageData['stageDescription'] = this.stageData['stageDescription'] ? this.stageData['stageDescription'].replace(reg,"<br>") : '';
-    this.stageData['deliverable'] = this.stageData['deliverable'] ? this.stageData['deliverable'].replace(reg,"<br>") : '';
-    this.stageData['note'] = this.stageData['note'] ? this.stageData['note'].replace(reg,"<br>") : '';
+  ionViewWillLeave() {
+    let reg = new RegExp("\n", "g");
+    this.stageData['stageDescription'] = this.stageData['stageDescription'] ? this.stageData['stageDescription'].replace(reg, "<br>") : '';
+    this.stageData['deliverable'] = this.stageData['deliverable'] ? this.stageData['deliverable'].replace(reg, "<br>") : '';
+    this.stageData['note'] = this.stageData['note'] ? this.stageData['note'].replace(reg, "<br>") : '';
   }
 
   /*删除操作请求*/

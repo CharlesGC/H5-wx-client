@@ -1,16 +1,16 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { MamenDataProvider } from '../../../../providers/mamen-data/mamen-data';
-
 import { FormEditPage } from '../../form-edit/form-edit';
-import { addOrEditEducationalExpUrl, delEducationalExpUrl } from '../../../../providers/requestUrl';
+import { addOrEditEducationalExpUrl, delEducationalExpUrl, hideAttentionMenuUrl, getAttentionUserInfo } from '../../../../providers/requestUrl';
+import { HttpClient, HttpParams } from '@angular/common/http';
 /**
  * Generated class for the ConsultantEducationExpPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
-
+declare var wx: any;
 @IonicPage()
 @Component({
   selector: 'page-consultant-education-exp',
@@ -21,11 +21,13 @@ export class ConsultantEducationExpPage {
   public isSubmit = false;
   public isDelete = false;
   public isComplete = false;
-  public isBigTime =false
-  constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider) {
+  public isBigTime = false
+  constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider, private http: HttpClient) {
     this.educationListData = {};
   }
-
+  ionViewDidEnter() {
+    this.isAttention();
+  }
   ionViewDidLoad() {
     this.educationListData = this.navParams.get('data');
     console.log('ionViewDidLoad ConsultantEducationExpPage');
@@ -64,8 +66,8 @@ export class ConsultantEducationExpPage {
   sureComplete() {
     this.isComplete = !this.isComplete;
   }
-  sureBigTime(){
-    this.isBigTime=  !this.isBigTime
+  sureBigTime() {
+    this.isBigTime = !this.isBigTime
     return
   }
 
@@ -80,7 +82,7 @@ export class ConsultantEducationExpPage {
       this.isComplete = true;
       return
     }
-    if(new Date(educationListData.endTime)< new Date(educationListData.startTime)){
+    if (new Date(educationListData.endTime) < new Date(educationListData.startTime)) {
       this.isBigTime = true
       return
     }
@@ -127,5 +129,25 @@ export class ConsultantEducationExpPage {
       console.log('erros===', error);
     })
   }
-
+  //隐藏底部分享菜单
+  isAttention() {
+    // let url = location.href.split('#')[0]; // 当前网页的URL，不包含#及其后面部分
+    // let data = { url: url };
+    this.http.get(hideAttentionMenuUrl).subscribe(res => {
+      if (res['code'] == 200) {
+        wx.config({
+          debug: false,
+          appId: res['data'].appid,
+          timestamp: res['data'].timestamp,
+          nonceStr: res['data'].nonceStr,
+          signature: res['data'].signature,
+          jsApiList: ['hideOptionMenu']
+        });
+        wx.ready(function () {
+          //wx.showOptionMenu();
+          wx.hideOptionMenu();
+        });
+      }
+    })
+  }
 }

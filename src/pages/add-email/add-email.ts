@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { MamenDataProvider } from '../../providers/mamen-data/mamen-data';
-
 import { ContactPage } from '../contact/contact';
 import { getAddEmailUrl } from '../../providers/requestUrl';
+import { hideAttentionMenuUrl, getAttentionUserInfo } from '../../providers/requestUrl'
+import { HttpClient, HttpParams } from '@angular/common/http';
+declare var wx: any;
 /**
  * 
  * Generated class for the AddEmailPage page.
@@ -19,13 +21,15 @@ import { getAddEmailUrl } from '../../providers/requestUrl';
 export class AddEmailPage {
   public isEmail = false
   public isEmailType = false
-  constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider, private http: HttpClient) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AddEmailPage');
   }
-
+  ionViewDidEnter(){
+    this.isAttention();
+  }
   sureEmailBack() {
     this.isEmail = !this.isEmail
     //this.navCtrl.push(ContactPage);
@@ -70,5 +74,25 @@ export class AddEmailPage {
       return null;
     }
   }
-
+  //隐藏底部分享菜单
+  isAttention() {
+    // let url = location.href.split('#')[0]; // 当前网页的URL，不包含#及其后面部分
+    // let data = { url: url };
+    this.http.get(hideAttentionMenuUrl).subscribe(res => {
+      if (res['code'] == 200) {
+        wx.config({
+          debug: false,
+          appId: res['data'].appid,
+          timestamp: res['data'].timestamp,
+          nonceStr: res['data'].nonceStr,
+          signature: res['data'].signature,
+          jsApiList: ['hideOptionMenu']
+        });
+        wx.ready(function () {
+          // wx.showOptionMenu();
+          wx.hideOptionMenu();
+        });
+      }
+    })
+  }
 }

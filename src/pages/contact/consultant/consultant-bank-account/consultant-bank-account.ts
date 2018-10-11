@@ -4,6 +4,9 @@ import { MamenDataProvider } from '../../../../providers/mamen-data/mamen-data';
 
 import { ConsultantBankAccountEditPage } from '../consultant-bank-account-edit/consultant-bank-account-edit';
 import { getBankListUrl } from '../../../../providers/requestUrl';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { hideAttentionMenuUrl, getAttentionUserInfo } from '../../../../providers/requestUrl'
+declare var wx: any;
 
 /**
  * Generated class for the ConsultantBankAccountPage page.
@@ -20,7 +23,7 @@ import { getBankListUrl } from '../../../../providers/requestUrl';
 export class ConsultantBankAccountPage {
   public consultantBankList: any;
   public ReceiptNum: any
-  constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider, private http: HttpClient) {
     this.consultantBankList = [];
   }
 
@@ -30,6 +33,7 @@ export class ConsultantBankAccountPage {
   }
   ionViewDidEnter() {
     this.getpaymentListData();
+    this.isAttention();
   }
 
   /*跳转到账号编辑页面*/
@@ -69,5 +73,26 @@ export class ConsultantBankAccountPage {
     let callback = this.navParams.get('callback')
     callback(this.ReceiptNum)
     this.navCtrl.pop()
+  }
+  //隐藏底部分享菜单
+  isAttention() {
+    // let url = location.href.split('#')[0]; // 当前网页的URL，不包含#及其后面部分
+    // let data = { url: url };
+    this.http.get(hideAttentionMenuUrl).subscribe(res => {
+      if (res['code'] == 200) {
+        wx.config({
+          debug: false,
+          appId: res['data'].appid,
+          timestamp: res['data'].timestamp,
+          nonceStr: res['data'].nonceStr,
+          signature: res['data'].signature,
+          jsApiList: ['hideOptionMenu']
+        });
+        wx.ready(function () {
+          //wx.showOptionMenu();
+          wx.hideOptionMenu();
+        });
+      }
+    })
   }
 }

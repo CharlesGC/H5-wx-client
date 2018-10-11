@@ -5,10 +5,11 @@ import { MamenDataProvider } from '../../../../providers/mamen-data/mamen-data';
 import { FormEditPage } from '../../../contact/form-edit/form-edit';
 import { ProjectTimeSelectPage } from '../../project-time-select/project-time-select';
 import { ProjectListPage } from '../project-list/project-list';
-import { savaraftUrl, releaseProjectUrl } from '../../../../providers/requestUrl';
+import { savaraftUrl, releaseProjectUrl, hideAttentionMenuUrl, getAttentionUserInfo } from '../../../../providers/requestUrl';
 import { SpeedPage } from '../../../speed/speed';
 import { ProjectBrowserPage } from '../project-browser/project-browser'
-
+import { HttpClient, HttpParams } from '@angular/common/http';
+declare var wx: any;
 /**
  * Generated class for the ProjectEditStep3Page page.
  *
@@ -31,19 +32,43 @@ export class ProjectEditStep3Page {
   public isfailed = false
   public gotype = 0
   public isReleaseFailed = false
-  constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider, private http: HttpClient) {
     this.projectData = {};
   }
 
   ionViewDidLoad() {
     this.projectData = this.navParams.get('projectData') || {};
     this.projectData['industryList'] = this.projectData['pIndustry'] ? this.projectData['pIndustry'] : [];
-    console.log(this.projectData['industryList'],'+++999888')
+    console.log(this.projectData['industryList'], '+++999888')
     this.projectData['skillList'] = this.projectData['pSkill'] ? this.projectData['pSkill'] : [];
     this.isEdit = this.navParams.get('isEdit') || false;
     console.log(this.projectData, 'ionViewDidLoad ProjectEditStep3Page');
   }
+  ionViewDidEnter() {
+    this.isAttention();
+  }
 
+  //隐藏底部分享菜单
+  isAttention() {
+    // let url = location.href.split('#')[0]; // 当前网页的URL，不包含#及其后面部分
+    // let data = { url: url };
+    this.http.get(hideAttentionMenuUrl).subscribe(res => {
+      if (res['code'] == 200) {
+        wx.config({
+          debug: false,
+          appId: res['data'].appid,
+          timestamp: res['data'].timestamp,
+          nonceStr: res['data'].nonceStr,
+          signature: res['data'].signature,
+          jsApiList: ['hideOptionMenu']
+        });
+        wx.ready(function () {
+          //wx.showOptionMenu();
+          wx.hideOptionMenu();
+        });
+      }
+    })
+  }
   getUrlParam(name) {
     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象  
     var r = window.location.search.substr(1).match(reg);  //匹配目标参数  
@@ -56,7 +81,7 @@ export class ProjectEditStep3Page {
   sureSubmit() {
     this.isSubmit = !this.isSubmit
     if (this.gotype == 1) {
-      this.navCtrl.push(ProjectBrowserPage,{data:this.projectData});
+      this.navCtrl.push(ProjectBrowserPage, { data: this.projectData });
     } else {
       // this.navCtrl.push(ProjectListPage);
       return
@@ -83,9 +108,9 @@ export class ProjectEditStep3Page {
     let language = this.projectData['planguage'] && this.projectData['planguage'].length > 0 ? this.projectData['planguage'].map(f => f.language).join(',') : '';
     let grade = this.projectData['planguage'] && this.projectData['planguage'].length > 0 ? this.projectData['planguage'].map(f => f.grade).join(',') : '';
     let pid = projectData['pid'];
-    let projectLengthType = !projectData['projectLengthType'] && projectData['projectLengthType'] !=0 ? '' : projectData['projectLengthType'];
-    let startTimeType = !projectData['startTimeType'] && projectData['startTimeType'] !=0 ? '' : projectData['startTimeType'];
-    let budgetType = !projectData['budgetType'] && projectData['budgetType'] !=0 ? '' : projectData['budgetType'];
+    let projectLengthType = !projectData['projectLengthType'] && projectData['projectLengthType'] != 0 ? '' : projectData['projectLengthType'];
+    let startTimeType = !projectData['startTimeType'] && projectData['startTimeType'] != 0 ? '' : projectData['startTimeType'];
+    let budgetType = !projectData['budgetType'] && projectData['budgetType'] != 0 ? '' : projectData['budgetType'];
     // 必填项校验
     if ((!projectData.startTimeType && projectData.startTimeType != 0) || (!projectData.deliverMethod && projectData.deliverMethod != 0) || (!projectData.province) || (!projectData.budgetType && projectData.budgetType != 0)) {
       this.isComplete = true;
@@ -104,7 +129,7 @@ export class ProjectEditStep3Page {
       '&target=' + (projectData['target'] || '') +
       '&industrys=' + industrys +
       '&skills=' + skills +
-      '&projectLengthType=' + projectLengthType+
+      '&projectLengthType=' + projectLengthType +
       '&projectLength=' + (projectData['projectLength'] || '') +
       '&startTimeType=' + startTimeType +
       '&startTime=' + projectData['startTime'] +
@@ -195,7 +220,7 @@ export class ProjectEditStep3Page {
       this.projectData['city'] = value['city'] || ''
       return;
     } else if (field == 'projectTime') {
-      
+
       // console.log(projectLengthType,'projectLengthTypeprojectLengthTypeprojectLengthTypeprojectLengthType');
       this.projectData['projectLengthType'] = value[0];
       this.projectData['projectLength'] = value[1] || '';
@@ -234,9 +259,9 @@ export class ProjectEditStep3Page {
     let language = this.projectData['planguage'] && this.projectData['planguage'].length > 0 ? this.projectData['planguage'].map(f => f.language).join(',') : '';
     let grade = this.projectData['planguage'] && this.projectData['planguage'].length > 0 ? this.projectData['planguage'].map(f => f.grade).join(',') : '';
     let pid = projectData['pid'];
-    let projectLengthType = !projectData['projectLengthType'] && projectData['projectLengthType'] !== 0 ? '' :projectData['projectLengthType'];
-    let startTimeType = !projectData['startTimeType'] && projectData['startTimeType'] !=0 ? '' : projectData['startTimeType'];
-    let budgetType = !projectData['budgetType'] && projectData['budgetType'] !=0 ? '' : projectData['budgetType'];
+    let projectLengthType = !projectData['projectLengthType'] && projectData['projectLengthType'] !== 0 ? '' : projectData['projectLengthType'];
+    let startTimeType = !projectData['startTimeType'] && projectData['startTimeType'] != 0 ? '' : projectData['startTimeType'];
+    let budgetType = !projectData['budgetType'] && projectData['budgetType'] != 0 ? '' : projectData['budgetType'];
     // let projectStageDetailUrl = 'http://mamon.yemindream.com/mamon/customer/savaraft';
     const openId = window.sessionStorage.getItem('openId') || this.getUrlParam('openId') || 'o2GZp1Gsud1OVuaw5AH_e28m3kOw'
     let projectStageDetailUrl = savaraftUrl + '?openId=' + openId +
@@ -249,11 +274,11 @@ export class ProjectEditStep3Page {
       '&description=' + (projectData['description'] || '') +
       '&target=' + (projectData['target'] || '') +
       '&industrys=' + (industrys || '') +
-      '&skills=' + (skills || '')+
-      '&projectLengthType=' + projectLengthType+
-      '&projectLength=' + (projectData['projectLength'] || '')+
-      '&startTimeType=' + startTimeType+
-      '&startTime=' + (projectData['startTime'] || '')+
+      '&skills=' + (skills || '') +
+      '&projectLengthType=' + projectLengthType +
+      '&projectLength=' + (projectData['projectLength'] || '') +
+      '&startTimeType=' + startTimeType +
+      '&startTime=' + (projectData['startTime'] || '') +
       '&deliverMethod=' + (projectData['deliverMethod'] || '') +
       '&budgetType=' + budgetType +
       '&budgetDay=' + (projectData['budgetDay'] || 0) +

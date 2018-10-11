@@ -3,7 +3,8 @@ import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-an
 import globalConfig from '../../config.js';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { MamenDataProvider } from '../../providers/mamen-data/mamen-data';
-import { resumeUpLoadUrl, getApplicationProjectList } from '../../providers/requestUrl';
+import { resumeUpLoadUrl, getApplicationProjectList, hideAttentionMenuUrl, getAttentionUserInfo } from '../../providers/requestUrl';
+declare var wx: any;
 /**
 * Generated class for the UploadfilePage page.
 *
@@ -43,14 +44,36 @@ export class UploadfilePage {
 	ionViewDidLoad() {
 		console.log('ionViewDidLoad UploadfilePage');
 	}
+	ionViewDidEnter() {
+		this.isAttention();
+	}
 
+	//隐藏底部分享菜单
+	isAttention() {
+		// let url = location.href.split('#')[0]; // 当前网页的URL，不包含#及其后面部分
+		// let data = { url: url };
+		this.http.get(hideAttentionMenuUrl).subscribe(res => {
+			if (res['code'] == 200) {
+				wx.config({
+					debug: false,
+					appId: res['data'].appid,
+					timestamp: res['data'].timestamp,
+					nonceStr: res['data'].nonceStr,
+					signature: res['data'].signature,
+					jsApiList: ['hideOptionMenu']
+				});
+				wx.ready(function () {
+					//wx.showOptionMenu();
+					wx.hideOptionMenu();
+				});
+			}
+		})
+	}
 	presentLoadingDefault() {
 		this.loading = this.loadingCtrl.create({
 			content: '上传中.....'
 		});
-
 		this.loading.present();
-
 	}
 
 	sureBack() {
@@ -117,7 +140,10 @@ export class UploadfilePage {
 			return null;
 		}
 	}
-
+	sureFailed() {
+		this.isFailed = !this.isFailed;
+		return
+	}
 	uploadFile() {
 		// 上传
 		if (this.pagetype == 'resumePage') {
@@ -193,7 +219,7 @@ export class UploadfilePage {
 					}, 1000)
 				}
 			}, error => {
-				console.log('请求失败',error);
+				console.log('请求失败', error);
 				this.loading.dismiss();
 				setTimeout(() => {
 					this.isFailed = true;
@@ -225,7 +251,7 @@ export class UploadfilePage {
 					}, 1000)
 				}
 			}, error => {
-				console.log('请求失败',error);
+				console.log('请求失败', error);
 				this.loading.dismiss();
 				setTimeout(() => {
 					this.isFailed = true;

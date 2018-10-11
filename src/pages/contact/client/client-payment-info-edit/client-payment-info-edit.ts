@@ -4,6 +4,9 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { MamenDataProvider } from '../../../../providers/mamen-data/mamen-data';
 import { FormEditPage } from '../../form-edit/form-edit'
 import { editCompanyPayerUrl, addCompanyPayerUrl, delPayerUrl } from '../../../../providers/requestUrl';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { hideAttentionMenuUrl, getAttentionUserInfo } from '../../../../providers/requestUrl'
+declare var wx: any;
 /**
  * Generated class for the ClientPaymentInfoEditPage page.
  *
@@ -24,7 +27,7 @@ export class ClientPaymentInfoEditPage {
   public isDisabled: any
   public isSuccess = false
   public isfailed = false
-  constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider, private http: HttpClient) {
     this.paymentDetail = {}
   }
 
@@ -37,6 +40,7 @@ export class ClientPaymentInfoEditPage {
   ionViewDidEnter() {
     this.paymentDetail = this.navParams.get('data') || {};
     this.isdefault = this.paymentDetail.type == 1;
+    this.isAttention();
   }
 
   /*跳转到数据处理页面*/
@@ -60,7 +64,7 @@ export class ClientPaymentInfoEditPage {
     this.isSuccess = !this.isSuccess
     this.navCtrl.pop()
   }
-  sureFailed(){
+  sureFailed() {
     this.isfailed = !this.isfailed
     return
   }
@@ -88,7 +92,7 @@ export class ClientPaymentInfoEditPage {
         //alert('修改成功')
         //this.navCtrl.pop();
         this.isSuccess = true
-      }else{
+      } else {
         this.isfailed = true
         this.isDisabled = ''
       }
@@ -129,5 +133,26 @@ export class ClientPaymentInfoEditPage {
   onClose() {
     this.isDelPayment = !this.isDelPayment
     return
+  }
+  //隐藏底部分享菜单
+  isAttention() {
+    // let url = location.href.split('#')[0]; // 当前网页的URL，不包含#及其后面部分
+    // let data = { url: url };
+    this.http.get(hideAttentionMenuUrl).subscribe(res => {
+      if (res['code'] == 200) {
+        wx.config({
+          debug: false,
+          appId: res['data'].appid,
+          timestamp: res['data'].timestamp,
+          nonceStr: res['data'].nonceStr,
+          signature: res['data'].signature,
+          jsApiList: ['hideOptionMenu']
+        });
+        wx.ready(function () {
+          //wx.showOptionMenu();
+          wx.hideOptionMenu();
+        });
+      }
+    })
   }
 }
