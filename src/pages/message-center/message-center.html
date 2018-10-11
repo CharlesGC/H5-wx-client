@@ -16,12 +16,15 @@
       </p>
       <div class="msg-cont">
         <h4>{{messageCenterList_item.projectName}}</h4>
-        <p *ngIf="messageCenterList_item.pStatus != 0 || messageCenterList_item.pStatus != 1 || 
+        <!-- <p *ngIf="messageCenterList_item.pStatus != 0 || messageCenterList_item.pStatus != 1 || 
                   messageCenterList_item.pStatus != 2 || messageCenterList_item.pStatus != 3|| 
                   messageCenterList_item.pStatus != 6">整体进度 第{{messageCenterList_item.stageSort}}阶段</p>
         <p *ngIf="messageCenterList_item.pStatus == 0 || messageCenterList_item.pStatus == 1 || 
                   messageCenterList_item.pStatus == 2 || messageCenterList_item.pStatus == 3|| 
-                  messageCenterList_item.pStatus == 6">整体进度 未开始</p>
+                  messageCenterList_item.pStatus == 6">整体进度 未开始</p> -->
+
+        <p *ngIf="messageCenterList_item.params && messageCenterList_item.params.stageSort">整体进度 第{{messageCenterList_item.params.stageSort}}阶段</p>
+        <p *ngIf="!messageCenterList_item.params || !messageCenterList_item.params.stageSort">整体进度 未开始</p>
       </div>
       <div class="msg-footer" (click)="goProjectBrowserPage(messageCenterList_item)">
         <span class="msg-footer-text">查看该项目详情</span>

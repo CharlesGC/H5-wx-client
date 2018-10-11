@@ -33,7 +33,7 @@
         <img class="boder-rads" src="{{user.avatar}}" [hidden]="!isLogin">
       </ion-thumbnail>
       <div class="title-name">
-        <h2>{{user.nickName || '黄先生'}}</h2>
+        <h2>{{user.nickName}}</h2>
         <span class="user-type" *ngIf="user.status >= 4">已审核</span>
         <span class="user-type" *ngIf="user.status == 0">未审核</span>
       </div>
