@@ -5,9 +5,11 @@ import { MamenDataProvider } from '../../../../providers/mamen-data/mamen-data';
 import { ProjectEditStep3Page } from '../project-edit-step3/project-edit-step3';
 import { FormEditPage } from '../../../contact/form-edit/form-edit';
 import { ProjectListPage } from '../project-list/project-list';
-import { savaraftUrl } from '../../../../providers/requestUrl';
+import { savaraftUrl,hideAttentionMenuUrl, getAttentionUserInfo  } from '../../../../providers/requestUrl';
 import { SpeedPage } from '../../../speed/speed';
 import { ProjectBrowserPage } from '../project-browser/project-browser'
+import { HttpClient, HttpParams } from '@angular/common/http';
+declare var wx: any;
 /**
  * Generated class for the ProjectEditStep2Page page.
  *
@@ -28,7 +30,7 @@ export class ProjectEditStep2Page {
   public isSubmit = false
   public isfailed = false
   public gotype = 0
-  constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider, private http: HttpClient) {
     this.projectData = {};
   }
 
@@ -42,12 +44,36 @@ export class ProjectEditStep2Page {
     this.projectData['note'] = this.projectData['note'] ? this.projectData['note'].replace(/<br>/g, "\n") : '';
   }
 
-  ionViewWillEnter(){
+  ionViewWillEnter() {
     this.projectData['description'] = this.projectData['description'] ? this.projectData['description'].replace(/<br>/g, "\n") : '';
     this.projectData['target'] = this.projectData['target'] ? this.projectData['target'].replace(/<br>/g, "\n") : '';
     this.projectData['note'] = this.projectData['note'] ? this.projectData['note'].replace(/<br>/g, "\n") : '';
   }
+  ionViewDidEnter() {
+    this.isAttention();
+  }
 
+  //隐藏底部分享菜单
+  isAttention() {
+    // let url = location.href.split('#')[0]; // 当前网页的URL，不包含#及其后面部分
+    // let data = { url: url };
+    this.http.get(hideAttentionMenuUrl).subscribe(res => {
+      if (res['code'] == 200) {
+        wx.config({
+          debug: false,
+          appId: res['data'].appid,
+          timestamp: res['data'].timestamp,
+          nonceStr: res['data'].nonceStr,
+          signature: res['data'].signature,
+          jsApiList: ['hideOptionMenu']
+        });
+        wx.ready(function () {
+          //wx.showOptionMenu();
+          wx.hideOptionMenu();
+        });
+      }
+    })
+  }
   /*跳转到下一步页面*/
   goStep3Page() {
     let projectData = this.projectData;
@@ -69,9 +95,9 @@ export class ProjectEditStep2Page {
 
   /*设置值（回调函数）*/
   setValue = (field, value) => {
-    if(field == 'description' || field == 'target' ||　field == 'note'){
+    if (field == 'description' || field == 'target' || field == 'note') {
       this.projectData[field] = value ? value.replace(/<br>/g, "\n") : '';
-    }else{
+    } else {
       this.projectData[field] = value;
     }
   }
@@ -118,11 +144,11 @@ export class ProjectEditStep2Page {
     let projectData = this.projectData;
     // let projectStageDetailUrl = 'http://mamon.yemindream.com/mamon/customer/savaraft';
     const openId = window.sessionStorage.getItem('openId') || this.getUrlParam('openId');
-    let reg=new RegExp("\n","g");
-    let description = projectData['description'] ? projectData['description'].replace(reg,"<br>") : '';
-    let target = projectData['target'] ? projectData['target'].replace(reg,"<br>") : '';
-    let note = projectData['note'] ? projectData['note'].replace(reg,"<br>") : '';
-    
+    let reg = new RegExp("\n", "g");
+    let description = projectData['description'] ? projectData['description'].replace(reg, "<br>") : '';
+    let target = projectData['target'] ? projectData['target'].replace(reg, "<br>") : '';
+    let note = projectData['note'] ? projectData['note'].replace(reg, "<br>") : '';
+
     let projectStageDetailUrl = savaraftUrl + '?openId=' + openId +
       '&cid=' + projectData['cid'] +
       '&principalName=' + (projectData['principalName'] || '') +
@@ -149,11 +175,11 @@ export class ProjectEditStep2Page {
     })
   }
   /*页面准备离开时触发*/
-  ionViewWillLeave(){
-    let reg=new RegExp("\n","g");
-    this.projectData['description'] = this.projectData['description'] ? this.projectData['description'].replace(reg,"<br>") : '';
-    this.projectData['target'] = this.projectData['target'] ? this.projectData['target'].replace(reg,"<br>") : '';
-    this.projectData['note'] = this.projectData['note'] ? this.projectData['note'].replace(reg,"<br>") : '';
+  ionViewWillLeave() {
+    let reg = new RegExp("\n", "g");
+    this.projectData['description'] = this.projectData['description'] ? this.projectData['description'].replace(reg, "<br>") : '';
+    this.projectData['target'] = this.projectData['target'] ? this.projectData['target'].replace(reg, "<br>") : '';
+    this.projectData['note'] = this.projectData['note'] ? this.projectData['note'].replace(reg, "<br>") : '';
   }
 
 }

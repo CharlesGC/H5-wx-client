@@ -4,18 +4,18 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
 import { File } from '@ionic-native/file';
 import { DomSanitizer } from '@angular/platform-browser';
-
 import { MamenDataProvider } from '../../../../providers/mamen-data/mamen-data';
-
 import { ConsultantInfoUserPage } from '../consultant-info-user/consultant-info-user';
 import { ConsultantProfessionalCertificationPage } from '../consultant-professional-certification/consultant-professional-certification';
 import { ConsultantProjectExpPage } from '../consultant-project-exp/consultant-project-exp';
 import { ConsultantWorkExpPage } from '../consultant-work-exp/consultant-work-exp';
 import { ConsultantLanguageExpPage } from '../consultant-language-exp/consultant-language-exp';
 import { ConsultantEducationExpPage } from '../consultant-education-exp/consultant-education-exp'
-import { getAdviserDetailUrl } from '../../../../providers/requestUrl';
+import { getAdviserDetailUrl, hideAttentionMenuUrl, getAttentionUserInfo } from '../../../../providers/requestUrl';
 import { UploadfilePage } from '../../../uploadfile/uploadfile'
 import { resumeDeleteUrl } from '../../../../providers/requestUrl';
+import { HttpClient, HttpParams } from '@angular/common/http';
+declare var wx: any;
 /**
  * Generated class for the ConsultantBasicPage page.
  *
@@ -35,15 +35,15 @@ export class ConsultantBasicPage {
   public isLoading = true;
   public format: boolean;
   public isDelete = false;
-  public arid:any;
-  constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider, 
-    public loadingCtrl: LoadingController, private camera: Camera,public sanitizer:DomSanitizer,
-    private transfer: FileTransfer, private file: File, ) {
+  public arid: any;
+  constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider,
+    public loadingCtrl: LoadingController, private camera: Camera, public sanitizer: DomSanitizer,
+    private transfer: FileTransfer, private file: File, private http: HttpClient) {
     this.consultantBasicData = {};
   }
 
   /*转换html标签处理*/
-  assembleHTML(strHTML:any){
+  assembleHTML(strHTML: any) {
     return this.sanitizer.bypassSecurityTrustHtml(strHTML);
   }
 
@@ -53,8 +53,9 @@ export class ConsultantBasicPage {
     this.presentLoading(true);
   }
   ionViewDidEnter() {
-    console.log(this.consultantBasicData,'this.consultantBasicData----')
+    console.log(this.consultantBasicData, 'this.consultantBasicData----')
     this.getConsultantBasicData();
+    this.isAttention();
   }
 
   presentLoading(isLoading) {
@@ -91,7 +92,7 @@ export class ConsultantBasicPage {
       console.log('erros===', error);
     })
   }
-  onResumeDel(value){
+  onResumeDel(value) {
     this.isDelete = true;
     this.arid = value;
   }
@@ -167,7 +168,7 @@ export class ConsultantBasicPage {
 
   /* 根据url来判断文件类型 */
   formatTypes(value) {
-    if(!value) return '';
+    if (!value) return '';
     if (value.search(/doc/) !== -1 || value.search(/docx/) !== -1) {
       return 'doc';
     } else if (value.search(/ppt/) !== -1 || value.search(/pptx/) !== -1) {
@@ -184,5 +185,27 @@ export class ConsultantBasicPage {
   /* 上传页面 */
   gouploadfile(value) {
     this.navCtrl.push(UploadfilePage, { type: value })
+  }
+
+  //隐藏底部分享菜单
+  isAttention() {
+    // let url = location.href.split('#')[0]; // 当前网页的URL，不包含#及其后面部分
+    // let data = { url: url };
+    this.http.get(hideAttentionMenuUrl).subscribe(res => {
+      if (res['code'] == 200) {
+        wx.config({
+          debug: false,
+          appId: res['data'].appid,
+          timestamp: res['data'].timestamp,
+          nonceStr: res['data'].nonceStr,
+          signature: res['data'].signature,
+          jsApiList: ['hideOptionMenu']
+        });
+        wx.ready(function () {
+          //wx.showOptionMenu();
+          wx.hideOptionMenu();
+        });
+      }
+    })
   }
 }

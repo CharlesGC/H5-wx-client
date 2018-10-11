@@ -4,6 +4,9 @@ import { MamenDataProvider } from '../../providers/mamen-data/mamen-data';
 import { ChooseIdentityPage } from '../choose-identity/choose-identity';
 import { ContactPage } from '../contact/contact';
 import { bindPhoneUrl, sendSmsCodeUrl } from '../../providers/requestUrl';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { hideAttentionMenuUrl, getAttentionUserInfo } from '../../providers/requestUrl'
+declare var wx: any;
 // import { Keyboard } from '@ionic-native/keyboard';
 
 /**
@@ -33,14 +36,39 @@ export class PhonebindPage {
   public isIntFailed = false
   public isSuccess = false
   public isFailed = false
-  public isDisabled:any
+  public isDisabled: any
   public isConsultant = false
-  constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider, public alertCtrl: AlertController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider, public alertCtrl: AlertController, private http: HttpClient) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad PhonebindPage', this.navParams.get('parmens'), '---==---');
     // this.keyboard.show();
+  }
+  ionViewDidEnter() {
+    this.isAttention();
+  }
+
+  //隐藏底部分享菜单
+  isAttention() {
+    // let url = location.href.split('#')[0]; // 当前网页的URL，不包含#及其后面部分
+    // let data = { url: url };
+    this.http.get(hideAttentionMenuUrl).subscribe(res => {
+      if (res['code'] == 200) {
+        wx.config({
+          debug: false,
+          appId: res['data'].appid,
+          timestamp: res['data'].timestamp,
+          nonceStr: res['data'].nonceStr,
+          signature: res['data'].signature,
+          jsApiList: ['hideOptionMenu']
+        });
+        wx.ready(function () {
+          //wx.showOptionMenu();
+          wx.hideOptionMenu();
+        });
+      }
+    })
   }
   surePhoneFormat() {
     this.isPhoneFormat = !this.isPhoneFormat
@@ -62,7 +90,7 @@ export class PhonebindPage {
     this.isFailed = !this.isFailed
     return
   }
-  sureConsultant(){
+  sureConsultant() {
     this.isConsultant = !this.isConsultant
     this.navCtrl.popToRoot()
   }
@@ -94,7 +122,7 @@ export class PhonebindPage {
         //alert('网络异常！')
         this.isIntFailed = true
       }
-      
+
     }, error => {
       console.log('erros===', error);
     })
@@ -124,7 +152,7 @@ export class PhonebindPage {
       }
     }, 1000);
     this.phoneCodeText = '获取验证码';
-    this.isDisabled =''
+    this.isDisabled = ''
   }
 
   //绑定手机号
@@ -132,7 +160,7 @@ export class PhonebindPage {
     const openId = window.sessionStorage.getItem('openId') || this.getUrlParam('openId');
     // let getPhoneCodeUrl = 'http://mamon.yemindream.com/mamon/user/bindPhone';
     let userType = this.navParams.get('parmens');
-    if(!userType && userType != 0){
+    if (!userType && userType != 0) {
       userType = 1;
     }
     let getPhoneCodeUrl = bindPhoneUrl + '?openId=' + openId + '&phone=' + phone.value + '&code=' + code.value + '&userType=' + userType;
@@ -140,9 +168,9 @@ export class PhonebindPage {
       if (res.code == 200) {
         // this.navCtrl.push(ContactPage);
         //alert('绑定成功！')
-        if(userType == 1){ //1是顾问、0是客户
+        if (userType == 1) { //1是顾问、0是客户
           this.isConsultant = true
-        }else{
+        } else {
           this.isSuccess = true
         }
       } else {

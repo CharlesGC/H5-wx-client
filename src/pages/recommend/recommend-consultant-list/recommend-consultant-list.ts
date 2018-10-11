@@ -4,8 +4,9 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { MamenDataProvider } from '../../../providers/mamen-data/mamen-data';
 import { ProjectBrowserPage } from '../../my-project/client/project-browser/project-browser';
 import { ConsultantProjectBrowserPage } from '../../my-project/consultant/consultant-project-browser/consultant-project-browser';
-import { getRecommendListUrl } from '../../../providers/requestUrl';
-
+import { getRecommendListUrl,hideAttentionMenuUrl, getAttentionUserInfo } from '../../../providers/requestUrl';
+import { HttpClient, HttpParams } from '@angular/common/http';
+declare var wx: any;
 /**
  * Generated class for the RecommendConsultantListPage page.
  *
@@ -25,7 +26,7 @@ export class RecommendConsultantListPage {
   public pageNum = 0;
   public pageSize = 999;
   public isCont = false;
-  constructor(public navCtrl: NavController, public navParams: NavParams,private Provider:MamenDataProvider,public sanitizer:DomSanitizer) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,private Provider:MamenDataProvider,public sanitizer:DomSanitizer,private http: HttpClient) {
     this.selected = 2;
   }
   /*转换html标签处理*/
@@ -40,8 +41,30 @@ export class RecommendConsultantListPage {
 
   ionViewDidEnter() {
     this.getProjectListData(this.selected);
+    this.isAttention();
   }
-
+ 
+ //隐藏底部分享菜单
+   isAttention() {
+     // let url = location.href.split('#')[0]; // 当前网页的URL，不包含#及其后面部分
+     // let data = { url: url };
+     this.http.get(hideAttentionMenuUrl).subscribe(res => {
+       if (res['code'] == 200) {
+         wx.config({
+           debug: false,
+           appId: res['data'].appid,
+           timestamp: res['data'].timestamp,
+           nonceStr: res['data'].nonceStr,
+           signature: res['data'].signature,
+           jsApiList: ['hideOptionMenu']
+         });
+         wx.ready(function () {
+           //wx.showOptionMenu();
+     wx.hideOptionMenu();
+         });
+       }
+     })
+   }
   /*标签切换时调用*/
   onSelectClick(type) {
     this.selected = type;

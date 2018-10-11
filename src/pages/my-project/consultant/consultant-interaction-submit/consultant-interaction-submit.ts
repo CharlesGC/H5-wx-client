@@ -2,10 +2,11 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { FormEditPage } from '../../../contact/form-edit/form-edit';
 import { MamenDataProvider } from '../../../../providers/mamen-data/mamen-data';
-import { submitDocumentUrl, delDocumentUrl } from '../../../../providers/requestUrl';
+import { submitDocumentUrl, delDocumentUrl, hideAttentionMenuUrl, getAttentionUserInfo } from '../../../../providers/requestUrl';
 
 import { UploadfilePage } from "../../../uploadfile/uploadfile";
-
+import { HttpClient, HttpParams } from '@angular/common/http';
+declare var wx: any;
 /**
  * Generated class for the ConsultantInteractionSubmitPage page.
  *
@@ -32,8 +33,8 @@ export class ConsultantInteractionSubmitPage {
   public fid: any;
   public isNoStageBook = false
   public isDelBook = false
-  public isSubmitSuccess =false
-  constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider) {
+  public isSubmitSuccess = false
+  constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider, private http: HttpClient) {
   }
 
   ionViewDidLoad() {
@@ -71,10 +72,34 @@ export class ConsultantInteractionSubmitPage {
     this.interactionData['introduction'] = this.interactionData['introduction'] ? this.interactionData['introduction'].replace(/<br>/g, "\n") : '';
   }
 
-  ionViewWillEnter(){
+  ionViewWillEnter() {
     this.interactionData['introduction'] = this.interactionData['introduction'] ? this.interactionData['introduction'].replace(/<br>/g, "\n") : '';
   }
+  ionViewDidEnter() {
+    this.isAttention();
+  }
 
+  //隐藏底部分享菜单
+  isAttention() {
+    // let url = location.href.split('#')[0]; // 当前网页的URL，不包含#及其后面部分
+    // let data = { url: url };
+    this.http.get(hideAttentionMenuUrl).subscribe(res => {
+      if (res['code'] == 200) {
+        wx.config({
+          debug: false,
+          appId: res['data'].appid,
+          timestamp: res['data'].timestamp,
+          nonceStr: res['data'].nonceStr,
+          signature: res['data'].signature,
+          jsApiList: ['hideOptionMenu']
+        });
+        wx.ready(function () {
+          //wx.showOptionMenu();
+          wx.hideOptionMenu();
+        });
+      }
+    })
+  }
   /** 跳转到上传页面 */
   gouploadfile() {
     this.navCtrl.push(UploadfilePage, { callback: this.setuploadfile })
@@ -125,13 +150,13 @@ export class ConsultantInteractionSubmitPage {
     this.isNoStageBook = !this.isNoStageBook
     return
   }
-  sureSubmitSuccess(){
+  sureSubmitSuccess() {
     this.isSubmitSuccess = !this.isSubmitSuccess
     this.navCtrl.pop();
   }
   /*附件、交互物*/
   onInteractionClick() {
-    
+
     let pid = this.navParams.get('pid') || this.interactionData['pid'];
     let psid = this.navParams.get('psid') || this.interactionData['psid'];
     let pdid = this.navParams.get('pdid') || this.interactionData['pdid'];
@@ -144,8 +169,8 @@ export class ConsultantInteractionSubmitPage {
       this.isNoStageBook = true
       return
     }
-    let reg=new RegExp("\n","g");
-    let introduction = interactionData['introduction'] ? interactionData['introduction'].replace(reg,"<br>") : '';
+    let reg = new RegExp("\n", "g");
+    let introduction = interactionData['introduction'] ? interactionData['introduction'].replace(reg, "<br>") : '';
 
     let projectStageDetailUrl = submitDocumentUrl + '?openId=' + openId + '&pid=' + pid +
       '&name=' + interactionData['name'] +
@@ -162,7 +187,7 @@ export class ConsultantInteractionSubmitPage {
       if (res.code == 200) {
         //alert('操作功能！');
         //this.isNoStageBook = true
-        this.isSubmitSuccess =true
+        this.isSubmitSuccess = true
       } else if (res.code == 207) {
         window.localStorage.removeItem('openId');
       } else {
@@ -173,9 +198,9 @@ export class ConsultantInteractionSubmitPage {
     })
   }
   /*页面准备离开时触发*/
-  ionViewWillLeave(){
-    let reg=new RegExp("\n","g");
-    this.interactionData['introduction'] = this.interactionData['introduction'] ? this.interactionData['introduction'].replace(reg,"<br>") : '';
+  ionViewWillLeave() {
+    let reg = new RegExp("\n", "g");
+    this.interactionData['introduction'] = this.interactionData['introduction'] ? this.interactionData['introduction'].replace(reg, "<br>") : '';
   }
   /*列表编辑*/
   goFormEditPage(field, value, type) {
@@ -184,9 +209,9 @@ export class ConsultantInteractionSubmitPage {
 
   /*设置值（回调函数）*/
   setValue = (field, value) => {
-    if(field == 'introduction'){
+    if (field == 'introduction') {
       this.interactionData[field] = value ? value.replace(/<br>/g, "\n") : '';
-    }else{
+    } else {
       this.interactionData[field] = value;
     }
   }

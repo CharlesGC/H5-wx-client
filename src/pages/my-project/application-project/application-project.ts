@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { MamenDataProvider } from '../../../providers/mamen-data/mamen-data';
-
 import { FormEditPage } from '../../contact/form-edit/form-edit';
 import { DemandContentPage } from '../../demand-content/demand-content';
-import { submitApplicationUrl } from '../../../providers/requestUrl';
+import { submitApplicationUrl, hideAttentionMenuUrl, getAttentionUserInfo } from '../../../providers/requestUrl';
 import { UploadfilePage } from '../../uploadfile/uploadfile'
 import { ApplicationProjectListPage } from './application-project-list/application-project-list'
-
+import { HttpClient, HttpParams } from '@angular/common/http';
+declare var wx: any;
 /**
  * Generated class for the ApplicationProjectPage page.
  *
@@ -32,9 +32,9 @@ export class ApplicationProjectPage {
   public tip_isShow = false;
   public success_isShow = false;
   public isComplete = false
-  public pacids:any;
-  public projectlist:any
-  constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider) {
+  public pacids: any;
+  public projectlist: any
+  constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider, private http: HttpClient) {
   }
 
   ionViewDidLoad() {
@@ -67,7 +67,31 @@ export class ApplicationProjectPage {
     }
     console.log('ionViewDidLoad ApplicationProjectPage');
   }
+  ionViewDidEnter() {
+    this.isAttention();
+  }
 
+  //隐藏底部分享菜单
+  isAttention() {
+    // let url = location.href.split('#')[0]; // 当前网页的URL，不包含#及其后面部分
+    // let data = { url: url };
+    this.http.get(hideAttentionMenuUrl).subscribe(res => {
+      if (res['code'] == 200) {
+        wx.config({
+          debug: false,
+          appId: res['data'].appid,
+          timestamp: res['data'].timestamp,
+          nonceStr: res['data'].nonceStr,
+          signature: res['data'].signature,
+          jsApiList: ['hideOptionMenu']
+        });
+        wx.ready(function () {
+          //wx.showOptionMenu();
+          wx.hideOptionMenu();
+        });
+      }
+    })
+  }
   /*列表编辑*/
   goFormEditPage(field, value, type) {
     this.navCtrl.push(FormEditPage, { callback: this.setValue, value: value, field: field, type: type });
@@ -145,7 +169,7 @@ export class ApplicationProjectPage {
   /*确定提交*/
   onDetermine() {
     let projectData = this.projectData;
-    console.log(projectData,this.pacids,'this.pacids');
+    console.log(projectData, this.pacids, 'this.pacids');
     // let projectDetailsUrl = 'http://mamon.yemindream.com/mamon/adviser/submitApplication';
     const openId = window.sessionStorage.getItem('openId') || this.getUrlParam('openId')
     let projectDetailsUrl = submitApplicationUrl + '?openId=' + openId + '&pid=' + projectData['pid'] +
@@ -181,12 +205,12 @@ export class ApplicationProjectPage {
   }
 
   /** 跳转到项目附件列表页 */
-  goApplicationProjectListPage(){
-    this.navCtrl.push(ApplicationProjectListPage,{callback:this.getPacIds,data:this.projectlist})
+  goApplicationProjectListPage() {
+    this.navCtrl.push(ApplicationProjectListPage, { callback: this.getPacIds, data: this.projectlist })
   }
-  getPacIds = (value)=>{
+  getPacIds = (value) => {
     this.projectlist = value
-    this.pacids = (value && value.length > 0) ? value.map(f=>f.id).join(',') :'';
+    this.pacids = (value && value.length > 0) ? value.map(f => f.id).join(',') : '';
   }
 
 }

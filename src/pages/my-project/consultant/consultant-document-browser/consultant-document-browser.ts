@@ -2,8 +2,9 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { MamenDataProvider } from '../../../../providers/mamen-data/mamen-data';
 import { ConsultantInteractionSubmitPage } from '../consultant-interaction-submit/consultant-interaction-submit';
-import { getAdviserDocumentDetailUrl, delDocumentUrl } from '../../../../providers/requestUrl';
-
+import { getAdviserDocumentDetailUrl, delDocumentUrl, hideAttentionMenuUrl, getAttentionUserInfo } from '../../../../providers/requestUrl';
+import { HttpClient, HttpParams } from '@angular/common/http';
+declare var wx: any;
 /**
  * Generated class for the ConsultantDocumentBrowserPage page.
  *
@@ -17,11 +18,11 @@ import { getAdviserDocumentDetailUrl, delDocumentUrl } from '../../../../provide
   templateUrl: 'consultant-document-browser.html',
 })
 export class ConsultantDocumentBrowserPage {
-public isDelBook =false
+  public isDelBook = false
   public invoiceType: any;
   public consultantDocumentDetailData = {};
-  public adviserStatus='';
-  constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider) {
+  public adviserStatus = '';
+  constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider, private http: HttpClient) {
     this.invoiceType = 0;
   }
 
@@ -30,12 +31,34 @@ public isDelBook =false
     let id = this.navParams.get('id');
     this.adviserStatus = this.navParams.get('adviserStatus') || ''
     this.getConsultantDocumentDetails(id);
-    
+
   }
-  ionViewWillEnter(){
+  ionViewWillEnter() {
     this.consultantDocumentDetailData['introduction'] = this.consultantDocumentDetailData['introduction'] ? this.consultantDocumentDetailData['introduction'].replace(/<br>/g, "\n") : '';
+    this.isAttention();
   }
 
+  //隐藏底部分享菜单
+  isAttention() {
+    // let url = location.href.split('#')[0]; // 当前网页的URL，不包含#及其后面部分
+    // let data = { url: url };
+    this.http.get(hideAttentionMenuUrl).subscribe(res => {
+      if (res['code'] == 200) {
+        wx.config({
+          debug: false,
+          appId: res['data'].appid,
+          timestamp: res['data'].timestamp,
+          nonceStr: res['data'].nonceStr,
+          signature: res['data'].signature,
+          jsApiList: ['hideOptionMenu']
+        });
+        wx.ready(function () {
+          //wx.showOptionMenu();
+          wx.hideOptionMenu();
+        });
+      }
+    })
+  }
   /*项目文档详情数据请求*/
   getConsultantDocumentDetails(id) {
     // let consultantDocumentDetailsUrl = 'http://mamon.yemindream.com/mamon/adviser/getDocumentDetail';
@@ -49,11 +72,11 @@ public isDelBook =false
 
         if (this.consultantDocumentDetailData['size'] > 1) {
           this.consultantDocumentDetailData['size'] = this.consultantDocumentDetailData['size'] + ' MB'
-        } else if(this.consultantDocumentDetailData['size'] < 1){
+        } else if (this.consultantDocumentDetailData['size'] < 1) {
           this.consultantDocumentDetailData['size'] = this.consultantDocumentDetailData['size'] * 1024 + ' KB'
         }
-    
-        if(this.consultantDocumentDetailData['format']){
+
+        if (this.consultantDocumentDetailData['format']) {
           if (this.consultantDocumentDetailData['format'].search(/doc/) !== -1 || this.consultantDocumentDetailData['format'].search(/docx/) !== -1) {
             this.consultantDocumentDetailData['format'] = 'assets/imgs/' + 'doc.png'
           } else if (this.consultantDocumentDetailData['format'].search(/ppt/) !== -1 || this.consultantDocumentDetailData['format'].search(/pptx/) !== -1) {
@@ -77,9 +100,9 @@ public isDelBook =false
     })
   }
   /*页面准备离开时触发*/
-  ionViewWillLeave(){
-    let reg=new RegExp("\n","g");
-    this.consultantDocumentDetailData['introduction'] = this.consultantDocumentDetailData['introduction'] ? this.consultantDocumentDetailData['introduction'].replace(reg,"<br>") : '';
+  ionViewWillLeave() {
+    let reg = new RegExp("\n", "g");
+    this.consultantDocumentDetailData['introduction'] = this.consultantDocumentDetailData['introduction'] ? this.consultantDocumentDetailData['introduction'].replace(reg, "<br>") : '';
   }
   getUrlParam(name) {
     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象  
@@ -96,7 +119,7 @@ public isDelBook =false
   onDocumentEditClick() {
     this.navCtrl.push(ConsultantInteractionSubmitPage, { data: this.consultantDocumentDetailData, pid: this.consultantDocumentDetailData['pid'], psid: this.consultantDocumentDetailData['psid'] });
   }
-  
+
   /* 根据format来判断文件类型 */
   // formatTypes(value) {
   //   if (value.search(/doc/) !== -1 || value.search(/docx/) !== -1) {
@@ -111,7 +134,7 @@ public isDelBook =false
   //     return 'pdf'
   //   }
   // }
-  sureDelBook(){
+  sureDelBook() {
     this.isDelBook = !this.isDelBook
     this.navCtrl.pop();
   }

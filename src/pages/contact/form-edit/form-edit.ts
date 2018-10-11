@@ -2,10 +2,12 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { MultiPickerModule } from 'ion-multi-picker';
 import { Http } from '@angular/http';
-
 import { MamenDataProvider } from '../../../providers/mamen-data/mamen-data';
 import { getSkillUrl, getSkillSecondaryUrl, getIndustryListUrl } from '../../../providers/requestUrl';
 import { SelectTagsPage } from '../select-tags/select-tags';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { hideAttentionMenuUrl, getAttentionUserInfo } from '../../../providers/requestUrl'
+declare var wx: any;
 
 /**
  * Generated class for the FormEditPage page.
@@ -163,9 +165,9 @@ export class FormEditPage {
       this.parentColumns = this.degree
     } else if (this.selectField == 'paymentMethod') {
       this.parentColumns = this.paymentMethod
-    } else if(this.selectField == 'deliverMethod') {
+    } else if (this.selectField == 'deliverMethod') {
       this.parentColumns = this.deliverMethod
-    } else if(this.fieldType == 'textarea'){
+    } else if (this.fieldType == 'textarea') {
       var str = value ? value.replace(/<br>/g, "\n") : '';
       this.inputName = str;
     }
@@ -174,10 +176,10 @@ export class FormEditPage {
       this.selectList = (value && value.length) ? value.map(f => ({ ...f, id: (f.ilid || f.alId) })) : [{ id: 0 }];
     } else if (this.fieldType == 'date') {
       this.inputName = new Date(value);
-    }else if (this.fieldType == 'percentage'){
-      if(value< 1){
-        this.inputName = value*100
-      }else if(value >1){
+    } else if (this.fieldType == 'percentage') {
+      if (value < 1) {
+        this.inputName = value * 100
+      } else if (value > 1) {
         this.inputName = value
       }
     }
@@ -206,13 +208,13 @@ export class FormEditPage {
       this.parentColumns = this.degree
     } else if (this.selectField == 'paymentMethod') {
       this.parentColumns = this.paymentMethod
-    }  else if(this.selectField == 'deliverMethod') {
+    } else if (this.selectField == 'deliverMethod') {
       this.parentColumns = this.deliverMethod
-    } else if(this.fieldType == 'textarea'){
+    } else if (this.fieldType == 'textarea') {
       var str = value ? value.replace(/<br>/g, "\n") : '';
       this.inputName = str;
-      console.log(this.inputName,str,'this.inputName')
-    }else if (this.selectField == 'industryList') {
+      console.log(this.inputName, str, 'this.inputName')
+    } else if (this.selectField == 'industryList') {
       //this.getpaymentListData();
       this.selectList = (value && value.length) ? value.map(f => ({ ...f, id: (f.ilid || f.alId) })) : [{ id: 0 }];
       console.log(value, this.selectList, '=========-----========');
@@ -220,37 +222,59 @@ export class FormEditPage {
     } else if (this.fieldType == 'date') {
       this.inputName = new Date(value);
 
-    // else if(this.fieldType == 'textarea') {
-    //   console.log(this.inputName,'未开始时')
-    //   this.inputName=this.inputName.replaceAll("<br>", "\n");
-    //   console.log(this.inputName,'转换后开始时')
-    // }
-    }else if (this.fieldType == 'percentage'){
-      if(value< 1){
-        this.inputName = value*100
-      }else if(value >1){
+      // else if(this.fieldType == 'textarea') {
+      //   console.log(this.inputName,'未开始时')
+      //   this.inputName=this.inputName.replaceAll("<br>", "\n");
+      //   console.log(this.inputName,'转换后开始时')
+      // }
+    } else if (this.fieldType == 'percentage') {
+      if (value < 1) {
+        this.inputName = value * 100
+      } else if (value > 1) {
         this.inputName = value
       }
     }
+    this.isAttention();
     console.log(this.fieldType, value, this.selectList, 'ionViewDidLoad FormEditPage');
   }
 
+  //隐藏底部分享菜单
+  isAttention() {
+    // let url = location.href.split('#')[0]; // 当前网页的URL，不包含#及其后面部分
+    // let data = { url: url };
+    this.http.get(hideAttentionMenuUrl).subscribe(res => {
+      if (res['code'] == 200) {
+        wx.config({
+          debug: false,
+          appId: res['data'].appid,
+          timestamp: res['data'].timestamp,
+          nonceStr: res['data'].nonceStr,
+          signature: res['data'].signature,
+          jsApiList: ['hideOptionMenu']
+        });
+        wx.ready(function () {
+          //wx.showOptionMenu();
+          wx.hideOptionMenu();
+        });
+      }
+    })
+  }
   /*保存把数据传回上一层*/
   addEmailSubmit(inValue) {
     let value,
       citystr,
       callback = this.navParams.get('callback');
     let index = this.navParams.get('index');
-    if (this.fieldType == 'percentage' || this.fieldType == 'price' || this.fieldType == 'text' || this.fieldType == 'gender' || this.fieldType == 'select'  || this.fieldType == 'ranger' || this.fieldType == 'date') {
+    if (this.fieldType == 'percentage' || this.fieldType == 'price' || this.fieldType == 'text' || this.fieldType == 'gender' || this.fieldType == 'select' || this.fieldType == 'ranger' || this.fieldType == 'date') {
       value = inValue;
-    } else if(this.fieldType == 'textarea') {
-      console.log(inValue,'未开始时')
-      var reg=new RegExp("\n","g"); //new RegExp("\r\n","g")
-      inValue= inValue.replace(reg,"<br>"); 
+    } else if (this.fieldType == 'textarea') {
+      console.log(inValue, '未开始时')
+      var reg = new RegExp("\n", "g"); //new RegExp("\r\n","g")
+      inValue = inValue.replace(reg, "<br>");
       // inValue=inValue.replaceAll("<br>", "\n");
-      console.log(inValue,'转换后开始时')
+      console.log(inValue, '转换后开始时')
       value = inValue;
-    }else if (this.fieldType == 'province-city') {
+    } else if (this.fieldType == 'province-city') {
       citystr = document.getElementById("cities").innerText;
       let cityArr = citystr ? citystr.split(' ') : [];
       this.userInfo.province = cityArr[0]

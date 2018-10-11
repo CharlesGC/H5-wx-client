@@ -1,17 +1,16 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { MamenDataProvider } from '../../../../providers/mamen-data/mamen-data';
-
 import { ProjectPaymentBrowserPage } from '../project-payment-browser/project-payment-browser';
-import { getPaymentListUrl,getProjectSignUpAdviserCountUrl } from '../../../../providers/requestUrl';
-
+import { getPaymentListUrl,getProjectSignUpAdviserCountUrl,hideAttentionMenuUrl, getAttentionUserInfo } from '../../../../providers/requestUrl';
 import { ProjectProgramListPage } from '../project-program-list/project-program-list';
 import { ProjectStageListPage } from '../project-stage-list/project-stage-list';
 import { ProjectBrowserPage } from '../project-browser/project-browser';
 import { ProjectConsultantListPage } from '../project-consultant-list/project-consultant-list';
 import { ProjectDecumentListPage } from '../project-decument-list/project-decument-list';
 import { ProjectInvoiceListPage } from '../project-invoice-list/project-invoice-list';
-
+import { HttpClient, HttpParams } from '@angular/common/http';
+declare var wx: any;
 /**
  * Generated class for the ProjectPaymentListPage page.
  *
@@ -33,7 +32,7 @@ export class ProjectPaymentListPage {
   public projectDetails = {}
   public projectSignCount = {};
   public isConsultantListShow = false;
-  constructor(public navCtrl: NavController, public navParams: NavParams,private Provider:MamenDataProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,private Provider:MamenDataProvider,private http: HttpClient) {
   }
 
   ionViewDidLoad() {
@@ -49,8 +48,30 @@ export class ProjectPaymentListPage {
     this.getProjectDocumentListDataData(pid,status);
     this.getProjectSignCount(pid);
     this.projectDetails = this.navParams.get('data') || {};
+    this.isAttention();
   }
-
+ 
+ //隐藏底部分享菜单
+   isAttention() {
+     // let url = location.href.split('#')[0]; // 当前网页的URL，不包含#及其后面部分
+     // let data = { url: url };
+     this.http.get(hideAttentionMenuUrl).subscribe(res => {
+       if (res['code'] == 200) {
+         wx.config({
+           debug: false,
+           appId: res['data'].appid,
+           timestamp: res['data'].timestamp,
+           nonceStr: res['data'].nonceStr,
+           signature: res['data'].signature,
+           jsApiList: ['hideOptionMenu']
+         });
+         wx.ready(function () {
+           //wx.showOptionMenu();
+     wx.hideOptionMenu();
+         });
+       }
+     })
+   }
    /*点击展开、收起*/
    onNavMenuClick(value) {
     this.isShowNavMenu = value;

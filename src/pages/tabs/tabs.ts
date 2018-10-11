@@ -11,7 +11,7 @@ import { RecommendConsultantListPage } from '../recommend/recommend-consultant-l
 import { RecommendClientListPage } from '../recommend/recommend-client-list/recommend-client-list';
 import { SpeedPage } from '../speed/speed';
 import { ChooseIdentityPage } from '../choose-identity/choose-identity';
-import { getUserByopenIdUrl, getWxOpenidUrl,hideAttentionMenuUrl } from '../../providers/requestUrl';
+import { getUserByopenIdUrl, getWxOpenidUrl, hideAttentionMenuUrl } from '../../providers/requestUrl';
 import { MamenDataProvider } from '../../providers/mamen-data/mamen-data';
 import { HttpClient, HttpParams } from '@angular/common/http';
 declare var wx: any;
@@ -28,7 +28,7 @@ export class TabsPage {
   public tab4Root: any;
   tab5Root = ContactPage;
   public isshow = false;
-  constructor(public navCtrl: NavController, private Provider: MamenDataProvider,private http:HttpClient) {
+  constructor(public navCtrl: NavController, private Provider: MamenDataProvider, private http: HttpClient) {
     // this.tab4Root = RecommendConsultantListPage
   }
 

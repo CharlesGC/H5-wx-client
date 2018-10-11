@@ -9,11 +9,11 @@ import { SwiperDetailPage } from './swiper-detail/swiper-detail';
 import { IndustrymorePage } from '../industrymore/industrymore';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { CasemorePage } from "./casemore/casemore";
+import { getswipreUrl, getindustryUrl, getskillUrl, getcaseUrl, getoutstandingUrl, getfinanceUrl, getfinanceAllUrl } from '../../providers/dataUrl';
+import { hideAttentionMenuUrl, getAttentionUserInfo } from '../../providers/requestUrl'
 // declare var onBridgeReady;
 // import { ViewChild } from '@angular/core';
 // import { Slides } from 'ionic-angular';
-import { getswipreUrl, getindustryUrl, getskillUrl, getcaseUrl, getoutstandingUrl, getfinanceUrl, getfinanceAllUrl } from '../../providers/dataUrl';
-import {hideAttentionMenuUrl, getAttentionUserInfo } from '../../providers/requestUrl'
 declare var wx: any;
 
 @Component({
@@ -34,8 +34,8 @@ export class HomePage {
   public financeAllArrlength: any;
   public pepperoni: boolean;
   public sausage: boolean;
-  public mushrooms: boolean; 
-  public attstate:any;
+  public mushrooms: boolean;
+  public attstate: any;
 
   constructor(public navCtrl: NavController, private swiperdata: MamenDataProvider, private industrydata: MamenDataProvider, private http: HttpClient,
     private skilldata: MamenDataProvider, private casedata: MamenDataProvider, private outstanddata: MamenDataProvider, private financedata: MamenDataProvider, private financeAlldata: MamenDataProvider) {
@@ -108,7 +108,7 @@ export class HomePage {
           title: '行业翘楚',
           data: res.data
         };
-        console.log(this.outstandingArr.data,"111111111111111111")
+        console.log(this.outstandingArr.data, "111111111111111111")
       }, error => {
         console.log(error);
       }
@@ -177,9 +177,9 @@ export class HomePage {
 
     }
     let getAttentionUserInfoUrl = getAttentionUserInfo + '?openId=' + openId;
-    this.http.get(getAttentionUserInfoUrl).subscribe(res=>{
+    this.http.get(getAttentionUserInfoUrl).subscribe(res => {
       this.attstate = res['data'].subscribe;
-      console.log(res,'1111222233334444')
+      console.log(res, '1111222233334444')
     });
     this.isAttention();
   }
@@ -211,7 +211,7 @@ export class HomePage {
   outstanding(value, index, type) {
     this.navCtrl.push(IndustrydetialPage, {
       // type: 'indeustryOutstand'
-      type: type 
+      type: type
     });
   }
   // 财务审计

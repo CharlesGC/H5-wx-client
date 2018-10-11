@@ -2,12 +2,13 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MamenDataProvider } from '../../../../providers/mamen-data/mamen-data';
-
 import { ProjectBrowserPage } from '../project-browser/project-browser';
-import { getProjectByStatusUrl, myProjectCountUrl } from '../../../../providers/requestUrl';
+import { getProjectByStatusUrl, myProjectCountUrl, hideAttentionMenuUrl, getAttentionUserInfo } from '../../../../providers/requestUrl';
 import { ProjectSpeedReleasePage } from '../project-speed-release/project-speed-release';
 import { SpeedPage } from '../../../speed/speed';
 import { ContactPage } from '../../../contact/contact';
+import { HttpClient, HttpParams } from '@angular/common/http';
+declare var wx: any;
 /**
  * Generated class for the ProjectListPage page.
  *
@@ -27,11 +28,11 @@ export class ProjectListPage {
   public showNavMenuNumber = 0;
   public projectCount = {}
   public projectListData = [];
-  constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider,public sanitizer:DomSanitizer) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider, public sanitizer: DomSanitizer, private http: HttpClient) {
     this.navCtrl = navCtrl
   }
   /*转换html标签处理*/
-  assembleHTML(strHTML:any){
+  assembleHTML(strHTML: any) {
     return this.sanitizer.bypassSecurityTrustHtml(strHTML);
   }
 
@@ -43,6 +44,7 @@ export class ProjectListPage {
   ionViewDidEnter() {
     this.getMyProjectCount();
     this.getProjectListData(0);
+    this.isAttention();
   }
   /*点击展开、收起*/
   onNavMenuClick(value) {
@@ -50,6 +52,27 @@ export class ProjectListPage {
     this.isShowNavMenu = value;
   }
 
+  //隐藏底部分享菜单
+  isAttention() {
+    // let url = location.href.split('#')[0]; // 当前网页的URL，不包含#及其后面部分
+    // let data = { url: url };
+    this.http.get(hideAttentionMenuUrl).subscribe(res => {
+      if (res['code'] == 200) {
+        wx.config({
+          debug: false,
+          appId: res['data'].appid,
+          timestamp: res['data'].timestamp,
+          nonceStr: res['data'].nonceStr,
+          signature: res['data'].signature,
+          jsApiList: ['hideOptionMenu']
+        });
+        wx.ready(function () {
+          //wx.showOptionMenu();
+          wx.hideOptionMenu();
+        });
+      }
+    })
+  }
   /*点击菜单触发*/
   onNavMenuItemClick(type, typeName, number) {
     this.showNavMenuName = typeName;

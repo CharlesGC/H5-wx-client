@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { MamenDataProvider } from '../../providers/mamen-data/mamen-data';
 import { HomePage } from '../home/home';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { hideAttentionMenuUrl, getAttentionUserInfo } from '../../providers/requestUrl'
+declare var wx: any;
 
 import { PhonebindPage } from '../phonebind/phonebind'
 
@@ -12,18 +15,20 @@ import { PhonebindPage } from '../phonebind/phonebind'
   viewProviders: [MamenDataProvider]
 })
 export class ChooseIdentityPage {
-  public pepperoni:boolean;
-  public sausage:boolean;
-  public mushrooms:boolean;
-  public relationship:any;
+  public pepperoni: boolean;
+  public sausage: boolean;
+  public mushrooms: boolean;
+  public relationship: any;
   public isDisabled = true;
-  public userType = {friends:0,enemies:1,family:2}
+  public userType = { friends: 0, enemies: 1, family: 2 }
 
   public Selected = 0;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,private Provider:MamenDataProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider, private http: HttpClient) {
   }
-
+  ionViewDidEnter() {
+    this.isAttention();
+  }
   ionViewDidLoad() {
     console.log('ionViewDidLoad ChooseIdentityPage');
   }
@@ -47,19 +52,39 @@ export class ChooseIdentityPage {
     // },error=>{
     //   console.log('erros===',error);
     // })
-    this.navCtrl.push(PhonebindPage,{parmens:this.Selected});
+    this.navCtrl.push(PhonebindPage, { parmens: this.Selected });
   }
 
   /*判断是否已选择*/
   onSelectChange() {
-    if(!this.isDisabled){
+    if (!this.isDisabled) {
       return;
     }
     this.isDisabled = !this.relationship
   }
 
-  onSelected(value){
+  onSelected(value) {
     this.Selected = value
   }
-
+  //隐藏底部分享菜单
+  isAttention() {
+    // let url = location.href.split('#')[0]; // 当前网页的URL，不包含#及其后面部分
+    // let data = { url: url };
+    this.http.get(hideAttentionMenuUrl).subscribe(res => {
+      if (res['code'] == 200) {
+        wx.config({
+          debug: false,
+          appId: res['data'].appid,
+          timestamp: res['data'].timestamp,
+          nonceStr: res['data'].nonceStr,
+          signature: res['data'].signature,
+          jsApiList: ['hideOptionMenu']
+        });
+        wx.ready(function () {
+          //wx.showOptionMenu();
+          wx.hideOptionMenu();
+        });
+      }
+    })
+  }
 }
