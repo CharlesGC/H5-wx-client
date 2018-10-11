@@ -106,7 +106,8 @@ export class ProjectBrowserPage {
   }
   sureSuccess(){
     this.isSuccess =!this.isSuccess
-    this.navCtrl.pop()
+    // this.navCtrl.pop()
+    this.navCtrl.popTo(this.navCtrl.getByIndex(1))
   }
   sureFailed(){
     this.isFailed = !this.isFailed
@@ -174,11 +175,25 @@ export class ProjectBrowserPage {
     // let releaseProjectUrl = 'http://mamon.yemindream.com/mamon/customer/releaseProject';
     const openId = window.sessionStorage.getItem('openId')|| this.getUrlParam('openId');
     let creleaseProjectUrl = releaseProjectUrl + '?openId=' + openId + '&pid='+pid;
-    //TODO  对数据进行校验
-    if(!this.projectDetails['description'] || !this.projectDetails['target'] || !this.projectDetails['pSkill'] || !this.projectDetails['pIndustry'] || !this.projectDetails['budgetDay'] || !this.projectDetails['workload'] || !this.projectDetails['budget'] || !this.projectDetails['startTime'] || !this.projectDetails['projectLengthType'] || !this.projectDetails['deliverMethod'] || !this.projectDetails['qualification'] || !this.projectDetails['planguage'] || !this.projectDetails['companyName'] || !this.projectDetails['principalName'] || !this.projectDetails['principalPhone'] || !this.projectDetails['principalEmail']){
+
+    /** 第一步校验 */
+    if(!this.projectDetails['companyName'] || !this.projectDetails['principalName'] || !this.projectDetails['principalPhone'] || !this.projectDetails['principalEmail']){
       this.isAllTypes = true
       return
     }
+
+    /** 第二步校验 */
+    if(!this.projectDetails['projectName'] || !this.projectDetails['description']){
+      this.isAllTypes = true
+      return
+    }
+
+    /** 第三步校验 */
+    if((!this.projectDetails['startTimeType'] && this.projectDetails['startTimeType'] != 0) || (!this.projectDetails['deliverMethod'] && this.projectDetails['deliverMethod'] != 0) || (!this.projectDetails['province']) || (!this.projectDetails['budgetType'] && this.projectDetails['budgetType'] != 0)){
+      this.isAllTypes = true
+      return
+    }
+
     this.Provider.getMamenSwiperData(creleaseProjectUrl).subscribe(res=>{
       if(res.code==200) {
         //alert('发布成功！');
