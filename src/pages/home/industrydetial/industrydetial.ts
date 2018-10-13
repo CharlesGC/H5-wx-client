@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { MamenDataProvider } from '../../../providers/mamen-data/mamen-data';
 import { getindustryUrl, getskillUrl, getskilltwoUrl, getSearch, getfinanceAllUrl, getfinanceUrl, getoutstandingUrl } from '../../../providers/dataUrl';
@@ -43,7 +44,11 @@ export class IndustrydetialPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, public IndustryMoreData: MamenDataProvider,
     public SkillLabelMoreData: MamenDataProvider,
     public Skilltwolabel: MamenDataProvider, public IndustrySearch: MamenDataProvider,
-    public financedata: MamenDataProvider, private http: HttpClient) {
+    public financedata: MamenDataProvider, private http: HttpClient,public sanitizer:DomSanitizer) {
+  }
+  /*转换html标签处理*/
+  assembleHTML(strHTML:any){
+    return this.sanitizer.bypassSecurityTrustHtml(strHTML);
   }
   ionViewDidLoad() {
     //this.doRefresh('');
@@ -89,7 +94,7 @@ export class IndustrydetialPage {
   }
   // 财务审计
   getfinanceInfo() {
-    this.financedata.getfinanceData(getfinanceUrl, 1, 1, 999).subscribe(
+    this.financedata.getfinanceData(getfinanceUrl, 2, 1, 999).subscribe(
       res => {
         this.financeAllArr = res.data
       }, error => {

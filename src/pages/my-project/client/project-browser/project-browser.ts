@@ -109,6 +109,8 @@ export class ProjectBrowserPage {
   sureSuccess() {
     this.isSuccess = !this.isSuccess
     // this.navCtrl.pop()
+    let data = this.navParams.get('data');
+    this.getProjectListData(data.pid);
     this.navCtrl.popTo(this.navCtrl.getByIndex(1))
   }
   sureFailed() {
@@ -195,7 +197,6 @@ export class ProjectBrowserPage {
       this.isAllTypes = true
       return
     }
-
     this.Provider.getMamenSwiperData(creleaseProjectUrl).subscribe(res => {
       if (res.code == 200) {
         //alert('发布成功！');

@@ -234,6 +234,11 @@ export class ConsultantProjectBrowserPage {
   // 返回项目列表页
   goback() {
     let isApply = this.navParams.get('isApply');
+    let isTabs = this.navParams.get('isTabs');
+    if(isTabs){
+      this.navCtrl.pop();
+      return;
+    }
     if (isApply) {
       this.navCtrl.pop();
     } else {

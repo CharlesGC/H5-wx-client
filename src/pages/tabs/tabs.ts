@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Location } from '@angular/common';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ContactPage } from '../contact/contact';
 import { HomePage } from '../home/home';
@@ -14,6 +15,19 @@ import { ChooseIdentityPage } from '../choose-identity/choose-identity';
 import { getUserByopenIdUrl, getWxOpenidUrl, hideAttentionMenuUrl } from '../../providers/requestUrl';
 import { MamenDataProvider } from '../../providers/mamen-data/mamen-data';
 import { HttpClient, HttpParams } from '@angular/common/http';
+
+import { ProjectBrowserPage } from '../my-project/client/project-browser/project-browser';
+import { ConsultantProjectBrowserPage } from '../my-project/consultant/consultant-project-browser/consultant-project-browser';
+import { ProjectConsultantListPage } from '../my-project/client/project-consultant-list/project-consultant-list';
+import { ConsultantProgramListPage } from '../my-project/consultant/consultant-program-list/consultant-program-list';
+import { ProjectProgramBrowserPage } from '../my-project/client/project-program-browser/project-program-browser';
+import { ProjectStageListPage } from '../my-project/client/project-stage-list/project-stage-list';
+import { ConsultantStageListPage } from '../my-project/consultant/consultant-stage-list/consultant-stage-list';
+import { ConsultantStageBrowserPage } from '../my-project/consultant/consultant-stage-browser/consultant-stage-browser';
+import { ProjectStageBrowserPage } from '../my-project/client/project-stage-browser/project-stage-browser'; 
+import { ProjectInvoiceListPage } from '../my-project/client/project-invoice-list/project-invoice-list';
+
+
 declare var wx: any;
 @Component({
   selector: 'page-tabs',
@@ -28,20 +42,118 @@ export class TabsPage {
   public tab4Root: any;
   tab5Root = ContactPage;
   public isshow = false;
-  constructor(public navCtrl: NavController, private Provider: MamenDataProvider, private http: HttpClient) {
+  public selectedIndex = 0;
+  constructor(public navCtrl: NavController, private Provider: MamenDataProvider,private http:HttpClient) {
     // this.tab4Root = RecommendConsultantListPage
   }
+  // @ViewChild('myTabs') tabRef: Tabs;
 
+  ionViewDidLoad() {
+    console.log('第一个执行')
+    this.goToBack({},1);
+  }
   ngOnInit() {
-    console.log('我最先执行~~')
+    console.log(Location,'我最先执行~~')
     const openId = window.sessionStorage.getItem('openId') || this.getUrlParam('openId') || window.localStorage.getItem('openId');
+    let backType = this.getUrlParam('backType');
+    let type = this.getUrlParam('type');
+    let pid = this.getUrlParam('pid');
+    let status = this.getUrlParam('pStatus');
+    let appStatus = this.getUrlParam('appStatus');
+    let ppid  = this.getUrlParam('ppid');
+    let finalPrice = this.getUrlParam('finalPrice');
+    let psid =  this.getUrlParam('psid');
+    let data = {
+      backType: backType,
+      pid: pid,
+      status: status,
+      appStatus:appStatus,
+      ppid:ppid,
+      finalPrice:finalPrice,
+      psid:psid,
+    };
     if (openId) {
+      this.goToBack(data,type);
+
       this.getUserInfo(openId)
       !window.sessionStorage.getItem('openId') && window.sessionStorage.setItem('openId', openId);
     } else {
 
     }
     this.isAttention();
+
+    
+  }
+
+  /*页面跳转判断*/
+  goToBack(data,type) {
+    if(!data.backType && data.backType != 0){
+      return;
+    }
+    // let params = data.params ? JSON.parse(data.params) : {}
+    let params = data.params;
+    //跳转到顾问列表backType:0
+    if(data.backType == 0){
+      this.navCtrl.push(ProjectBrowserPage,{data:data});
+    }
+    //跳转到顾问详情backType:1
+    else if(data.backType == 1){
+        // this.props.history.push(`/project/${data.pid}`);
+    }
+    //跳转到项目详情backType:2
+    else if(data.backType == 2){
+      this.selectedIndex = 1;
+    }
+    //跳转到项目详情backType:3
+    else if(data.backType == 3){
+      type == 0 ? this.navCtrl.push(ProjectBrowserPage,{data:data,isTabs:true}) : this.navCtrl.push(ConsultantProjectBrowserPage,{data:data,isTabs:true});
+    }
+    //跳转到项目详情backType:4
+    else if(data.backType == 4){
+        // this.props.history.push(`/project/${data.pid}`);
+    }
+    //跳转到backType:5 (顾问：项目详情页，客户：顾问列表页)
+    else if(data.backType == 5){
+      type == 0 ? this.navCtrl.push(ProjectConsultantListPage,{pid:data.pid,status:'',data:{pid:data.pid,status:data.status},isTabs:true}) : this.navCtrl.push(ConsultantProjectBrowserPage,{data:data});
+    }
+    //跳转到项目详情backType:6
+    else if(data.backType == 6){
+      if(type == 0){
+        this.navCtrl.push(ProjectProgramBrowserPage,{pid:data.pid,ppid:data.ppid})
+      }else{
+        this.navCtrl.push(ConsultantProgramListPage,{pid:data.pid,data:{pid:data.pid,appStatus:data.appStatus,finalPrice:data.finalPrice},isTabs:true});
+      }
+    }
+    //跳转到阶段列表backType:7
+    else if(data.backType == 7){
+      if(type == 0){
+        this.navCtrl.push(ProjectStageListPage,{pid:data.pid,status:-1,type:data.status,data:{pid:data.pid},isTabs:true})
+      }else{
+        this.navCtrl.push(ConsultantStageListPage,{
+          pid:data.pid,
+          status:'',
+          projectType:data.appStatus,
+          type:data.appStatus,
+          programPrice:data.finalPrice,
+          data:{pid:data.pid,appStatus:data.appStatus,finalPrice:data.finalPrice},isTabs:true});
+      }
+    }
+    //跳转到阶段详情backType:8
+    else if(data.backType == 8){
+      if(type == 0){
+        this.navCtrl.push(ProjectStageBrowserPage,{id: data.psid});
+      }else{
+        this.navCtrl.push(ConsultantStageBrowserPage,{id: data.psid, pid: data.pid, programPrice: data.finalPrice});
+      }
+    }
+    //跳转到发票列表backType:10
+    else if(data.backType == 10){
+      if(type == 0){
+        this.navCtrl.push(ProjectInvoiceListPage,{pid:data.pid,status:-1,data:{pid:data.pid},isTabs:true});
+      }else{
+        // this.navCtrl.push(ConsultantStageBrowserPage,{id: params.psid, pid: data.pid, programPrice: params.finalPrice});
+      }
+    }
   }
 
   /*获取url上的参数*/
@@ -59,14 +171,11 @@ export class TabsPage {
     const user = window.sessionStorage.getItem('user') ? JSON.parse(window.sessionStorage.getItem('user')) : { type: -1 };
     const openId = window.sessionStorage.getItem('openId') || this.getUrlParam('openId') || window.localStorage.getItem('openId');
     if (!openId && user.status == 1) {
-      console.log(1111)
       this.navCtrl.push(ChooseIdentityPage);
     } else if (openId) {
-      console.log(2222)
       this.getUserInfoEd(openId);
       !window.sessionStorage.getItem('openId') && window.sessionStorage.setItem('openId', openId);
     } else {
-      console.log(3333)
       this.onLogin();
     }
 
@@ -112,6 +221,7 @@ export class TabsPage {
         // if(!this.user || this.user['status'] == 1 || this.user['status'] == 2){
         //   this.navCtrl.push(ChooseIdentityPage);
         // }
+        
         if (this.user['type'] && this.user['type'] == 1) {
           this.isshow = false;
           this.tab4Root = RecommendConsultantListPage
@@ -119,6 +229,7 @@ export class TabsPage {
           this.isshow = true;
           this.tab4Root = RecommendClientListPage;
         }
+        
       } else if (res.code == 207) {
         window.localStorage.removeItem('openId');
         window.sessionStorage.removeItem('openId');
@@ -164,6 +275,7 @@ export class TabsPage {
   }
 
   ngDoCheck() {
+    console.log('改变时执行')
     const user = window.sessionStorage.getItem('user') ? JSON.parse(window.sessionStorage.getItem('user')) : { type: -1 };
     if (user.type == 1) {
       this.isshow = false;

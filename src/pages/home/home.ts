@@ -1,5 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { NavController, Slides } from 'ionic-angular';
+import { DomSanitizer } from '@angular/platform-browser';
 import { IndustrydetialPage } from './industrydetial/industrydetial';
 import { MamenDataProvider } from '../../providers/mamen-data/mamen-data';
 import { PhonebindPage } from '../phonebind/phonebind';
@@ -34,12 +35,16 @@ export class HomePage {
   public financeAllArrlength: any;
   public pepperoni: boolean;
   public sausage: boolean;
-  public mushrooms: boolean;
-  public attstate: any;
-
+  public mushrooms: boolean; 
+  public attstate:any;
   constructor(public navCtrl: NavController, private swiperdata: MamenDataProvider, private industrydata: MamenDataProvider, private http: HttpClient,
-    private skilldata: MamenDataProvider, private casedata: MamenDataProvider, private outstanddata: MamenDataProvider, private financedata: MamenDataProvider, private financeAlldata: MamenDataProvider) {
+    private skilldata: MamenDataProvider, private casedata: MamenDataProvider, private outstanddata: MamenDataProvider, private financedata: MamenDataProvider
+    , private financeAlldata: MamenDataProvider,public sanitizer:DomSanitizer) {
     this.IndustryArr = [];
+  }
+  /*转换html标签处理*/
+  assembleHTML(strHTML:any){
+    return this.sanitizer.bypassSecurityTrustHtml(strHTML);
   }
   ionViewDidLoad() {
     this.getswiperInfo();

@@ -222,6 +222,12 @@ export class ProjectConsultantListPage {
 
   /*返回项目列表页*/
   goback() {
+    let isTabs = this.navParams.get('isTabs');
+    console.log(isTabs,'====-==')
+    if(isTabs){
+      this.navCtrl.pop();
+      return;
+    }
     this.navCtrl.popTo(this.navCtrl.getByIndex(1))
   }
 
