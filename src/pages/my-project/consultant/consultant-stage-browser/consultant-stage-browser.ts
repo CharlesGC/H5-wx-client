@@ -10,6 +10,7 @@ import { ConsultantStageEditPage } from '../consultant-stage-edit/consultant-sta
 import { ConsultantDocumentBrowserPage } from '../consultant-document-browser/consultant-document-browser';
 import { getAdviserProjectStageDetailUrl, changeStageStatusUrl, hideAttentionMenuUrl, getAttentionUserInfo } from '../../../../providers/requestUrl';
 import { HttpClient, HttpParams } from '@angular/common/http';
+import { ConsultantStageListPage } from '../consultant-stage-list/consultant-stage-list' 
 declare var wx: any;
 /**
  * Generated class for the ConsultantStageBrowserPage page.
@@ -171,4 +172,7 @@ export class ConsultantStageBrowserPage {
     this.navCtrl.push(ConsultantDocumentBrowserPage, { id: id, adviserStatus: this.projectStageDetail['adviserStatus'] });
   }
 
+  goback(){
+    this.navCtrl.push(ConsultantStageListPage);
+  }
 }

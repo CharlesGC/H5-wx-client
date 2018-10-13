@@ -164,7 +164,8 @@ export class HomePage {
     }
     const token = this.getUrlParam('token');
     const usertype = this.getUrlParam('status');
-    const openId = this.getUrlParam('openId');
+    // const openId = this.getUrlParam('openId');
+    const openId = this.getUrlParam('openId') ||  window.sessionStorage.getItem('openId') || window.localStorage.getItem('openId');
     openId && window.localStorage.setItem('openId', openId);
     if (token) {
       if (Number(usertype) == 1) {
