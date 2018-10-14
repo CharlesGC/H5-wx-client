@@ -179,7 +179,7 @@ export class ProjectConsultantBrowserPage {
   /*向顾问发起项目*/
   goProjectStart() {
     let uid = this.navParams.get('uid');
-    this.navCtrl.push(ProjectEditStep1Page, { uid: uid, isEdit: true });
+    this.navCtrl.push(ProjectEditStep1Page, { uid: uid, isEdit: false });
   }
 
   formatTypes(value) {

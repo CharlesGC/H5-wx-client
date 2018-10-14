@@ -3,9 +3,9 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { FormEditPage } from '../../../contact/form-edit/form-edit';
 import { MamenDataProvider } from '../../../../providers/mamen-data/mamen-data';
 import { submitDocumentUrl, delDocumentUrl, hideAttentionMenuUrl, getAttentionUserInfo } from '../../../../providers/requestUrl';
-
 import { UploadfilePage } from "../../../uploadfile/uploadfile";
 import { HttpClient, HttpParams } from '@angular/common/http';
+import { ConsultantStageBrowserPage } from '../consultant-stage-browser/consultant-stage-browser'
 declare var wx: any;
 /**
  * Generated class for the ConsultantInteractionSubmitPage page.
@@ -34,6 +34,7 @@ export class ConsultantInteractionSubmitPage {
   public isNoStageBook = false
   public isDelBook = false
   public isSubmitSuccess = false
+  public gotype :any
   constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider, private http: HttpClient) {
   }
 
@@ -152,11 +153,14 @@ export class ConsultantInteractionSubmitPage {
   }
   sureSubmitSuccess() {
     this.isSubmitSuccess = !this.isSubmitSuccess
-    this.navCtrl.pop();
+    if(this.gotype == 1){
+      this.navCtrl.push(ConsultantStageBrowserPage);
+    }else{
+      this.navCtrl.pop();
+    }
   }
   /*附件、交互物*/
-  onInteractionClick() {
-
+  onInteractionClick(type) {
     let pid = this.navParams.get('pid') || this.interactionData['pid'];
     let psid = this.navParams.get('psid') || this.interactionData['psid'];
     let pdid = this.navParams.get('pdid') || this.interactionData['pdid'];
@@ -188,6 +192,7 @@ export class ConsultantInteractionSubmitPage {
         //alert('操作功能！');
         //this.isNoStageBook = true
         this.isSubmitSuccess = true
+        this.gotype = type
       } else if (res.code == 207) {
         window.localStorage.removeItem('openId');
       } else {
