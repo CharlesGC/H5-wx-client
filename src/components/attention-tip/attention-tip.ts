@@ -1,4 +1,4 @@
-import { Component,Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 /**
  * Generated class for the AttentionTipComponent component.
@@ -12,18 +12,24 @@ import { Component,Input } from '@angular/core';
 })
 
 export class AttentionTipComponent {
-  @Input() bottom:any;
+  @Input() bottom: any;
+  @Input() page: any;
   public isShowdata = false;
+  public timeOutEvent :any
   text: string;
-
   constructor() {
-    console.log('Hello AttentionTipComponent Component');
-    // console.log(this.bottom)
+    
   }
 
-  isShow(){
+  isShow() {
     this.isShowdata = !this.isShowdata;
   }
 
+  startTouch(event) {
+    this.timeOutEvent = setTimeout(()=>{this.longPress()},500);//这里设置定时器，定义长按500毫秒触发长按事件，时间可以自己改，个人感觉500毫秒非常合适  
+  }
 
+  longPress(){
+    window.localStorage.setItem('page',this.page);
+  }
 }
