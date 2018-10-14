@@ -110,7 +110,7 @@ export class ProjectStageBrowserPage {
   }
   sureTipsPrompt() {
     this.isTipsPrompt = true
-    this.tipstext = '确认是否提交阶段交互物？'
+    this.tipstext = '确认是否提交阶段交付物？'
   }
   onReturnBack() {
     this.isTipsPrompt = !this.isTipsPrompt

@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>顾问筛选</ion-title>
+    <ion-title>{{title}}</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -13,22 +13,13 @@
 
   <div class="item">
     <ion-list>
-      <div class="search_item">
+      <div class="search_item" [hidden]='isSearch'>
           <ion-input type="text" placeholder="请输入" [(ngModel)]="value" class="input-search"></ion-input>
           <div class="item-search" tappable (click)="searchLabel(value,'itemsearch')" item-right>
             <ion-icon name="search" class="icon"></ion-icon>
           </div>
-      </div>
-      <!-- <ion-item class="search_item"> -->
-        
-        <!-- <div class="search_content">
-          <span class="item-input-wrapper">
-            <ion-input type="search" placeholder="请输入行业或技能" [(ngModel)]="value" autofocus="autofocus" class="input-search"></ion-input>
-          </span>
-          
-        </div> -->
-      <!-- </ion-item> -->
-      <ion-item class="bgf">
+      </div>  
+      <ion-item class="bgf" [hidden]='isSelect'>
         <!-- 行业下拉 -->
         <div class="item-select">
           <div class="item-input" (click)="downindustryShow('downindustry')">

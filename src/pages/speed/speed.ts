@@ -39,6 +39,9 @@ export class SpeedPage {
   public isChange = false;
   public isComplete = false;
   public isTime = false;
+  public isConcerned = false;
+  public attstate:any;
+  public isCompany = false;
   // public Url:any;
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public WechatData: MamenDataProvider, public UploadData: MamenDataProvider,
@@ -61,6 +64,14 @@ export class SpeedPage {
         elements[key].style.display = 'none';
       });
     }
+    const openId = this.getUrlParam('openId') ||  window.sessionStorage.getItem('openId') || window.localStorage.getItem('openId');
+    openId && window.localStorage.setItem('openId', openId);
+    let getAttentionUserInfoUrl = getAttentionUserInfo + '?openId=' + openId;
+    this.http.get(getAttentionUserInfoUrl).subscribe(res => {
+      this.attstate = res['data'].subscribe;
+      console.log(this.attstate ,'this.attstate this.attstate ')
+      console.log(res, '1111222233334444')
+    });
     this.isAttention();
   }
   //隐藏底部分享菜单
@@ -194,6 +205,11 @@ export class SpeedPage {
     this.isRecord = true;//是否显示录音gif
     this.START = new Date().getTime();
     // console.log(this.START, 'getTime');
+    // 判断是否关注
+    if(this.attstate == 0) {
+      this.isConcerned = true;
+      return;
+    }
     this.recordTimer = setTimeout(() => {
       if (!localStorage.rainAllowRecord || localStorage.rainAllowRecord !== 'true') {
         wx.startRecord({
@@ -328,8 +344,10 @@ export class SpeedPage {
           this.speedVoiceReleaseArr = res.data;
           console.log(this.speedVoiceReleaseArr);
           this.isShow = true;
-        } else {
-          console.log('请求出错：' + res.msg)
+        } else if(res.code == 212){
+          this.isCompany = true;
+        }else{
+          console.log('请求出错：' + res.msg);
         }
       }, error => {
         console.log(error);
@@ -339,6 +357,14 @@ export class SpeedPage {
   // 确定
   sureComplete() {
     this.isComplete = !this.isComplete;
+  }
+  // 未关注确定
+  sureConcerned() {
+    this.isConcerned = !this.isConcerned;
+  }
+  //未添加公司
+  sureCompany() {
+    this.isCompany = !this.isCompany
   }
   /*功能之后跳转*/
   goClientProjectPage() {
