@@ -161,7 +161,7 @@ export class SpeedPage {
     // $.ajax({
     //   type: "get",
     //   url: "/mamon/wechat/wechatJsConfig",
-    //   dataType: "json",
+    //   dataType: "json",  
     //   data: { "url": url },
     //   async: false,
     //   success: function (res) {
@@ -199,7 +199,7 @@ export class SpeedPage {
         wx.startRecord({
           success: function () {
             localStorage.rainAllowRecord = 'true';
-            wx.stopRecord();
+            wx.startRecord();
             return;
           },
           cancel: function () {
@@ -211,7 +211,7 @@ export class SpeedPage {
         wx.startRecord({
           success: function () {
             localStorage.rainAllowRecord = 'true';
-            wx.stopRecord();
+            wx.startRecord();
             return;
           },
           cancel: function () {
