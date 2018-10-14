@@ -16,9 +16,9 @@ declare var wx: any;
   templateUrl: 'speed.html'
 })
 export class SpeedPage {
-  public localId = '';
-  public START = new Date().getTime();
-  public END = new Date().getTime();
+  public localId:any;
+  public START:any;
+  public END:any;
   // public Record = new Date().getTime();
   public recordTimer: any;
   public timer: any;
@@ -193,9 +193,21 @@ export class SpeedPage {
     )
     this.isRecord = true;//是否显示录音gif
     this.START = new Date().getTime();
-    console.log(this.START, 'getTime');
+    // console.log(this.START, 'getTime');
     this.recordTimer = setTimeout(() => {
       if (!localStorage.rainAllowRecord || localStorage.rainAllowRecord !== 'true') {
+        wx.startRecord({
+          success: function () {
+            localStorage.rainAllowRecord = 'true';
+            wx.stopRecord();
+            return;
+          },
+          cancel: function () {
+            this.isRecord = false;
+            // alert('用户拒绝授权录音');
+          }
+        });
+      }else {
         wx.startRecord({
           success: function () {
             localStorage.rainAllowRecord = 'true';
@@ -219,7 +231,7 @@ export class SpeedPage {
       //     this.isRecord = false;
       //   }
       // })
-      localStorage.rainAllowRecord = 'true';
+      // localStorage.rainAllowRecord = 'true';
     }, 300);
     event.preventDefault();
   }
