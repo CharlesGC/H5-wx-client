@@ -158,7 +158,7 @@ export class MessageCenterPage {
       if (type == 0) {
         this.navCtrl.push(ProjectStageBrowserPage, { id: params.psid });
       } else {
-        this.navCtrl.push(ConsultantStageBrowserPage, { id: params.psid, pid: data.pid, programPrice: params.finalPrice });
+        this.navCtrl.push(ConsultantStageBrowserPage, { id: params.psid, pid: data.pid, finalPrice: params.finalPrice });
       }
     }
     //跳转到发票列表backType:10

@@ -116,7 +116,7 @@ export class TabsPage {
     else if(data.backType == 5){
       type == 0 ? this.navCtrl.push(ProjectConsultantListPage,{pid:data.pid,status:'',data:{pid:data.pid,status:data.status},isTabs:true}) : this.navCtrl.push(ConsultantProjectBrowserPage,{data:data});
     }
-    //跳转到项目详情backType:6
+    //跳转到方案backType:6
     else if(data.backType == 6){
       if(type == 0){
         this.navCtrl.push(ProjectProgramBrowserPage,{pid:data.pid,ppid:data.ppid})
