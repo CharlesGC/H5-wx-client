@@ -313,6 +313,12 @@ page-project-browser {
             }
         }
     }
+    .list-ios > .item-block:last-child {
+        border-bottom: 0;
+    }
+    .list-md > .item-block:last-child {
+        border-bottom: 0;
+    }
     .total-budget {
         padding-left: 16px;
         .budget-label {

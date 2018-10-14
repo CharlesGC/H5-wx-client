@@ -64,7 +64,7 @@
   <div style="height:100px;"></div>
   <button ion-button expand="full" large class="fixed-bottom" (click)="onInteractionClick()" *ngIf="isAdd">保存</button>
   <div class="fixed-bottom" *ngIf="!isAdd">
-    <button ion-button class="btn-submit" (click)="onInteractionClick()">保存修改</button>
+    <button ion-button class="btn-submit" (click)="onInteractionClick(1)">保存修改</button>
     <button ion-button class="btn-delete" (click)="onDocumentDel()">删除</button>
   </div>
 </ion-content>

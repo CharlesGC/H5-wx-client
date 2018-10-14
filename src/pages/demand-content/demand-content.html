@@ -13,7 +13,7 @@
       <div class="msg-cont">
         <h4>{{projectListData_item.projectName}}</h4>
         <p *ngIf="projectListData_item.budget">预算<span class="demand-number">{{projectListData_item.budget | currency: '￥'}}</span> 元</p>
-        <p *ngIf="!projectListData_item.budget">待商议</p>
+        <p *ngIf="!projectListData_item.budget">预算 待商议</p>
         <p class="city-date-cont">
           <span *ngIf="projectListData_item.projectLengthType ==0">
             <ion-icon name="calendar-copy"></ion-icon>
@@ -83,4 +83,4 @@
   </ion-list>
   <div style="height:66px;"></div>
 </ion-content>
-<attention-tip *ngIf='attstate == 0' [bottom]='1'></attention-tip>
+<attention-tip *ngIf='attstate == 0' [bottom]='1' [page]='7'></attention-tip>

@@ -429,6 +429,7 @@ page-home {
                 }
                 .qu_u::-webkit-scrollbar{
                     display: none;
+                    color: transparent;
                 }
             }
         }
@@ -544,7 +545,7 @@ page-home {
                     }
                     .industryLabel {
                         display: flex;
-                        margin-top: 5px;
+                        margin-top: 10px;
                         span {
                             display: block;
                             width: 95px;
