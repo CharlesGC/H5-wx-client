@@ -154,7 +154,8 @@ export class ConsultantInteractionSubmitPage {
   sureSubmitSuccess() {
     this.isSubmitSuccess = !this.isSubmitSuccess
     if(this.gotype == 1){
-      this.navCtrl.push(ConsultantStageBrowserPage);
+      let pageLength = this.navCtrl.length();
+      this.navCtrl.popTo(this.navCtrl.getByIndex(pageLength-3));
     }else{
       this.navCtrl.pop();
     }

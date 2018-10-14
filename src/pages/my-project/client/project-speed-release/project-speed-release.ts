@@ -1,5 +1,6 @@
 import { Component, ChangeDetectorRef } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { DomSanitizer } from '@angular/platform-browser';
 import { getProjectDetailUrl, hideAttentionMenuUrl, getAttentionUserInfo } from '../../../../providers/requestUrl';
 import { MamenDataProvider } from '../../../../providers/mamen-data/mamen-data';
 import { HttpClient, HttpParams } from '@angular/common/http';
@@ -20,7 +21,12 @@ export class ProjectSpeedReleasePage {
   public audio: any;
   public duration: any;
   public projectDetails = [];
-  constructor(public navCtrl: NavController, public navParams: NavParams, public changeDetectorRef: ChangeDetectorRef, public Provider: MamenDataProvider, private http: HttpClient) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public changeDetectorRef: ChangeDetectorRef, 
+    public Provider: MamenDataProvider, private http: HttpClient, public sanitizer: DomSanitizer) {
+  }
+  /*转换html标签处理*/
+  assembleHTML(strHTML: any) {
+    return this.sanitizer.bypassSecurityTrustHtml(strHTML);
   }
 
   ionViewDidLoad() {

@@ -149,7 +149,9 @@ export class ProjectEditStep3Page {
     if (pid) {
       projectStageDetailUrl = projectStageDetailUrl + '&pid=' + pid;
     }
-
+    if (projectData['uid']) {
+      projectStageDetailUrl = projectStageDetailUrl + '&appoint=' + projectData['uid'];
+    }
     this.Provider.getMamenSwiperData(projectStageDetailUrl).subscribe(res => {
       if (res.code == 200) {
         this.isShow = true;
@@ -293,6 +295,9 @@ export class ProjectEditStep3Page {
       '&qualification=' + (projectData['qualification'] || '');
     if (pid) {
       projectStageDetailUrl = projectStageDetailUrl + '&pid=' + pid;
+    }
+    if (projectData['uid']) {
+      projectStageDetailUrl = projectStageDetailUrl + '&appoint=' + projectData['uid'];
     }
     this.Provider.getMamenSwiperData(projectStageDetailUrl).subscribe(res => {
       if (res.code == 200) {

@@ -20,7 +20,8 @@
     <div class="speed-box" *ngFor="let speedItem of projectDetails">
       <div class="speed-decription">
         <div class="speed-text">项目描述</div>
-        <div class="p15">{{speedItem.description}}</div>
+        <!-- <div class="p15">{{speedItem.description}}</div> -->
+        <div class="p15" [innerHTML]="assembleHTML(speedItem.description)"></div>
       </div>
       <div class="speed-voice">收听语音记录</div>
       <ion-item class="voice-item">

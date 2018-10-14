@@ -173,6 +173,7 @@ export class ConsultantStageBrowserPage {
   }
 
   goback(){
-    this.navCtrl.push(ConsultantStageListPage);
+    this.navCtrl.pop();
+    // this.navCtrl.push(ConsultantStageListPage);
   }
 }
