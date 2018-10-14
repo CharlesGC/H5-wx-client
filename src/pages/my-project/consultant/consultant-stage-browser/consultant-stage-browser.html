@@ -144,7 +144,7 @@
           <button ion-button class="btn-delete" (click)="onBankAccountDel()">提出异议</button>
       </div> -->
   <div class="fixed-bottom" *ngIf="projectStageDetail.adviserStatus==3 || projectStageDetail.adviserStatus==8">
-    <button ion-button class="btn-submit" (click)="goPaymentRecord(projectStageDetail.adviserStatus)">添加交互物</button>
+    <button ion-button class="btn-submit" (click)="goPaymentRecord(projectStageDetail.adviserStatus)">添加交付物</button>
     <button ion-button class="btn-delete" (click)="sureStage()" [disabled] = 'isdis'>阶段交付</button>
   </div>
 </ion-content>
