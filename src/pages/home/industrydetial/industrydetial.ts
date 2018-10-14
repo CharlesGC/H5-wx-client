@@ -35,11 +35,15 @@ export class IndustrydetialPage {
   public industryNameChecked: any;
   public skiiNameChecked: any;
   public type: any;
+  public value:any;
   public id: any;
   public name: any;
   public financeAllArr = [];
   public BlurInput: any;
   public attstate: boolean;
+  public isSearch = false;
+  public isSelect = false;
+  public title:any;
   // public bottom = '11110'
   constructor(public navCtrl: NavController, public navParams: NavParams, public IndustryMoreData: MamenDataProvider,
     public SkillLabelMoreData: MamenDataProvider,
@@ -63,14 +67,23 @@ export class IndustrydetialPage {
       this.IndustryName['industryName'] = this.name || '全部行业';
       this.getSearchadviser(this.skillChecked, this.firstSkillId = 0, this.secondSkillId = 0, this.search = '', this.pageNum = 0, this.pageSize = 15);
     } else if (this.type == 'skill') {
+      this.title = '顾问筛选'
       this.skillCheckedSkill = this.id ? this.id : 0;
+      console.log(this.skillCheckedSkill,'-------------------------')
       this.skilldoubleData['fName'] = this.name || '全部领域';
       this.getSearchadviser(this.industryId = 0, this.skillCheckedSkill, this.secondSkillId = 0, this.search = '', this.pageNum = 0, this.pageSize = 15);
     } else if (this.type == 'finance-count') {
+      this.title = '全部顾问筛选'
       this.getfinanceAllInfo();
     } else if (this.type == 'financemore') {
+      this.title = '采购与供应链顾问'
+      this.isSearch = true;
+      this.isSelect = true;
       this.getfinanceInfo();
     } else if (this.type == 'indeustryOutstand') {
+      this.title = '明星顾问'
+      this.isSearch = true;
+      this.isSelect = true;
       this.getoutstandingInfo();
     }
   }
@@ -133,10 +146,12 @@ export class IndustrydetialPage {
   }
   // 技能下拉
   downSkill(type) {
+    console.log(this.value,'this.value')
     this.type = type;
     this.skillLabel = !this.skillLabel;
     this.isIndustryLabel = true;
     this.getSkillMoreData();
+    this.getSecondaryData(this.skillCheckedSkill || '');
   }
   // 获取筛选数据
   getSearchadviser(industryId, firstSkillId, secondSkillId, search, pageNum, pageSize) {
@@ -154,6 +169,7 @@ export class IndustrydetialPage {
     this.IndustryMoreData.getIndustryMoreData(getindustryUrl, 1, 1, 999).subscribe(
       res => {
         this.IndustryTotal = res.data.list;
+        console.log(this.IndustryTotal,'this.IndustryTotalthis.IndustryTotal')
       }, error => {
         console.log(error);
       }
@@ -164,6 +180,7 @@ export class IndustrydetialPage {
     this.SkillLabelMoreData.getSkillLabelMoreData(getskillUrl, 2, 1, 999).subscribe(
       res => {
         this.SkillLabelMoreArr = res.data.list;
+        console.log(this.SkillLabelMoreArr,'this.SkillLabelMoreArrthis.SkillLabelMoreArrthis.SkillLabelMoreArr')
       }, error => {
         console.log(error);
       }
@@ -174,6 +191,7 @@ export class IndustrydetialPage {
     this.Skilltwolabel.getSkillSecondaryData(getskilltwoUrl, id, 0, 999).subscribe(
       res => {
         this.SkillLabelTwoArr = res.data.list;
+        console.log(this.SkillLabelTwoArr,'this.SkillLabelTwoArrthis.SkillLabelTwoArr')
       }, error => {
         console.log(error);
       }
@@ -191,11 +209,12 @@ export class IndustrydetialPage {
       this.skillChecked = index;
       this.IndustryName = value;
       this.isIndustryLabel = true;
-      this.getSearchadviser(this.industryId = this.IndustryName['ilid'], this.firstSkillId = 0, this.secondSkillId = 0, this.search = '', this.pageNum = '', this.pageSize = '');
+      this.getSearchadviser(this.industryId = this.IndustryName['ilid'], this.firstSkillId = 0, this.secondSkillId = 0, this.search = 0, this.pageNum = '', this.pageSize = '');
     }
   }
   //点击一级获取二级技能
   infoSecondarySkill(value, index, type) {
+    // console.log(value,this.IndustryName,'11111111111111111111111111')
     this.type = type;
     if (index == -1) {
       this.skillCheckedSkill = 0;
@@ -207,22 +226,23 @@ export class IndustrydetialPage {
       this.skillBgcolor = null;
       this.skilldoubleData = value;
       this.getSecondaryData(value.sfid);
-      this.getSearchadviser(this.industryId = this.skilldoubleData['sfid'], this.firstSkillId = 1, this.secondSkillId = 0, '', '', '');
+      this.getSearchadviser(this.industryId = this.IndustryName['ilid'] || 0, this.firstSkillId = this.skilldoubleData['sfid'], this.secondSkillId =0 , this.search = 0, '', '');
     }
   }
   // 点击二级选择技能
   infoSelectClick(value, index, type) {
+    // console.log(value,'222222222222222222222222222')
     this.type = type;
     if (index == -1) {
       this.inputValue = { 'sName': value };
       this.skillLabel = true;
       this.skillBgcolor = index;
-      this.getSearchadviser(this.industryId = 0, this.firstSkillId = 1, this.secondSkillId = 0, '', '', '');
+      this.getSearchadviser(this.industryId = this.IndustryName['ilid'] || 0, this.firstSkillId =this.inputValue['sfid'] || 1, this.secondSkillId = 0, '', '', '');
     } else {
       this.inputValue = value;
       this.skillBgcolor = index;
       this.skillLabel = true;
-      this.getSearchadviser(this.industryId = this.inputValue['ssid'], this.firstSkillId = 1, this.secondSkillId = 3, '', '', '');
+      this.getSearchadviser(this.industryId = this.IndustryName['ilid'] || 0, this.firstSkillId = this.inputValue['sfid'], this.secondSkillId = this.inputValue['ssid'], '', '', '');
     }
   }
   /*跳转到顾问详情*/
