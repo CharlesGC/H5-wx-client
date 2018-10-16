@@ -165,28 +165,11 @@ export class SpeedPage {
   // }
   // 长按语音输入
   startTouch(event) {
-    // var _this = this;
+    event.preventDefault();
+    var _this = this;
     console.log(event, '=====')
     let url = location.href.split('#')[0]; // 当前网页的URL，不包含#及其后面部分
     this.localId = '';
-    // $.ajax({
-    //   type: "get",
-    //   url: "/mamon/wechat/wechatJsConfig",
-    //   dataType: "json",  
-    //   data: { "url": url },
-    //   async: false,
-    //   success: function (res) {
-    //     console.log(res);
-    //     wx.config({
-    //       debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
-    //       appId: res.data.appid, // 必填，公众号的唯一标识
-    //       timestamp: res.data.timestamp, // 必填，生成签名的时间戳
-    //       nonceStr: res.data.nonceStr, // 必填，生成签名的随机串
-    //       signature: res.data.signature, // 必填，签名
-    //       jsApiList: ['startRecord', 'stopRecord', 'uploadVoice'] // 必填，需要使用的JS接口列表
-    //     });
-    //   }
-    // });
     this.WechatData.getWechatJs(getWechatJsConfig, url).subscribe(
       res => {
         console.log(res);
@@ -210,46 +193,31 @@ export class SpeedPage {
       this.isConcerned = true;
       return;
     }
-    this.recordTimer = setTimeout(() => {
-      if (!localStorage.rainAllowRecord || localStorage.rainAllowRecord !== 'true') {
-        wx.startRecord({
-          success: function () {
-            localStorage.rainAllowRecord = 'true';
-            wx.startRecord();
-            return;
-          },
-          cancel: function () {
-            this.isRecord = false;
-            // alert('用户拒绝授权录音');
-          }
-        });
-      }else {
-        wx.startRecord({
-          success: function () {
-            localStorage.rainAllowRecord = 'true';
-            wx.startRecord();
-            return;
-          },
-          cancel: function () {
-            this.isRecord = false;
-            // alert('用户拒绝授权录音');
-          }
-        });
+    wx.startRecord({
+      success: function () {
+        localStorage.rainAllowRecord = 'true';
+        // wx.startRecord();
+        // //  alert('录音开始'); 
+        // return;
+      },
+      cancel: function () {
+        _this.isRecord = false;
       }
-      // wx.startRecord({
-      //   success: function () {
-      //     localStorage.rainAllowRecord = 'true';
-      //     wx.startRecord();
-      //     //  alert('录音开始'); 
-      //     return;
-      //   },
-      //   cancel: function () {
-      //     this.isRecord = false;
-      //   }
-      // })
+    })
+    this.recordTimer = setTimeout(() => {
+      wx.startRecord({
+        success: function () {
+          localStorage.rainAllowRecord = 'true';
+          // wx.startRecord();
+          //  alert('录音开始'); 
+          // return;
+        },
+        cancel: function () {
+          _this.isRecord = false;
+        }
+      })
       // localStorage.rainAllowRecord = 'true';
-    }, 300);
-    event.preventDefault();
+    }, 500);
   }
   /*结束录音*/
   endTouch(event) {

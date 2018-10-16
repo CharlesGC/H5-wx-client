@@ -127,7 +127,6 @@ export class IndustrydetialPage {
   }
   // 点击搜索按钮
   searchLabel(value, type) {
-    console.log(111111111111111111111);
     // this.BlurInput = setTimeout(() => {
     //   this.blurInput()
     // }, 1000);
@@ -180,7 +179,6 @@ export class IndustrydetialPage {
     this.SkillLabelMoreData.getSkillLabelMoreData(getskillUrl, 2, 1, 999).subscribe(
       res => {
         this.SkillLabelMoreArr = res.data.list;
-        console.log(this.SkillLabelMoreArr,'this.SkillLabelMoreArrthis.SkillLabelMoreArrthis.SkillLabelMoreArr')
       }, error => {
         console.log(error);
       }
@@ -191,7 +189,6 @@ export class IndustrydetialPage {
     this.Skilltwolabel.getSkillSecondaryData(getskilltwoUrl, id, 0, 999).subscribe(
       res => {
         this.SkillLabelTwoArr = res.data.list;
-        console.log(this.SkillLabelTwoArr,'this.SkillLabelTwoArrthis.SkillLabelTwoArr')
       }, error => {
         console.log(error);
       }
@@ -214,7 +211,6 @@ export class IndustrydetialPage {
   }
   //点击一级获取二级技能
   infoSecondarySkill(value, index, type) {
-    // console.log(value,this.IndustryName,'11111111111111111111111111')
     this.type = type;
     if (index == -1) {
       this.skillCheckedSkill = 0;
@@ -231,7 +227,6 @@ export class IndustrydetialPage {
   }
   // 点击二级选择技能
   infoSelectClick(value, index, type) {
-    // console.log(value,'222222222222222222222222222')
     this.type = type;
     if (index == -1) {
       this.inputValue = { 'sName': value };
