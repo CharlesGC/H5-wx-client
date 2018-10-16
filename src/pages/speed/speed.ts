@@ -195,7 +195,7 @@ export class SpeedPage {
     }
     wx.startRecord({
       success: function () {
-        localStorage.rainAllowRecord = 'true';
+        // localStorage.rainAllowRecord = 'true';
         // wx.startRecord();
         // //  alert('录音开始'); 
         // return;
