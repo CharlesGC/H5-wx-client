@@ -70,21 +70,21 @@
     <p class="browser-file">寄送信息</p>
     <ion-list class="list-item-flex mt10">
       <ion-item (click)="goFormEditPage('companyAddress',invoiceData.companyAddress,'text')">
-        <label>寄送地址</label>
+        <label>寄送地址<span class="required-field ml5">(必填)</span></label>
         <p item-right>
           <span class="item-value">{{invoiceData.companyAddress}}</span>
           <ion-icon class="icon" name="arrow-forward"></ion-icon>
         </p>
       </ion-item>
       <ion-item (click)="goFormEditPage('recipient',invoiceData.recipient,'text')">
-        <label>收件人</label>
+        <label>收件人<span class="required-field ml5">(必填)</span></label>
         <p item-right>
           <span class="item-value">{{invoiceData.recipient}}</span>
           <ion-icon class="icon" name="arrow-forward"></ion-icon>
         </p>
       </ion-item>
       <ion-item no-lines (click)="goFormEditPage('taxPhone',invoiceData.taxPhone,'text')">
-        <label>联系方式</label>
+        <label>联系方式<span class="required-field ml5">(必填)</span></label>
         <p item-right>
           <span class="item-value">{{invoiceData.taxPhone}}</span>
           <ion-icon class="icon" name="arrow-forward"></ion-icon>

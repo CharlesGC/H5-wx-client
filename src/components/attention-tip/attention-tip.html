@@ -1,6 +1,6 @@
 <!-- Generated template for the AttentionTipComponent component -->
 <div>
-  <div class="attention-bottom-wrap" [ngClass]="{'bot0':bottom==1}">
+  <div class="attention-bottom-wrap" *ngIf="!bottom">
     <span class="icon-wrap">
       <img src="../../assets/imgs/attention-smalllogo.svg" alt="">
     </span>
@@ -14,6 +14,37 @@
       关注
     </span>
   </div>
+
+  <div class="attention-bottom-wrap bot0" *ngIf="bottom==1">
+    <span class="icon-wrap">
+      <img src="../../assets/imgs/attention-smalllogo.svg" alt="">
+    </span>
+    <span class="attention-title">
+      麦盟咨询
+    </span>
+    <span class="attention-desc">
+      关注公众号开启新的资讯生活
+    </span>
+    <span class="attention-btn" (click)=isShow()>
+      关注
+    </span>
+  </div>
+
+  <div class="attention-bottom-wrap bot50" *ngIf="bottom==3">
+    <span class="icon-wrap">
+      <img src="../../assets/imgs/attention-smalllogo.svg" alt="">
+    </span>
+    <span class="attention-title">
+      麦盟咨询
+    </span>
+    <span class="attention-desc">
+      关注公众号开启新的资讯生活
+    </span>
+    <span class="attention-btn" (click)=isShow()>
+      关注
+    </span>
+  </div>
+  
   <div class="attention-modal" *ngIf='isShowdata' (touchstart)="startTouch($event)">
     <div class="qrcode-wrap">
       <span class="title">长按二维码关注[麦盟咨询]</span>

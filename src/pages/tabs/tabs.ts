@@ -27,6 +27,11 @@ import { ConsultantStageBrowserPage } from '../my-project/consultant/consultant-
 import { ProjectStageBrowserPage } from '../my-project/client/project-stage-browser/project-stage-browser'; 
 import { ProjectInvoiceListPage } from '../my-project/client/project-invoice-list/project-invoice-list';
 
+import { IndustrydetialPage } from '../home/industrydetial/industrydetial';
+import { ProjectConsultantBrowserPage } from '../my-project/client/project-consultant-browser/project-consultant-browser';
+import { CasemorePage } from '../home/casemore/casemore';
+import { SwiperDetailPage } from '../home/swiper-detail/swiper-detail';
+
 
 declare var wx: any;
 @Component({
@@ -63,6 +68,10 @@ export class TabsPage {
     let ppid  = this.getUrlParam('ppid');
     let finalPrice = this.getUrlParam('finalPrice');
     let psid =  this.getUrlParam('psid');
+
+    //获取判断是否为关注后跳转的地址
+    let source = this.getUrlParam('source');
+
     let data = {
       backType: backType,
       pid: pid,
@@ -73,16 +82,45 @@ export class TabsPage {
       psid:psid,
     };
     if (openId) {
-      this.goToBack(data,type);
+      if(source == 'history'){
+        this.gotoSource();
+      }else{
+        this.goToBack(data,type);
+      }
 
       this.getUserInfo(openId)
       !window.sessionStorage.getItem('openId') && window.sessionStorage.setItem('openId', openId);
     } else {
-
+      
     }
     this.isAttention();
+  }
 
-    
+  /*关注后返回历史页面*/
+  gotoSource() {
+    let page = window.localStorage.getItem('page') || 0;
+    if(page == 1){
+
+    }else if(page == 2){
+      this.navCtrl.push(IndustrydetialPage);
+    }else if(page == 4){
+      const user = window.localStorage.getItem('user') ? JSON.parse(window.localStorage.getItem('user')) : {};
+      let uid = window.localStorage.getItem('cuid');
+      this.navCtrl.push(ProjectConsultantBrowserPage, { uid: uid, type: 'homepage', userType: user.type });
+    }else if(page == 5){
+      this.navCtrl.push(CasemorePage);
+    }else if(page == 7){
+      this.selectedIndex = 1;
+    }else if(page == 8){
+      let pid = window.localStorage.getItem('pid');
+      this.navCtrl.push(ProjectBrowserPage, { data: {pid:pid}, isApply: true });
+    }else if(page == 9){
+      this.navCtrl.push(SwiperDetailPage);
+    }else if(page == 10){
+      let selectType = window.localStorage.getItem('selectType');
+      let pid = window.localStorage.getItem('pid');
+      this.navCtrl.push(ConsultantProjectBrowserPage, { data: {pid:pid}, isApply: true, selectType: selectType });
+    }
   }
 
   /*页面跳转判断*/

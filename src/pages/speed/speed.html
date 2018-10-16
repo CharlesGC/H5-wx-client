@@ -70,56 +70,56 @@
             <ion-icon class="left-icon" name="add-circle" start isActive></ion-icon>
             <span class="left-title">前往完整发布</span>
             <div item-right class="rigth-message">
-              <span>提供更详细的项目细节</span>
-              <ion-icon name="arrow-forward" class="ml12" color="ion-gray"></ion-icon>
+                <span>提供更详细的项目细节</span>
+                <ion-icon name="arrow-forward" class="ml12" color="ion-gray"></ion-icon>
             </div>
-          </ion-item>
+        </ion-item>
     </ion-list>
     <div class="speed-footer" (click)="onSpeedReleaseSubmit(fieldValue)">发布</div>
 </ion-content>
-    <!--弹出框-->
-    <div class="phonebind-modal" [hidden]="!isShow">
-        <div class="modal-bg"></div>
-        <div class="modal-box">
-            <div class="modal-top">
-                <div class="modal-top-close">
-                    <!-- <ion-icon ios="ios-close" md="md-close" item-rigth (click)="onClose()" color=""></ion-icon> -->
-                </div>
-                <div class="modal-title">
-                    <img src="../../assets/imgs/success-icon.png" alt="">
-                </div>
-                <div class="modal-title">发送成功</div>
-                <div class="modal-content">
-                    <p>您的项目已经发布成功，我们将在尽快对项目展开审核，结果将会以邮件和短信的形式通知您。</p>
-                </div>
-                <div class="modal-footer">
-                    <button ion-button full large (click)="goClientProjectPage()">返回项目列表</button>
-                    <!-- <button ion-button full large (click)="onCompanyDel()" class="btn-delete">返回</button> -->
-                </div>
+<!--弹出框-->
+<div class="phonebind-modal" [hidden]="!isShow">
+    <div class="modal-bg"></div>
+    <div class="modal-box">
+        <div class="modal-top">
+            <div class="modal-top-close">
+                <!-- <ion-icon ios="ios-close" md="md-close" item-rigth (click)="onClose()" color=""></ion-icon> -->
+            </div>
+            <div class="modal-title">
+                <img src="../../assets/imgs/success-icon.png" alt="">
+            </div>
+            <div class="modal-title">发送成功</div>
+            <div class="modal-content">
+                <p>您的项目已经发布成功，我们将在尽快对项目展开审核，结果将会以邮件和短信的形式通知您。</p>
+            </div>
+            <div class="modal-footer">
+                <button ion-button full large (click)="goClientProjectPage()">返回项目列表</button>
+                <!-- <button ion-button full large (click)="onCompanyDel()" class="btn-delete">返回</button> -->
             </div>
         </div>
     </div>
-    <!-- 切换发布方式弹框 -->
-    <div class="phonebind-modal" [hidden]="!isChange">
-        <div class="modal-bg"></div>
-        <div class="modal-box">
-            <div class="modal-top">
-                <div class="modal-top-close">
-                    <!-- <ion-icon ios="ios-close" md="md-close" item-rigth (click)="onClose()" color=""></ion-icon> -->
-                </div>
-                <div class="modal-title">切换发布方式</div>
-                <div class="modal-content">
-                    <p>切换发布方式之后，部分您已经填写的信息将不会被保存，确定要继续么？</p>
-                </div>
-                <div class="modal-footer">
-                    <button ion-button full large (click)="goClientProjectEdit1Page()">继续前往完整发布</button>
-                    <button ion-button full large (click)="onCompanyDel()" class="btn-delete">返回</button>
-                </div>
+</div>
+<!-- 切换发布方式弹框 -->
+<div class="phonebind-modal" [hidden]="!isChange">
+    <div class="modal-bg"></div>
+    <div class="modal-box">
+        <div class="modal-top">
+            <div class="modal-top-close">
+                <!-- <ion-icon ios="ios-close" md="md-close" item-rigth (click)="onClose()" color=""></ion-icon> -->
+            </div>
+            <div class="modal-title">切换发布方式</div>
+            <div class="modal-content">
+                <p>切换发布方式之后，部分您已经填写的信息将不会被保存，确定要继续么？</p>
+            </div>
+            <div class="modal-footer">
+                <button ion-button full large (click)="goClientProjectEdit1Page()">继续前往完整发布</button>
+                <button ion-button full large (click)="onCompanyDel()" class="btn-delete">返回</button>
             </div>
         </div>
     </div>
-   <!-- 填写完整弹框 -->
-   <div class="phonebind-modal " [hidden]="!isComplete">
+</div>
+<!-- 填写完整弹框 -->
+<div class="phonebind-modal " [hidden]="!isComplete">
     <div class="modal-bg"></div>
     <div class="modal-box">
         <div class="modal-top">
@@ -132,6 +132,44 @@
             </div>
             <div class="modal-footer">
                 <button ion-button full large (click)="sureComplete()">确定</button>
+                <!-- <button ion-button full large (click)="onCompanyDel()" class="btn-delete">返回</button> -->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 未关注弹出框 -->
+<div class="phonebind-modal " [hidden]="!isConcerned ">
+    <div class="modal-bg"></div>
+    <div class="modal-box">
+        <div class="modal-top">
+            <div class="modal-top-close">
+                <!-- <ion-icon ios="ios-close" md="md-close" item-rigth (click)="onClose()" color=""></ion-icon> -->
+            </div>
+            <div class="modal-title">提示</div>
+            <div class="modal-content">
+                <p class="modal-center">您未关注公众号，不能使用语言功能</p>
+            </div>
+            <div class="modal-footer">
+                <button ion-button full large (click)="sureConcerned()">确定</button>
+                <!-- <button ion-button full large (click)="onCompanyDel()" class="btn-delete">返回</button> -->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 未添加公司 -->
+<div class="phonebind-modal " [hidden]="!isCompany">
+    <div class="modal-bg"></div>
+    <div class="modal-box">
+        <div class="modal-top">
+            <div class="modal-top-close">
+                <!-- <ion-icon ios="ios-close" md="md-close" item-rigth (click)="onClose()" color=""></ion-icon> -->
+            </div>
+            <div class="modal-title">提示</div>
+            <div class="modal-content">
+                <p class="modal-center">您还未添加公司，请到个人中心添加公司再发布</p>
+            </div>
+            <div class="modal-footer">
+                <button ion-button full large (click)="sureCompany()">确定</button>
                 <!-- <button ion-button full large (click)="onCompanyDel()" class="btn-delete">返回</button> -->
             </div>
         </div>

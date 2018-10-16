@@ -47,7 +47,7 @@
   </ion-list>
   <ion-list class="describe-list mt10">
     <ion-item no-lines>
-      <h4>交互标的</h4>
+      <h4>交付标的</h4>
       <!-- <p class="describe-cont">{{projectStageDetail.deliverable}} </p> -->
       <p class="describe-cont" [innerHTML]="assembleHTML(projectStageDetail.deliverable)"></p>
     </ion-item>
@@ -71,7 +71,7 @@
   </ion-list>
   <div class="user-other-list" *ngIf="projectStageDetail.document && projectStageDetail.document.length>0">
     <p class="browser-file">查看阶段相关文件</p>
-    <h4 class="mt10">交互物</h4>
+    <h4 class="mt10">交付物</h4>
     <ion-list class="card-item mb10" *ngFor="let document_item of projectStageDetail.document">
       <ion-item no-lines>
         <div class="card-item-top">

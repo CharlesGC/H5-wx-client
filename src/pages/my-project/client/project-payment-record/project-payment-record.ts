@@ -230,12 +230,12 @@ export class ProjectPaymentRecordPage {
       console.log('erros===', error);
     })
   }
+  // || !invoiceData['payee'] || !invoiceData['payeeBank'] || !invoiceData['payeeAccount']收款人项目
   sureCompleteRecord() {
     this.isCompleteRecord = true
     let invoiceData = this.paymentRecordData;
     // let projectInvoiceDetailUrl = 'http://mamon.yemindream.com/mamon/customer/addPayMent';
-    if (!invoiceData['realPrice'] || !invoiceData['payer'] || !invoiceData['payerBank'] ||
-      !invoiceData['payerAccount'] || !invoiceData['payee'] || !invoiceData['payeeBank'] || !invoiceData['payeeAccount']) {
+    if (!invoiceData['realPrice'] || !invoiceData['payer'] || !invoiceData['payerBank'] || !invoiceData['payerAccount']) {
       this.tipstext = '请填写完整信息';
       this.isFailed = true
       return;

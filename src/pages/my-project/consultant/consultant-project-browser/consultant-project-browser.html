@@ -249,7 +249,7 @@
     <button ion-button class="btn-delete" (click)="sureTipPrompt()" [disabled]='isdisabled'>忽略</button>
   </div>
 </ion-content>
-<attention-tip *ngIf='attstate == 0' [bottom]='((projectDetails.appStatus ==9 && !isApply) || (!projectDetails.appStatus && projectDetails.appStatus != 0 && selectType != 3)) ? 0 : 1' [page]='8'></attention-tip>
+<attention-tip *ngIf='attstate == 0' [bottom]='((projectDetails.appStatus ==9 && !isApply) || (!projectDetails.appStatus && projectDetails.appStatus != 0 && selectType != 3)) ? 3 : 1' [page]='10' [selectType]='selectType' [pid]='projectDetails.pid'></attention-tip>
 <div class="phonebind-modal" [hidden]="!isTipPrompt">
   <div class="modal-bg"></div>
   <div class="modal-box">

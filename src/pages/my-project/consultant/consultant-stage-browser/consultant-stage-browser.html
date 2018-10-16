@@ -49,7 +49,7 @@
   </ion-list>
   <ion-list class="describe-list mt10">
     <ion-item no-lines>
-      <h4>交互标的</h4>
+      <h4>交付标的</h4>
       <!-- <p class="describe-cont">{{projectStageDetail.deliverable}} </p> -->
       <p class="describe-cont" [innerHTML]="assembleHTML(projectStageDetail.deliverable)"></p>
     </ion-item>
@@ -64,14 +64,14 @@
       <span item-right class="item-value">{{projectStageDetail.price | currency: '￥'}}元</span>
     </ion-item>
     <ion-item no-lines>
-      <label>交互方式</label>
+      <label>交付方式</label>
       <span item-right class="item-value" *ngIf="projectStageDetail.paymentMethod == 0">线上</span>
       <span item-right class="item-value" *ngIf="projectStageDetail.paymentMethod == 1">线下</span>
     </ion-item>
   </ion-list>
   <div class="user-other-list" *ngIf="projectStageDetail.document && projectStageDetail.document.length>0">
     <p class="browser-file"> </p>
-    <h4 class="mt10">交互物</h4>
+    <h4 class="mt10">交付物</h4>
     <ion-list class="card-item mb10" *ngFor="let document_item of projectStageDetail.document">
       <ion-item no-lines>
         <div class="card-item-top">
@@ -144,7 +144,7 @@
           <button ion-button class="btn-delete" (click)="onBankAccountDel()">提出异议</button>
       </div> -->
   <div class="fixed-bottom" *ngIf="projectStageDetail.adviserStatus==3 || projectStageDetail.adviserStatus==8">
-    <button ion-button class="btn-submit" (click)="goPaymentRecord(projectStageDetail.adviserStatus)">添加交互物</button>
+    <button ion-button class="btn-submit" (click)="goPaymentRecord(projectStageDetail.adviserStatus)">添加交付物</button>
     <button ion-button class="btn-delete" (click)="sureStage()" [disabled] = 'isdis'>阶段交付</button>
   </div>
 </ion-content>
@@ -158,7 +158,7 @@
       </div>
       <div class="modal-title">提示</div>
       <div class="modal-content">
-        <p>阶段交互物不能为空</p>
+        <p>阶段交付物不能为空</p>
       </div>
       <div class="modal-footer">
         <button ion-button full large (click)="sureStageBook()">确定</button>

@@ -164,7 +164,7 @@ export class ProjectSubmitInvoicePage {
       }
     } else if (this.selected == 0) {
       if ((!invoiceData['price'] && invoiceData['price'] != 0) || !invoiceData['invoiceLetterhead'] || !invoiceData['companyPhone'] ||
-        !invoiceData['openBank'] || !invoiceData['taxNumber'] || !invoiceData['companyAddress'] || !invoiceData['recipient'] || !invoiceData['taxPhone']) {
+        !invoiceData['openBank'] || !invoiceData['taxNumber'] || !invoiceData['companyAddress'] || !invoiceData['recipient'] || !invoiceData['taxPhone'] || !invoiceData['account']) {
         this.isComplete = true;
         return
       }

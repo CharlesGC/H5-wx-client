@@ -162,6 +162,9 @@ export class ProjectEditStep2Page {
     if (pid) {
       projectStageDetailUrl = projectStageDetailUrl + '&pid=' + pid;
     }
+    if (projectData['uid']) {
+      projectStageDetailUrl = projectStageDetailUrl + '&appoint=' + projectData['uid'];
+    }
     this.Provider.getMamenSwiperData(projectStageDetailUrl).subscribe(res => {
       if (res.code == 200) {
         //alert('操作成功！');

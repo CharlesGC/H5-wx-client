@@ -26,6 +26,7 @@ export class ConsultantDeliveryModelPage {
   public isContent = false
   public isSubmit = false
   public isFailed = false
+  public isNoBankAccount = false
   constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider, private http: HttpClient) {
   }
 
@@ -97,6 +98,10 @@ export class ConsultantDeliveryModelPage {
   sureContent() {
     let deliveryModelData = this.deliveryModelData;
 
+    if(!deliveryModelData['bankAccount'] || !deliveryModelData['account']){
+      this.isNoBankAccount = true
+      return;
+    }
     if (!deliveryModelData['logisticsCompany']) {
       this.isCourierCompany = true
       return;
@@ -118,6 +123,10 @@ export class ConsultantDeliveryModelPage {
   }
   sureFailed() {
     this.isFailed = !this.isFailed
+    return
+  }
+  surebankAccount(){
+    this.isNoBankAccount = !this.isNoBankAccount
     return
   }
   /*付款申请信息提交*/

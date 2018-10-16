@@ -162,3 +162,21 @@
     </div>
   </div>
 </div>
+<div class="phonebind-modal" [hidden]="!isNoBankAccount">
+  <div class="modal-bg"></div>
+  <div class="modal-box">
+    <div class="modal-top">
+      <div class="modal-top-close">
+        <!-- <ion-icon ios="ios-close" md="md-close" item-rigth (click)="onClose()" color=""></ion-icon> -->
+      </div>
+      <div class="modal-title">提示</div>
+      <div class="modal-content">
+        <p>未填写收款银行信息，请添加完整</p>
+      </div>
+      <div class="modal-footer">
+        <button ion-button full large (click)="surebankAccount()">确定</button>
+        <!-- <button ion-button full large (click)="onCompanyDel()" class="btn-delete">返回</button> -->
+      </div>
+    </div>
+  </div>
+</div>
