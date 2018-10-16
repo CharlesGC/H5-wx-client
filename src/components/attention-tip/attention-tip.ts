@@ -14,6 +14,9 @@ import { Component, Input } from '@angular/core';
 export class AttentionTipComponent {
   @Input() bottom: any;
   @Input() page: any;
+  @Input() uid: any;
+  @Input() pid: any;
+  @Input() selectType: any;
   public isShowdata = false;
   public timeOutEvent :any
   text: string;
@@ -31,5 +34,13 @@ export class AttentionTipComponent {
 
   longPress(){
     window.localStorage.setItem('page',this.page);
+    if(this.page == 4){
+      window.localStorage.setItem('cuid',this.uid);
+    }else if(this.page == 8){
+      window.localStorage.setItem('pid',this.pid);
+    }else if(this.page == 10){
+      window.localStorage.setItem('pid',this.pid);
+      window.localStorage.setItem('pid',this.selectType);
+    }
   }
 }

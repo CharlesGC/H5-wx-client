@@ -187,7 +187,7 @@ export class ProjectEditStep1Page {
       projectStageDetailUrl = projectStageDetailUrl + '&pid=' + pid;
     }
     if (projectData['uid']) {
-      //projectStageDetailUrl = projectStageDetailUrl + '&uid=' + projectData['uid'];
+      projectStageDetailUrl = projectStageDetailUrl + '&appoint=' + projectData['uid'];
     }
     this.Provider.getMamenSwiperData(projectStageDetailUrl).subscribe(res => {
       if (res.code == 200) {

@@ -164,7 +164,8 @@
           <p class="city-date-cont">
             <span><span class="fontw600">{{projectListData_item.voiceCount}} 条</span>语音记录</span>
           </p>
-          <div class="demand-content-cont mt10">{{projectListData_item.description}}</div>
+          <!-- <div class="demand-content-cont mt10">{{projectListData_item.description}}</div> -->
+          <div class="demand-content-cont mt10" [innerHTML]="assembleHTML(projectListData_item.description)"></div>
         </div>
         <div class="msg-footer" (click)="onProjectBrowserClick(projectListData_item)">
           <span class="msg-footer-text">查看该项目详情</span>

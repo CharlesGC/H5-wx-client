@@ -297,7 +297,9 @@ export class SpeedPage {
     console.log(value);
     // o2GZp1KSbS2Ab6zWjBurLzfcrAKk
     const openId = window.sessionStorage.getItem('openId') || this.getUrlParam('openId') || window.localStorage.getItem('openId');
-    this.description = value;
+    var reg = new RegExp("\n", "g"); //new RegExp("\r\n","g")
+    this.description = value.replace(reg, "<br>");
+    // this.description = value;
     let Arr = this.audioData || [];
     this.voice = Arr.length > 0 ? Arr.map(f => f.url).join(",") : '';
     if (!this.description && this.description != 0) {
