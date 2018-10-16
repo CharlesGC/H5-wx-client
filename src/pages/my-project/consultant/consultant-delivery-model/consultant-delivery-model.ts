@@ -136,8 +136,8 @@ export class ConsultantDeliveryModelPage {
     // let projectStageDetailUrl = 'http://mamon.yemindream.com/mamon/adviser/applyMoney';
     const openId = window.sessionStorage.getItem('openId') || this.getUrlParam('openId');
     let projectStageDetailUrl = applyMoneyUrl + '?openId=' + openId + '&pid=' + pid + '&psid=' + psid +
-      '&payerBank=' + deliveryModelData['bankAccount'] +
-      '&payerAccount=' + deliveryModelData['account'] +
+      // '&payerBank=' + deliveryModelData['bankAccount'] +
+      // '&payerAccount=' + deliveryModelData['account'] +
       '&logisticsCompany=' + deliveryModelData['logisticsCompany'] +
       '&logisticsNumber=' + deliveryModelData['logisticsNumber'] +
       '&payee=' + deliveryModelData['accountHolder'] +

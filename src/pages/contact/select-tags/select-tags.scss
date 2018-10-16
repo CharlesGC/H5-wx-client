@@ -29,6 +29,18 @@ page-select-tags {
         letter-spacing: normal;
         color: #9b9b9b;
     }
+    .add-skill{
+        ion-item {
+            font-family: PingFangSC;
+            font-size: 1.4rem;
+            font-weight: 600;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: normal;
+            letter-spacing: normal;
+            color: #4a4a4a;
+        }
+    }
     .select-list-item {
         overflow: scroll;
         height: -webkit-fill-available;
@@ -41,6 +53,9 @@ page-select-tags {
             line-height: normal;
             letter-spacing: normal;
             color: #4a4a4a;
+        }
+        &.auto {
+            height: auto;
         }
     }
     .select-list-item1 {
