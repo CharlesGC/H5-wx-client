@@ -328,7 +328,7 @@
             <button ion-button class="btn-delete" (click)="onProjectEditStep1()">忽略</button>
         </div> -->
 </ion-content>
-<attention-tip *ngIf='attstate == 0' [bottom]='1' [page]='8'></attention-tip>
+<attention-tip *ngIf='attstate == 0' [bottom]='(((projectDetails.status == 0 || projectDetails.status ==7) && !isApply) || (projectDetails.status ==5 && !isApply)) ? 0 : 1' [page]='8'></attention-tip>
 <div class="phonebind-modal" [hidden]="!isSuccess">
     <div class="modal-bg"></div>
     <div class="modal-box">

@@ -49,7 +49,7 @@ export class DemandContentPage {
     //console.log(getAttentionUserInfo)
     this.http.get(getAttentionUserInfoUrl).subscribe(res => {
       this.attstate = res['data'].subscribe;
-      //console.log(res,'ccc')
+      console.log(res,'ccc')
     });
     this.isAttention();
     this.getProjectListData(this.selected);

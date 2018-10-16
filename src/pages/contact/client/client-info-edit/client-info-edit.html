@@ -45,7 +45,7 @@
           </div>
         </ion-item>
       <ion-item class="" (click)="goFormEditPage('scale',companyDetaiData.scale,'select')">
-          <span class="left-title">公司规模<span class="required-field ml5">(必填)</span></span>
+          <span class="left-title">公司规模</span>
           <div item-right class="rigth-message">
             <span *ngIf="companyDetaiData.scale==0">0-50人</span>
             <span *ngIf="companyDetaiData.scale==1">50-100人</span>
@@ -55,7 +55,7 @@
           </div>
       </ion-item>
       <ion-item class="" (click)="goFormEditPage('stage',companyDetaiData.stage,'select')">
-          <span class="left-title">发展阶段<span class="required-field ml5">(必填)</span></span>
+          <span class="left-title">发展阶段</span>
           <div item-right class="rigth-message">
             <span *ngIf="companyDetaiData.stage == 0">起步期</span>
             <span *ngIf="companyDetaiData.stage == 1">快速成长期</span>
@@ -71,7 +71,7 @@
           </div>
       </ion-item> -->
       <ion-item class="" (click)="goFormEditPage('companyPhone',companyDetaiData.companyPhone,'text')">
-          <span class="left-title">公司电话<span class="required-field ml5">(必填)</span></span>
+          <span class="left-title">公司电话</span>
           <div item-right class="rigth-message">
             <span>{{companyDetaiData.companyPhone}}</span>
             <ion-icon name="arrow-forward" class="ml12"></ion-icon>
@@ -92,14 +92,14 @@
           </div>
       </ion-item> -->
       <ion-item class="mt10" (click)="goInvoiceInfo()" *ngIf="cid">
-          <span class="left-title">发票信息<span class="required-field ml5">(必填)</span></span>
+          <span class="left-title">发票信息</span>
           <div item-right class="rigth-message">
             <!-- <span>1 条记录</span> -->
             <ion-icon name="arrow-forward" class="ml12"></ion-icon>
           </div>
       </ion-item>
       <ion-item (click)="goPaymentInfo()" no-lines *ngIf="cid">
-          <span class="left-title">付款人信息<span class="required-field ml5">(必填)</span></span>
+          <span class="left-title">付款人信息</span>
           <div item-right class="rigth-message">
             <span *ngIf="companyDetaiData.payCount">{{companyDetaiData.payCount}} 条记录</span>
             <ion-icon name="arrow-forward" class="ml12"></ion-icon>
@@ -176,7 +176,7 @@
       </div>
       <div class="modal-title">提示</div>
       <div class="modal-content">
-        <p class="modal-center">公司信息需填写完整</p>
+        <p class="modal-center">请将必填项填写完整</p>
       </div>
       <div class="modal-footer">
         <button ion-button full large (click)="sureComplete()">确定</button>
