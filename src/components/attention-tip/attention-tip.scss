@@ -15,6 +15,9 @@
         &.bot0 {
             bottom: 0;
         }
+        &.bot50 {
+            bottom: 50px;
+        }
         .icon-wrap{
             display:block;
             float: left;
@@ -85,7 +88,7 @@
             background-size:100%;
             background-repeat: no-repeat;
             position: absolute;
-            top: 4rem;
+            top: 10%;
             left: 50%;
             transform: translateX(-50%);
             img{
@@ -103,7 +106,7 @@
                 background-image : url('../../assets/imgs/qrcode-close.svg');
                 background-size:100%;
                 position: absolute;
-                top: 360px;
+                top: 333px;
                 left: 50%;
                 transform: translateX(-50%);
                 border-radius: 50%;
@@ -178,6 +181,9 @@
         &.bot0 {
             bottom: 0;
         }
+        &.bot50 {
+            bottom: 50px;
+        }
         .icon-wrap{
             display:block;
             float: left;
@@ -248,7 +254,7 @@
             background-size:100%;
             background-repeat: no-repeat;
             position: absolute;
-            top: 4rem;
+            top: 13%;
             left: 50%;
             transform: translateX(-50%);
             img{
@@ -266,7 +272,7 @@
                 background-image : url('../../assets/imgs/qrcode-close.svg');
                 background-size:100%;
                 position: absolute;
-                top: 360px;
+                top: 333px;
                 left: 50%;
                 transform: translateX(-50%);
                 border-radius: 50%;

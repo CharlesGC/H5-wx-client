@@ -196,3 +196,9 @@ page-select-tags {
         }
     }
 }
+.list-ios > .item-block:last-child, .list-ios > .item-wrapper:last-child .item-block{
+    border-bottom: none;
+}
+.list-md > .item-block:last-child, .list-md > .item-wrapper:last-child .item-block{
+    border-bottom: none;
+}

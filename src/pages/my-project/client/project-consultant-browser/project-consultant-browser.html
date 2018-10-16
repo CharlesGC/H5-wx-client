@@ -284,7 +284,7 @@
   <button ion-button expand="full" large class="fixed-bottom" (click)="goProjectStart()" *ngIf="ishome == 'homepage' && userType == 0">发起项目邀请</button>
 </ion-content>
 <div class="phonebind-modal" [hidden]="!isTipPrompt">
-  <div class="modal-bg"></div>
+  <div class="modal-bg"></div> 
   <div class="modal-box">
     <div class="modal-top">
       <div class="modal-top-close">
@@ -302,5 +302,7 @@
   </div>
 </div>
 <!--*ngIf='attstate == 0'-->
-<attention-tip *ngIf='attstate == 0' [bottom]='userType' [page]='4' [uid]='consultantDetails.uid'></attention-tip>
+<attention-tip *ngIf='attstate == 0' [bottom]='(applicationDeatil.status==0 || 
+                      applicationDeatil.status==2 || applicationDeatil.status==1 || 
+                      (ishome == "homepage" && userType == 0)) ? 3 : 1' [page]='4' [uid]='consultantDetails.uid'></attention-tip>
 <tellphone-tip></tellphone-tip>

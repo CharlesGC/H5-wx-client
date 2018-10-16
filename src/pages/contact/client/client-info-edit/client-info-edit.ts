@@ -189,13 +189,12 @@ export class ClientInfoEditPage {
     newCompanyDetaiData['otherIndustrys'] = this.getOtherIndustrys(newCompanyDetaiData['industryList']);
     let otherIndustrys = this.companyDetaiData['otherIndustrys'] && this.companyDetaiData['otherIndustrys'].length > 0 ? this.companyDetaiData['otherIndustrys'].join(',') : '';
     // let getCompanyDetailUrl = 'http://mamon.yemindream.com/mamon/company/addOrUpdateCompany';
-    if (Object.keys(this.companyDetaiData).length < 8) {
+    if (!newCompanyDetaiData['companyName'] || !newCompanyDetaiData['address'] || !industryList || !newCompanyDetaiData['province']) {
       this.isComplete = true
-      console.log('cancel')
       return
     }
     var regPhone = /^[0-9]{8,11}$/;
-    if (regPhone.test(newCompanyDetaiData['companyPhone']) == false) {
+    if (newCompanyDetaiData['companyPhone'] && regPhone.test(newCompanyDetaiData['companyPhone']) == false) {
       this.isPhoneProper = true;
       return;
     }
@@ -205,10 +204,10 @@ export class ClientInfoEditPage {
       '&city=' + newCompanyDetaiData['city'] +
       '&address=' + newCompanyDetaiData['address'] +
       '&industryIds=' + industryList +
-      '&scale=' + newCompanyDetaiData['scale'] +
-      '&stage=' + newCompanyDetaiData['stage'] +
+      '&scale=' + (newCompanyDetaiData['scale'] || '')+
+      '&stage=' + (newCompanyDetaiData['stage'] || '')+
       '&priority=' + (this.isdefault ? 1 : 0) +
-      '&phone=' + newCompanyDetaiData['companyPhone'] +
+      '&phone=' + (newCompanyDetaiData['companyPhone'] || '')+
       '&otherIndustrys=' + otherIndustrys +
       '&website=' + (newCompanyDetaiData['webSite'] || '');
     // '&zipCode='+companyDetaiData.webSite;

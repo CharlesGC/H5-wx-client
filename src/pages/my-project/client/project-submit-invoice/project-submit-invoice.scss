@@ -6,7 +6,7 @@ page-project-submit-invoice {
         padding: 30px 0 0;
         text-align: center;
         margin-bottom: 0;
-        h4{
+        h4 {
             font-family: PingFangSC;
             font-size: 1.6rem;
             font-weight: 600;
@@ -44,7 +44,6 @@ page-project-submit-invoice {
             }
         }
     }
-
     .describe-list {
         ion-item {
             font-family: PingFangSC;
@@ -82,18 +81,17 @@ page-project-submit-invoice {
                     padding: 3px 12px;
                     border-radius: 3px;
                 }
-                &.skills{
+                &.skills {
                     .tag {
                         background-color: rgba(186, 232, 212, 0.4);
                     }
                 }
-                &.industry{
+                &.industry {
                     .tag {
                         background-color: rgba(204, 219, 254, 0.5);
                     }
-                } 
-                
-            } 
+                }
+            }
         }
     }
     .list-item-flex {
@@ -105,7 +103,7 @@ page-project-submit-invoice {
             line-height: normal;
             letter-spacing: normal;
             color: #4a4a4a;
-            label{
+            label {
                 font-weight: 600;
             }
             .icon {
@@ -169,7 +167,7 @@ page-project-submit-invoice {
                     line-height: 20px;
                     color: #4a4a4a;
                     white-space: normal;
-                    h5{
+                    h5 {
                         font-family: PingFangSC;
                         font-size: 1.6rem;
                         font-weight: 600;
@@ -215,13 +213,11 @@ page-project-submit-invoice {
                     color: #cfcfcf;
                 }
             }
-
         }
     }
-
     .top-lines {
         display: flex;
-        .top-lines-right{
+        .top-lines-right {
             font-family: PingFangSC;
             font-size: 1.2rem;
             font-weight: normal;
@@ -246,7 +242,6 @@ page-project-submit-invoice {
         color: #c7c7c7;
         margin: 3rem 0 0 1.5rem;
     }
-
     .card-item-top {
         display: flex;
         margin-bottom: 10px;
@@ -264,7 +259,7 @@ page-project-submit-invoice {
                 color: #f46f46;
             }
         }
-        .item-top-right{
+        .item-top-right {
             font-family: PingFangSC;
             font-size: 1.2rem;
             font-weight: normal;
@@ -276,7 +271,6 @@ page-project-submit-invoice {
             color: #9b9b9b;
         }
     }
-
     .phonebind-modal {
         left: 0;
         right: 0;
@@ -374,5 +368,8 @@ page-project-submit-invoice {
             }
         }
     }
-
+    .required-field {
+        font-size: 1rem;
+        color: #f46f46;
+    }
 }

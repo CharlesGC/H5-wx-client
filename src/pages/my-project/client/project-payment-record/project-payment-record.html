@@ -57,16 +57,14 @@
       </p>
     </ion-item>
     <ion-item no-lines>
-      <label>{{paymentRecordData.payerBank}}</label>
+      <label>{{paymentRecordData.payerBank}}<span class="required-field ml5">(必填)</span></label>
       <span item-right class="item-value">{{paymentRecordData.payerAccount}}</span>
     </ion-item>
   </ion-list>
   <p class="browser-file">收款信息</p>
   <ion-list class="list-item-flex mt10">
     <ion-item>
-      <label>收款人
-        <span class="required-field ml5">(必填)</span>
-      </label>
+      <label>收款人</label>
       <span item-right class="item-value">{{paymentRecordData.payee}}</span>
     </ion-item>
     <ion-item no-lines>
