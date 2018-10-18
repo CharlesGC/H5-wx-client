@@ -4,7 +4,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { MamenDataProvider } from '../../../providers/mamen-data/mamen-data';
 import { getindustryUrl, getskillUrl, getskilltwoUrl, getSearch, getfinanceAllUrl, getfinanceUrl, getoutstandingUrl } from '../../../providers/dataUrl';
 import { ProjectConsultantBrowserPage } from '../../my-project/client/project-consultant-browser/project-consultant-browser';
-import { hideAttentionMenuUrl, getAttentionUserInfo } from '../../../providers/requestUrl'
+import { hideAttentionMenuUrl, getAttentionUserInfo,sourceHistoryUrl } from '../../../providers/requestUrl'
 import { HttpClient, HttpParams } from '@angular/common/http';
 declare var wx: any;
 @IonicPage()
@@ -48,7 +48,7 @@ export class IndustrydetialPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, public IndustryMoreData: MamenDataProvider,
     public SkillLabelMoreData: MamenDataProvider,
     public Skilltwolabel: MamenDataProvider, public IndustrySearch: MamenDataProvider,
-    public financedata: MamenDataProvider, private http: HttpClient,public sanitizer:DomSanitizer) {
+    public financedata: MamenDataProvider, private http: HttpClient,public sanitizer:DomSanitizer,private Provider: MamenDataProvider,) {
   }
   /*转换html标签处理*/
   assembleHTML(strHTML:any){
@@ -294,9 +294,9 @@ export class IndustrydetialPage {
 
   //隐藏底部分享菜单
   isAttention() {
-    // let url = location.href.split('#')[0]; // 当前网页的URL，不包含#及其后面部分
-    // let data = { url: url };
-    this.http.get(hideAttentionMenuUrl).subscribe(res => {
+    let url = encodeURIComponent(location.href.split('#')[0]); // 当前网页的URL，不包含#及其后面部分
+    let wUrl = hideAttentionMenuUrl + '?url=' + url;
+    this.Provider.getMamenSwiperData(wUrl).subscribe(res => {
       if (res['code'] == 200) {
         wx.config({
           debug: false,
@@ -304,12 +304,26 @@ export class IndustrydetialPage {
           timestamp: res['data'].timestamp,
           nonceStr: res['data'].nonceStr,
           signature: res['data'].signature,
-          jsApiList: ['showOptionMenu']
+          jsApiList: ['showOptionMenu','onMenuShareAppMessage']
         });
         wx.ready(function () {
           wx.showOptionMenu();
+          wx.onMenuShareAppMessage({
+            // 分享标题
+            title: '麦盟自由顾问平台',
+            // 分享描述 
+            desc: '麦盟自由顾问平台',
+            // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+            link: sourceHistoryUrl + '&page=2',
+            // 分享图标 
+            imgUrl: '../../assets/imgs/logobig.png',
+          }, function (res) {
+            //alert(res)
+          });
         });
       }
+    }, error => {
+      console.log('erros===', error);
     })
   }
 }

@@ -11,7 +11,7 @@ import { IndustrymorePage } from '../industrymore/industrymore';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { CasemorePage } from "./casemore/casemore";
 import { getswipreUrl, getindustryUrl, getskillUrl, getcaseUrl, getoutstandingUrl, getfinanceUrl, getfinanceAllUrl } from '../../providers/dataUrl';
-import { hideAttentionMenuUrl, getAttentionUserInfo } from '../../providers/requestUrl'
+import { hideAttentionMenuUrl, getAttentionUserInfo,sourceHistoryUrl} from '../../providers/requestUrl'
 // declare var onBridgeReady;
 // import { ViewChild } from '@angular/core';
 // import { Slides } from 'ionic-angular';
@@ -35,15 +35,15 @@ export class HomePage {
   public financeAllArrlength: any;
   public pepperoni: boolean;
   public sausage: boolean;
-  public mushrooms: boolean; 
-  public attstate:any;
+  public mushrooms: boolean;
+  public attstate: any;
   constructor(public navCtrl: NavController, private swiperdata: MamenDataProvider, private industrydata: MamenDataProvider, private http: HttpClient,
     private skilldata: MamenDataProvider, private casedata: MamenDataProvider, private outstanddata: MamenDataProvider, private financedata: MamenDataProvider
-    , private financeAlldata: MamenDataProvider,public sanitizer:DomSanitizer) {
+    , private financeAlldata: MamenDataProvider, public sanitizer: DomSanitizer,private Provider: MamenDataProvider,) {
     this.IndustryArr = [];
   }
   /*转换html标签处理*/
-  assembleHTML(strHTML:any){
+  assembleHTML(strHTML: any) {
     return this.sanitizer.bypassSecurityTrustHtml(strHTML);
   }
   ionViewDidLoad() {
@@ -170,7 +170,7 @@ export class HomePage {
     const token = this.getUrlParam('token');
     const usertype = this.getUrlParam('status');
     // const openId = this.getUrlParam('openId');
-    const openId = this.getUrlParam('openId') ||  window.sessionStorage.getItem('openId') || window.localStorage.getItem('openId');
+    const openId = this.getUrlParam('openId') || window.sessionStorage.getItem('openId') || window.localStorage.getItem('openId');
     openId && window.localStorage.setItem('openId', openId);
     if (token) {
       if (Number(usertype) == 1) {
@@ -185,7 +185,6 @@ export class HomePage {
     let getAttentionUserInfoUrl = getAttentionUserInfo + '?openId=' + openId;
     this.http.get(getAttentionUserInfoUrl).subscribe(res => {
       this.attstate = res['data'].subscribe;
-      console.log(res, '1111222233334444')
     });
     this.isAttention();
   }
@@ -266,9 +265,9 @@ export class HomePage {
   }
   //隐藏底部分享菜单
   isAttention() {
-    // let url = location.href.split('#')[0]; // 当前网页的URL，不包含#及其后面部分
-    // let data = { url: url };
-    this.http.get(hideAttentionMenuUrl).subscribe(res => {
+    let url = encodeURIComponent(location.href.split('#')[0]); // 当前网页的URL，不包含#及其后面部分
+    let wUrl = hideAttentionMenuUrl + '?url=' + url;
+    this.Provider.getMamenSwiperData(wUrl).subscribe(res => {
       if (res['code'] == 200) {
         wx.config({
           debug: false,
@@ -276,12 +275,26 @@ export class HomePage {
           timestamp: res['data'].timestamp,
           nonceStr: res['data'].nonceStr,
           signature: res['data'].signature,
-          jsApiList: ['showOptionMenu']
+          jsApiList: ['showOptionMenu','onMenuShareAppMessage']
         });
         wx.ready(function () {
           wx.showOptionMenu();
+          wx.onMenuShareAppMessage({
+            // 分享标题
+            title: '麦盟自由顾问平台',
+            // 分享描述 
+            desc: '麦盟自由顾问平台',
+            // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+            link: sourceHistoryUrl + '&page=1',
+            // 分享图标 
+            imgUrl: '../../assets/imgs/logobig.png',
+          }, function (res) {
+            //alert(res)
+          });
         });
       }
+    }, error => {
+      console.log('erros===', error);
     })
   }
 }

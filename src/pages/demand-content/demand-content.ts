@@ -4,7 +4,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { MamenDataProvider } from '../../providers/mamen-data/mamen-data';
 import { ProjectBrowserPage } from '../my-project/client/project-browser/project-browser';
 import { ConsultantProjectBrowserPage } from '../my-project/consultant/consultant-project-browser/consultant-project-browser';
-import { demandListUrl, getAttentionUserInfo, hideAttentionMenuUrl } from '../../providers/requestUrl';
+import { demandListUrl, getAttentionUserInfo, hideAttentionMenuUrl,sourceHistoryUrl } from '../../providers/requestUrl';
 import { HttpClient, HttpParams } from '@angular/common/http';
 declare var wx: any;
 @IonicPage()
@@ -18,11 +18,11 @@ export class DemandContentPage {
   public pageNum = 0;
   public pageSize = 999;
   public attstate: any
-  constructor(public navCtrl: NavController, public navParams: NavParams,private Provider:MamenDataProvider,public sanitizer:DomSanitizer, private http: HttpClient) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider, public sanitizer: DomSanitizer, private http: HttpClient) {
     this.selected = 2;
   }
   /*转换html标签处理*/
-  assembleHTML(strHTML:any){
+  assembleHTML(strHTML: any) {
     return this.sanitizer.bypassSecurityTrustHtml(strHTML);
   }
 
@@ -49,16 +49,15 @@ export class DemandContentPage {
     //console.log(getAttentionUserInfo)
     this.http.get(getAttentionUserInfoUrl).subscribe(res => {
       this.attstate = res['data'].subscribe;
-      console.log(res,'ccc')
     });
     this.isAttention();
     this.getProjectListData(this.selected);
   }
   //隐藏底部分享菜单
   isAttention() {
-    // let url = location.href.split('#')[0]; // 当前网页的URL，不包含#及其后面部分
-    // let data = { url: url };
-    this.http.get(hideAttentionMenuUrl).subscribe(res => {
+    let url = encodeURIComponent(location.href.split('#')[0]); // 当前网页的URL，不包含#及其后面部分
+    let wUrl = hideAttentionMenuUrl + '?url=' + url;
+    this.Provider.getMamenSwiperData(wUrl).subscribe(res => {
       if (res['code'] == 200) {
         wx.config({
           debug: false,
@@ -66,12 +65,26 @@ export class DemandContentPage {
           timestamp: res['data'].timestamp,
           nonceStr: res['data'].nonceStr,
           signature: res['data'].signature,
-          jsApiList: ['showOptionMenu']
+          jsApiList: ['showOptionMenu','onMenuShareAppMessage']
         });
         wx.ready(function () {
           wx.showOptionMenu();
+          wx.onMenuShareAppMessage({
+            // 分享标题
+            title: '麦盟自由顾问平台',
+            // 分享描述 
+            desc: '麦盟自由顾问平台',
+            // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+            link: sourceHistoryUrl + '&page=7',
+            // 分享图标 
+            imgUrl: '../../assets/imgs/logobig.png',
+          }, function (res) {
+            //alert(res)
+          });
         });
       }
+    }, error => {
+      console.log('erros===', error);
     })
   }
   /*标签切换时调用*/
@@ -115,10 +128,8 @@ export class DemandContentPage {
       this.navCtrl.push(ProjectBrowserPage, { data: data, isApply: true });
     } else if (user.type == 1) {
       this.navCtrl.push(ConsultantProjectBrowserPage, { data: data, isApply: true, selectType: this.selected });
-    }else {
+    } else {
       this.navCtrl.push(ConsultantProjectBrowserPage, { data: data, isApply: true, selectType: 3 });
     }
-
   }
-
 }

@@ -86,7 +86,6 @@ export class ProjectEditStep3Page {
       // this.navCtrl.push(ProjectListPage);
       return
     }
-
   }
   sureFailed() {
     this.isfailed = !this.isfailed
@@ -158,7 +157,6 @@ export class ProjectEditStep3Page {
       } else {
         this.isReleaseFailed = true
         return
-        //alert('请求出错:' + res.msg);
       }
     }, error => {
       console.log('erros===', error);
@@ -320,7 +318,6 @@ export class ProjectEditStep3Page {
   }
   /*点击返回快速发布*/
   goSpeedPage() {
-    console.log(111111111111111111)
     this.isSpeed = true;
   }
   /*跳转到快速发布页面*/

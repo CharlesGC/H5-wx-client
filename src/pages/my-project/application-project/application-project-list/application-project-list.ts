@@ -54,7 +54,7 @@ export class ApplicationProjectListPage {
         });
         wx.ready(function () {
           //wx.showOptionMenu();
-	  wx.hideOptionMenu();
+	        wx.hideOptionMenu();
         });
       }
     })
@@ -77,16 +77,27 @@ export class ApplicationProjectListPage {
   /* 根据url来判断文件类型 */
   formatTypes(value) {
     if(!value) return '';
-    if (value.search(/doc/) !== -1 || value.search(/docx/) !== -1) {
-      return 'doc';
-    } else if (value.search(/ppt/) !== -1 || value.search(/pptx/) !== -1) {
-      return 'ppt'
-    } else if (value.search(/xls/) !== -1 || value.search(/xlsx/) !== -1) {
-      return 'xls'
-    } else if (value.search(/jpg/) !== -1 || value.search(/png/) !== -1 || value.search(/jpeg/) !== -1) {
-      return 'jpg'
-    } else if (value.search(/pdf/) !== -1) {
-      return 'pdf'
-    }
+    if (value.indexOf('word') == 14 || value.indexOf('wordprocessingml') == 46) {
+			return 'doc';
+		} else if (value.indexOf('powerpoint') == 19 || value.indexOf('presentationml') == 46) {
+			return 'ppt'
+		} else if (value.indexOf('excel') == 19 || value.indexOf('spreadsheetml') == 46) {
+			return 'xls'
+		} else if (value.indexOf('image') == 0) {
+			return 'jpg'
+		} else if (value.indexOf('pdf') == 12) {
+			return 'pdf'
+		}
+    // if (value.search(/doc/) !== -1 || value.search(/docx/) !== -1) {
+    //   return 'doc';
+    // } else if (value.search(/ppt/) !== -1 || value.search(/pptx/) !== -1) {
+    //   return 'ppt'
+    // } else if (value.search(/xls/) !== -1 || value.search(/xlsx/) !== -1) {
+    //   return 'xls'
+    // } else if (value.search(/jpg/) !== -1 || value.search(/png/) !== -1 || value.search(/jpeg/) !== -1) {
+    //   return 'jpg'
+    // } else if (value.search(/pdf/) !== -1) {
+    //   return 'pdf'
+    // }
   }
 }
