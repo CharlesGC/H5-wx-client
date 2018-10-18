@@ -69,8 +69,6 @@ export class SpeedPage {
     let getAttentionUserInfoUrl = getAttentionUserInfo + '?openId=' + openId;
     this.http.get(getAttentionUserInfoUrl).subscribe(res => {
       this.attstate = res['data'].subscribe;
-      console.log(this.attstate ,'this.attstate this.attstate ')
-      console.log(res, '1111222233334444')
     });
     this.isAttention();
   }

@@ -27,7 +27,7 @@ export class AddEmailPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad AddEmailPage');
   }
-  ionViewDidEnter(){
+  ionViewDidEnter() {
     this.isAttention();
   }
   sureEmailBack() {
@@ -77,7 +77,7 @@ export class AddEmailPage {
   //隐藏底部分享菜单
   isAttention() {
     // let url = location.href.split('#')[0]; // 当前网页的URL，不包含#及其后面部分
-    // let data = { url: url };
+    // let wUrl = hideAttentionMenuUrl + '?url=' + url;
     this.http.get(hideAttentionMenuUrl).subscribe(res => {
       if (res['code'] == 200) {
         wx.config({

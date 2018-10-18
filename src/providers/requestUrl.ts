@@ -319,5 +319,8 @@ export const getApplicationProjectList = getAPIPath + 'adviser/submitApplication
 /** 判断用户是否关注了公众号 */
 export const getAttentionUserInfo = getAPIPath + 'wechat/getUserInfo';
 
+/** 关注分享URL参数 */
+export const sourceHistoryUrl = getAPIPath + '?source=history';
+
 
 

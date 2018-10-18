@@ -21,7 +21,6 @@ export class AttentionTipComponent {
   public timeOutEvent :any
   text: string;
   constructor() {
-    
   }
 
   isShow() {
@@ -29,7 +28,8 @@ export class AttentionTipComponent {
   }
 
   startTouch(event) {
-    this.timeOutEvent = setTimeout(()=>{this.longPress()},500);//这里设置定时器，定义长按500毫秒触发长按事件，时间可以自己改，个人感觉500毫秒非常合适  
+    //这里设置定时器，定义长按500毫秒触发长按事件，时间可以自己改，个人感觉500毫秒非常合适  
+    this.timeOutEvent = setTimeout(()=>{this.longPress()},500);
   }
 
   longPress(){
