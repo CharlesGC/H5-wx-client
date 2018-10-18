@@ -34,7 +34,9 @@
           <div class="info-rigth">
             <div class="title-name">
               <h3>{{consultantBasicData.nickName || ''}}</h3>
-              <ion-icon class="transgender mr10 men" name="ios-male1"></ion-icon>
+              <ion-icon class="transgender mr10" name="secrecy" *ngIf="consultantBasicData.gender == 0"></ion-icon>
+              <ion-icon class="transgender mr10" name="male1" *ngIf="consultantBasicData.gender == 1"></ion-icon>
+              <ion-icon class="transgender mr10" name="woman" *ngIf="consultantBasicData.gender == 2"></ion-icon>
               <span class="user-type type-approved" *ngIf="consultantBasicData.status == 4">已审核</span>
               <span class="user-type type-gray" *ngIf="consultantBasicData.status == 0">未审核</span>
               <span class="user-type type-gray" *ngIf="consultantBasicData.status == 5">面试通过</span>

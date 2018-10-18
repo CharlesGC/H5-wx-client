@@ -157,6 +157,7 @@ export class IndustrydetialPage {
     this.IndustrySearch.getSearchAdviserList(getSearch, industryId, firstSkillId, secondSkillId, search, pageNum, pageSize).subscribe(
       res => {
         this.financeAllArr = res.data && res.data.list ? res.data.list : [];
+        console.log(this.financeAllArr,'获取筛选数据获取筛选数据')
       }, error => {
         console.log(error);
       }
@@ -197,6 +198,7 @@ export class IndustrydetialPage {
   // 点击选择行业
   selsectIndustry(value, index, type) {
     this.type = type;
+    console.log(this.type ,'this.type this.type ')
     if (index == -1) {
       this.IndustryName = { 'industryName': value };
       this.isIndustryLabel = true;
@@ -222,7 +224,7 @@ export class IndustrydetialPage {
       this.skillBgcolor = null;
       this.skilldoubleData = value;
       this.getSecondaryData(value.sfid);
-      this.getSearchadviser(this.industryId = this.IndustryName['ilid'] || 0, this.firstSkillId = this.skilldoubleData['sfid'], this.secondSkillId =0 , this.search = 0, '', '');
+      this.getSearchadviser(this.industryId = this.IndustryName['ilid'] || 0, this.firstSkillId = this.skilldoubleData['sfid'], this.secondSkillId =this.inputValue['ssid'], this.search = 0, '', '');
     }
   }
   // 点击二级选择技能
@@ -232,7 +234,7 @@ export class IndustrydetialPage {
       this.inputValue = { 'sName': value };
       this.skillLabel = true;
       this.skillBgcolor = index;
-      this.getSearchadviser(this.industryId = this.IndustryName['ilid'] || 0, this.firstSkillId =this.inputValue['sfid'] || 1, this.secondSkillId = 0, '', '', '');
+      this.getSearchadviser(this.industryId = this.IndustryName['ilid'] || 0, this.firstSkillId =this.skilldoubleData['sfid'] || 1, this.secondSkillId = 0, '', '', '');
     } else {
       this.inputValue = value;
       this.skillBgcolor = index;

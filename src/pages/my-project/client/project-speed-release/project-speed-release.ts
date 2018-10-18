@@ -105,7 +105,7 @@ export class ProjectSpeedReleasePage {
         // spinner[i]['style'].display = 'none';
         if (this.audio[i].paused) {
           this.audio[i].play();
-          spinner1[i]['style'].display = 'block';
+          spinner1[i]['style'].display = 'block'; 
           spinner[i]['style'].display = 'none';
         } else {
           this.audio[i].pause();
@@ -119,6 +119,7 @@ export class ProjectSpeedReleasePage {
         this.audio[i].pause();
         if (this.audio[i].paused) {
           this.audio[i].load();
+          return;
         }
       }
     }

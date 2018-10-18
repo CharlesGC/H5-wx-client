@@ -45,7 +45,7 @@ export class SpeedPage {
   // public Url:any;
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public WechatData: MamenDataProvider, public UploadData: MamenDataProvider,
-    public changeDetectorRef: ChangeDetectorRef, public speedVoiceData: MamenDataProvider, private http: HttpClient) {
+    public changeDetectorRef: ChangeDetectorRef, public speedVoiceData: MamenDataProvider,private Provider: MamenDataProvider, private http: HttpClient) {
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad SpeedPage');
@@ -166,13 +166,12 @@ export class SpeedPage {
   // 长按语音输入
   startTouch(event) {
     event.preventDefault();
-    var _this = this;
-    console.log(event, '=====')
-    let url = location.href.split('#')[0]; // 当前网页的URL，不包含#及其后面部分
+    // var _this = this;
+    let url =encodeURIComponent(location.href.split('#')[0]);// 当前网页的URL，不包含#及其后面部分
     this.localId = '';
-    this.WechatData.getWechatJs(getWechatJsConfig, url).subscribe(
-      res => {
-        console.log(res);
+    let ryUrl = getWechatJsConfig + '?url='+url;
+    this.Provider.getMamenSwiperData(ryUrl).subscribe(res => {
+      if (res.code == 200) {
         wx.config({
           debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
           appId: res.data.appid, // 必填，公众号的唯一标识
@@ -181,47 +180,99 @@ export class SpeedPage {
           signature: res.data.signature, // 必填，签名
           jsApiList: ['startRecord', 'stopRecord', 'uploadVoice'] // 必填，需要使用的JS接口列表
         });
-      }, error => {
-        console.log(error);
-      }
-    )
-    this.isRecord = true;//是否显示录音gif
-    this.START = new Date().getTime();
-    // console.log(this.START, 'getTime');
-    // 判断是否关注
-    if(this.attstate == 0) {
-      this.isConcerned = true;
-      return;
-    }
-    wx.startRecord({
-      success: function () {
-        // localStorage.rainAllowRecord = 'true';
-        // wx.startRecord();
-        // //  alert('录音开始'); 
-        // return;
-      },
-      cancel: function () {
-        _this.isRecord = false;
-      }
-    })
-    this.recordTimer = setTimeout(() => {
-      wx.startRecord({
-        success: function () {
-          localStorage.rainAllowRecord = 'true';
-          // wx.startRecord();
-          //  alert('录音开始'); 
-          // return;
-        },
-        cancel: function () {
-          _this.isRecord = false;
+
+        this.isRecord = true;//是否显示录音gif
+        this.START = new Date().getTime();
+        // console.log(this.START, 'getTime');
+        // 判断是否关注
+        if(this.attstate == 0) {
+          this.isConcerned = true;
+          return;
         }
-      })
-      // localStorage.rainAllowRecord = 'true';
-    }, 500);
+        wx.startRecord({
+          success: function () {
+            // localStorage.rainAllowRecord = 'true';
+            // wx.startRecord();
+            // //  alert('录音开始'); 
+            // return;
+          },
+          cancel: function () {
+            // _this.isRecord = false;
+          }
+        })
+        this.recordTimer = setTimeout(() => {
+          wx.startRecord({
+            success: function () {
+              localStorage.rainAllowRecord = 'true';
+              // wx.startRecord();
+              //  alert('录音开始'); 
+              // return;
+            },
+            cancel: function () {
+              // _this.isRecord = false;
+            }
+          })
+          // localStorage.rainAllowRecord = 'true';
+        }, 500);
+      }  else {
+        alert('请求出错:' + res.msg);
+      }
+    }, error => {
+      console.log('erros===', error);
+    })
+    // this.WechatData.getWechatJs(getWechatJsConfig, url).subscribe(
+    //   res => {
+    //     console.log(res);
+    //     wx.config({
+    //       debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+    //       appId: res.data.appid, // 必填，公众号的唯一标识
+    //       timestamp: res.data.timestamp, // 必填，生成签名的时间戳
+    //       nonceStr: res.data.nonceStr, // 必填，生成签名的随机串
+    //       signature: res.data.signature, // 必填，签名
+    //       jsApiList: ['startRecord', 'stopRecord', 'uploadVoice'] // 必填，需要使用的JS接口列表
+    //     });
+
+    //     _this.isRecord = true;//是否显示录音gif
+    //     _this.START = new Date().getTime();
+    //     // console.log(this.START, 'getTime');
+    //     // 判断是否关注
+    //     if(_this.attstate == 0) {
+    //       _this.isConcerned = true;
+    //       return;
+    //     }
+    //     wx.startRecord({
+    //       success: function () {
+    //         // localStorage.rainAllowRecord = 'true';
+    //         // wx.startRecord();
+    //         // //  alert('录音开始'); 
+    //         // return;
+    //       },
+    //       cancel: function () {
+    //         _this.isRecord = false;
+    //       }
+    //     })
+    //     _this.recordTimer = setTimeout(() => {
+    //       wx.startRecord({
+    //         success: function () {
+    //           localStorage.rainAllowRecord = 'true';
+    //           // wx.startRecord();
+    //           //  alert('录音开始'); 
+    //           // return;
+    //         },
+    //         cancel: function () {
+    //           _this.isRecord = false;
+    //         }
+    //       })
+    //       // localStorage.rainAllowRecord = 'true';
+    //     }, 500);
+    //   }, error => {
+    //     console.log(error);
+    //   }
+    // )
+    
   }
   /*结束录音*/
   endTouch(event) {
-    console.log(event + "************")
     // event.preventDefault();
     this.isRecord = false;
     this.END = new Date().getTime();
@@ -344,5 +395,10 @@ export class SpeedPage {
     // this.navCtrl.goToRoot(HomePage); 
     this.navCtrl.parent.select(0);
   }
+
+  ionViewWillUnload(){
+    clearTimeout(this.recordTimer);
+  }
+
 }
 
