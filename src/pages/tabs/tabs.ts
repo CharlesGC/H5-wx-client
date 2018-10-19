@@ -227,7 +227,7 @@ export class TabsPage {
     var ua = navigator.userAgent.toLowerCase();
     var isWeixin = ua.indexOf('micromessenger') != -1;
     if (isWeixin) {
-      const appid = 'wxc7d4e3e94ad5b330';
+      const appid = 'wxd8565954ffa9ca91';
       const code = this.getUrlParam('code') || window.localStorage.getItem('code');
       const local = window.location.href;
       const openidUrl = getWxOpenidUrl;
