@@ -10,6 +10,7 @@ module.exports = {
     // port: 8181,
     // path: '/mamon/',
     path: '/mamon/',
+    webPath: '/maweb/',
     timeout: 15000
   },
   //文件上传地址

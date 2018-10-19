@@ -1,7 +1,8 @@
 import globalConfig from '../config.js';
 
-const getAPIPath = globalConfig.api.host + globalConfig.api.path
-const getAPIPath1 = globalConfig.api.host+':'+globalConfig.api.port + globalConfig.api.path
+const getAPIPath = globalConfig.api.host + globalConfig.api.path;
+const getWebPath = globalConfig.api.host + globalConfig.api.webPath;
+const getAPIPath1 = globalConfig.api.host+':'+globalConfig.api.port + globalConfig.api.path;
 
 /*获取用户登录信息*/
 export const getUserByopenIdUrl = getAPIPath + 'wechat/getUserByopenId';
@@ -320,7 +321,7 @@ export const getApplicationProjectList = getAPIPath + 'adviser/submitApplication
 export const getAttentionUserInfo = getAPIPath + 'wechat/getUserInfo';
 
 /** 关注分享URL参数 */
-export const sourceHistoryUrl = getAPIPath + '?source=history';
+export const sourceHistoryUrl = getWebPath + '?source=history';
 
 
 
