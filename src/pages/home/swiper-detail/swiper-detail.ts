@@ -24,7 +24,7 @@ export class SwiperDetailPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad SwiperDetailPage');
-    this.index = this.navParams.get('index');
+    this.index = this.navParams.get('index') || window.localStorage.getItem('index') ||0;
     if (this.index == 0) {
       this.title = "麦盟-自由顾问精英聚集地";
     } else if (this.index == 1) {
@@ -78,7 +78,7 @@ export class SwiperDetailPage {
             // 分享描述 
             desc: '麦盟自由顾问平台',
             // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-            link: sourceHistoryUrl + '&page=9',
+            link: sourceHistoryUrl + '&page=9&index='+this.index,
             // 分享图标 
             imgUrl: '../../assets/imgs/logobig.png',
           }, function (res) {

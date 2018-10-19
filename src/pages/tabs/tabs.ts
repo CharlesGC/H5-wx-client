@@ -98,7 +98,8 @@ export class TabsPage {
 
   /*关注后返回历史页面*/
   gotoSource() {
-    let page = window.localStorage.getItem('page') || 0;
+    let page = window.localStorage.getItem('page') || this.getUrlParam('page') || 0;
+    let index = window.localStorage.getItem('index') || this.getUrlParam('index') || 0;
     if (page == 1) {
     } else if (page == 2) {
       this.navCtrl.push(IndustrydetialPage);
@@ -114,7 +115,7 @@ export class TabsPage {
       let pid = window.localStorage.getItem('pid');
       this.navCtrl.push(ProjectBrowserPage, { data: { pid: pid }, isApply: true });
     } else if (page == 9) {
-      this.navCtrl.push(SwiperDetailPage);
+      this.navCtrl.push(SwiperDetailPage,{index:index});
     } else if (page == 10) {
       let selectType = window.localStorage.getItem('selectType');
       let pid = window.localStorage.getItem('pid');
