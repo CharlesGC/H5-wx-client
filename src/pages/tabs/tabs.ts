@@ -91,7 +91,7 @@ export class TabsPage {
       this.getUserInfo(openId)
       !window.sessionStorage.getItem('openId') && window.sessionStorage.setItem('openId', openId);
     } else {
-
+      this.onLogin();
     }
     this.isAttention();
   }
@@ -275,7 +275,7 @@ export class TabsPage {
       } else if (res.code == 203) {
         window.localStorage.removeItem('openId');
         window.sessionStorage.removeItem('openId');
-        // this.onLogin();
+        this.onLogin();
       }
     }, error => {
       console.log('erros===', error);

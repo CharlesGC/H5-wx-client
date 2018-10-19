@@ -60,6 +60,7 @@ export class ConsultantStageListPage {
     this.projectDetails = this.navParams.get('data') || {};
     this.getIsAction(this.projectDetails);
     this.isAttention();
+    console.log(this.projectType,this.navParams.get('projectType'),'阶段状态')
   }
   //隐藏底部分享菜单
   isAttention() {

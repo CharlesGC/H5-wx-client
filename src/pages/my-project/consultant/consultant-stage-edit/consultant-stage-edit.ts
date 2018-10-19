@@ -28,6 +28,7 @@ export class ConsultantStageEditPage {
   public isComplete = false
   public isDateRepeat = false
   public isBigTime = false
+  public isDelete = false;
   constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider, private http: HttpClient) {
   }
 
@@ -189,22 +190,50 @@ export class ConsultantStageEditPage {
 
   /*删除操作请求*/
   onStageDelClick(psid) {
+    // let stageData = this.stageData;
+    // // let projectStageDellUrl = 'http://mamon.yemindream.com/mamon/adviser/delStage';
+    // const openId = window.sessionStorage.getItem('openId') || this.getUrlParam('openId');
+    // let projectStageDellUrl = delStageUrl + '?openId=' + openId + '&psid=' + psid;
+    // this.Provider.getMamenSwiperData(projectStageDellUrl).subscribe(res => {
+    //   if (res.code == 200) {
+    //     let pageLength = this.navCtrl.length();
+    //     this.navCtrl.popTo(this.navCtrl.getByIndex(pageLength-3));
+    //     //this.navCtrl.push(ConsultantStageListPage, { pid: this.stageData['pid'], status: -1 });
+    //   } else if (res.code == 207) {
+    //     window.localStorage.removeItem('openId');
+    //   } else {
+    //     console.log('请求出错:' + res.msg);
+    //   }
+    // }, error => {
+    //   console.log('erros===', error);
+    // })
+    this.isDelete = true;
+  }
+
+  /*确认删除*/
+  onStageDel() {
     let stageData = this.stageData;
     // let projectStageDellUrl = 'http://mamon.yemindream.com/mamon/adviser/delStage';
     const openId = window.sessionStorage.getItem('openId') || this.getUrlParam('openId');
-    let projectStageDellUrl = delStageUrl + '?openId=' + openId + '&psid=' + psid;
+    let projectStageDellUrl = delStageUrl + '?openId=' + openId + '&psid=' + this.stageData['psid'];
     this.Provider.getMamenSwiperData(projectStageDellUrl).subscribe(res => {
       if (res.code == 200) {
-        console.log('删除成功！')
-        this.navCtrl.push(ConsultantStageListPage, { pid: this.stageData['pid'], status: -1 });
-      } else if (res.code == 207) {
-        window.localStorage.removeItem('openId');
+        this.isDelete = false;
+        let pageLength = this.navCtrl.length();
+        this.navCtrl.popTo(this.navCtrl.getByIndex(pageLength-3));
+        //this.navCtrl.push(ConsultantStageListPage, { pid: this.stageData['pid'], status: -1 });
       } else {
+        this.isDelete = false;
         console.log('请求出错:' + res.msg);
       }
     }, error => {
       console.log('erros===', error);
     })
+  }
+
+  /*返回按钮*/
+  onCompanyDel(){
+    this.isDelete = false;
   }
 
 }

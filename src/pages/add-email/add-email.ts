@@ -19,8 +19,9 @@ declare var wx: any;
   templateUrl: 'add-email.html',
 })
 export class AddEmailPage {
-  public isEmail = false
-  public isEmailType = false
+  public isEmail = false;
+  public isEmailType = false;
+  public promptText = '';
   constructor(public navCtrl: NavController, public navParams: NavParams, private Provider: MamenDataProvider, private http: HttpClient) {
   }
 
@@ -45,6 +46,7 @@ export class AddEmailPage {
     // let getPhoneCodeUrl = 'http://mamon.yemindream.com/mamon/user/sendMail'
     var pattern = /^([A-Za-z0-9_\-\.\u4e00-\u9fa5])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,8})$/;
     if (pattern.test(mail.value) == false) {
+      this.promptText = '请填写正确的邮箱格式';
       this.isEmailType = true
       return
     }
@@ -56,8 +58,14 @@ export class AddEmailPage {
         // alert('绑定成功！');
         // this.navCtrl.push(ContactPage);
         this.isEmail = true
+      }else if(res.code == 209){
+        this.promptText = '此邮箱已存在！';
+        this.isEmailType = true
+        return
       } else {
-        //alert('请求出错：'+res.msg)
+        this.promptText = '操作错误：'+res.msg;
+        this.isEmailType = true
+        return
       }
     }, error => {
       console.log('erros===', error);

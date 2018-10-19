@@ -169,3 +169,22 @@
         </div>
     </div>
 </div>
+
+<div class="phonebind-modal" [hidden]="!isDelete">
+    <div class="modal-bg"></div>
+    <div class="modal-box">
+        <div class="modal-top">
+            <div class="modal-top-close">
+                <!-- <ion-icon ios="ios-close" md="md-close" item-rigth (click)="onClose()" color=""></ion-icon> -->
+            </div>
+            <div class="modal-title">确认提示</div>
+            <div class="modal-content">
+                <p>确定删除该阶段吗？</p>
+            </div>
+            <div class="modal-footer">
+                <button ion-button full large (click)="onStageDel()">确定</button>
+                <button ion-button full large (click)="onCompanyDel()" class="btn-delete">返回</button>
+            </div>
+        </div>
+    </div>
+</div>
