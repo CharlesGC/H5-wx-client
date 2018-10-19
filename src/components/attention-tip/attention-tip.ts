@@ -17,6 +17,7 @@ export class AttentionTipComponent {
   @Input() uid: any;
   @Input() pid: any;
   @Input() selectType: any;
+  @Input() index: any;
   public isShowdata = false;
   public timeOutEvent :any
   text: string;
@@ -36,6 +37,8 @@ export class AttentionTipComponent {
     window.localStorage.setItem('page',this.page);
     if(this.page == 4){
       window.localStorage.setItem('cuid',this.uid);
+    }else if(this.page == 9){
+      window.localStorage.setItem('index',this.index);
     }else if(this.page == 8){
       window.localStorage.setItem('pid',this.pid);
     }else if(this.page == 10){
