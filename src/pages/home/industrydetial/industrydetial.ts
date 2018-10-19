@@ -198,17 +198,16 @@ export class IndustrydetialPage {
   // 点击选择行业
   selsectIndustry(value, index, type) {
     this.type = type;
-    console.log(this.type ,'this.type this.type ')
     if (index == -1) {
       this.IndustryName = { 'industryName': value };
       this.isIndustryLabel = true;
       this.skillChecked = 0;
-      this.getSearchadviser(this.industryId = 0, this.firstSkillId = 0, this.secondSkillId = 0, this.search = '', this.pageNum = 0, this.pageSize = 15);
+      this.getSearchadviser(this.industryId = 0, this.firstSkillId =this.skilldoubleData['sfid'] || 0, this.secondSkillId = this.inputValue['ssid'] || 0, this.search = '', this.pageNum = 0, this.pageSize = 15);
     } else {
       this.skillChecked = index;
       this.IndustryName = value;
       this.isIndustryLabel = true;
-      this.getSearchadviser(this.industryId = this.IndustryName['ilid'], this.firstSkillId = 0, this.secondSkillId = 0, this.search = 0, this.pageNum = '', this.pageSize = '');
+      this.getSearchadviser(this.industryId = this.IndustryName['ilid'], this.firstSkillId = this.skilldoubleData['sfid'] || 0, this.secondSkillId = this.inputValue['ssid'] || 0, this.search = '', this.pageNum = '', this.pageSize = '');
     }
   }
   //点击一级获取二级技能
@@ -224,7 +223,7 @@ export class IndustrydetialPage {
       this.skillBgcolor = null;
       this.skilldoubleData = value;
       this.getSecondaryData(value.sfid);
-      this.getSearchadviser(this.industryId = this.IndustryName['ilid'] || 0, this.firstSkillId = this.skilldoubleData['sfid'], this.secondSkillId =this.inputValue['ssid'], this.search = 0, '', '');
+      this.getSearchadviser(this.industryId = this.IndustryName['ilid'] || 0, this.firstSkillId = this.skilldoubleData['sfid'], this.secondSkillId =this.inputValue['ssid'] || 0, this.search = '', '', '');
     }
   }
   // 点击二级选择技能
@@ -234,7 +233,7 @@ export class IndustrydetialPage {
       this.inputValue = { 'sName': value };
       this.skillLabel = true;
       this.skillBgcolor = index;
-      this.getSearchadviser(this.industryId = this.IndustryName['ilid'] || 0, this.firstSkillId =this.skilldoubleData['sfid'] || 1, this.secondSkillId = 0, '', '', '');
+      this.getSearchadviser(this.industryId = this.IndustryName['ilid'] || 0, this.firstSkillId =this.skilldoubleData['sfid'] || 0, this.secondSkillId = 0, '', '', '');
     } else {
       this.inputValue = value;
       this.skillBgcolor = index;
